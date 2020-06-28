@@ -25,3 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: node -v
+    - run: pwd
+    - run: mkdir build
+    - run: zip -r build.zip build
+      
