@@ -2,29 +2,28 @@
 <html>
 
 <head>
-    <link rel="icon" type="image/png" size="16x16" href="images/chrome/chrome-favicon-16-16.png">
-    <link rel="icon" type="image/png" size="32x32" href="images/firefox/firefox-general-32-32.png">
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
-    <link rel="apple-touch-icon" type="image/png" size="180x180" href="images/ios/ios-appicon-180-180.png">
-    <link rel="manifest" href="manifest.webmanifest">
     <meta name="msapplication-TileColor" content="#005040">
     <meta name="theme-color" content="#005040">
+
+    <link rel="icon" type="image/png" size="16x16" href="images/chrome/chrome-favicon-16-16.png">
+    <link rel="icon" type="image/png" size="32x32" href="images/firefox/firefox-general-32-32.png">
+    <link rel="apple-touch-icon" type="image/png" size="180x180" href="images/ios/ios-appicon-180-180.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <link rel="stylesheet" href="addon/fold/foldgutter.css" />
+    <link rel='stylesheet' href='theme/material-darker2.css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    
+    <link rel='stylesheet' href='css/index.css'>
+
     <script type="module">
         // PWA worker config from: https://www.pwabuilder.com/serviceworker
         import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
         const el = document.createElement('pwa-update');
         document.body.appendChild(el);
     </script>
-
-
-
-
-    <link rel="stylesheet" href="lib/codemirror.css">
-    <link rel="stylesheet" href="addon/fold/foldgutter.css" />
-    <link rel='stylesheet' href='theme/material-darker2.css'>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <link rel='stylesheet' href='css/index.css'>
 
     <script src="lib/codemirror.js"></script>
     <script src="mode/css/css.js"></script>

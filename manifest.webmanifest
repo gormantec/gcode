@@ -4,10 +4,10 @@
     "display": "standalone",
     "start_url": "https://git.gormantec.com/gcode/index.html",
     "short_name": "gcode",
-    "theme_color": "transparent",
     "description": "An implementation of \"codemirror.net\" designed for easy access to coding for kids and schools.",
     "orientation": "any",
     "background_color": "#FFFFFF",
+    "theme_color": "#005040",
     "related_applications": [],
     "prefer_related_applications": false,
     "icons": [
