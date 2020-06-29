@@ -7,12 +7,14 @@ const CACHE = "pwabuilder-page";
 const offlineFallbackPage = "offline.html";
 
 self.addEventListener("message", (event) => {
+  console.log("message: "+event);
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
 
 self.addEventListener('install', async (event) => {
+  console.log("install: "+event);
   event.waitUntil(
     caches.open(CACHE)
       .then((cache) => cache.add(offlineFallbackPage))
@@ -24,6 +26,7 @@ if (workbox.navigationPreload.isSupported()) {
 }
 
 self.addEventListener('fetch', (event) => {
+  console.log("fetch: "+event);
   if (event.request.mode === 'navigate') {
     event.respondWith((async () => {
       try {
