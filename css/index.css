@@ -5,7 +5,7 @@
     right:0px;
     height: 22px !important;
     padding-top: 10px;
-    padding-left: 36px;
+    padding-left: 8px;
     margin: 0px;
     border-style: solid;
     border-width: 1px;
@@ -186,6 +186,11 @@ body {
     cursor: pointer;
 }
 .pageLeftToolbarButton i {
+    font-size: 36px;
+}
+
+#sideBarButton{
+    margin-top:-12px;
     font-size: 36px;
 }
 

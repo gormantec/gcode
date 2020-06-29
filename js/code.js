@@ -238,6 +238,24 @@ function _toggleTerminal() {
         document.getElementById("pageBottom").style.display = "";
         document.getElementById("pageAll").style.bottom = "160px";
     }
+}
+
+function _toggleSideBar(){
+
+    if (document.getElementById("pageLeftToolbar").style.display != "none" ) {
+        document.getElementById("pageLeft").style.display = "none";
+        document.getElementById("pageLeftToolbar").style.display = "none";
+        document.getElementById("pageMiddle").style.left = "0px";
+        document.getElementById("filename").style.marginLeft = "40px";
+        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_down";
+    }
+    else {
+        document.getElementById("pageLeft").style.display = "";
+        document.getElementById("pageLeftToolbar").style.display = "";
+        document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 2) + "px";
+        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
+    }
 
 }
 
@@ -245,7 +263,7 @@ function _open() {
 
     _refresh();
 
-    if (document.getElementById("pageLeft").style.display != "none") {
+    if (document.getElementById("pageLeft").style.display != "none" ) {
         document.getElementById("pageLeft").style.display = "none";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 1) + "px";
@@ -255,9 +273,6 @@ function _open() {
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 2) + "px";
     }
-
-
-
 
 }
 
@@ -310,6 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("openButton").onclick = _open;
     document.getElementById("terminalButton").onclick = _toggleTerminal;
+    document.getElementById("sideBarButton").onclick = _toggleSideBar;
     Array.from(document.getElementsByClassName("toolbarButton")).forEach(function (e) { e.onclick = _toolbarButtonClicked; });
 
 
