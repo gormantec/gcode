@@ -183,6 +183,32 @@ function consolelog(x) {
     }
 }
 
+function _onclickFilename()
+{
+    document.getElementById("filename").onclick = null;
+    var input = document.createElement("input");
+    input.value = selectedFileWidget;
+    document.getElementById("filename").innerHTML="";
+    document.getElementById("filename").appendChild(input);
+    input.onkeypress = function(e){
+        if (!e) e = window.event;
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == '13'){
+          // Enter pressed
+          var filename = input.value;
+          if (filename == "" || filename == null) return false;
+          localStorage.setItem("file-" + filename, btoa(editor.getValue()));
+          localStorage.setItem("lastFileName", filename);
+          localStorage.removeItem("file-" + selectedFileWidget);
+          selectedFileWidget=input.value;
+          input.onkeypress = null;
+          document.getElementById("filename").innerHTML = selectedFileWidget;
+          document.getElementById("filename").onclick = _onclickFilename;
+          return false;
+        }
+      };
+}
+
 function _toolbarButtonClicked() {
 
     if (this.dataset.action == "addFile") {
@@ -253,7 +279,7 @@ function _toggleSideBar(){
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageLeftToolbar").style.display = "";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 2) + "px";
+        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
         document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_down";
     }
 
@@ -266,12 +292,12 @@ function _open() {
     if (document.getElementById("pageLeft").style.display != "none" ) {
         document.getElementById("pageLeft").style.display = "none";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 1) + "px";
+        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
     }
     else {
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 2) + "px";
+        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
     }
 
 }
@@ -322,10 +348,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     _open();
 
-
     document.getElementById("openButton").onclick = _open;
     document.getElementById("terminalButton").onclick = _toggleTerminal;
     document.getElementById("sideBarButton").onclick = _toggleSideBar;
+    document.getElementById("filename").onclick = _onclickFilename;
     Array.from(document.getElementsByClassName("toolbarButton")).forEach(function (e) { e.onclick = _toolbarButtonClicked; });
 
 
