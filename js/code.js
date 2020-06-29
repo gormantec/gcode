@@ -318,7 +318,9 @@ document.addEventListener("DOMContentLoaded", function () {
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
+        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
         foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
