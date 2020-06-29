@@ -1,7 +1,8 @@
 {
+    "dir": "ltr",
     "name": "gcode",
     "display": "standalone",
-    "start_url": ".",
+    "start_url": "https://git.gormantec.com/gcode/index.html",
     "short_name": "gcode",
     "theme_color": "transparent",
     "description": "An implementation of \"codemirror.net\" designed for easy access to coding for kids and schools.",

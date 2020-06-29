@@ -9,7 +9,14 @@
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="msapplication-TileColor" content="#005040">
     <meta name="theme-color" content="#005040">
-    
+    <script type="module">
+        // PWA worker config from: https://www.pwabuilder.com/serviceworker
+        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+        const el = document.createElement('pwa-update');
+        document.body.appendChild(el);
+    </script>
+
+
     <script src="lib/codemirror.js"></script>
     <script src="mode/css/css.js"></script>
     <script src="mode/htmlmixed/htmlmixed.js"></script>
@@ -20,16 +27,20 @@
     <script src="mode/yaml/yaml.js"></script>
     <script src="mode/javascript/javascript.js"></script>
     <script src="addon/edit/matchbrackets.js"></script>
-    
+
     <script src="js/code.js"></script>
     <script src="lib/skulpt.min.js" type="text/javascript"></script>
+    <script src="lib/skulpt-stdlib.js" type="text/javascript"></script>
+
     <script src="lib/skulpt-stdlib.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="lib/codemirror.css">
     <link rel='stylesheet' href='theme/material-darker2.css'>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
 
     <link rel='stylesheet' href='css/index.css'>
 </head>
@@ -44,14 +55,14 @@
 
 
     </div>
-    <div id="pageAll" >
+    <div id="pageAll">
         <div id="pageLeftToolbar" class="cm-s-theme CodeMirror">
-                <div id="openButton" class="pageLeftToolbarButton">
-                        <i class="material-icons-outlined">file_copy</i>
-                </div>
-                <div id="terminalButton" class="pageLeftToolbarButton">
-                        <i class="material-icons-outlined">wysiwyg</i>
-                </div>
+            <div id="openButton" class="pageLeftToolbarButton">
+                <i class="material-icons-outlined">file_copy</i>
+            </div>
+            <div id="terminalButton" class="pageLeftToolbarButton">
+                <i class="material-icons-outlined">wysiwyg</i>
+            </div>
         </div>
         <div id="pageLeft" class="cm-s-theme CodeMirror">
             <div id="pageLeftToolbarTop">
@@ -74,8 +85,10 @@
             <textarea id="dartcode" style="width:100%;height:100%;"></textarea>
         </div>
     </div>
-    <div id="pageBottom" class="cm-s-theme CodeMirror"><pre id="log"></pre></div>
-    
+    <div id="pageBottom" class="cm-s-theme CodeMirror">
+        <pre id="log"></pre>
+    </div>
+
 </body>
 
 </html>
