@@ -247,14 +247,14 @@ function _toggleSideBar(){
         document.getElementById("pageLeftToolbar").style.display = "none";
         document.getElementById("pageMiddle").style.left = "0px";
         document.getElementById("filename").style.marginLeft = "40px";
-        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_down";
+        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
     }
     else {
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageLeftToolbar").style.display = "";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 2) + "px";
-        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
+        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_down";
     }
 
 }
