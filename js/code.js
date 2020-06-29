@@ -317,7 +317,8 @@ document.addEventListener("DOMContentLoaded", function () {
     editor = CodeMirror.fromTextArea(document.getElementById("dartcode"), {
         lineNumbers: true,
         theme: theme,
-        matchBrackets: true
+        matchBrackets: true,
+        foldGutter: true,
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
@@ -333,33 +334,10 @@ document.addEventListener("DOMContentLoaded", function () {
     else {
         document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".js";
     }
-    /*
-    ertertert
-    */
+
 
     editor.on("change", _save);
-    /*
-        document.getElementById("nextTheme").onclick = function(){
-    
-            document.getElementById("themeSelect").selectedIndex=document.getElementById("themeSelect").selectedIndex+1;
-            var theme=document.getElementById("themeSelect").value;
-            editor.setOption('theme',theme);
-            Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-'+theme);});
-            Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme');});
-        
-    
-        }
-    
-        document.getElementById("themeSelect").addEventListener("change", function(){
-            console.log(this.value);
-            var theme=this.value;
-            editor.setOption('theme',theme);
-            Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-'+theme);});
-            Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme');});
-        
-    
-        });
-    */
+
 
     (function () {
         var old = console.log;
