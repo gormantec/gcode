@@ -19,14 +19,14 @@
 
 .cm-s-material-darker2 .CodeMirror-gutters {
   background: #212121;
-  color: #545454;
+  color: #747474;
   border: none;
 }
 
 .cm-s-material-darker2 .CodeMirror-guttermarker,
 .cm-s-material-darker2 .CodeMirror-guttermarker-subtle,
 .cm-s-material-darker2 .CodeMirror-linenumber {
-  color: #545454;
+  color: #747474;
 }
 
 .cm-s-material-darker2 .CodeMirror-cursor {
