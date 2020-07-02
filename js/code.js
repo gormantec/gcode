@@ -1,41 +1,52 @@
-class HtmlApp {
+class PWA {
     constructor(title, params) {
         this.title = title || "Code";
-        this.params = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
-        this.innerHTML = "TEST";
+        this.params = params || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
+        this.innerHTML = "";
+        this.pwaRoot=new Div({id:"PWA_ROOT"});
     }
 
-    open() {
-        console.log("open: " + this.title);
+    setHeader()
+    {
+        this.pwaHeader=new Div({id:"PWA_Header"});
+        this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || parentNode.firstChild);
+    }
+
+    setBody()
+    {
+        this.pwaBody=new Div({id:"PWA_Body"});
+        this.pwaRoot.insert (newNode, parentNode.firstChild);
+    }
+    setFooter()
+    {
+        this.pwaFooter=new Div({id:"PWA_Footer"});
+        this.pwaRoot.insert (newNode, parentNode.firstChild);
+    }
+
+    show() {
+        console.log("show: " + this.title);
         var win = window.open("", this.title, this.params);
+        var _style = win.document.createElement("link"); 
+        _style.setAttribute("rel","stylesheet");
+        _style.setAttribute("href","css/pwa.css");
+        win.document.head.appendChild(_style);
         win.document.body.innerHTML = this.innerHTML;
     }
-}
-
-class Body {
-    constructor(params) {
-        window.document.body.innerHTML = "";
-        if (params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
-        else if (params.child instanceof HTMLElement) this.element.appendChild(params.child);
-        else if (params.child instanceof String) this.element.innerHTML = params.child;
-        else if (params instanceof HTMLElement) this.element.appendChild(params);
-        else if (params instanceof String) this.element.innerHTML = params;
-    }
-    append(params) {
-        if (params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
-        else if (params.child instanceof HTMLElement) this.element.appendChild(params.child);
-        else if (params.child instanceof String) this.element.innerHTML = params.child;
-        else if (params instanceof HTMLElement) this.element.appendChild(params);
-        else if (params instanceof String) this.element.innerHTML = params;
+    
+    dynamicallyLoadScript(url) {
+        var script = document.createElement("script");  // create a script DOM node
+        script.src = url;  // set its src to the provided URL
+        document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
     }
 }
 
 class Div {
+   
     constructor(params) {
         this.element = document.createElement('div');
-        if (params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
-        else if (params.child instanceof HTMLElement) this.element.appendChild(params.child);
-        else if (params.child instanceof String) this.element.innerHTML = params.child;
+        if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
+        else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
+        else if (params && params.child instanceof String) this.element.innerHTML = params.child;
         else if (params instanceof HTMLElement) this.element.appendChild(params);
         else if (params instanceof String) this.element.innerHTML = params;
 
@@ -43,9 +54,9 @@ class Div {
         if (params.class instanceof String) this.element.className = params.class;
     }
     append(params) {
-        if (params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
-        else if (params.child instanceof HTMLElement) this.element.appendChild(params.child);
-        else if (params.child instanceof String) this.element.innerHTML = params.child;
+        if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
+        else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
+        else if (params && params.child instanceof String) this.element.innerHTML = params.child;
         else if (params instanceof HTMLElement) this.element.appendChild(params);
         else if (params instanceof String) this.element.innerHTML = params;
     }
@@ -99,7 +110,7 @@ function _new() {
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
-        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\nconsole.log('new javascript file!');\n\nvar aHtmlApp=new HtmlApp();\n\naHtmlApp.open();");
+        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\nconsole.log('new javascript file!');\n\nvar aPWA=new PWA();\n\naPWA.show();");
         if (selectedFileWidget.endsWith(".js")) {
             //editor.setOption("mode", "javascript");
         }
@@ -391,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     editor.on("change", _save);
-
+/*
 
     (function () {
         var old = console.log;
@@ -412,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
             pageBottom.scrollTo(0, pageBottom.scrollHeight);
         }
     })();
-
+*/
 
     const BORDER_SIZE = 4;
     const panel = document.getElementById("pageLeft");
