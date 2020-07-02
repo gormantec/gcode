@@ -57,6 +57,15 @@ body {
     border-width: 1px;
     border-color: #005040;
 }
+#pageBottom:after {
+    content: " ";
+       position: absolute;
+       top: 0px;
+       height: 4px;
+       width: 100%;
+       z-index: 2;
+       cursor: ns-resize;
+   }
 
 #pageLeft {
     position: absolute;
@@ -70,6 +79,16 @@ body {
     vertical-align: top;
     font-size: 8pt;
 }
+
+#pageLeft:after {
+    content: " ";
+       position: absolute;
+       right: 0px;
+       width: 4px;
+       height: 100%;
+       z-index: 2;
+       cursor: ew-resize;
+   }
 
 #pageLeftBody {
     position: absolute;
@@ -135,6 +154,7 @@ body {
     text-decoration: none;
     cursor: pointer;
     background-color: none;
+    white-space: nowrap;
 }
 
 .fileWidgetSelected {
