@@ -3,43 +3,87 @@ class PWA {
         this.title = title || "Code";
         this.params = params || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
         this.innerHTML = "";
-        this.pwaRoot=new Div({id:"pwaroot"});
+        this.pwaRoot = new Div({ id: "pwaroot" });
+        this.pwaOverlay = new Div({ id: "pwaoverlay" });
         this.setHeader();
         this.setBody();
         this.setFooter();
     }
 
-    setHeader()
-    {
-        if(this.pwaHeader)this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader=new Div({id:"pwaheader", tagName:"header"});
-        this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild());
+    setHeader() {
+        if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header" });
+        this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
     }
 
-    setBody()
-    {
-        if(this.pwaBody)this.pwaRoot.removeChild(this.pwaBody);
-        this.pwaBody=new Div({id:"pwabody"});
+    setBody() {
+        if (this.pwaBody) this.pwaRoot.removeChild(this.pwaBody);
+        this.pwaBody = new Div({ id: "pwabody" });
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
-    setFooter()
-    {
-        if(this.pwaFooter)this.pwaRoot.removeChild(this.pwaFooter);
-        this.pwaFooter=new Div({id:"pwafooter", tagName:"header"});
-        this.pwaRoot.appendChild (this.pwaFooter);
+
+    setFloatingActionButton() {
+        if (this.floatingActionButton) this.pwaRoot.removeChild(this.floatingActionButton);
+        this.floatingActionButton = new Div({ id: "floatingActionButton" });
+        this.pwaRoot.appendChild(this.floatingActionButton);
     }
+    setFooter() {
+        if (this.pwaFooter) this.pwaRoot.removeChild(this.pwaFooter);
+        this.pwaFooter = new Div({ id: "pwafooter", tagName: "header" });
+        this.pwaRoot.appendChild(this.pwaFooter);
+    }
+
+
 
     show() {
         console.log("show: " + this.title);
         var win = window.open("", this.title, this.params);
-        var _style = win.document.createElement("link"); 
-        _style.setAttribute("rel","stylesheet");
-        _style.setAttribute("href","https://git.gormantec.com/gcode/css/pwa.css");
+        var _style = win.document.createElement("link");
+        _style.setAttribute("rel", "stylesheet");
+        _style.setAttribute("href", "https://git.gormantec.com/gcode/css/pwa.css");
         win.document.head.appendChild(_style);
         win.document.body.innerHTML = "";
         win.document.body.appendChild(this.pwaRoot.element);
+        win.document.body.appendChild(this.pwaOverlay.element);
+
+        var addMeta = function (name, content) {
+            var _meta = win.document.createElement("meta");
+            _meta.setAttribute("name", name);
+            _meta.setAttribute("content", content);
+            win.document.head.appendChild(_meta);
+            win.document.body.appendChild(this.pwaRoot.element);
+        }
+        addMeta("mobile-web-app-capable", "yes");
+        addMeta("apple-touch-fullscreen", "yes");
+        addMeta("apple-mobile-web-app-title", this.title);
+        addMeta("apple-mobile-web-app-capable", "yes");
+        addMeta("apple-mobile-web-app-status-bar-style", "default");
+        addMeta("viewport", "width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86");
+        addMeta("msapplication-TileColor", "#005040");
+        addMeta("theme-color", "#005040");
+
+
     }
-    
+
+    showFooter() {
+        this.pwaFooter.style.display = "block";
+        this.pwaBody.style.bottom = 30 + "px";
+    }
+
+    showHeader() {
+        this.pwaHeader.style.display = "block";
+        this.pwaBody.style.top = 30 + "px";
+    }
+    hideFooter() {
+        this.pwaFooter.style.display = "none";
+        this.pwaBody.style.bottom = "0px"
+    }
+
+    hideHeader() {
+        this.pwaHeader.style.display = "none";
+        this.pwaBody.style.top = "0px"
+    }
+
     dynamicallyLoadScript(url) {
         var script = document.createElement("script");  // create a script DOM node
         script.src = url;  // set its src to the provided URL
@@ -49,10 +93,10 @@ class PWA {
 
 class Div {
 
-   
+
     constructor(params) {
         this.element = document.createElement(params.tagName || 'div');
-        if(params instanceof Div) this.element.appendChild(params.element);
+        if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
         else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
         else if (params && params.child instanceof String) this.element.innerHTML = params.child;
@@ -62,53 +106,55 @@ class Div {
         if (params.class) this.element.className = params.class;
     }
     appendChild(params) {
-        console.log("appendChild:"+ typeof params);
-        if(!params) return;
-        else if(params instanceof Div && params.element instanceof Node ){
-            console.log("n1:"+params.element);
-            console.log("appendChild:68:"+ typeof params.element);
+        console.log("appendChild:" + typeof params);
+        if (!params) return;
+        else if (params instanceof Div && params.element instanceof Node) {
+            console.log("n1:" + params.element);
+            console.log("appendChild:68:" + typeof params.element);
             this.element.appendChild(params.element);
-            console.log("n1:"+params.element);
+            console.log("n1:" + params.element);
         }
-        else if (params && params.child && params.child.element instanceof HTMLElement){
-            console.log("appendChild:72:"+ typeof params.child.element);
+        else if (params && params.child && params.child.element instanceof HTMLElement) {
+            console.log("appendChild:72:" + typeof params.child.element);
             this.element.appendChild(params.child.element);
         }
-        else if (params && params.child instanceof HTMLElement){
-            console.log("appendChild:76:"+ typeof params.child);
-          this.element.appendChild(params.child);
+        else if (params && params.child instanceof HTMLElement) {
+            console.log("appendChild:76:" + typeof params.child);
+            this.element.appendChild(params.child);
         }
-        else if (params && params.child instanceof String){
-            console.log("appendChild:80:"+ typeof params.child);
-            this.element.innerHTML = params.child; 
-        } 
-        else if (params instanceof HTMLElement){
-            console.log("appendChild:84:"+ typeof params);
+        else if (params && params.child instanceof String) {
+            console.log("appendChild:80:" + typeof params.child);
+            this.element.innerHTML = params.child;
+        }
+        else if (params instanceof HTMLElement) {
+            console.log("appendChild:84:" + typeof params);
             this.element.appendChild(params);
         }
-        else if (params instanceof String){
-            console.log("appendChild:88:"+ typeof params.child.element);
+        else if (params instanceof String) {
+            console.log("appendChild:88:" + typeof params.child.element);
             this.element.innerHTML = params;
         }
     }
-    
-    insertBefore(n1,n2)
-    {
-        if(n1 instanceof Div)n1=n1.element;
-        if(n2 instanceof Div)n2=n2.element;
-        console.log("n1:"+n1);
-        console.log("n2:"+n2);
 
-        this.element.insertBefore(n1,n2);
+    insertBefore(n1, n2) {
+        if (n1 instanceof Div) n1 = n1.element;
+        if (n2 instanceof Div) n2 = n2.element;
+        console.log("n1:" + n1);
+        console.log("n2:" + n2);
+
+        this.element.insertBefore(n1, n2);
     }
-    removeChild(n1)
-    {
-        if(n1 instanceof Div)n1=n1.element;
+    removeChild(n1) {
+        if (n1 instanceof Div) n1 = n1.element;
         this.element.removeChild(n1);
     }
 
-    firstChild(){
+    get firstChild() {
         return this.element.firstChild;
+    }
+
+    get style() {
+        return this.element.style;
     }
 }
 
@@ -120,7 +166,7 @@ var leftToolbarWidth = 50;
 var leftToolbarFontSize = leftToolbarWidth - 26;
 var leftPageWidth = 170;
 var selectedFileWidget = null;
-var pageBottomHeight =150;
+var pageBottomHeight = 150;
 
 
 
@@ -325,7 +371,7 @@ function _toggleTerminal() {
     }
     else {
         document.getElementById("pageBottom").style.display = "";
-        document.getElementById("pageAll").style.bottom = (pageBottomHeight+10)+"px";
+        document.getElementById("pageAll").style.bottom = (pageBottomHeight + 10) + "px";
     }
 }
 
@@ -452,28 +498,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     editor.on("change", _save);
-/*
-
-    (function () {
-        var old = console.log;
-        var olde = console.error;
-        var logger = document.getElementById('log');
-        var pageBottom = document.getElementById('pageBottom');
-        console.log = function (message) {
-            if (typeof message == 'object') {
-                logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
-                pageBottom.scrollTo(0, pageBottom.scrollHeight);
-            } else {
-                logger.innerHTML += "<div>" + message + '</div>';
+    /*
+    
+        (function () {
+            var old = console.log;
+            var olde = console.error;
+            var logger = document.getElementById('log');
+            var pageBottom = document.getElementById('pageBottom');
+            console.log = function (message) {
+                if (typeof message == 'object') {
+                    logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
+                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                } else {
+                    logger.innerHTML += "<div>" + message + '</div>';
+                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                }
+            }
+            console.error = function (message) {
+                logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
                 pageBottom.scrollTo(0, pageBottom.scrollHeight);
             }
-        }
-        console.error = function (message) {
-            logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
-            pageBottom.scrollTo(0, pageBottom.scrollHeight);
-        }
-    })();
-*/
+        })();
+    */
 
     const BORDER_SIZE = 4;
     const panel = document.getElementById("pageLeft");
@@ -486,23 +532,23 @@ document.addEventListener("DOMContentLoaded", function () {
     function resizex(e) {
         const dx = m_posx - e.x;
         m_posx = e.x;
-        leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx) ;
+        leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx);
         panel.style.width = leftPageWidth + "px";
-        panelMiddle.style.left = (leftToolbarWidth + leftPageWidth + 2)  + "px";
+        panelMiddle.style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
     }
 
     function resizey(e) {
         const dy = m_posy - e.y;
         m_posy = e.y;
-        pageBottomHeight = (parseInt(getComputedStyle(pageBottom, '').height) + dy) ;
+        pageBottomHeight = (parseInt(getComputedStyle(pageBottom, '').height) + dy);
         pageBottom.style.height = pageBottomHeight + "px";
-        pageAll.style.bottom = (pageBottomHeight+10)  + "px";
+        pageAll.style.bottom = (pageBottomHeight + 10) + "px";
 
     }
 
     panel.addEventListener("mousedown", function (e) {
 
-        if (e.offsetX >(panel.clientWidth - BORDER_SIZE)) {
+        if (e.offsetX > (panel.clientWidth - BORDER_SIZE)) {
             m_posx = e.x;
             document.addEventListener("mousemove", resizex, false);
         }
@@ -516,7 +562,7 @@ document.addEventListener("DOMContentLoaded", function () {
     pageBottom.addEventListener("mousedown", function (e) {
 
         if (e.offsetY < BORDER_SIZE) {
-            
+
             m_posy = e.y;
             document.addEventListener("mousemove", resizey, false);
         }
