@@ -24,6 +24,16 @@ body {
     z-index: 100;
 }
 
+.floatingActionButton{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background-color: #005040;
+    border-radius: 15px;
+    right: 15px;
+    bottom: 15px;
+}
+
 #pwaheader{
     position: absolute;
     left: 0px;

@@ -24,8 +24,8 @@ class PWA {
 
     setFloatingActionButton() {
         if (this.floatingActionButton) this.pwaRoot.removeChild(this.floatingActionButton);
-        this.floatingActionButton = new Div({ id: "floatingActionButton" });
-        this.pwaRoot.appendChild(this.floatingActionButton);
+        this.floatingActionButton = new Div({ class: "floatingActionButton" });
+        this.pwaOverlay.appendChild(this.floatingActionButton);
     }
     setFooter() {
         if (this.pwaFooter) this.pwaRoot.removeChild(this.pwaFooter);
