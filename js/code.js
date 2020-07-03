@@ -8,6 +8,7 @@ class PWA {
         this.setHeader();
         this.setBody();
         this.setFooter();
+        this.setFloatingActionButton();
     }
 
     setHeader() {
@@ -23,8 +24,15 @@ class PWA {
     }
 
     setFloatingActionButton() {
-        if (this.floatingActionButton) this.pwaRoot.removeChild(this.floatingActionButton);
-        this.floatingActionButton = new Div({ class: "floatingActionButton" });
+        if (this.floatingActionButton) this.pwaOverlay.removeChild(this.floatingActionButton);
+        this.floatingActionButton = new Div({ 
+            class: "floatingActionButton", 
+            child: new Div({
+                tagName:"i",
+                class:"material-icons",
+                innerText:"play_circle_outline"
+            })
+        });
         this.pwaOverlay.appendChild(this.floatingActionButton);
     }
     setFooter() {
@@ -33,34 +41,38 @@ class PWA {
         this.pwaRoot.appendChild(this.pwaFooter);
     }
 
+    addMeta(targetDocument, name, content) {
+        var _meta = targetDocument.createElement("meta");
+        _meta.setAttribute("name", name);
+        _meta.setAttribute("content", content);
+        targetDocument.head.appendChild(_meta);
+    }
 
+    addStyle(targetDocument, href) {
+        var _style = targetDocument.createElement("link");
+        _style.setAttribute("rel", "stylesheet");
+        _style.setAttribute("href", href);
+        targetDocument.head.appendChild(_style);
+    }
 
     show() {
         console.log("show: " + this.title);
         var win = window.open("", this.title, this.params);
-        var _style = win.document.createElement("link");
-        _style.setAttribute("rel", "stylesheet");
-        _style.setAttribute("href", "https://git.gormantec.com/gcode/css/pwa.css");
-        win.document.head.appendChild(_style);
+        this.addMeta(win.document, "mobile-web-app-capable", "yes");
+        this.addMeta(win.document, "apple-touch-fullscreen", "yes");
+        this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
+        this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
+        this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "default");
+        this.addMeta(win.document, "viewport", "width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86");
+        this.addMeta(win.document, "msapplication-TileColor", "#005040");
+        this.addMeta(win.document, "theme-color", "#005040");
+        this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
+        this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css");
         win.document.body.innerHTML = "";
         win.document.body.appendChild(this.pwaRoot.element);
         win.document.body.appendChild(this.pwaOverlay.element);
 
-        var addMeta = function (name, content) {
-            var _meta = win.document.createElement("meta");
-            _meta.setAttribute("name", name);
-            _meta.setAttribute("content", content);
-            win.document.head.appendChild(_meta);
-            win.document.body.appendChild(this.pwaRoot.element);
-        }
-        addMeta("mobile-web-app-capable", "yes");
-        addMeta("apple-touch-fullscreen", "yes");
-        addMeta("apple-mobile-web-app-title", this.title);
-        addMeta("apple-mobile-web-app-capable", "yes");
-        addMeta("apple-mobile-web-app-status-bar-style", "default");
-        addMeta("viewport", "width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86");
-        addMeta("msapplication-TileColor", "#005040");
-        addMeta("theme-color", "#005040");
+
 
 
     }
@@ -95,8 +107,15 @@ class Div {
 
 
     constructor(params) {
+        if(params)console.log("constructor::*****::"+params.child);
         this.element = document.createElement(params.tagName || 'div');
         if (params instanceof Div) this.element.appendChild(params.element);
+        else if (params && params.innerText) this.element.innerText = params.innerText;
+        else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
+        else if (params && params.child && params.child instanceof Div){
+            console.log("appendChild::"+params.child);
+            this.appendChild(params.child);
+        }
         else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
         else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
         else if (params && params.child instanceof String) this.element.innerHTML = params.child;
