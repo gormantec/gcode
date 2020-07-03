@@ -3,24 +3,30 @@ class PWA {
         this.title = title || "Code";
         this.params = params || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
         this.innerHTML = "";
-        this.pwaRoot=new Div({id:"PWA_ROOT"});
+        this.pwaRoot=new Div({id:"pwaroot"});
+        this.setHeader();
+        this.setBody();
+        this.setFooter();
     }
 
     setHeader()
     {
-        this.pwaHeader=new Div({id:"PWA_Header"});
-        this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || parentNode.firstChild);
+        if(this.pwaHeader)this.pwaRoot.removeChild(this.pwaHeader);
+        this.pwaHeader=new Div({id:"pwaheader", tagName:"header"});
+        this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild());
     }
 
     setBody()
     {
-        this.pwaBody=new Div({id:"PWA_Body"});
-        this.pwaRoot.insert (newNode, parentNode.firstChild);
+        if(this.pwaBody)this.pwaRoot.removeChild(this.pwaBody);
+        this.pwaBody=new Div({id:"pwabody"});
+        this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
     setFooter()
     {
-        this.pwaFooter=new Div({id:"PWA_Footer"});
-        this.pwaRoot.insert (newNode, parentNode.firstChild);
+        if(this.pwaFooter)this.pwaRoot.removeChild(this.pwaFooter);
+        this.pwaFooter=new Div({id:"pwafooter", tagName:"header"});
+        this.pwaRoot.appendChild (this.pwaFooter);
     }
 
     show() {
@@ -28,9 +34,10 @@ class PWA {
         var win = window.open("", this.title, this.params);
         var _style = win.document.createElement("link"); 
         _style.setAttribute("rel","stylesheet");
-        _style.setAttribute("href","css/pwa.css");
+        _style.setAttribute("href","https://git.gormantec.com/gcode/css/pwa.css");
         win.document.head.appendChild(_style);
-        win.document.body.innerHTML = this.innerHTML;
+        win.document.body.innerHTML = "";
+        win.document.body.appendChild(this.pwaRoot.element);
     }
     
     dynamicallyLoadScript(url) {
@@ -41,24 +48,67 @@ class PWA {
 }
 
 class Div {
+
    
     constructor(params) {
-        this.element = document.createElement('div');
-        if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
+        this.element = document.createElement(params.tagName || 'div');
+        if(params instanceof Div) this.element.appendChild(params.element);
+        else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
         else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
         else if (params && params.child instanceof String) this.element.innerHTML = params.child;
         else if (params instanceof HTMLElement) this.element.appendChild(params);
         else if (params instanceof String) this.element.innerHTML = params;
-
-        if (params.id instanceof String) this.element.id = params.class;
-        if (params.class instanceof String) this.element.className = params.class;
+        if (params.id) this.element.id = params.id;
+        if (params.class) this.element.className = params.class;
     }
-    append(params) {
-        if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
-        else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
-        else if (params && params.child instanceof String) this.element.innerHTML = params.child;
-        else if (params instanceof HTMLElement) this.element.appendChild(params);
-        else if (params instanceof String) this.element.innerHTML = params;
+    appendChild(params) {
+        console.log("appendChild:"+ typeof params);
+        if(!params) return;
+        else if(params instanceof Div && params.element instanceof Node ){
+            console.log("n1:"+params.element);
+            console.log("appendChild:68:"+ typeof params.element);
+            this.element.appendChild(params.element);
+            console.log("n1:"+params.element);
+        }
+        else if (params && params.child && params.child.element instanceof HTMLElement){
+            console.log("appendChild:72:"+ typeof params.child.element);
+            this.element.appendChild(params.child.element);
+        }
+        else if (params && params.child instanceof HTMLElement){
+            console.log("appendChild:76:"+ typeof params.child);
+          this.element.appendChild(params.child);
+        }
+        else if (params && params.child instanceof String){
+            console.log("appendChild:80:"+ typeof params.child);
+            this.element.innerHTML = params.child; 
+        } 
+        else if (params instanceof HTMLElement){
+            console.log("appendChild:84:"+ typeof params);
+            this.element.appendChild(params);
+        }
+        else if (params instanceof String){
+            console.log("appendChild:88:"+ typeof params.child.element);
+            this.element.innerHTML = params;
+        }
+    }
+    
+    insertBefore(n1,n2)
+    {
+        if(n1 instanceof Div)n1=n1.element;
+        if(n2 instanceof Div)n2=n2.element;
+        console.log("n1:"+n1);
+        console.log("n2:"+n2);
+
+        this.element.insertBefore(n1,n2);
+    }
+    removeChild(n1)
+    {
+        if(n1 instanceof Div)n1=n1.element;
+        this.element.removeChild(n1);
+    }
+
+    firstChild(){
+        return this.element.firstChild;
     }
 }
 
