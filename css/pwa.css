@@ -29,7 +29,8 @@ body {
     position: absolute;
     height: 30px;
     width: 30px;
-    font-size: 28px;
+    font-size: 30px;
+    font-weight: 900;
     padding: 5px;
     margin:0px;
     background-color: #005040;
