@@ -24,7 +24,7 @@ class PWA {
         var b = (rgb >> 0) & 0xff;  // extract blue
         var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
         console.log("luma:"+luma);
-        if (luma < 40) {
+        if (luma < 124) {
             // pick a different colour
             return "#F0F0F0";
         }
