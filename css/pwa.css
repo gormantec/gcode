@@ -37,6 +37,8 @@ body {
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    border-style: solid;
+    border-color: #000000;
 }
 
 #pwaheader{
@@ -49,6 +51,8 @@ body {
     padding-bottom:5px;
     font-size: 28px;
     font-weight: 900;
+    background-color: #005040;
+    color:#FFFFFF;
 }
 
 #pwabody{
@@ -66,4 +70,6 @@ body {
     right: 0px;
     bottom: 0px;
     height: 30px;
+    background-color: #005040;
+    color:#FFFFFF;
 }

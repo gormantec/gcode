@@ -2,7 +2,7 @@ class PWA {
     constructor(params) {
         if(!params)params={};
         this.title = params.title || "Code";
-        this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
+        this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
