@@ -239,7 +239,7 @@ function _new() {
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
-        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\nconsole.log('new javascript file!');\n\nvar aPWA=new PWA();\n\naPWA.show();");
+        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\nconsole.log('new javascript file!');\n\nvar aPWA=new PWA({title:\"Hello World!\"});\n\naPWA.show();");
         if (selectedFileWidget.endsWith(".js")) {
             //editor.setOption("mode", "javascript");
         }
