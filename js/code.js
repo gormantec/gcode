@@ -1,7 +1,8 @@
 class PWA {
-    constructor(title, params) {
-        this.title = title || "Code";
-        this.params = params || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
+    constructor(params) {
+        if(!params)params={};
+        this.title = params.title || "Code";
+        this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=600,top=50,left=50";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
@@ -13,7 +14,7 @@ class PWA {
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header" });
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header",innerHTML:this.title });
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
     }
 
@@ -57,7 +58,7 @@ class PWA {
 
     show() {
         console.log("show: " + this.title);
-        var win = window.open("", this.title, this.params);
+        var win = window.open("", this.title, this.windowOptions);
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
