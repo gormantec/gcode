@@ -244,11 +244,22 @@ function _delete() {
 }
 
 function _new() {
+
+    var _samplecode=""+
+    "console.log('new javascript file!');\n\n"+
+    "var aPWA=new PWA({title:\"Hello World\",footer:\"https://www.gormantec.com\"});\n\n"+
+    "aPWA.show();\n\n"+
+    "aPWA.floatingActionButton.onclick(function(){\n"+
+    "  console.log(\"button clicked\");\n"+
+    "  alert(\"Hello World!\");\n"+
+    "});\n";
+
+
     var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".js");
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
-        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\nconsole.log('new javascript file!');\n\nvar aPWA=new PWA({title:\"Hello World!\",footer:\"https://www.gormantec.com\"});\n\naPWA.show();");
+        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\n"+_samplecode);
         if (selectedFileWidget.endsWith(".js")) {
             //editor.setOption("mode", "javascript");
         }
