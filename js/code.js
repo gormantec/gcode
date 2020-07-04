@@ -159,6 +159,7 @@ class Div {
         else if (params instanceof String) this.element.innerHTML = params;
         if (params.id) this.element.id = params.id;
         if (params.class) this.element.className = params.class;
+        if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
