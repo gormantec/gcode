@@ -264,10 +264,10 @@ function _new() {
 
     var _samplecode = "" +
         "console.log('new javascript file!');\n\n" +
-        "var aPWA=new PWA({" +
-        "        title:\"Hello World\"," +
-        "        footer:\"https://www.gormantec.com\"" +
-        "        primaryColor:\"#005040\"" +
+        "var aPWA=new PWA({\n" +
+        "        title:\"Hello World\",\n" +
+        "        footer:\"https://www.gormantec.com\"\n" +
+        "        primaryColor:\"#005040\"\n" +
         "    });\n\n" +
         "aPWA.show();\n\n" +
         "aPWA.floatingActionButton.onclick(function(){\n" +
