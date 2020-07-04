@@ -1,8 +1,10 @@
 class PWA {
     constructor(params) {
-        if(!params)params={};
+        if (!params) params = {};
         this.title = params.title || "Code";
-        this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
+        this.primaryColor = params.primaryColor || "#005040";
+        this.primaryColorText = getTextColor(this.primaryColor);
+            this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
         this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
@@ -13,9 +15,28 @@ class PWA {
         this.setFloatingActionButton();
     }
 
+    getTextColor(backColor) {
+        var c = c.substring(1);      // strip #
+        var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+        var r = (rgb >> 16) & 0xff;  // extract red
+        var g = (rgb >> 8) & 0xff;  // extract green
+        var b = (rgb >> 0) & 0xff;  // extract blue
+        var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+        if (luma < 50) {
+            // pick a different colour
+            return "#F0F0F0";
+        }
+        else{
+            return "#0F0F0F";
+        }
+    }
+
+
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header",innerHTML:this.title });
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", innerHTML: this.title });
+        this.pwaHeader.style.backgroundColor = this.primaryColor;
+        this.pwaHeader.style.color = this.primaryColorText;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
     }
 
@@ -27,19 +48,19 @@ class PWA {
 
     setFloatingActionButton() {
         if (this.floatingActionButton) this.pwaOverlay.removeChild(this.floatingActionButton);
-        this.floatingActionButton = new Div({ 
-            class: "floatingActionButton", 
+        this.floatingActionButton = new Div({
+            class: "floatingActionButton",
             child: new Div({
-                tagName:"i",
-                class:"material-icons",
-                innerText:"add"
+                tagName: "i",
+                class: "material-icons",
+                innerText: "add"
             })
         });
         this.pwaOverlay.appendChild(this.floatingActionButton);
     }
     setFooter() {
         if (this.pwaFooter) this.pwaRoot.removeChild(this.pwaFooter);
-        this.pwaFooter = new Div({ id: "pwafooter", tagName: "footer",innerHTML:this.footer });
+        this.pwaFooter = new Div({ id: "pwafooter", tagName: "footer", innerHTML: this.footer });
         this.pwaRoot.appendChild(this.pwaFooter);
     }
 
@@ -61,7 +82,7 @@ class PWA {
         console.log("show: " + this.title);
         var win = window.open("", this.title, this.windowOptions);
         var _title = win.document.createElement("title");
-        _title.innerText=this.title;
+        _title.innerText = this.title;
         win.document.head.appendChild(_title);
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
@@ -82,12 +103,10 @@ class PWA {
 
     }
 
-    showFloatingActionButton()
-    {
+    showFloatingActionButton() {
         this.floatingActionButton.style.display = "";
     }
-    hideFloatingActionButton()
-    {
+    hideFloatingActionButton() {
         this.floatingActionButton.style.display = "none";
     }
 
@@ -122,13 +141,13 @@ class Div {
 
 
     constructor(params) {
-        if(params)console.log("constructor::*****::"+params.child);
+        if (params) console.log("constructor::*****::" + params.child);
         this.element = document.createElement(params.tagName || 'div');
         if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.innerText) this.element.innerText = params.innerText;
         else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
-        else if (params && params.child && params.child instanceof Div){
-            console.log("appendChild::"+params.child);
+        else if (params && params.child && params.child instanceof Div) {
+            console.log("appendChild::" + params.child);
             this.appendChild(params.child);
         }
         else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
@@ -139,13 +158,11 @@ class Div {
         if (params.id) this.element.id = params.id;
         if (params.class) this.element.className = params.class;
     }
-    onclick(afunc)
-    { 
-        if(afunc && {}.toString.call(afunc) === '[object Function]')
-        {
-            this.element.onclick=afunc;
+    onclick(afunc) {
+        if (afunc && {}.toString.call(afunc) === '[object Function]') {
+            this.element.onclick = afunc;
         }
-        
+
     }
     appendChild(params) {
         console.log("appendChild:" + typeof params);
@@ -245,21 +262,25 @@ function _delete() {
 
 function _new() {
 
-    var _samplecode=""+
-    "console.log('new javascript file!');\n\n"+
-    "var aPWA=new PWA({title:\"Hello World\",footer:\"https://www.gormantec.com\"});\n\n"+
-    "aPWA.show();\n\n"+
-    "aPWA.floatingActionButton.onclick(function(){\n"+
-    "  console.log(\"button clicked\");\n"+
-    "  alert(\"Hello World!\");\n"+
-    "});\n";
+    var _samplecode = "" +
+        "console.log('new javascript file!');\n\n" +
+        "var aPWA=new PWA({" +
+        "        title:\"Hello World\"," +
+        "        footer:\"https://www.gormantec.com\"" +
+        "        primaryColor:\"#005040\"" +
+        "    });\n\n" +
+        "aPWA.show();\n\n" +
+        "aPWA.floatingActionButton.onclick(function(){\n" +
+        "  console.log(\"button clicked\");\n" +
+        "  alert(\"Hello World!\");\n" +
+        "});\n";
 
 
     var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".js");
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
-        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\n"+_samplecode);
+        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\n" + _samplecode);
         if (selectedFileWidget.endsWith(".js")) {
             //editor.setOption("mode", "javascript");
         }
