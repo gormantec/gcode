@@ -77,6 +77,16 @@ class PWA {
 
     }
 
+    showFloatingActionButton()
+    {
+        this.floatingActionButton.style.display = "";
+    }
+    hideFloatingActionButton()
+    {
+        this.floatingActionButton.style.display = "none";
+    }
+
+
     showFooter() {
         this.pwaFooter.style.display = "block";
         this.pwaBody.style.bottom = 30 + "px";
