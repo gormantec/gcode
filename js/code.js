@@ -138,6 +138,14 @@ class Div {
         if (params.id) this.element.id = params.id;
         if (params.class) this.element.className = params.class;
     }
+    onclick(afunc)
+    { 
+        if(afunc && {}.toString.call(afunc) === '[object Function]')
+        {
+            this.element.onclick=afunc;
+        }
+        
+    }
     appendChild(params) {
         console.log("appendChild:" + typeof params);
         if (!params) return;
