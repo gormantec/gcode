@@ -30,7 +30,7 @@ class PWA {
             child: new Div({
                 tagName:"i",
                 class:"material-icons",
-                innerText:"play_circle_outline"
+                innerText:"add"
             })
         });
         this.pwaOverlay.appendChild(this.floatingActionButton);
