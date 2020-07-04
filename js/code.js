@@ -3,7 +3,7 @@ class PWA {
         if (!params) params = {};
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
-        this.primaryColorText = getTextColor(this.primaryColor);
+        this.primaryColorText = this.getTextColor(this.primaryColor);
             this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
         this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50";
         this.innerHTML = "";
@@ -266,7 +266,7 @@ function _new() {
         "console.log('new javascript file!');\n\n" +
         "var aPWA=new PWA({\n" +
         "        title:\"Hello World\",\n" +
-        "        footer:\"https://www.gormantec.com\"\n" +
+        "        footer:\"https://www.gormantec.com\",\n" +
         "        primaryColor:\"#005040\"\n" +
         "    });\n\n" +
         "aPWA.show();\n\n" +
