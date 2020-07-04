@@ -67,7 +67,7 @@ class PWA {
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
         this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "default");
-        this.addMeta(win.document, "viewport", "width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86");
+        this.addMeta(win.document, "viewport", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", "#005040");
         this.addMeta(win.document, "theme-color", "#005040");
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
