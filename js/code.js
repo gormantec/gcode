@@ -16,8 +16,9 @@ class PWA {
     }
 
     getTextColor(backColor) {
-        var c = c.substring(1);      // strip #
-        var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+        
+        var backColor = c.substring(1);      // strip #
+        var rgb = parseInt(backColor, 16);   // convert rrggbb to decimal
         var r = (rgb >> 16) & 0xff;  // extract red
         var g = (rgb >> 8) & 0xff;  // extract green
         var b = (rgb >> 0) & 0xff;  // extract blue
