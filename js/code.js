@@ -59,7 +59,7 @@ class PWA {
     show() {
         console.log("show: " + this.title);
         var win = window.open("", this.title, this.windowOptions);
-        var _title = targetDocument.createElement("title");
+        var _title = win.document.createElement("title");
         _title.innerText=this.title;
         win.document.head.appendChild(_title);
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
