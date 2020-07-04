@@ -83,3 +83,27 @@ body {
     background-color: #005040;
     color:#FFFFFF;
 }
+
+#pwafooter a:link {
+    color: #0077ff; 
+    background-color: transparent; 
+    text-decoration: none;
+  }
+  
+#pwafooter a:visited {
+    color: #0077ff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  #pwafooter  a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  #pwafooter a:active {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
