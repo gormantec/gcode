@@ -76,8 +76,9 @@ body {
     left: 0px;
     right: 0px;
     bottom: 0px;
-    height: 30px;
-    padding: 5px;
+    height: 18px;
+    font-size: 18px;
+    padding: 11px;
     text-align: center;
     background-color: #005040;
     color:#FFFFFF;
