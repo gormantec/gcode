@@ -87,6 +87,13 @@ class PWA {
         targetDocument.head.appendChild(_style);
     }
 
+    addModule(targetDocument, href) {
+        var _script = targetDocument.createElement("script");
+        _script.setAttribute("type", "module");
+        _script.setAttribute("src", href);
+        targetDocument.head.appendChild(_script);
+    }
+
     show() {
         var win = window.open("", this.title, this.windowOptions);
         var _title = win.document.createElement("title");
@@ -105,6 +112,7 @@ class PWA {
         this.addMeta(win.document, "theme-color", "#005040");
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
         this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css");
+        this.addModule(win.document, "https://git.gormantec.com/gcode/modules/test.js");
         win.document.body.innerHTML = "";
         win.document.body.appendChild(this.pwaRoot.element);
         win.document.body.appendChild(this.pwaOverlay.element);

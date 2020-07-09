@@ -475,7 +475,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
 
-
+/*
    var gitRepositories = localStorage.getItem("git-repositories");
    if(gitRepositories)
    {
@@ -498,6 +498,8 @@ document.addEventListener("DOMContentLoaded", function () {
            }
        });
    }
+
+   */
 
 });
 
