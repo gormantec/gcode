@@ -112,7 +112,7 @@ class PWA {
         this.addMeta(win.document, "theme-color", "#005040");
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
         this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css");
-        this.addModule(win.document, "https://git.gormantec.com/gcode/modules/test.js");
+        this.addModule(win.document, "https://git.gormantec.com/gcode/modules/main.js");
         win.document.body.innerHTML = "";
         win.document.body.appendChild(this.pwaRoot.element);
         win.document.body.appendChild(this.pwaOverlay.element);
