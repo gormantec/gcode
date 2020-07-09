@@ -1,225 +1,3 @@
-class PWA {
-    constructor(params) {
-        if (!params) params = {};
-        this.title = params.title || "Code";
-        this.primaryColor = params.primaryColor || "#005040";
-        this.primaryColorText = this.getTextColor(this.primaryColor);
-            this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
-        this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50";
-        this.innerHTML = "";
-        this.pwaRoot = new Div({ id: "pwaroot" });
-        this.pwaOverlay = new Div({ id: "pwaoverlay" });
-        this.setHeader();
-        this.setBody();
-        this.setFooter();
-        this.setFloatingActionButton();
-    }
-
-    getTextColor(backColor) {
-        
-        var backColor = backColor.substring(1);      // strip #
-        var rgb = parseInt(backColor, 16);   // convert rrggbb to decimal
-        var r = (rgb >> 16) & 0xff;  // extract red
-        var g = (rgb >> 8) & 0xff;  // extract green
-        var b = (rgb >> 0) & 0xff;  // extract blue
-        var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-        console.log("luma:"+luma);
-        if (luma < 124) {
-            // pick a different colour
-            return "#F0F0F0";
-        }
-        else{
-            return "#0F0F0F";
-        }
-    }
-
-
-    setHeader() {
-        if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", innerHTML: this.title });
-        this.pwaHeader.style.backgroundColor = this.primaryColor;
-        this.pwaHeader.style.color = this.primaryColorText;
-        this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
-    }
-
-    setBody() {
-        if (this.pwaBody) this.pwaRoot.removeChild(this.pwaBody);
-        this.pwaBody = new Div({ id: "pwabody" });
-        this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
-    }
-
-    setFloatingActionButton() {
-        if (this.floatingActionButton) this.pwaOverlay.removeChild(this.floatingActionButton);
-        this.floatingActionButton = new Div({
-            class: "floatingActionButton",
-            child: new Div({
-                tagName: "i",
-                class: "material-icons",
-                innerText: "add"
-            })
-        });
-        this.pwaOverlay.appendChild(this.floatingActionButton);
-    }
-    setFooter() {
-        if (this.pwaFooter) this.pwaRoot.removeChild(this.pwaFooter);
-        this.pwaFooter = new Div({ id: "pwafooter", tagName: "footer", innerHTML: this.footer });
-        this.pwaRoot.appendChild(this.pwaFooter);
-    }
-
-    addMeta(targetDocument, name, content) {
-        var _meta = targetDocument.createElement("meta");
-        _meta.setAttribute("name", name);
-        _meta.setAttribute("content", content);
-        targetDocument.head.appendChild(_meta);
-    }
-
-    addStyle(targetDocument, href) {
-        var _style = targetDocument.createElement("link");
-        _style.setAttribute("rel", "stylesheet");
-        _style.setAttribute("href", href);
-        targetDocument.head.appendChild(_style);
-    }
-
-    show() {
-        console.log("show: " + this.title);
-        var win = window.open("", this.title, this.windowOptions);
-        var _title = win.document.createElement("title");
-        _title.innerText = this.title;
-        win.document.head.appendChild(_title);
-        this.addMeta(win.document, "mobile-web-app-capable", "yes");
-        this.addMeta(win.document, "apple-touch-fullscreen", "yes");
-        this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
-        this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
-        this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "default");
-        this.addMeta(win.document, "viewport", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
-        this.addMeta(win.document, "msapplication-TileColor", "#005040");
-        this.addMeta(win.document, "theme-color", "#005040");
-        this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
-        this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css");
-        win.document.body.innerHTML = "";
-        win.document.body.appendChild(this.pwaRoot.element);
-        win.document.body.appendChild(this.pwaOverlay.element);
-
-
-
-
-    }
-
-    showFloatingActionButton() {
-        this.floatingActionButton.style.display = "";
-    }
-    hideFloatingActionButton() {
-        this.floatingActionButton.style.display = "none";
-    }
-
-
-    showFooter() {
-        this.pwaFooter.style.display = "block";
-        this.pwaBody.style.bottom = 30 + "px";
-    }
-
-    showHeader() {
-        this.pwaHeader.style.display = "block";
-        this.pwaBody.style.top = 30 + "px";
-    }
-    hideFooter() {
-        this.pwaFooter.style.display = "none";
-        this.pwaBody.style.bottom = "0px"
-    }
-
-    hideHeader() {
-        this.pwaHeader.style.display = "none";
-        this.pwaBody.style.top = "0px"
-    }
-
-    dynamicallyLoadScript(url) {
-        var script = document.createElement("script");  // create a script DOM node
-        script.src = url;  // set its src to the provided URL
-        document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
-    }
-}
-
-class Div {
-
-
-    constructor(params) {
-        if (params) console.log("constructor::*****::" + params.child);
-        this.element = document.createElement(params.tagName || 'div');
-        if (params instanceof Div) this.element.appendChild(params.element);
-        else if (params && params.innerText) this.element.innerText = params.innerText;
-        else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
-        else if (params && params.child && params.child instanceof Div) {
-            console.log("appendChild::" + params.child);
-            this.appendChild(params.child);
-        }
-        else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
-        else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
-        else if (params && params.child instanceof String) this.element.innerHTML = params.child;
-        else if (params instanceof HTMLElement) this.element.appendChild(params);
-        else if (params instanceof String) this.element.innerHTML = params;
-        if (params.id) this.element.id = params.id;
-        if (params.class) this.element.className = params.class;
-        if (params.style) this.element.setAttribute("style",params.style);
-    }
-    onclick(afunc) {
-        if (afunc && {}.toString.call(afunc) === '[object Function]') {
-            this.element.onclick = afunc;
-        }
-
-    }
-    appendChild(params) {
-        console.log("appendChild:" + typeof params);
-        if (!params) return;
-        else if (params instanceof Div && params.element instanceof Node) {
-            console.log("n1:" + params.element);
-            console.log("appendChild:68:" + typeof params.element);
-            this.element.appendChild(params.element);
-            console.log("n1:" + params.element);
-        }
-        else if (params && params.child && params.child.element instanceof HTMLElement) {
-            console.log("appendChild:72:" + typeof params.child.element);
-            this.element.appendChild(params.child.element);
-        }
-        else if (params && params.child instanceof HTMLElement) {
-            console.log("appendChild:76:" + typeof params.child);
-            this.element.appendChild(params.child);
-        }
-        else if (params && params.child instanceof String) {
-            console.log("appendChild:80:" + typeof params.child);
-            this.element.innerHTML = params.child;
-        }
-        else if (params instanceof HTMLElement) {
-            console.log("appendChild:84:" + typeof params);
-            this.element.appendChild(params);
-        }
-        else if (params instanceof String) {
-            console.log("appendChild:88:" + typeof params.child.element);
-            this.element.innerHTML = params;
-        }
-    }
-
-    insertBefore(n1, n2) {
-        if (n1 instanceof Div) n1 = n1.element;
-        if (n2 instanceof Div) n2 = n2.element;
-        console.log("n1:" + n1);
-        console.log("n2:" + n2);
-
-        this.element.insertBefore(n1, n2);
-    }
-    removeChild(n1) {
-        if (n1 instanceof Div) n1 = n1.element;
-        this.element.removeChild(n1);
-    }
-
-    get firstChild() {
-        return this.element.firstChild;
-    }
-
-    get style() {
-        return this.element.style;
-    }
-}
-
 var editor;
 
 //int variables
@@ -229,18 +7,15 @@ var leftToolbarFontSize = leftToolbarWidth - 26;
 var leftPageWidth = 170;
 var selectedFileWidget = null;
 var pageBottomHeight = 150;
-
-
-
+var dirIconOpened="keyboard_arrow_down";
+var dirIconClosed="keyboard_arrow_right";
 
 
 // root functions
 
-
-
 function _save() {
     var filename = document.getElementById("filename").innerText;
-    if (filename == "" || selectedFileWidget == null) return;
+    if (filename == "" || selectedFileWidget == null || filename.substring(0,6) == "git://") return;
     localStorage.setItem("file-" + filename, btoa(editor.getValue()));
     localStorage.setItem("lastFileName", filename);
 }
@@ -284,24 +59,34 @@ function _new() {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
         editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\n" + _samplecode);
-        if (selectedFileWidget.endsWith(".js")) {
-            //editor.setOption("mode", "javascript");
-        }
-        else if (selectedFileWidget.endsWith(".py")) {
-            //editor.setOption("mode", "python");
-        }
-        else if (selectedFileWidget.endsWith(".dart")) {
-            //editor.setOption("mode", "dart");
-        }
+        _setEditorMode();
     }
     _refresh();
 }
 
 function _openFile() {
-    selectedFileWidget = this.dataset.name;
-    document.getElementById("filename").innerText = this.dataset.name;
-    editor.setValue(atob(localStorage.getItem("file-" + this.dataset.name)));
-    _setEditorMode();
+    if(this.dataset.name.substring(0,6)!="git://"){
+        selectedFileWidget = this.dataset.name;
+        document.getElementById("filename").innerText = this.dataset.name;
+        editor.setValue(atob(localStorage.getItem("file-" + this.dataset.name)));
+        _setEditorMode();
+    }
+    else{
+        var firstColon=this.dataset.name.indexOf(":",6);
+        var secondColon=this.dataset.name.indexOf("/",firstColon+1);
+        var username=this.dataset.name.substring(6,firstColon);
+        var repo=this.dataset.name.substring(firstColon+1,secondColon);
+        var path=this.dataset.name.substring(secondColon+1);
+
+
+        selectedFileWidget = this.dataset.name;
+        document.getElementById("filename").innerText = this.dataset.name;
+        console.log(username+" "+repo+" "+path);
+        getGitFile(username,repo,path,function (e, d) {  
+            /*console.log(d);*/ 
+            editor.setValue(d);
+        });
+    }
     _refresh();
 }
 function _setEditorMode() {
@@ -333,21 +118,32 @@ function _openDir() {
     if (_this.dataset.state && _this.dataset.state == "closed") {
         _this.dataset.state = "open";
         _fileDisplayValue = "";
-        _this.childNodes[0].innerText = "folder_open";
+        _this.getElementsByTagName("i")[0].innerText = dirIconOpened;
     }
     else {
         _this.dataset.state = "closed";
         _fileDisplayValue = "none";
-        _this.childNodes[0].innerText = "folder";
+        _this.getElementsByTagName("i")[0].innerText = dirIconClosed;
     }
-    var _array = document.getElementsByClassName("fileWidget");
-    if (typeof _array == "object") {
-        Array.from(_array).forEach(function (e) {
-            if (e.dataset.dirname == _dirname) {
-                e.style.display = _fileDisplayValue;
-            }
+
+    githubtree.setDirectoryState(_this.dataset.name,_this.dataset.state);
+    
+    if(_dirname=="default")
+    {
+        var _array = document.querySelectorAll("div.fileWidget[data-dirname='"+_dirname+"']");
+        if (_array) Array.from(_array).forEach(function (e) {if (e.dataset.dirname == _dirname) e.style.display = _fileDisplayValue;});
+        var _array = document.querySelectorAll("div.dirWidget[data-dirname='"+_dirname+"']");
+        if (_array) Array.from(_array).forEach(function (e) {e.style.display = _fileDisplayValue;});
+    }
+    else if(_dirname.substring(0,6)=="git://")
+    {
+        var _array = document.querySelectorAll("div.fileWidget[data-name^='"+_dirname+"/'], div.dirWidget[data-name^='"+_dirname+"/']");
+        if (_array) Array.from(_array).forEach(function (e) {
+            e.style.display = _fileDisplayValue;
         });
     }
+
+
 }
 
 function builtinRead(x) {
@@ -434,7 +230,29 @@ function _toolbarButtonClicked() {
 
     }
     else if (this.dataset.action == "addDirectory") {
+        var gitRepoName = prompt("Git username/repo");
+        var username=gitRepoName.substring(0,gitRepoName.indexOf("/"));
+        var repo=gitRepoName.substring(gitRepoName.indexOf("/")+1);
 
+        var gitRepositories = localStorage.getItem("git-repositories");
+        var data ={};
+        if(!gitRepositories)
+        {
+            data ={};
+            data["git://"+username+":"+repo]={"username":username,"repo":repo};
+            localStorage.setItem("git-repositories",JSON.stringify(data));
+        }
+        else{
+            data =JSON.parse(gitRepositories);
+            data["git://"+username+":"+repo]=({"username":username,"repo":repo});
+            localStorage.setItem("git-repositories",JSON.stringify(data));
+        }
+        console.log(data);
+        Object.values(data).forEach(function(r,x){
+            console.log("r:"+r);
+            console.log("x:"+x);
+            pullGitRepository(r.username, r.repo);
+        });
     }
     else if (this.dataset.action == "deleteFile") {
         _delete();
@@ -494,21 +312,19 @@ function _open() {
 
 }
 
+
 function _refresh() {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div class='dirWidget' data-name='default'><i class='material-icons'>folder_open</i>default</div>";
+    var pageLeft = "<div class='dirWidget' data-name='default'><i class='material-icons'>"+dirIconOpened+"</i>default</div>";
     keys.sort();
     keys.reverse();
     while (i--) {
 
         if (keys[i].startsWith("file-") && keys[i] != "file-") {
-
             var nextname = "";
-
             if (i > 0) nextname = "data-nextname='" + keys[i - 1].substring(5) + "'";
-
             if (selectedFileWidget == keys[i].substring(5)) {
                 pageLeft = pageLeft + "<div class='fileWidget fileWidgetSelected' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>";
             }
@@ -517,8 +333,19 @@ function _refresh() {
             }
         }
     }
-
     document.getElementById("pageLeftBody").innerHTML = pageLeft;
+
+    var gitRepositories = localStorage.getItem("git-repositories");
+    if(gitRepositories)
+    {
+        var data ={};
+        data =JSON.parse(gitRepositories);
+        Object.values(data).forEach(function(r,x){
+            if(r.username && r.repo){
+                addGitRepository(r.username, r.repo,document.getElementById("pageLeftBody"));
+            }
+        });
+    }
 
     Array.from(document.getElementsByClassName("dirWidget")).forEach(function (e) {
         e.onclick = _openDir;
@@ -528,6 +355,8 @@ function _refresh() {
         e.onclick = _openFile;
     });
 }
+
+
 
 
 
@@ -645,6 +474,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, false);
 
+
+
+   var gitRepositories = localStorage.getItem("git-repositories");
+   if(gitRepositories)
+   {
+       var data ={};
+       data =JSON.parse(gitRepositories);
+       Object.values(data).forEach(function(r,x){
+           if(r.username && r.repo){
+
+            var running_count=0;
+            pullGitRepository(r.username, r.repo,function(state,repo, path){
+                if(state=="running"){
+                    running_count++;
+                    if(Math.floor(running_count/10)*10==running_count)
+                    {
+                        //_refresh();
+                    }
+                }
+                if(state=="done") _refresh();
+            });
+           }
+       });
+   }
 
 });
 

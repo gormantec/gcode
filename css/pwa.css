@@ -21,12 +21,12 @@ body {
     left: 0px;
     right: 0px;
     top: 0px;
-    bottom: 0px;
+    height: 0px;
     z-index: 100;
 }
 
 .floatingActionButton{
-    position: absolute;
+    position: fixed;
     height: 30px;
     width: 30px;
     padding: 5px;
@@ -85,13 +85,13 @@ body {
 }
 
 #pwafooter a:link {
-    color: #0077ff; 
+    color: #a6cdfa; 
     background-color: transparent; 
     text-decoration: none;
   }
   
 #pwafooter a:visited {
-    color: #0077ff;
+    color: #a6cdfa;
     background-color: transparent;
     text-decoration: none;
   }

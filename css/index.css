@@ -246,5 +246,13 @@ body {
     padding-bottom: 0px;
     margin-bottom: 0px;
     padding-right: 6px;
-    vertical-align: bottom;
+}
+#pageLeftBodyScroll {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    right: 6px;
+    bottom: 0px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
