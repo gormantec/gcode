@@ -3,6 +3,8 @@ class PWA {
         if (!params) params = {};
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
+        this.headerHeight = params.headerHeight || 60;
+        this.headerFontSize = params.headerFontSize || 24;
         this.primaryColorText = this.getTextColor(this.primaryColor);
         this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
         this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50";
@@ -38,6 +40,8 @@ class PWA {
         this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", innerHTML: this.title });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
+        if(this.headerHeight) this.pwaHeader.style.height = this.headerHeight-25;
+        if(this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
     }
 
