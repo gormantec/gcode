@@ -1,0 +1,14 @@
+name: gmobile build
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Runs a single command using the runners shell
+    - name: Webhook
+      uses: zzzze/webhook-trigger@master
+      with:
+        data: "{\"event_type\":\"build\"}"
+        webhook_url: ${{ secrets.WEBHOOK_URL }}
+        options: "-H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${{ secrets.TOKEN }}\""
