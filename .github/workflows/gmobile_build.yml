@@ -9,9 +9,15 @@ jobs:
       run: |
         echo ${{ secrets.WEBHOOK_URL }}
         echo ${{ secrets.TOKEN }}
-    - name: Webhook
-      uses: zzzze/webhook-trigger@master
-      with:
-        data: "{\"event_type\":\"build\"}"
-        webhook_url: ${{ secrets.WEBHOOK_URL }}
-        options: "-H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${{ secrets.TOKEN }}\""
+        curl \
+        -v -H "Authorization: token a13d75e55193941dc041e13d000bc1a3c7440623" \
+        -X POST \
+        -H "Accept: application/vnd.github.v3+json" \
+        https://api.github.com/repos/gormantec/gmobile/actions/workflows/workflow_dispatch.yml/dispatches \
+        -d '{"ref":"master"}'
+ #   - name: Webhook
+ #     uses: zzzze/webhook-trigger@master
+ #     with:
+ #       data: "{\"event_type\":\"build\"}"
+ #       webhook_url: ${{ secrets.WEBHOOK_URL }}
+ #       options: "-H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${{ secrets.TOKEN }}\""
