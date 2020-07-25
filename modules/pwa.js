@@ -149,7 +149,9 @@ class PWA {
     }
 }
 
+class Page extends Div{
 
+}
 
 class Div {
 
@@ -171,6 +173,10 @@ class Div {
         else if (params instanceof String) this.element.innerHTML = params;
         if (params && params.id) this.element.id = params.id;
         if (params && params.class) this.element.className = params.class;
+        if (params && params.backgroundColor) this.element.style.backgroundColor = params.backgroundColor;
+        if (params && params.backgroundPosition) this.element.style.backgroundPosition = params.backgroundPosition;
+        if (params && params.backgroundRepeat) this.element.style.backgroundRepeat = params.backgroundRepeat;
+        if (params && params.backgroundImage) this.element.style.backgroundImage = params.backgroundImage;
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
