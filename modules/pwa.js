@@ -1,3 +1,4 @@
+var globals={}
 class PWA {
     constructor(params) {
         if (!params) params = {};
@@ -14,6 +15,22 @@ class PWA {
         this.setBody();
         this.setFooter();
         this.setFloatingActionButton();
+        globals.setNavigateBackPage=this.setNavigateBackPage;
+        globals.showNavigateBackButton=this.showNavigateBackButton;
+        globals.hideNavigateBackButton=this.hideNavigateBackButton;
+    }
+
+    setNavigateBackPage(navigateBackPage)
+    {
+
+    }
+    showNavigateBackButton()
+    {
+
+    }
+    hideNavigateBackButton()
+    {
+
     }
 
     getTextColor(backColor) {
@@ -36,7 +53,7 @@ class PWA {
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", innerHTML: this.title });
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", child:new Div({innerHTML: this.title}) });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
         if(this.headerHeight) this.pwaHeader.style.height = this.headerHeight-25;
@@ -252,6 +269,10 @@ class Page extends Div{
     constructor(params) {
         super(params);
         this.element.className=(this.element.className+" pwapage").trim();
+        if(params.navigateBackPage instanceof Page)
+        {
+
+        }
     }
 }
 
