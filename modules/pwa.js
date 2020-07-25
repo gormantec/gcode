@@ -22,15 +22,16 @@ class PWA {
 
     setNavigateBackPage(navigateBackPage)
     {
-
+        var _this=this;
+        this.navigateBackButton.onclick(function(){_this.setPage(navigateBackPage);});
     }
     showNavigateBackButton()
     {
-
+        this.navigateBackButton.style.display = "";
     }
     hideNavigateBackButton()
     {
-
+        this.navigateBackButton.style.display = "none";
     }
 
     getTextColor(backColor) {
@@ -53,7 +54,18 @@ class PWA {
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[new Div({id:"pwaheaderback",innerHTML: "X"}),new Div({id:"pwaheadertitle",innerHTML: this.title})] });
+        this.navigateBackButton=new Div({
+            id:"pwaheaderback",
+            child: new Div({
+                tagName: "i",
+                class: "material-icons",
+                innerText: "navigate-before"
+            })
+        });
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[
+            this.navigateBackButton,
+            new Div({id:"pwaheadertitle",innerHTML: this.title})
+        ] });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
         if(this.headerHeight) this.pwaHeader.style.height = this.headerHeight-25;
