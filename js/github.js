@@ -146,7 +146,7 @@ window.githubtree={
         var repo=path.substring(firstColon+1,secondColon);
         var dirpath=path.substring(secondColon+1);
         var parentpath=dirpath.substring(0,dirpath.lastIndexOf("/"));
-        if(!repo) return;
+        if(!repo || !dirpath || repos[repo][dirpath]) return;
         repos[repo][dirpath].state=state;
     }
 
