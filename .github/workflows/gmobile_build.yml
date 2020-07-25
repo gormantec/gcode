@@ -1,0 +1,23 @@
+name: gmobile build
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo
+      run: |
+        echo ${{ secrets.WEBHOOK_URL }}
+        echo ${{ secrets.TOKEN }}
+        curl \
+        -v -H "Authorization: token ${{ secrets.TOKEN }}" \
+        -X POST \
+        -H "Accept: application/vnd.github.v3+json" \
+        ${{ secrets.WEBHOOK_URL }} \
+        -d '{"ref":"master","inputs":{"test":"test"}}'
+ #   - name: Webhook
+ #     uses: zzzze/webhook-trigger@master
+ #     with:
+ #       data: "{\"event_type\":\"build\"}"
+ #       webhook_url: ${{ secrets.WEBHOOK_URL }}
+ #       options: "-H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${{ secrets.TOKEN }}\""
