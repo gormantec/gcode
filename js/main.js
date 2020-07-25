@@ -218,14 +218,9 @@ function _toolbarButtonClicked() {
             console.log("local:default user$ launch webApp " + selectedFileWidget + "\n\n");
             try {
                 var win = window.open("", selectedFileWidget);
-
-                //var _script = win.document.createElement("script");
-                //_script.setAttribute("src", "https://git.gormantec.com/gcode/js/pwa.js");
-                //win.document.head.appendChild(_script);
-
+                win.document.body.style.backgroundColor="black";
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
-                //_script.setAttribute("src", href);
                 _module.innerText=editor.getValue("\n");
                 win.document.head.appendChild(_module);
             }
