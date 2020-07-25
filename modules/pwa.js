@@ -7,7 +7,6 @@ class PWA {
         this.headerFontSize = params.headerFontSize || 24;
         this.primaryColorText = this.getTextColor(this.primaryColor);
         this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
-        this.windowOptions = params.windowOptions || "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
