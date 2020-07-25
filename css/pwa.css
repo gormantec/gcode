@@ -71,6 +71,14 @@ body {
     background-color: #FFFFFF;
 }
 
+#pwaPage{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 00px;
+    bottom: 0px;
+}
+
 #pwafooter{
     position: absolute;
     left: 0px;
