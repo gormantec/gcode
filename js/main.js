@@ -41,6 +41,7 @@ function _delete() {
 function _new() {
 
     var _samplecode = "" +
+        "import { PWA } from 'https://git.gormantec.com/gcode/modules/pwa.js';\n\n"
         "console.log('new javascript file!');\n\n" +
         "var aPWA=new PWA({\n" +
         "        title:\"Hello World\",\n" +
