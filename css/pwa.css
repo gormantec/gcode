@@ -71,7 +71,7 @@ body {
     background-color: #FFFFFF;
 }
 
-#pwapage{
+.pwapage{
     position: absolute;
     left: 0px;
     right: 0px;
