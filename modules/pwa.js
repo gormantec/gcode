@@ -51,6 +51,7 @@ class PWA {
     }
     setPage(aPage)
     {
+        console.log("setpage");
         this.pwaBody.setChild({child:aPage});
 
     }
@@ -199,17 +200,20 @@ class Div {
 
     setChild(params)
     {
+        console.log("setChild");
         if (!params && !params.child) return;  
         this.element.innerHTML="";
         this.appendChild(params);
     }
 
     appendChild(params) {
+        console.log("appendChild");
         if (!params) return;
         else if (params instanceof Div && params.element instanceof Node) {
             this.element.appendChild(params.element);
         }
         else if (params && params.child && params.child.element instanceof HTMLElement) {
+            console.log("appendChildDiv");
             this.element.appendChild(params.child.element);
         }
         else if (params && params.child instanceof HTMLElement) {
