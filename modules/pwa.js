@@ -87,6 +87,7 @@ class PWA {
     }
     setPage(aPage) {
         console.log("setpage");
+        if(aPage.navigateBackPage)globals.setNavigateBackPage(aPage.navigateBackPage);
         this.pwaBody.setChild({ child: aPage });
 
     }
@@ -295,7 +296,7 @@ class Page extends Div {
         super(params);
         this.element.className = (this.element.className + " pwapage").trim();
         if (params.navigateBackPage instanceof Page) {
-
+            this.navigateBackPage=params.navigateBackPage;
         }
     }
 }
