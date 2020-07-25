@@ -149,9 +149,7 @@ class PWA {
     }
 }
 
-class Page extends Div{
 
-}
 
 class Div {
 
@@ -233,6 +231,10 @@ class Div {
     get style() {
         return this.element.style;
     }
+}
+
+class Page extends Div{
+
 }
 
 
