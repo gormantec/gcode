@@ -215,6 +215,7 @@ body {
     position: absolute;
     margin-top:-12px;
     font-size: 36px;
+    margin-bottom:-12px;
 }
 
 #runHeaderButton{
