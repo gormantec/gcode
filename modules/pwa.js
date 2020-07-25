@@ -236,4 +236,4 @@ class Div {
 }
 
 
-export { PWA, Div };
+export { PWA, Page, Div };
