@@ -177,6 +177,7 @@ class Div {
         if (params && params.backgroundPosition) this.element.style.backgroundPosition = params.backgroundPosition;
         if (params && params.backgroundRepeat) this.element.style.backgroundRepeat = params.backgroundRepeat;
         if (params && params.backgroundImage) this.element.style.backgroundImage = params.backgroundImage;
+        this.element.className=(this.element.className+" pwaPage").trim();
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
