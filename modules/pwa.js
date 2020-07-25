@@ -50,7 +50,7 @@ class PWA {
             return "#0F0F0F";
         }
     }
-
+ 
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
