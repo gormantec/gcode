@@ -91,6 +91,12 @@ class PWA {
         var _script = targetDocument.createElement("script");
         _script.setAttribute("type", "module");
         _script.setAttribute("src", href);
+
+        _script.innerText="\n\n"+
+          "import { name } from 'https://git.gormantec.com/gcode/modules/name.js';\n"+
+          "name();\n"+
+          "console.log('Module!!!');\n\n";
+
         targetDocument.head.appendChild(_script);
     }
 
