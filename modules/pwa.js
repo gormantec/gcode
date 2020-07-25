@@ -49,6 +49,11 @@ class PWA {
         this.pwaBody = new Div({ id: "pwabody" });
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
+    setPage(aPage)
+    {
+        this.pwaBody.setChild({child:aPage});
+
+    }
 
     setFloatingActionButton() {
         if (this.floatingActionButton) this.pwaOverlay.removeChild(this.floatingActionButton);
@@ -190,6 +195,13 @@ class Div {
         html = html.trim(); // Never return a text node of whitespace as the result
         template.innerHTML = html;
         return template.content.firstChild;
+    }
+
+    setChild(params)
+    {
+        if (!params && !params.child) return;  
+        this.element.innerHTML="";
+        this.appendChild(params);
     }
 
     appendChild(params) {
