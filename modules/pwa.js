@@ -1,4 +1,4 @@
-var globals={}
+var globals = {}
 class PWA {
     constructor(params) {
         if (!params) params = {};
@@ -15,22 +15,19 @@ class PWA {
         this.setBody();
         this.setFooter();
         this.setFloatingActionButton();
-        globals.setNavigateBackPage=this.setNavigateBackPage;
-        globals.showNavigateBackButton=this.showNavigateBackButton;
-        globals.hideNavigateBackButton=this.hideNavigateBackButton;
+        globals.setNavigateBackPage = this.setNavigateBackPage;
+        globals.showNavigateBackButton = this.showNavigateBackButton;
+        globals.hideNavigateBackButton = this.hideNavigateBackButton;
     }
 
-    setNavigateBackPage(navigateBackPage)
-    {
-        var _this=this;
-        this.navigateBackButton.onclick(function(){_this.setPage(navigateBackPage);});
+    setNavigateBackPage(navigateBackPage) {
+        this.navigateBackButton = navigateBackPage;
+        this.showNavigateBackButton();
     }
-    showNavigateBackButton()
-    {
+    showNavigateBackButton() {
         this.navigateBackButton.style.display = "";
     }
-    hideNavigateBackButton()
-    {
+    hideNavigateBackButton() {
         this.navigateBackButton.style.display = "none";
     }
 
@@ -50,27 +47,37 @@ class PWA {
             return "#0F0F0F";
         }
     }
- 
+
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.navigateBackButton=new Div({
-            id:"pwaheaderback",
+        this.navigateBackButton = new Div({
+            id: "pwaheaderback",
             child: new Div({
                 tagName: "i",
                 class: "material-icons",
                 innerText: "add"
             })
         });
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[
-            this.navigateBackButton,
-            new Div({id:"pwaheadertitle",innerHTML: this.title})
-        ] });
+        var _this = this;
+
+        this.navigateBackButton.onclick(function () { 
+            alert("click");
+            if (_this.navigateBackPage) { _this.setPage(_this.navigateBackPage); } 
+        });
+
+        this.pwaHeader = new Div({
+            id: "pwaheader", tagName: "header", children: [
+                this.navigateBackButton,
+                new Div({ id: "pwaheadertitle", innerHTML: this.title })
+            ]
+        });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
-        if(this.headerHeight) this.pwaHeader.style.height = this.headerHeight-25;
-        if(this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
+        if (this.headerHeight) this.pwaHeader.style.height = this.headerHeight - 25;
+        if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
+        if (!this.navigateBackPage) this.navigateBackButton.style.display = "none";
     }
 
     setBody() {
@@ -78,10 +85,9 @@ class PWA {
         this.pwaBody = new Div({ id: "pwabody" });
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
-    setPage(aPage)
-    {
+    setPage(aPage) {
         console.log("setpage");
-        this.pwaBody.setChild({child:aPage});
+        this.pwaBody.setChild({ child: aPage });
 
     }
 
@@ -133,8 +139,8 @@ class PWA {
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.appendChild(_title);
-        win.document.body.style.backgroundColor=this.primaryColor;
-        win.document.body.style.color=this.primaryColorText;
+        win.document.body.style.backgroundColor = this.primaryColor;
+        win.document.body.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
@@ -199,11 +205,10 @@ class Div {
         else if (params && params.child && params.child instanceof Div) {
             this.appendChild(params.child);
         }
-        else if (params && params.children && params.children.length>0) {
-            var _this=this;
-            Array.from(params.children).forEach(function(child){
-                if(child instanceof Div)
-                {
+        else if (params && params.children && params.children.length > 0) {
+            var _this = this;
+            Array.from(params.children).forEach(function (child) {
+                if (child instanceof Div) {
                     _this.appendChild(child);
                 }
             });
@@ -235,11 +240,10 @@ class Div {
         return template.content.firstChild;
     }
 
-    setChild(params)
-    {
+    setChild(params) {
         console.log("setChild");
-        if (!params && !params.child) return;  
-        this.element.innerHTML="";
+        if (!params && !params.child) return;
+        this.element.innerHTML = "";
         this.appendChild(params);
     }
 
@@ -286,12 +290,11 @@ class Div {
     }
 }
 
-class Page extends Div{
+class Page extends Div {
     constructor(params) {
         super(params);
-        this.element.className=(this.element.className+" pwapage").trim();
-        if(params.navigateBackPage instanceof Page)
-        {
+        this.element.className = (this.element.className + " pwapage").trim();
+        if (params.navigateBackPage instanceof Page) {
 
         }
     }
