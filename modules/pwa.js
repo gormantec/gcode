@@ -235,3 +235,6 @@ class Div {
         return this.element.style;
     }
 }
+
+
+export { PWA, Div };
