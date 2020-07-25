@@ -251,7 +251,7 @@ class Div {
 class Page extends Div{
     constructor(params) {
         super(params);
-        this.element.className=(this.element.className+" pwabody").trim();
+        this.element.className=(this.element.className+" pwapage").trim();
     }
 }
 
