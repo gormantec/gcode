@@ -187,10 +187,13 @@ class Div {
         else if (params && params.child && params.child instanceof Div) {
             this.appendChild(params.child);
         }
-        else if (params && params.children && params.children.length>0 && params.children[0] instanceof Div) {
+        else if (params && params.children && params.children.length>0) {
             var _this=this;
-            Array.from(params.children).forEach(function(cild){
-                _this.appendChild(child);
+            Array.from(params.children).forEach(function(child){
+                if(child instanceof Div)
+                {
+                    _this.appendChild(child);
+                }
             });
         }
         else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
