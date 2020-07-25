@@ -26,6 +26,7 @@ body {
     font-size: 16px;
     font-weight: bolder;
     margin: 0px;
+    margin-top: 4px;
     padding: 0px;
     cursor: pointer;
 }
@@ -213,12 +214,12 @@ body {
 
 #sideBarButton{
     position: absolute;
-    margin-top:-12px;
+    margin-top:-8px;
 }
 
 #runHeaderButton{
     position: absolute;
-    top: 4px;
+    top: 10px;
     left: 50px;
     width: 30px;
     margin-top:0px;
