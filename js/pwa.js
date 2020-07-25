@@ -100,8 +100,8 @@ class PWA {
         targetDocument.head.appendChild(_script);
     }
 
-    show() {
-        var win = window.open("", this.title, this.windowOptions);
+    show(win) {
+        win = win || window;
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.appendChild(_title);
@@ -122,10 +122,6 @@ class PWA {
         win.document.body.innerHTML = "";
         win.document.body.appendChild(this.pwaRoot.element);
         win.document.body.appendChild(this.pwaOverlay.element);
-
-
-
-
     }
 
     showFloatingActionButton() {
@@ -161,6 +157,8 @@ class PWA {
         document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
     }
 }
+
+
 
 class Div {
 

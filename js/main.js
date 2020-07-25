@@ -54,7 +54,7 @@ function _new() {
         "});\n";
 
 
-    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".js");
+    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".jsm");
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
@@ -91,6 +91,9 @@ function _openFile() {
 }
 function _setEditorMode() {
     if (selectedFileWidget.endsWith(".js")) {
+        editor.setOption("mode", "javascript");
+    }
+    else if (selectedFileWidget.endsWith(".jsm")) {
         editor.setOption("mode", "javascript");
     }
     else if (selectedFileWidget.endsWith(".py")) {
@@ -205,6 +208,21 @@ function _toolbarButtonClicked() {
                     eval(editor.getValue());
                 }
                 _run();
+            }
+            catch (e) {
+                console.error(e);
+            }
+            console.log(" ");
+        }
+        else if (selectedFileWidget.endsWith(".jsm")) {
+            console.log("local:default user$ launch webApp " + selectedFileWidget + "\n\n");
+            try {
+                var win = window.open("", selectedFileWidget);
+                var _script = win.document.createElement("script");
+                _script.setAttribute("type", "module");
+                _script.setAttribute("src", href);
+                _script.innerText="\n\n"+editor.getValue()+"\n\n";
+                win.document.head.appendChild(_script);
             }
             catch (e) {
                 console.error(e);
@@ -399,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
         editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
     }
     else {
-        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".js";
+        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".jsm";
     }
 
 
