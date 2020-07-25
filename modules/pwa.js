@@ -53,7 +53,7 @@ class PWA {
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", child:new Div({innerHTML: this.title}) });
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[new Div({innerHTML: "X"}),new Div({innerHTML: this.title})] });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
         if(this.headerHeight) this.pwaHeader.style.height = this.headerHeight-25;
@@ -186,6 +186,12 @@ class Div {
         else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
         else if (params && params.child && params.child instanceof Div) {
             this.appendChild(params.child);
+        }
+        else if (params && params.children && params.children.length>0 && params.children[0] instanceof Div) {
+            var _this=this;
+            Array.from(params.children).forEach(function(cild){
+                _this.appendChild(child);
+            });
         }
         else if (params && params.child && params.child.element instanceof HTMLElement) this.element.appendChild(params.child.element);
         else if (params && params.child instanceof HTMLElement) this.element.appendChild(params.child);
