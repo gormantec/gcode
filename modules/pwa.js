@@ -53,7 +53,7 @@ class PWA {
 
     setHeader() {
         if (this.pwaHeader) this.pwaRoot.removeChild(this.pwaHeader);
-        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[new Div({innerHTML: "X"}),new Div({innerHTML: this.title})] });
+        this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[new Div({id:"pwaheaderback",innerHTML: "X"}),new Div({id:"pwaheadertitle",innerHTML: this.title})] });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
         if(this.headerHeight) this.pwaHeader.style.height = this.headerHeight-25;
