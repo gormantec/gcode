@@ -21,7 +21,7 @@ class PWA {
     }
 
     setNavigateBackPage(navigateBackPage) {
-        this.navigateBackButton = navigateBackPage;
+        this.navigateBackPage = navigateBackPage;
         this.showNavigateBackButton();
     }
     showNavigateBackButton() {
@@ -63,7 +63,11 @@ class PWA {
 
         this.navigateBackButton.onclick(function () { 
             alert("click");
-            if (_this.navigateBackPage) { _this.setPage(_this.navigateBackPage); } 
+            if (_this.navigateBackPage) { 
+                if(_this.navigateBackPage.navigateBackPage)_this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
+                else _this.hideNavigateBackButton();
+                _this.setPage(_this.navigateBackPage);
+             } 
         });
 
         this.pwaHeader = new Div({
@@ -87,7 +91,10 @@ class PWA {
     }
     setPage(aPage) {
         console.log("setpage");
-        if(aPage.navigateBackPage)globals.setNavigateBackPage(aPage.navigateBackPage);
+        if(aPage.navigateBackPage){
+            console.log("setNavigateBackPage:"+aPage.navigateBackPage);
+            this.setNavigateBackPage(aPage.navigateBackPage);
+        }
         this.pwaBody.setChild({ child: aPage });
 
     }
@@ -295,7 +302,9 @@ class Page extends Div {
     constructor(params) {
         super(params);
         this.element.className = (this.element.className + " pwapage").trim();
+        alert("add1");
         if (params.navigateBackPage instanceof Page) {
+            alert("add2");
             this.navigateBackPage=params.navigateBackPage;
         }
     }
