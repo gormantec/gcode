@@ -59,7 +59,7 @@ class PWA {
             child: new Div({
                 tagName: "i",
                 class: "material-icons",
-                innerText: "navigate-before"
+                innerText: "add"
             })
         });
         this.pwaHeader = new Div({ id: "pwaheader", tagName: "header", children:[
