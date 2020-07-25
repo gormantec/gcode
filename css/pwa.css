@@ -64,13 +64,14 @@ body {
 #pwaheaderback{
     position: absolute;
     left: 0px;
-    width: 20px;
+    width: 30px;
     top: 0px;
     bottom: 0px;
+    cursor: pointer;
 }
 #pwaheadertitle{
     position: absolute;
-    left: 20px;
+    left: 30px;
     right: 0px;
     top: 0px;
     bottom: 0px;
