@@ -15,9 +15,6 @@ class PWA {
         this.setBody();
         this.setFooter();
         this.setFloatingActionButton();
-        globals.setNavigateBackPage = this.setNavigateBackPage;
-        globals.showNavigateBackButton = this.showNavigateBackButton;
-        globals.hideNavigateBackButton = this.hideNavigateBackButton;
     }
 
     setNavigateBackPage(navigateBackPage) {
@@ -56,7 +53,7 @@ class PWA {
             child: new Div({
                 tagName: "i",
                 class: "material-icons",
-                innerText: "add"
+                innerText: "keyboard_arrow_left"
             })
         });
         var _this = this;
@@ -302,9 +299,7 @@ class Page extends Div {
     constructor(params) {
         super(params);
         this.element.className = (this.element.className + " pwapage").trim();
-        alert("add1");
         if (params.navigateBackPage instanceof Page) {
-            alert("add2");
             this.navigateBackPage=params.navigateBackPage;
         }
     }
