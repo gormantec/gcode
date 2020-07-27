@@ -59,7 +59,6 @@ class PWA {
         var _this = this;
 
         this.navigateBackButton.onclick(function () { 
-            alert("click");
             if (_this.navigateBackPage) { 
                 if(_this.navigateBackPage.navigateBackPage)_this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
                 else _this.hideNavigateBackButton();
