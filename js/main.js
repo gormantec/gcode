@@ -7,15 +7,15 @@ var leftToolbarFontSize = leftToolbarWidth - 26;
 var leftPageWidth = 170;
 var selectedFileWidget = null;
 var pageBottomHeight = 150;
-var dirIconOpened="keyboard_arrow_down";
-var dirIconClosed="keyboard_arrow_right";
+var dirIconOpened = "keyboard_arrow_down";
+var dirIconClosed = "keyboard_arrow_right";
 
 
 // root functions
 
 function _save() {
     var filename = document.getElementById("filename").innerText;
-    if (filename == "" || selectedFileWidget == null || filename.substring(0,6) == "git://") return;
+    if (filename == "" || selectedFileWidget == null || filename.substring(0, 6) == "git://") return;
     localStorage.setItem("file-" + filename, btoa(editor.getValue()));
     localStorage.setItem("lastFileName", filename);
 }
@@ -42,7 +42,7 @@ function _new() {
 
     var _samplecode = "" +
         "import { PWA } from 'https://git.gormantec.com/gcode/modules/pwa.js';\n\n"
-        "console.log('new javascript file!');\n\n" +
+    "console.log('new javascript file!');\n\n" +
         "var aPWA=new PWA({\n" +
         "        title:\"Hello World\",\n" +
         "        footer:\"https://www.gormantec.com\",\n" +
@@ -66,25 +66,25 @@ function _new() {
 }
 
 function _openFile() {
-    if(this.dataset.name.substring(0,6)!="git://"){
+    if (this.dataset.name.substring(0, 6) != "git://") {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
         editor.setValue(atob(localStorage.getItem("file-" + this.dataset.name)));
         _setEditorMode();
     }
-    else{
-        var firstColon=this.dataset.name.indexOf(":",6);
-        var secondColon=this.dataset.name.indexOf("/",firstColon+1);
-        var username=this.dataset.name.substring(6,firstColon);
-        var repo=this.dataset.name.substring(firstColon+1,secondColon);
-        var path=this.dataset.name.substring(secondColon+1);
+    else {
+        var firstColon = this.dataset.name.indexOf(":", 6);
+        var secondColon = this.dataset.name.indexOf("/", firstColon + 1);
+        var username = this.dataset.name.substring(6, firstColon);
+        var repo = this.dataset.name.substring(firstColon + 1, secondColon);
+        var path = this.dataset.name.substring(secondColon + 1);
 
 
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
-        console.log(username+" "+repo+" "+path);
-        getGitFile(username,repo,path,function (e, d) {  
-            /*console.log(d);*/ 
+        console.log(username + " " + repo + " " + path);
+        getGitFile(username, repo, path, function (e, d) {
+            /*console.log(d);*/
             editor.setValue(d);
         });
     }
@@ -130,18 +130,16 @@ function _openDir() {
         _this.getElementsByTagName("i")[0].innerText = dirIconClosed;
     }
 
-    githubtree.setDirectoryState(_this.dataset.name,_this.dataset.state);
-    
-    if(_dirname=="default")
-    {
-        var _array = document.querySelectorAll("div.fileWidget[data-dirname='"+_dirname+"']");
-        if (_array) Array.from(_array).forEach(function (e) {if (e.dataset.dirname == _dirname) e.style.display = _fileDisplayValue;});
-        var _array = document.querySelectorAll("div.dirWidget[data-dirname='"+_dirname+"']");
-        if (_array) Array.from(_array).forEach(function (e) {e.style.display = _fileDisplayValue;});
+    githubtree.setDirectoryState(_this.dataset.name, _this.dataset.state);
+
+    if (_dirname == "default") {
+        var _array = document.querySelectorAll("div.fileWidget[data-dirname='" + _dirname + "']");
+        if (_array) Array.from(_array).forEach(function (e) { if (e.dataset.dirname == _dirname) e.style.display = _fileDisplayValue; });
+        var _array = document.querySelectorAll("div.dirWidget[data-dirname='" + _dirname + "']");
+        if (_array) Array.from(_array).forEach(function (e) { e.style.display = _fileDisplayValue; });
     }
-    else if(_dirname.substring(0,6)=="git://")
-    {
-        var _array = document.querySelectorAll("div.fileWidget[data-name^='"+_dirname+"/'], div.dirWidget[data-name^='"+_dirname+"/']");
+    else if (_dirname.substring(0, 6) == "git://") {
+        var _array = document.querySelectorAll("div.fileWidget[data-name^='" + _dirname + "/'], div.dirWidget[data-name^='" + _dirname + "/']");
         if (_array) Array.from(_array).forEach(function (e) {
             e.style.display = _fileDisplayValue;
         });
@@ -218,13 +216,13 @@ function _toolbarButtonClicked() {
         else if (selectedFileWidget.endsWith(".jsm")) {
             console.log("local:default user$ launch webApp " + selectedFileWidget + "\n\n");
             try {
-                var win = window.open("", selectedFileWidget,"toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
-                win.document.body.innerHTML="";
-                win.document.body.head.innerHTML="";
-                win.document.body.style.backgroundColor="black";
+                var win = window.open("", selectedFileWidget, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+                while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
+                while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
+                win.document.body.style.backgroundColor = "black";
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
-                _module.innerText=editor.getValue("\n");
+                _module.innerText = editor.getValue("\n");
                 win.document.head.appendChild(_module);
             }
             catch (e) {
@@ -252,26 +250,25 @@ function _toolbarButtonClicked() {
     }
     else if (this.dataset.action == "addDirectory") {
         var gitRepoName = prompt("Git username/repo");
-        var username=gitRepoName.substring(0,gitRepoName.indexOf("/"));
-        var repo=gitRepoName.substring(gitRepoName.indexOf("/")+1);
+        var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
+        var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
 
         var gitRepositories = localStorage.getItem("git-repositories");
-        var data ={};
-        if(!gitRepositories)
-        {
-            data ={};
-            data["git://"+username+":"+repo]={"username":username,"repo":repo};
-            localStorage.setItem("git-repositories",JSON.stringify(data));
+        var data = {};
+        if (!gitRepositories) {
+            data = {};
+            data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
+            localStorage.setItem("git-repositories", JSON.stringify(data));
         }
-        else{
-            data =JSON.parse(gitRepositories);
-            data["git://"+username+":"+repo]=({"username":username,"repo":repo});
-            localStorage.setItem("git-repositories",JSON.stringify(data));
+        else {
+            data = JSON.parse(gitRepositories);
+            data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
+            localStorage.setItem("git-repositories", JSON.stringify(data));
         }
         console.log(data);
-        Object.values(data).forEach(function(r,x){
-            console.log("r:"+r);
-            console.log("x:"+x);
+        Object.values(data).forEach(function (r, x) {
+            console.log("r:" + r);
+            console.log("x:" + x);
             pullGitRepository(r.username, r.repo);
         });
     }
@@ -338,7 +335,7 @@ function _refresh() {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div class='dirWidget' data-name='default'><i class='material-icons'>"+dirIconOpened+"</i>default</div>";
+    var pageLeft = "<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>";
     keys.sort();
     keys.reverse();
     while (i--) {
@@ -357,13 +354,12 @@ function _refresh() {
     document.getElementById("pageLeftBody").innerHTML = pageLeft;
 
     var gitRepositories = localStorage.getItem("git-repositories");
-    if(gitRepositories)
-    {
-        var data ={};
-        data =JSON.parse(gitRepositories);
-        Object.values(data).forEach(function(r,x){
-            if(r.username && r.repo){
-                addGitRepository(r.username, r.repo,document.getElementById("pageLeftBody"));
+    if (gitRepositories) {
+        var data = {};
+        data = JSON.parse(gitRepositories);
+        Object.values(data).forEach(function (r, x) {
+            if (r.username && r.repo) {
+                addGitRepository(r.username, r.repo, document.getElementById("pageLeftBody"));
             }
         });
     }
@@ -496,31 +492,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
 
-/*
-   var gitRepositories = localStorage.getItem("git-repositories");
-   if(gitRepositories)
-   {
-       var data ={};
-       data =JSON.parse(gitRepositories);
-       Object.values(data).forEach(function(r,x){
-           if(r.username && r.repo){
-
-            var running_count=0;
-            pullGitRepository(r.username, r.repo,function(state,repo, path){
-                if(state=="running"){
-                    running_count++;
-                    if(Math.floor(running_count/10)*10==running_count)
-                    {
-                        //_refresh();
+    /*
+       var gitRepositories = localStorage.getItem("git-repositories");
+       if(gitRepositories)
+       {
+           var data ={};
+           data =JSON.parse(gitRepositories);
+           Object.values(data).forEach(function(r,x){
+               if(r.username && r.repo){
+    
+                var running_count=0;
+                pullGitRepository(r.username, r.repo,function(state,repo, path){
+                    if(state=="running"){
+                        running_count++;
+                        if(Math.floor(running_count/10)*10==running_count)
+                        {
+                            //_refresh();
+                        }
                     }
-                }
-                if(state=="done") _refresh();
-            });
-           }
-       });
-   }
-
-   */
+                    if(state=="done") _refresh();
+                });
+               }
+           });
+       }
+    
+       */
 
 });
 
