@@ -1,8 +1,9 @@
-import { Popover } from "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
+import { Popover, Tab } from "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
 
 window.Popover = Popover;
+window.Tab = Tab;
 
-import {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, ScrollSpy, Tab, Tooltip} from "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
+import {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, ScrollSpy, Tooltip} from "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
 
 var _style = window.document.createElement("link");
 _style.setAttribute("rel", "stylesheet");
