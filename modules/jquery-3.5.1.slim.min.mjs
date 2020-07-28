@@ -1,3 +1,3 @@
-import { $ } from 'https://code.jquery.com/jquery-3.5.1.slim.min.js';
+import 'https://code.jquery.com/jquery-3.5.1.slim.min.js';
 window.$ = $
 export { $ };
