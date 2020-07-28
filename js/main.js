@@ -219,8 +219,8 @@ function _toolbarButtonClicked() {
             console.log("local:default user$ launch webApp " + selectedFileWidget + "\n\n");
             try {
                 var win = window.open("", selectedFileWidget,"toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
-                //win.document.body.innerHTML="";
-                //win.document.body.head.innerHTML="";
+                win.document.body.innerHTML="";
+                win.document.body.head.innerHTML="";
                 win.document.body.style.backgroundColor="black";
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
