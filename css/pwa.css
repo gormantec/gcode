@@ -58,16 +58,18 @@ body {
     padding:0px;
     background-color: #005040;
     color:#FFFFFF;
+    overflow: hidden;
 }
 #pwaheaderback{
     position: absolute;
-    left: 0px;
-    width: 40px;
+    left: 10px;
+    width: 30px;
     top: 20px;
     bottom: 0px;
     font-weight: 900;
-    font-size: 26px;
+    font-size: 30px;
     cursor: pointer;
+    overflow: hidden;
 }
 #pwaheadertitle{
     position: absolute;
@@ -77,6 +79,7 @@ body {
     bottom: 0px;
     font-size: 22px;
     font-weight: 900;
+    overflow: hidden;
 }
 
 #pwabody{
@@ -110,6 +113,7 @@ body {
     text-align: center;
     background-color: #005040;
     color:#FFFFFF;
+    overflow: hidden;
 }
 
 #pwafooter a:link {
