@@ -1,3 +1,3 @@
 import 'https://code.jquery.com/jquery-3.5.1.slim.min.js';
-$ = window.$ = window.jQuery = jQuery;
+var $ = window.$ = window.jQuery = jQuery;
 export { $ , JQuery };
