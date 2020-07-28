@@ -55,7 +55,7 @@ function _new() {
         "});\n";
 
 
-    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".jsm");
+    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
@@ -94,7 +94,7 @@ function _setEditorMode() {
     if (selectedFileWidget.endsWith(".js")) {
         editor.setOption("mode", "javascript");
     }
-    else if (selectedFileWidget.endsWith(".jsm")) {
+    else if (selectedFileWidget.endsWith(".mjs")) {
         editor.setOption("mode", "javascript");
     }
     else if (selectedFileWidget.endsWith(".py")) {
@@ -213,7 +213,7 @@ function _toolbarButtonClicked() {
             }
             console.log(" ");
         }
-        else if (selectedFileWidget.endsWith(".jsm")) {
+        else if (selectedFileWidget.endsWith(".mjs")) {
             console.log("local:default user$ launch webApp " + selectedFileWidget + "\n\n");
             try {
                 var win = window.open("", selectedFileWidget, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
@@ -416,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
         editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
     }
     else {
-        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".jsm";
+        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
     }
 
 
