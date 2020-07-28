@@ -213,19 +213,12 @@ class Div {
             this.element.innerText = params.innerText;
         }
         else if (params && params.innerHTML  && params.innerHTML.substring(0,4).toLowerCase()=="url("){
-
-            var link = document.createElement('link');
-            link.rel = 'import';
-            link.href = params.innerHTML.substring(4,params.innerHTML.length-1);
-            console.log("link.href: "+link.href);
-            //link.setAttribute('async', ''); // make it async!
-            _this=this;
-            link.onload = function(e) {
-                var content = document.querySelector('link[rel="import"]').import;
-                _this.element.innerHTML = content;
-            };
-            link.onerror = function(e) {console.log(e);};
-            document.head.appendChild(link);
+            fetch(params.innerHTML.substring(4,params.innerHTML.length-1))
+            .then(
+                response => response.text() 
+            ).then(
+                html => _this.element.innerHTML = html
+            );
         }
         else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
         else if (params && params.child && params.child instanceof Div) {
