@@ -1,4 +1,4 @@
-import { Popover, Tab } from "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
+import { Popover } from "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
 
 window.Popover = Popover;
 window.Tab = Tab;
@@ -18,7 +18,6 @@ window.Collapse = Collapse;
 window.Dropdown = Dropdown;
 window.Modal = Modal;
 window.Scrollspy = ScrollSpy;
-window.Tab = Tab;
 window.Tooltip = Tooltip;
 
-export {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, Popover, ScrollSpy, Tab, Tooltip};
+export {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, Popover, ScrollSpy, Tooltip};
