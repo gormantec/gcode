@@ -204,7 +204,10 @@ class Div {
         if (params && params.tagName) tagName = params.tagName;
         this.element = document.createElement(tagName);
         if (params instanceof Div) this.element.appendChild(params.element);
-        else if (params && params.innerText) this.element.innerText = params.innerText;
+        else if (params && params.innerText){
+            console.log("innerText:"+params.innerText);
+            this.element.innerText = params.innerText;
+        }
         else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
         else if (params && params.child && params.child instanceof Div) {
             this.appendChild(params.child);
