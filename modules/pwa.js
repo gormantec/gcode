@@ -214,6 +214,7 @@ class Div {
         }
         else if (params && params.innerHTML  && params.innerHTML.substring(0,4).toLowerCase()=="url("){
             console.log(params.innerHTML.substring(4,params.innerHTML.length-1));
+            var _this=this;
             fetch(params.innerHTML.substring(4,params.innerHTML.length-1))
             .then(
                 response => response.text() 
