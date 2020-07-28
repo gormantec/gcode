@@ -215,7 +215,7 @@ class Div {
         else if (params && params.innerHTML  && params.innerHTML.substring(0,4).toLowerCase()=="url("){
             var _uri=params.innerHTML.trim().substring(4,params.innerHTML.length-1);
             _uri=_uri.sub(/\A"(.*)"\z/, '\\1');
-            _uri=_uri.sub(/\A'(.*)'\z/, '\\1');
+            _uri=_uri.sub(/\A\'(.*)\'\z/, '\\1');
             console.log(_uri);
             var _this=this;
             fetch(params.innerHTML.substring(4,params.innerHTML.length-1))
