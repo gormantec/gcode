@@ -5,6 +5,8 @@ class PWA {
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 60;
+        this.footerHeight = params.footerHeight || 40;
+        this.footerPadding = params.footerPadding || (this.footerHeight-10)/2;
         this.headerFontSize = params.headerFontSize || 24;
         this.primaryColorText = this.getTextColor(this.primaryColor);
         this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
@@ -74,7 +76,7 @@ class PWA {
         });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
-        if (this.headerHeight) this.pwaHeader.style.height = this.headerHeight - 25;
+        if (this.headerHeight) this.pwaHeader.style.height = this.headerHeight;
         if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
         if (!this.navigateBackPage) this.navigateBackButton.style.display = "none";
@@ -169,17 +171,19 @@ class PWA {
 
 
     showFooter() {
-        this.pwaFooter.style.display = "block";
+        this.pwaFooter.style.display = "";
+        this.pwaFooter.style.padding = this.footerPadding+"px";
+        this.pwaFooter.style.footerHeight = (this.footerHeight-(2*this.footerPadding))+"px";
         this.pwaBody.style.bottom = 30 + "px";
     }
 
     showHeader() {
-        this.pwaHeader.style.display = "block";
-        this.pwaBody.style.top = 30 + "px";
+        this.pwaHeader.style.display = "";
+        this.pwaBody.style.top = headerHeight + "px";
     }
     hideFooter() {
         this.pwaFooter.style.display = "none";
-        this.pwaBody.style.bottom = "0px"
+        this.pwaBody.style.bottom = (this.footerPadding*2+this.footerHeight)+"px"
     }
 
     hideHeader() {
