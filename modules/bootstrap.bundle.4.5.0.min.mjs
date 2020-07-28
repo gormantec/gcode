@@ -1,7 +1,6 @@
 import { Popover } from "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
 
 window.Popover = Popover;
-window.Tab = Tab;
 
 import {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, ScrollSpy, Tooltip} from "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
 
