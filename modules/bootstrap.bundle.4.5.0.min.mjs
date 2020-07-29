@@ -1,3 +1,5 @@
+console.log("modules/bootstrap.bundle.4.5.0.min.mjs");
+
 import  "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
 
 window.Popover = Popover;
