@@ -1,5 +1,5 @@
 console.log("modules/jquery-3.5.1.slim.min.mjs");
-
+var exports,module;
 import 'https://code.jquery.com/jquery-3.5.1.slim.min.js';
 console.log($);
 console.log("exports:"+exports);
