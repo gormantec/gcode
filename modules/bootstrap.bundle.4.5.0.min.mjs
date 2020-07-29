@@ -1,10 +1,7 @@
 console.log("modules/bootstrap.bundle.4.5.0.min.mjs");
 
-import  "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
-
-window.Popover = Popover;
-
-import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
+//import "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
+//import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
 
 var _style = window.document.createElement("link");
 _style.setAttribute("rel", "stylesheet");
@@ -28,6 +25,7 @@ class BootStrapexports{
     get ScrollSpy() { return window.Scrollspy};
     get Tab() { return window.Tab};
     get Tooltip() { return window.Tooltip};
+    get Popover() { return window.Popover};
 }
 
 var _B = new BootStrapexports();
@@ -41,6 +39,7 @@ var Modal = _B.Modal;
 var ScrollSpy = _B.ScrollSpy;
 var Tab = _B.Tab;
 var Tooltip = _B.Tooltip;
+var Popover = _B.Popover;
 
 
 export {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, Popover, ScrollSpy, Tab, Tooltip};
