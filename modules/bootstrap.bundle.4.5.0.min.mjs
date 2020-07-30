@@ -1,8 +1,9 @@
 console.log("modules/bootstrap.bundle.4.5.0.min.mjs");
 
-//import "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
-//import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
+import "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js";
+import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js";
 
+/*
 var _style = window.document.createElement("link");
 _style.setAttribute("rel", "stylesheet");
 _style.setAttribute("href", "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css");
@@ -13,6 +14,7 @@ window.document.head.appendChild(_style);
 var _style = window.document.createElement("script");
 _style.setAttribute("src", "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js");
 window.document.head.appendChild(_style);
+*/
 
 class BootStrapexports{
     get Util() { return window.Util };
