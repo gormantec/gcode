@@ -14,7 +14,7 @@ window.document.head.appendChild(_style);
 var _style = window.document.createElement("script");
 _style.setAttribute("src", "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js");
 window.document.head.appendChild(_style);
-*/
+
 
 class BootStrapexports{
     get Util() { return window.Util };
@@ -29,19 +29,20 @@ class BootStrapexports{
     get Tooltip() { return window.Tooltip};
     get Popover() { return window.Popover};
 }
+*/
 
 var _B = new BootStrapexports();
-var Util = _B.Util;
-var Alert = _B.Alert;
-var Button = _B.Button;
-var Carousel = _B.Carousel;
-var Collapse = _B.Collapse;
-var Dropdown = _B.Dropdown;
-var Modal = _B.Modal;
-var ScrollSpy = _B.ScrollSpy;
-var Tab = _B.Tab;
-var Tooltip = _B.Tooltip;
-var Popover = _B.Popover;
+var Util = window.Util;
+var Alert = window.Alert;
+var Button = window.Button;
+var Carousel = window.Carousel;
+var Collapse = window.Collapse;
+var Dropdown = window.Dropdown;
+var Modal = window.Modal;
+var ScrollSpy = window.ScrollSpy;
+var Tab = window.Tab;
+var Tooltip = window.Tooltip;
+var Popover = window.Popover;
 
 
 export {Util, Alert, Button, Carousel, Collapse, Dropdown, Modal, Popover, ScrollSpy, Tab, Tooltip};
