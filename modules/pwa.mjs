@@ -275,7 +275,8 @@ class Div {
         if (params && params.right) this.element.style.right = params.right;
         if (params && params.borderRadius) this.element.style.borderRadius = params.borderRadius;
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
-        if (params && params.padding) this.element.style.padding = params.padding;
+        if (params && params.padding) this.element.style.padding = params.padding
+        if (params && params.textAlign) this.element.style.textAlign = params.textAlign;
         if (params && params.onclick){
             this.onclick(params.onclick);
             this.element.style.cursor = "pointer";
