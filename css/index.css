@@ -96,11 +96,11 @@ body {
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 5px;
+    top: 0px;
     bottom: 0px;
     vertical-align: top;
     font-size: 8pt;
-    padding-top: 4px;
+    padding-top: 0px;
 }
 
 #pageLeftToolbarTop {
