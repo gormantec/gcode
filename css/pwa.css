@@ -111,7 +111,7 @@ body {
     top: 0px;
     bottom: 0px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 #pwafooter{
