@@ -1,3 +1,6 @@
+
+import { githubtree } from '../modules/githubtree.mjs';
+
 var editor;
 
 //int variables
@@ -83,7 +86,7 @@ function _openFile() {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
         console.log(username + " " + repo + " " + path);
-        getGitFile(username, repo, path, function (e, d) {
+        githubtree.getGitFile(username, repo, path, function (e, d) {
             /*console.log(d);*/
             editor.setValue(d);
         });
@@ -359,7 +362,7 @@ function _refresh() {
         data = JSON.parse(gitRepositories);
         Object.values(data).forEach(function (r, x) {
             if (r.username && r.repo) {
-                addGitRepository(r.username, r.repo, document.getElementById("pageLeftBody"));
+                githubtree.addGitRepository(r.username, r.repo, document.getElementById("pageLeftBody"));
             }
         });
     }
