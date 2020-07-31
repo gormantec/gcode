@@ -225,7 +225,7 @@ function _toolbarButtonClicked() {
                 win.document.body.style.backgroundColor = "black";
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
-                _module.innerText = editor.getValue("\n");
+                _module.appendChild(document.createCDATASection("\n\n"+editor.getValue()+"\n\n"));
                 win.document.head.appendChild(_module);
             }
             catch (e) {
