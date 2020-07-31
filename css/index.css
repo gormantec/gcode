@@ -96,7 +96,7 @@ body {
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 25px;
+    top: 5px;
     bottom: 0px;
     vertical-align: top;
     font-size: 8pt;
@@ -250,7 +250,7 @@ body {
 }
 #pageLeftBodyScroll {
     position: absolute;
-    top: 20px;
+    top: 25px;
     left: 0px;
     right: 6px;
     bottom: 0px;
