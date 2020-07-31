@@ -274,6 +274,10 @@ class Div {
         if (params && params.borderRadius) this.element.style.borderRadius = params.borderRadius;
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
         if (params && params.padding) this.element.style.padding = params.padding;
+        if (params && params.onclick){
+            this.onclick(params.onclick);
+            this.element.style.cursor = "pointer";
+        }
         if (params && params.width) {
             this.element.style.width = params.width;
             if(!params.right)this.element.style.right=unset;
