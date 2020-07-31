@@ -17,6 +17,7 @@ class PWA {
         this.setBody();
         this.setFooter();
         this.setFloatingActionButton();
+        globals.getPrimaryColor=function(){return this.primaryColor};
     }
 
     setNavigateBackPage(navigateBackPage) {
