@@ -126,10 +126,13 @@ class PWA {
         targetDocument.head.appendChild(_meta);
     }
 
-    addStyle(targetDocument, href) {
+    
+
+    addStyle(targetDocument, href, callback) {
         var _style = targetDocument.createElement("link");
         _style.setAttribute("rel", "stylesheet");
         _style.setAttribute("href", href);
+        if(callback) _style.onload = function(){ callback(); }
         targetDocument.head.appendChild(_style);
     }
 
@@ -155,11 +158,17 @@ class PWA {
         this.addMeta(win.document, "viewport", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", "#005040");
         this.addMeta(win.document, "theme-color", "#005040");
-        this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
-        this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css");
-        win.document.body.innerHTML = "";
-        win.document.body.appendChild(this.pwaRoot.element);
-        win.document.body.appendChild(this.pwaOverlay.element);
+        var _this=this;
+        this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp",function(){
+            _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function(){
+                while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
+                setTimeout(function(){
+                    win.document.body.appendChild(this.pwaRoot.element);
+                    win.document.body.appendChild(this.pwaOverlay.element);
+                },2000);
+            });
+        });
+
     }
 
     showFloatingActionButton() {
