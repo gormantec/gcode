@@ -224,12 +224,12 @@ function _toolbarButtonClicked() {
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
                 
                 var code=editor.getValue();
-                var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\//s, '$1');
+                var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\/.*/s, '$1');
                 if(splash==code)splash=null;
                 console.log("--------------------");
                 console.log("splash:"+splash);
                 console.log("--------------------");
-                var splashColor=code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\//s, '$1');
+                var splashColor=code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if(splashColor==code)splashColor=null;
                 console.log("--------------------");
                 console.log("splashColor:"+splashColor);
