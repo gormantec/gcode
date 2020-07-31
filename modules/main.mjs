@@ -1,5 +1,5 @@
 
-import { githubtree } from '../modules/githubtree.mjs';
+import * as githubtree from '../modules/githubtree.mjs';
 
 var editor;
 
