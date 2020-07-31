@@ -44,7 +44,7 @@ function _delete() {
 function _new() {
 
     var _samplecode = "" +
-        "import { PWA } from 'https://git.gormantec.com/gcode/modules/pwa.js';\n\n" +
+        "import { PWA } from 'https://git.gormantec.com/gcode/modules/pwa.mjs';\n\n" +
         "console.log('new javascript file!');\n\n" +
         "var aPWA=new PWA({\n" +
         "        title:\"Hello World\",\n" +
@@ -222,10 +222,22 @@ function _toolbarButtonClicked() {
                 var win = window.open("", selectedFileWidget, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
-                win.document.body.style.backgroundColor = "black";
+                
+                var code=editor.getValue();
+                var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\//s, '$1');
+                if(splash==code)splash=null;
+                var splashColor=code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\//s, '$1');
+                if(splashColor==code)splashColor=null;
+                if(splash && splash.substring(0,4)=="http" && splash.substring(splash.length-3)=="png"){
+                    win.document.body.style.backgroundImage="url("+splash+")";
+                    win.document.body.style.backgroundPosition="center";
+                    win.document.body.style.backgroundRepeat="no-repeat";
+                }
+                if(splashColor) win.document.body.style.backgroundColor=splashColor;
+                else  win.document.body.style.backgroundColor = "black";
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
-                _module.text = "\n\n"+editor.getValue()+"\n\n";
+                _module.text = "\n\n"+code+"\n\n";
                 win.document.head.appendChild(_module);
             }
             catch (e) {
