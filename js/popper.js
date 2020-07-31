@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+console.log("this:"+this);
 (function (global, factory) {
     console.log("global:"+global);
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
