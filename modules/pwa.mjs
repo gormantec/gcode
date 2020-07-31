@@ -163,8 +163,8 @@ class PWA {
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function(){
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 setTimeout(function(){
-                    win.document.body.appendChild(this.pwaRoot.element);
-                    win.document.body.appendChild(this.pwaOverlay.element);
+                    win.document.body.appendChild(_this.pwaRoot.element);
+                    win.document.body.appendChild(_this.pwaOverlay.element);
                 },2000);
             });
         });
