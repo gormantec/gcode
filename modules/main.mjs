@@ -272,7 +272,7 @@ function _toolbarButtonClicked() {
         Object.values(data).forEach(function (r, x) {
             console.log("r:" + r);
             console.log("x:" + x);
-            pullGitRepository(r.username, r.repo);
+            githubtree.pullGitRepository(r.username, r.repo);
         });
     }
     else if (this.dataset.action == "deleteFile") {
@@ -505,7 +505,7 @@ document.addEventListener("DOMContentLoaded", function () {
                if(r.username && r.repo){
     
                 var running_count=0;
-                pullGitRepository(r.username, r.repo,function(state,repo, path){
+                githubtree.pullGitRepository(r.username, r.repo,function(state,repo, path){
                     if(state=="running"){
                         running_count++;
                         if(Math.floor(running_count/10)*10==running_count)
