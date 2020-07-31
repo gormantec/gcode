@@ -212,7 +212,7 @@ function _toolbarButtonClicked() {
                 _run();
             }
             catch (e) {
-                console.error(e);
+                console.error(e);  
             }
             console.log(" ");
         }
