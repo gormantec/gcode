@@ -178,8 +178,8 @@ class PWA {
                     _this.pwaOverlay.element.style.opacity=0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
-                    fadeIn(_this.pwaRoot.element,1000);
-                    fadeIn(_this.pwaOverlay.element,1000);
+                    this.fadeIn(_this.pwaRoot.element,1000);
+                    this.fadeIn(_this.pwaOverlay.element,1000);
                 },500);
             });
         });
