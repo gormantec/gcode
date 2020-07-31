@@ -273,7 +273,7 @@ class Div {
         if (params && params.right) this.element.style.right = params.right;
         if (params && params.borderRadius) this.element.style.borderRadius = params.borderRadius;
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
-        if (params && params.padding) this.element.style.right = params.padding;
+        if (params && params.padding) this.element.style.padding = params.padding;
         if (params && params.width) {
             this.element.style.width = params.width;
             if(!params.right)this.element.style.right=unset;
@@ -289,8 +289,7 @@ class Div {
         if (params && params.backgroundRepeat) this.element.style.backgroundRepeat = params.backgroundRepeat;
         if (params && params.backgroundImage) this.element.style.backgroundImage = params.backgroundImage;
         
-        
-        padding
+   
         if(!params || !params.tagName)this.element.className = (this.element.className + " pwadiv").trim();
         //if (params.style) this.element.setAttribute("style",params.style);
     }
