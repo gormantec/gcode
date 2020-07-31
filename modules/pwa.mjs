@@ -148,8 +148,8 @@ class PWA {
             element.style.opacity = String(value);
             if (element.style.opacity !== '1') {
                 setTimeout(() => {
-                    increment(value + 0.1);
-                }, duration / 10);
+                    increment(value + 0.05);
+                }, duration / 20);
             }
         })();
     };
@@ -175,11 +175,9 @@ class PWA {
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 setTimeout(function(){
                     _this.pwaRoot.element.style.opacity=0.0;
-                    _this.pwaOverlay.element.style.opacity=0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
-                    _this.fadeIn(_this.pwaRoot.element,1000);
-                    _this.fadeIn(_this.pwaOverlay.element,1000);
+                    _this.fadeIn(_this.pwaRoot.element,500);
                 },500);
             });
         });
