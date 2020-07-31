@@ -21,7 +21,7 @@ export function addGitRepository(repousername, reponame, toDiv) {
     toDiv.appendChild(htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>"));
     repos[reponame]
     if (repos[reponame]) {
-        keys = Object.keys(repos[reponame]);
+        var keys = Object.keys(repos[reponame]);
         i = keys.length;
         keys.sort();
 
