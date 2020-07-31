@@ -143,6 +143,17 @@ class PWA {
         targetDocument.head.appendChild(_script);
     }
 
+    fadeIn (element, duration) {
+        (function increment(value = 0) {
+            element.style.opacity = String(value);
+            if (element.style.opacity !== '1') {
+                setTimeout(() => {
+                    increment(value + 0.1);
+                }, duration / 10);
+            }
+        })();
+    };
+
     show(win) {
         win = win || window;
         var _title = win.document.createElement("title");
@@ -156,16 +167,20 @@ class PWA {
         this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "default");
         this.addMeta(win.document, "viewport", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
-        this.addMeta(win.document, "msapplication-TileColor", "#005040");
-        this.addMeta(win.document, "theme-color", "#005040");
+        this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
+        this.addMeta(win.document, "theme-color", this.primaryColor);
         var _this=this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp",function(){
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function(){
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 setTimeout(function(){
+                    _this.pwaRoot.element.style.opacity=0.0;
+                    _this.pwaOverlay.element.style.opacity=0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
-                },2000);
+                    fadeIn(_this.pwaRoot.element,1000);
+                    fadeIn(_this.pwaOverlay.element,1000);
+                },500);
             });
         });
 
