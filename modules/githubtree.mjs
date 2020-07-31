@@ -14,7 +14,7 @@ function getToken(repousername, reponame) {
     return token;
 }
 
-export function addGitRepository(repousername, reponame, toDiv) {
+export function addGitRepository(repousername, reponame, toDiv,selectedFileWidget) {
 
 
 

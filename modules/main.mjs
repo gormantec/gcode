@@ -362,7 +362,7 @@ function _refresh() {
         data = JSON.parse(gitRepositories);
         Object.values(data).forEach(function (r, x) {
             if (r.username && r.repo) {
-                githubtree.addGitRepository(r.username, r.repo, document.getElementById("pageLeftBody"));
+                githubtree.addGitRepository(r.username, r.repo, document.getElementById("pageLeftBody"),selectedFileWidget);
             }
         });
     }
