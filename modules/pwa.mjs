@@ -271,6 +271,8 @@ class Div {
         if (params && params.bottom) this.element.style.bottom = params.bottom;
         if (params && params.left) this.element.style.left = params.left;
         if (params && params.right) this.element.style.right = params.right;
+        if (params && params.width) this.element.style.width = params.width;
+        if (params && params.height) this.element.style.height = params.height;
         if (params && params.backgroundColor) this.element.style.backgroundColor = params.backgroundColor;
         if (params && params.backgroundPosition) this.element.style.backgroundPosition = params.backgroundPosition;
         if (params && params.backgroundRepeat) this.element.style.backgroundRepeat = params.backgroundRepeat;
