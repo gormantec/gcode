@@ -90,7 +90,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
 
     var loopDirectories = function (directories, depth, callback) {
 
-        if (!directories || directories.length == 0) {
+        if (!directories || directories.length == 0 || depth>2) {
             callback();
         }
         else {
@@ -114,7 +114,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
         gitrepo.getSha("master", path).then(function (sha) {
             var directories = [];
             Array.from(sha.data).forEach(function (file) {
-                if (file.name.substring(0, 1) != "." && directories.length < 40) {
+                if (file.name.substring(0, 1) != "." && directories.length < 4) {
 
                     addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, type: file.type });
                     if (callbackrefresh) callbackrefresh("running", repo, _path);
