@@ -360,6 +360,10 @@ class Div {
     get style() {
         return this.element.style;
     }
+    get primaryColor()
+    {
+        return globals.getPrimaryColor();
+    }
 }
 
 class Page extends Div {
