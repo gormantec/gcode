@@ -22,7 +22,7 @@ export function addGitRepository(repousername, reponame, toDiv) {
     repos[reponame]
     if (repos[reponame]) {
         var keys = Object.keys(repos[reponame]);
-        i = keys.length;
+        var i = keys.length;
         keys.sort();
 
         keys.reverse();
