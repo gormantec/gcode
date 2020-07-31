@@ -5,7 +5,7 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
-export function getToken(repousername, reponame) {
+function getToken(repousername, reponame) {
     var token = localStorage.getItem("git-token://" + repousername + ":" + reponame);
     if (!token) {
         var token = prompt("Token for " + repousername + "/" + reponame);
@@ -78,14 +78,14 @@ export function htmlToElement(html) {
 }
 
 export function getGitFile(username, repo, path, callback) {
-    var gh = new GitHub();//({ token: getToken(username, repo) });
+    var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     gitrepo.getContents("master", path, true, callback);
 }
 
 export function pullGitRepository(username, repo, callbackrefresh) {
 
-    var gh = new GitHub();//({ token: getToken(username, repo) });
+    var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
 
     var loopDirectories = function (directories, depth, callback) {
