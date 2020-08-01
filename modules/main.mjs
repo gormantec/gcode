@@ -339,15 +339,22 @@ function _toolbarButtonClicked() {
         console.log(data);
         Object.values(data).forEach(function (r, x) {
             var running_count=0;
-            githubtree.pullGitRepository(r.username, r.repo,function(state){
+            githubtree.pullGitRepository(r.username, r.repo,function(state,repo){
                 if(state=="running"){
                     running_count++;
                     if(Math.floor(running_count/10)*10==running_count)
                     {
-                        _refresh();
+                        githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
+
+                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
+                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                     }
                 }
-                if(state=="done") _refresh();
+                if(state=="done") {
+                    githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
+                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
+                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                }
             });
         });
     }
