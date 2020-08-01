@@ -44,16 +44,18 @@ function getToken(repousername, reponame) {
 export function addGitRepository(repousername, reponame, toDiv,selectedFileWidget) {
 
     var repoRoot=toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
+    var parentElement;
     if(repoRoot)
     {
-        repoRoot.innerHTML="";
+        parentElement=repoRoot.parentElement;
+        while (parentElement.firstChild) parentElement.removeChild(parentElement.lastChild);
     }
     else{
-        repoRoot=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>");
-        var div = document.createElement('div');
-        div.appendChild(repoRoot);
-        toDiv.appendChild(div); 
+        parentElement = document.createElement('div');
+        toDiv.appendChild(parentElement); 
     }
+    parentElement.appendChild(htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>"));
+    
     repos[reponame]
     if (repos[reponame]) {
         var keys = Object.keys(repos[reponame]);
