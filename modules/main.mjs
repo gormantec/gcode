@@ -228,8 +228,8 @@ function _toolbarButtonClicked() {
                 var win = window.open("", selectedFileWidget, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
-                win.PWA=window.PWA || {};
-                win.PWA.globals=window.PWA.globals || {};
+                win.PWA=win.PWA || {};
+                win.PWA.globals=win.PWA.globals || {};
                 var code=editor.getValue();
                 var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\/.*/s, '$1');
                 if(splash==code)splash=null;
