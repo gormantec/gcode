@@ -229,7 +229,7 @@ function _toolbarButtonClicked() {
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
                 window.PWA=window.PWA || {};
-                window.PWA=window.PWA.globals || {};
+                window.PWA.globals=window.PWA.globals || {};
                 var code=editor.getValue();
                 var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\/.*/s, '$1');
                 if(splash==code)splash=null;
