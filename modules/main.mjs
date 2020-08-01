@@ -337,6 +337,7 @@ function _toolbarButtonClicked() {
             localStorage.setItem("git-repositories", JSON.stringify(data));
         }
         console.log(data);
+        var toDiv=document.getElementById("pageLeftBody");
         Object.values(data).forEach(function (r, x) {
             var running_count=0;
             githubtree.pullGitRepository(r.username, r.repo,function(state,repo){
