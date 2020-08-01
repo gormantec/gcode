@@ -16,7 +16,7 @@ export function saveFile(name,content,toDiv)
     var repo = name.substring(firstColon + 1, secondColon);
     var fullpath = name.substring(secondColon + 1);
     var filename = fullpath.substring(fullpath.lastIndexOf("/")+1);
-    var filepath = fullpath.substring(0,fullpath.lastIndexOf("/"));
+    var dirpath = fullpath.substring(0,fullpath.lastIndexOf("/"));
     
 
     var gh = new GitHub({ token: getToken(username, repo) });
@@ -24,8 +24,8 @@ export function saveFile(name,content,toDiv)
     gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
         console.log("e:"+e);
         console.log("d:"+JSON.stringify(d));
-        console.log("addRepoFile:"+JSON.stringify({repo, fullpath, info:{ name: filename, filepath: filepath, dirpath: fullpath, type: "file" }}));
-        addRepoFile(repo, fullpath, { name: filename, filepath: filepath, dirpath: fullpath, type: "file" });
+        console.log("addRepoFile:"+JSON.stringify({repo, fullpath, info:{ name: filename, filepath: fullpath, dirpath: fullpath, type: "file" }}));
+        addRepoFile(repo, dirpath, { name: filename, filepath: filepath, dirpath: dirpath, type: "file" });
         addGitRepository(username,repo,toDiv,name);
     });
 }
