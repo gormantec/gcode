@@ -1,5 +1,5 @@
 window.PWA=window.PWA || {};
-window.PWA=window.PWA.globals || {};
+window.PWA.globals=window.PWA.globals || {};
 class PWA {
     constructor(params) {
         if (!params) params = {};
