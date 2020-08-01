@@ -234,7 +234,6 @@ function _toolbarButtonClicked() {
                     win.document.body.style.backgroundRepeat="no-repeat";
                     console.log("backgroundPosition:"+"center");
                 }
-                <div class="loader">Loading...</div>
                 var _loader = win.document.createElement("div");
                 _loader.className="loader";
                 _loader.innerText("Loading...");
