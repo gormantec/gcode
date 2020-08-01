@@ -1,4 +1,4 @@
-var globals = {}
+var globals = {getPrimaryColor:function(){}}
 class PWA {
     constructor(params) {
         if (!params) params = {};
