@@ -167,6 +167,7 @@ class PWA {
         _title.innerText = this.title;
         win.document.head.appendChild(_title);
         if(!window.PWA.globals.splashColor) win.document.body.style.backgroundColor = this.primaryColor;
+        if(!window.PWA.globals.splashColor) win.document.body.style.color = this.primaryColorText;
         win.document.body.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
@@ -188,6 +189,7 @@ class PWA {
                 setTimeout(function () {
                     while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                     win.document.body.style.backgroundColor = this.primaryColor;
+                    win.document.body.style.color = this.primaryColorText;
                     _this.pwaRoot.element.style.opacity = 0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
