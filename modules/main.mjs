@@ -309,7 +309,7 @@ function _toolbarButtonClicked() {
         }
 
     }
-    else if (this.dataset.action == "addDirectory") {
+    else if (this.dataset.action == "addGitRepo") {
         var gitRepoName = prompt("Git username/repo");
         var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
         var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
