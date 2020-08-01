@@ -50,7 +50,7 @@ export function addGitRepository(repousername, reponame, toDiv,selectedFileWidge
         repoRoot=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>");
         var div = document.createElement('div');
         div.appendChild(repoRoot);
-        toDiv.appendChild(div);
+        toDiv.appendChild(div); 
     }
     repos[reponame]
     if (repos[reponame]) {
