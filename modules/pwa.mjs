@@ -1,4 +1,4 @@
-var globals = { getPrimaryColor: function () { } }
+var globals = { }
 class PWA {
     constructor(params) {
         if (!params) params = {};
@@ -362,9 +362,6 @@ class Div {
 
     get style() {
         return this.element.style;
-    }
-    get primaryColor() {
-        return globals.getPrimaryColor();
     }
 }
 
