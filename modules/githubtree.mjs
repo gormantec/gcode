@@ -47,8 +47,10 @@ export function addGitRepository(repousername, reponame, toDiv,selectedFileWidge
         repoRoot.innerHTML="";
     }
     else{
-        repoRoot=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>")
-        toDiv.appendChild(repoRoot);
+        repoRoot=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>");
+        var div = document.createElement('div');
+        div.appendChild(repoRoot);
+        toDiv.appendChild(div);
     }
     repos[reponame]
     if (repos[reponame]) {
@@ -88,6 +90,7 @@ export function addGitRepository(repousername, reponame, toDiv,selectedFileWidge
                 indentWidth = indentWidth + 10;
                 var gitpath = "git://" + repousername + ":" + reponame + "/" + files[j].dirpath;
                 if (gitpath.slice(-1) == "/") gitpath = gitpath.slice(0, -1);
+                console.log("gitpath:"+gitpath);
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(htmlToElement(
                     "<div><div class='" + widgetClass + fileWidgetSelected + "' data-name='git://" + repousername + ":" + reponame + "/" +
                     files[j].filepath + "' " + nextname + " data-dirname='" + reponame + "' " + datastate + display + ">" +
