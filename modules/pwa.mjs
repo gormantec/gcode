@@ -110,7 +110,7 @@ class PWA {
                 innerText: "add"
             })
         });
-        this.floatingActionButton.className = "material-icons";
+        this.floatingActionButton.element.className = "material-icons";
         this.floatingActionButton.style.backgroundColor = this.primaryColor;
         this.floatingActionButton.style.color = this.primaryColorText;
         this.pwaOverlay.appendChild(this.floatingActionButton);
