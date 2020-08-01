@@ -107,10 +107,10 @@ class PWA {
             child: new Div({
                 tagName: "i",
                 class: "material-icons",
+                classNameOverride: true,
                 innerText: "add"
             })
         });
-        this.floatingActionButton.element.className = "material-icons";
         this.floatingActionButton.style.backgroundColor = this.primaryColor;
         this.floatingActionButton.style.color = this.primaryColorText;
         this.pwaOverlay.appendChild(this.floatingActionButton);
@@ -234,7 +234,7 @@ class Div {
         
         if (params && params.tagName) tagName = params.tagName;
         this.element = document.createElement(tagName);
-        this.element.className = "pwadiv";
+        if(params && !params.classNameOverride)this.element.className = "pwadiv";
         if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.innerText) {
             console.log("innerText:" + params.innerText);
