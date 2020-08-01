@@ -1,4 +1,4 @@
-var globals = {getPrimaryColor:function(){}}
+var globals = { getPrimaryColor: function () { } }
 class PWA {
     constructor(params) {
         if (!params) params = {};
@@ -6,7 +6,7 @@ class PWA {
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 60;
         this.footerHeight = params.footerHeight || 40;
-        this.footerPadding = params.footerPadding || (this.footerHeight-10)/2;
+        this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
         this.headerFontSize = params.headerFontSize || 24;
         this.primaryColorText = this.getTextColor(this.primaryColor);
         this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
@@ -17,8 +17,9 @@ class PWA {
         this.setBody();
         this.setFooter();
         this.setFloatingActionButton();
-        var _this=this;
-        globals.getPrimaryColor=function(){return _this.primaryColor};
+        var _this = this;
+        window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
+        window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
 
     setNavigateBackPage(navigateBackPage) {
@@ -62,12 +63,12 @@ class PWA {
         });
         var _this = this;
 
-        this.navigateBackButton.onclick(function () { 
-            if (_this.navigateBackPage) { 
-                if(_this.navigateBackPage.navigateBackPage)_this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
+        this.navigateBackButton.onclick(function () {
+            if (_this.navigateBackPage) {
+                if (_this.navigateBackPage.navigateBackPage) _this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
                 else _this.hideNavigateBackButton();
                 _this.setPage(_this.navigateBackPage);
-             } 
+            }
         });
 
         this.pwaHeader = new Div({
@@ -91,8 +92,8 @@ class PWA {
     }
     setPage(aPage) {
         console.log("setpage");
-        if(aPage.navigateBackPage){
-            console.log("setNavigateBackPage:"+aPage.navigateBackPage);
+        if (aPage.navigateBackPage) {
+            console.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
         }
         this.pwaBody.setChild({ child: aPage });
@@ -128,13 +129,13 @@ class PWA {
         targetDocument.head.appendChild(_meta);
     }
 
-    
+
 
     addStyle(targetDocument, href, callback) {
         var _style = targetDocument.createElement("link");
         _style.setAttribute("rel", "stylesheet");
         _style.setAttribute("href", href);
-        if(callback) _style.onload = function(){ callback(); }
+        if (callback) _style.onload = function () { callback(); }
         targetDocument.head.appendChild(_style);
     }
 
@@ -145,7 +146,7 @@ class PWA {
         targetDocument.head.appendChild(_script);
     }
 
-    fadeIn (element, duration) {
+    fadeIn(element, duration) {
         (function increment(value = 0) {
             element.style.opacity = String(value);
             if (element.style.opacity !== '1') {
@@ -171,16 +172,16 @@ class PWA {
         this.addMeta(win.document, "viewport", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
         this.addMeta(win.document, "theme-color", this.primaryColor);
-        var _this=this;
-        this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp",function(){
-            _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function(){
+        var _this = this;
+        this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
+            _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
-                setTimeout(function(){
-                    _this.pwaRoot.element.style.opacity=0.0;
+                setTimeout(function () {
+                    _this.pwaRoot.element.style.opacity = 0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
-                    _this.fadeIn(_this.pwaRoot.element,500);
-                },500);
+                    _this.fadeIn(_this.pwaRoot.element, 500);
+                }, 500);
             });
         });
 
@@ -196,8 +197,8 @@ class PWA {
 
     showFooter() {
         this.pwaFooter.style.display = "";
-        this.pwaFooter.style.padding = this.footerPadding+"px";
-        this.pwaFooter.style.footerHeight = (this.footerHeight-(2*this.footerPadding))+"px";
+        this.pwaFooter.style.padding = this.footerPadding + "px";
+        this.pwaFooter.style.footerHeight = (this.footerHeight - (2 * this.footerPadding)) + "px";
         this.pwaBody.style.bottom = 30 + "px";
     }
 
@@ -207,7 +208,7 @@ class PWA {
     }
     hideFooter() {
         this.pwaFooter.style.display = "none";
-        this.pwaBody.style.bottom = (this.footerPadding*2+this.footerHeight)+"px"
+        this.pwaBody.style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px"
     }
 
     hideHeader() {
@@ -232,22 +233,22 @@ class Div {
         if (params && params.tagName) tagName = params.tagName;
         this.element = document.createElement(tagName);
         if (params instanceof Div) this.element.appendChild(params.element);
-        else if (params && params.innerText){
-            console.log("innerText:"+params.innerText);
+        else if (params && params.innerText) {
+            console.log("innerText:" + params.innerText);
             this.element.innerText = params.innerText;
         }
-        else if (params && params.innerHTML  && params.innerHTML.substring(0,4).toLowerCase()=="url("){
-            var _uri=params.innerHTML.trim().substring(4,params.innerHTML.length-1);
-            _uri=_uri.replace(/\"/g, "");
-            _uri=_uri.replace(/\'/g, "");
+        else if (params && params.innerHTML && params.innerHTML.substring(0, 4).toLowerCase() == "url(") {
+            var _uri = params.innerHTML.trim().substring(4, params.innerHTML.length - 1);
+            _uri = _uri.replace(/\"/g, "");
+            _uri = _uri.replace(/\'/g, "");
             console.log(_uri);
-            var _this=this;
+            var _this = this;
             fetch(_uri)
-            .then(
-                response => response.text() 
-            ).then(
-                html => _this.element.innerHTML = html
-            );
+                .then(
+                    response => response.text()
+                ).then(
+                    html => _this.element.innerHTML = html
+                );
         }
         else if (params && params.innerHTML) this.element.innerHTML = params.innerHTML;
         else if (params && params.child && params.child instanceof Div) {
@@ -277,27 +278,27 @@ class Div {
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
         if (params && params.padding) this.element.style.padding = params.padding
         if (params && params.textAlign) this.element.style.textAlign = params.textAlign;
-        if (params && params.onclick){
+        if (params && params.onclick) {
             this.onclick(params.onclick);
             this.element.style.cursor = "pointer";
         }
         if (params && params.width) {
             this.element.style.width = params.width;
-            if(!params.right)this.element.style.right=unset;
-            if(!params.left)this.element.style.left=unset;
+            if (!params.right) this.element.style.right = unset;
+            if (!params.left) this.element.style.left = unset;
         }
-        if (params && params.height){
+        if (params && params.height) {
             this.element.style.height = params.height;
-            if(!params.top)this.element.style.top=unset;
-            if(!params.bottom)this.element.style.bottom=unset;
+            if (!params.top) this.element.style.top = unset;
+            if (!params.bottom) this.element.style.bottom = unset;
         }
         if (params && params.backgroundColor) this.element.style.backgroundColor = params.backgroundColor;
         if (params && params.backgroundPosition) this.element.style.backgroundPosition = params.backgroundPosition;
         if (params && params.backgroundRepeat) this.element.style.backgroundRepeat = params.backgroundRepeat;
         if (params && params.backgroundImage) this.element.style.backgroundImage = params.backgroundImage;
-        
-   
-        if(!params || !params.tagName)this.element.className = (this.element.className + " pwadiv").trim();
+
+
+        if (!params || !params.tagName) this.element.className = (this.element.className + " pwadiv").trim();
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
@@ -362,8 +363,7 @@ class Div {
     get style() {
         return this.element.style;
     }
-    get primaryColor()
-    {
+    get primaryColor() {
         return globals.getPrimaryColor();
     }
 }
@@ -373,7 +373,7 @@ class Page extends Div {
         super(params);
         this.element.className = (this.element.className + " pwapage").trim();
         if (params.navigateBackPage instanceof Page) {
-            this.navigateBackPage=params.navigateBackPage;
+            this.navigateBackPage = params.navigateBackPage;
         }
     }
 }
