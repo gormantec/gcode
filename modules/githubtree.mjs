@@ -7,7 +7,7 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
-export function saveFile(name,content)
+export function saveFile(name,content,toDiv)
 {
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
@@ -15,12 +15,17 @@ export function saveFile(name,content)
     var username = name.substring(6, firstColon);
     var repo = name.substring(firstColon + 1, secondColon);
     var fullpath = name.substring(secondColon + 1);
+    var filename = fullpath.substring(fullpath.lastIndexOf("/")+1);
+    var filepath = fullpath.substring(0,fullpath.lastIndexOf("/"));
+    
 
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
         console.log("e:"+e);
         console.log("d:"+d);
+        addRepoFile(repo, fullpath, { name: filename, filepath: filepath, dirpath: fullpath, type: file.type });
+        addGitRepository(username,repo,toDiv,name);
     });
 }
 
@@ -35,9 +40,15 @@ function getToken(repousername, reponame) {
 
 export function addGitRepository(repousername, reponame, toDiv,selectedFileWidget) {
 
-
-
-    toDiv.appendChild(htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>"));
+    var repoRoot=toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
+    if(repoRoot)
+    {
+        repoRoot.innerHTML="";
+    }
+    else{
+        repoRoot=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>")
+        toDiv.appendChild(repoRoot);
+    }
     repos[reponame]
     if (repos[reponame]) {
         var keys = Object.keys(repos[reponame]);

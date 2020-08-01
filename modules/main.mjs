@@ -77,9 +77,9 @@ function _new() {
         "splashDuration: 2000"+
         "\n\n*/\n\n" + _samplecode);
         _setEditorMode();
-        if(selectedFileWidget.substring(0,6)=="git://") githubtree.saveFile(selectedFileWidget, editor.getValue());
+        if(selectedFileWidget.substring(0,6)=="git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),document.getElementById("pageLeftBody"));
+        else _refresh();
     }
-    _refresh();
 }
 
 function _openFile() {
