@@ -336,6 +336,7 @@ function _open() {
     _refresh();
 
     if (document.getElementById("pageLeft").style.display != "none") {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft=none");
         document.getElementById("pageLeft").style.display = "none";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
