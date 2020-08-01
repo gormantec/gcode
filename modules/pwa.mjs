@@ -230,8 +230,10 @@ class Div {
 
     constructor(params) {
         var tagName = "div";
+        
         if (params && params.tagName) tagName = params.tagName;
         this.element = document.createElement(tagName);
+        this.element.className = "pwadiv";
         if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.innerText) {
             console.log("innerText:" + params.innerText);
@@ -268,7 +270,7 @@ class Div {
         else if (params instanceof HTMLElement) this.element.appendChild(params);
         else if (params instanceof String) this.element.innerHTML = params;
         if (params && params.id) this.element.id = params.id;
-        if (params && params.class) this.element.className = params.class;
+        if (params && params.class) this.element.className = (this.element.className + " "+params.class).trim();
         if (params && params.color) this.element.style.color = params.color;
         if (params && params.top) this.element.style.top = params.top;
         if (params && params.bottom) this.element.style.bottom = params.bottom;
@@ -298,7 +300,7 @@ class Div {
         if (params && params.backgroundImage) this.element.style.backgroundImage = params.backgroundImage;
 
 
-        if (!params || !params.tagName) this.element.className = (this.element.className + " pwadiv").trim();
+        
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
