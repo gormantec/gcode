@@ -414,7 +414,8 @@ function _refresh() {
             }
         }
     }
-    document.getElementById("pageLeftBody").innerHTML = pageLeft;
+    var pageLeftBody=document.getElementById("pageLeftBody");
+    pageLeftBody.innerHTML = pageLeft;
 
     var gitRepositories = localStorage.getItem("git-repositories");
     if (gitRepositories) {
@@ -422,7 +423,7 @@ function _refresh() {
         data = JSON.parse(gitRepositories);
         Object.values(data).forEach(function (r, x) {
             if (r.username && r.repo) {
-                githubtree.addGitRepository(r.username, r.repo, document.getElementById("pageLeftBody"),selectedFileWidget);
+                githubtree.refreshGitTree(r.username, r.repo, pageLeftBody ,selectedFileWidget);
             }
         });
     }

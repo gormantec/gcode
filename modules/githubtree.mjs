@@ -28,7 +28,7 @@ export function saveFile(name,content,toDiv)
         console.log("addRepoFile:"+JSON.stringify({repo, dirpath, info:{ name: filename, filepath: fullpath, dirpath: dirpath, type: "file" }}));
         console.log("********");
         addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
-        addGitRepository(username,repo,toDiv,name);
+        refreshGitTree(username,repo,toDiv,name);
     });
 }
 
@@ -41,7 +41,7 @@ function getToken(repousername, reponame) {
     return token;
 }
 
-export function addGitRepository(repousername, reponame, toDiv,selectedFileWidget) {
+export function refreshGitTree(repousername, reponame, toDiv,selectedFileWidget) {
 
     var repoRoot=toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
     var parentElement;
