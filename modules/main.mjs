@@ -59,6 +59,10 @@ function _new() {
 
 
     var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
+    if(selectedFileWidget.substring(0,6)="git://")
+    {
+        aFilename=selectedFileWidget.substring(0,selectedFileWidget.lastIndexOf("/"))+"/"+aFilename;
+    }
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
