@@ -331,11 +331,11 @@ function _toggleSideBar() {
 
 }
 
-function _open() {
+function _open(params) {
 
     _refresh();
 
-    if (document.getElementById("pageLeft").style.display != "none") {
+    if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
         console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft=none");
         document.getElementById("pageLeft").style.display = "none";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
     document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
 
-    //_open();
+    _open({visible:true});
 
     document.getElementById("openButton").onclick = _open;
     document.getElementById("terminalButton").onclick = _toggleTerminal;
