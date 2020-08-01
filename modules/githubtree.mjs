@@ -24,9 +24,9 @@ export function saveFile(name,content,toDiv)
     gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
         console.log("e:"+e);
         console.log("d:"+JSON.stringify(d));
-        onsole.log("********");
+        console.log("********");
         console.log("addRepoFile:"+JSON.stringify({repo, dirpath, info:{ name: filename, filepath: fullpath, dirpath: dirpath, type: "file" }}));
-        onsole.log("********");
+        console.log("********");
         addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
         addGitRepository(username,repo,toDiv,name);
     });
