@@ -110,6 +110,7 @@ function _openFile() {
         var selectedItem=pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']");
         if(selectedItem)selectedItem.className="fileWidget";
         this.className="fileWidget fileWidgetSelected";
+        _setEditorMode();
         githubtree.getGitFile(username, repo, path, function (e, d) {
             /*console.log(d);*/
             editor.setValue(d);
