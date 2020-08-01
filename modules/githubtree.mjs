@@ -23,7 +23,8 @@ export function saveFile(name,content,toDiv)
     let gitrepo = gh.getRepo(username, repo);
     gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
         console.log("e:"+e);
-        console.log("d:"+d);
+        console.log("d:"+JSON.stringify(d));
+        console.log("addRepoFile:"+JSON.stringify({repo, fullpath, info:{ name: filename, filepath: filepath, dirpath: fullpath, type: file.type }}));
         addRepoFile(repo, fullpath, { name: filename, filepath: filepath, dirpath: fullpath, type: file.type });
         addGitRepository(username,repo,toDiv,name);
     });
