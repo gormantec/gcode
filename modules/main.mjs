@@ -65,7 +65,8 @@ function _new() {
         editor.setValue("/*\n\n  "+
         "filename:" + aFilename + "\n  "+
         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  "+
-        "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png"+
+        "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  "+
+        "splashColor: #005040"+
         "\n\n*/\n\n" + _samplecode);
         _setEditorMode();
     }
