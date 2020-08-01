@@ -179,9 +179,11 @@ class PWA {
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
+                console.log("splashDuration:"+window.PWA.globals.splashDuration);
                 if(window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
                 else if(!_this.splashDuration) _this.splashDuration=2000;
                 var timeoutMs=_this.splashDuration-((new Date()).getTime()-msec);
+                console.log("timeoutMs:"+timeoutMs);
                 if(timeoutMs<0)timeoutMs=10;
                 setTimeout(function () {
                     while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
