@@ -336,7 +336,7 @@ function _open(params) {
     _refresh();
 
     if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft=none");
+        console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft.display=none");
         document.getElementById("pageLeft").style.display = "none";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
@@ -345,6 +345,7 @@ function _open(params) {
 
     }
     else {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft.display=''");
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
