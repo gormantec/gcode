@@ -184,7 +184,7 @@ class PWA {
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
                     _this.fadeIn(_this.pwaRoot.element, 500);
-                }, 15000);
+                }, 60000);
             });
         });
 
