@@ -86,6 +86,10 @@ function _openFile() {
     if (this.dataset.name.substring(0, 6) != "git://") {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
+
+        pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']").className="fileWidget";
+        this.className="fileWidget fileWidgetSelected";
+
         editor.setValue(atob(localStorage.getItem("file-" + this.dataset.name)));
         _setEditorMode();
     }
@@ -102,7 +106,7 @@ function _openFile() {
         console.log(username + " " + repo + " " + path);
         var pageLeftBody=document.getElementById("pageLeftBody");
         pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']").className="fileWidget";
-        pageLeftBody.querySelector("div.dirWidget[data-name='" + this.dataset.name + "']").className="fileWidget fileWidgetSelected";
+        this.className="fileWidget fileWidgetSelected";
         githubtree.getGitFile(username, repo, path, function (e, d) {
             /*console.log(d);*/
             editor.setValue(d);
