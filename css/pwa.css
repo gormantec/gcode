@@ -51,6 +51,8 @@ body {
     background-color: var(--primaryColor);
     color: var(--primaryColorText);
     border-radius: 20px;
+    top: unset;
+    left:unset;
     right: 15px;
     bottom: 15px;
     text-align: center;
