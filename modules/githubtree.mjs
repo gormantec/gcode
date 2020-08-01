@@ -7,9 +7,21 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
-export function saveFile(name,btoaData)
+export function saveFile(name,content)
 {
+    var firstColon = name.indexOf(":", 6);
+    var secondColon = name.indexOf("/", firstColon + 1);
+    if (secondColon < 0) secondColon = 10000;
+    var username = name.substring(6, firstColon);
+    var repo = name.substring(firstColon + 1, secondColon);
+    var fullpath = name.substring(secondColon + 1);
 
+    var gh = new GitHub({ token: getToken(username, repo) });
+    let gitrepo = gh.getRepo(username, repo);
+    gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
+        console.log("e:"+e);
+        console.log("d:"+d);
+    });
 }
 
 function getToken(repousername, reponame) {

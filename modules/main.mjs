@@ -1,5 +1,6 @@
 
 import * as githubtree from '../modules/githubtree.mjs';
+import { saveFile } from './githubtree.mjs';
 
 var editor;
 
@@ -23,11 +24,7 @@ function _save() {
     localStorage.setItem("lastFileName", filename);
 }
 
-function _saveGit() {
-    var filename = document.getElementById("filename").innerText;
-    if (filename == "" || selectedFileWidget == null || filename.substring(0, 6) !== "git://") return;
-    githubtree.saveFile(filename, btoa(editor.getValue()));
-}
+
 
 function _delete() {
     var filename = document.getElementById("filename").innerText;
@@ -80,6 +77,7 @@ function _new() {
         "splashDuration: 2000"+
         "\n\n*/\n\n" + _samplecode);
         _setEditorMode();
+        if(selectedFileWidget.substring(0,6)=="git://") githubtree.saveFile(selectedFileWidget, editor.getValue());
     }
     _refresh();
 }
