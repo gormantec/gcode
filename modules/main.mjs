@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
     document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
 
-    _open();
+    //_open();
 
     document.getElementById("openButton").onclick = _open;
     document.getElementById("terminalButton").onclick = _toggleTerminal;
