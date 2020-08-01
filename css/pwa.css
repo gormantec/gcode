@@ -83,6 +83,7 @@ body {
     position: absolute;
     left: 10px;
     width: 30px;
+    right: unset;
     top: 20px;
     bottom: 0px;
     font-weight: 900;
