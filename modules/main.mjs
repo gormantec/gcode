@@ -86,7 +86,7 @@ function _openFile() {
     if (this.dataset.name.substring(0, 6) != "git://") {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
-
+        var pageLeftBody=document.getElementById("pageLeftBody");
         pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']").className="fileWidget";
         this.className="fileWidget fileWidgetSelected";
 
