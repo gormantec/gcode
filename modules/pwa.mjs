@@ -1,4 +1,5 @@
-var globals = { }
+window.PWA=window.PWA || {};
+window.PWA=window.PWA.globals || {};
 class PWA {
     constructor(params) {
         if (!params) params = {};
@@ -178,7 +179,9 @@ class PWA {
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
-                var timeoutMs=2000-((new Date()).getTime()-msec);
+                if(window.PWA.globals.splashDuration) this.splashDuration = window.PWA.globals.splashDuration
+                else if(!this.splashDuration) this.splashDuration=2000;
+                var timeoutMs=this.splashDuration-((new Date()).getTime()-msec);
                 if(timeoutMs<0)timeoutMs=10;
                 setTimeout(function () {
                     while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
@@ -191,7 +194,6 @@ class PWA {
         });
 
     }
-
     showFloatingActionButton() {
         this.floatingActionButton.style.display = "";
     }

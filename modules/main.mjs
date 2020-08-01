@@ -66,7 +66,8 @@ function _new() {
         "filename:" + aFilename + "\n  "+
         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  "+
         "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  "+
-        "splashColor: #005040"+
+        "splashColor: #005040"+ + "\n  "+
+        "splashDuration: 2000"+
         "\n\n*/\n\n" + _samplecode);
         _setEditorMode();
     }
@@ -233,6 +234,11 @@ function _toolbarButtonClicked() {
                 if(splash==code)splash=null;
                 var splashColor=code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if(splashColor==code)splashColor=null;
+                var splashDuration=code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
+                if(splashDuration==code)splashDuration="2000";
+                window.PWA=window.PWA || {};
+                window.PWA=window.PWA.globals || {};
+                window.PWA.globals.splashDuration=parseInt(splashDuration);
                 if(splash && splash.substring(0,4)=="http" && splash.substring(splash.length-3)=="png"){
                     win.document.body.style.backgroundImage="url("+splash+")";
                     win.document.body.style.backgroundPosition="center";
