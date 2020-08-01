@@ -226,20 +226,19 @@ function _toolbarButtonClicked() {
                 var code=editor.getValue();
                 var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\/.*/s, '$1');
                 if(splash==code)splash=null;
-                console.log("--------------------");
-                console.log("splash:"+splash);
-                console.log("--------------------");
                 var splashColor=code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if(splashColor==code)splashColor=null;
-                console.log("--------------------");
-                console.log("splashColor:"+splashColor);
-                console.log("--------------------");
                 if(splash && splash.substring(0,4)=="http" && splash.substring(splash.length-3)=="png"){
                     win.document.body.style.backgroundImage="url("+splash+")";
                     win.document.body.style.backgroundPosition="center";
                     win.document.body.style.backgroundRepeat="no-repeat";
                     console.log("backgroundPosition:"+"center");
                 }
+                <div class="loader">Loading...</div>
+                var _loader = win.document.createElement("div");
+                _loader.className="loader";
+                _loader.innerText("Loading...");
+                win.document.body.appendChild(_module);
                 if(splashColor) win.document.body.style.backgroundColor=splashColor;
                 else  win.document.body.style.backgroundColor = "black";
                 var _module = win.document.createElement("script");
