@@ -228,17 +228,18 @@ function _toolbarButtonClicked() {
                 var win = window.open("", selectedFileWidget, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
-                
+                window.PWA=window.PWA || {};
+                window.PWA=window.PWA.globals || {};
                 var code=editor.getValue();
                 var splash=code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\/.*/s, '$1');
                 if(splash==code)splash=null;
+                else window.PWA.globals.splash=splash;
                 var splashColor=code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if(splashColor==code)splashColor=null;
+                else window.PWA.globals.splashColor=splashColor;
                 var splashDuration=code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
-                if(splashDuration==code)splashDuration="2000";
-                window.PWA=window.PWA || {};
-                window.PWA=window.PWA.globals || {};
-                window.PWA.globals.splashDuration=parseInt(splashDuration);
+                if(splashDuration==code)splashDuration=null;
+                else window.PWA.globals.splashDuration=parseInt(splashDuration);
                 if(splash && splash.substring(0,4)=="http" && splash.substring(splash.length-3)=="png"){
                     win.document.body.style.backgroundImage="url("+splash+")";
                     win.document.body.style.backgroundPosition="center";
