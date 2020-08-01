@@ -596,14 +596,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         {
                             githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
 
-                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
-                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                         }
                     }
                     if(state=="done") {
                         githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
-                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
-                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
+                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                     }
                 });
                }
