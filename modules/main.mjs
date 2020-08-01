@@ -201,6 +201,23 @@ function _onclickFilename() {
     };
 }
 
+function getTextColor(backColor) {
+
+    var backColor = backColor.substring(1);      // strip #
+    var rgb = parseInt(backColor, 16);   // convert rrggbb to decimal
+    var r = (rgb >> 16) & 0xff;  // extract red
+    var g = (rgb >> 8) & 0xff;  // extract green
+    var b = (rgb >> 0) & 0xff;  // extract blue
+    var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+    if (luma < 124) {
+        // pick a different colour
+        return "#F0F0F0";
+    }
+    else {
+        return "#0F0F0F";
+    }
+}
+
 function _toolbarButtonClicked() {
 
 
@@ -252,6 +269,7 @@ function _toolbarButtonClicked() {
                 var _loader = win.document.createElement("div");
                 _loader.className="loader";
                 _loader.innerText="Loading...";
+                if(splashColor)_loader.style.color=getTextColor(splashColor);
                 win.document.body.appendChild(_loader);
                 if(splashColor) win.document.body.style.backgroundColor=splashColor;
                 else  win.document.body.style.backgroundColor = "black";
