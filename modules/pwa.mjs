@@ -58,6 +58,7 @@ class PWA {
             child: new Div({
                 tagName: "i",
                 class: "material-icons",
+                classNameOverride:true,
                 innerText: "keyboard_arrow_left"
             })
         });
