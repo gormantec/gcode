@@ -23,6 +23,12 @@ function _save() {
     localStorage.setItem("lastFileName", filename);
 }
 
+function _saveGit() {
+    var filename = document.getElementById("filename").innerText;
+    if (filename == "" || selectedFileWidget == null || filename.substring(0, 6) !== "git://") return;
+    githubtree.saveFile(filename, btoa(editor.getValue()));
+}
+
 function _delete() {
     var filename = document.getElementById("filename").innerText;
     if (filename == "" && selectedFileWidget != null) filename = selectedFileWidget;

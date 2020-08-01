@@ -1,8 +1,15 @@
+import "https://unpkg.com/github-api/dist/GitHub.bundle.min.js"
+
 var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo] = repos[repo] || [];
     repos[repo][dirpath] = repos[repo][dirpath] || { files: [] };
     repos[repo][dirpath].files.push(fileinfo);
+}
+
+export function saveFile(name,btoaData)
+{
+
 }
 
 function getToken(repousername, reponame) {
