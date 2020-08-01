@@ -100,6 +100,9 @@ function _openFile() {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
         console.log(username + " " + repo + " " + path);
+        var pageLeftBody=document.getElementById("pageLeftBody");
+        pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']").className="fileWidget";
+        pageLeftBody.querySelector("div.dirWidget[data-name='" + this.dataset.name + "']").className="fileWidget fileWidgetSelected";
         githubtree.getGitFile(username, repo, path, function (e, d) {
             /*console.log(d);*/
             editor.setValue(d);
