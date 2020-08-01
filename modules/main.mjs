@@ -105,7 +105,6 @@ function _openFile() {
             editor.setValue(d);
         });
     }
-    _refresh();
 }
 function _setEditorMode() {
     if (selectedFileWidget.endsWith(".js")) {
@@ -402,7 +401,7 @@ function _open(params) {
 }
 
 
-function _refresh() {
+function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
@@ -425,15 +424,18 @@ function _refresh() {
     var pageLeftBody=document.getElementById("pageLeftBody");
     pageLeftBody.innerHTML = pageLeft;
 
-    var gitRepositories = localStorage.getItem("git-repositories");
-    if (gitRepositories) {
-        var data = {};
-        data = JSON.parse(gitRepositories);
-        Object.values(data).forEach(function (r, x) {
-            if (r.username && r.repo) {
-                githubtree.refreshGitTree(r.username, r.repo, pageLeftBody ,selectedFileWidget);
-            }
-        });
+    if(params && params.all)
+    {
+        var gitRepositories = localStorage.getItem("git-repositories");
+        if (gitRepositories) {
+            var data = {};
+            data = JSON.parse(gitRepositories);
+            Object.values(data).forEach(function (r, x) {
+                if (r.username && r.repo) {
+                    githubtree.refreshGitTree(r.username, r.repo, pageLeftBody ,selectedFileWidget);
+                }
+            });
+        }
     }
 
     Array.from(document.getElementsByClassName("dirWidget")).forEach(function (e) {
@@ -570,18 +572,20 @@ document.addEventListener("DOMContentLoaded", function () {
        {
            var data ={};
            data =JSON.parse(gitRepositories);
+           var toDiv=document.getElementById("pageLeftBody");
            Object.values(data).forEach(function(r,x){
                if(r.username && r.repo){
                 var running_count=0;
-                githubtree.pullGitRepository(r.username, r.repo,function(state,repo, path){
+                var username=r.username;
+                githubtree.pullGitRepository(r.username, r.repo,function(state,repo){
                     if(state=="running"){
                         running_count++;
                         if(Math.floor(running_count/10)*10==running_count)
                         {
-                            _refresh();
+                            githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
                         }
                     }
-                    if(state=="done") _refresh();
+                    if(state=="done") githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
                 });
                }
            });
