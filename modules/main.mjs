@@ -236,7 +236,7 @@ function _toolbarButtonClicked() {
                 }
                 var _loader = win.document.createElement("div");
                 _loader.className="loader";
-                _loader.innerText("Loading...");
+                _loader.innerText="Loading...";
                 win.document.body.appendChild(_module);
                 if(splashColor) win.document.body.style.backgroundColor=splashColor;
                 else  win.document.body.style.backgroundColor = "black";
