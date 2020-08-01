@@ -328,9 +328,17 @@ function _toolbarButtonClicked() {
         }
         console.log(data);
         Object.values(data).forEach(function (r, x) {
-            console.log("r:" + r);
-            console.log("x:" + x);
-            githubtree.pullGitRepository(r.username, r.repo);
+            var running_count=0;
+            githubtree.pullGitRepository(r.username, r.repo,function(state){
+                if(state=="running"){
+                    running_count++;
+                    if(Math.floor(running_count/10)*10==running_count)
+                    {
+                        _refresh();
+                    }
+                }
+                if(state=="done") _refresh();
+            });
         });
     }
     else if (this.dataset.action == "deleteFile") {
@@ -485,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     editor.on("change", _save);
-    /*
+    
     
         (function () {
             var old = console.log;
@@ -506,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 pageBottom.scrollTo(0, pageBottom.scrollHeight);
             }
         })();
-    */
+    
 
     const BORDER_SIZE = 4;
     const panel = document.getElementById("pageLeft");
@@ -556,7 +564,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
 
-    /*
+    
        var gitRepositories = localStorage.getItem("git-repositories");
        if(gitRepositories)
        {
@@ -571,7 +579,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         running_count++;
                         if(Math.floor(running_count/10)*10==running_count)
                         {
-                            //_refresh();
+                            _refresh();
                         }
                     }
                     if(state=="done") _refresh();
@@ -580,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function () {
            });
        }
     
-       */
+       
 
 });
 
