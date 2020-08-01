@@ -22,11 +22,6 @@ export function saveFile(name,content,toDiv)
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
-        console.log("e:"+e);
-        console.log("d:"+JSON.stringify(d));
-        console.log("********");
-        console.log("addRepoFile:"+JSON.stringify({repo, dirpath, info:{ name: filename, filepath: fullpath, dirpath: dirpath, type: "file" }}));
-        console.log("********");
         addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
         refreshGitTree(username,repo,toDiv,name);
     });
@@ -94,7 +89,7 @@ export function refreshGitTree(repousername, reponame, toDiv,selectedFileWidget)
                 indentWidth = indentWidth + 10;
                 var gitpath = "git://" + repousername + ":" + reponame + "/" + files[j].dirpath;
                 if (gitpath.slice(-1) == "/") gitpath = gitpath.slice(0, -1);
-                console.log("gitpath:"+gitpath);
+              
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(htmlToElement(
                     "<div><div class='" + widgetClass + fileWidgetSelected + "' data-name='git://" + repousername + ":" + reponame + "/" +
                     files[j].filepath + "' " + nextname + " data-dirname='" + reponame + "' " + datastate + display + ">" +

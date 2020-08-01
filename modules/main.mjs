@@ -496,7 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     editor.on("change", _save);
     
-    
+    /*
         (function () {
             var old = console.log;
             var olde = console.error;
@@ -516,6 +516,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 pageBottom.scrollTo(0, pageBottom.scrollHeight);
             }
         })();
+
+        */
     
 
     const BORDER_SIZE = 4;
