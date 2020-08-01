@@ -572,7 +572,6 @@ document.addEventListener("DOMContentLoaded", function () {
            data =JSON.parse(gitRepositories);
            Object.values(data).forEach(function(r,x){
                if(r.username && r.repo){
-    
                 var running_count=0;
                 githubtree.pullGitRepository(r.username, r.repo,function(state,repo, path){
                     if(state=="running"){
