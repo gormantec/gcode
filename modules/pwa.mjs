@@ -160,6 +160,7 @@ class PWA {
     };
 
     show(win) {
+        var msec=(new Date()).getTime();
         win = win || window;
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
@@ -177,14 +178,15 @@ class PWA {
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
-                
+                var timeoutMs=2000-((new Date()).getTime()-msec);
+                if(timeoutMs<0)timeoutMs=10;
                 setTimeout(function () {
                     while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                     _this.pwaRoot.element.style.opacity = 0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
                     win.document.body.appendChild(_this.pwaOverlay.element);
                     _this.fadeIn(_this.pwaRoot.element, 500);
-                }, 60000);
+                }, timeoutMs);
             });
         });
 
