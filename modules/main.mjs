@@ -62,7 +62,11 @@ function _new() {
     if (aFilename != null) {
         document.getElementById("filename").innerText = aFilename;
         selectedFileWidget = aFilename;
-        editor.setValue("/*\n\n  filename:" + aFilename + "\n  created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n\n*/\n\n" + _samplecode);
+        editor.setValue("/*\n\n  "+
+        "filename:" + aFilename + "\n  "+
+        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  "+
+        "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png"+
+        "\n\n*/\n\n" + _samplecode);
         _setEditorMode();
     }
     _refresh();
