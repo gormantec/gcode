@@ -26,6 +26,20 @@ export function saveFile(name,content,toDiv)
         refreshGitTree(username,repo,toDiv,name);
     });
 }
+export function saveFile(name,callback)
+{
+    var firstColon = name.indexOf(":", 6);
+    var secondColon = name.indexOf("/", firstColon + 1);
+    if (secondColon < 0) secondColon = 10000;
+    var username = name.substring(6, firstColon);
+    var repo = name.substring(firstColon + 1, secondColon);
+    var fullpath = name.substring(secondColon + 1);
+    var filename = fullpath.substring(fullpath.lastIndexOf("/")+1);
+    var dirpath = fullpath.substring(0,fullpath.lastIndexOf("/"));
+    var gh = new GitHub({ token: getToken(username, repo) });
+    let gitrepo = gh.getRepo(username, repo);
+    gitrepo.deleteFile("master",fullpath,callback);
+}
 
 function getToken(repousername, reponame) {
     var token = localStorage.getItem("git-token://" + repousername + ":" + reponame);

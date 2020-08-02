@@ -35,17 +35,32 @@ function _save() {
 function _delete() {
     var filename = document.getElementById("filename").innerText;
     if (filename == "" && selectedFileWidget != null) filename = selectedFileWidget;
-    localStorage.removeItem("file-" + filename);
-    localStorage.setItem("lastFileName", "");
-    document.getElementById("filename").innerText = "";
-    editor.setValue("");
+    if(filename.substring(0,6)=="git://")
+    {
+        githubtree.delete(filename,function(e,d){
+            if(!e){
+                document.getElementById("filename").innerText = "";
+                editor.setValue("");
+                selectedFileWidget = null;
+                Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
+                    if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;
+                });
+            }
+        });
+    }
+    else
+    {
+        localStorage.removeItem("file-" + filename);
+        localStorage.setItem("lastFileName", "");
+        document.getElementById("filename").innerText = "";
+        editor.setValue("");
+        selectedFileWidget = null;
+        Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
+            if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;
+        });
+        _refresh();
+    }
 
-
-    selectedFileWidget = null;
-    Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
-        if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;
-    });
-    _refresh();
 }
 
 function _new() {
