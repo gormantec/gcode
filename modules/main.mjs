@@ -95,9 +95,9 @@ function _openFile() {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
         var pageLeftBody=document.getElementById("pageLeftBody");
-        var selectedItem=pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']");
+        var selectedItem=pageLeftBody.querySelector("div.fileWidgetSelected");
         if(selectedItem)selectedItem.className="fileWidget";
-        selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected']");
+        selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected");
         if(selectedItem)selectedItem.className="dirWidget";
         this.className="fileWidget fileWidgetSelected";
 
@@ -116,9 +116,9 @@ function _openFile() {
         document.getElementById("filename").innerText = this.dataset.name;
         console.log(username + " " + repo + " " + path);
         var pageLeftBody=document.getElementById("pageLeftBody");
-        var selectedItem=pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']");
+        var selectedItem=pageLeftBody.querySelector("div.fileWidgetSelected");
         if(selectedItem)selectedItem.className="fileWidget";    
-        selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected']");
+        selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected");
         if(selectedItem)selectedItem.className="dirWidget";
         this.className="fileWidget fileWidgetSelected";
         _setEditorMode();
@@ -158,9 +158,9 @@ function _openDir() {
     var _this = this;
 
     var pageLeftBody=document.getElementById("pageLeftBody");
-    var selectedItem=pageLeftBody.querySelector("div.fileWidgetSelected']");
+    var selectedItem=pageLeftBody.querySelector("div.fileWidgetSelected");
     if(selectedItem)selectedItem.className="fileWidget";
-    selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected']");
+    selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected");
     if(selectedItem)selectedItem.className="dirWidget";
     this.className="dirWidget dirWidgetSelected";
     selectedFileWidget = this.dataset.name;
