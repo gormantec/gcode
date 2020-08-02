@@ -265,8 +265,9 @@ function _toolbarButtonClicked() {
     }
     else if (this.dataset.action == "runFile") {
 
-        if (selectedFileWidget.endsWith(".js")) {
-            console.log("local:default user$ nodejs " + selectedFileWidget + "\n\n");
+        var filename=document.getElementById("filename").innerText;
+        if (filename.endsWith(".js")) {
+            console.log("local:default user$ nodejs " + filename + "\n\n");
             try {
                 var _run = function () {
                     eval(editor.getValue());
@@ -278,10 +279,10 @@ function _toolbarButtonClicked() {
             }
             console.log(" ");
         }
-        else if (selectedFileWidget.endsWith(".mjs")) {
-            console.log("local:default user$ launch webApp " + selectedFileWidget + "\n\n");
+        else if (filename.endsWith(".mjs")) {
+            console.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
-                var win = window.open("", selectedFileWidget, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+                var win = window.open("", filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
                 win.PWA=win.PWA || {};
@@ -322,9 +323,9 @@ function _toolbarButtonClicked() {
             }
             console.log(" ");
         }
-        else if (selectedFileWidget.endsWith(".py")) {
+        else if (filename.endsWith(".py")) {
             try {
-                console.log("local:default user$ python " + selectedFileWidget)
+                console.log("local:default user$ python " + filename)
                 Sk.pre = "output";
                 Sk.configure({
                     output: consolelog, read: builtinRead
@@ -366,14 +367,14 @@ function _toolbarButtonClicked() {
                     running_count++;
                     if(Math.floor(running_count/10)*10==running_count)
                     {
-                        githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
+                        githubtree.refreshGitTree(username, repo,toDiv,filename);
 
                         Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
                         Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                     }
                 }
                 if(state=="done") {
-                    githubtree.refreshGitTree(username, repo,toDiv,selectedFileWidget);
+                    githubtree.refreshGitTree(username, repo,toDiv,filename);
                     Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) {e.onclick = _openDir; });
                     Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                 }
