@@ -446,7 +446,7 @@ function _refresh(params) {
     }
     pageLeft=pageLeft+"</div>";
     var pageLeftBody=document.getElementById("pageLeftBody");
-    var defaultParent=pageLeftBody.getElementById("defaultParent");
+    var defaultParent=pageLeftBody.querySelector("div#defaultParent");
     if(defaultParent)
     {
         defaultParent.parentNode.replaceChild(htmlToElement(pageLeft), defaultParent);
