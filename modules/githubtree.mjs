@@ -38,6 +38,9 @@ export function deleteFile(name,callback)
     var dirpath = fullpath.substring(0,fullpath.lastIndexOf("/"));
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
+    console.log(username);
+    console.log(repo);
+    console.log(fullpath);
     gitrepo.deleteFile("master",fullpath,callback);
 }
 
