@@ -82,7 +82,10 @@ function _new() {
         "\n\n*/\n\n" + _samplecode);
         _setEditorMode();
         if(selectedFileWidget.substring(0,6)=="git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),document.getElementById("pageLeftBody"));
-        else _refresh();
+        else{
+            _save();
+            _refresh();
+        }
     }
 }
 
@@ -94,6 +97,8 @@ function _openFile() {
         var pageLeftBody=document.getElementById("pageLeftBody");
         var selectedItem=pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']");
         if(selectedItem)selectedItem.className="fileWidget";
+        selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected']");
+        if(selectedItem)selectedItem.className="dirWidget";
         this.className="fileWidget fileWidgetSelected";
 
         editor.setValue(atob(localStorage.getItem("file-" + this.dataset.name)));
@@ -112,7 +117,9 @@ function _openFile() {
         console.log(username + " " + repo + " " + path);
         var pageLeftBody=document.getElementById("pageLeftBody");
         var selectedItem=pageLeftBody.querySelector("div.fileWidget[class='fileWidget fileWidgetSelected']");
-        if(selectedItem)selectedItem.className="fileWidget";
+        if(selectedItem)selectedItem.className="fileWidget";    
+        selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected']");
+        if(selectedItem)selectedItem.className="dirWidget";
         this.className="fileWidget fileWidgetSelected";
         _setEditorMode();
         githubtree.getGitFile(username, repo, path, function (e, d) {
@@ -149,6 +156,15 @@ function _openDir() {
 
     var _dirname = this.dataset.name;
     var _this = this;
+
+    var pageLeftBody=document.getElementById("pageLeftBody");
+    var selectedItem=pageLeftBody.querySelector("div.fileWidgetSelected']");
+    if(selectedItem)selectedItem.className="fileWidget";
+    selectedItem=pageLeftBody.querySelector("div.dirWidgetSelected']");
+    if(selectedItem)selectedItem.className="dirWidget";
+    this.className="dirWidget dirWidgetSelected";
+    selectedFileWidget = this.dataset.name;
+
     var _fileDisplayValue = "none";
     if (_this.dataset.state && _this.dataset.state == "closed") {
         _this.dataset.state = "open";
@@ -200,6 +216,7 @@ function consolelog(x) {
 function _onclickFilename() {
     document.getElementById("filename").onclick = null;
     var input = document.createElement("input");
+    selectedFileWidget=document.getElementById("filename").innerText;
     input.value = selectedFileWidget;
     document.getElementById("filename").innerHTML = "";
     document.getElementById("filename").appendChild(input);

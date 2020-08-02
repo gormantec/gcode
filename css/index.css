@@ -151,6 +151,11 @@ body {
     cursor: pointer;
 }
 
+.dirWidgetSelected {
+    background-color: #555555;
+    color:#EEEEEE;
+}
+
 .fileWidget {
     font-weight: normal;
     text-decoration: none;
