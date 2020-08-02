@@ -25,9 +25,18 @@ function htmlToElement(html) {
 
 function _save() {
     var filename = document.getElementById("filename").innerText;
-    if (filename == "" || selectedFileWidget == null || filename.substring(0, 6) == "git://") return;
-    localStorage.setItem("file-" + filename, btoa(editor.getValue()));
-    localStorage.setItem("lastFileName", filename);
+    if(filename && filename.substring(0,6)=="git://")
+    {
+        githubtree.saveFile(filename, editor.getValue(),document.getElementById("pageLeftBody"));
+        var pageLeftBody=document.getElementById("pageLeftBody");
+        var fileWidget=pageLeftBody.querySelector("div.fileWidget[data-name='"+filename+"']");
+        delete fileWidget.style.fontStyle;
+    }
+    else {
+        if (filename == "" || selectedFileWidget == null) return;
+        localStorage.setItem("file-" + filename, btoa(editor.getValue()));
+        localStorage.setItem("lastFileName", filename);
+    }
 }
 
 
@@ -37,7 +46,7 @@ function _delete() {
     if (filename == "" && selectedFileWidget != null) filename = selectedFileWidget;
     if(filename.substring(0,6)=="git://")
     {
-        githubtree.delete(filename,function(e,d){
+        githubtree.deleteFile(filename,function(e,d){
             if(e)console.log(e);
             if(d)console.log(d);
             if(!e){
@@ -47,6 +56,13 @@ function _delete() {
                 Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
                     if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;
                 });
+                var toDiv=document.getElementById("pageLeftBody");
+                var firstColon = filename.indexOf(":", 6);
+                var secondColon = filename.indexOf("/", firstColon + 1);
+                if (secondColon < 0) secondColon = 10000;
+                var username = filename.substring(6, firstColon);
+                var repo = filename.substring(firstColon + 1, secondColon);
+                githubtree.refreshGitTree(username, repo,toDiv,filename);
             }
         });
     }
@@ -279,6 +295,8 @@ function _toolbarButtonClicked() {
 
     if (this.dataset.action == "addFile") {
         _new();
+    }else if (this.dataset.action == "saveFile") {
+        _save();
     }
     else if (this.dataset.action == "runFile") {
 
@@ -561,7 +579,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    editor.on("change", _save);
+    editor.on("change", function(){
+        if(selectedFileWidget.startsWith("git://")){
+            _save();
+        }
+        else{
+            var filename=document.getElementById("filename").innerText;
+            var pageLeftBody=document.getElementById("pageLeftBody");
+            var fileWidget=pageLeftBody.querySelector("div.fileWidget[data-name='"+filename+"']");
+            fileWidget.style.fontStyle="italic";
+        }
+    });
     
     /*
         (function () {

@@ -145,6 +145,10 @@ body {
     overflow:hidden;
 }
 
+.fileChanged{
+    font-style:
+}
+
 .dirWidget {
     font-weight: bolder;
     text-decoration: none;
