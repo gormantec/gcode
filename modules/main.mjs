@@ -14,6 +14,12 @@ var pageBottomHeight = 150;
 var dirIconOpened = "keyboard_arrow_down";
 var dirIconClosed = "keyboard_arrow_right";
 
+function htmlToElement(html) {
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
 
 // root functions
 
@@ -39,8 +45,6 @@ function _delete() {
     Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
         if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;
     });
-
-
     _refresh();
 }
 
@@ -424,7 +428,7 @@ function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>";
+    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div></div>";
     keys.sort();
     keys.reverse();
     while (i--) {
@@ -440,8 +444,17 @@ function _refresh(params) {
             }
         }
     }
+    pageLeft=pageLeft+"</div>";
     var pageLeftBody=document.getElementById("pageLeftBody");
-    pageLeftBody.innerHTML = pageLeft;
+    var defaultParent=pageLeftBody.getElementById("defaultParent");
+    if(defaultParent)
+    {
+        defaultParent.parentNode.replaceChild(htmlToElement(pageLeft), defaultParent);
+    }
+    else{
+        pageLeftBody.innerHTML = pageLeft;
+    }
+    
 
     if(params && params.all)
     {
