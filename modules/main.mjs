@@ -580,11 +580,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     editor.on("change", function(){
-        if(selectedFileWidget.startsWith("git://")){
+        var filename = document.getElementById("filename").innerText;
+        if(!filename.startsWith("git://")){
             _save();
         }
         else{
-            var filename=document.getElementById("filename").innerText;
             var pageLeftBody=document.getElementById("pageLeftBody");
             var fileWidget=pageLeftBody.querySelector("div.fileWidget[data-name='"+filename+"']");
             fileWidget.style.fontStyle="italic";
