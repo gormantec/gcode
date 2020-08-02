@@ -38,6 +38,8 @@ function _delete() {
     if(filename.substring(0,6)=="git://")
     {
         githubtree.delete(filename,function(e,d){
+            if(e)console.log(e);
+            if(d)console.log(d);
             if(!e){
                 document.getElementById("filename").innerText = "";
                 editor.setValue("");

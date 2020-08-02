@@ -26,7 +26,7 @@ export function saveFile(name,content,toDiv)
         refreshGitTree(username,repo,toDiv,name);
     });
 }
-export function saveFile(name,callback)
+export function delete(name,callback)
 {
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
