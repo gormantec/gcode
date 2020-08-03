@@ -12,7 +12,7 @@ var _GitHub;
 function getGitHub(params)
 {
     if(_GitHub) return _GitHub;
-    else return getGitHub(params);
+    else return new GitHub(params);
 }
 
 export function saveFile(name, content, callback) {
