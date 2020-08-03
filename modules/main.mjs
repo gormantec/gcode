@@ -533,6 +533,7 @@ function _refresh(params) {
         pageLeftBody.removeChild(defaultParent);
     }
     pageLeftBody.insertBefore(htmlToElement(pageLeft), pageLeftBody.firstChild);
+    defaultParent = pageLeftBody.querySelector("div#defaultParent");
 
 
 
@@ -544,18 +545,14 @@ function _refresh(params) {
             Object.values(data).forEach(function (r, x) {
                 if (r.username && r.repo) {
                     githubtree.refreshGitTree(r.username, r.repo, pageLeftBody, selectedFileWidget);
+                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                 }
             });
         }
     }
-
-    Array.from(document.getElementsByClassName("dirWidget")).forEach(function (e) {
-        e.onclick = _openDir;
-    });
-
-    Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
-        e.onclick = _openFile;
-    });
+    Array.from(defaultParent.querySelectorAll("div.dirWidget")).forEach(function (e) {e.onclick = _openDir;});
+    Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) {e.onclick = _openFile;});
 }
 
 
@@ -722,7 +719,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         running_count++;
                         if (Math.floor(running_count / 10) * 10 == running_count) {
                             githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget);
-
                             Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
                             Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                         }
