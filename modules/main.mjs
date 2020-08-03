@@ -47,9 +47,12 @@ function _delete() {
     if(filename.substring(0,6)=="git://")
     {
         githubtree.deleteFile(filename,function(e,d){
-            if(e)console.log(e);
-            if(d)console.log(d);
-            if(!e){
+            if(e){
+                console.log("**DELETE ERROR**");
+                console.log(e);
+            }
+            else{
+                console.log(d);
                 document.getElementById("filename").innerText = "";
                 editor.setValue("");
                 selectedFileWidget = null;

@@ -23,8 +23,16 @@ export function saveFile(name,content,toDiv)
     let gitrepo = gh.getRepo(username, repo);
     console.log(JSON.stringify(["master",fullpath,content]));
     gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
-        addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
-        refreshGitTree(username,repo,toDiv,name);
+        if(e)
+        {
+            console.log("** SAVE ERROR **");
+            console.log(e);
+        }
+        else
+        {
+            addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
+            refreshGitTree(username,repo,toDiv,name);
+        }
     });
 }
 export function deleteFile(name,callback)
