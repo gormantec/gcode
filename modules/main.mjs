@@ -587,7 +587,26 @@ document.addEventListener("DOMContentLoaded", function () {
         else{
             var pageLeftBody=document.getElementById("pageLeftBody");
             var fileWidget=pageLeftBody.querySelector("div.fileWidget[data-name='"+filename+"']");
-            fileWidget.style.fontStyle="italic";
+            
+            if(fileWidget.style.fontStyle!="italic")
+            {
+                var firstColon = filename.name.indexOf(":", 6);
+                var secondColon = filename.name.indexOf("/", firstColon + 1);
+                var username = filename.name.substring(6, firstColon);
+                var repo = filename.name.substring(firstColon + 1, secondColon);
+                var path = filename.name.substring(secondColon + 1);
+    
+                githubtree.getGitFile(username, repo, path, function (e, d) {
+                    if(d!=editor.getValue())
+                    {
+                        fileWidget.style.fontStyle="italic";
+                    }
+                    else{
+                        fileWidget.style.fontStyle="";
+                    }
+                });
+            }
+
         }
     });
     
