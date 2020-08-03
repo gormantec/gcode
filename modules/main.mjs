@@ -505,7 +505,7 @@ function _open(params) {
 }
 
 
-function _refresh(params) {
+function _refresh(params) {  
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
