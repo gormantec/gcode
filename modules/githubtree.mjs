@@ -30,6 +30,7 @@ export function saveFile(name,content,toDiv)
         }
         else
         {
+            console.log("** SAVED OK **");
             addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
             refreshGitTree(username,repo,toDiv,name);
         }
