@@ -25,7 +25,7 @@ function htmlToElement(html) {
 function _save() {
     var filename = document.getElementById("filename").innerText;
     if (filename && filename.substring(0, 6) == "git://") {
-        githubtree.saveFile(filename, editor.getValue(), function () {
+        githubtree.saveFile(filename, editor.getValue(), function (e,d) {
             if(e)
             {
                 console.log(e);
