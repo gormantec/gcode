@@ -138,6 +138,7 @@ function _openFile() {
         _setEditorMode();
     }
     else {
+        var filename=this.dataset.name;
         var firstColon = this.dataset.name.indexOf(":", 6);
         var secondColon = this.dataset.name.indexOf("/", firstColon + 1);
         var username = this.dataset.name.substring(6, firstColon);
@@ -155,8 +156,18 @@ function _openFile() {
         if(selectedItem)selectedItem.className="dirWidget";
         this.className="fileWidget fileWidgetSelected";
         _setEditorMode();
+        var _this=this;
         githubtree.getGitFile(username, repo, path, function (e, d) {
             /*console.log(d);*/
+            var cached=localStorage.getItem("gitfile-" + filename);
+            if(cached)
+            {
+                if(atob(cached)!=d)
+                {
+                    d=atob(cached);
+                    _this.style.fontStyle="italic";
+                }
+            }
             editor.setValue(d);
         });
     }
@@ -600,6 +611,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if(d!=editor.getValue())
                     {
                         fileWidget.style.fontStyle="italic";
+                        localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
                     }
                     else{
                         fileWidget.style.fontStyle="";
