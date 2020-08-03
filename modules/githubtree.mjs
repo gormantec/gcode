@@ -24,7 +24,7 @@ export function saveFile(name, content, toDiv) {
     //gitrepo.getSha("master", fullpath).then(function (sha) {
       //  console.log("** GOT SHA **");
         //console.log(sha);
-        gitrepo.writeFile("master", fullpath, content, "commit").then(function (d) {
+        gitrepo.writeFile("master", fullpath, content, "commit", {} ).then(function (d) {
             console.log("** SAVED OK **");
             console.log(d);
             addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
