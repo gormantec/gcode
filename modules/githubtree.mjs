@@ -7,50 +7,48 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
-export function saveFile(name,content,toDiv)
-{
+export function saveFile(name, content, toDiv) {
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
     if (secondColon < 0) secondColon = 10000;
     var username = name.substring(6, firstColon);
     var repo = name.substring(firstColon + 1, secondColon);
     var fullpath = name.substring(secondColon + 1);
-    var filename = fullpath.substring(fullpath.lastIndexOf("/")+1);
-    var dirpath = fullpath.substring(0,fullpath.lastIndexOf("/"));
-    
+    var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
+    var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
+
 
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
-    console.log(JSON.stringify(["master",username, repo,fullpath]));
+    console.log(JSON.stringify(["master", username, repo, fullpath]));
     gitrepo.getSha("master", fullpath).then(function (sha) {
         console.log("** GOT SHA **");
         console.log(sha);
-        gitrepo.writeFile("master",fullpath,content,"commit").then(function(d){
-                console.log("** SAVED OK **");
-                console.log(d);
-                addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
-                refreshGitTree(username,repo,toDiv,name);
-            
-        }).catch( (e) => console.log(e) );
+        gitrepo.writeFile("master", fullpath, content, "commit").then(function (d) {
+            console.log("** SAVED OK **");
+            console.log(d);
+            addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
+            refreshGitTree(username, repo, toDiv, name);
+
+        }).catch((e) => console.log(e));
     });
 
 }
-export function deleteFile(name,callback)
-{
+export function deleteFile(name, callback) {
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
     if (secondColon < 0) secondColon = 10000;
     var username = name.substring(6, firstColon);
     var repo = name.substring(firstColon + 1, secondColon);
     var fullpath = name.substring(secondColon + 1);
-    var filename = fullpath.substring(fullpath.lastIndexOf("/")+1);
-    var dirpath = fullpath.substring(0,fullpath.lastIndexOf("/"));
+    var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
+    var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     console.log(username);
     console.log(repo);
     console.log(fullpath);
-    gitrepo.deleteFile("master",fullpath,callback);
+    gitrepo.deleteFile("master", fullpath, callback);
 }
 
 function getToken(repousername, reponame) {
@@ -62,21 +60,20 @@ function getToken(repousername, reponame) {
     return token;
 }
 
-export function refreshGitTree(repousername, reponame, toDiv,selectedFileWidget) {
+export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget) {
 
-    var repoRoot=toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
+    var repoRoot = toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
     var parentElement;
-    if(repoRoot)
-    {
-        parentElement=repoRoot.parentElement;
+    if (repoRoot) {
+        parentElement = repoRoot.parentElement;
         while (parentElement.firstChild) parentElement.removeChild(parentElement.lastChild);
     }
-    else{
+    else {
         parentElement = document.createElement('div');
-        toDiv.appendChild(parentElement); 
+        toDiv.appendChild(parentElement);
     }
     parentElement.appendChild(htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>"));
-    
+
     repos[reponame]
     if (repos[reponame]) {
         var keys = Object.keys(repos[reponame]);
@@ -115,7 +112,7 @@ export function refreshGitTree(repousername, reponame, toDiv,selectedFileWidget)
                 indentWidth = indentWidth + 10;
                 var gitpath = "git://" + repousername + ":" + reponame + "/" + files[j].dirpath;
                 if (gitpath.slice(-1) == "/") gitpath = gitpath.slice(0, -1);
-              
+
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(htmlToElement(
                     "<div><div class='" + widgetClass + fileWidgetSelected + "' data-name='git://" + repousername + ":" + reponame + "/" +
                     files[j].filepath + "' " + nextname + " data-dirname='" + reponame + "' " + datastate + display + ">" +
@@ -149,7 +146,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
 
     var loopDirectories = function (directories, depth, callback) {
 
-        if (!directories || directories.length == 0 || depth>2) {
+        if (!directories || directories.length == 0 || depth > 2) {
             callback();
         }
         else {
