@@ -7,6 +7,14 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
+var _GitHub;
+
+function getGitHub(params)
+{
+    if(_GitHub) return _GitHub;
+    else return getGitHub(params);
+}
+
 export function saveFile(name, content, callback) {
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
@@ -18,7 +26,7 @@ export function saveFile(name, content, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
 
-    var gh = new GitHub({ token: getToken(username, repo) });
+    var gh = getGitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     console.log(JSON.stringify(["master", username, repo, fullpath]));
     gitrepo.getSha("master", fullpath).then(function (sha) {
@@ -42,7 +50,7 @@ export function deleteFile(name, callback) {
     var fullpath = name.substring(secondColon + 1);
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
-    var gh = new GitHub({ token: getToken(username, repo) });
+    var gh = getGitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     console.log(username);
     console.log(repo);
@@ -133,14 +141,14 @@ export function htmlToElement(html) {
 }
 
 export function getGitFile(username, repo, path, callback) {
-    var gh = new GitHub({ token: getToken(username, repo) });
+    var gh = getGitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     gitrepo.getContents("master", path, true, callback);
 }
 
 export function pullGitRepository(username, repo, callbackrefresh) {
 
-    var gh = new GitHub({ token: getToken(username, repo) });
+    var gh = getGitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
 
     var loopDirectories = function (directories, depth, callback) {
