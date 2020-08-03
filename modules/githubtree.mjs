@@ -48,7 +48,7 @@ export function deleteFile(name, callback) {
     console.log(username);
     console.log(repo);
     console.log(fullpath);
-    gitrepo.deleteFile("master", fullpath, callback);
+    gitrepo.deleteFile("master", fullpath).then((d) => callback(null,d) ).catch((e) => {console.log(e);callback(e);});;
 }
 
 function getToken(repousername, reponame) {
