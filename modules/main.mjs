@@ -124,6 +124,7 @@ function _new() {
         _setEditorMode();
         if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
             function () {
+                var filename=selectedFileWidget;
                 var toDiv = document.getElementById("pageLeftBody");
                 var firstColon = filename.indexOf(":", 6);
                 var secondColon = filename.indexOf("/", firstColon + 1);
