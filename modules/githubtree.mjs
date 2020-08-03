@@ -21,7 +21,7 @@ export function saveFile(name, content, toDiv) {
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     console.log(JSON.stringify(["master", username, repo, fullpath]));
-    gitrepo.getSha("master", fullpath).then(function (sha) {
+    //gitrepo.getSha("master", fullpath).then(function (sha) {
         console.log("** GOT SHA **");
         console.log(sha);
         gitrepo.writeFile("master", fullpath, content, "commit").then(function (d) {
@@ -31,7 +31,7 @@ export function saveFile(name, content, toDiv) {
             refreshGitTree(username, repo, toDiv, name);
 
         }).catch((e) => console.log(e));
-    });
+    //});
 
 }
 export function deleteFile(name, callback) {
@@ -168,6 +168,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
         var _path = path;
         if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
         gitrepo.getSha("master", path).then(function (sha) {
+            console.log(sha);
             var directories = [];
             Array.from(sha.data).forEach(function (file) {
                 if (file.name.substring(0, 1) != "." && directories.length < 4) {
