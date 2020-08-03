@@ -599,7 +599,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var pageLeftBody=document.getElementById("pageLeftBody");
             var fileWidget=pageLeftBody.querySelector("div.fileWidget[data-name='"+filename+"']");
             
-            if(fileWidget.style.fontStyle!="italic")
+            if(fileWidget && fileWidget.style.fontStyle!="italic")
             {
                 var firstColon = filename.indexOf(":", 6);
                 var secondColon = filename.indexOf("/", firstColon + 1);
