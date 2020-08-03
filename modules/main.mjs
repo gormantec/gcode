@@ -181,6 +181,7 @@ function _openFile() {
         githubtree.getGitFile(username, repo, path, function (e, d) {
             /*console.log(d);*/
             var cached = localStorage.getItem("gitfile-" + filename);
+            console.log(cached);
             if (cached) {
                 if (atob(cached) != d) {
                     d = atob(cached);
