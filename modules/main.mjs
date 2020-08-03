@@ -633,6 +633,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
+            else{
+                localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
+            }
 
         }
     });
