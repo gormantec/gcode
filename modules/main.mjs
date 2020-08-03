@@ -590,11 +590,11 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if(fileWidget.style.fontStyle!="italic")
             {
-                var firstColon = filename.name.indexOf(":", 6);
-                var secondColon = filename.name.indexOf("/", firstColon + 1);
-                var username = filename.name.substring(6, firstColon);
-                var repo = filename.name.substring(firstColon + 1, secondColon);
-                var path = filename.name.substring(secondColon + 1);
+                var firstColon = filename.indexOf(":", 6);
+                var secondColon = filename.indexOf("/", firstColon + 1);
+                var username = filename.substring(6, firstColon);
+                var repo = filename.substring(firstColon + 1, secondColon);
+                var path = filename.substring(secondColon + 1);
     
                 githubtree.getGitFile(username, repo, path, function (e, d) {
                     if(d!=editor.getValue())
