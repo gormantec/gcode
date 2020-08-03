@@ -514,13 +514,12 @@ function _refresh(params) {
     pageLeft=pageLeft+"</div>";
     var pageLeftBody=document.getElementById("pageLeftBody");
     var defaultParent=pageLeftBody.querySelector("div#defaultParent");
-    if(defaultParent)
-    {
-        defaultParent.parentNode.replaceChild(htmlToElement(pageLeft), defaultParent);
+    if(defaultParent){
+        console.log("remove defaultParent");
+        pageLeftBody.removeChild(defaultParent);
     }
-    else{
-        pageLeftBody.innerHTML = pageLeft;
-    }
+    pageLeftBody.insertBefore(htmlToElement(pageLeft),pageLeftBody.firstChild);
+
     
 
     if(params && params.all)
