@@ -26,15 +26,21 @@ function _save() {
     var filename = document.getElementById("filename").innerText;
     if (filename && filename.substring(0, 6) == "git://") {
         githubtree.saveFile(filename, editor.getValue(), function () {
-            var toDiv = document.getElementById("pageLeftBody");
-            var firstColon = filename.indexOf(":", 6);
-            var secondColon = filename.indexOf("/", firstColon + 1);
-            var username = filename.substring(6, firstColon);
-            var repo = filename.substring(firstColon + 1, secondColon);
-            githubtree.refreshGitTree(username, repo, toDiv, filename);
-            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-
+            if(e)
+            {
+                console.log(e);
+            }
+            else{
+                var toDiv = document.getElementById("pageLeftBody");
+                var firstColon = filename.indexOf(":", 6);
+                var secondColon = filename.indexOf("/", firstColon + 1);
+                var username = filename.substring(6, firstColon);
+                var repo = filename.substring(firstColon + 1, secondColon);
+                githubtree.refreshGitTree(username, repo, toDiv, filename);
+                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+    
+            }
         });
         var pageLeftBody = document.getElementById("pageLeftBody");
         var fileWidget = pageLeftBody.querySelector("div.fileWidget[data-name='" + filename + "']");
