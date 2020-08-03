@@ -509,7 +509,7 @@ function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div><";
+    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>";
     keys.sort();
     keys.reverse();
     while (i--) {
