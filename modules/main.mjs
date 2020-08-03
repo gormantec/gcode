@@ -183,7 +183,9 @@ function _openFile() {
             var cached = localStorage.getItem("gitfile-" + filename);
             console.log(cached);
             if (cached) {
+                console.log(cached);
                 if (atob(cached) != d) {
+                    console.log("use cached");
                     d = atob(cached);
                     _this.style.fontStyle = "italic";
                 }
