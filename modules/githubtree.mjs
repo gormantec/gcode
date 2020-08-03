@@ -22,19 +22,18 @@ export function saveFile(name,content,toDiv)
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     console.log(JSON.stringify(["master",fullpath,content]));
-    gitrepo.writeFile("master",fullpath,content,"commit",{},function(e,d){
-        if(e)
-        {
-            console.log("** SAVE ERROR **");
-            console.log(e);
-        }
-        else
-        {
-            console.log("** SAVED OK **");
-            addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
-            refreshGitTree(username,repo,toDiv,name);
-        }
+    gitrepo.getSha("master", path).then(function (sha) {
+        console.log("** GOT SHA **");
+        console.log(sha);
+        gitrepo.writeFile("master",fullpath,content,"commit").then(function(d){
+                console.log("** SAVED OK **");
+                console.log(d);
+                addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
+                refreshGitTree(username,repo,toDiv,name);
+            
+        }).catch( (e) => console.log(e) );
     });
+
 }
 export function deleteFile(name,callback)
 {
