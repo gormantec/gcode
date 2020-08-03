@@ -7,7 +7,7 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
-export function saveFile(name, content, toDiv) {
+export function saveFile(name, content, callback) {
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
     if (secondColon < 0) secondColon = 10000;
@@ -28,7 +28,7 @@ export function saveFile(name, content, toDiv) {
             console.log("** SAVED OK **");
             console.log(d);
             addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
-            refreshGitTree(username, repo, toDiv, name);
+            callback(d);
 
         }).catch((e) => console.log(e));
     //});
