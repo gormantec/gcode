@@ -23,7 +23,7 @@ export function saveFile(name, content, toDiv) {
     console.log(JSON.stringify(["master", username, repo, fullpath]));
     //gitrepo.getSha("master", fullpath).then(function (sha) {
         console.log("** GOT SHA **");
-        console.log(sha);
+        //console.log(sha);
         gitrepo.writeFile("master", fullpath, content, "commit").then(function (d) {
             console.log("** SAVED OK **");
             console.log(d);
