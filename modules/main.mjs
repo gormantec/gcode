@@ -512,6 +512,7 @@ function _refresh(params) {
     var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>"; 
     keys.sort();
     keys.reverse();
+    //asdasdasd
     while (i--) {
 
         if (keys[i].startsWith("file-") && keys[i] != "file-") {
