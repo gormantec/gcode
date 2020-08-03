@@ -21,8 +21,8 @@ export function saveFile(name,content,toDiv)
 
     var gh = new GitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
-    console.log(JSON.stringify(["master",fullpath,content]));
-    gitrepo.getSha("master", path).then(function (sha) {
+    console.log(JSON.stringify(["master",username, repo,fullpath]));
+    gitrepo.getSha("master", fullpath).then(function (sha) {
         console.log("** GOT SHA **");
         console.log(sha);
         gitrepo.writeFile("master",fullpath,content,"commit").then(function(d){
