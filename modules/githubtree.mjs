@@ -41,7 +41,7 @@ export function saveFile(name, content, callback) {
             console.log(d);
             addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
             callback(null,d);
-        }).catch((e) => {console.log(e);callback(e);});
+        });
     
 
 }
