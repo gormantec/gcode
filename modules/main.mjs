@@ -31,6 +31,10 @@ function _save() {
                 console.log(e);
             }
             else{
+
+                localStorage.removeItem("gitfile-" + filename);
+                fileWidget.style.fontStyle = "";
+                
                 var toDiv = document.getElementById("pageLeftBody");
                 var firstColon = filename.indexOf(":", 6);
                 var secondColon = filename.indexOf("/", firstColon + 1);
@@ -635,6 +639,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
                     }
                     else {
+                        localStorage.removeItem("gitfile-" + filename);
                         fileWidget.style.fontStyle = "";
                     }
                 });
