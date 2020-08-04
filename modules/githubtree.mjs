@@ -30,15 +30,17 @@ export function saveFile(name, content, callback) {
     let gitrepo = gh.getRepo(username, repo);
     console.log(JSON.stringify(["master", username, repo, fullpath]));
     gitrepo.getSha("master", fullpath).then(function (sha) {
-       console.log("** GOT SHA **");
+        console.log("** GOT SHA **");
         console.log(sha);
+    }).catch((e) => {console.log("** NO SHA **");});
+
         gitrepo.writeFile("master", fullpath, content, "commit", {} ).then(function (d) {
             console.log("** SAVED OK **");
             console.log(d);
             addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
             callback(null,d);
         }).catch((e) => {console.log(e);callback(e);});
-    }).catch((e) => {console.log(e);callback(e);});
+    
 
 }
 export function deleteFile(name, callback) {
