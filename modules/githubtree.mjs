@@ -29,10 +29,12 @@ export function saveFile(name, content, callback) {
     var gh = getGitHub({ token: getToken(username, repo) });
     let gitrepo = gh.getRepo(username, repo);
     console.log(JSON.stringify(["master", username, repo, fullpath]));
-    //gitrepo.getSha("master", fullpath).then(function (sha) {
-    //    console.log("** GOT SHA **");
-   //     console.log(sha);
-   // }).catch((e) => {console.log("** NO SHA **");});
+    gitrepo.getSha("master", fullpath).then(function (response) {
+        console.log("** GOT SHA **");
+        console.log(response);
+        console.log(sresponse.data);
+        console.log(sresponse.data.sha);
+    }).catch((e) => {console.log("** NO SHA **");});
 
         gitrepo.writeFile("master", fullpath, content, "commit", {encode:true} ).then(function (d) {
             console.log("** SAVED OK **");
