@@ -9,9 +9,8 @@ export function addRepoFile(repo, dirpath, fileinfo) {
 
 var _GitHub;
 
-function getGitHub(params)
-{
-    if(_GitHub) return _GitHub;
+function getGitHub(params) {
+    if (_GitHub) return _GitHub;
     else return new GitHub(params);
 }
 
@@ -32,19 +31,19 @@ export function saveFile(name, content, callback) {
     gitrepo.getSha("master", fullpath).then(function (response) {
         console.log("** GOT SHA **");
         console.log(response);
-        console.log("data:"+response.data);
-        if(response.data)console.log("data.sha:"+response.data.sha);
+        console.log("data:" + response.data);
+        if (response.data) console.log("data.sha:" + response.data.sha);
         else console.log("data.sha: error");
-    }).catch((e) => {console.log(e);console.log("** NO SHA **");});
+    }).catch((e) => { console.log(e); console.log("** NO SHA **"); });
 
-        gitrepo.writeFile("master", fullpath, content, "commit", {encode:true} ,function (e,d) {
-            if(e)console.log("error:"+e);
-            if(d)console.log("data:"+d);
-            console.log("** SAVED OK **");
-            addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
-            callback(null,d);
-        });
-    
+    gitrepo.writeFile("master", fullpath, content, "commit", { encode: true }, function (e, d) {
+        if (e) console.log("error:" + e);
+        if (d) console.log("data:" + d);
+        console.log("** SAVED OK **");
+        addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
+        callback(null, d);
+    });
+
 
 }
 export function deleteFile(name, callback) {
@@ -61,7 +60,7 @@ export function deleteFile(name, callback) {
     console.log(username);
     console.log(repo);
     console.log(fullpath);
-    gitrepo.deleteFile("master", fullpath).then((d) => callback(null,d) ).catch((e) => {console.log(e);callback(e);});;
+    gitrepo.deleteFile("master", fullpath).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
 }
 
 function getToken(repousername, reponame) {
@@ -181,7 +180,12 @@ export function pullGitRepository(username, repo, callbackrefresh) {
         var _path = path;
         if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
         gitrepo.getSha("master", path).then(function (sha) {
+            console.log("** GOT SHA **");
             console.log(sha);
+            console.log("data:" + sha.data);
+            if (response.data) console.log("data.sha:" + response.data.sha);
+            else console.log("data.sha: error");
+
             var directories = [];
             Array.from(sha.data).forEach(function (file) {
                 if (file.name.substring(0, 1) != "." && directories.length < 4) {
