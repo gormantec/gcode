@@ -47,6 +47,7 @@ export function saveFile(name, content, callback) {
     var octokit = getGitHub({ auth: getToken(username, repo) });
     octokit.repos.createOrUpdateFileContents(f).then((d)=>{
         console.log("** SAVED OK **");
+        console.log(d);
         addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.sha, type: "file" });
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
