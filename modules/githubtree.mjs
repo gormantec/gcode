@@ -77,7 +77,7 @@ export function deleteFile(name, callback) {
     if(sha)f.sha=sha;
 
     octokit.repos.deleteFile(f).then((d) =>{
-        repos[repo][dirpath] = repos[repo][dirpath].files.filter(function(el) { return obj.name != filename; }); 
+        repos[repo][dirpath] = repos[repo][dirpath].files.filter(function(obj) { return obj.name != filename; }); 
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
 }
