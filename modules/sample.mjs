@@ -6,13 +6,6 @@
 */
 
 import { PWA, Page, Div } from 'https://git.gormantec.com/gcode/modules/pwa.mjs';
-import { $ } from 'https://git.gormantec.com/gcode/modules/jquery-3.5.1.slim.min.mjs';
-import { Util } from 'https://git.gormantec.com/gcode/modules/bootstrap.bundle.4.5.0.min.mjs';
-
-import 'https://code.jquery.com/jquery-3.5.1.slim.min.js';
-window.$ = window.jQuery = jQuery;
-import 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js';
-import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js';
 
 
 var homePage=new Page({
