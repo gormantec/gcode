@@ -28,7 +28,7 @@ export function saveFile(name, content, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
-    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
     console.log(repoFileInfo);
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
@@ -60,7 +60,7 @@ export function deleteFile(name, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
     var octokit = getGitHub({ auth: getToken(username, repo) });
-    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
     console.log("----------repoFileInfo---------");
     console.log(repoFileInfo);
     console.log("----------repoFileInfo---------");
