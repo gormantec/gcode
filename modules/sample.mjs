@@ -1,10 +1,3 @@
-/*
-
-  filename:new-file-3662444.jsm
-  created: 2020-6-6T17:34:05
-
-*/
-
 import { PWA, Page, Div } from 'https://git.gormantec.com/gcode/modules/pwa.mjs';
 
 
