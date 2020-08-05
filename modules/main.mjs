@@ -183,11 +183,8 @@ function _openFile() {
         _setEditorMode();
         var _this = this;
         githubtree.getGitFile(username, repo, path, function (e, d) {
-            console.log(d);
             var cached = localStorage.getItem("gitfile-" + filename);
-            console.log(cached);
             if (cached) {
-                console.log(cached);
                 if (atob(cached) != d) {
                     console.log("use cached");
                     d = atob(cached);
@@ -430,7 +427,6 @@ function _toolbarButtonClicked() {
             data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
             localStorage.setItem("git-repositories", JSON.stringify(data));
         }
-        console.log(data);
         var toDiv = document.getElementById("pageLeftBody");
         Object.values(data).forEach(function (r, x) {
             var running_count = 0;
