@@ -74,7 +74,10 @@ function _delete() {
                 editor.setValue("");
                 selectedFileWidget = null;
                 Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
-                    if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;
+                    if (e.dataset.name == filename && e.dataset.nextname != null){
+                        selectedFileWidget = e.dataset.nextname;
+                        console.log("selectedFileWidget:"+selectedFileWidget);
+                    }
                 });
                 var toDiv = document.getElementById("pageLeftBody");
                 var firstColon = filename.indexOf(":", 6);
@@ -83,7 +86,9 @@ function _delete() {
                 var username = filename.substring(6, firstColon);
                 var repo = filename.substring(firstColon + 1, secondColon);
                 console.log("** Refresh Git Tree **");
-                githubtree.refreshGitTree(username, repo, toDiv, filename);
+                githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget);
+                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
             }
         });
     }
@@ -551,8 +556,8 @@ function _refresh(params) {
             Object.values(data).forEach(function (r, x) {
                 if (r.username && r.repo) {
                     githubtree.refreshGitTree(r.username, r.repo, pageLeftBody, selectedFileWidget);
-                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                    Array.from(pageLeftBody.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                    Array.from(pageLeftBody.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                 }
             });
         }
