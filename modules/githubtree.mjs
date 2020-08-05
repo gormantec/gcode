@@ -48,7 +48,7 @@ export function saveFile(name, content, callback) {
     octokit.repos.createOrUpdateFileContents(f).then((d)=>{
         console.log("** SAVED OK **");
         console.log(d.data.content.sha);
-        addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.data.content.sha, type: "file" });
+        if(!sha)addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.data.content.sha, type: "file" });
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
 }
