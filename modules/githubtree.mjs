@@ -183,7 +183,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
             console.log("** GOT SHA **");
             console.log(sha);
             console.log("data:" + sha.data);
-            if (response.data) console.log("data.sha:" + response.data.sha);
+            if (sha.data) console.log("data.sha:" + sha.data.sha);
             else console.log("data.sha: error");
 
             var directories = [];
