@@ -74,7 +74,10 @@ export function deleteFile(name, callback) {
     };
     if(sha)f.sha=sha;
 
-    octokit.repos.deleteFile(f).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
+    octokit.repos.deleteFile(f).then((d) =>{
+        repos[repo][dirpath] = repos[repo][dirpath].filter(function(el) { return obj.name != filename; }); 
+        callback(null, d);
+    }).catch((e) => { console.log(e); callback(e); });;
 }
 
 function getToken(repousername, reponame) {
