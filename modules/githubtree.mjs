@@ -32,8 +32,9 @@ export function saveFile(name, content, callback) {
     gitrepo.getSha("master", fullpath).then(function (response) {
         console.log("** GOT SHA **");
         console.log(response);
-        console.log("data:"+sresponse.data);
-        console.log(sresponse.data.sha);
+        console.log("data:"+response.data);
+        if(response.data)console.log("data.sha:"+response.data.sha);
+        else console.log("data.sha: error");
     }).catch((e) => {console.log(e);console.log("** NO SHA **");});
 
         gitrepo.writeFile("master", fullpath, content, "commit", {encode:true} ,function (d) {
