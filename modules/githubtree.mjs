@@ -29,21 +29,22 @@ export function saveFile(name, content, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
     var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    console.log(repoFileInfo);
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
-
-
-    var octokit = getGitHub({ auth: getToken(username, repo) });
-
-    octokit.repos.createOrUpdateFileContents({
+    console.log(sha);
+    var f={
         owner:username,
         repo:repo,
         path:fullpath,
         message:"commit",
         content:content,
-        sha:sha
-    }).then((d)=>{
-        if (d) console.log("data:" + d);
+    };
+    if(sha)f.sha=sha;
+
+    var octokit = getGitHub({ auth: getToken(username, repo) });
+
+    octokit.repos.createOrUpdateFileContents(f).then((d)=>{
         console.log("** SAVED OK **");
         addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.sha, type: "file" });
         callback(null, d);
@@ -59,20 +60,22 @@ export function deleteFile(name, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
     var octokit = getGitHub({ auth: getToken(username, repo) });
-
-    console.log(repos[repo][dirpath].files);
     var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    console.log("----------repoFileInfo---------");
     console.log(repoFileInfo);
+    console.log("----------repoFileInfo---------");
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
-
-    octokit.repos.deleteFile({
+    console.log(sha);
+    var f={
         owner:username,
         repo:repo,
         path:fullpath,
         message:"commit",
-        sha:sha,
-      }).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
+    };
+    if(sha)f.sha=sha;
+
+    octokit.repos.deleteFile(f).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
 }
 
 function getToken(repousername, reponame) {
@@ -201,10 +204,6 @@ export function pullGitRepository(username, repo, callbackrefresh) {
             path:path
           }).then((sha)=>{
             console.log("** GOT SHA **");
-            console.log(sha);
-            console.log("data:" + sha.data);
-
-
             var directories = [];
             Array.from(sha.data).forEach(function (file) {
                 if (file.name.substring(0, 1) != "." && directories.length < 4) {
