@@ -163,7 +163,7 @@ export function getGitFile(username, repo, path, callback) {
         owner:username,
         repo:repo,
         path:path
-      }).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
+      }).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
 }
 
 export function pullGitRepository(username, repo, callbackrefresh) {
