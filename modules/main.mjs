@@ -25,16 +25,15 @@ function htmlToElement(html) {
 function _save() {
     var filename = document.getElementById("filename").innerText;
     if (filename && filename.substring(0, 6) == "git://") {
-        githubtree.saveFile(filename, editor.getValue(), function (e,d) {
-            if(e)
-            {
+        githubtree.saveFile(filename, editor.getValue(), function (e, d) {
+            if (e) {
                 console.log(e);
             }
-            else{
+            else {
 
                 localStorage.removeItem("gitfile-" + filename);
                 fileWidget.style.fontStyle = "";
-                
+
                 var toDiv = document.getElementById("pageLeftBody");
                 var firstColon = filename.indexOf(":", 6);
                 var secondColon = filename.indexOf("/", firstColon + 1);
@@ -43,7 +42,7 @@ function _save() {
                 githubtree.refreshGitTree(username, repo, toDiv, filename);
                 Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
                 Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-    
+
             }
         });
         var pageLeftBody = document.getElementById("pageLeftBody");
@@ -102,55 +101,49 @@ function _delete() {
 
 function _new() {
 
-    var _samplecode = "" +
-        "import { PWA } from 'https://git.gormantec.com/gcode/modules/pwa.mjs';\n\n" +
-        "console.log('new javascript file!');\n\n" +
-        "var aPWA=new PWA({\n" +
-        "        title:\"Hello World\",\n" +
-        "        footer:\"https://www.gormantec.com\",\n" +
-        "        primaryColor:\"#005040\"\n" +
-        "    });\n\n" +
-        "aPWA.show();\n\n" +
-        "aPWA.floatingActionButton.onclick(function(){\n" +
-        "  console.log(\"button clicked\");\n" +
-        "  alert(\"Hello World!\");\n" +
-        "});\n";
+    fetch("https://git.gormantec.com/gcode/modules/sample.mjs")
+        .then(
+            response => response.text()
+        ).then(
+            text => {
+                var _samplecode = text;
 
+                var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
+                if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
+                    aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
+                }
+                if (aFilename != null) {
+                    document.getElementById("filename").innerText = aFilename;
+                    selectedFileWidget = aFilename;
+                    editor.setValue("/*\n\n  " +
+                        "filename:" + aFilename + "\n  " +
+                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
+                        "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  " +
+                        "splashColor: #005040" + "\n  " +
+                        "splashDuration: 2000" +
+                        "\n\n*/\n\n" + _samplecode);
+                    _setEditorMode();
+                    if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
+                        function () {
+                            var filename = selectedFileWidget;
+                            var toDiv = document.getElementById("pageLeftBody");
+                            var firstColon = filename.indexOf(":", 6);
+                            var secondColon = filename.indexOf("/", firstColon + 1);
+                            var username = filename.substring(6, firstColon);
+                            var repo = filename.substring(firstColon + 1, secondColon);
+                            githubtree.refreshGitTree(username, repo, toDiv, filename);
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
 
-    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
-    if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
-        aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
-    }
-    if (aFilename != null) {
-        document.getElementById("filename").innerText = aFilename;
-        selectedFileWidget = aFilename;
-        editor.setValue("/*\n\n  " +
-            "filename:" + aFilename + "\n  " +
-            "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
-            "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  " +
-            "splashColor: #005040" + "\n  " +
-            "splashDuration: 2000" +
-            "\n\n*/\n\n" + _samplecode);
-        _setEditorMode();
-        if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
-            function () {
-                var filename=selectedFileWidget;
-                var toDiv = document.getElementById("pageLeftBody");
-                var firstColon = filename.indexOf(":", 6);
-                var secondColon = filename.indexOf("/", firstColon + 1);
-                var username = filename.substring(6, firstColon);
-                var repo = filename.substring(firstColon + 1, secondColon);
-                githubtree.refreshGitTree(username, repo, toDiv, filename);
-                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-
+                        }
+                    );
+                    else {
+                        _save();
+                        _refresh();
+                    }
+                }
             }
         );
-        else {
-            _save();
-            _refresh();
-        }
-    }
 }
 
 function _openFile() {
@@ -519,11 +512,11 @@ function _open(params) {
 }
 
 
-function _refresh(params) {  
+function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>"; 
+    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>";
     keys.sort();
     keys.reverse();
     //asdasdasd
@@ -566,8 +559,8 @@ function _refresh(params) {
             });
         }
     }
-    Array.from(defaultParent.querySelectorAll("div.dirWidget")).forEach(function (e) {e.onclick = _openDir;});
-    Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) {e.onclick = _openFile;});
+    Array.from(defaultParent.querySelectorAll("div.dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+    Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) { e.onclick = _openFile; });
 }
 
 
@@ -644,7 +637,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
-            else{
+            else {
                 localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
             }
 
