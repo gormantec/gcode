@@ -38,12 +38,11 @@ export function saveFile(name, content, callback) {
         repo:repo,
         path:fullpath,
         message:"commit",
-        content:content,
+        content:btoa(content),
     };
     if(sha)f.sha=sha;
 
     var octokit = getGitHub({ auth: getToken(username, repo) });
-
     octokit.repos.createOrUpdateFileContents(f).then((d)=>{
         console.log("** SAVED OK **");
         addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.sha, type: "file" });

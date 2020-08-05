@@ -82,6 +82,7 @@ function _delete() {
                 if (secondColon < 0) secondColon = 10000;
                 var username = filename.substring(6, firstColon);
                 var repo = filename.substring(firstColon + 1, secondColon);
+                console.log("** Refresh Git Tree **");
                 githubtree.refreshGitTree(username, repo, toDiv, filename);
             }
         });
