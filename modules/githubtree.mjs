@@ -1,4 +1,7 @@
-import "https://unpkg.com/github-api/dist/GitHub.bundle.min.js"
+import * as GitHub from 'https://cdn.skypack.dev/@octokit/rest@^17.11.0';
+console.log('@octokit/rest loaded:', GitHub);
+
+
 
 var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
@@ -15,6 +18,7 @@ function getGitHub(params) {
 }
 
 export function saveFile(name, content, callback) {
+
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
     if (secondColon < 0) secondColon = 10000;
@@ -24,27 +28,26 @@ export function saveFile(name, content, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
+    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    var sha=null;
+    if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
 
-    var gh = getGitHub({ token: getToken(username, repo) });
-    let gitrepo = gh.getRepo(username, repo);
-    console.log(JSON.stringify(["master", username, repo, fullpath]));
-    gitrepo.getSha("master", fullpath).then(function (response) {
-        console.log("** GOT SHA **");
-        console.log(response);
-        console.log("data:" + response.data);
-        if (response.data) console.log("data.sha:" + response.data.sha);
-        else console.log("data.sha: error");
-    }).catch((e) => { console.log(e); console.log("** NO SHA **"); });
 
-    gitrepo.writeFile("master", fullpath, content, "commit", { encode: true }, function (e, d) {
-        if (e) console.log("error:" + e);
+    var octokit = getGitHub({ auth: getToken(username, repo) });
+
+    octokit.repos.createOrUpdateFileContents({
+        owner:username,
+        repo:repo,
+        path:fullpath,
+        message:"commit",
+        content:content,
+        sha:sha
+    }).then((d)=>{
         if (d) console.log("data:" + d);
         console.log("** SAVED OK **");
-        addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
+        addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.sha, type: "file" });
         callback(null, d);
-    });
-
-
+    }).catch((e) => { console.log(e); callback(e); });;
 }
 export function deleteFile(name, callback) {
     var firstColon = name.indexOf(":", 6);
@@ -55,12 +58,19 @@ export function deleteFile(name, callback) {
     var fullpath = name.substring(secondColon + 1);
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
-    var gh = getGitHub({ token: getToken(username, repo) });
-    let gitrepo = gh.getRepo(username, repo);
-    console.log(username);
-    console.log(repo);
-    console.log(fullpath);
-    gitrepo.deleteFile("master", fullpath).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
+    var octokit = getGitHub({ auth: getToken(username, repo) });
+
+    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    var sha=null;
+    if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
+
+    octokit.repos.deleteFile({
+        owner:username,
+        repo:repo,
+        path:fullpath,
+        message:"commit",
+        sha:sha,
+      }).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
 }
 
 function getToken(repousername, reponame) {
@@ -146,15 +156,18 @@ export function htmlToElement(html) {
 }
 
 export function getGitFile(username, repo, path, callback) {
-    var gh = getGitHub({ token: getToken(username, repo) });
-    let gitrepo = gh.getRepo(username, repo);
-    gitrepo.getContents("master", path, true, callback);
+    var octokit = getGitHub({ auth: getToken(username, repo) });
+    octokit.repos.getContent({
+        owner:username,
+        repo:repo,
+        path:path
+      }).then((d) => callback(null, d)).catch((e) => { console.log(e); callback(e); });;
 }
 
 export function pullGitRepository(username, repo, callbackrefresh) {
 
-    var gh = getGitHub({ token: getToken(username, repo) });
-    let gitrepo = gh.getRepo(username, repo);
+    var octokit = getGitHub({ auth: getToken(username, repo) });
+
 
     var loopDirectories = function (directories, depth, callback) {
 
@@ -179,18 +192,22 @@ export function pullGitRepository(username, repo, callbackrefresh) {
     var recurseGit = function (path, depth, callback) {
         var _path = path;
         if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
-        gitrepo.getSha("master", path).then(function (sha) {
+
+        octokit.repos.getContent({
+            owner:username,
+            repo:repo,
+            path:path
+          }).then((sha)=>{
             console.log("** GOT SHA **");
             console.log(sha);
             console.log("data:" + sha.data);
-            if (sha.data) console.log("data.sha:" + sha.data.sha);
-            else console.log("data.sha: error");
+
 
             var directories = [];
             Array.from(sha.data).forEach(function (file) {
                 if (file.name.substring(0, 1) != "." && directories.length < 4) {
 
-                    addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, type: file.type });
+                    addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha:file.sha, type: file.type });
                     if (callbackrefresh) callbackrefresh("running", repo, _path);
 
                     if (file.type == "dir" && file.name.substring(0, 1) != ".") {
@@ -202,7 +219,9 @@ export function pullGitRepository(username, repo, callbackrefresh) {
             });
             if (directories.length > 0) loopDirectories(directories, depth, callback);
             else callback();
-        });
+          }).catch((e) => { console.log(e); callback(); });;;
+
+
     }
 
     recurseGit("", 0, function () { console.log("done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
