@@ -14,7 +14,7 @@ var _GitHub;
 
 function getGitHub(params) {
     if (_GitHub) return _GitHub;
-    else return new GitHub(params);
+    else return new GitHub.Octokit(params);
 }
 
 export function saveFile(name, content, callback) {
