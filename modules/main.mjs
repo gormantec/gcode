@@ -183,7 +183,7 @@ function _openFile() {
         _setEditorMode();
         var _this = this;
         githubtree.getGitFile(username, repo, path, function (e, d) {
-            /*console.log(d);*/
+            console.log(d);
             var cached = localStorage.getItem("gitfile-" + filename);
             console.log(cached);
             if (cached) {
