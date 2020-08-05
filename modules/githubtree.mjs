@@ -36,7 +36,7 @@ export function saveFile(name, content, callback) {
         console.log(sresponse.data.sha);
     }).catch((e) => {console.log("** NO SHA **");});
 
-        gitrepo.writeFile("master", fullpath, content, "commit", {encode:true} ).then(function (d) {
+        gitrepo.writeFile("master", fullpath, content, "commit", {encode:true} ,function (d) {
             console.log("** SAVED OK **");
             console.log(d);
             addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, type: "file" });
