@@ -60,7 +60,9 @@ export function deleteFile(name, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
     var octokit = getGitHub({ auth: getToken(username, repo) });
 
+    console.log(repos[repo][dirpath].files);
     var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.filename === filename});
+    console.log(repoFileInfo);
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
 
