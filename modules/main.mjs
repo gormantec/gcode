@@ -65,18 +65,15 @@ function _delete() {
     if (filename.substring(0, 6) == "git://") {
         githubtree.deleteFile(filename, function (e, d) {
             if (e) {
-                console.log("**DELETE ERROR**");
                 console.log(e);
             }
             else {
-                console.log(d);
                 document.getElementById("filename").innerText = "";
                 editor.setValue("");
                 selectedFileWidget = null;
                 Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
                     if (e.dataset.name == filename && e.dataset.nextname != null){
                         selectedFileWidget = e.dataset.nextname;
-                        console.log("selectedFileWidget:"+selectedFileWidget);
                     }
                 });
                 var toDiv = document.getElementById("pageLeftBody");
@@ -85,7 +82,6 @@ function _delete() {
                 if (secondColon < 0) secondColon = 10000;
                 var username = filename.substring(6, firstColon);
                 var repo = filename.substring(firstColon + 1, secondColon);
-                console.log("** Refresh Git Tree **");
                 githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget);
                 Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
                 Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
@@ -154,7 +150,6 @@ function _new() {
 }
 
 function _openFile() {
-    console.log("open ${this.dataset.name}");
     if (this.dataset.name.substring(0, 6) != "git://") {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
@@ -179,7 +174,6 @@ function _openFile() {
 
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
-        console.log(username + " " + repo + " " + path);
         var pageLeftBody = document.getElementById("pageLeftBody");
         var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
         if (selectedItem) selectedItem.className = "fileWidget";
@@ -192,9 +186,15 @@ function _openFile() {
             var cached = localStorage.getItem("gitfile-" + filename);
             if (cached) {
                 if (atob(cached) != d) {
-                    console.log("use cached");
                     d = atob(cached);
                     _this.style.fontStyle = "italic";
+                    _this.style.color = "#cce6ff";
+                }
+                else{
+
+                    localStorage.removeItem("gitfile-" + filename);
+                    _this.style.fontStyle = "";
+                    _this.style.color = "";
                 }
             }
             editor.setValue(d);
@@ -376,7 +376,6 @@ function _toolbarButtonClicked() {
                     win.document.body.style.backgroundImage = "url(" + splash + ")";
                     win.document.body.style.backgroundPosition = "center";
                     win.document.body.style.backgroundRepeat = "no-repeat";
-                    console.log("backgroundPosition:" + "center");
                 }
                 var _spinner = win.document.createElement("style");
                 _spinner.textContent = ".loader{color:var(--primaryColorText);font-size:50px;text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
@@ -496,7 +495,6 @@ function _open(params) {
     _refresh();
 
     if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft.display=none");
         document.getElementById("pageLeft").style.display = "none";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
@@ -505,7 +503,6 @@ function _open(params) {
 
     }
     else {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!! _open() => pageLeft.display=''");
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
@@ -540,7 +537,6 @@ function _refresh(params) {
     var pageLeftBody = document.getElementById("pageLeftBody");
     var defaultParent = pageLeftBody.querySelector("div#defaultParent");
     if (defaultParent) {
-        console.log("remove defaultParent");
         pageLeftBody.removeChild(defaultParent);
     }
     pageLeftBody.insertBefore(htmlToElement(pageLeft), pageLeftBody.firstChild);
@@ -632,11 +628,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 githubtree.getGitFile(username, repo, path, function (e, d) {
                     if (d != editor.getValue()) {
                         fileWidget.style.fontStyle = "italic";
+                        fileWidget.style.color = "#cce6ff";
                         localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
                     }
                     else {
                         localStorage.removeItem("gitfile-" + filename);
                         fileWidget.style.fontStyle = "";
+                        fileWidget.style.color = "";
                     }
                 });
             }

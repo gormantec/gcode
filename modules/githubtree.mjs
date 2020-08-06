@@ -1,6 +1,4 @@
 import * as GitHub from 'https://cdn.skypack.dev/@octokit/rest@^17.11.0';
-console.log('@octokit/rest loaded:', GitHub);
-
 
 
 var repos = [];
@@ -29,12 +27,9 @@ export function saveFile(name, content, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
     var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
-    console.log("----------repoFileInfo---------");
-    console.log(repoFileInfo);
-    console.log("----------repoFileInfo---------");
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
-    console.log(sha);
+
     var f={
         owner:username,
         repo:repo,
@@ -46,8 +41,6 @@ export function saveFile(name, content, callback) {
 
     var octokit = getGitHub({ auth: getToken(username, repo) });
     octokit.repos.createOrUpdateFileContents(f).then((d)=>{
-        console.log("** SAVED OK **");
-        console.log(d.data.content.sha);
         if(!sha)addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.data.content.sha, type: "file" });
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
@@ -63,12 +56,8 @@ export function deleteFile(name, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
     var octokit = getGitHub({ auth: getToken(username, repo) });
     var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
-    console.log("----------repoFileInfo---------");
-    console.log(repoFileInfo);
-    console.log("----------repoFileInfo---------");
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
-    console.log(sha);
     var f={
         owner:username,
         repo:repo,
@@ -118,7 +107,7 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
             var state = repos[reponame][keys[i]].state;
             var display = "";
             var xxx = "";
-            if (state == "closed") { display = " style='display:none' "; xxx = "*"; console.log(keys[i] + ": none"); }
+            if (state == "closed") { display = " style='display:none' "; xxx = "*"; }
             var j = files.length;
             files.sort(function (a, b) {
                 if (a.type == "dir" && b.type == "file") return -1;
@@ -208,7 +197,6 @@ export function pullGitRepository(username, repo, callbackrefresh) {
             repo:repo,
             path:path
           }).then((sha)=>{
-            console.log("** GOT SHA **");
             var directories = [];
             Array.from(sha.data).forEach(function (file) {
                 if (file.name.substring(0, 1) != "." && directories.length < 4) {
@@ -230,7 +218,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
 
     }
 
-    recurseGit("", 0, function () { console.log("done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
+    recurseGit("", 0, function () { console.log("git pull - done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
 }
 
 
