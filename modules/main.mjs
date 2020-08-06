@@ -645,7 +645,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    /*
+    
         (function () {
             var old = console.log;
             var olde = console.error;
@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })();
 
-        */
+        
 
 
     const BORDER_SIZE = 4;
