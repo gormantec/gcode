@@ -673,6 +673,7 @@ function _refresh(params) {
 
 
 window.onresize = function () {
+    console.log(onresize);
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
     if (w < 576) {
         if (document.getElementById("pageLeftToolbar").style.display != "none") {
