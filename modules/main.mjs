@@ -551,7 +551,7 @@ function _toggleSideBar() {
         if (w < 576) {
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeft").style.right = "0px";
-            document.getElementById("pageLeft").style.width =  "unset";
+            document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
@@ -562,7 +562,7 @@ function _toggleSideBar() {
 
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth+"px";
+            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -594,7 +594,7 @@ function _open(params) {
         if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
 
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth+"px";
+            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageMiddle").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
@@ -606,7 +606,7 @@ function _open(params) {
         else {
 
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth+"px";
+            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -670,7 +670,34 @@ function _refresh(params) {
 }
 
 
+window.onresize = function () {
+    if (w < 576) {
+        if (document.getElementById("pageLeftToolbar").style.display != "none") {
+            document.getElementById("pageLeft").style.display = "";
+            document.getElementById("pageLeft").style.right = "0px";
+            document.getElementById("pageLeft").style.width = "unset";
 
+        }
+        else {
+            document.getElementById("pageLeft").style.display = "none";
+            document.getElementById("pageLeft").style.right = "0px";
+            document.getElementById("pageLeft").style.width = "unset";
+        }
+    }
+    else {
+        if (document.getElementById("pageLeftToolbar").style.display != "none") {
+            document.getElementById("pageLeft").style.display = "";
+            document.getElementById("pageLeft").style.right = "unset";
+            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+
+        }
+        else {
+            document.getElementById("pageLeft").style.display = "none";
+            document.getElementById("pageLeft").style.right = "unset";
+            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+        }
+    }
+};
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -679,14 +706,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
-    if (w < 576) {
-        document.getElementById("pageLeftToolbar").style.width = "unset";
-        document.getElementById("pageLeftToolbar").style.right = 0;
-    }
-    else {
-        document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
-    }
 
+    document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
 
     _open({ visible: true });
 
