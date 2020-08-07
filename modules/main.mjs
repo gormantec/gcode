@@ -341,12 +341,13 @@ function getCode(guid, callback) {
     var h = window.outerHeight || document.documentElement.clientHeight || 0;
     var x = (window.screenX || window.screenLeft || 0);
     var y = (window.screenY || window.screenTop || 0);
-    var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,user:login,public_repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top="+(y-335+h/2)+",left="+(x-188+w/2));
+    var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,user:login,public_repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=600,top="+(y-300+h/2)+",left="+(x-188+w/2));
         
     var count = 0;
     var loop = setInterval(function () {
         count++;
-        const queryString = win.location.search;
+        var queryString="";
+        try{queryString = win.location.search;}catch(e){}
         const urlParams = new URLSearchParams(queryString);
         const code = urlParams.get('code')
         if (code) {
