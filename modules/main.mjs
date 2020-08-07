@@ -555,9 +555,8 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "none";
             document.getElementById("pageLeftToolbar").style.display = "";
-            document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_left";
         }
         else {
