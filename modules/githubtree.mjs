@@ -72,7 +72,7 @@ export function deleteFile(name, callback) {
     }).catch((e) => { console.log(e); callback(e); });;
 }
 
-function getToken(repousername, reponame) {
+export function getToken(repousername, reponame) {
     var token = localStorage.getItem("git-token");
     return token;
 }
