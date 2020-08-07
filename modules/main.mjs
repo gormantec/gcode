@@ -455,9 +455,9 @@ function _toolbarButtonClicked() {
                     console.log("********************");
                     win.close();
                     githubtree.setToken(json.data.access_token);
-                    githubtree.getAuthenticated().then((data)=>{
-                        console.log("data:"+data);
-                        var gitRepoName = prompt("Git repo name to add",data.login+"/<reponame>");
+                    githubtree.getAuthenticated().then((resp)=>{
+                        console.log("data:"+resp.data);
+                        var gitRepoName = prompt("Git repo name to add",resp.data.login+"/<reponame>");
                         if(gitRepoName)
                         {
                             var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
