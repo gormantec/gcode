@@ -562,7 +562,7 @@ function _toggleSideBar() {
 
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftToolbarWidth+"px";
+            document.getElementById("pageLeft").style.width = leftPageWidth+"px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -594,7 +594,7 @@ function _open(params) {
         if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
 
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftToolbarWidth+"px";
+            document.getElementById("pageLeft").style.width = leftPageWidth+"px";
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageMiddle").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
@@ -606,7 +606,7 @@ function _open(params) {
         else {
 
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftToolbarWidth+"px";
+            document.getElementById("pageLeft").style.width = leftPageWidth+"px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
