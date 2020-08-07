@@ -4,7 +4,7 @@ setTimeout(() => {
     import('https://cdn.skypack.dev/@octokit/rest@^17.11.0').then((module) => {
         Octokit=module.Octokit;
       });
-}, 2000);
+}, 10);
 
 var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
