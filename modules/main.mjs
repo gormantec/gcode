@@ -341,13 +341,13 @@ function getCode(guid, callback) {
     var h = window.outerHeight || document.documentElement.clientHeight || 0;
     var x = (window.screenX || window.screenLeft || 0);
     var y = (window.screenY || window.screenTop || 0);
-    var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,user:login,public_repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=600,top="+(y-300+h/2)+",left="+(x-188+w/2));
-        
+    var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,user:login,public_repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=600,top=" + (y - 300 + h / 2) + ",left=" + (x - 188 + w / 2));
+
     var count = 0;
     var loop = setInterval(function () {
         count++;
-        var queryString="";
-        try{queryString = win.location.search;}catch(e){}
+        var queryString = "";
+        try { queryString = win.location.search; } catch (e) { }
         const urlParams = new URLSearchParams(queryString);
         const code = urlParams.get('code')
         if (code) {
@@ -451,8 +451,8 @@ function _toolbarButtonClicked() {
     }
     else if (this.dataset.action == "addGitRepo") {
         var guid = uuidv4();
-        
-        var doSomething=function(){
+
+        var doSomething = function () {
             githubtree.getAuthenticated().then((resp) => {
                 console.log("data:" + resp.data);
                 console.log("login:" + resp.data.login);
@@ -461,7 +461,7 @@ function _toolbarButtonClicked() {
                     if (gitRepoName) {
                         var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
                         var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
-                        if(repo!="<reponame>"){
+                        if (repo != "<reponame>") {
                             var gitRepositories = localStorage.getItem("git-repositories");
                             var data = {};
                             if (!gitRepositories) {
@@ -497,14 +497,13 @@ function _toolbarButtonClicked() {
                         }
                     }
                 }
-            }).catch(()=>githubtree.setToken(null));
+            }).catch(() => githubtree.setToken(null));
         };
-        
-        if(githubtree.getToken())
-        {
+
+        if (githubtree.getToken()) {
             doSomething();
         }
-        else{
+        else {
             getCode(guid, (e, code) => {
                 if (!e) {
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
@@ -561,20 +560,33 @@ function _open(params) {
 
     _refresh();
 
-    if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
-        document.getElementById("pageLeft").style.display = "none";
-        document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
-        document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+    var w = window.outerWidth || document.documentElement.clientWidth || 0;
 
+    if (w < 576) {
 
+            document.getElementById("pageLeft").style.display = "";
+            document.getElementById("pageMiddle").style.display= "none";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 22) + "px";
+            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth  + 2) + "px";
+    
     }
     else {
-        document.getElementById("pageLeft").style.display = "";
-        document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
-        document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+        if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
+            document.getElementById("pageLeft").style.display = "none";
+            document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+
+
+        }
+        else {
+            document.getElementById("pageLeft").style.display = "";
+            document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
+            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+        }
     }
+
 
 }
 
