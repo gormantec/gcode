@@ -454,10 +454,12 @@ function _toolbarButtonClicked() {
                 ).then((json) => { 
                     console.log("********************");
                     console.log(json);
-
+                    win.close();
                     var gitRepoName = prompt("Git username/repo");
                     var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
                     var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
+
+                    githubtree.setToken(username,repo,json.data.access_token);
             
                     var gitRepositories = localStorage.getItem("git-repositories");
                     var data = {};

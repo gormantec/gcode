@@ -81,6 +81,13 @@ function getToken(repousername, reponame) {
     return token;
 }
 
+function setToken(repousername, reponame, token) {
+
+    localStorage.setItem("git-token://" + repousername + ":" + reponame, token);
+
+    return token;
+}
+
 export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget) {
 
     var repoRoot = toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
