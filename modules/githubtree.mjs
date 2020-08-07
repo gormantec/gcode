@@ -73,17 +73,23 @@ export function deleteFile(name, callback) {
 }
 
 function getToken(repousername, reponame) {
-    var token = localStorage.getItem("git-token://" + repousername + ":" + reponame);
-    if (!token) {
+    var token = localStorage.getItem("git-token");
+    if (!token && repousername && reponame) {
         var token = prompt("Token for " + repousername + "/" + reponame);
-        localStorage.setItem("git-token://" + repousername + ":" + reponame, token);
+        localStorage.setItem("git-token", token);
     }
     return token;
 }
 
-export function setToken(repousername, reponame, token) {
+export function getAuthenticated()
+{
+    var octokit = getGitHub({ auth: getToken() });
+    return octokit.users.getAuthenticated();
+}
 
-    localStorage.setItem("git-token://" + repousername + ":" + reponame, token);
+export function setToken(token) {
+
+    localStorage.setItem("git-token",token);
 
     return token;
 }
