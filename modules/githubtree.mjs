@@ -39,7 +39,7 @@ export function saveFile(name, content, callback) {
     };
     if(sha)f.sha=sha;
 
-    var octokit = getGitHub({ auth: getToken(username, repo) });
+    var octokit = getGitHub({ auth: getToken() });
     octokit.repos.createOrUpdateFileContents(f).then((d)=>{
         if(!sha)addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.data.content.sha, type: "file" });
         callback(null, d);
@@ -54,7 +54,7 @@ export function deleteFile(name, callback) {
     var fullpath = name.substring(secondColon + 1);
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
-    var octokit = getGitHub({ auth: getToken(username, repo) });
+    var octokit = getGitHub({ auth: getToken() });
     var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
     var sha=null;
     if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
@@ -72,7 +72,7 @@ export function deleteFile(name, callback) {
     }).catch((e) => { console.log(e); callback(e); });;
 }
 
-export function getToken(repousername, reponame) {
+export function getToken() {
     var token = localStorage.getItem("git-token");
     return token;
 }
@@ -171,7 +171,7 @@ export function htmlToElement(html) {
 }
 
 export function getGitFile(username, repo, path, callback) {
-    var octokit = getGitHub({ auth: getToken(username, repo) });
+    var octokit = getGitHub({ auth: getToken() });
     octokit.repos.getContent({
         owner:username,
         repo:repo,
@@ -181,7 +181,7 @@ export function getGitFile(username, repo, path, callback) {
 
 export function pullGitRepository(username, repo, callbackrefresh) {
 
-    var octokit = getGitHub({ auth: getToken(username, repo) });
+    var octokit = getGitHub({ auth: getToken() });
 
 
     var loopDirectories = function (directories, depth, callback) {
