@@ -680,26 +680,21 @@ window.addEventListener('resize', function(event){
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
+            document.getElementById("pageMiddle").style.display = "none";
 
         }
         else {
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
+            document.getElementById("pageMiddle").style.display = "";
         }
     }
     else {
-        if (document.getElementById("pageLeftToolbar").style.display != "none") {
-            document.getElementById("pageLeft").style.display = "";
-            document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
-
-        }
-        else {
-            document.getElementById("pageLeft").style.display = "none";
-            document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
-        }
+        document.getElementById("pageLeft").style.display = "";
+        document.getElementById("pageLeft").style.right = "unset";
+        document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+        document.getElementById("pageMiddle").style.display = "";
     }
 });
 
