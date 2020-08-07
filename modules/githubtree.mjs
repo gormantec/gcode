@@ -81,7 +81,7 @@ function getToken(repousername, reponame) {
     return token;
 }
 
-function setToken(repousername, reponame, token) {
+export function setToken(repousername, reponame, token) {
 
     localStorage.setItem("git-token://" + repousername + ":" + reponame, token);
 
