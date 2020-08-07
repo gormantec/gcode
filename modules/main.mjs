@@ -457,6 +457,7 @@ function _toolbarButtonClicked() {
                     win.close();
                     githubtree.setToken(json.data.access_token);
                     githubtree.getAuthenticated().then((data)=>{
+                        console.log(data);
                         var gitRepoName = prompt("Git repo name to add",data.login+"/<reponame>");
                         if(gitRepoName)
                         {
