@@ -22,15 +22,21 @@ function htmlToElement(html) {
 
 // root functions
 
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 function _save() {
     var filename = document.getElementById("filename").innerText;
     if (filename && filename.substring(0, 6) == "git://") {
-        githubtree.saveFile(filename, editor.getValue(), function (e,d) {
-            if(e)
-            {
+        githubtree.saveFile(filename, editor.getValue(), function (e, d) {
+            if (e) {
                 console.log(e);
             }
-            else{
+            else {
 
                 localStorage.removeItem("gitfile-" + filename);
                 fileWidget.style.fontStyle = "";
@@ -43,7 +49,7 @@ function _save() {
                 githubtree.refreshGitTree(username, repo, toDiv, filename);
                 Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
                 Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-    
+
             }
         });
         var pageLeftBody = document.getElementById("pageLeftBody");
@@ -72,7 +78,7 @@ function _delete() {
                 editor.setValue("");
                 selectedFileWidget = null;
                 Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
-                    if (e.dataset.name == filename && e.dataset.nextname != null){
+                    if (e.dataset.name == filename && e.dataset.nextname != null) {
                         selectedFileWidget = e.dataset.nextname;
                     }
                 });
@@ -105,48 +111,48 @@ function _delete() {
 function _new() {
 
     fetch("https://git.gormantec.com/gcode/modules/sample.mjs")
-    .then(
-        response => response.text()
-    ).then(
-        text => {
-            var _samplecode = text;
+        .then(
+            response => response.text()
+        ).then(
+            text => {
+                var _samplecode = text;
 
-        var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
-        if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
-            aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
-        }
-        if (aFilename != null) {
-            document.getElementById("filename").innerText = aFilename;
-            selectedFileWidget = aFilename;
-            editor.setValue("/*\n\n  " +
-                "filename:" + aFilename + "\n  " +
-                "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
-                "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  " +
-                "splashColor: #005040" + "\n  " +
-                "splashDuration: 2000" +
-                "\n\n*/\n\n" + _samplecode);
-            _setEditorMode();
-            if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
-                function () {
-                    var filename=selectedFileWidget;
-                    var toDiv = document.getElementById("pageLeftBody");
-                    var firstColon = filename.indexOf(":", 6);
-                    var secondColon = filename.indexOf("/", firstColon + 1);
-                    var username = filename.substring(6, firstColon);
-                    var repo = filename.substring(firstColon + 1, secondColon);
-                    githubtree.refreshGitTree(username, repo, toDiv, filename);
-                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-    
+                var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
+                if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
+                    aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
                 }
-            );
-            else {
-                _save();
-                _refresh();
+                if (aFilename != null) {
+                    document.getElementById("filename").innerText = aFilename;
+                    selectedFileWidget = aFilename;
+                    editor.setValue("/*\n\n  " +
+                        "filename:" + aFilename + "\n  " +
+                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
+                        "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  " +
+                        "splashColor: #005040" + "\n  " +
+                        "splashDuration: 2000" +
+                        "\n\n*/\n\n" + _samplecode);
+                    _setEditorMode();
+                    if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
+                        function () {
+                            var filename = selectedFileWidget;
+                            var toDiv = document.getElementById("pageLeftBody");
+                            var firstColon = filename.indexOf(":", 6);
+                            var secondColon = filename.indexOf("/", firstColon + 1);
+                            var username = filename.substring(6, firstColon);
+                            var repo = filename.substring(firstColon + 1, secondColon);
+                            githubtree.refreshGitTree(username, repo, toDiv, filename);
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+
+                        }
+                    );
+                    else {
+                        _save();
+                        _refresh();
+                    }
+                }
             }
-        }
-        }
-    );  
+        );
 }
 
 function _openFile() {
@@ -190,7 +196,7 @@ function _openFile() {
                     _this.style.fontStyle = "italic";
                     _this.style.color = "#cce6ff";
                 }
-                else{
+                else {
 
                     localStorage.removeItem("gitfile-" + filename);
                     _this.style.fontStyle = "";
@@ -330,6 +336,27 @@ function getTextColor(backColor) {
     }
 }
 
+function getCode(win,callback)
+{
+    var count=0;
+    var loop=setInterval(function(){ 
+        count++;
+        const queryString = win.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const code = urlParams.get('code')
+        if(code){
+            clearInterval(loop);
+            return callback(null,code);
+        }
+        else if(count>20)
+        {
+            clearInterval(loop);
+            return callback({error:"timeout"});
+        }
+
+     }, 500);
+}
+
 function _toolbarButtonClicked() {
 
 
@@ -416,43 +443,60 @@ function _toolbarButtonClicked() {
 
     }
     else if (this.dataset.action == "addGitRepo") {
-        var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,public_repo&client_id=0197d74da25302207cf6", "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
-        var gitRepoName = prompt("Git username/repo");
-        var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
-        var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
+        var guid = uuidv4();
+        var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,public_repo&client_id=0197d74da25302207cf6$state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
 
-        var gitRepositories = localStorage.getItem("git-repositories");
-        var data = {};
-        if (!gitRepositories) {
-            data = {};
-            data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
-            localStorage.setItem("git-repositories", JSON.stringify(data));
-        }
-        else {
-            data = JSON.parse(gitRepositories);
-            data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
-            localStorage.setItem("git-repositories", JSON.stringify(data));
-        }
-        var toDiv = document.getElementById("pageLeftBody");
-        Object.values(data).forEach(function (r, x) {
-            var running_count = 0;
-            githubtree.pullGitRepository(r.username, r.repo, function (state, repo) {
-                if (state == "running") {
-                    running_count++;
-                    if (Math.floor(running_count / 10) * 10 == running_count) {
-                        githubtree.refreshGitTree(username, repo, toDiv, filename);
-
-                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-                    }
+        getCode(win,(e,code)=>{
+            if(!e)
+            {
+                fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com/", {
+                    method: 'POST', mode: "cors",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: "code", state: guid })
+                }).then(
+                    response => response.text()
+                ).then((text) => { console.log(text);});
+        
+                var gitRepoName = prompt("Git username/repo");
+                var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
+                var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
+        
+                var gitRepositories = localStorage.getItem("git-repositories");
+                var data = {};
+                if (!gitRepositories) {
+                    data = {};
+                    data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
+                    localStorage.setItem("git-repositories", JSON.stringify(data));
                 }
-                if (state == "done") {
-                    githubtree.refreshGitTree(username, repo, toDiv, filename);
-                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                    Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                else {
+                    data = JSON.parse(gitRepositories);
+                    data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
+                    localStorage.setItem("git-repositories", JSON.stringify(data));
                 }
-            });
+                var toDiv = document.getElementById("pageLeftBody");
+                Object.values(data).forEach(function (r, x) {
+                    var running_count = 0;
+                    githubtree.pullGitRepository(r.username, r.repo, function (state, repo) {
+                        if (state == "running") {
+                            running_count++;
+                            if (Math.floor(running_count / 10) * 10 == running_count) {
+                                githubtree.refreshGitTree(username, repo, toDiv, filename);
+        
+                                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                            }
+                        }
+                        if (state == "done") {
+                            githubtree.refreshGitTree(username, repo, toDiv, filename);
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                        }
+                    });
+                });
+            }
         });
+
+
     }
     else if (this.dataset.action == "deleteFile") {
         _delete();
@@ -513,11 +557,11 @@ function _open(params) {
 }
 
 
-function _refresh(params) {  
+function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>"; 
+    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>";
     keys.sort();
     keys.reverse();
     //asdasdasd
@@ -559,8 +603,8 @@ function _refresh(params) {
             });
         }
     }
-    Array.from(defaultParent.querySelectorAll("div.dirWidget")).forEach(function (e) {e.onclick = _openDir;});
-    Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) {e.onclick = _openFile;});
+    Array.from(defaultParent.querySelectorAll("div.dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+    Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) { e.onclick = _openFile; });
 }
 
 
@@ -639,35 +683,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
-            else{
+            else {
                 localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
             }
 
         }
     });
 
-    
-        (function () {
-            var old = console.log;
-            var olde = console.error;
-            var logger = document.getElementById('log');
-            var pageBottom = document.getElementById('pageBottom');
-            console.log = function (message) {
-                if (typeof message == 'object') {
-                    logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
-                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
-                } else {
-                    logger.innerHTML += "<div>" + message + '</div>';
-                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
-                }
-            }
-            console.error = function (message) {
-                logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
+
+    (function () {
+        var old = console.log;
+        var olde = console.error;
+        var logger = document.getElementById('log');
+        var pageBottom = document.getElementById('pageBottom');
+        console.log = function (message) {
+            if (typeof message == 'object') {
+                logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
+                pageBottom.scrollTo(0, pageBottom.scrollHeight);
+            } else {
+                logger.innerHTML += "<div>" + message + '</div>';
                 pageBottom.scrollTo(0, pageBottom.scrollHeight);
             }
-        })();
+        }
+        console.error = function (message) {
+            logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
+            pageBottom.scrollTo(0, pageBottom.scrollHeight);
+        }
+    })();
 
-        
+
 
 
     const BORDER_SIZE = 4;
