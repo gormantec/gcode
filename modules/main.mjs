@@ -456,48 +456,50 @@ function _toolbarButtonClicked() {
                     console.log(json);
                     win.close();
                     githubtree.setToken(json.data.access_token);
-                    console.log("---->"+githubtree.getAuthenticated());
-                    var gitRepoName = prompt("Git repo name to add",""+"/repo");
-                    if(gitRepoName)
-                    {
-                        var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
-                    var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
-
-                    
-            
-                    var gitRepositories = localStorage.getItem("git-repositories");
-                    var data = {};
-                    if (!gitRepositories) {
-                        data = {};
-                        data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
-                        localStorage.setItem("git-repositories", JSON.stringify(data));
-                    }
-                    else {
-                        data = JSON.parse(gitRepositories);
-                        data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
-                        localStorage.setItem("git-repositories", JSON.stringify(data));
-                    }
-                    var toDiv = document.getElementById("pageLeftBody");
-                    Object.values(data).forEach(function (r, x) {
-                        var running_count = 0;
-                        githubtree.pullGitRepository(r.username, r.repo, function (state, repo) {
-                            if (state == "running") {
-                                running_count++;
-                                if (Math.floor(running_count / 10) * 10 == running_count) {
+                    githubtree.getAuthenticated().then((data)=>{
+                        var gitRepoName = prompt("Git repo name to add",data.login+"/<reponame>");
+                        if(gitRepoName)
+                        {
+                            var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
+                        var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
+    
+                        
+                
+                        var gitRepositories = localStorage.getItem("git-repositories");
+                        var data = {};
+                        if (!gitRepositories) {
+                            data = {};
+                            data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
+                            localStorage.setItem("git-repositories", JSON.stringify(data));
+                        }
+                        else {
+                            data = JSON.parse(gitRepositories);
+                            data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
+                            localStorage.setItem("git-repositories", JSON.stringify(data));
+                        }
+                        var toDiv = document.getElementById("pageLeftBody");
+                        Object.values(data).forEach(function (r, x) {
+                            var running_count = 0;
+                            githubtree.pullGitRepository(r.username, r.repo, function (state, repo) {
+                                if (state == "running") {
+                                    running_count++;
+                                    if (Math.floor(running_count / 10) * 10 == running_count) {
+                                        githubtree.refreshGitTree(username, repo, toDiv, filename);
+                
+                                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
+                                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                                    }
+                                }
+                                if (state == "done") {
                                     githubtree.refreshGitTree(username, repo, toDiv, filename);
-            
                                     Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
                                     Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                                 }
-                            }
-                            if (state == "done") {
-                                githubtree.refreshGitTree(username, repo, toDiv, filename);
-                                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
-                            }
+                            });
                         });
+                        }
                     });
-                    }
+
                     
                 });
         
