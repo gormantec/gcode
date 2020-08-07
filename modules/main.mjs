@@ -444,7 +444,7 @@ function _toolbarButtonClicked() {
     }
     else if (this.dataset.action == "addGitRepo") {
         var guid = uuidv4();
-        var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,public_repo&client_id=0197d74da25302207cf6$state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+        var win = window.open("https://github.com/login/oauth/authorize?scope=user:email,public_repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
 
         getCode(win,(e,code)=>{
             if(!e)
