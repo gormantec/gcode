@@ -1,5 +1,10 @@
-import { Octokit } from 'https://cdn.skypack.dev/@octokit/rest@^17.11.0';
+var Octokit;
 
+setTimeout(() => {
+    import('https://cdn.skypack.dev/@octokit/rest@^17.11.0').then((module) => {
+        Octokit=module.Octokit;
+      });
+}, 2000);
 
 var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
@@ -12,10 +17,7 @@ var _GitHub;
 
 function getGitHub(params) {
     if (_GitHub) return _GitHub;
-    else{
-        let module = await import('https://cdn.skypack.dev/@octokit/rest@^17.11.0');
-        return new module.Octokit(params);
-    }
+    else return new Octokit(params);
 }
 
 export function saveFile(name, content, callback) {
