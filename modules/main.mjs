@@ -581,11 +581,17 @@ function _open(params) {
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
 
     if (w < 576) {
+        if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
+
+            document.getElementById("pageMiddle").style.display = "none";
+        }
+        else {
+            document.getElementById("pageMiddle").style.display = "";
+        }
 
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageLeft").style.right = "0px";
         document.getElementById("pageLeft").style.width = "unset";
-        document.getElementById("pageMiddle").style.display = "none";
         document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 22) + "px";
         document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
 
