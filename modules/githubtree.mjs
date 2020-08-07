@@ -12,7 +12,10 @@ var _GitHub;
 
 function getGitHub(params) {
     if (_GitHub) return _GitHub;
-    else return new Octokit(params);
+    else{
+        let module = await import('https://cdn.skypack.dev/@octokit/rest@^17.11.0');
+        return new module.Octokit(params);
+    }
 }
 
 export function saveFile(name, content, callback) {
