@@ -671,8 +671,8 @@ function _refresh(params) {
     Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) { e.onclick = _openFile; });
 }
 
+window.addEventListener('resize', function(event){
 
-window.onresize = function () {
     console.log(onresize);
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
     if (w < 576) {
@@ -701,7 +701,7 @@ window.onresize = function () {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
         }
     }
-};
+});
 
 
 document.addEventListener("DOMContentLoaded", function () {
