@@ -1,4 +1,4 @@
-import * as GitHub from 'https://cdn.skypack.dev/@octokit/rest@^17.11.0';
+import { Octokit } from 'https://cdn.skypack.dev/@octokit/rest@^17.11.0';
 
 
 var repos = [];
@@ -12,7 +12,7 @@ var _GitHub;
 
 function getGitHub(params) {
     if (_GitHub) return _GitHub;
-    else return new GitHub.Octokit(params);
+    else return new Octokit(params);
 }
 
 export function saveFile(name, content, callback) {
