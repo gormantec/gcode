@@ -449,11 +449,7 @@ function _toolbarButtonClicked() {
         getCode(win,(e,code)=>{
             if(!e)
             {
-                fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com/", {
-                    method: 'POST', mode: "cors",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code: "code", state: guid })
-                }).then(
+                fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code="+code+"&state="+guid).then(
                     response => response.text()
                 ).then((text) => { console.log(text);});
         
