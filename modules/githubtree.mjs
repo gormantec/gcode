@@ -2,9 +2,9 @@ var Octokit;
 
 setTimeout(() => {
     import('https://cdn.skypack.dev/@octokit/rest@^17.11.0').then((module) => {
-        Octokit=module.Octokit;
-      });
-}, 10);
+        Octokit = module.Octokit;
+    });
+}, 1000);
 
 var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
@@ -20,6 +20,16 @@ function getGitHub(params) {
     else return new Octokit(params);
 }
 
+function waitForOctokit(callback) {
+    if (Octokit) callback();
+    var i = window.setInterval(() => {
+        if (Octokit) {
+            clearInterval(i);
+            callback();
+        }
+    }, 500)
+}
+
 export function saveFile(name, content, callback) {
 
     var firstColon = name.indexOf(":", 6);
@@ -31,22 +41,22 @@ export function saveFile(name, content, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
-    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
-    var sha=null;
-    if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
+    var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
+    var sha = null;
+    if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
 
-    var f={
-        owner:username,
-        repo:repo,
-        path:fullpath,
-        message:"commit",
-        content:btoa(content),
+    var f = {
+        owner: username,
+        repo: repo,
+        path: fullpath,
+        message: "commit",
+        content: btoa(content),
     };
-    if(sha)f.sha=sha;
+    if (sha) f.sha = sha;
 
     var octokit = getGitHub({ auth: getToken() });
-    octokit.repos.createOrUpdateFileContents(f).then((d)=>{
-        if(!sha)addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha:d.data.content.sha, type: "file" });
+    octokit.repos.createOrUpdateFileContents(f).then((d) => {
+        if (!sha) addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha: d.data.content.sha, type: "file" });
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
 }
@@ -60,19 +70,19 @@ export function deleteFile(name, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
     var octokit = getGitHub({ auth: getToken() });
-    var repoFileInfo=repos[repo][dirpath].files.find(obj => {return obj.name === filename});
-    var sha=null;
-    if(repoFileInfo && repoFileInfo!="undefined")sha=repoFileInfo.sha;
-    var f={
-        owner:username,
-        repo:repo,
-        path:fullpath,
-        message:"commit",
+    var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
+    var sha = null;
+    if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
+    var f = {
+        owner: username,
+        repo: repo,
+        path: fullpath,
+        message: "commit",
     };
-    if(sha)f.sha=sha;
+    if (sha) f.sha = sha;
 
-    octokit.repos.deleteFile(f).then((d) =>{
-        repos[repo][dirpath].files = repos[repo][dirpath].files.filter(function(obj) { return obj.name != filename; }); 
+    octokit.repos.deleteFile(f).then((d) => {
+        repos[repo][dirpath].files = repos[repo][dirpath].files.filter(function (obj) { return obj.name != filename; });
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
 }
@@ -82,22 +92,20 @@ export function getToken() {
     return token;
 }
 
-export function getAuthenticated()
-{
+export function getAuthenticated() {
     var octokit = getGitHub({ auth: getToken() });
     return octokit.users.getAuthenticated();
 }
 
 export function setToken(token) {
 
-    if(token)
-    {
-        localStorage.setItem("git-token",token);
+    if (token) {
+        localStorage.setItem("git-token", token);
     }
-    else{
+    else {
         localStorage.removeItem("git-token");
     }
-    
+
 
     return token;
 }
@@ -178,68 +186,68 @@ export function htmlToElement(html) {
 export function getGitFile(username, repo, path, callback) {
     var octokit = getGitHub({ auth: getToken() });
     octokit.repos.getContent({
-        owner:username,
-        repo:repo,
-        path:path
-      }).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
+        owner: username,
+        repo: repo,
+        path: path
+    }).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
 }
 
 export function pullGitRepository(username, repo, callbackrefresh) {
 
-    var octokit = getGitHub({ auth: getToken() });
-
-
-    var loopDirectories = function (directories, depth, callback) {
-
-        if (!directories || directories.length == 0 || depth > 2) {
-            callback();
-        }
-        else {
-            var dir = directories.shift();
-            depth++;
-            recurseGit(dir, depth, function () {
-                depth--;
-                if (directories.length > 0) {
-                    loopDirectories(directories, depth, callback);
-                }
-                else {
-                    callback();
-                }
-            });
-        }
-    };
-
-    var recurseGit = function (path, depth, callback) {
-        var _path = path;
-        if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
-
-        octokit.repos.getContent({
-            owner:username,
-            repo:repo,
-            path:path
-          }).then((sha)=>{
-            var directories = [];
-            Array.from(sha.data).forEach(function (file) {
-                if (file.name.substring(0, 1) != "." && directories.length < 4) {
-
-                    addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha:file.sha, type: file.type });
-                    if (callbackrefresh) callbackrefresh("running", repo, _path);
-
-                    if (file.type == "dir" && file.name.substring(0, 1) != ".") {
-                        if (file.path) {
-                            directories.push(file.path);
+    waitForOctokit(function(){
+        var octokit = getGitHub({ auth: getToken() });
+        var loopDirectories = function (directories, depth, callback) {
+    
+            if (!directories || directories.length == 0 || depth > 2) {
+                callback();
+            }
+            else {
+                var dir = directories.shift();
+                depth++;
+                recurseGit(dir, depth, function () {
+                    depth--;
+                    if (directories.length > 0) {
+                        loopDirectories(directories, depth, callback);
+                    }
+                    else {
+                        callback();
+                    }
+                });
+            }
+        };
+    
+        var recurseGit = function (path, depth, callback) {
+            var _path = path;
+            if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
+    
+            octokit.repos.getContent({
+                owner: username,
+                repo: repo,
+                path: path
+            }).then((sha) => {
+                var directories = [];
+                Array.from(sha.data).forEach(function (file) {
+                    if (file.name.substring(0, 1) != "." && directories.length < 4) {
+    
+                        addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
+                        if (callbackrefresh) callbackrefresh("running", repo, _path);
+    
+                        if (file.type == "dir" && file.name.substring(0, 1) != ".") {
+                            if (file.path) {
+                                directories.push(file.path);
+                            }
                         }
                     }
-                }
-            });
-            if (directories.length > 0) loopDirectories(directories, depth, callback);
-            else callback();
-          }).catch((e) => { console.log(e); callback(); });;;
-
-
-    }
-
-    recurseGit("", 0, function () { console.log("git pull - done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
+                });
+                if (directories.length > 0) loopDirectories(directories, depth, callback);
+                else callback();
+            }).catch((e) => { console.log(e); callback(); });;;
+    
+    
+        }
+    
+        recurseGit("", 0, function () { console.log("git pull - done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
+    });
 }
 
 
