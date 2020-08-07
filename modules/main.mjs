@@ -453,7 +453,6 @@ function _toolbarButtonClicked() {
                     response => response.json()
                 ).then((json) => { 
                     console.log("********************");
-                    console.log(json);
                     win.close();
                     githubtree.setToken(json.data.access_token);
                     githubtree.getAuthenticated().then((data)=>{
