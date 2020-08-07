@@ -458,7 +458,9 @@ function _toolbarButtonClicked() {
                     githubtree.setToken(json.data.access_token);
                     console.log("---->"+githubtree.getAuthenticated());
                     var gitRepoName = prompt("Git repo name to add",""+"/repo");
-                    var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
+                    if(gitRepoName)
+                    {
+                        var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
                     var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
 
                     
@@ -495,6 +497,8 @@ function _toolbarButtonClicked() {
                             }
                         });
                     });
+                    }
+                    
                 });
         
 
