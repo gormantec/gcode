@@ -148,56 +148,63 @@ function _new() {
 function _openFile(element) {
 
 
+    if (element.dataset.name) {
+        if (element.dataset.name.substring(0, 6) != "git://") {
+            selectedFileWidget = element.dataset.name;
+            document.getElementById("filename").innerText = element.dataset.name;
+            var pageLeftBody = document.getElementById("pageLeftBody");
+            var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
+            if (selectedItem) selectedItem.className = "fileWidget";
+            selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
+            if (selectedItem) selectedItem.className = "dirWidget";
+            element.className = "fileWidget fileWidgetSelected";
 
-    if (element.dataset.name.substring(0, 6) != "git://") {
-        selectedFileWidget = element.dataset.name;
-        document.getElementById("filename").innerText = element.dataset.name;
-        var pageLeftBody = document.getElementById("pageLeftBody");
-        var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
-        if (selectedItem) selectedItem.className = "fileWidget";
-        selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
-        if (selectedItem) selectedItem.className = "dirWidget";
-        element.className = "fileWidget fileWidgetSelected";
-
-        editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
-        _setEditorMode();
-    }
-    else {
-        var filename = element.dataset.name;
-        var firstColon = element.dataset.name.indexOf(":", 6);
-        var secondColon = element.dataset.name.indexOf("/", firstColon + 1);
-        var username = element.dataset.name.substring(6, firstColon);
-        var repo = element.dataset.name.substring(firstColon + 1, secondColon);
-        var path = element.dataset.name.substring(secondColon + 1);
+            editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
+            _setEditorMode();
+        }
+        else {
+            var filename = element.dataset.name;
+            var firstColon = element.dataset.name.indexOf(":", 6);
+            var secondColon = element.dataset.name.indexOf("/", firstColon + 1);
+            var username = element.dataset.name.substring(6, firstColon);
+            var repo = element.dataset.name.substring(firstColon + 1, secondColon);
+            var path = element.dataset.name.substring(secondColon + 1);
 
 
-        selectedFileWidget = element.dataset.name;
-        document.getElementById("filename").innerText = element.dataset.name;
-        var pageLeftBody = document.getElementById("pageLeftBody");
-        var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
-        if (selectedItem) selectedItem.className = "fileWidget";
-        selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
-        if (selectedItem) selectedItem.className = "dirWidget";
-        element.className = "fileWidget fileWidgetSelected";
-        _setEditorMode();
-        githubtree.getGitFile(username, repo, path, function (e, d) {
-            var cached = localStorage.getItem("gitfile-" + filename);
-            if (cached) {
-                if (atob(cached) != d) {
-                    d = atob(cached);
-                    element.style.fontStyle = "italic";
-                    element.style.color = "#cce6ff";
+            selectedFileWidget = element.dataset.name;
+            document.getElementById("filename").innerText = element.dataset.name;
+            var pageLeftBody = document.getElementById("pageLeftBody");
+            var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
+            if (selectedItem) selectedItem.className = "fileWidget";
+            selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
+            if (selectedItem) selectedItem.className = "dirWidget";
+            element.className = "fileWidget fileWidgetSelected";
+            _setEditorMode();
+            githubtree.getGitFile(username, repo, path, function (e, d) {
+                var cached = localStorage.getItem("gitfile-" + filename);
+                if (cached) {
+                    if (atob(cached) != d) {
+                        d = atob(cached);
+                        element.style.fontStyle = "italic";
+                        element.style.color = "#cce6ff";
+                    }
+                    else {
+
+                        localStorage.removeItem("gitfile-" + filename);
+                        element.style.fontStyle = "";
+                        element.style.color = "";
+                    }
                 }
-                else {
-
-                    localStorage.removeItem("gitfile-" + filename);
-                    element.style.fontStyle = "";
-                    element.style.color = "";
-                }
-            }
-            editor.setValue(d);
-        });
+                editor.setValue(d);
+            });
+        }
     }
+    else{
+        console.log(element);
+        console.log(element.classList);
+        console.log(element.dataset);
+    }
+
 }
 function _setEditorMode() {
     if (selectedFileWidget.endsWith(".js")) {
@@ -224,54 +231,60 @@ function _setEditorMode() {
 }
 function _openDir(element) {
 
+    if (element.dataset.name) {
+
+        var _dirname = element.dataset.name;
 
 
-    var _dirname = element.dataset.name;
+        var pageLeftBody = document.getElementById("pageLeftBody");
+        var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
+        if (selectedItem) selectedItem.className = "fileWidget";
+        selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
+        if (selectedItem) selectedItem.className = "dirWidget";
+        element.className = "dirWidget dirWidgetSelected";
+        selectedFileWidget = element.dataset.name;
+
+        var _fileDisplayValue = "none";
+        if (element.dataset.state && element.dataset.state == "closed") {
+            element.dataset.state = "open";
+            _fileDisplayValue = "";
+            element.getElementsByTagName("i")[0].innerText = dirIconOpened;
+        }
+        else {
+            element.dataset.state = "closed";
+            _fileDisplayValue = "none";
+            element.getElementsByTagName("i")[0].innerText = dirIconClosed;
+        }
+
+        githubtree.setDirectoryState(element.dataset.name, element.dataset.state);
+        if (element.dataset.state == "open") {
+            var _params = githubtree.getGitParts(_dirname, { depth: 2 });
+            githubtree.pullGitRepository(_params, function (state, repo) {
+                if (state == "done") {
+                    githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
+                }
+            });
+        }
 
 
-    var pageLeftBody = document.getElementById("pageLeftBody");
-    var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
-    if (selectedItem) selectedItem.className = "fileWidget";
-    selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
-    if (selectedItem) selectedItem.className = "dirWidget";
-    element.className = "dirWidget dirWidgetSelected";
-    selectedFileWidget = element.dataset.name;
 
-    var _fileDisplayValue = "none";
-    if (element.dataset.state && element.dataset.state == "closed") {
-        element.dataset.state = "open";
-        _fileDisplayValue = "";
-        element.getElementsByTagName("i")[0].innerText = dirIconOpened;
+        if (_dirname == "default") {
+            var _array = document.querySelectorAll("div.fileWidget[data-dirname='" + _dirname + "']");
+            if (_array) Array.from(_array).forEach(function (e) { if (e.dataset.dirname == _dirname) e.style.display = _fileDisplayValue; });
+            var _array = document.querySelectorAll("div.dirWidget[data-dirname='" + _dirname + "']");
+            if (_array) Array.from(_array).forEach(function (e) { e.style.display = _fileDisplayValue; });
+        }
+        else if (_dirname.substring(0, 6) == "git://") {
+            var _array = document.querySelectorAll("div.fileWidget[data-name^='" + _dirname + "/'], div.dirWidget[data-name^='" + _dirname + "/']");
+            if (_array) Array.from(_array).forEach(function (e) {
+                e.style.display = _fileDisplayValue;
+            });
+        }
     }
-    else {
-        element.dataset.state = "closed";
-        _fileDisplayValue = "none";
-        element.getElementsByTagName("i")[0].innerText = dirIconClosed;
-    }
-
-    githubtree.setDirectoryState(element.dataset.name, element.dataset.state);
-    if (element.dataset.state == "open") {
-        var _params = githubtree.getGitParts(_dirname, { depth: 2 });
-        githubtree.pullGitRepository(_params, function (state, repo) {
-            if (state == "done") {
-                githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
-            }
-        });
-    }
-
-
-
-    if (_dirname == "default") {
-        var _array = document.querySelectorAll("div.fileWidget[data-dirname='" + _dirname + "']");
-        if (_array) Array.from(_array).forEach(function (e) { if (e.dataset.dirname == _dirname) e.style.display = _fileDisplayValue; });
-        var _array = document.querySelectorAll("div.dirWidget[data-dirname='" + _dirname + "']");
-        if (_array) Array.from(_array).forEach(function (e) { e.style.display = _fileDisplayValue; });
-    }
-    else if (_dirname.substring(0, 6) == "git://") {
-        var _array = document.querySelectorAll("div.fileWidget[data-name^='" + _dirname + "/'], div.dirWidget[data-name^='" + _dirname + "/']");
-        if (_array) Array.from(_array).forEach(function (e) {
-            e.style.display = _fileDisplayValue;
-        });
+    else{
+        console.log(element);
+        console.log(element.classList);
+        console.log(element.dataset);
     }
 
 
