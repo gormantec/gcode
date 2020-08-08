@@ -146,7 +146,7 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
         toDiv.appendChild(parentElement);
     }
     var _root=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>");
-    _root.onclick=function(){dirOnClick(_root);};
+    _root.addEventListener("click", function () { dirOnClick(_root); });
     parentElement.appendChild(_root);
 
     repos[reponame]
@@ -194,9 +194,9 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     "<div class='fileIndent' style='width:" + indentWidth + "px'></div><i class='material-icons'>" + fileIcon + "</i>" +
                     files[j].name + xxx + "</div></div>"
                 );
-                if(widgetClass ==  "dirWidget")_child.onclick= function(){dirOnClick(_child);};
-                else _child.onclick= function(){fileOnClick(_child);};  
-                console.log("append child:"+files[j].filepath );
+                if(widgetClass ==  "dirWidget")_child.addEventListener("click", function () { dirOnClick(_child); });
+                else _child.addEventListener("click", function () { fileOnClick(_child); });
+                console.log("append child: "+_child.dataset.name );
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
             }
         }
