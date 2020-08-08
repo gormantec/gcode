@@ -229,6 +229,9 @@ export function pullGitRepository(params, callbackrefresh) {
     waitForOctokit(function(){
         var octokit = getGitHub({ auth: getToken() });
         var loopDirectories = function (directories, depth, callback) {
+
+            console.log("depth:"+depth);
+            console.log("directories.length :"+directories.length );
     
             if (!directories || directories.length == 0 || depth > maxdepth) {
                 console.log("exit:");
