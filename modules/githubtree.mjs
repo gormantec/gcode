@@ -169,7 +169,7 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                 else return a.name.localeCompare(b.name);
             });
             files.reverse();
-            console.log("files:"+files);
+            console.log("files:"+JSON.stringify({data:files}));
             while (j--) {
                 var nextname = "";
                 if (j > 0) nextname = "data-nextname='git://" + repousername + ":" + reponame + "/" + files[j - 1].filepath + "'";
