@@ -231,6 +231,10 @@ export function pullGitRepository(params, callbackrefresh) {
         var loopDirectories = function (directories, depth, callback) {
     
             if (!directories || directories.length == 0 || depth > maxdepth) {
+                console.log("exit:");
+                console.log(directories);
+                console.log(directories.length);
+                console.log(depth);
                 callback();
             }
             else {
