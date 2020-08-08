@@ -628,24 +628,18 @@ function _refresh(params) {
     defaultParent.appendChild(pageLeft);
     keys.sort();
     keys.reverse();
- 
+
     while (i--) {
 
         if (keys[i].startsWith("file-") && keys[i] != "file-") {
             var nextname = "";
+            var selectedClass = "";
             if (i > 0) nextname = "data-nextname='" + keys[i - 1].substring(5) + "'";
-            if (selectedFileWidget == keys[i].substring(5)) {
-                var _child=htmlToElement("<div class='fileWidget fileWidgetSelected' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
+            if (selectedFileWidget == keys[i].substring(5)) selectedClass = " fileWidgetSelected";
+            var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
+            _child.onclick = function () { fileOnClick(_child); };
+            defaultParent.appendChild(_child);
 
-                _child.onclick= function(){fileOnClick(_child);}; 
-                pageLeft.appendChild(_child);
-            }
-            else {
-                var _child=htmlToElement("<div class='fileWidget' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
-         
-                _child.onclick= function(){fileOnClick(_child);}; 
-                pageLeft.appendChild(_child);
-            }
         }
     }
     var pageLeftBody = document.getElementById("pageLeftBody");
