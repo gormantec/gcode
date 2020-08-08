@@ -145,7 +145,11 @@ function _new() {
         );
 }
 
-function _openFile() {
+function _openFile(e) {
+
+    console.log("this:"+this);
+    console.log("e:"+e);
+
     if (this.dataset.name.substring(0, 6) != "git://") {
         selectedFileWidget = this.dataset.name;
         document.getElementById("filename").innerText = this.dataset.name;
@@ -220,8 +224,10 @@ function _setEditorMode() {
         editor.setOption("mode", "htmlmixed");
     }
 }
-function _openDir() {
+function _openDir(e) {
 
+    console.log("this:"+this);
+    console.log("e:"+e);
 
     var _dirname = this.dataset.name;
     var _this = this;
