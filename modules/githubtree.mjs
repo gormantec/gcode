@@ -10,7 +10,7 @@ var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo] = repos[repo] || [];
     repos[repo][dirpath] = repos[repo][dirpath] || { files: [] };
-    repos[repo][dirpath].files = repos[repo][dirpath].files.filter(function( obj ) { return obj.fullpath !== fileinfo.fullpath; });
+    repos[repo][dirpath].files = repos[repo][dirpath].files.filter(function( obj ) { return obj.filepath !== fileinfo.filepath; });
     repos[repo][dirpath].files.push(fileinfo);
 }
 
