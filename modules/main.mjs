@@ -623,33 +623,37 @@ function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-    var pageLeft = "<div id=\"defaultParent\"><div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>";
+    var defaultParent = htmlToElement("<div id=\"defaultParent\"></div>");
+    var pageLeft = htmlToElement("<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>");
+    defaultParent.appendChild(pageLeft);
     keys.sort();
     keys.reverse();
-    //asdasdasd
+ 
     while (i--) {
 
         if (keys[i].startsWith("file-") && keys[i] != "file-") {
             var nextname = "";
             if (i > 0) nextname = "data-nextname='" + keys[i - 1].substring(5) + "'";
             if (selectedFileWidget == keys[i].substring(5)) {
-                pageLeft = pageLeft + "<div class='fileWidget fileWidgetSelected' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>";
+                var _child=htmlToElement("<div class='fileWidget fileWidgetSelected' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
+
+                _child.onclick= function(){fileOnClick(_child);}; 
+                pageLeft.appendChild(_child);
             }
             else {
-                pageLeft = pageLeft + "<div class='fileWidget' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>";
+                var _child=htmlToElement("<div class='fileWidget' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
+         
+                _child.onclick= function(){fileOnClick(_child);}; 
+                pageLeft.appendChild(_child);
             }
         }
     }
-    pageLeft = pageLeft + "</div>";
     var pageLeftBody = document.getElementById("pageLeftBody");
-    var defaultParent = pageLeftBody.querySelector("div#defaultParent");
-    if (defaultParent) {
-        pageLeftBody.removeChild(defaultParent);
+    var oldDefaultParent = pageLeftBody.querySelector("div#defaultParent");
+    if (oldDefaultParent) {
+        pageLeftBody.removeChild(oldDefaultParent);
     }
-    pageLeftBody.insertBefore(htmlToElement(pageLeft), pageLeftBody.firstChild);
-    defaultParent = pageLeftBody.querySelector("div#defaultParent");
-
-
+    pageLeftBody.insertBefore(defaultParent, pageLeftBody.firstChild);
 
     if (params && params.all) {
         var gitRepositories = localStorage.getItem("git-repositories");
@@ -663,8 +667,6 @@ function _refresh(params) {
             });
         }
     }
-    Array.from(defaultParent.querySelectorAll("div.dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-    Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) { e.onclick = _openFile; });
 }
 
 window.addEventListener('resize', function (event) {
