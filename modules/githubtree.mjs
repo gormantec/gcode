@@ -22,6 +22,7 @@ export function getGitParts(filename,result) {
         _result.username = filename.substring(6, firstColon);
         _result.repo = filename.substring(firstColon + 1, secondColon);
         _result.path = filename.substring(secondColon + 1);
+        console.log(_result);
         return _result;
     }
     else{
