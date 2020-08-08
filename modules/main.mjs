@@ -147,7 +147,8 @@ function _new() {
 
 function _openFile(e) {
 
-    console.log("this:"+this.dataset.name);
+    console.log("this:"+this.dataset);
+    console.log("className:"+this.className);
     console.log("e:"+e);
 
     if (this.dataset.name.substring(0, 6) != "git://") {
