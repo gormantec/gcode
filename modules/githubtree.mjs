@@ -194,9 +194,9 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     "<div class='fileIndent' style='width:" + indentWidth + "px'></div><i class='material-icons'>" + fileIcon + "</i>" +
                     files[j].name + xxx + "</div></div>"
                 );
-                if(widgetClass ==  "dirWidget")_child.addEventListener("click", function () { dirOnClick(_child); });
-                else _child.addEventListener("click", function () { fileOnClick(_child); });
-                console.log("append child: "+_child.dataset.name );
+                if(widgetClass ==  "dirWidget")_child.firstChild.addEventListener("click", function () { dirOnClick(_child.firstChild); });
+                else _child.firstChild.addEventListener("click", function () { fileOnClick(_child.firstChild); });
+                console.log("append child: "+_child.firstChild.dataset.name );
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
             }
         }
