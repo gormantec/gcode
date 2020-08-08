@@ -195,7 +195,7 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     files[j].name + xxx + "</div></div>"
                 );
                 if(widgetClass ==  "dirWidget")_child.onclick= dirOnClick;
-                else _child.onclick= fileOnClick;
+                else _child.onclick= fileOnClick;  
                 console.log("append child:"+files[j].filepath );
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
             }
