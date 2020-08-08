@@ -29,6 +29,7 @@ function uuidv4() {
     });
 }
 
+
 function _save() {
     var filename = document.getElementById("filename").innerText;
     if (filename && filename.substring(0, 6) == "git://") {
@@ -257,6 +258,10 @@ function _openDir() {
     }
 
     githubtree.setDirectoryState(_this.dataset.name, _this.dataset.state);
+    githubtree.pullGitRepository(githubtree.getGitParts(_dirname,{depth:1}), function (state, repo) {
+
+    });
+
 
     if (_dirname == "default") {
         var _array = document.querySelectorAll("div.fileWidget[data-dirname='" + _dirname + "']");
@@ -477,12 +482,11 @@ function _toolbarButtonClicked() {
                             var toDiv = document.getElementById("pageLeftBody");
                             Object.values(data).forEach(function (r, x) {
                                 var running_count = 0;
-                                githubtree.pullGitRepository(r.username, r.repo, function (state, repo) {
+                                githubtree.pullGitRepository({ username: r.username, repo: r.repo }, function (state, repo) {
                                     if (state == "running") {
                                         running_count++;
                                         if (Math.floor(running_count / 10) * 10 == running_count) {
                                             githubtree.refreshGitTree(username, repo, toDiv, filename);
-
                                             Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
                                             Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
                                         }
@@ -671,7 +675,7 @@ function _refresh(params) {
     Array.from(defaultParent.querySelectorAll("div.fileWidget")).forEach(function (e) { e.onclick = _openFile; });
 }
 
-window.addEventListener('resize', function(event){
+window.addEventListener('resize', function (event) {
 
     console.log("onresize");
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
@@ -866,7 +870,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (r.username && r.repo) {
                 var running_count = 0;
                 var username = r.username;
-                githubtree.pullGitRepository(r.username, r.repo, function (state, repo) {
+                githubtree.pullGitRepository({ username: r.username, repo: r.repo }, function (state, repo) {
                     if (state == "running") {
                         running_count++;
                         if (Math.floor(running_count / 10) * 10 == running_count) {

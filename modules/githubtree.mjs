@@ -10,7 +10,28 @@ var repos = [];
 export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo] = repos[repo] || [];
     repos[repo][dirpath] = repos[repo][dirpath] || { files: [] };
+    repos[repo][dirpath].files = repos[repo][dirpath].files.filter(function( obj ) { return obj.fullpath !== fileinfo.fullpath; });
     repos[repo][dirpath].files.push(fileinfo);
+}
+
+export function getGitParts(filename,result) {
+    var _result=result||{};
+    if (filename && filename.substring(0, 6) == "git://") {
+        var firstColon = filename.indexOf(":", 6);
+        var secondColon = filename.indexOf("/", firstColon + 1);
+        _result.username = filename.substring(6, firstColon);
+        _result.repo = filename.substring(firstColon + 1, secondColon);
+        _result.path = filename.substring(secondColon + 1);
+        return _result;
+    }
+    else{
+        return null;
+    }
+}
+
+export function getGitPath(username,repo,path) {
+
+    return "git://"+username+":"+repo+"/"+path;
 }
 
 var _GitHub;
@@ -192,13 +213,18 @@ export function getGitFile(username, repo, path, callback) {
     }).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
 }
 
-export function pullGitRepository(username, repo, callbackrefresh) {
+export function pullGitRepository(params, callbackrefresh) {
+
+    var username=params.username;
+    var repo=params.repo;
+    var startpath=params.path || "";
+    var maxdepth=params.depth || 2;
 
     waitForOctokit(function(){
         var octokit = getGitHub({ auth: getToken() });
         var loopDirectories = function (directories, depth, callback) {
     
-            if (!directories || directories.length == 0 || depth > 2) {
+            if (!directories || directories.length == 0 || depth > maxdepth) {
                 callback();
             }
             else {
@@ -227,7 +253,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
             }).then((sha) => {
                 var directories = [];
                 Array.from(sha.data).forEach(function (file) {
-                    if (file.name.substring(0, 1) != "." && directories.length < 4) {
+                    if (file.name.substring(0, 1) != "." && directories.length) {
     
                         addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
                         if (callbackrefresh) callbackrefresh("running", repo, _path);
@@ -246,7 +272,7 @@ export function pullGitRepository(username, repo, callbackrefresh) {
     
         }
     
-        recurseGit("", 0, function () { console.log("git pull - done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
+        recurseGit(startpath, 0, function () { console.log("git pull - done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
     });
 }
 
