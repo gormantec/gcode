@@ -133,7 +133,7 @@ export function setToken(token) {
     return token;
 }
 
-export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget) {
+export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget,dirOnClick,fileOnClick) {
 
     var repoRoot = toDiv.querySelector("div.dirWidget[data-name='git://" + repousername + ":" + reponame + "']");
     var parentElement;
@@ -145,7 +145,9 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
         parentElement = document.createElement('div');
         toDiv.appendChild(parentElement);
     }
-    parentElement.appendChild(htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>"));
+    var _root=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>");
+    _root.onclick=dirOnClick;
+    parentElement.appendChild(_root);
 
     repos[reponame]
     if (repos[reponame]) {
@@ -185,13 +187,14 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                 indentWidth = indentWidth + 10;
                 var gitpath = "git://" + repousername + ":" + reponame + "/" + files[j].dirpath;
                 if (gitpath.slice(-1) == "/") gitpath = gitpath.slice(0, -1);
-
-                toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(htmlToElement(
+                var _child=htmlToElement(
                     "<div><div class='" + widgetClass + fileWidgetSelected + "' data-name='git://" + repousername + ":" + reponame + "/" +
                     files[j].filepath + "' " + nextname + " data-dirname='" + reponame + "' " + datastate + display + ">" +
                     "<div class='fileIndent' style='width:" + indentWidth + "px'></div><i class='material-icons'>" + fileIcon + "</i>" +
                     files[j].name + xxx + "</div></div>"
-                ));
+                );
+                _child.onclick=widgetClass==  "dirWidget" ? dirOnClick : fileOnClick;
+                toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
             }
         }
     }

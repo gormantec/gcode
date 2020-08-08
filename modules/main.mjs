@@ -47,9 +47,7 @@ function _save() {
                 var secondColon = filename.indexOf("/", firstColon + 1);
                 var username = filename.substring(6, firstColon);
                 var repo = filename.substring(firstColon + 1, secondColon);
-                githubtree.refreshGitTree(username, repo, toDiv, filename);
-                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
 
             }
         });
@@ -89,9 +87,7 @@ function _delete() {
                 if (secondColon < 0) secondColon = 10000;
                 var username = filename.substring(6, firstColon);
                 var repo = filename.substring(firstColon + 1, secondColon);
-                githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget);
-                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget, _openDir, _openFile);
             }
         });
     }
@@ -135,15 +131,8 @@ function _new() {
                     _setEditorMode();
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
                         function () {
-                            var filename = selectedFileWidget;
-                            var toDiv = document.getElementById("pageLeftBody");
-                            var firstColon = filename.indexOf(":", 6);
-                            var secondColon = filename.indexOf("/", firstColon + 1);
-                            var username = filename.substring(6, firstColon);
-                            var repo = filename.substring(firstColon + 1, secondColon);
-                            githubtree.refreshGitTree(username, repo, toDiv, filename);
-                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                            var gitParts = githubtree.getGitParts(selectedFileWidget);
+                            githubtree.refreshGitTree(gitParts.username, gitParts.repo, toDiv, selectedFileWidget, _openDir, _openFile);
 
                         }
                     );
@@ -258,9 +247,15 @@ function _openDir() {
     }
 
     githubtree.setDirectoryState(_this.dataset.name, _this.dataset.state);
-    githubtree.pullGitRepository(githubtree.getGitParts(_dirname,{depth:1}), function (state, repo) {
+    if (_this.dataset.state == "open") {
+        var _params = githubtree.getGitParts(_dirname, { depth: 2 });
+        githubtree.pullGitRepository(_params, function (state, repo) {
+            if (state == "done") {
+                githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
+            }
+        });
+    }
 
-    });
 
 
     if (_dirname == "default") {
@@ -486,15 +481,11 @@ function _toolbarButtonClicked() {
                                     if (state == "running") {
                                         running_count++;
                                         if (Math.floor(running_count / 10) * 10 == running_count) {
-                                            githubtree.refreshGitTree(username, repo, toDiv, filename);
-                                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                                            githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
                                         }
                                     }
                                     if (state == "done") {
-                                        githubtree.refreshGitTree(username, repo, toDiv, filename);
-                                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                                        githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
                                     }
                                 });
                             });
@@ -664,9 +655,7 @@ function _refresh(params) {
             data = JSON.parse(gitRepositories);
             Object.values(data).forEach(function (r, x) {
                 if (r.username && r.repo) {
-                    githubtree.refreshGitTree(r.username, r.repo, pageLeftBody, selectedFileWidget);
-                    Array.from(pageLeftBody.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                    Array.from(pageLeftBody.querySelector("div.dirWidget[data-name='git://" + r.username + ":" + r.repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                    githubtree.refreshGitTree(r.username, r.repo, pageLeftBody, selectedFileWidget, _openDir, _openFile);
                 }
             });
         }
@@ -874,15 +863,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (state == "running") {
                         running_count++;
                         if (Math.floor(running_count / 10) * 10 == running_count) {
-                            githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget);
-                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                            Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                            githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget, _openDir, _openFile);
                         }
                     }
                     if (state == "done") {
-                        githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget);
-                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("dirWidget")).forEach(function (e) { e.onclick = _openDir; });
-                        Array.from(toDiv.querySelector("div.dirWidget[data-name='git://" + username + ":" + repo + "']").parentElement.getElementsByClassName("fileWidget")).forEach(function (e) { e.onclick = _openFile; });
+                        githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget, _openDir, _openFile);
                     }
                 });
             }
