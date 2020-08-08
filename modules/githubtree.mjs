@@ -224,7 +224,7 @@ export function pullGitRepository(params, callbackrefresh) {
     var username=params.username;
     var repo=params.repo;
     var startpath=params.path || "";
-    var maxdepth=params.depth || 1;
+    var maxdepth=params.depth || 2;
 
     waitForOctokit(function(){
         var octokit = getGitHub({ auth: getToken() });
