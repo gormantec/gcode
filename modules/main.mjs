@@ -145,57 +145,54 @@ function _new() {
         );
 }
 
-function _openFile(e) {
+function _openFile(element) {
 
-    console.log("this:"+this.dataset);
-    console.log("className:"+this.className);
-    console.log("e:"+e);
 
-    if (this.dataset.name.substring(0, 6) != "git://") {
-        selectedFileWidget = this.dataset.name;
-        document.getElementById("filename").innerText = this.dataset.name;
+
+    if (element.dataset.name.substring(0, 6) != "git://") {
+        selectedFileWidget = element.dataset.name;
+        document.getElementById("filename").innerText = element.dataset.name;
         var pageLeftBody = document.getElementById("pageLeftBody");
         var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
         if (selectedItem) selectedItem.className = "fileWidget";
         selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
         if (selectedItem) selectedItem.className = "dirWidget";
-        this.className = "fileWidget fileWidgetSelected";
+        element.className = "fileWidget fileWidgetSelected";
 
-        editor.setValue(atob(localStorage.getItem("file-" + this.dataset.name)));
+        editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
         _setEditorMode();
     }
     else {
-        var filename = this.dataset.name;
-        var firstColon = this.dataset.name.indexOf(":", 6);
-        var secondColon = this.dataset.name.indexOf("/", firstColon + 1);
-        var username = this.dataset.name.substring(6, firstColon);
-        var repo = this.dataset.name.substring(firstColon + 1, secondColon);
-        var path = this.dataset.name.substring(secondColon + 1);
+        var filename = element.dataset.name;
+        var firstColon = element.dataset.name.indexOf(":", 6);
+        var secondColon = element.dataset.name.indexOf("/", firstColon + 1);
+        var username = element.dataset.name.substring(6, firstColon);
+        var repo = element.dataset.name.substring(firstColon + 1, secondColon);
+        var path = element.dataset.name.substring(secondColon + 1);
 
 
-        selectedFileWidget = this.dataset.name;
-        document.getElementById("filename").innerText = this.dataset.name;
+        selectedFileWidget = element.dataset.name;
+        document.getElementById("filename").innerText = element.dataset.name;
         var pageLeftBody = document.getElementById("pageLeftBody");
         var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
         if (selectedItem) selectedItem.className = "fileWidget";
         selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
         if (selectedItem) selectedItem.className = "dirWidget";
-        this.className = "fileWidget fileWidgetSelected";
+        element.className = "fileWidget fileWidgetSelected";
         _setEditorMode();
-        var _this = this;
         githubtree.getGitFile(username, repo, path, function (e, d) {
             var cached = localStorage.getItem("gitfile-" + filename);
             if (cached) {
                 if (atob(cached) != d) {
                     d = atob(cached);
-                    _this.style.fontStyle = "italic";
-                    _this.style.color = "#cce6ff";
+                    element.style.fontStyle = "italic";
+                    element.style.color = "#cce6ff";
                 }
                 else {
 
                     localStorage.removeItem("gitfile-" + filename);
-                    _this.style.fontStyle = "";
-                    _this.style.color = "";
+                    element.style.fontStyle = "";
+                    element.style.color = "";
                 }
             }
             editor.setValue(d);
@@ -225,36 +222,35 @@ function _setEditorMode() {
         editor.setOption("mode", "htmlmixed");
     }
 }
-function _openDir(e) {
+function _openDir(element) {
 
-    console.log("this:"+this);
-    console.log("e:"+e);
 
-    var _dirname = this.dataset.name;
-    var _this = this;
+
+    var _dirname = element.dataset.name;
+
 
     var pageLeftBody = document.getElementById("pageLeftBody");
     var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
     if (selectedItem) selectedItem.className = "fileWidget";
     selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
     if (selectedItem) selectedItem.className = "dirWidget";
-    this.className = "dirWidget dirWidgetSelected";
-    selectedFileWidget = this.dataset.name;
+    element.className = "dirWidget dirWidgetSelected";
+    selectedFileWidget = element.dataset.name;
 
     var _fileDisplayValue = "none";
-    if (_this.dataset.state && _this.dataset.state == "closed") {
-        _this.dataset.state = "open";
+    if (element.dataset.state && element.dataset.state == "closed") {
+        element.dataset.state = "open";
         _fileDisplayValue = "";
-        _this.getElementsByTagName("i")[0].innerText = dirIconOpened;
+        element.getElementsByTagName("i")[0].innerText = dirIconOpened;
     }
     else {
-        _this.dataset.state = "closed";
+        element.dataset.state = "closed";
         _fileDisplayValue = "none";
-        _this.getElementsByTagName("i")[0].innerText = dirIconClosed;
+        element.getElementsByTagName("i")[0].innerText = dirIconClosed;
     }
 
-    githubtree.setDirectoryState(_this.dataset.name, _this.dataset.state);
-    if (_this.dataset.state == "open") {
+    githubtree.setDirectoryState(element.dataset.name, element.dataset.state);
+    if (element.dataset.state == "open") {
         var _params = githubtree.getGitParts(_dirname, { depth: 2 });
         githubtree.pullGitRepository(_params, function (state, repo) {
             if (state == "done") {
@@ -673,7 +669,7 @@ function _refresh(params) {
 
 window.addEventListener('resize', function (event) {
 
-    console.log("onresize");
+
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
     if (w < 576) {
         if (document.getElementById("pageLeftToolbar").style.display != "none") {
