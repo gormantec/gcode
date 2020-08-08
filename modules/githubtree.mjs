@@ -19,6 +19,7 @@ export function getGitParts(filename,result) {
     if (filename && filename.substring(0, 6) == "git://") {
         var firstColon = filename.indexOf(":", 6);
         var secondColon = filename.indexOf("/", firstColon + 1);
+        if(secondColon<0){secondColon=filename.length;filename=filename+"/"};
         _result.username = filename.substring(6, firstColon);
         _result.repo = filename.substring(firstColon + 1, secondColon);
         _result.path = filename.substring(secondColon + 1);
