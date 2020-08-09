@@ -295,8 +295,7 @@ export function pullGitRepository(params, callbackrefresh) {
     
     
         }
-        console.log("git pull "+repo+" - start");
-        recurseGit(startpath, 0, function () { console.log("git pull "+repo+" - done"); if (callbackrefresh) callbackrefresh("done", repo, ""); });
+        recurseGit(startpath, 0, function () { if (callbackrefresh) callbackrefresh("done", repo, ""); });
     });
 }
 
