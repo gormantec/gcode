@@ -383,8 +383,29 @@ function getCode(guid, callback) {
 }
 
 function _uploadFile(html) {
+/*
+    $.ajax({
+        url: fpwaupload_uri,
+        //headers: { "x-api-key": "gKVuZ4CdXa59xxK2SmnTC9CL6b1LG1jL5h9WYcrD" },
+        type: 'post',
+        dataType: "json",
+        xhrFields: {
+            withCredentials: false
+        },
+        data: JSON.stringify({
+            encodedhtml: btoa("<!doctype html>\n<html>\n<head>\n<link rel=\"manifest\" href=\"xxxxx_manifest.json\">\n<link rel=\"apple-touch-icon\" href=\"###ICONURI###\">\n<meta property=\"fpwa:template\" content=\"fpwa=true,name=Long Name,short_name=Short Name,theme_color=#2196f3,orientation=portrait\" />\n</head>\n<body>\n" + sessionStorage.getItem("compiledhtml") + "\n</body>\n</html>"),
+            encodedicon: sessionStorage.getItem("icon57")
+            
+        }),
+        success: function (data) {
+            console.log(data);
+            w.location = 'https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/' + data.uri;
+        },
+        error: function (error) { window.alert("Error:" + JSON.stringify(error)); },
+    });
+    */
 
-    fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload', {
+    fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload?test=100', {
         method: 'POST', 
         mode: "cors",
         credentials: 'omit',
