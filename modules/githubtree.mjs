@@ -281,6 +281,7 @@ export function pullGitRepository(params, callbackrefresh) {
                                 if(!repos[repo][file.path]){
                                     console.log("repos["+repo+"]["+file.path+"] not exist: "+repos[repo][file.path]);
                                     repos[repo][file.path]={ files: [], state:"closed"};
+                                    setDirectoryState("git://"+username+":"+repo+""+file.path,"closed");
                                 }
                                 else{
                                     console.log("repos["+repo+"]["+file.path+"] exits state="+repos[repo][file.path].state);
