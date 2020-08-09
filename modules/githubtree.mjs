@@ -195,15 +195,16 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     files[j].name + xxx + "</div>"
                 );
                 console.log("append child: "+_child.dataset.name );
+                var tempName=_child.dataset.name;
                 if(widgetClass ==  "dirWidget"){
                     var tempParentElement = document.createElement('div');
-                    _child.addEventListener("click", function () { console.log(_child.dataset.name); dirOnClick(_child); });
                     tempParentElement.appendChild(_child);
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(tempParentElement);
+                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName:"+tempName); dirOnClick(_child); });
                 }
                 else{
-                    _child.addEventListener("click", function () { console.log(_child.dataset.name); fileOnClick(_child); });
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
+                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName"+tempName; fileOnClick(_child); });
                 }
                 
             }
