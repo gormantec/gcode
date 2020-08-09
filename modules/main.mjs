@@ -265,21 +265,13 @@ function _openDir(element) {
         else if (_dirname.substring(0, 6) == "git://") {
             githubtree.setDirectoryState(_dirname, element.dataset.state);
             if (element.dataset.state == "open") {
-                var _params = githubtree.getGitParts(_dirname, { depth: 2 });
+                var _params = githubtree.getGitParts(_dirname, { depth: 1 });
                 githubtree.pullGitRepository(_params, function (state, repo) {
                     if (state == "done") {
                         githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
                     }
                 });
             }
-            if (element.parentElement.childNodes.length > 1) {
-                element.parentElement.childNodes.forEach(function (e) {
-                    if (e != element) {
-                        e.style.display = _fileDisplayValue;
-                    }
-                });
-            }
-
         }
     }
     else {
