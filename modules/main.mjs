@@ -388,11 +388,12 @@ function _uploadFile(html) {
     fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload', {
         method: 'POST', 
         mode: "cors",
+        credentials: 'omit',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            encodedhtml: btoa(html),
+            encodedhtml: btoa("<html>sdfsdfsdfsdf</html>"),
         }),
     }).then(response => response.json()).then(data => {
         console.log('Success:', data);
