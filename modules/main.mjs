@@ -429,7 +429,7 @@ function _toolbarButtonClicked() {
         }
         else if (filename.endsWith(".mjs")) {
             console.log("local:default user$ launch webApp " + filename + "\n\n");
-            try {
+          //  try {
                 var win = window.open("", filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
@@ -476,9 +476,9 @@ function _toolbarButtonClicked() {
                     
                 });
             }
-            catch (e) {
-                console.error("error:"+e);
-            }
+           // catch (e) {
+           //     console.error("error:"+e);
+           // }
             console.log(" ");
         }
         else if (filename.endsWith(".py")) {
