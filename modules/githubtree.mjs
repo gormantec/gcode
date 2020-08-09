@@ -15,17 +15,15 @@ export function addRepoFile(repo, dirpath, fileinfo) {
 }
 
 export function setDirectoryState(path, state) {
-    var firstColon = path.indexOf(":", 6);
-    var secondColon = path.indexOf("/", firstColon + 1);
-    if (secondColon < 0) secondColon = 10000;
-    var username = path.substring(6, firstColon);
-    var repo = path.substring(firstColon + 1, secondColon);
-    var dirpath = path.substring(secondColon + 1);
+    var parts=getGitParts(path);
+
+    var username = parts.username;
+    var repo = parts.repo;
+    var dirpath = parts.path;
     var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
     if (repo && dirpath ) {
         repos[repo][dirpath]=repos[repo][dirpath] || {files:[]};
         repos[repo][dirpath].state = state;
-        console.log("repos["+repo+"]["+dirpath+"] set state="+repos[repo][dirpath].state);
     }
 
 }
