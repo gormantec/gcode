@@ -199,7 +199,7 @@ function _openFile(element) {
             });
         }
     }
-    else{
+    else {
         console.log(element);
         console.log(element.classList);
         console.log(element.dataset);
@@ -242,7 +242,7 @@ function _openDir(element) {
         selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
         if (selectedItem) selectedItem.className = "dirWidget";
         element.className = "dirWidget dirWidgetSelected";
-        selectedFileWidget = element.dataset.name;
+        selectedFileWidget = _dirname;
 
         var _fileDisplayValue = "none";
         if (element.dataset.state && element.dataset.state == "closed") {
@@ -256,18 +256,6 @@ function _openDir(element) {
             element.getElementsByTagName("i")[0].innerText = dirIconClosed;
         }
 
-        githubtree.setDirectoryState(element.dataset.name, element.dataset.state);
-        if (element.dataset.state == "open") {
-            var _params = githubtree.getGitParts(_dirname, { depth: 2 });
-            githubtree.pullGitRepository(_params, function (state, repo) {
-                if (state == "done") {
-                    githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
-                }
-            });
-        }
-
-
-
         if (_dirname == "default") {
             var _array = document.querySelectorAll("div.fileWidget[data-dirname='" + _dirname + "']");
             if (_array) Array.from(_array).forEach(function (e) { if (e.dataset.dirname == _dirname) e.style.display = _fileDisplayValue; });
@@ -275,13 +263,26 @@ function _openDir(element) {
             if (_array) Array.from(_array).forEach(function (e) { e.style.display = _fileDisplayValue; });
         }
         else if (_dirname.substring(0, 6) == "git://") {
-            var _array = document.querySelectorAll("div.fileWidget[data-name^='" + _dirname + "/'], div.dirWidget[data-name^='" + _dirname + "/']");
-            if (_array) Array.from(_array).forEach(function (e) {
-                e.style.display = _fileDisplayValue;
-            });
+            githubtree.setDirectoryState(_dirname, element.dataset.state);
+            if (element.dataset.state == "open") {
+                var _params = githubtree.getGitParts(_dirname, { depth: 2 });
+                githubtree.pullGitRepository(_params, function (state, repo) {
+                    if (state == "done") {
+                        githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
+                    }
+                });
+            }
+            if (element.parentElement.childNodes.length > 1) {
+                element.parentElement.childNodes.forEach(function (e) {
+                    if (e != element) {
+                        e.style.display = _fileDisplayValue;
+                    }
+                });
+            }
+
         }
     }
-    else{
+    else {
         console.log(element);
         console.log(element.classList);
         console.log(element.dataset);
