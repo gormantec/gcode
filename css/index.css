@@ -55,6 +55,7 @@ body {
     overflow: hidden;
     border-style: solid;
     border-width: 1px;
+    padding:4px;
     border-color: #005040;
 }
 #pageBottomScroll {
@@ -63,7 +64,7 @@ body {
     right: 0px;
     top: 4px;
     bottom: 0px;
-    padding:4px;
+    padding:0px;
     overflow: scroll;
     border: none;
     
