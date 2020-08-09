@@ -275,7 +275,6 @@ function _openDir(element) {
                         {
                             e.firstChild.style.display = _fileDisplayValue;
                         }
-                        
                     }
                 });
             }
