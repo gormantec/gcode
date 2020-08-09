@@ -465,7 +465,7 @@ function _toolbarButtonClicked() {
                 _module.text = "\n\n" + code + "\n\n";
                 var html=htmlToElement(win.document.documentElement.outerHTML ? win.document.documentElement.outerHTML : ("<html>\n"+win.document.documentElement.innerHTML+"\n</html>"));
                 console.log(html.outerHTML);
-                html.firstChild.appendChild(_module);
+                html.getElementsByTagName("head")[0].appendChild(_module);
                 _uploadFile("<!doctype html>\n"+html.outerHTML,function(error,uri){
                     if(error)
                     {
