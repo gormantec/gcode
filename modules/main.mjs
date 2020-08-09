@@ -813,7 +813,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
+/*
     (function () {
         var old = console.log;
         var olde = console.error;
@@ -833,7 +833,7 @@ document.addEventListener("DOMContentLoaded", function () {
             pageBottom.scrollTo(0, pageBottom.scrollHeight);
         }
     })();
-
+*/
 
 
 
