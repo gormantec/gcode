@@ -410,11 +410,10 @@ function _uploadFile(html) {
         mode: "cors",
         credentials: 'omit',
         headers: {
-            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            encodedhtml: btoa(html), 
-        }),
+        body: JSON.stringify({encodedhtml: btoa(html)}),
     }).then(response => response.json()).then(data => {
         console.log('Success:', data);
     }).catch((error) => {
