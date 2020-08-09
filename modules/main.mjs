@@ -463,7 +463,7 @@ function _toolbarButtonClicked() {
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
                 _module.text = "\n\n" + code + "\n\n";
-                var html=htmlToElement(win.document.documentElement.outerHTML ? win.document.documentElement.outerHTML : ("<html>\n"+win.document.documentElement.innerHTML+"\n</html>"));
+                var html= win.document.documentElement.cloneNode(true);
                 console.log(html.outerHTML);
                 html.getElementsByTagName("head")[0].appendChild(_module);
                 _uploadFile("<!doctype html>\n"+html.outerHTML,function(error,uri){
