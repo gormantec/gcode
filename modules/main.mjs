@@ -464,8 +464,8 @@ function _toolbarButtonClicked() {
                 console.log("DOMContentLoaded loading  2");
                 win.addEventListener("load", function () {
                     console.log("loaded");
-                    console.log(win.document.documentElement.outerHTML);
-                    _uploadFile(win.document.documentElement.outerHTML);
+                    console.log(win.document.outerHTML);
+                    _uploadFile(win.document.outerHTML);
                 },false);
             }
             catch (e) {
