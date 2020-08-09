@@ -189,14 +189,21 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                 var gitpath = "git://" + repousername + ":" + reponame + "/" + files[j].dirpath;
                 if (gitpath.slice(-1) == "/") gitpath = gitpath.slice(0, -1);
                 var _child=htmlToElement(
-                    "<div><div class='" + widgetClass + fileWidgetSelected + "' data-name='git://" + repousername + ":" + reponame + "/" +
+                    "<div class='" + widgetClass + fileWidgetSelected + "' data-name='git://" + repousername + ":" + reponame + "/" +
                     files[j].filepath + "' " + nextname + " data-dirname='" + reponame + "' " + datastate + display + ">" +
                     "<div class='fileIndent' style='width:" + indentWidth + "px'></div><i class='material-icons'>" + fileIcon + "</i>" +
-                    files[j].name + xxx + "</div></div>"
+                    files[j].name + xxx + "</div>"
                 );
-                if(widgetClass ==  "dirWidget")_child.firstChild.addEventListener("click", function () { dirOnClick(_child.firstChild); });
-                else _child.firstChild.addEventListener("click", function () { fileOnClick(_child.firstChild); });
                 console.log("append child: "+_child.firstChild.dataset.name );
+                if(widgetClass ==  "dirWidget"){
+                    var tempParentElement = document.createElement('div');
+                    _child.firstChild.addEventListener("click", function () { dirOnClick(_child.firstChild); });
+                    tempParentElement.appendChild(_child);
+                    _child=tempParentElement;
+                }
+                else _child.firstChild.addEventListener("click", function () { fileOnClick(_child.firstChild); });
+
+                
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
             }
         }
