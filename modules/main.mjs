@@ -384,7 +384,6 @@ function getCode(guid, callback) {
 
 function _uploadFile(html) {
 
-    console.log(html);
     fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload', {
         method: 'POST', 
         mode: "cors",
@@ -393,7 +392,7 @@ function _uploadFile(html) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            encodedhtml: btoa("<html>sdfsdfsdfsdf</html>"),
+            encodedhtml: btoa(html),
         }),
     }).then(response => response.json()).then(data => {
         console.log('Success:', data);
@@ -466,11 +465,7 @@ function _toolbarButtonClicked() {
                 console.log("DOMContentLoaded loading  2");
                 win.addEventListener("load", function () {
                     console.log("loaded");
-                    console.log("outerHTML:"+win.document.outerHTML);
-                    console.log("innerHTML:"+win.document.innerHTML);
-                    console.log("outerHTML:"+win.document.documentElement.outerHTML);
-                    console.log("innerHTML:"+win.document.documentElement.innerHTML);
-                    _uploadFile(win.document.outerHTML);
+                    _uploadFile(win.document.documentElement.outerHTML ? "<!doctype html>\n"+win.document.documentElement.outerHTML : ("<!doctype html>\n<html>\n"+win.document.documentElement.innerHTML+"\n</html>"));
                 },false);
             }
             catch (e) {
