@@ -392,7 +392,7 @@ function _uploadFile(html) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            encodedhtml: btoa(html),
+            encodedhtml: btoa(html), 
         }),
     }).then(response => response.json()).then(data => {
         console.log('Success:', data);
