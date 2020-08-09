@@ -14,6 +14,37 @@ export function addRepoFile(repo, dirpath, fileinfo) {
     repos[repo][dirpath].files.push(fileinfo);
 }
 
+export function setDirectoryState(path, state) {
+    var firstColon = path.indexOf(":", 6);
+    var secondColon = path.indexOf("/", firstColon + 1);
+    if (secondColon < 0) secondColon = 10000;
+    var username = path.substring(6, firstColon);
+    var repo = path.substring(firstColon + 1, secondColon);
+    var dirpath = path.substring(secondColon + 1);
+    var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
+    if (repo && dirpath ) {
+        repos[repo][dirpath]=repos[repo][dirpath] || {files:[]};
+        repos[repo][dirpath].state = state;
+        console.log("repos["+repo+"]["+dirpath+"] set state="+repos[repo][dirpath].state);
+    }
+
+}
+
+export function setDirectoryLastRefresh(path,lastRefresh){
+    var parts=getGitParts(path);
+    if (parts.repo && parts.path && repos[parts.repo][parts.path]) {
+        repos[parts.repo][parts.path].lastRefresh = lastRefresh;
+    }
+}
+
+export function getDirectoryLastRefresh(path){
+    var parts=getGitParts(path);
+    if (parts.repo && parts.path && repos[parts.repo][parts.path]) {
+        return repos[parts.repo][parts.path].lastRefresh
+    }
+    return null;
+}
+
 export function getGitParts(filename,result) {
     var _result=result||{};
     if (filename && filename.substring(0, 6) == "git://") {
@@ -305,21 +336,7 @@ export function pullGitRepository(params, callbackrefresh) {
 
 
 
-export function setDirectoryState(path, state) {
-    var firstColon = path.indexOf(":", 6);
-    var secondColon = path.indexOf("/", firstColon + 1);
-    if (secondColon < 0) secondColon = 10000;
-    var username = path.substring(6, firstColon);
-    var repo = path.substring(firstColon + 1, secondColon);
-    var dirpath = path.substring(secondColon + 1);
-    var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
-    if (repo && dirpath ) {
-        repos[repo][dirpath]=repos[repo][dirpath] || {files:[]};
-        repos[repo][dirpath].state = state;
-        console.log("repos["+repo+"]["+dirpath+"] set state="+repos[repo][dirpath].state);
-    }
 
-}
 
 
 
