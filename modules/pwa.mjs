@@ -131,9 +131,12 @@ class PWA {
         _meta.setAttribute("content", content);
         targetDocument.head.appendChild(_meta);
     }
-
-
-
+    addLink(rel, href) {
+        var _meta = targetDocument.createElement("link");
+        _meta.setAttribute("rel", rel);
+        _meta.setAttribute("href", href);
+        targetDocument.head.appendChild(_meta);
+    }
     addStyle(targetDocument, href, callback) {
         var _style = targetDocument.createElement("link");
         _style.setAttribute("rel", "stylesheet");
@@ -173,10 +176,11 @@ class PWA {
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
         this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
-        this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "default");
-        this.addMeta(win.document, "viewport", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
+        this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "black-translucent");
+        this.addMeta(win.document, "viewport", "viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
         this.addMeta(win.document, "theme-color", this.primaryColor);
+        this.addLink("manifest", "./pwa/sample_manifest.webmanifest");
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
