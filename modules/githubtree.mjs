@@ -204,7 +204,7 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                 }
                 else{
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
-                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName"+tempName; fileOnClick(_child); });
+                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName"+tempName); fileOnClick(_child); });
                 }
                 
             }
