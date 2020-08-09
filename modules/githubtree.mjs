@@ -235,7 +235,7 @@ export function pullGitRepository(params, callbackrefresh) {
     var username=params.username;
     var repo=params.repo;
     var startpath=params.path || "";
-    var maxdepth=params.depth || 2;
+    var maxdepth=params.depth || 1;
 
     waitForOctokit(function(){
         var octokit = getGitHub({ auth: getToken() });
@@ -244,7 +244,7 @@ export function pullGitRepository(params, callbackrefresh) {
             console.log("depth:"+depth);
             console.log("directories.length :"+directories.length );
     
-            if (!directories || directories.length == 0 || depth > maxdepth) {
+            if (!directories || directories.length == 0 || depth >= maxdepth) {
                 console.log("exit:");
                 console.log(directories);
                 console.log(directories.length);
