@@ -277,7 +277,7 @@ export function pullGitRepository(params, callbackrefresh) {
                 var directories = [];
                 console.log("length:"+sha.data.length);
                 sha.data.forEach(function (file) {
-                    console.log("file:"+file);
+                    console.log("file:"+file.name);
                     if (file.name.substring(0, 1) != ".") {
                         console.log("addRepoFile:"+_path+"/"+file.path);
                         addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
@@ -294,7 +294,7 @@ export function pullGitRepository(params, callbackrefresh) {
                     }
                 });
                 callback();
-            }).catch((e) => { console.log(e); callback(); });;;
+            }).catch((e) => { console.log("error:"+e); callback(); });;;
     
     
         }
