@@ -467,6 +467,7 @@ function _toolbarButtonClicked() {
                 _script.text="\n  window.PWA.globals.splash="+splash+";\n"+
                                "  window.PWA.globals.splashColor="+splashColor+";\n"+
                                "  window.PWA.globals.splashDuration="+splashDuration+";\n";
+                win.document.head.appendChild(_script);
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
                 _module.text = "\n\n" + code + "\n\n";
