@@ -275,6 +275,7 @@ export function pullGitRepository(params, callbackrefresh) {
                 path: path
             }).then((sha) => {
                 var directories = [];
+                console.log("length:"+sha.data.length);
                 Array.from(sha.data).forEach(function (file) {
                     if (file.name.substring(0, 1) != ".") {
                         console.log("addRepoFile:"+_path+" "+file.path +" "+file.name);
