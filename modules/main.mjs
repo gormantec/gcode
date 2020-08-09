@@ -267,11 +267,11 @@ function _openDir(element) {
             if (element.parentElement.childNodes.length > 1) {
                 element.parentElement.childNodes.forEach(function (e) {
                     if (e != element) {
-                        if(e.classList.contains("dirWidget") || e.classList.contains("dirWidget"))
+                        if(e.classList.contains("dirWidget") || e.classList.contains("fileWidget"))
                         {
                             e.style.display = _fileDisplayValue;
                         }
-                        else if(e.firstChild.classList.contains("dirWidget") || e.firstChild.classList.contains("dirWidget"))
+                        else if(e.firstChild.classList.contains("dirWidget") || e.firstChild.classList.contains("fileWidget"))
                         {
                             e.firstChild.style.display = _fileDisplayValue;
                         }
@@ -283,7 +283,7 @@ function _openDir(element) {
                 var _params = githubtree.getGitParts(_dirname, { depth: 1 });
                 githubtree.pullGitRepository(_params, function (state, repo) {
                     if (state == "done") {
-                        githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, filename, _openDir, _openFile);
+                        githubtree.refreshGitTree(_params.username, _params.repo, pageLeftBody, selectedFileWidget, _openDir, _openFile);
                     }
                 });
             }
