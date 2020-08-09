@@ -475,7 +475,7 @@ function _toolbarButtonClicked() {
                     }
                     
                 });
-            }
+           // }
            // catch (e) {
            //     console.error("error:"+e);
            // }
