@@ -290,7 +290,7 @@ export function pullGitRepository(params, callbackrefresh) {
                         }
                     }
                 });
-                if (directories.length > 0) loopDirectories(directories, depth, callback);
+                if (false && directories.length > 0) loopDirectories(directories, depth, callback);
                 else callback();
             }).catch((e) => { console.log(e); callback(); });;;
     
