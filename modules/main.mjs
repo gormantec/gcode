@@ -465,7 +465,7 @@ function _toolbarButtonClicked() {
                 win.addEventListener("load", function () {
                     console.log("loaded");
                     _uploadFile(win.document.documentElement.outerHTML);
-                });
+                },false);
             }
             catch (e) {
                 console.error("error:"+e);
