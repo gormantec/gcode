@@ -265,30 +265,6 @@ export function pullGitRepository(params, callbackrefresh) {
 
     waitForOctokit(function(){
         var octokit = getGitHub({ auth: getToken() });
-        var loopDirectories = function (directories, depth, callback) {
-    
-            if (!directories || directories.length == 0 || depth >= maxdepth) {
-                console.log("exit:");
-                console.log(directories);
-                console.log(directories.length);
-                console.log(depth);
-                callback();
-            }
-            else {
-                var dir = directories.shift();
-                depth++;
-                recurseGit(dir, depth, function () {
-                    depth--;
-                    if (directories.length > 0) {
-                        loopDirectories(directories, depth, callback);
-                    }
-                    else {
-                        callback();
-                    }
-                });
-            }
-        };
-    
         var recurseGit = function (path, depth, callback) {
             var _path = path;
             if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
@@ -301,27 +277,22 @@ export function pullGitRepository(params, callbackrefresh) {
                 var directories = [];
                 Array.from(sha.data).forEach(function (file) {
                     if (file.name.substring(0, 1) != ".") {
-    
+                        console.log("addRepoFile:"+_path);
                         addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
                         if (callbackrefresh) callbackrefresh("running", repo, _path);
     
                         if (file.type == "dir" && file.name.substring(0, 1) != ".") {
                             if (file.path) {
                                 if(!repos[repo][file.path]){
-                                    console.log("repos["+repo+"]["+file.path+"] not exist: "+repos[repo][file.path]);
                                     repos[repo][file.path]={ files: [], state:"closed"};
                                     setDirectoryState("git://"+username+":"+repo+""+file.path,"closed");
-                                }
-                                else{
-                                    console.log("repos["+repo+"]["+file.path+"] exits state="+repos[repo][file.path].state);
                                 }
                                 directories.push(file.path);
                             }
                         }
                     }
                 });
-                if (false && directories.length > 0) loopDirectories(directories, depth, callback);
-                else callback();
+                callback();
             }).catch((e) => { console.log(e); callback(); });;;
     
     
