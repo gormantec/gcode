@@ -638,6 +638,7 @@ function _refresh(params) {
         i = keys.length;
     var defaultParent = htmlToElement("<div id=\"defaultParent\"></div>");
     var pageLeft = htmlToElement("<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>");
+    pageLeft.addEventListener("click", function () { _openDir(pageLeft); });
     defaultParent.appendChild(pageLeft);
     keys.sort();
     keys.reverse();
