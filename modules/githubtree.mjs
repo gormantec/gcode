@@ -293,7 +293,7 @@ export function pullGitRepository(params, callbackrefresh) {
                     }
                 });
                 callback();
-            }).catch((e) => { console.log("error:"+e); callback(); });;;
+            });//.catch((e) => { console.log("error:"+e); callback(); });;;
     
     
         }
