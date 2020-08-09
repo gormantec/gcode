@@ -312,9 +312,12 @@ export function setDirectoryState(path, state) {
     var repo = path.substring(firstColon + 1, secondColon);
     var dirpath = path.substring(secondColon + 1);
     var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
-    if (!repo || !dirpath || repos[repo][dirpath]) return;
-    repos[repo][dirpath].state = state;
-    console.log("repos["+repo+"]["+dirpath+"] set state="+repos[repo][dirpath].state);
+    if (repo && dirpath ) {
+        repos[repo][dirpath]=repos[repo][dirpath] || {files:[]};
+        repos[repo][dirpath].state = state;
+        console.log("repos["+repo+"]["+dirpath+"] set state="+repos[repo][dirpath].state);
+    }
+
 }
 
 
