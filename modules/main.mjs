@@ -468,7 +468,7 @@ function _toolbarButtonClicked() {
                 });
             }
             catch (e) {
-                console.error(e);
+                console.error("error:"+e);
             }
             console.log(" ");
         }
