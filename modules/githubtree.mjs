@@ -22,9 +22,6 @@ export function setDirectoryState(path, state) {
     var dirpath = parts.path;
     var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
     if (repo && dirpath ) {
-        console.log(path);
-        console.log(repo);
-        console.log(dirpath);
         repos[repo][dirpath]=repos[repo][dirpath] || {files:[]};
         repos[repo][dirpath].state = state;
     }
@@ -278,9 +275,7 @@ export function pullGitRepository(params, callbackrefresh) {
                 path: path
             }).then((sha) => {
                 var directories = [];
-                console.log("length:"+sha.data.length);
                 sha.data.forEach(function (file) {
-                    console.log("file:"+file.name);
                     if (file.name.substring(0, 1) != ".") {
                         addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
                         if (callbackrefresh) callbackrefresh("running", repo, _path);
@@ -296,7 +291,7 @@ export function pullGitRepository(params, callbackrefresh) {
                     }
                 });
                 callback();
-            });//.catch((e) => { console.log("error:"+e); callback(); });;;
+            }).catch((e) => { console.log("error:"+e); callback(); });;;
     
     
         }
