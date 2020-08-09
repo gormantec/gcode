@@ -461,7 +461,7 @@ function _toolbarButtonClicked() {
                 _module.setAttribute("type", "module");
                 _module.text = "\n\n" + code + "\n\n";
                 win.document.head.appendChild(_module);
-                console.log("DOMContentLoaded loading");
+                console.log("DOMContentLoaded loading  2");
                 win.addEventListener("load", function () {
                     console.log("loaded");
                     _uploadFile(win.document.documentElement.outerHTML);
