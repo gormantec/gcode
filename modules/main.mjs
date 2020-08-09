@@ -267,14 +267,7 @@ function _openDir(element) {
             if (element.parentElement.childNodes.length > 1) {
                 element.parentElement.childNodes.forEach(function (e) {
                     if (e != element) {
-                        if(e.classList.contains("dirWidget") || e.classList.contains("fileWidget"))
-                        {
                             e.style.display = _fileDisplayValue;
-                        }
-                        else if(e.firstChild.classList.contains("dirWidget") || e.firstChild.classList.contains("fileWidget"))
-                        {
-                            e.firstChild.style.display = _fileDisplayValue;
-                        }
                     }
                 });
             }
