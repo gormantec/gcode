@@ -68,7 +68,7 @@ body {
     border: none;
     
 }
-#log{
+pre#log{
     border: none;
 }
 #pageBottom:after {
