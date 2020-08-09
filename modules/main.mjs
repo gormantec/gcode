@@ -278,8 +278,8 @@ function _openDir(element) {
                     }
                 });
             }
-            if (element.dataset.state == "open" && (!element.dataset.lastrefresh || element.dataset.lastrefresh>(Date().now()-60000))) {
-                element.dataset.lastrefresh=Date().now();
+            if (element.dataset.state == "open" && (!element.dataset.lastrefresh || element.dataset.lastrefresh>(Date.now()-60000))) {
+                element.dataset.lastrefresh=Date.now();
                 var _params = githubtree.getGitParts(_dirname, { depth: 1 });
                 githubtree.pullGitRepository(_params, function (state, repo) {
                     if (state == "done") {
