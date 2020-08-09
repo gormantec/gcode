@@ -279,6 +279,7 @@ export function pullGitRepository(params, callbackrefresh) {
                         if (file.type == "dir" && file.name.substring(0, 1) != ".") {
                             if (file.path) {
                                 if(!repos[repo][file.path]){
+                                    console.log("repos[repo][file.path]:"+repos[repo][file.path]);
                                     repos[repo][file.path]={ files: [], state:"closed"};
                                 }
                                 else{
