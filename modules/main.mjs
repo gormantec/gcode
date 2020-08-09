@@ -652,8 +652,9 @@ function _refresh(params) {
             if (i > 0) nextname = "data-nextname='" + keys[i - 1].substring(5) + "'";
             if (selectedFileWidget == keys[i].substring(5)) selectedClass = " fileWidgetSelected";
             var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
-            _child.addEventListener("click", function () { _openFile(_child); });
             defaultParent.appendChild(_child);
+            _child.addEventListener("click", function () { console.log("default:"+_child.dataset.name);_openFile(_child); });
+            
 
         }
     }
