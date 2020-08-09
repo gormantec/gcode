@@ -382,28 +382,8 @@ function getCode(guid, callback) {
     }, 500);
 }
 
-function _uploadFile(html) {
-/*
-    $.ajax({
-        url: fpwaupload_uri,
-        //headers: { "x-api-key": "gKVuZ4CdXa59xxK2SmnTC9CL6b1LG1jL5h9WYcrD" },
-        type: 'post',
-        dataType: "json",
-        xhrFields: {
-            withCredentials: false
-        },
-        data: JSON.stringify({
-            encodedhtml: btoa("<!doctype html>\n<html>\n<head>\n<link rel=\"manifest\" href=\"xxxxx_manifest.json\">\n<link rel=\"apple-touch-icon\" href=\"###ICONURI###\">\n<meta property=\"fpwa:template\" content=\"fpwa=true,name=Long Name,short_name=Short Name,theme_color=#2196f3,orientation=portrait\" />\n</head>\n<body>\n" + sessionStorage.getItem("compiledhtml") + "\n</body>\n</html>"),
-            encodedicon: sessionStorage.getItem("icon57")
-            
-        }),
-        success: function (data) {
-            console.log(data);
-            w.location = 'https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/' + data.uri;
-        },
-        error: function (error) { window.alert("Error:" + JSON.stringify(error)); },
-    });
-    */
+function _uploadFile(html,callback) {
+
 
     fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
         method: 'post', 
@@ -415,10 +395,12 @@ function _uploadFile(html) {
         },
         body: JSON.stringify({encodedhtml: btoa(html)}),
     }).then(response => response.json()).then(data => {
-        console.log('Success:', data);
+        callback(null,"https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/"+data.uri);
     }).catch((error) => {
-        console.error('Error:', error);
+        callback(error);
     });
+
+    //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
 
 function _toolbarButtonClicked() {
@@ -481,12 +463,18 @@ function _toolbarButtonClicked() {
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
                 _module.text = "\n\n" + code + "\n\n";
-                win.document.head.appendChild(_module);
-                console.log("DOMContentLoaded loading  2");
-                win.addEventListener("load", function () {
-                    console.log("loaded");
-                    _uploadFile(win.document.documentElement.outerHTML ? "<!doctype html>\n"+win.document.documentElement.outerHTML : ("<!doctype html>\n<html>\n"+win.document.documentElement.innerHTML+"\n</html>"));
-                },false);
+                var html=htmlToElement(win.document.documentElement.outerHTML ? win.document.documentElement.outerHTML : ("<html>\n"+win.document.documentElement.innerHTML+"\n</html>"));
+                html.firstChild.appendChild(_module);
+                _uploadFile("<!doctype html>\n"+html.outerHTML,function(error,uri){
+                    if(error)
+                    {
+                        win.document.head.appendChild(_module);
+                    }
+                    else{
+                        win.location.href=url;
+                    }
+                    
+                });
             }
             catch (e) {
                 console.error("error:"+e);
