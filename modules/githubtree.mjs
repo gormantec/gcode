@@ -288,7 +288,7 @@ export function pullGitRepository(params, callbackrefresh) {
                             if (file.path) {
                                 if(!repos[repo][file.path]){
                                     repos[repo][file.path]={ files: [], state:"closed"};
-                                    setDirectoryState("git://"+username+":"+repo+""+file.path,"closed");
+                                    setDirectoryState("git://"+username+":"+repo+"/"+file.path,"closed");
                                 }
                                 directories.push(file.path);
                             }
