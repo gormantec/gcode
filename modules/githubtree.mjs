@@ -22,6 +22,7 @@ export function setDirectoryState(path, state) {
     var dirpath = parts.path;
     var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
     if (repo && dirpath ) {
+        console.log(path);
         console.log(repo);
         console.log(dirpath);
         repos[repo][dirpath]=repos[repo][dirpath] || {files:[]};
