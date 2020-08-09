@@ -65,8 +65,11 @@ body {
     bottom: 0px;
     padding:4px;
     overflow: scroll;
-    border-style: none;
+    border: none;
     
+}
+#log{
+    border: none;
 }
 #pageBottom:after {
     content: " ";
