@@ -146,7 +146,7 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
         toDiv.appendChild(parentElement);
     }
     var _root=htmlToElement("<div class='dirWidget' data-name='git://" + repousername + ":" + reponame + "'><i class='material-icons'>keyboard_arrow_down</i>" + reponame + "</div>");
-    _root.addEventListener("click", function () { dirOnClick(_root); });
+    _root.addEventListener("click", function () { dirOnClick(this); });
     parentElement.appendChild(_root);
 
     repos[reponame]
@@ -200,11 +200,11 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     var tempParentElement = document.createElement('div');
                     tempParentElement.appendChild(_child);
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(tempParentElement);
-                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName:"+tempName); console.log("this:"+this.dataset.name); dirOnClick(_child); });
+                    _child.addEventListener("click", function () { dirOnClick(this); });
                 }
                 else{
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
-                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName"+tempName); console.log("this:"+this.dataset.name); fileOnClick(_child); });
+                    _child.addEventListener("click", function () { fileOnClick(this); });
                 }
                 
             }

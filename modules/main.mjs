@@ -639,7 +639,7 @@ function _refresh(params) {
         i = keys.length;
     var defaultParent = htmlToElement("<div id=\"defaultParent\"></div>");
     var pageLeft = htmlToElement("<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>");
-    pageLeft.addEventListener("click", function () { _openDir(pageLeft); });
+    pageLeft.addEventListener("click", function () { _openDir(this); });
     defaultParent.appendChild(pageLeft);
     keys.sort();
     keys.reverse();
@@ -653,7 +653,7 @@ function _refresh(params) {
             if (selectedFileWidget == keys[i].substring(5)) selectedClass = " fileWidgetSelected";
             var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
             defaultParent.appendChild(_child);
-            _child.addEventListener("click", function () { console.log("default:"+_child.dataset.name);_openFile(_child); });
+            _child.addEventListener("click", function () { _openFile(this); });
             
 
         }
