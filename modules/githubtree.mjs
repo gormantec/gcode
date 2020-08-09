@@ -314,6 +314,7 @@ export function setDirectoryState(path, state) {
     var parentpath = dirpath.substring(0, dirpath.lastIndexOf("/"));
     if (!repo || !dirpath || repos[repo][dirpath]) return;
     repos[repo][dirpath].state = state;
+    console.log("repos["+repo+"]["+dirpath+"] set state="+repos[repo][dirpath].state);
 }
 
 
