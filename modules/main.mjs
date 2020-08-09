@@ -386,7 +386,8 @@ function _uploadFile(html) {
 
     console.log(html);
     fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload', {
-        method: 'POST', // or 'PUT'
+        method: 'POST', 
+        mode: "cors",
         headers: {
             'Content-Type': 'application/json',
         },
