@@ -53,7 +53,6 @@ body {
     height: 150px;
     bottom: 0px;
     overflow: hidden;
-    padding:4px;
     border-style: solid;
     border-width: 1px;
     border-color: #005040;
@@ -64,6 +63,7 @@ body {
     right: 0px;
     top: 6px;
     bottom: 0px;
+    padding:4px;
     overflow: scroll;
     border-style: none;
     
