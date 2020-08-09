@@ -463,6 +463,10 @@ function _toolbarButtonClicked() {
                 win.document.body.appendChild(_loader);
                 if (splashColor) win.document.body.style.backgroundColor = splashColor;
                 else win.document.body.style.backgroundColor = "black";
+                var _script = win.document.createElement("script");
+                _script.text="\n  window.PWA.globals.splash="+splash+";\n"+
+                               "  window.PWA.globals.splashColor="+splashColor+";\n"+
+                               "  window.PWA.globals.splashDuration="+splashDuration+";\n";
                 var _module = win.document.createElement("script");
                 _module.setAttribute("type", "module");
                 _module.text = "\n\n" + code + "\n\n";
