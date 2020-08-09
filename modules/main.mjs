@@ -405,7 +405,7 @@ function _uploadFile(html) {
     });
     */
 
-    fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload?test=100', {
+    fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload?test=101', {
         method: 'POST', 
         mode: "cors",
         credentials: 'omit',
