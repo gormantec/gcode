@@ -405,7 +405,7 @@ function _uploadFile(html) {
     });
     */
 
-    fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload?test=102', {
+    fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/', {
         method: 'post', 
         mode: "cors",
         credentials: 'omit',
