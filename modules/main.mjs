@@ -267,13 +267,13 @@ function _openDir(element) {
             if (element.parentElement.childNodes.length > 1) {
                 element.parentElement.childNodes.forEach(function (e) {
                     if (e != element) {
-                            e.style.display = _fileDisplayValue;
+                        e.style.display = _fileDisplayValue;
                     }
                 });
             }
-            var lastRefresh=githubtree.getDirectoryLastRefresh(_dirname);
-            if (element.dataset.state == "open" && (!lastRefresh|| lastRefresh>(Date.now()-60000))) {
-                githubtree.setDirectoryLastRefresh(_dirname,Date.now());
+            var lastRefresh = githubtree.getDirectoryLastRefresh(_dirname);
+            if (element.dataset.state == "open" && (!lastRefresh || lastRefresh > (Date.now() - 60000))) {
+                githubtree.setDirectoryLastRefresh(_dirname, Date.now());
                 var _params = githubtree.getGitParts(_dirname, { depth: 1 });
                 githubtree.pullGitRepository(_params, function (state, repo) {
                     if (state == "done") {
@@ -382,6 +382,24 @@ function getCode(guid, callback) {
     }, 500);
 }
 
+function _uploadFile(html) {
+
+    console.log(html);
+    fetch('https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            encodedhtml: btoa(html),
+        }),
+    }).then(response => response.json()).then(data => {
+        console.log('Success:', data);
+    }).catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
 function _toolbarButtonClicked() {
 
 
@@ -443,6 +461,9 @@ function _toolbarButtonClicked() {
                 _module.setAttribute("type", "module");
                 _module.text = "\n\n" + code + "\n\n";
                 win.document.head.appendChild(_module);
+                win.document.addEventListener("DOMContentLoaded", function () {
+                    _uploadFile(win.document.documentElement.outerHTML);
+                });
             }
             catch (e) {
                 console.error(e);
@@ -655,7 +676,7 @@ function _refresh(params) {
             var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
             defaultParent.appendChild(_child);
             _child.addEventListener("click", function () { _openFile(this); });
-            
+
 
         }
     }
