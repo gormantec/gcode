@@ -23,7 +23,6 @@ export function getGitParts(filename,result) {
         _result.username = filename.substring(6, firstColon);
         _result.repo = filename.substring(firstColon + 1, secondColon);
         _result.path = filename.substring(secondColon + 1);
-        console.log(_result);
         return _result;
     }
     else{
@@ -169,7 +168,6 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                 else return a.name.localeCompare(b.name);
             });
             files.reverse();
-            console.log("files:"+JSON.stringify({data:files}));
             while (j--) {
                 var nextname = "";
                 if (j > 0) nextname = "data-nextname='git://" + repousername + ":" + reponame + "/" + files[j - 1].filepath + "'";
@@ -194,7 +192,6 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     "<div class='fileIndent' style='width:" + indentWidth + "px'></div><i class='material-icons'>" + fileIcon + "</i>" +
                     files[j].name + xxx + "</div>"
                 );
-                console.log("append child: "+_child.dataset.name );
                 var tempName=_child.dataset.name;
                 if(widgetClass ==  "dirWidget"){
                     var tempParentElement = document.createElement('div');
@@ -240,9 +237,6 @@ export function pullGitRepository(params, callbackrefresh) {
     waitForOctokit(function(){
         var octokit = getGitHub({ auth: getToken() });
         var loopDirectories = function (directories, depth, callback) {
-
-            console.log("depth:"+depth);
-            console.log("directories.length :"+directories.length );
     
             if (!directories || directories.length == 0 || depth >= maxdepth) {
                 console.log("exit:");
@@ -277,7 +271,6 @@ export function pullGitRepository(params, callbackrefresh) {
             }).then((sha) => {
                 var directories = [];
                 Array.from(sha.data).forEach(function (file) {
-                    console.log("file.name:"+file.name);
                     if (file.name.substring(0, 1) != ".") {
     
                         addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
@@ -285,7 +278,12 @@ export function pullGitRepository(params, callbackrefresh) {
     
                         if (file.type == "dir" && file.name.substring(0, 1) != ".") {
                             if (file.path) {
-                                if(!repos[repo][file.path])repos[repo][file.path]={ files: [], state:"closed"};
+                                if(!repos[repo][file.path]){
+                                    repos[repo][file.path]={ files: [], state:"closed"};
+                                }
+                                else{
+                                    console.log(repos[repo][file.path].state);
+                                }
                                 directories.push(file.path);
                             }
                         }
