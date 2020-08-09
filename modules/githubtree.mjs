@@ -200,11 +200,11 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     var tempParentElement = document.createElement('div');
                     tempParentElement.appendChild(_child);
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(tempParentElement);
-                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName:"+tempName); dirOnClick(_child); });
+                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName:"+tempName); console.log("this:"+this.dataset.name); dirOnClick(_child); });
                 }
                 else{
                     toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
-                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName"+tempName); fileOnClick(_child); });
+                    _child.addEventListener("click", function () { console.log("_child.dataset.name"+_child.dataset.name);console.log("tempName"+tempName); console.log("this:"+this.dataset.name); fileOnClick(_child); });
                 }
                 
             }
