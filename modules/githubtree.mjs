@@ -194,14 +194,14 @@ export function refreshGitTree(repousername, reponame, toDiv, selectedFileWidget
                     "<div class='fileIndent' style='width:" + indentWidth + "px'></div><i class='material-icons'>" + fileIcon + "</i>" +
                     files[j].name + xxx + "</div>"
                 );
-                console.log("append child: "+_child.firstChild.dataset.name );
+                console.log("append child: "+_child.dataset.name );
                 if(widgetClass ==  "dirWidget"){
                     var tempParentElement = document.createElement('div');
-                    _child.firstChild.addEventListener("click", function () { dirOnClick(_child.firstChild); });
+                    _child.addEventListener("click", function () { dirOnClick(_child); });
                     tempParentElement.appendChild(_child);
                     _child=tempParentElement;
                 }
-                else _child.firstChild.addEventListener("click", function () { fileOnClick(_child.firstChild); });
+                else _child.addEventListener("click", function () { fileOnClick(_child); });
 
                 
                 toDiv.querySelector("div.dirWidget[data-name='" + gitpath + "']").parentElement.appendChild(_child);
