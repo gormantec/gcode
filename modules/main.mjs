@@ -402,6 +402,7 @@ function _uploadFile(html,callback) {
 
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
+var win;
 
 function _toolbarButtonClicked() {
 
@@ -430,7 +431,8 @@ function _toolbarButtonClicked() {
         else if (filename.endsWith(".mjs")) {
             console.log("local:default user$ launch webApp " + filename + "\n\n");
           //  try {
-                var win = window.open("", filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+                if(win)win.close();
+                win = window.open("", filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
                 win.PWA = win.PWA || {};
