@@ -450,7 +450,7 @@ function _toolbarButtonClicked() {
                 if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
                 var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
                 if (splashDuration == code) splashDuration = null;
-                var spinnerSize = code.replace(/\/\*.*?spinnerSize:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
+                var spinnerSize = code.replace(/\/\*.*?spinnerSize:.*?([A-Za-z0-9]*)[\n].*?\*\/.*/s, '$1');
                 if (spinnerSize == code) spinnerSize = "50px";
                 if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
                     var _style = window.document.createElement("style");
