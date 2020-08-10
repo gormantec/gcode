@@ -431,7 +431,7 @@ function _toolbarButtonClicked() {
         else if (filename.endsWith(".mjs")) {
             console.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
-                if(win)win.close();
+                
                 var rootHTML=window.document.createElement("html");
                 var rootHead=window.document.createElement("head");
                 var rootBody=window.document.createElement("body");
@@ -478,7 +478,8 @@ function _toolbarButtonClicked() {
                     {
                     }
                     else{
-                        win = window.open(uri, filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+                        if(win)win.location.href=uri;
+                        else win = window.open(uri, filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                     }
                     
                 });
