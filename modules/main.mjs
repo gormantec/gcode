@@ -476,6 +476,7 @@ function _toolbarButtonClicked() {
                 _uploadFile("<!doctype html>\n"+rootHTML.outerHTML,function(error,uri){
                     if(error)
                     {
+                        console.log(error);
                     }
                     else{
                         if(win)win.location.href=uri;
