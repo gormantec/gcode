@@ -432,55 +432,53 @@ function _toolbarButtonClicked() {
             console.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
                 if(win)win.close();
-                win = window.open("", filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
-                while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
-                while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
-                win.PWA = win.PWA || {};
-                win.PWA.globals = win.PWA.globals || {};
+                var rootHTML=window.document.createElement("html");
+                var rootHead=window.document.createElement("head");
+                var rootBody=window.document.createElement("body");
+                rootHTML.appendChild(rootHead);
+                rootHTML.appendChild(rootBody);
+                //
+                //while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
+                //while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
                 var code = editor.getValue();
                 var splash = code.replace(/\/\*.*?splash:.*?(http.*png).*?\*\/.*/s, '$1');
                 if (splash == code) splash = null;
-                else win.PWA.globals.splash = splash;
                 var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if (splashColor == code) splashColor = null;
-                else win.PWA.globals.splashColor = splashColor;
+                var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+                if (splashBackgroundColor == code) splashBackgroundColor = "black";
+                if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
                 var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
                 if (splashDuration == code) splashDuration = null;
-                else win.PWA.globals.splashDuration = parseInt(splashDuration);
                 if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
-                    win.document.body.style.backgroundImage = "url(" + splash + ")";
-                    win.document.body.style.backgroundPosition = "center";
-                    win.document.body.style.backgroundRepeat = "no-repeat";
-                    win.document.body.style.height = "100vh";
+                    var _style = win.document.createElement("style");
+                    _style.textContent="body{background-image:url(" + splash + ");background-position:center;background-repeat=no-repeat;height=100vh;"+(splashColor?"color:"+splashColor:"")+";"+(splashBackgroundColor?"background-color:"+splashBackgroundColor:"")+";}"
+                    rootHead.appendChild(_style);
                 }
                 var _spinner = win.document.createElement("style");
                 _spinner.textContent = ".loader{color:var(--primaryColorText);font-size:50px;text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
-                win.document.head.appendChild(_spinner);
-                var _loader = win.document.createElement("div");
+                rootHead.appendChild(_spinner);
+                var _loader = windows.document.createElement("div");
                 _loader.className = "loader";
                 _loader.innerText = "Loading...";
-                if (splashColor) _loader.style.color = getTextColor(splashColor);
-                win.document.body.appendChild(_loader);
-                if (splashColor) win.document.body.style.backgroundColor = splashColor;
-                else win.document.body.style.backgroundColor = "black";
-                var _script = win.document.createElement("script");
+                rootBody.appendChild(_loader);
+                var _script = windows.document.createElement("script");
                 _script.text="";
                 if(splash)_script.text+="  window.PWA.globals.splash=\""+splash+"\";\n";
                 if(splashColor)_script.text+="  window.PWA.globals.splashColor=\""+splashColor+"\";\n";
+                if(splashColor)_script.text+="  window.PWA.globals.splashBackgroundColor=\""+splashBackgroundColor+"\";\n";
                 if(splashDuration)_script.text+="  window.PWA.globals.splashDuration="+parseInt(splashDuration)+";\n";
-                win.document.head.appendChild(_script);
-                var _module = win.document.createElement("script");
+                rootHead.appendChild(_script);
+                var _module = windows.document.createElement("script");
                 _module.setAttribute("type", "module");
-                _module.text = "\n\n" + code + "\n\n";
-                var html= win.document.documentElement.cloneNode(true);
-                html.getElementsByTagName("head")[0].appendChild(_module);
-                _uploadFile("<!doctype html>\n"+html.outerHTML,function(error,uri){
+                _module.text = "\n" + code + "\n";
+                rootHead.appendChild(_module);
+                _uploadFile("<!doctype html>\n"+rootHTML.outerHTML,function(error,uri){
                     if(error)
                     {
-                        win.document.head.appendChild(_module);
                     }
                     else{
-                        win.location.href=uri;
+                        win = window.open(uri, filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                     }
                     
                 });
