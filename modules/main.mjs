@@ -124,6 +124,7 @@ function _new() {
                     editor.setValue("/*\n\n  " +
                         "filename:" + aFilename + "\n  " +
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
+                        "appName: gcode app" + "\n  " +
                         "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  " +
                         "splashBackgroundColor: #005040" + "\n  " +
                         "splashDuration: 2000" +
