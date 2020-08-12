@@ -3,7 +3,7 @@ import * as githubtree from '../modules/githubtree.mjs';
 
 var editor;
 
-//int variables
+//int variables   
 
 var leftToolbarWidth = 50;
 var leftToolbarFontSize = leftToolbarWidth - 26;
@@ -382,24 +382,56 @@ function getCode(guid, callback) {
     }, 500);
 }
 
-function _uploadFile(html,callback) {
+getImage(url,callback)
+{
+    if(!url || url.substring(url.length-4)!=".png")
+    {
+        callback({error:"not a png file"});
+    }
+    else{
+        var arrayBufferToBase64=function(buffer) {
+            var binary = '';
+            var bytes = [].slice.call(new Uint8Array(buffer));
+            bytes.forEach((b) => binary += String.fromCharCode(b));
+            return window.btoa(binary);
+        };
+        fetch(uri, {mode: 'cors'}).then((response) => {
+            response.arrayBuffer().then((buffer) => {
+              var imageStr = arrayBufferToBase64(buffer);
+              callback(null,imageStr);
+            });
+          });
+    }
 
+}
 
-    fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
-        method: 'post', 
-        mode: "cors",
-        credentials: 'omit',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({encodedhtml: btoa(html)}),
-    }).then(response => response.json()).then(data => {
-        callback(null,"https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/"+data.uri);
-    }).catch((error) => {
-        callback(error);
+function _uploadFile(params,callback) {
+
+    var html = params.html;
+    var icon = params.icon;
+
+    getImage(icon,function(e,iconBase64){
+
+        var body={encodedhtml: btoa(html)};
+        if(iconBase64)body.encodedicon=iconBase64;
+
+        fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
+            method: 'post', 
+            mode: "cors",
+            credentials: 'omit',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body),
+        }).then(response => response.json()).then(data => {
+            callback(null,"https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/"+data.uri);
+        }).catch((error) => {
+            callback(error);
+        });
     });
 
+    //encodedicon ###ICONURI###
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
 var win;
@@ -478,7 +510,7 @@ function _toolbarButtonClicked() {
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + code + "\n";
                 rootHead.appendChild(_module);
-                _uploadFile("<!doctype html>\n"+rootHTML.outerHTML,function(error,uri){
+                _uploadFile({html:"<!doctype html>\n"+rootHTML.outerHTML,icon:splash},function(error,uri){
                     if(error)
                     {
                         console.log(error);
