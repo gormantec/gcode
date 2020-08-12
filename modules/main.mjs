@@ -395,7 +395,7 @@ function getImage(url,callback)
             bytes.forEach((b) => binary += String.fromCharCode(b));
             return window.btoa(binary);
         };
-        fetch(uri, {mode: 'cors'}).then((response) => {
+        fetch(url, {mode: 'cors'}).then((response) => {
             response.arrayBuffer().then((buffer) => {
               var imageStr = arrayBufferToBase64(buffer);
               callback(null,imageStr);
