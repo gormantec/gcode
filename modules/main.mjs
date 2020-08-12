@@ -479,7 +479,6 @@ function _toolbarButtonClicked() {
                 if (!icon || icon == code) icon = splash;
                 var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*png).*?\*\/.*/s, '$1');
                 if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
-
                 var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if (splashColor == code) splashColor = null;
                 var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
@@ -506,6 +505,7 @@ function _toolbarButtonClicked() {
                 _link.setAttribute("href",manifest);
                 var _script = window.document.createElement("script");
                 _script.text="";
+                if(icon)_script.text+="  window.PWA.globals.icon180x180=\""+icon+"\";\n";
                 if(icon180x180)_script.text+="  window.PWA.globals.icon180x180=\""+icon180x180+"\";\n";
                 if(splash)_script.text+="  window.PWA.globals.splash=\""+splash+"\";\n";
                 if(splashColor)_script.text+="  window.PWA.globals.splashColor=\""+splashColor+"\";\n";
