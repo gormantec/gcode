@@ -519,7 +519,7 @@ function _toolbarButtonClicked() {
                 if(icon180x180)_script.text+="  window.PWA.globals.icon180x180=\""+icon180x180+"\";\n";
                 if(splash)_script.text+="  window.PWA.globals.splash=\""+splash+"\";\n";
                 if(splashColor)_script.text+="  window.PWA.globals.splashColor=\""+splashColor+"\";\n";
-                if(splashColor)_script.text+="  window.PWA.globals.splashBackgroundColor=\""+splashBackgroundColor+"\";\n";
+                if(splashBackgroundColor)_script.text+="  window.PWA.globals.splashBackgroundColor=\""+splashBackgroundColor+"\";\n";
                 if(splashDuration)_script.text+="  window.PWA.globals.splashDuration="+parseInt(splashDuration)+";\n";
                 rootHead.appendChild(_script);
                 var _module = window.document.createElement("script");
@@ -528,6 +528,7 @@ function _toolbarButtonClicked() {
                 rootHead.appendChild(_module);
                 if(!win || win.closed){
                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+                    win.body.style.backgroundColor=splashBackgroundColor;
                 }
                 _uploadFile({html:"<!doctype html>\n"+rootHTML.outerHTML,icon:splash},function(error,uri){
                     if(error)
