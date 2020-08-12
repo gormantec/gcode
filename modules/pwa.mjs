@@ -173,13 +173,14 @@ class PWA {
         if(!window.PWA.globals.splashColor) win.document.body.style.color = this.primaryColorText;
         if(window.PWA.globals.manifest && !this.manifest) this.manifest=window.PWA.globals.manifest;
         else if(!this.manifest) this.manifest="xxxxx_manifest.json";
+        if(window.PWA.globals.icon180x180 && !this.icon180x180) this.icon180x180=window.PWA.globals.icon180x180;
         win.document.body.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
         this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "black-translucent");
-        this.addMeta(win.document, "apple-touch-icon", "black-translucent");
+        if(this.icon180x180)this.addMeta(win.document, "apple-touch-icon", "###ICONURI###");
         this.addMeta(win.document, "viewport", "viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
         this.addMeta(win.document, "theme-color", this.primaryColor);

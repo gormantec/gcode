@@ -505,7 +505,7 @@ function _toolbarButtonClicked() {
                 _link.setAttribute("href",manifest);
                 var _script = window.document.createElement("script");
                 _script.text="";
-                if(icon)_script.text+="  window.PWA.globals.icon180x180=\""+icon+"\";\n";
+                if(icon)_script.text+="  window.PWA.globals.icon=\""+icon+"\";\n";
                 if(icon180x180)_script.text+="  window.PWA.globals.icon180x180=\""+icon180x180+"\";\n";
                 if(splash)_script.text+="  window.PWA.globals.splash=\""+splash+"\";\n";
                 if(splashColor)_script.text+="  window.PWA.globals.splashColor=\""+splashColor+"\";\n";
