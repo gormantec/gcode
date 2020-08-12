@@ -496,6 +496,7 @@ function _toolbarButtonClicked() {
                 if (!orientation || orientation == code) orientation = "any";
                 var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
                 if (!appName || appName == code) appName = "gcode App";
+                appName=appName.trim();
                 var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
                 if (!manifest || manifest =="" || manifest == code) manifest = "xxxxx_manifest.json";
                 var longName=appName;
@@ -523,7 +524,7 @@ function _toolbarButtonClicked() {
                 _link.setAttribute("href","###ICONURI###");
                 rootHead.appendChild(_link);
                 var _script = window.document.createElement("script");
-                _script.text="";
+                _script.text="window.PWA={globals:{}}\n";
                 if(appName)_script.text+="  window.PWA.globals.appName=\""+appName+"\";\n";
                 if(orientation)_script.text+="  window.PWA.globals.orientation=\""+orientation+"\";\n";
                 if(icon)_script.text+="  window.PWA.globals.icon=\""+icon+"\";\n";
