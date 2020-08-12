@@ -533,11 +533,11 @@ function _toolbarButtonClicked() {
                 _uploadFile({html:"<!doctype html>\n"+rootHTML.outerHTML,icon:splash},function(error,uri){
                     if(error)
                     {
-                        console.log(error);
+                        console.log(error); 
                     }
                     else{
                         console.log("open window");
-                        win.location.href=uri;
+                        win.location.href=uri; 
                     }
                     
                 });
