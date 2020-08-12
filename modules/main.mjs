@@ -124,7 +124,7 @@ function _new() {
                     editor.setValue("/*\n\n  " +
                         "filename:" + aFilename + "\n  " +
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
-                        "appName: gcode app" + "\n  " +
+                        "appName: gcodeApp" + "\n  " +
                         "splash: https://git.gormantec.com/gcode/images/android/android-launchericon-144-144.png" + "\n  " +
                         "splashBackgroundColor: #005040" + "\n  " +
                         "splashDuration: 2000" +
@@ -490,9 +490,9 @@ function _toolbarButtonClicked() {
                 if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
                 var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
                 if (splashDuration == code) splashDuration = null;
-                var spinnerSize = code.replace(/\/\*.*?spinnerSize:.*?([A-Za-z0-9]*)[\n].*?\*\/.*/s, '$1');
+                var spinnerSize = code.replace(/\/\*.*?spinnerSize:.*?([A-Za-z0-9]*?).*?[\n].*?\*\/.*/s, '$1');
                 if (spinnerSize == code) spinnerSize = "50px";
-                var orientation = code.replace(/\/\*.*?orientation:.*?([A-Za-z0-9]*)[\n].*?\*\/.*/s, '$1');
+                var orientation = code.replace(/\/\*.*?orientation:.*?([A-Za-z0-9]*?).*?[\n].*?\*\/.*/s, '$1');
                 if (!orientation || orientation == code) orientation = "any";
                 var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
                 if (!appName || appName == code) appName = "gcode App";
@@ -524,6 +524,8 @@ function _toolbarButtonClicked() {
                 rootHead.appendChild(_link);
                 var _script = window.document.createElement("script");
                 _script.text="";
+                if(appName)_script.text+="  window.PWA.globals.appName=\""+appName+"\";\n";
+                if(orientation)_script.text+="  window.PWA.globals.orientation=\""+orientation+"\";\n";
                 if(icon)_script.text+="  window.PWA.globals.icon=\""+icon+"\";\n";
                 if(icon180x180)_script.text+="  window.PWA.globals.icon180x180=\""+icon180x180+"\";\n";
                 if(splash)_script.text+="  window.PWA.globals.splash=\""+splash+"\";\n";
