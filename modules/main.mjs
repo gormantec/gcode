@@ -382,7 +382,7 @@ function getCode(guid, callback) {
     }, 500);
 }
 
-getImage(url,callback)
+function getImage(url,callback)
 {
     if(!url || url.substring(url.length-4)!=".png")
     {
