@@ -532,6 +532,7 @@ function _toolbarButtonClicked() {
                         console.log(error);
                     }
                     else{
+                        console.log("open window");
                         if(win)win.location.href=uri;
                         else win = window.open(uri, filename, "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                     }
