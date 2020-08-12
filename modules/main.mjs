@@ -473,11 +473,11 @@ function _toolbarButtonClicked() {
                 //while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
                 //while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
                 var code = editor.getValue();
-                var splash = code.replace(/\/\*.*?splash:.*?(http.*png)[\n].*?\*\/.*/s, '$1');
+                var splash = code.replace(/\/\*.*?splash:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
                 if (splash == code) splash = null;
-                var icon = code.replace(/\/\*.*?icon:.*?(http.*png)[\n].*?\*\/.*/s, '$1');
+                var icon = code.replace(/\/\*.*?icon:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
                 if (!icon || icon == code) icon = splash;
-                var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*png)[\n].*?\*\/.*/s, '$1');
+                var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
                 if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
 
 
