@@ -508,6 +508,7 @@ function _toolbarButtonClicked() {
                 var _link = window.document.createElement("link");
                 _link.setAttribute("ref","manifest");
                 _link.setAttribute("href",manifest);
+                rootHead.appendChild(_link);
                 var _script = window.document.createElement("script");
                 _script.text="";
                 if(icon)_script.text+="  window.PWA.globals.icon=\""+icon+"\";\n";

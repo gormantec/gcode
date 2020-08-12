@@ -171,8 +171,6 @@ class PWA {
         win.document.head.appendChild(_title);
         if(!window.PWA.globals.splashColor) win.document.body.style.backgroundColor = this.primaryColor;
         if(!window.PWA.globals.splashColor) win.document.body.style.color = this.primaryColorText;
-        if(window.PWA.globals.manifest && !this.manifest) this.manifest=window.PWA.globals.manifest;
-        else if(!this.manifest) this.manifest="xxxxx_manifest.json";
         if(window.PWA.globals.icon180x180 && !this.icon180x180) this.icon180x180=window.PWA.globals.icon180x180;
         win.document.body.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
@@ -184,7 +182,7 @@ class PWA {
         this.addMeta(win.document, "viewport", "viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
         this.addMeta(win.document, "theme-color", this.primaryColor);
-        this.addLink(win.document, "manifest", this.manifest);
+        
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
