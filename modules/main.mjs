@@ -479,6 +479,11 @@ function _toolbarButtonClicked() {
                 if (!icon || icon == code) icon = splash;
                 var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*png)[\n].*?\*\/.*/s, '$1');
                 if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
+
+
+                console.log("--------------icon180x180---------------");
+                console.log(icon180x180);
+                console.log("--------------icon180x180---------------");
                 var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
                 if (splashColor == code) splashColor = null;
                 var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
