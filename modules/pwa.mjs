@@ -171,8 +171,8 @@ class PWA {
         win.document.head.appendChild(_title);
         if(!window.PWA.globals.splashColor) win.document.body.style.backgroundColor = this.primaryColor;
         if(!window.PWA.globals.splashColor) win.document.body.style.color = this.primaryColorText;
-        if(!window.PWA.globals.manifest) win.document.body.style.color = this.manifest;
-        else this.manifest="xxxxx_manifest.json";
+        if(window.PWA.globals.manifest && !this.manifest) this.manifest=window.PWA.globals.manifest;
+        else if(!this.manifest) this.manifest="xxxxx_manifest.json";
         win.document.body.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
