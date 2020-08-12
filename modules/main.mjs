@@ -526,7 +526,7 @@ function _toolbarButtonClicked() {
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + code + "\n";
                 rootHead.appendChild(_module);
-                if(!win){
+                if(!win || win.closed){
                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                 }
                 _uploadFile({html:"<!doctype html>\n"+rootHTML.outerHTML,icon:splash},function(error,uri){
@@ -537,10 +537,6 @@ function _toolbarButtonClicked() {
                     else{
                         console.log("open window");
                         win.location.href=uri; 
-                        win.onunload = function(){ 
-                            console.log("onunload");
-                            win=null; 
-                        };
                     }
                     
                 });
