@@ -528,7 +528,7 @@ function _toolbarButtonClicked() {
                 rootHead.appendChild(_module);
                 if(!win || win.closed){
                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
-                    win.body.style.backgroundColor=splashBackgroundColor;
+                    win.document.body.style.backgroundColor=splashBackgroundColor;
                 }
                 _uploadFile({html:"<!doctype html>\n"+rootHTML.outerHTML,icon:splash},function(error,uri){
                     if(error)
