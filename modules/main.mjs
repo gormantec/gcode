@@ -524,7 +524,7 @@ function _toolbarButtonClicked() {
                 _link.setAttribute("href","###ICONURI###");
                 rootHead.appendChild(_link);
                 var _script = window.document.createElement("script");
-                _script.text="window.PWA={globals:{}}\n";
+                _script.text="\nwindow.PWA={globals:{}}\n";
                 if(appName)_script.text+="  window.PWA.globals.appName=\""+appName+"\";\n";
                 if(orientation)_script.text+="  window.PWA.globals.orientation=\""+orientation+"\";\n";
                 if(icon)_script.text+="  window.PWA.globals.icon=\""+icon+"\";\n";
