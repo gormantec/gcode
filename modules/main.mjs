@@ -507,9 +507,11 @@ function _toolbarButtonClicked() {
                 var _link  = window.document.createElement("meta");
                 _link.setAttribute("name","mobile-web-app-capable");
                 _link.setAttribute("content","yes");
+                rootHead.appendChild(_link);
                 _link  = window.document.createElement("meta");
                 _link.setAttribute("name","apple-touch-fullscreen");
                 _link.setAttribute("content","yes");
+                rootHead.appendChild(_link);
                 _link  = window.document.createElement("meta");
                 _link.setAttribute("name","apple-mobile-web-app-capable");
                 _link.setAttribute("content","yes");
