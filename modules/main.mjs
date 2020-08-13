@@ -504,7 +504,15 @@ function _toolbarButtonClicked() {
                 var longName=appName;
                 var shortName=appName;
                 var display="standalone";
-                var _link = window.document.createElement("meta");
+                var _link = window.document.createElement("link");
+                _link.setAttribute("ref","manifest");
+                _link.setAttribute("href",manifest);
+                rootHead.appendChild(_link);
+                _link = window.document.createElement("link");
+                _link.setAttribute("rel","apple-touch-icon");
+                _link.setAttribute("href","###ICONURI###");
+                rootHead.appendChild(_link);
+                _link = window.document.createElement("meta");
                 _link.setAttribute("property","fpwa:template");
                 _link.setAttribute("content","pwa=true,name="+longName+",short_name="+shortName+",theme_color="+splashBackgroundColor+",background_color="+splashBackgroundColor+",display="+display+",orientation="+orientation);
                 rootHead.appendChild(_link);
@@ -518,14 +526,7 @@ function _toolbarButtonClicked() {
                 _loader.className = "loader";
                 _loader.innerText = "Loading...";
                 rootBody.appendChild(_loader);
-                var _link = window.document.createElement("link");
-                _link.setAttribute("ref","manifest");
-                _link.setAttribute("href",manifest);
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("link");
-                _link.setAttribute("name","apple-touch-icon");
-                _link.setAttribute("href","###ICONURI###");
-                rootHead.appendChild(_link);
+
                 var _script = window.document.createElement("script");
                 _script.text="\n  window.PWA={globals:{}};\n";
                 if(appName)_script.text+="  window.PWA.globals.appName=\""+appName+"\";\n";
