@@ -129,7 +129,7 @@ class PWA {
         var _meta = targetDocument.createElement("meta");
         _meta.setAttribute("name", name);
         _meta.setAttribute("content", content);
-        targetDocument.head.appendChild(_meta);
+        if(!document.head.querySelector("[name~="+name+"][content]").content) targetDocument.head.appendChild(_meta);
     }
     addLink(targetDocument, rel, href) {
         var _meta = targetDocument.createElement("link");
