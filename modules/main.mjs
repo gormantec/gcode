@@ -501,9 +501,10 @@ function _toolbarButtonClicked() {
                 if (!manifest || manifest =="" || manifest == code) manifest = "xxxxx_manifest.json";
                 var longName=appName;
                 var shortName=appName;
+                var display="standalone";
                 var _link = window.document.createElement("meta");
                 _link.setAttribute("property","fpwa:template");
-                _link.setAttribute("content","pwa=true,name="+longName+",shortName="+shortName+",themeColor="+splashBackgroundColor+",orientation="+orientation);
+                _link.setAttribute("content","pwa=true,name="+longName+",short_name="+shortName+",theme_color="+splashBackgroundColor+",background_color="+splashBackgroundColor+",display="+display+",orientation="+orientation);
                 rootHead.appendChild(_link);
                 if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
                     var _style = window.document.createElement("style");
