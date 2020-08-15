@@ -316,4 +316,9 @@ div.toolbarButton img{
     #filename input{
         font-size: 32px;
     }
+    #sideBarButton{
+        position: absolute;
+        margin-top: 0px;
+    }
+    
   }
