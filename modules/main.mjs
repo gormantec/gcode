@@ -873,8 +873,8 @@ document.addEventListener("DOMContentLoaded", function () {
     _open({ visible: true });
 
     document.getElementById("openButton").onclick = _open;
-    document.getElementById("addButton").onclick = function(){prompt("Add feature: ");};
-    document.getElementById("addFeatureButton").onclick = _toggleTerminal;
+    document.getElementById("addFeatureButton").onclick = function(){prompt("Add feature: ");};
+    document.getElementById("terminalButton").onclick = _toggleTerminal;
     document.getElementById("sideBarButton").onclick = _toggleSideBar;
     document.getElementById("filename").onclick = _onclickFilename;
     document.getElementById("runHeaderButton").onclick = _toolbarButtonClicked;
