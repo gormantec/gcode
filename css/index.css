@@ -297,16 +297,16 @@ div.toolbarButton img{
         width: 28px;
     }
 
-    #runHeaderButton{
+    #runHeaderButton i{
         font-size: 40px;
     }
     #filename {
         font-size: 32px;
     }
     .header {
-        height: 45px !important;
+        height: 50px !important;
     }
     #pageAll {
-        top: 55px;
+        top: 60px;
     }
   }
