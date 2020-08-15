@@ -685,6 +685,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "";
+            editor.refresh();
             document.getElementById("pageLeftToolbar").style.display = "none";
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
@@ -699,6 +700,7 @@ function _toggleSideBar() {
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
             document.getElementById("pageMiddle").style.display = "";
+            editor.refresh();
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
@@ -726,6 +728,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
+            editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -758,6 +761,7 @@ function _open(params) {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageMiddle").style.display = "";
+            editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
@@ -770,6 +774,7 @@ function _open(params) {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
+            editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -843,6 +848,7 @@ window.addEventListener('resize', function (event) {
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "";
+            editor.refresh();
         }
     }
     else {
@@ -850,6 +856,7 @@ window.addEventListener('resize', function (event) {
         document.getElementById("pageLeft").style.right = "unset";
         document.getElementById("pageLeft").style.width = leftPageWidth + "px";
         document.getElementById("pageMiddle").style.display = "";
+        editor.refresh();
     }
 });
 
