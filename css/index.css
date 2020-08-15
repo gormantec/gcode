@@ -303,4 +303,10 @@ div.toolbarButton img{
     #filename {
         font-size: 32px;
     }
+    .header {
+        height: 45px !important;
+    }
+    #pageAll {
+        top: 55px;
+    }
   }
