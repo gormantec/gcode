@@ -296,4 +296,8 @@ div.toolbarButton img{
     div.toolbarButton img{
         width: 28px;
     }
+
+    #runHeaderButton{
+        font-size: 40px;
+    }
   }
