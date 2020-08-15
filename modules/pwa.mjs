@@ -184,7 +184,7 @@ class PWA {
         
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
-            _this.addStyle(win.document, "https://git.gormantec.com/gcode/css/pwa.css", function () {
+            _this.addStyle(win.document, "https://gcode.com.au/css/pwa.css", function () {
                 console.log("splashDuration:"+window.PWA.globals.splashDuration);
                 if(window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
                 else if(!_this.splashDuration) _this.splashDuration=2000;

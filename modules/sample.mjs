@@ -1,4 +1,4 @@
-import { PWA, Page, Div } from 'https://git.gormantec.com/gcode/modules/pwa.mjs';
+import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 
 
 var homePage=new Page({
@@ -13,7 +13,7 @@ var secondPage=new Page({
   color:"black",
   backgroundColor:"white",
   navigateBackPage:homePage,
-  child: new Div({innerHTML:"url(https://git.gormantec.com/gcode/html/test.html)"})
+  child: new Div({innerHTML:"url(https://gcode.com.au/html/test.html)"})
 });
 
 var aPWA=new PWA({
