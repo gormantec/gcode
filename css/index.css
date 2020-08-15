@@ -296,14 +296,13 @@ div.toolbarButton img{
     div.toolbarButton img{
         width: 28px;
     }
-    #runHeaderButton{
-        margin-right: 10px;
-    }
     #runHeaderButton i{
         font-size: 36px;
     }
+
     #filename {
         font-size: 28px;
+        padding-left: 10px;
     }
     .header {
         height: 50px !important;
