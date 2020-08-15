@@ -309,6 +309,10 @@ div.toolbarButton img{
     #pageAll {
         top: 60px;
     }
+    #pageLeftBodyScroll {
+        
+        top: 45px;
+    }
     #filename input{
         font-size: 32px;
     }
