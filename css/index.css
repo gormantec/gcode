@@ -300,4 +300,7 @@ div.toolbarButton img{
     #runHeaderButton{
         font-size: 40px;
     }
+    #filename {
+        font-size: 32px;
+    }
   }
