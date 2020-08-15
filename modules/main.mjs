@@ -385,41 +385,39 @@ function getCode(guid, callback) {
     }, 500);
 }
 
-function getImage(url,callback)
-{
-    if(!url || url.substring(url.length-4)!=".png")
-    {
-        callback({error:"not a png file"});
+function getImage(url, callback) {
+    if (!url || url.substring(url.length - 4) != ".png") {
+        callback({ error: "not a png file" });
     }
-    else{
-        var arrayBufferToBase64=function(buffer) {
+    else {
+        var arrayBufferToBase64 = function (buffer) {
             var binary = '';
             var bytes = [].slice.call(new Uint8Array(buffer));
             bytes.forEach((b) => binary += String.fromCharCode(b));
             return window.btoa(binary);
         };
-        fetch(url, {mode: 'cors'}).then((response) => {
+        fetch(url, { mode: 'cors' }).then((response) => {
             response.arrayBuffer().then((buffer) => {
-              var imageStr = arrayBufferToBase64(buffer);
-              callback(null,imageStr);
+                var imageStr = arrayBufferToBase64(buffer);
+                callback(null, imageStr);
             });
-          });
+        });
     }
 
 }
 
-function _uploadFile(params,callback) {
+function _uploadFile(params, callback) {
 
     var html = params.html;
     var icon = params.icon;
 
-    getImage(icon,function(e,iconBase64){
+    getImage(icon, function (e, iconBase64) {
 
-        var body={encodedhtml: btoa(html)};
-        if(iconBase64)body.encodedicon=iconBase64;
+        var body = { encodedhtml: btoa(html) };
+        if (iconBase64) body.encodedicon = iconBase64;
 
         fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
-            method: 'post', 
+            method: 'post',
             mode: "cors",
             credentials: 'omit',
             headers: {
@@ -428,7 +426,7 @@ function _uploadFile(params,callback) {
             },
             body: JSON.stringify(body),
         }).then(response => response.json()).then(data => {
-            callback(null,"https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/"+data.uri);
+            callback(null, "https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/" + data.uri);
         }).catch((error) => {
             callback(error);
         });
@@ -466,10 +464,10 @@ function _toolbarButtonClicked() {
         else if (filename.endsWith(".mjs")) {
             console.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
-                
-                var rootHTML=window.document.createElement("html");
-                var rootHead=window.document.createElement("head");
-                var rootBody=window.document.createElement("body");
+
+                var rootHTML = window.document.createElement("html");
+                var rootHead = window.document.createElement("head");
+                var rootBody = window.document.createElement("body");
                 rootHTML.appendChild(rootHead);
                 rootHTML.appendChild(rootBody);
                 //
@@ -498,44 +496,44 @@ function _toolbarButtonClicked() {
                 if (!orientation || orientation == code) orientation = "any";
                 var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
                 if (!appName || appName == code) appName = "gcode App";
-                appName=appName.trim();
+                appName = appName.trim();
                 var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
-                if (!manifest || manifest =="" || manifest == code) manifest = "xxxxx_manifest.json";
-                var longName=appName;
-                var shortName=appName;
-                var display="standalone";
-                var _link  = window.document.createElement("meta");
-                _link.setAttribute("name","mobile-web-app-capable");
-                _link.setAttribute("content","yes");
+                if (!manifest || manifest == "" || manifest == code) manifest = "xxxxx_manifest.json";
+                var longName = appName;
+                var shortName = appName;
+                var display = "standalone";
+                var _link = window.document.createElement("meta");
+                _link.setAttribute("name", "mobile-web-app-capable");
+                _link.setAttribute("content", "yes");
                 rootHead.appendChild(_link);
-                _link  = window.document.createElement("meta");
-                _link.setAttribute("name","apple-touch-fullscreen");
-                _link.setAttribute("content","yes");
+                _link = window.document.createElement("meta");
+                _link.setAttribute("name", "apple-touch-fullscreen");
+                _link.setAttribute("content", "yes");
                 rootHead.appendChild(_link);
-                _link  = window.document.createElement("meta");
-                _link.setAttribute("name","apple-mobile-web-app-capable");
-                _link.setAttribute("content","yes");
+                _link = window.document.createElement("meta");
+                _link.setAttribute("name", "apple-mobile-web-app-capable");
+                _link.setAttribute("content", "yes");
                 rootHead.appendChild(_link);
-                _link  = window.document.createElement("meta");
-                _link.setAttribute("name","apple-mobile-web-app-status-bar-style");
-                _link.setAttribute("content","black-translucent");
+                _link = window.document.createElement("meta");
+                _link.setAttribute("name", "apple-mobile-web-app-status-bar-style");
+                _link.setAttribute("content", "black-translucent");
                 rootHead.appendChild(_link);
-                _link  = window.document.createElement("meta");
-                _link.setAttribute("property","fpwa:template");
-                _link.setAttribute("content","pwa=true,name="+longName+",short_name="+shortName+",theme_color="+splashBackgroundColor+",background_color="+splashBackgroundColor+",display="+display+",orientation="+orientation);
+                _link = window.document.createElement("meta");
+                _link.setAttribute("property", "fpwa:template");
+                _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
                 rootHead.appendChild(_link);
                 window.document.createElement("link");
-                _link.setAttribute("ref","manifest");
-                _link.setAttribute("href",manifest);
+                _link.setAttribute("ref", "manifest");
+                _link.setAttribute("href", manifest);
                 rootHead.appendChild(_link);
                 _link = window.document.createElement("link");
-                _link.setAttribute("rel","apple-touch-icon");
-                _link.setAttribute("href","###ICONURI###");
+                _link.setAttribute("rel", "apple-touch-icon");
+                _link.setAttribute("href", "###ICONURI###");
                 rootHead.appendChild(_link);
                 if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
                     var _style = window.document.createElement("style");
-                    var spinnerCss=".loader{font-size:"+spinnerSize+";text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
-                    _style.textContent="\nbody{background-image:url(" + splash + ");background-position:center;background-repeat:no-repeat;height:100vh;"+(splashColor?"color:"+splashColor:"")+";"+(splashBackgroundColor?"background-color:"+splashBackgroundColor:"")+";}\n"+spinnerCss+"\n";
+                    var spinnerCss = ".loader{font-size:" + spinnerSize + ";text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
+                    _style.textContent = "\nbody{background-image:url(" + splash + ");background-position:center;background-repeat:no-repeat;height:100vh;" + (splashColor ? "color:" + splashColor : "") + ";" + (splashBackgroundColor ? "background-color:" + splashBackgroundColor : "") + ";}\n" + spinnerCss + "\n";
                     rootHead.appendChild(_style);
                 }
                 var _loader = window.document.createElement("div");
@@ -544,39 +542,38 @@ function _toolbarButtonClicked() {
                 rootBody.appendChild(_loader);
 
                 var _script = window.document.createElement("script");
-                _script.text="\n  window.PWA={globals:{}};\n";
-                if(appName)_script.text+="  window.PWA.globals.appName=\""+appName+"\";\n";
-                if(orientation)_script.text+="  window.PWA.globals.orientation=\""+orientation+"\";\n";
-                if(icon)_script.text+="  window.PWA.globals.icon=\""+icon+"\";\n";
-                if(icon180x180)_script.text+="  window.PWA.globals.icon180x180=\""+icon180x180+"\";\n";
-                if(splash)_script.text+="  window.PWA.globals.splash=\""+splash+"\";\n";
-                if(splashColor)_script.text+="  window.PWA.globals.splashColor=\""+splashColor+"\";\n";
-                if(splashBackgroundColor)_script.text+="  window.PWA.globals.splashBackgroundColor=\""+splashBackgroundColor+"\";\n";
-                if(splashDuration)_script.text+="  window.PWA.globals.splashDuration="+parseInt(splashDuration)+";\n";
+                _script.text = "\n  window.PWA={globals:{}};\n";
+                if (appName) _script.text += "  window.PWA.globals.appName=\"" + appName + "\";\n";
+                if (orientation) _script.text += "  window.PWA.globals.orientation=\"" + orientation + "\";\n";
+                if (icon) _script.text += "  window.PWA.globals.icon=\"" + icon + "\";\n";
+                if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
+                if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
+                if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
+                if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
+                if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
                 rootHead.appendChild(_script);
                 var _module = window.document.createElement("script");
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + code + "\n";
                 rootHead.appendChild(_module);
-                if(!win || win.closed){
+                if (!win || win.closed) {
                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
-                    if(splashBackgroundColor)win.document.body.style.backgroundColor=splashBackgroundColor;
-                    else win.document.body.style.backgroundColor="black";
+                    if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                    else win.document.body.style.backgroundColor = "black";
                 }
-                _uploadFile({html:"<!doctype html>\n"+rootHTML.outerHTML,icon:splash},function(error,uri){
-                    if(error)
-                    {
-                        console.log(error); 
+                _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                    if (error) {
+                        console.log(error);
                     }
-                    else{
+                    else {
                         console.log("open window");
-                        win.location.href=uri; 
+                        win.location.href = uri;
                     }
-                    
+
                 });
             }
             catch (e) {
-                console.error("error:"+e);
+                console.error("error:" + e);
             }
             console.log(" ");
         }
@@ -682,13 +679,31 @@ function _toggleTerminal() {
 function _toggleSideBar() {
 
     if (document.getElementById("pageLeftToolbar").style.display != "none") {
-        document.getElementById("pageLeft").style.display = "none";
-        document.getElementById("pageLeftToolbar").style.display = "none";
-        document.getElementById("pageMiddle").style.left = "0px";
-        document.getElementById("pageMiddle").style.display = "";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
-        document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
-        document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
+        if (w < 576) {
+
+            document.getElementById("pageLeft").style.display = "none";
+            document.getElementById("pageLeft").style.right = "0px";
+            document.getElementById("pageLeft").style.width = "unset";
+            document.getElementById("pageMiddle").style.display = "";
+            document.getElementById("pageLeftToolbar").style.display = "none";
+            document.getElementById("pageMiddle").style.left = "0px";
+            document.getElementById("pageMiddle").style.right = "0px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+            document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
+
+        }
+        else {
+            document.getElementById("pageLeft").style.display = "none";
+            document.getElementById("pageLeftToolbar").style.display = "none";
+            document.getElementById("pageMiddle").style.left = "0px";
+            document.getElementById("pageMiddle").style.right = "0px";
+            document.getElementById("pageMiddle").style.display = "";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+            document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
+        }
+
     }
     else {
         var w = window.outerWidth || document.documentElement.clientWidth || 0;
@@ -860,7 +875,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     var theme = "material-darker2";
-    editor = CodeMirror.fromTextArea(document.getElementById("dartcode"), {
+    editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
@@ -920,27 +935,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-/*
-    (function () {
-        var old = console.log;
-        var olde = console.error;
-        var logger = document.getElementById('log');
-        var pageBottom = document.getElementById('pageBottom');
-        console.log = function (message) {
-            if (typeof message == 'object') {
-                logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
-                pageBottom.scrollTo(0, pageBottom.scrollHeight);
-            } else {
-                logger.innerHTML += "<div>" + message + '</div>';
+    /*
+        (function () {
+            var old = console.log;
+            var olde = console.error;
+            var logger = document.getElementById('log');
+            var pageBottom = document.getElementById('pageBottom');
+            console.log = function (message) {
+                if (typeof message == 'object') {
+                    logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
+                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                } else {
+                    logger.innerHTML += "<div>" + message + '</div>';
+                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                }
+            }
+            console.error = function (message) {
+                logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
                 pageBottom.scrollTo(0, pageBottom.scrollHeight);
             }
-        }
-        console.error = function (message) {
-            logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
-            pageBottom.scrollTo(0, pageBottom.scrollHeight);
-        }
-    })();
-*/
+        })();
+    */
 
 
 
