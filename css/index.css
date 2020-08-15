@@ -286,6 +286,11 @@ div.toolbarButton img{
     padding-bottom:2px
 }
 
+.floatBottom{
+    position: absolute;
+    bottom: 0px;
+}
+
 @media only screen and (max-width: 576px) {
     #pageLeftToolbarTop i {
         font-size: 36px;
