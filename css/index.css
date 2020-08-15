@@ -323,5 +323,8 @@ div.toolbarButton img{
         position: absolute;
         margin-top: 0px;
     }
+    #pageLeftToolbarTop .toolbarButton{
+        margin-right: 10px;
+    }
     
   }
