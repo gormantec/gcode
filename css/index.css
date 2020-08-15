@@ -297,6 +297,8 @@ div.toolbarButton img{
 .floatBottom{
     position: absolute;
     bottom: 0px;
+    left:0px;
+    right:0px;
 }
 
 @media only screen and (max-width: 576px) {
