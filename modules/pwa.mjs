@@ -10,7 +10,7 @@ class PWA {
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
         this.headerFontSize = params.headerFontSize || 24;
         this.primaryColorText = this.getTextColor(this.primaryColor);
-        this.footer = params.footer || "<a href=\"https://git.gormantec.com/gcode/\">gcode()</a> by gormantec";
+        this.footer = params.footer || "<a href=\"https://gcode.com.au\">gcode()</a> by gormantec";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
         this.pwaOverlay = new Div({ id: "pwaoverlay" });

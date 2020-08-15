@@ -107,7 +107,7 @@ function _delete() {
 
 function _new() {
 
-    fetch("https://git.gormantec.com/gcode/modules/sample.mjs")
+    fetch("modules/sample.mjs")
         .then(
             response => response.text()
         ).then(
