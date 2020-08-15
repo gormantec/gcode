@@ -309,6 +309,9 @@ div.toolbarButton img{
     #pageAll {
         top: 60px;
     }
+    #pageLeftBody{
+        font-size: 12px;
+    }
     #pageLeftBodyScroll {
         
         top: 45px;
