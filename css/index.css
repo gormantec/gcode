@@ -326,5 +326,8 @@ div.toolbarButton img{
     #pageLeftToolbarTop .toolbarButton{
         margin-right: 10px;
     }
+    .pageLeftToolbarButton i {
+        font-size: 42px;
+    }
     
   }
