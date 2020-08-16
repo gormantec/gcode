@@ -5,7 +5,7 @@ var homePage=new Page({
   color:"white", 
   backgroundColor:"black", 
   backgroundPosition:"center",
-  backgroundSize:"50% 50%",
+  backgroundSize:"50%",
   backgroundRepeat:"no-repeat",
   backgroundImage:"url(https://c7.uihere.com/files/614/185/190/sun-solar-flare-uv-uv-light.jpg)"
 });
