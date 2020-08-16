@@ -183,7 +183,7 @@ div.pwapage div.pwadiv{
     text-decoration: underline;
   }
 
-  @media only screen and (orientation: portrait) and (display-mode: standalone) , (display-mode: fulscreen) {
+  @media only screen and (orientation: portrait) and (display-mode: standalone) , (display-mode: fullscreen ) {
   
     body {
         margin-top: 20px;
