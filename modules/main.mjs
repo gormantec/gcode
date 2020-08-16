@@ -124,7 +124,7 @@ function _new() {
                     editor.setValue("/*\n\n  " +
                         "filename:" + aFilename + "\n  " +
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
-                        "appName: gcodeApp" + "\n  " +
+                        "appName: gcode" + "\n  " +
                         "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
                         "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
                         "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
