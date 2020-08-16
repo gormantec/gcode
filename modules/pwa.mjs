@@ -131,20 +131,28 @@ class PWA {
         var _meta = targetDocument.createElement("meta");
         _meta.setAttribute("name", name);
         _meta.setAttribute("content", content);
-        if(!targetDocument.querySelector('meta[name="'+name+'"]')) targetDocument.head.appendChild(_meta);
+        if(!targetDocument.querySelector('meta[name="'+name+'"]')){
+            
+            var linkStyleOrScript=targetDocument.querySelector("head link");
+            if(linkStyleOrScript) linkStyleOrScript=targetDocument.querySelector("head style");
+            if(linkStyleOrScript) linkStyleOrScript=targetDocument.querySelector("head script");
+            targetDocument.head.insertBefore(_meta,linkStyleOrScript);
+        }
     }
     addLink(targetDocument, rel, href) {
         var _meta = targetDocument.createElement("link");
         _meta.setAttribute("rel", rel);
         _meta.setAttribute("href", href);
-        targetDocument.head.appendChild(_meta);
+        var styleOrScript=targetDocument.querySelector("head style");
+        if(styleOrScript) styleOrScript=targetDocument.querySelector("head script");
+        targetDocument.head.insertBefore(_meta,styleOrScript);
     }
     addStyle(targetDocument, href, callback) {
-        var _style = targetDocument.createElement("link");
+        var _style = targetDocument.createElement("style");
         _style.setAttribute("rel", "stylesheet");
         _style.setAttribute("href", href);
         if (callback) _style.onload = function () { callback(); }
-        targetDocument.head.appendChild(_style);
+        targetDocument.head.insertBefore(_style,targetDocument.querySelector("head script"));
     }
 
     addModule(targetDocument, href) {
@@ -170,7 +178,7 @@ class PWA {
         win = win || window;
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
-        win.document.head.appendChild(_title);
+        win.document.head.insertBefore(_title,win.document.head.firstChild);
         if(!window.PWA.globals.splashColor) win.document.body.style.backgroundColor = this.primaryColor;
         if(!window.PWA.globals.splashColor) win.document.body.style.color = this.primaryColorText;
         if(window.PWA.globals.icon180x180 && !this.icon180x180) this.icon180x180=window.PWA.globals.icon180x180;
