@@ -132,7 +132,6 @@ class PWA {
         _meta.setAttribute("name", name);
         _meta.setAttribute("content", content);
         if(!targetDocument.querySelector('meta[name="'+name+'"]')){
-            
             var linkStyleOrScript=targetDocument.querySelector("head link");
             if(linkStyleOrScript) linkStyleOrScript=targetDocument.querySelector("head style");
             if(linkStyleOrScript) linkStyleOrScript=targetDocument.querySelector("head script");
@@ -148,7 +147,7 @@ class PWA {
         targetDocument.head.insertBefore(_meta,styleOrScript);
     }
     addStyle(targetDocument, href, callback) {
-        var _style = targetDocument.createElement("style");
+        var _style = targetDocument.createElement("link");
         _style.setAttribute("rel", "stylesheet");
         _style.setAttribute("href", href);
         if (callback) _style.onload = function () { callback(); }
