@@ -183,10 +183,10 @@ div.pwapage div.pwadiv{
     text-decoration: underline;
   }
 
-  @media only screen and (orientation: portrait) {
+  @media only screen and (orientation: portrait) and (display-mode: standalone) {
   
     body {
-        margin-top: 0px;
+        margin-top: 20px;
     }  
     #pwaroot{
         top: 20px;
