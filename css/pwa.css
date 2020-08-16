@@ -183,7 +183,12 @@ div.pwapage div.pwadiv{
     text-decoration: underline;
   }
 
-  @media only screen and (orientation: portrait) and (max-height: 667px ) and (min-height: 667px ) {
+  @media all and (display-mode: standalone),
+         only screen and (orientation: portrait) and (max-height: 667px ) and (min-height: 667px ),
+         only screen and (orientation: portrait) and (max-height: 736px ) and (min-height: 736px ),
+         only screen and (orientation: portrait) and (max-height: 812px ) and (min-height: 812px ),
+         only screen and (orientation: portrait) and (max-height: 896px ) and (min-height: 896px )
+   {
   
     body {
         margin-top: 20px;
@@ -191,5 +196,5 @@ div.pwapage div.pwadiv{
     #pwaroot{
         top: 20px;
     }
-}
+ }
 
