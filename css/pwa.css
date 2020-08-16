@@ -30,6 +30,11 @@ body {
     overflow-y: hidden;
 }
 
+div.pwapage div.pwadiv{
+    overflow-x: unset;
+    overflow-y: unset;
+}
+
 #pwaroot{
     position: fixed;
     left: 0px;
