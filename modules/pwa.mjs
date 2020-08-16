@@ -13,7 +13,6 @@ class PWA {
         this.footer = params.footer || "<a href=\"https://gcode.com.au\">gcode()</a> by gormantec";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
-        this.pwaRoot.element.addEventListener('resize', this.RootResize);
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
         this.setHeader();
         this.setBody();
@@ -24,17 +23,7 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
 
-    rootResize(event)
-    {
-        console.log(this.pwaRoot.element.offsetHeight);
-        console.log(this.pwaRoot.element.parentElement.offsetHeight);
-        if(this.pwaRoot.element.parentElement.offsetHeight<this.pwaRoot.element.offsetHeight)
-        {
-            this.pwaRoot.element.parentElement.style.marginTop="20px";
-            this.pwaRoot.element.style.marginTop="20px";
-        }
-        
-    }
+
 
     setNavigateBackPage(navigateBackPage) {
         this.navigateBackPage = navigateBackPage;
@@ -210,6 +199,9 @@ class PWA {
                     win.document.body.style.color = this.primaryColorText;
                     _this.pwaRoot.element.style.opacity = 0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
+                    console.log(event);
+                    console.log(this.pwaRoot.element.offsetHeight);
+                    console.log(win.document.documentElement.offsetHeight);
                     win.document.body.appendChild(_this.pwaOverlay.element);
                     _this.fadeIn(_this.pwaRoot.element, 500);
                 }, timeoutMs);

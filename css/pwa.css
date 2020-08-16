@@ -4,7 +4,7 @@
 }
 
 html {
-    height:100%;
+    height:100vh;
     width:100%;
 }
 
@@ -14,7 +14,7 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--primaryColor);
     color: var(--primaryColorText);
-    height:100%;
+    height:100vh;
     width:100%;
     overflow: hidden;
 }
@@ -182,4 +182,14 @@ div.pwapage div.pwadiv{
     background-color: transparent;
     text-decoration: underline;
   }
+
+  @media only screen and (orientation: portrait) {
+  
+    body {
+        margin-top: 0px;
+    }  
+    #pwaroot{
+        top: 20px;
+    }
+}
 
