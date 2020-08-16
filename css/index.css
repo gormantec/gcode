@@ -316,7 +316,7 @@ div.toolbarButton img{
     }
 
     #filename {
-        font-size: 26px;
+        font-size: 20px;
         padding-left: 26px;
     }
     .header {
@@ -333,7 +333,7 @@ div.toolbarButton img{
         top: 45px;
     }
     #filename input{
-        font-size: 26px;
+        font-size: 20px;
     }
     #sideBarButton{
         position: absolute;
