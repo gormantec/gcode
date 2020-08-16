@@ -184,10 +184,10 @@ div.pwapage div.pwadiv{
   }
 
   @media all and (display-mode: standalone),
-         only screen and (orientation: portrait) and (max-height: 667px ) and (min-height: 667px ),
-         only screen and (orientation: portrait) and (max-height: 736px ) and (min-height: 736px ),
-         only screen and (orientation: portrait) and (max-height: 812px ) and (min-height: 812px ),
-         only screen and (orientation: portrait) and (max-height: 896px ) and (min-height: 896px )
+         only screen and (orientation: portrait) and (max-height: 667px ) and (min-height: 647px ),
+         only screen and (orientation: portrait) and (max-height: 736px ) and (min-height: 716px ),
+         only screen and (orientation: portrait) and (max-height: 812px ) and (min-height: 792px ),
+         only screen and (orientation: portrait) and (max-height: 896px ) and (min-height: 876px )
    {
   
     body {
