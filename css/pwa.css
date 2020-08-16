@@ -140,11 +140,11 @@ div.pwapage div.pwadiv{
     bottom: 0px;
     overflow-x: hidden;
     overflow-y: scroll;
-    -webkit-transition: background 1.5s linear;
-    -moz-transition: background 1.5s linear;
-    -o-transition: background 1.5s linear;
-    -ms-transition: background 1.5s linear;
-    transition: background 1.5s linear;
+    -webkit-transition: backgroundImage 5.5s linear;
+    -moz-transition: backgroundImage 5.5s linear;
+    -o-transition: backgroundImage 5.5s linear;
+    -ms-transition: backgroundImage 5.5s linear;
+    transition: backgroundImage 5.5s linear;
 }
 
 
