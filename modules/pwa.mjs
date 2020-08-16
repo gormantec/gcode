@@ -28,6 +28,11 @@ class PWA {
     {
         console.log(this.pwaRoot.element.offsetHeight);
         console.log(this.pwaRoot.element.parentElement.offsetHeight);
+        if(this.pwaRoot.element.parentElement.offsetHeight<this.pwaRoot.element.offsetHeight)
+        {
+            this.pwaRoot.element.parentElement.style.marginTop="20px";
+            this.pwaRoot.element.style.marginTop="20px";
+        }
         
     }
 
