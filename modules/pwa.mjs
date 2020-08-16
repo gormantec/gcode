@@ -199,9 +199,6 @@ class PWA {
                     win.document.body.style.color = this.primaryColorText;
                     _this.pwaRoot.element.style.opacity = 0.0;
                     win.document.body.appendChild(_this.pwaRoot.element);
-                    console.log(event);
-                    console.log(this.pwaRoot.element.offsetHeight);
-                    console.log(win.document.documentElement.offsetHeight);
                     win.document.body.appendChild(_this.pwaOverlay.element);
                     _this.fadeIn(_this.pwaRoot.element, 500);
                 }, timeoutMs);
