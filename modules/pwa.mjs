@@ -13,7 +13,7 @@ class PWA {
         this.footer = params.footer || "<a href=\"https://gcode.com.au\">gcode()</a> by gormantec";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
-        this.pwaRoot.addEventListener('resize', this.RootResize);
+        this.pwaRoot.element.addEventListener('resize', this.RootResize);
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
         this.setHeader();
         this.setBody();
