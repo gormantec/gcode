@@ -13,6 +13,7 @@ class PWA {
         this.footer = params.footer || "<a href=\"https://gcode.com.au\">gcode()</a> by gormantec";
         this.innerHTML = "";
         this.pwaRoot = new Div({ id: "pwaroot" });
+        this.pwaRoot.addEventListener('resize', this.RootResize);
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
         this.setHeader();
         this.setBody();
@@ -21,6 +22,13 @@ class PWA {
         var _this = this;
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
+    }
+
+    rootResize(event)
+    {
+        console.log(this.pwaRoot.element.offsetHeight);
+        console.log(this.pwaRoot.element.parentElement.offsetHeight);
+        
     }
 
     setNavigateBackPage(navigateBackPage) {
