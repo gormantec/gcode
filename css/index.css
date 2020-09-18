@@ -73,7 +73,7 @@ body {
     top: 4px;
     bottom: 0px;
     padding:0px;
-    overflow: scroll;
+    overflow: auto;
     border: none;
     
 }
