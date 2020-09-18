@@ -105,6 +105,43 @@ function _delete() {
 
 }
 
+function _sms() {
+
+    var xxx = localStorage.getItem("phonenumber");
+    if (xxx == null) xxx = "+61440000XXX";
+    var phonenumber = prompt("Please enter your number", xxx);
+    while (phonenumber != null && (!phonenumber.startsWith("+") || !$.isNumeric(phonenumber.substring(1)))) {
+        phonenumber = prompt("Please use format +61440000000", xxx);
+    }
+    if (phonenumber != null) {
+
+        localStorage.setItem("phonenumber", phonenumber);
+
+        $.ajax({
+            //https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload
+            url: fpwaupload_uri,
+            //headers: { "x-api-key": "gKVuZ4CdXa59xxK2SmnTC9CL6b1LG1jL5h9WYcrD" },
+            type: 'post',
+            dataType: "json",
+            xhrFields: {
+                withCredentials: false
+            },
+            data: JSON.stringify({
+                encodedhtml: btoa("<!doctype html>\n<html>\n<head>\n<link rel=\"manifest\" href=\"xxxxx_manifest.json\">\n<link rel=\"apple-touch-icon\" href=\"###ICONURI###\">\n<meta property=\"fpwa:template\" content=\"fpwa=true,name=Long Name,shortName=Short Name,themeColor=#2196f3,orientation=portrait\"/>\n</head>\n<body>\n" + sessionStorage.getItem("compiledhtml") + "\n</body>\n</html>"),
+                encodedicon: sessionStorage.getItem("icon57"),
+                phonenumber: phonenumber,
+            }),
+            success: function (data) {
+                alert("sent to: " + phonenumber);
+            },
+            error: function (error) { window.alert("Error:" + JSON.stringify(error)); },
+        });
+    }
+    else {
+        alert("no sms sent");
+    }
+}
+
 function _new() {
 
     fetch("modules/sample.mjs")
@@ -406,6 +443,47 @@ function getImage(url, callback) {
 
 }
 
+function _sms(params, callback) {
+
+    var html = params.html;
+    var icon = params.icon;
+
+    var xxx = localStorage.getItem("phonenumber");
+    if (xxx == null) xxx = "+61440000XXX";
+    var phonenumber = prompt("Please enter your number", xxx);
+    while (phonenumber != null && (!phonenumber.startsWith("+") || !$.isNumeric(phonenumber.substring(1)))) {
+        phonenumber = prompt("Please use format +61440000000", xxx);
+    }
+    if (phonenumber != null) {
+
+        localStorage.setItem("phonenumber", phonenumber);
+
+        getImage(icon, function (e, iconBase64) {
+
+            var body = { encodedhtml: btoa(html) };
+            if (iconBase64) body.encodedicon = iconBase64;
+
+            fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
+                method: 'post',
+                mode: "cors",
+                credentials: 'omit',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body),
+            }).then(response => response.json()).then(data => {
+                callback(null, "https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/" + data.uri);
+            }).catch((error) => {
+                callback(error);
+            });
+        });
+    }
+    else {
+        alert("no sms sent");
+    }
+}
+
 function _uploadFile(params, callback) {
 
     var html = params.html;
@@ -435,6 +513,97 @@ function _uploadFile(params, callback) {
     //encodedicon ###ICONURI###
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
+
+function _createHtml() {
+    var rootHTML = window.document.createElement("html");
+    var rootHead = window.document.createElement("head");
+    var rootBody = window.document.createElement("body");
+    rootHTML.appendChild(rootHead);
+    rootHTML.appendChild(rootBody);
+    var code = editor.getValue();
+    var splash = code.replace(/\/\*.*?splash:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
+    if (splash == code) splash = null;
+    var icon = code.replace(/\/\*.*?icon:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
+    if (!icon || icon == code) icon = splash;
+    var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
+    if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
+    var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+    if (splashColor == code) splashColor = null;
+    var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+    if (splashBackgroundColor == code) splashBackgroundColor = "black";
+    if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
+    var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
+    if (splashDuration == code) splashDuration = null;
+    var spinnerSize = code.replace(/\/\*.*?spinnerSize:.*?([A-Za-z0-9]*?).*?[\n].*?\*\/.*/s, '$1');
+    if (spinnerSize == code) spinnerSize = "50px";
+    var orientation = code.replace(/\/\*.*?orientation:.*?([A-Za-z0-9]*?).*?[\n].*?\*\/.*/s, '$1');
+    if (!orientation || orientation == code) orientation = "any";
+    var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
+    if (!appName || appName == code) appName = "gcode App";
+    appName = appName.trim();
+    var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
+    if (!manifest || manifest == "" || manifest == code) manifest = "xxxxx_manifest.json";
+    var longName = appName;
+    var shortName = appName;
+    var display = "standalone";
+    var _link = window.document.createElement("meta");
+    _link.setAttribute("name", "mobile-web-app-capable");
+    _link.setAttribute("content", "yes");
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
+    _link.setAttribute("name", "apple-touch-fullscreen");
+    _link.setAttribute("content", "yes");
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
+    _link.setAttribute("name", "apple-mobile-web-app-capable");
+    _link.setAttribute("content", "yes");
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
+    _link.setAttribute("name", "apple-mobile-web-app-status-bar-style");
+    _link.setAttribute("content", "black-translucent");
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
+    _link.setAttribute("property", "fpwa:template");
+    _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
+    window.document.createElement("link");
+    _link.setAttribute("ref", "manifest");
+    _link.setAttribute("href", manifest);
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("link");
+    _link.setAttribute("rel", "apple-touch-icon");
+    _link.setAttribute("href", "###ICONURI###");
+    rootHead.appendChild(_link);
+    if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
+        var _style = window.document.createElement("style");
+        var spinnerCss = ".loader{font-size:" + spinnerSize + ";text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
+        _style.textContent = "\nbody{background-image:url(" + splash + ");background-position:center;background-repeat:no-repeat;height:100vh;" + (splashColor ? "color:" + splashColor : "") + ";" + (splashBackgroundColor ? "background-color:" + splashBackgroundColor : "") + ";}\n" + spinnerCss + "\n";
+        rootHead.appendChild(_style);
+    }
+    var _loader = window.document.createElement("div");
+    _loader.className = "loader";
+    _loader.innerText = "Loading...";
+    rootBody.appendChild(_loader);
+
+    var _script = window.document.createElement("script");
+    _script.text = "\n  window.PWA={globals:{}};\n";
+    if (appName) _script.text += "  window.PWA.globals.appName=\"" + appName + "\";\n";
+    if (orientation) _script.text += "  window.PWA.globals.orientation=\"" + orientation + "\";\n";
+    if (icon) _script.text += "  window.PWA.globals.icon=\"" + icon + "\";\n";
+    if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
+    if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
+    if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
+    if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
+    if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
+    rootHead.appendChild(_script);
+    var _module = window.document.createElement("script");
+    _module.setAttribute("type", "module");
+    _module.text = "\n" + code + "\n";
+    rootHead.appendChild(_module);
+    return rootHTML;
+}
+
 var win;
 
 function _toolbarButtonClicked() {
@@ -464,99 +633,7 @@ function _toolbarButtonClicked() {
         else if (filename.endsWith(".mjs")) {
             console.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
-
-                var rootHTML = window.document.createElement("html");
-                var rootHead = window.document.createElement("head");
-                var rootBody = window.document.createElement("body");
-                rootHTML.appendChild(rootHead);
-                rootHTML.appendChild(rootBody);
-                //
-                //while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
-                //while (win.document.head.firstChild) win.document.head.removeChild(win.document.head.lastChild);
-                var code = editor.getValue();
-                var splash = code.replace(/\/\*.*?splash:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
-                if (splash == code) splash = null;
-                var icon = code.replace(/\/\*.*?icon:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
-                if (!icon || icon == code) icon = splash;
-                var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
-                if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
-                console.log("--------------icon180x180---------------");
-                console.log(icon180x180);
-                console.log("--------------icon180x180---------------");
-                var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
-                if (splashColor == code) splashColor = null;
-                var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
-                if (splashBackgroundColor == code) splashBackgroundColor = "black";
-                if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
-                var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
-                if (splashDuration == code) splashDuration = null;
-                var spinnerSize = code.replace(/\/\*.*?spinnerSize:.*?([A-Za-z0-9]*?).*?[\n].*?\*\/.*/s, '$1');
-                if (spinnerSize == code) spinnerSize = "50px";
-                var orientation = code.replace(/\/\*.*?orientation:.*?([A-Za-z0-9]*?).*?[\n].*?\*\/.*/s, '$1');
-                if (!orientation || orientation == code) orientation = "any";
-                var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
-                if (!appName || appName == code) appName = "gcode App";
-                appName = appName.trim();
-                var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
-                if (!manifest || manifest == "" || manifest == code) manifest = "xxxxx_manifest.json";
-                var longName = appName;
-                var shortName = appName;
-                var display = "standalone";
-                var _link = window.document.createElement("meta");
-                _link.setAttribute("name", "mobile-web-app-capable");
-                _link.setAttribute("content", "yes");
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("meta");
-                _link.setAttribute("name", "apple-touch-fullscreen");
-                _link.setAttribute("content", "yes");
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("meta");
-                _link.setAttribute("name", "apple-mobile-web-app-capable");
-                _link.setAttribute("content", "yes");
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("meta");
-                _link.setAttribute("name", "apple-mobile-web-app-status-bar-style");
-                _link.setAttribute("content", "black-translucent");
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("meta");
-                _link.setAttribute("property", "fpwa:template");
-                _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("meta");
-                window.document.createElement("link");
-                _link.setAttribute("ref", "manifest");
-                _link.setAttribute("href", manifest);
-                rootHead.appendChild(_link);
-                _link = window.document.createElement("link");
-                _link.setAttribute("rel", "apple-touch-icon");
-                _link.setAttribute("href", "###ICONURI###");
-                rootHead.appendChild(_link);
-                if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
-                    var _style = window.document.createElement("style");
-                    var spinnerCss = ".loader{font-size:" + spinnerSize + ";text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
-                    _style.textContent = "\nbody{background-image:url(" + splash + ");background-position:center;background-repeat:no-repeat;height:100vh;" + (splashColor ? "color:" + splashColor : "") + ";" + (splashBackgroundColor ? "background-color:" + splashBackgroundColor : "") + ";}\n" + spinnerCss + "\n";
-                    rootHead.appendChild(_style);
-                }
-                var _loader = window.document.createElement("div");
-                _loader.className = "loader";
-                _loader.innerText = "Loading...";
-                rootBody.appendChild(_loader);
-
-                var _script = window.document.createElement("script");
-                _script.text = "\n  window.PWA={globals:{}};\n";
-                if (appName) _script.text += "  window.PWA.globals.appName=\"" + appName + "\";\n";
-                if (orientation) _script.text += "  window.PWA.globals.orientation=\"" + orientation + "\";\n";
-                if (icon) _script.text += "  window.PWA.globals.icon=\"" + icon + "\";\n";
-                if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
-                if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
-                if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
-                if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
-                if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
-                rootHead.appendChild(_script);
-                var _module = window.document.createElement("script");
-                _module.setAttribute("type", "module");
-                _module.text = "\n" + code + "\n";
-                rootHead.appendChild(_module);
+                var rootHTML = _createHtml();
                 if (!win || win.closed) {
                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
@@ -686,7 +763,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "";
-            if(editor)editor.refresh();
+            if (editor) editor.refresh();
             document.getElementById("pageLeftToolbar").style.display = "none";
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
@@ -701,7 +778,7 @@ function _toggleSideBar() {
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
             document.getElementById("pageMiddle").style.display = "";
-            if(editor)editor.refresh();
+            if (editor) editor.refresh();
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
@@ -729,7 +806,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
-            if(editor)editor.refresh();
+            if (editor) editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -762,7 +839,7 @@ function _open(params) {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageMiddle").style.display = "";
-            if(editor)editor.refresh();
+            if (editor) editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
@@ -775,7 +852,7 @@ function _open(params) {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
-            if(editor)editor.refresh();
+            if (editor) editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -849,7 +926,7 @@ window.addEventListener('resize', function (event) {
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "";
-            if(editor)editor.refresh();
+            if (editor) editor.refresh();
         }
     }
     else {
@@ -857,7 +934,7 @@ window.addEventListener('resize', function (event) {
         document.getElementById("pageLeft").style.right = "unset";
         document.getElementById("pageLeft").style.width = leftPageWidth + "px";
         document.getElementById("pageMiddle").style.display = "";
-        if(editor)editor.refresh();
+        if (editor) editor.refresh();
     }
 });
 
@@ -874,7 +951,7 @@ document.addEventListener("DOMContentLoaded", function () {
     _open({ visible: true });
 
     document.getElementById("openButton").onclick = _open;
-    document.getElementById("addFeatureButton").onclick = function(){prompt("Add feature: ");};
+    document.getElementById("addFeatureButton").onclick = function () { prompt("Add feature: "); };
     document.getElementById("terminalButton").onclick = _toggleTerminal;
     document.getElementById("sideBarButton").onclick = _toggleSideBar;
     document.getElementById("filename").onclick = _onclickFilename;
