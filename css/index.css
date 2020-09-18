@@ -285,7 +285,7 @@ pre#log{
     right: 6px;
     bottom: 0px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 div.toolbarButton img{

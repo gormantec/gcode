@@ -529,6 +529,8 @@ function _createHtml() {
     if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
+    var mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+    if (mockFrame == code) mockFrame = null;
     var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashBackgroundColor == code) splashBackgroundColor = "black";
     if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
