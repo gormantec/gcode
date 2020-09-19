@@ -481,15 +481,17 @@ function _uploadFile(params, callback) {
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
 var splashBackgroundColor =null;
+var splash =null
 function _createHtml() {
-     splashBackgroundColor =null;
+    splashBackgroundColor =null;
+    splash =null;
     var rootHTML = window.document.createElement("html");
     var rootHead = window.document.createElement("head");
     var rootBody = window.document.createElement("body");
     rootHTML.appendChild(rootHead);
     rootHTML.appendChild(rootBody);
     var code = editor.getValue();
-    var splash = code.replace(/\/\*.*?splash:.*?(http.*?[png|gif])[\n].*?\*\/.*/s, '$1');
+    splash = code.replace(/\/\*.*?splash:.*?(http.*?[png|gif])[\n].*?\*\/.*/s, '$1');
     if (splash == code) splash = null;
     var icon = code.replace(/\/\*.*?icon:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
     if (!icon || icon == code) icon = splash;
