@@ -615,7 +615,7 @@ function _toolbarButtonClicked() {
                 var wh="width=375,height=667";
                 var frame="";
                 if(mockFrame){
-                    wh="width=385,height=677";
+                    wh="width=395,height=687";
                     frame="?mockFrame="+mockFrame;
                 }
                 if (!win || win.closed) {
