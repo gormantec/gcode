@@ -19,9 +19,10 @@ body {
     overflow: hidden;
 }
 .iphoneX{
-    border-width:5px;
-    border-color:red;
-    border-radius: 5px;
+    border-width:10px;
+    border-color:white;
+    border-radius: 10px;
+    background-color: red;
 }
 
 .pwadiv{
