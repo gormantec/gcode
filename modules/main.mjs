@@ -481,10 +481,12 @@ function _uploadFile(params, callback) {
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
 var splashBackgroundColor =null;
-var splash =null
+var splash =null;
+var mockFrame=null;
 function _createHtml() {
     splashBackgroundColor =null;
     splash =null;
+    mockFrame=null;
     var rootHTML = window.document.createElement("html");
     var rootHead = window.document.createElement("head");
     var rootBody = window.document.createElement("body");
@@ -501,7 +503,7 @@ function _createHtml() {
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
     debug.log("splashColor="+splashColor);
-    var mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+    mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (mockFrame == code) mockFrame = null;
     debug.log("mockFrame="+mockFrame);
     splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
@@ -610,8 +612,14 @@ function _toolbarButtonClicked() {
             debug.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
                 var rootHTML = _createHtml();
+                var wh="width=375,height=667";
+                var frame="";
+                if(mockFrame){
+                    wh="width=385,height=677";
+                    frame="?mockFrame="+mockFrame;
+                }
                 if (!win || win.closed) {
-                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667,top=50,left=50");
+                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,"+wh+",top=50,left=50");
                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                     else win.document.body.style.backgroundColor = "black";
                 }
@@ -621,7 +629,7 @@ function _toolbarButtonClicked() {
                     }
                     else {
                         debug.log("open window");
-                        win.location.href = uri;
+                        win.location.href = uri+frame;
                     }
 
                 });

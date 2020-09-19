@@ -173,6 +173,12 @@ class PWA {
     };
 
     show(win) {
+        const urlParams = new URLSearchParams(win.location.search);
+        var mockFrame=urlParams.get("mockFrame");
+        if(mockFrame)
+        {
+            win.document.body.style.border="5px solid red";
+        }
         var msec=(new Date()).getTime();
         win = win || window;
         var _title = win.document.createElement("title");
