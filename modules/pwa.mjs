@@ -179,17 +179,27 @@ class PWA {
 
         const urlParams = new URLSearchParams(win.location.search);
         var mockFrame=urlParams.get("mockFrame");
+        var rootWindow;
         if(mockFrame)
         {
+            while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
+            var frame=win.document.createElement('div');
+            frame.className="pwadiv "+mockFrame;
             win.document.body.firstChild.class="pwadiv "+mockFrame;
+            win.document.body.appendChild(frame);
+            rootWindow=frame;
+        }
+        else
+        {
+            rootWindow=win.document.body;
         }
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.insertBefore(_title,win.document.head.firstChild);
-        if(!window.PWA.globals.splashColor) win.document.body.style.backgroundColor = this.primaryColor;
-        if(!window.PWA.globals.splashColor) win.document.body.style.color = this.primaryColorText;
+        if(!window.PWA.globals.splashColor) rootWindow.style.backgroundColor = this.primaryColor;
+        if(!window.PWA.globals.splashColor) rootWindow.style.color = this.primaryColorText;
         if(window.PWA.globals.icon180x180 && !this.icon180x180) this.icon180x180=window.PWA.globals.icon180x180;
-        win.document.body.style.color = this.primaryColorText;
+        rootWindow.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
@@ -209,12 +219,12 @@ class PWA {
                 console.log("timeoutMs:"+timeoutMs);
                 if(timeoutMs<0)timeoutMs=10;
                 setTimeout(function () {
-                    while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
-                    win.document.body.style.backgroundColor = this.primaryColor;
-                    win.document.body.style.color = this.primaryColorText;
+                    while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
+                    rootWindow.style.backgroundColor = this.primaryColor;
+                    rootWindow.style.color = this.primaryColorText;
                     _this.pwaRoot.element.style.opacity = 0.0;
-                    win.document.body.appendChild(_this.pwaRoot.element);
-                    win.document.body.appendChild(_this.pwaOverlay.element);
+                    rootWindow.appendChild(_this.pwaRoot.element);
+                    rootWindow.appendChild(_this.pwaOverlay.element);
                     _this.fadeIn(_this.pwaRoot.element, 500);
                 }, timeoutMs);
             });
