@@ -181,7 +181,7 @@ class PWA {
         var mockFrame=urlParams.get("mockFrame");
         if(mockFrame)
         {
-            win.document.body.class=mockFrame;
+            win.document.body.firstChild.class="pwadiv "+mockFrame;
         }
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
