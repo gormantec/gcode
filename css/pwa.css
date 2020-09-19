@@ -24,6 +24,7 @@ body {
     border-color: darkgrey;
     border-width: 2px;
     background-color: black;
+    padding: 18px;
 }
 
 .pwadiv{
@@ -70,7 +71,7 @@ div.pwapage div.pwadiv{
 }
 
 .floatingActionButton{
-    position: fixed;
+    position: relative;
     height: 30px;
     width: 30px;
     padding: 5px;
