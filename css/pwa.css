@@ -18,6 +18,11 @@ body {
     width:100%;
     overflow: hidden;
 }
+.iphoneX{
+    border-width:5px;
+    border-color:red;
+    border-radius: 5px;
+}
 
 .pwadiv{
     position: absolute;
