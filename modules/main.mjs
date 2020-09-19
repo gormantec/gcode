@@ -521,7 +521,7 @@ function _createHtml() {
     rootHTML.appendChild(rootHead);
     rootHTML.appendChild(rootBody);
     var code = editor.getValue();
-    var splash = code.replace(/\/\*.*?splash:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
+    var splash = code.replace(/\/\*.*?splash:.*?(http.*?[png|gif])[\n].*?\*\/.*/s, '$1');
     if (splash == code) splash = null;
     var icon = code.replace(/\/\*.*?icon:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
     if (!icon || icon == code) icon = splash;
