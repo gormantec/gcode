@@ -186,10 +186,10 @@ class PWA {
             var frame=win.document.createElement('div');
             frame.className="pwadiv "+mockFrame;
             win.document.body.appendChild(frame);
-            this.pwaRoot.style.left="10px";
-            this.pwaRoot.style.right="10px";
-            this.pwaRoot.style.top="10px";
-            this.pwaRoot.style.botton="10px";
+            this.pwaRoot.style.left="20px";
+            this.pwaRoot.style.right="20px";
+            this.pwaRoot.style.top="20px";
+            this.pwaRoot.style.bottom="20px";
             rootWindow=frame;
         }
         else
