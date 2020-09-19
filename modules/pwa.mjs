@@ -190,6 +190,10 @@ class PWA {
             this.pwaRoot.style.right="20px";
             this.pwaRoot.style.top="20px";
             this.pwaRoot.style.bottom="20px";
+            this.pwaOverlay.style.left="20px";
+            this.pwaOverlay.style.right="20px";
+            this.pwaOverlay.style.top="20px";
+            this.pwaOverlay.style.bottom="20px";
             rootWindow=frame;
         }
         else
