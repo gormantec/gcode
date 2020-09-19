@@ -66,8 +66,9 @@ div.pwapage div.pwadiv{
     right: 0px;
     top: 0px;
     bottom: 0px;
-    z-index: -100;
+    z-index: 100;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .floatingActionButton{
@@ -89,7 +90,6 @@ div.pwapage div.pwadiv{
     border-style: solid;
     border-width: 1px;
     border-color: #00000099;
-    z-index: 100;
 }
 .floatingActionButton i{
     font-size: 30px;
