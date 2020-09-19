@@ -612,10 +612,10 @@ function _toolbarButtonClicked() {
             debug.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
                 var rootHTML = _createHtml();
-                var wh="width=375,height=667";
+                var wh="width=414,height=896";
                 var frame="";
                 if(mockFrame){
-                    wh="width=415,height=707";
+                    wh="width="+(414+40)+",height="+(896+40);
                     frame="?mockFrame="+mockFrame;
                 }
                 if (!win || win.closed) {
