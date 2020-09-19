@@ -480,8 +480,9 @@ function _uploadFile(params, callback) {
     //encodedicon ###ICONURI###
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
-
+var splashBackgroundColor =null;
 function _createHtml() {
+     splashBackgroundColor =null;
     var rootHTML = window.document.createElement("html");
     var rootHead = window.document.createElement("head");
     var rootBody = window.document.createElement("body");
@@ -498,7 +499,7 @@ function _createHtml() {
     if (splashColor == code) splashColor = null;
     var mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (mockFrame == code) mockFrame = null;
-    var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+    splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashBackgroundColor == code) splashBackgroundColor = "black";
     debug.log(splashBackgroundColor);
     if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
