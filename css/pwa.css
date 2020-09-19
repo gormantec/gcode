@@ -20,7 +20,7 @@ body {
 }
 .iphoneX{
     border-radius: 30px;
-    border-style: inset;
+    border-style: solid;
     border-color: darkgrey;
     border-width: 2px;
     background-color: black;
