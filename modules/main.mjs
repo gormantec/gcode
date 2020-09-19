@@ -105,42 +105,7 @@ function _delete() {
 
 }
 
-function _sms() {
 
-    var xxx = localStorage.getItem("phonenumber");
-    if (xxx == null) xxx = "+61440000XXX";
-    var phonenumber = prompt("Please enter your number", xxx);
-    while (phonenumber != null && (!phonenumber.startsWith("+") || !$.isNumeric(phonenumber.substring(1)))) {
-        phonenumber = prompt("Please use format +61440000000", xxx);
-    }
-    if (phonenumber != null) {
-
-        localStorage.setItem("phonenumber", phonenumber);
-
-        $.ajax({
-            //https://wlco93vlol.execute-api.ap-southeast-2.amazonaws.com/default/fpwaupload
-            url: fpwaupload_uri,
-            //headers: { "x-api-key": "gKVuZ4CdXa59xxK2SmnTC9CL6b1LG1jL5h9WYcrD" },
-            type: 'post',
-            dataType: "json",
-            xhrFields: {
-                withCredentials: false
-            },
-            data: JSON.stringify({
-                encodedhtml: btoa("<!doctype html>\n<html>\n<head>\n<link rel=\"manifest\" href=\"xxxxx_manifest.json\">\n<link rel=\"apple-touch-icon\" href=\"###ICONURI###\">\n<meta property=\"fpwa:template\" content=\"fpwa=true,name=Long Name,shortName=Short Name,themeColor=#2196f3,orientation=portrait\"/>\n</head>\n<body>\n" + sessionStorage.getItem("compiledhtml") + "\n</body>\n</html>"),
-                encodedicon: sessionStorage.getItem("icon57"),
-                phonenumber: phonenumber,
-            }),
-            success: function (data) {
-                alert("sent to: " + phonenumber);
-            },
-            error: function (error) { window.alert("Error:" + JSON.stringify(error)); },
-        });
-    }
-    else {
-        alert("no sms sent");
-    }
-}
 
 function _new() {
 
