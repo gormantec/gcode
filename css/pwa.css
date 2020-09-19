@@ -90,6 +90,7 @@ div.pwapage div.pwadiv{
     border-style: solid;
     border-width: 1px;
     border-color: #00000099;
+    pointer-events: auto;
 }
 .floatingActionButton i{
     font-size: 30px;
