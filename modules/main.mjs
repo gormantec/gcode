@@ -3,6 +3,8 @@ import * as githubtree from '../modules/githubtree.mjs';
 
 var editor;
 
+var debug = { log:function(v){console.log(v);} };
+
 //int variables   
 
 var leftToolbarWidth = 50;
@@ -35,7 +37,7 @@ function _save() {
     if (filename && filename.substring(0, 6) == "git://") {
         githubtree.saveFile(filename, editor.getValue(), function (e, d) {
             if (e) {
-                console.log(e);
+                debug.log(e);
             }
             else {
 
@@ -70,7 +72,7 @@ function _delete() {
     if (filename.substring(0, 6) == "git://") {
         githubtree.deleteFile(filename, function (e, d) {
             if (e) {
-                console.log(e);
+                debug.log(e);
             }
             else {
                 document.getElementById("filename").innerText = "";
@@ -205,9 +207,9 @@ function _openFile(element) {
         }
     }
     else {
-        console.log(element);
-        console.log(element.classList);
-        console.log(element.dataset);
+        debug.log(element);
+        debug.log(element.classList);
+        debug.log(element.dataset);
     }
 
 }
@@ -289,9 +291,9 @@ function _openDir(element) {
         }
     }
     else {
-        console.log(element);
-        console.log(element.classList);
-        console.log(element.dataset);
+        debug.log(element);
+        debug.log(element.classList);
+        debug.log(element.dataset);
     }
 
 
@@ -307,7 +309,7 @@ var xx = "";
 function consolelog(x) {
 
     if (x == "\n") {
-        console.log(xx);
+        debug.log(xx);
         xx = "";
     }
     else {
@@ -498,7 +500,7 @@ function _createHtml() {
     if (mockFrame == code) mockFrame = null;
     var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashBackgroundColor == code) splashBackgroundColor = "black";
-    console.log(splashBackgroundColor);
+    debug.log(splashBackgroundColor);
     if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
     var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
     if (splashDuration == code) splashDuration = null;
@@ -586,7 +588,7 @@ function _toolbarButtonClicked() {
 
         var filename = document.getElementById("filename").innerText;
         if (filename.endsWith(".js")) {
-            console.log("local:default user$ nodejs " + filename + "\n\n");
+            debug.log("local:default user$ nodejs " + filename + "\n\n");
             try {
                 var _run = function () {
                     eval(editor.getValue());
@@ -596,10 +598,10 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error(e);
             }
-            console.log(" ");
+            debug.log(" ");
         }
         else if (filename.endsWith(".mjs")) {
-            console.log("local:default user$ launch webApp " + filename + "\n\n");
+            debug.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
                 var rootHTML = _createHtml();
                 if (!win || win.closed) {
@@ -609,10 +611,10 @@ function _toolbarButtonClicked() {
                 }
                 _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                     if (error) {
-                        console.log(error);
+                        debug.log(error);
                     }
                     else {
-                        console.log("open window");
+                        debug.log("open window");
                         win.location.href = uri;
                     }
 
@@ -621,11 +623,11 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error("error:" + e);
             }
-            console.log(" ");
+            debug.log(" ");
         }
         else if (filename.endsWith(".py")) {
             try {
-                console.log("local:default user$ python " + filename)
+                debug.log("local:default user$ python " + filename)
                 Sk.pre = "output";
                 Sk.configure({
                     output: consolelog, read: builtinRead
@@ -633,7 +635,7 @@ function _toolbarButtonClicked() {
                 var myPromise = Sk.misceval.asyncToPromise(function () {
                     return Sk.importMainWithBody("<stdin>", false, editor.getValue(), true);
                 });
-                console.log("\n local:default user$");
+                debug.log("\n local:default user$");
             }
             catch (e) {
                 console.error(e);
@@ -646,8 +648,8 @@ function _toolbarButtonClicked() {
 
         var doSomething = function () {
             githubtree.getAuthenticated().then((resp) => {
-                console.log("data:" + resp.data);
-                console.log("login:" + resp.data.login);
+                debug.log("data:" + resp.data);
+                debug.log("login:" + resp.data.login);
                 if (resp.data.login) {
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
                     if (gitRepoName) {
@@ -991,11 +993,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /*
         (function () {
-            var old = console.log;
+            var old = debug.log;
             var olde = console.error;
             var logger = document.getElementById('log');
             var pageBottom = document.getElementById('pageBottom');
-            console.log = function (message) {
+            debug.log = function (message) {
                 if (typeof message == 'object') {
                     logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
                     pageBottom.scrollTo(0, pageBottom.scrollHeight);
