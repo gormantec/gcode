@@ -495,13 +495,16 @@ function _createHtml() {
     if (!icon || icon == code) icon = splash;
     var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
     if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
+    debug.log("icon180x180="+icon180x180);
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
+    debug.log("splashColor="+splashColor);
     var mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (mockFrame == code) mockFrame = null;
+    debug.log("mockFrame="+mockFrame);
     splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashBackgroundColor == code) splashBackgroundColor = "black";
-    debug.log(splashBackgroundColor);
+    debug.log("splashBackgroundColor="+splashBackgroundColor);
     if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
     var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
     if (splashDuration == code) splashDuration = null;
