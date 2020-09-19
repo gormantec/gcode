@@ -185,7 +185,6 @@ class PWA {
             while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
             var frame=win.document.createElement('div');
             frame.className="pwadiv "+mockFrame;
-            win.document.body.firstChild.class="pwadiv "+mockFrame;
             win.document.body.appendChild(frame);
             rootWindow=frame;
         }
