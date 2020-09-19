@@ -20,8 +20,7 @@ body {
 }
 .iphoneX{
     border-width:10px;
-    border-color:white;
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: red;
 }
 
@@ -53,6 +52,7 @@ div.pwapage div.pwadiv{
     top: 0px;
     bottom: 0px;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 #pwaoverlay{
