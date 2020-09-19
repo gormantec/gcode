@@ -19,9 +19,11 @@ body {
     overflow: hidden;
 }
 .iphoneX{
-    border-width:10px;
     border-radius: 30px;
-    background-color: red;
+    border-style: inset;
+    border-color: darkgrey;
+    border-width: 2px;
+    background-color: black;
 }
 
 .pwadiv{
@@ -52,7 +54,9 @@ div.pwapage div.pwadiv{
     top: 0px;
     bottom: 0px;
     overflow: hidden;
-    border-radius: 10px;
+}
+.iphoneX #pwaroot{
+    border-radius: 15px;
 }
 
 #pwaoverlay{
