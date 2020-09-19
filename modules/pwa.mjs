@@ -189,7 +189,6 @@ class PWA {
                     }catch(e){
                         debug.log("************************ error ********************");
                     }
-                  
                 }
               })();
         var _title = win.document.createElement("title");
