@@ -498,6 +498,7 @@ function _createHtml() {
     if (mockFrame == code) mockFrame = null;
     var splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashBackgroundColor == code) splashBackgroundColor = "black";
+    console.log(splashBackgroundColor);
     if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
     var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
     if (splashDuration == code) splashDuration = null;
