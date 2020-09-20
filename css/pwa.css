@@ -102,7 +102,7 @@ div.pwapage div.pwadiv{
     left: 0px;
     right: 0px;
     top: 0px;
-    height: 60px;
+    height: 80px;
     padding:0px;
     margin:0px;
     background-color: var(--primaryColor);
@@ -114,7 +114,6 @@ div.pwapage div.pwadiv{
     left: 0px;
     width: 30px;
     right: unset;
-    top: 21px;
     bottom: 0px;
     font-weight: 900;
     cursor: pointer;
@@ -128,7 +127,6 @@ div.pwapage div.pwadiv{
     position: absolute;
     left: 40px;
     right: 5px;
-    top: 28px;
     bottom: 0px;
     font-size: 22px;
     font-weight: 900;
@@ -139,7 +137,7 @@ div.pwapage div.pwadiv{
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 60px;
+    top: 80px;
     bottom: 40px;
     background-color: #FFFFFF;
     overflow: hidden;
