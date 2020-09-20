@@ -183,7 +183,9 @@ class PWA {
         var mockFrame=urlParams.get("mockFrame");
         var rootWindow=win.document.body;
         var aPWA=this;
-        (async () => {if (mockFrame) {try{rootWindow=(await import('/modules/'+mockFrame+'.mjs')).addFrame(win,aPWA, mockFrame);}catch(e){debug.log(e);}}})();
+        if( mockFrame && !( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) ) {
+            (async () => {try{rootWindow=(await import('/modules/'+mockFrame+'.mjs')).addFrame(win,aPWA, mockFrame);}catch(e){debug.log(e);}})();
+        }
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.insertBefore(_title,win.document.head.firstChild);
