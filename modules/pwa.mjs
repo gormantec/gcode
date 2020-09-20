@@ -183,25 +183,7 @@ class PWA {
         const urlParams = new URLSearchParams(win.location.search);
         var mockFrame=urlParams.get("mockFrame");
         var rootWindow=win.document.body;
-            (async () => {
-                debug.log("************************ try ********************");
-                debug.log("************************ "+mockFrame+" ********************");
-                if (mockFrame) {
-                    try{
-
-                  debug.log("************************ working1 ********************");
-                  var module = await import('/modules/'+mockFrame+'.mjs');
-
-                  debug.log("************************ working2 ********************");
-                  rootWindow=module.addFrame(win, mockFrame);
-                  debug.log("************************ working3 ********************");
-                    }catch(e){
-                        debug.log("************************ error2 ********************");
-                        debug.log(e);
-                        debug.log("************************ error2 ********************");
-                    }
-                }
-              })();
+        (async () => {if (mockFrame) {try{rootWindow=(await import('/modules/'+mockFrame+'.mjs')).addFrame(win, mockFrame);}catch(e){debug.log(e);}}})();
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.insertBefore(_title,win.document.head.firstChild);
