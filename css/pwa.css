@@ -115,7 +115,7 @@ div.pwapage div.pwadiv{
     width: 30px;
     right: unset;
     bottom: 0px;
-    top:45;
+    top:45px;
     font-weight: 900;
     cursor: pointer;
     overflow: hidden;
@@ -129,7 +129,7 @@ div.pwapage div.pwadiv{
     left: 40px;
     right: 5px;
     bottom: 0px;
-    top:45;
+    top:45px;
     font-size: 22px;
     font-weight: 900;
     overflow: hidden;
