@@ -188,13 +188,17 @@ class PWA {
                 debug.log("************************ "+mockFrame+" ********************");
                 if (mockFrame) {
                     try{
+
+                  debug.log("************************ working1 ********************");
                   var module = await import('/modules/'+mockFrame+'.mjs');
+
+                  debug.log("************************ working2 ********************");
                   rootWindow=module.addFrame(win, mockFame);
-                  debug.log("************************working********************");
+                  debug.log("************************ working3 ********************");
                     }catch(e){
-                        debug.log("************************ error ********************");
+                        debug.log("************************ error2 ********************");
                         debug.log(e);
-                        debug.log("************************ error ********************");
+                        debug.log("************************ error2 ********************");
                     }
                 }
               })();
