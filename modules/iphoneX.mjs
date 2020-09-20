@@ -35,7 +35,7 @@ export function addFrame(win, aPWA, mockFrame) {
     ((_div)=>{setTimeout(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
 
     div = win.document.createElement('div');
-    div.innerText="wifi";
+    div.innerText="signal_cellular_alt";
     div.className="material-icons";
     div.setAttribute("style", "position:fixed;top:21px;background-color:none;color:black;width:20px;right: 20%;font-size:16px;");
     aPWA.pwaOverlay.element.appendChild(div);
