@@ -37,13 +37,13 @@ export function addFrame(win, aPWA, mockFrame) {
 
     div = win.document.createElement('div');
     div.innerText="wifi";
-    div.setClass("material-icons");
+    div.className="material-icons";
     div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;right: 15%;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="battery_charging_full";
-    div.setClass("material-icons");
+    div.className="material-icons";
     div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;margin-left:20px;right: 15%;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(45deg);transform: rotate(90deg)");
     aPWA.pwaOverlay.element.appendChild(div);
 
