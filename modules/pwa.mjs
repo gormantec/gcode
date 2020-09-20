@@ -179,11 +179,11 @@ class PWA {
 
         var msec=(new Date()).getTime();
         win = win || window;
-
         const urlParams = new URLSearchParams(win.location.search);
         var mockFrame=urlParams.get("mockFrame");
         var rootWindow=win.document.body;
-        (async () => {if (mockFrame) {try{rootWindow=(await import('/modules/'+mockFrame+'.mjs')).addFrame(win, mockFrame);}catch(e){debug.log(e);}}})();
+        var aPWA=this;
+        (async () => {if (mockFrame) {try{rootWindow=(await import('/modules/'+mockFrame+'.mjs')).addFrame(win,aPWA, mockFrame);}catch(e){debug.log(e);}}})();
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.insertBefore(_title,win.document.head.firstChild);
