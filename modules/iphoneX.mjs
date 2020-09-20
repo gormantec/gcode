@@ -27,5 +27,11 @@ export function addFrame(win, aPWA, mockFrame) {
     div = win.document.createElement('div');
     div.setAttribute("style", "position:fixed;top:20px;margin-left:40px;width:8px;left:50%;height:8px;background-color:#323232;border-radius:4px;");
     aPWA.pwaOverlay.element.appendChild(div);
+    div = win.document.createElement('div');
+    div.setAttribute("id", "pwaStatusBarTime");
+    div.setAttribute("style", "position:fixed;top:24px;width:40px;left:20%;height:20px;background-color:none;color:black;");
+    div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);
+    ((_div)=>{setTimeout(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
+    aPWA.pwaOverlay.element.appendChild(div);
     return frame;
 }
