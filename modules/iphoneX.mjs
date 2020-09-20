@@ -32,7 +32,7 @@ export function addFrame(win, aPWA, mockFrame) {
     div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width: 50px;left: 10%;height: 20px;text-align: right;font-weight: 900;");
     div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);
     aPWA.pwaOverlay.element.appendChild(div);
-    ((_div)=>{setTimeout(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
+    ((_div)=>{setInterval(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
 
     div = win.document.createElement('div');
     div.innerText="signal_cellular_alt";
