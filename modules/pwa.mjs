@@ -181,6 +181,8 @@ class PWA {
         var mockFrame=urlParams.get("mockFrame");
         var rootWindow=win.document.body;
             (async () => {
+                debug.log("************************ try ********************");
+                debug.log("************************ "+mockFrame+" ********************");
                 if (mockFrame) {
                     try{
                   var module = await import('/modules/'+mockFrame+'.js');
