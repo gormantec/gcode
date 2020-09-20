@@ -8,7 +8,7 @@ class PWA {
         if (!params) params = {};
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
-        this.headerHeight = params.headerHeight || 60;
+        this.headerHeight = params.headerHeight || 80;
         this.footerHeight = params.footerHeight || 40;
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
         this.headerFontSize = params.headerFontSize || 24;
