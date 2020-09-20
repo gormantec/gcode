@@ -193,7 +193,7 @@ class PWA {
                   var module = await import('/modules/'+mockFrame+'.mjs');
 
                   debug.log("************************ working2 ********************");
-                  rootWindow=module.addFrame(win, mockFame);
+                  rootWindow=module.addFrame(win, mockFrame);
                   debug.log("************************ working3 ********************");
                     }catch(e){
                         debug.log("************************ error2 ********************");
