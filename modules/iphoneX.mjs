@@ -1,7 +1,7 @@
 export function addFrame(win, aPWA, mockFrame) {
 
     var splashdiv = win.document.createElement('div');
-    splashdiv.setAttribute("style", "position:fixed;top:20px;bottom:20px;left:20px;right:20px;border-radius: 15px;");
+    splashdiv.setAttribute("style", "position:fixed;top:20px;bottom:20px;left:20px;right:20px;border-radius: 15px;overflow:hide;");
     splashdiv.innerHTML=win.document.body.innerHTML;
 
     while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
