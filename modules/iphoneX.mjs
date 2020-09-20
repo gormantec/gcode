@@ -37,19 +37,19 @@ export function addFrame(win, aPWA, mockFrame) {
     div = win.document.createElement('div');
     div.innerText="signal_cellular_alt";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:21px;background-color:none;color:black;width:20px;right: 20%;font-size:16px;");
+    div.setAttribute("style", "position:fixed;top:23px;background-color:none;color:black;width:20px;right: 20%;font-size:20px;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="wifi";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:21px;background-color:none;color:black;width:20px;right: 20%;margin-right:-25px;font-size:16px;");
+    div.setAttribute("style", "position:fixed;top:23px;background-color:none;color:black;width:20px;right: 20%;margin-right:-25px;font-size:20px;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="battery_charging_full";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:21px;background-color:none;color:black;width:20px;margin-right:-50px;right: 20%;font-size:24px;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg)");
+    div.setAttribute("style", "position:fixed;top:23px;background-color:none;color:black;width:20px;margin-right:-50px;right: 20%;font-size:24px;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg)");
     aPWA.pwaOverlay.element.appendChild(div);
 
 
