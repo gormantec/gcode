@@ -34,17 +34,22 @@ export function addFrame(win, aPWA, mockFrame) {
     aPWA.pwaOverlay.element.appendChild(div);
     ((_div)=>{setTimeout(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
 
+    div = win.document.createElement('div');
+    div.innerText="wifi";
+    div.className="material-icons";
+    div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;right: 12%;margin-right:-40px;");
+    aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="wifi";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;right: 15%;");
+    div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;right: 12%;margin-right:-40px;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="battery_charging_full";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;margin-left:20px;right: 15%;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(45deg);transform: rotate(90deg)");
+    div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width:20px;margin-right:-40px;right: 12%;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg)");
     aPWA.pwaOverlay.element.appendChild(div);
 
 
