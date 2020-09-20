@@ -52,6 +52,10 @@ export function addFrame(win, aPWA, mockFrame) {
     div.setAttribute("style", "position:fixed;top:16px;background-color:none;color:black;width:20px;margin-right:-50px;right: 20%;font-size:28px;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg)");
     aPWA.pwaOverlay.element.appendChild(div);
 
-
+    div = win.document.createElement('div');
+    div.setAttribute("style", "position:fixed;top:20px;bottom:20px;left:20px;right:20px;");
+    div.innerHTML=win.document.body.innerHTML;
+    frame.appendChild(div);
+    
     return frame;
 }
