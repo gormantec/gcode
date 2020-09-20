@@ -98,9 +98,9 @@ class PWA {
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
     setPage(aPage) {
-        console.log("setpage");
+        debug.log("setpage");
         if (aPage.navigateBackPage) {
-            console.log("setNavigateBackPage:" + aPage.navigateBackPage);
+            debug.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
         }
         this.pwaBody.setChild({ child: aPage });
@@ -215,11 +215,11 @@ class PWA {
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://gcode.com.au/css/pwa.css", function () {
-                console.log("splashDuration:"+window.PWA.globals.splashDuration);
+                debug.log("splashDuration:"+window.PWA.globals.splashDuration);
                 if(window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
                 else if(!_this.splashDuration) _this.splashDuration=2000;
                 var timeoutMs=_this.splashDuration-((new Date()).getTime()-msec);
-                console.log("timeoutMs:"+timeoutMs);
+                debug.log("timeoutMs:"+timeoutMs);
                 if(timeoutMs<0)timeoutMs=10;
                 setTimeout(function () {
                     while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
@@ -283,14 +283,14 @@ class Div {
         if(params && !params.classNameOverride)this.element.className = "pwadiv";
         if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.innerText) {
-            console.log("innerText:" + params.innerText);
+            debug.log("innerText:" + params.innerText);
             this.element.innerText = params.innerText;
         }
         else if (params && params.innerHTML && params.innerHTML.substring(0, 4).toLowerCase() == "url(") {
             var _uri = params.innerHTML.trim().substring(4, params.innerHTML.length - 1);
             _uri = _uri.replace(/\"/g, "");
             _uri = _uri.replace(/\'/g, "");
-            console.log(_uri);
+            debug.log(_uri);
             var _this = this;
             fetch(_uri)
                 .then(
@@ -366,20 +366,20 @@ class Div {
     }
 
     setChild(params) {
-        console.log("setChild");
+        debug.log("setChild");
         if (!params && !params.child) return;
         this.element.innerHTML = "";
         this.appendChild(params);
     }
 
     appendChild(params) {
-        console.log("appendChild");
+        debug.log("appendChild");
         if (!params) return;
         else if (params instanceof Div && params.element instanceof Node) {
             this.element.appendChild(params.element);
         }
         else if (params && params.child && params.child.element instanceof HTMLElement) {
-            console.log("appendChildDiv");
+            debug.log("appendChildDiv");
             this.element.appendChild(params.child.element);
         }
         else if (params && params.child instanceof HTMLElement) {
