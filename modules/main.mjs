@@ -1053,7 +1053,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    /*
+    
         (function () {
             var old = debug.log;
             var olde = console.error;
@@ -1073,7 +1073,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 pageBottom.scrollTo(0, pageBottom.scrollHeight);
             }
         })();
-    */
+    
 
 
 
