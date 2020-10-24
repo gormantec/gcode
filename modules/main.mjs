@@ -627,6 +627,7 @@ function _toolbarButtonClicked() {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
+                                console.log(`>>> readFile: name=${name} baseDir = ${baseDir} `);
                                 return name === filename ? editor.getValue() : null;
                               },
                               writeFile(name, data, baseDir) {
