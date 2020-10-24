@@ -612,6 +612,48 @@ function _toolbarButtonClicked() {
             }
             debug.log(" ");
         }
+        else if (filename.endsWith(".ts")) {
+            debug.log("local:default user$ asc " + filename + " --target release\n\n");
+            try {
+                var _run = function () {
+                    require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
+                        asc.ready.then(() => {
+                            const stdout = asc.createMemoryStream();
+                            const stderr = asc.createMemoryStream();
+                            asc.main([
+                                filename,
+                              "--target", "release"
+                            ], {
+                              stdout,
+                              stderr,
+                              readFile(name, baseDir) {
+                                return name === filename ? editor.getValue() : null;
+                              },
+                              writeFile(name, data, baseDir) {
+                                console.log(`>>> WRITE:${name} >>>\n${data.length}`);
+                              },
+                              listFiles(dirname, baseDir) {
+                                console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
+                                return [];
+                              }
+                            }, err => {
+                              console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                              console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                              if (err) {
+                                console.log(">>> THROWN >>>");
+                                console.log(err);
+                              }
+                            });
+                        });
+                      });
+                }
+                _run();
+            }
+            catch (e) {
+                console.error(e);
+            }
+            debug.log(" ");
+        }
         else if (filename.endsWith(".mjs")) {
             debug.log("local:default user$ launch webApp " + filename + "\n\n");
             try {
