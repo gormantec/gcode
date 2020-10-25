@@ -628,7 +628,26 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} `);
-                                return name === filename ? editor.getValue() : null;
+                                if(name==="asconfig.json"){
+                                    return '{\n'+
+                                    '    "targets": {\n'+
+                                    '      "debug": {\n'+
+                                    '        "binaryFile": "untouched.wasm",\n'+
+                                    '        "textFile": "untouched.wat",\n'+
+                                    '        "sourceMap": true,\n'+
+                                    '        "debug": true\n'+
+                                    '      },\n'+
+                                    '      "release": {\n'+
+                                    '        "binaryFile": "optimized.wasm",\n'+
+                                    '        "textFile": "optimized.wat",\n'+
+                                    '        "sourceMap": true,\n'+
+                                    '        "optimize": true\n'+
+                                    '      }\n'+
+                                    '    },\n'+
+                                    '    "options": {}\n'+
+                                    '  }';
+                                }
+                                else return name === filename ? editor.getValue() : null;
                               },
                               writeFile(name, data, baseDir) {
                                 console.log(`>>> WRITE:${name} >>>\n${data.length}`);
