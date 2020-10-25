@@ -362,7 +362,6 @@ function getTextColor(backColor) {
 }
 
 function getCode(guid, callback) {
-    console.log("**********************************************************************************1");
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
     var h = window.outerHeight || document.documentElement.clientHeight || 0;
     var x = (window.screenX || window.screenLeft || 0);
@@ -370,9 +369,7 @@ function getCode(guid, callback) {
     var win = window.open("https://github.com/login/oauth/authorize?scope=user:email%20user:login%20repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=600,top=" + (y - 300 + h / 2) + ",left=" + (x - 188 + w / 2));
 
     var count = 0;
-    console.log("**********************************************************************************2");
     var loop = setInterval(function () {
-        console.log("**********************************************************************************3-"+count);
         count++;
         var queryString = "";
         try { queryString = win.location.search; } catch (e) { }
