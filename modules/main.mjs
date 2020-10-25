@@ -783,6 +783,7 @@ function _toolbarButtonClicked() {
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
                     ).then((json) => {
+                        console.log("set new token");
                         githubtree.setToken(json.data.access_token);
                         doSomething();
                     });
