@@ -590,6 +590,7 @@ function _createHtml() {
 }
 
 var win;
+var myLogin="";
 
 function _toolbarButtonClicked() {
 
@@ -603,7 +604,7 @@ function _toolbarButtonClicked() {
 
         var filename = document.getElementById("filename").innerText;
         if (filename.endsWith(".js")) {
-            debug.log("$ nodejs " + filename + "\n");
+            debug.log(myLogin+"$ nodejs " + filename + "\n");
             try {
                 var _run = function () {
                     eval(editor.getValue());
@@ -616,7 +617,7 @@ function _toolbarButtonClicked() {
             debug.log(" ");
         }
         else if (filename.endsWith(".ts")) {
-            debug.log("$ asc " + filename + " --target release\n");
+            debug.log(myLogin+"$ asc " + filename + " --target release\n");
             try {
                 var _run = function () {
                     require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
@@ -678,7 +679,7 @@ function _toolbarButtonClicked() {
             debug.log(" ");
         }
         else if (filename.endsWith(".mjs")) {
-            debug.log("$ launch webApp " + filename + "\n");
+            debug.log(myLogin+"$ launch webApp " + filename + "\n");
             try {
                 var rootHTML = _createHtml();
                 var w=375;
@@ -712,7 +713,7 @@ function _toolbarButtonClicked() {
         }
         else if (filename.endsWith(".py")) {
             try {
-                debug.log("$ python " + filename)
+                debug.log(myLogin+"$ python " + filename)
                 Sk.pre = "output";
                 Sk.configure({
                     output: consolelog, read: builtinRead
@@ -735,6 +736,7 @@ function _toolbarButtonClicked() {
             githubtree.getAuthenticated().then((resp) => {
                 debug.log("data:" + resp.data);
                 debug.log("login:" + resp.data.login);
+                myLogin=resp.data.login;
                 if (resp.data.login) {
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
                     if (gitRepoName) {
@@ -774,7 +776,7 @@ function _toolbarButtonClicked() {
             }).catch(() => githubtree.setToken(null));
         };
 
-        if (false && githubtree.getToken()) {
+        if (githubtree.getToken()) {
             doSomething();
         }
         else {
