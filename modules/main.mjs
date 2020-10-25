@@ -718,7 +718,7 @@ function _toolbarButtonClicked() {
                 var myPromise = Sk.misceval.asyncToPromise(function () {
                     return Sk.importMainWithBody("<stdin>", false, editor.getValue(), true);
                 });
-                debug.log("\n $");
+                debug.log("\n$");
             }
             catch (e) {
                 console.error(e);
