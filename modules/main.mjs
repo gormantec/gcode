@@ -633,10 +633,12 @@ function _toolbarButtonClicked() {
                                 {
                                     var result=null;
                                     var error=null;
-                                    githubtree.getGitFile(username, "_repo", name, function (e, d) {
-                                        result=d;
-                                        error=e;
-                                    });
+                                    try{
+                                        githubtree.getGitFile(myLogin, "_repo", name, function (e, d) {
+                                            result=d;
+                                            error=e;
+                                        });
+                                    }catch(e){error=e}
 
                                     while(!result && !error)
                                     {
