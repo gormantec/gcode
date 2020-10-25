@@ -1150,7 +1150,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
     if (githubtree.getToken()) {
-        githubtree.getAuthenticated().then((resp) => { myLogin=resp.data.login; });
+        githubtree.waitForOctokit(()=>{
+            githubtree.getAuthenticated().then((resp) => { myLogin=resp.data.login; });
+        });
     }
 
     var gitRepositories = localStorage.getItem("git-repositories");
