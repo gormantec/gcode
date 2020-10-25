@@ -71,7 +71,7 @@ function getGitHub(params) {
     else return new Octokit(params);
 }
 
-function waitForOctokit(callback) {
+export function waitForOctokit(callback) {
     if (Octokit) callback();
     var i = window.setInterval(() => {
         if (Octokit) {
