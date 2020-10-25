@@ -731,8 +731,6 @@ function _toolbarButtonClicked() {
 
         var doSomething = function () {
             githubtree.getAuthenticated().then((resp) => {
-                debug.log("data:" + resp.data);
-                debug.log("login:" + resp.data.login);
                 myLogin=resp.data.login;
                 if (resp.data.login) {
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
