@@ -603,7 +603,7 @@ function _toolbarButtonClicked() {
 
         var filename = document.getElementById("filename").innerText;
         if (filename.endsWith(".js")) {
-            debug.log("local:default user$ nodejs " + filename + "\n\n");
+            debug.log("$ nodejs " + filename + "\n");
             try {
                 var _run = function () {
                     eval(editor.getValue());
@@ -616,7 +616,7 @@ function _toolbarButtonClicked() {
             debug.log(" ");
         }
         else if (filename.endsWith(".ts")) {
-            debug.log("local:default user$ asc " + filename + " --target release\n\n");
+            debug.log("$ asc " + filename + " --target release\n");
             try {
                 var _run = function () {
                     require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
@@ -678,7 +678,7 @@ function _toolbarButtonClicked() {
             debug.log(" ");
         }
         else if (filename.endsWith(".mjs")) {
-            debug.log("local:default user$ launch webApp " + filename + "\n\n");
+            debug.log("$ launch webApp " + filename + "\n");
             try {
                 var rootHTML = _createHtml();
                 var w=375;
@@ -712,7 +712,7 @@ function _toolbarButtonClicked() {
         }
         else if (filename.endsWith(".py")) {
             try {
-                debug.log("local:default user$ python " + filename)
+                debug.log("$ python " + filename)
                 Sk.pre = "output";
                 Sk.configure({
                     output: consolelog, read: builtinRead
@@ -720,7 +720,7 @@ function _toolbarButtonClicked() {
                 var myPromise = Sk.misceval.asyncToPromise(function () {
                     return Sk.importMainWithBody("<stdin>", false, editor.getValue(), true);
                 });
-                debug.log("\n local:default user$");
+                debug.log("\n $");
             }
             catch (e) {
                 console.error(e);
