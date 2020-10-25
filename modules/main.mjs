@@ -1150,7 +1150,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
     if (githubtree.getToken()) {
+
+
         githubtree.waitForOctokit(()=>{
+
+            
             githubtree.getAuthenticated().then((resp) => { myLogin=resp.data.login; });
         });
     }
