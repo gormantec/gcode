@@ -628,7 +628,7 @@ function _toolbarButtonClicked() {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
-                                console.log(`>>> readFile: name=${name} baseDir = ${baseDir} `);
+                                console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
                                 if(name.substring(0,14)=="/node_modules/")
                                 {
                                     var result=null;
