@@ -380,16 +380,16 @@ function getCode(guid, callback) {
         const code = urlParams.get('code')
         if (code) {
             clearInterval(loop);
-            //win.close();
+            setTimeout(win.close,2000);
             return callback(null, code);
         }
         else if (count > 20) {
             clearInterval(loop);
-            //win.close();
+            setTimeout(win.close,2000);
             return callback({ error: "timeout" });
         }
 
-    }, 10000);
+    }, 500);
 }
 
 function getImage(url, callback) {
