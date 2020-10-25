@@ -629,7 +629,23 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} `);
-                                if(name==="asconfig.json"){
+                                if(name==="/node_modules/")
+                                {
+                                    var result=null;
+                                    var error=null;
+                                    githubtree.getGitFile(username, "_repo", name, function (e, d) {
+                                        result=d;
+                                        error=e;
+                                    });
+
+                                    while(!result && !error)
+                                    {
+                                        console.log("wait");
+                                    }
+                                    console.log(result);
+                                    return result;
+                                }
+                                else if(name==="asconfig.json"){
                                     return '{\n'+
                                     '    "targets": {\n'+
                                     '      "debug": {\n'+
