@@ -611,7 +611,7 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error(e);
             }
-            debug.log(" ");
+            debug.log("\n");
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin+"$ asc " + filename + " --target release\n");
@@ -673,7 +673,7 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error(e);
             }
-            debug.log(" ");
+            debug.log("\n");
         }
         else if (filename.endsWith(".mjs")) {
             debug.log(myLogin+"$ launch webApp " + filename + "\n");
@@ -706,7 +706,7 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error("error:" + e);
             }
-            debug.log(" ");
+            debug.log("\n");
         }
         else if (filename.endsWith(".py")) {
             try {
