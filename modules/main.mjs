@@ -1083,15 +1083,15 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log = function (message) {
                 if (typeof message == 'object') {
                     logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
-                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                    pageBottomScroll.scrollTo(0, pageBottomScroll.scrollHeight);
                 } else {
                     logger.innerHTML += "<div>" + message + '</div>';
-                    pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                    pageBottomScroll.scrollTo(0, pageBottomScroll.scrollHeight);
                 }
             }
             console.error = function (message) {
                 logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
-                pageBottom.scrollTo(0, pageBottom.scrollHeight);
+                pageBottomScroll.scrollTo(0, pageBottomScroll.scrollHeight);
             }
         })();
     
