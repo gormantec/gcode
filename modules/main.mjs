@@ -389,7 +389,7 @@ function getCode(guid, callback) {
             return callback({ error: "timeout" });
         }
 
-    }, 500);
+    }, 10000);
 }
 
 function getImage(url, callback) {
