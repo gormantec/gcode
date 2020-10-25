@@ -611,7 +611,7 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error(e);
             }
-            debug.log("\n");
+            debug.log("${myLogin}$");
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin+"$ asc " + filename + " --target release\n");
@@ -718,7 +718,7 @@ function _toolbarButtonClicked() {
                 var myPromise = Sk.misceval.asyncToPromise(function () {
                     return Sk.importMainWithBody("<stdin>", false, editor.getValue(), true);
                 });
-                debug.log("\n$");
+                debug.log("$");
             }
             catch (e) {
                 console.error(e);
