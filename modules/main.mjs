@@ -380,12 +380,12 @@ function getCode(guid, callback) {
         const code = urlParams.get('code')
         if (code) {
             clearInterval(loop);
-            win.close();
+            //win.close();
             return callback(null, code);
         }
         else if (count > 20) {
             clearInterval(loop);
-            win.close();
+            //win.close();
             return callback({ error: "timeout" });
         }
 
