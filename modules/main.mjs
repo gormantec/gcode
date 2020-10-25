@@ -1079,11 +1079,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     
         (function () {
-            var old = debug.log;
+            var old = console.log;
             var olde = console.error;
             var logger = document.getElementById('log');
             var pageBottom = document.getElementById('pageBottom');
-            debug.log = function (message) {
+            console.log = function (message) {
                 if (typeof message == 'object') {
                     logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
                     pageBottom.scrollTo(0, pageBottom.scrollHeight);
