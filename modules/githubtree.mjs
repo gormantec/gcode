@@ -314,21 +314,21 @@ export function cacheRepo(params, callbackrefresh) {
             var _path = path;
             if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
             octokit.repos.getContent({
-                owner: username,
-                repo: repo,
+                owner: "gormantec",
+                repo: "wasmdom",
                 path: path
             }).then((sha) => {
                 var directories = [];
                 sha.data.forEach(function (file) {
                     if (file.name.substring(0, 1) != ".") {
                         console.log("cache:"+file.path);
-                        if (file.path && file.type == "dir" && file.name.substring(0, 1) != ".") {
-                            recurseGit(file.path, 0, callback);
+                        if (file.path && file.type == "dir" && file.name.substring(0, 1) != "." && (depth==0 || file.path.indexOf("assembly")>=0)) {
+                            recurseGit(file.path, depth, callback);
                         }
-                        else if(file.path.endsWith("index.ts") && file.name.substring(0, 1) != "."){
+                        else {
                             console.log("cache:"+file.path);
                             getGitFile(username, repo, file.path, (e,d)=>{
-                                localStorage.setItem("gitfile-git://"+username+":"+repo+"/"+file.path,btoa(editor.getValue()));
+                                localStorage.setItem("gitfile-git://gormantec:wasmdom/"+file.path,btoa(editor.getValue()));
                             });
                             
                         }
@@ -339,7 +339,7 @@ export function cacheRepo(params, callbackrefresh) {
     
     
         }
-        recurseGit(startpath, 0, function () { if (callbackrefresh) callbackrefresh("done", repo, ""); });
+        recurseGit("assembly", 0, function () { if (callbackrefresh) callbackrefresh("done", repo, ""); });
     });
 }
 
