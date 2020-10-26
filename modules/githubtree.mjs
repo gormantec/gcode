@@ -321,12 +321,10 @@ export function cacheRepo(params, callbackrefresh) {
                 var directories = [];
                 sha.data.forEach(function (file) {
                     if (file.name.substring(0, 1) != ".") {
-                        console.log("cache:"+file.path);
                         if (file.path && file.type == "dir" && file.name.substring(0, 1) != "." && (depth==0 || file.path.indexOf("assembly")>=0)) {
                             recurseGit(file.path, depth, callback);
                         }
                         else {
-                            console.log("cache:"+file.path && file.name.substring(0, 1) != ".");
                             getGitFile("gormantec", "wasmdom", file.path, (e,d)=>{
                                 localStorage.setItem("gitfile-git://gormantec:wasmdom/"+file.path,btoa(d));
                             });
