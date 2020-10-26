@@ -249,11 +249,12 @@ export function htmlToElement(html) {
 
 export function getGitFile(username, repo, path, callback) {
     var octokit = getGitHub({ auth: getToken() });
-    octokit.repos.getContent({
+    var params={
         owner: username,
         repo: repo,
         path: path
-    }).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
+    };
+    octokit.repos.getContent(params).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
 }
 
 export function pullGitRepository(params, callbackrefresh) {

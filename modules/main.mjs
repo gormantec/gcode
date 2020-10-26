@@ -686,8 +686,8 @@ function _toolbarButtonClicked() {
                                 return [];
                               }
                             }, err => {
-                              console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                              console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                              //console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                              //console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                               if (err) {
                                 console.log(">>> THROWN >>>");
                                 console.log(err);
