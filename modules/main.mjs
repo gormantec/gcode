@@ -645,6 +645,7 @@ function _toolbarButtonClicked() {
                                         });
                                     }catch(e){
                                         console.log(e);
+                                        if(!e) e="error";
                                         error=e;
                                     }
 
