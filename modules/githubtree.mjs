@@ -324,8 +324,9 @@ export function cacheRepo(params, callbackrefresh) {
                         if (file.path && file.type == "dir" && file.name.substring(0, 1) != ".") {
                             recurseGit(file.path, 0, callback);
                         }
-                        else{
+                        else if(file.path.endsWith("index.js") || file.path.endsWith("assembly/index.ts")){
                             console.log("cache:"+file.path);
+                            localStorage.setItem("gitfile-git://"+username+":"+repo+name,"");
                         }
                     }
                 });

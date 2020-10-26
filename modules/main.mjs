@@ -636,7 +636,7 @@ function _toolbarButtonClicked() {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
                                 if(name.substring(0,14)=="/node_modules/")
                                 {
-                                    var cached = localStorage.getItem("gitfile-git://"+myLogin+":"+_repo+name);
+                                    var cached = localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
                                     return cached;
                                 }
                                 else if(name==="asconfig.json"){
