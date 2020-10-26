@@ -326,12 +326,15 @@ export function cacheRepo(params, callbackrefresh) {
                         }
                         else if(file.path.indexOf("assembly")>=0 && file.path.endsWith("index.ts")){
                             console.log("cache:"+file.path);
-                            localStorage.setItem("gitfile-git://"+username+":"+repo+"/"+file.path,"//test");
+                            getGitFile(username, repo, file.path, (e,d)=>{
+                                localStorage.setItem("gitfile-git://"+username+":"+repo+"/"+file.path,btoa(editor.getValue()));
+                            });
+                            
                         }
                     }
                 });
-                callback();
-            }).catch((e) => { console.log("error:"+e); callback(); });;;
+                //callback();
+            }).catch((e) => { console.log("error:"+e); callback("error",repo,""+e); });;;
     
     
         }
