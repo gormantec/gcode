@@ -636,7 +636,7 @@ function _toolbarButtonClicked() {
                                     try{
 
                                         console.log("get name");
-                                        githubtree.getGitFile(myLogin, "_repo", "node_modules/ws/index.ts", function (e, d) {
+                                        githubtree.getGitFile(myLogin, "_repo", "node_modules/ws/index.js", function (e, d) {
                                             result=d;
                                             error=e;
                                             console.log("d="+d);
