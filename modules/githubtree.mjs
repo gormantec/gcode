@@ -328,7 +328,7 @@ export function cacheRepo(params, callbackrefresh) {
                         else {
                             console.log("cache:"+file.path && file.name.substring(0, 1) != ".");
                             getGitFile("gormantec", "wasmdom", file.path, (e,d)=>{
-                                localStorage.setItem("gitfile-git://gormantec:wasmdom/"+file.path,btoa(editor.getValue()));
+                                localStorage.setItem("gitfile-git://gormantec:wasmdom/"+file.path,btoa(d));
                             });
                             
                         }

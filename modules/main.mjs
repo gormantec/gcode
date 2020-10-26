@@ -1164,7 +1164,7 @@ document.addEventListener("DOMContentLoaded", function () {
             githubtree.getAuthenticated().then((resp) => { 
                 myLogin=resp.data.login; 
                 console.log("cacheRepo");
-                githubtree.cacheRepo({ username: myLogin, repo: "_repo" }, function (state, repo) { console.log("state="+state); });
+                githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state="+state); });
             });
         });
     }
