@@ -634,7 +634,7 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
-                                if(name.substring(0,14)=="/node_modules/" && file.path.indexOf("assembly")>=0 && file.path.endsWith("index.ts"))
+                                if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith("index.ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/"+name.substring(14));
