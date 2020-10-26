@@ -634,7 +634,7 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
-                                if(name.substring(0,14)=="/node_modules/")
+                                if(name.substring(0,14)=="/node_modules/" && file.path.indexOf("assembly")>=0 && file.path.endsWith("index.ts"))
                                 {
                                     var cached = atob(localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name));
                                     return cached;
