@@ -327,7 +327,7 @@ export function cacheRepo(params, callbackrefresh) {
                         }
                         else {
                             console.log("cache:"+file.path);
-                            getGitFile(username, repo, file.path, (e,d)=>{
+                            getGitFile("gormantec", "wasmdom", file.path, (e,d)=>{
                                 localStorage.setItem("gitfile-git://gormantec:wasmdom/"+file.path,btoa(editor.getValue()));
                             });
                             
