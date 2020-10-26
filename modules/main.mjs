@@ -662,7 +662,11 @@ function _toolbarButtonClicked() {
                                     '    "options": {}\n'+
                                     '  }';
                                 }
-                                else return name === filename ? editor.getValue() : null;
+                                else{
+                                    console.log("**** name="+name);
+                                    console.log("**** filename="+filename);
+                                    return name === filename ? editor.getValue() : null;
+                                }
                               },
                               writeFile(name, data, baseDir) {
                                 console.log(`>>> WRITE:${name} >>>\n${data.length}`);
