@@ -636,7 +636,10 @@ function _toolbarButtonClicked() {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
                                 if(name.substring(0,14)=="/node_modules/" && file.path.indexOf("assembly")>=0 && file.path.endsWith("index.ts"))
                                 {
-                                    var cached = atob(localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name));
+                                    var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
+                                    if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/"+name.substring(14));
+                                    var cached = null;
+                                    if(b64) cached=atob(b64);
                                     return cached;
                                 }
                                 else if(name==="asconfig.json"){
