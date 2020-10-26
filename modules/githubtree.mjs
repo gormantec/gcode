@@ -321,6 +321,7 @@ export function cacheRepo(params, callbackrefresh) {
                 var directories = [];
                 sha.data.forEach(function (file) {
                     if (file.name.substring(0, 1) != ".") {
+                        console.log("cache:"+file.path);
                         if (file.path && file.type == "dir" && file.name.substring(0, 1) != ".") {
                             recurseGit(file.path, 0, callback);
                         }
