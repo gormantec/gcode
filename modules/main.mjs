@@ -589,6 +589,11 @@ function _createHtml() {
 var win;
 var myLogin="";
 
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+  }
+
 function _toolbarButtonClicked() {
 
 
@@ -636,7 +641,7 @@ function _toolbarButtonClicked() {
                                     try{
 
                                         console.log("get name");
-                                        githubtree.getGitFile(myLogin, "_repo", "node_modules/ws/index.js", function (e, d) {
+                                        githubtree.getGitFile(myLogin, "_repo", name.substring(1), function (e, d) {
                                             result=d;
                                             error=e;
                                             console.log("d="+d);
@@ -648,12 +653,13 @@ function _toolbarButtonClicked() {
                                         if(!e) e="error";
                                         error=e;
                                     }
-/*
-                                    while(!result && !error)
+
+                                    for(var i=0;i<10 && !result && !error;i++)
                                     {
-                                        console.log("wait");
+                                        sleep(1000);
+                                        console.log("sleep "+i);
                                     }
-                                    */
+                                    
                                     console.log(result);
                                     return result;
                                 }
