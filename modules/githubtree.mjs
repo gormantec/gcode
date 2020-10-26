@@ -254,6 +254,7 @@ export function getGitFile(username, repo, path, callback) {
         repo: repo,
         path: path
     };
+    console.log(params);
     octokit.repos.getContent(params).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
 }
 
