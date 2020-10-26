@@ -637,10 +637,10 @@ function _toolbarButtonClicked() {
                                 if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith("index.ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
-                                    if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/"+name.substring(14));
+                                    if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
                                     if(b64) cached=atob(b64);
-                                    console.log("gitfile-git://gormantec:wasmdom/"+name.substring(14));
+                                    console.log("gitfile-git://gormantec:"+name.substring(14));
                                     console.log(cached);
                                     return cached;
                                 }
