@@ -1163,11 +1163,8 @@ document.addEventListener("DOMContentLoaded", function () {
         githubtree.waitForOctokit(()=>{
             githubtree.getAuthenticated().then((resp) => { 
                 myLogin=resp.data.login; 
-        
-                    var running_count = 0;
-                    var username = r.username;
-                    githubtree.cacheRepo({ username: myLogin, repo: "_repo" }, function (state, repo) { console.log("state="+state); });
-                
+                githubtree.cacheRepo({ username: myLogin, repo: "_repo" }, function (state, repo) { console.log("state="+state); });
+            
 
             });
         });
