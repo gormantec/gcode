@@ -634,6 +634,8 @@ function _toolbarButtonClicked() {
                                     var result=null;
                                     var error=null;
                                     try{
+
+                                        console.log("get name");
                                         githubtree.getGitFile(myLogin, "_repo", name, function (e, d) {
                                             result=d;
                                             error=e;
