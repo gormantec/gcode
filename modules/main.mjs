@@ -377,12 +377,12 @@ function getCode(guid, callback) {
         const code = urlParams.get('code')
         if (code) {
             clearInterval(loop);
-            setTimeout(win.close,2000);
+            win.close();
             return callback(null, code);
         }
         else if (count > 20) {
             clearInterval(loop);
-            setTimeout(win.close,2000);
+            win.close();
             return callback({ error: "timeout" });
         }
 
@@ -1163,6 +1163,7 @@ document.addEventListener("DOMContentLoaded", function () {
         githubtree.waitForOctokit(()=>{
             githubtree.getAuthenticated().then((resp) => { 
                 myLogin=resp.data.login; 
+                console.log("cacheRepo");
                 githubtree.cacheRepo({ username: myLogin, repo: "_repo" }, function (state, repo) { console.log("state="+state); });
             });
         });
