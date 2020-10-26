@@ -326,7 +326,7 @@ export function cacheRepo(params, callbackrefresh) {
                         }
                         else if(file.path.endsWith("index.js") || file.path.endsWith("assembly/index.ts")){
                             console.log("cache:"+file.path);
-                            localStorage.setItem("gitfile-git://"+username+":"+repo+file.path,"//test");
+                            localStorage.setItem("gitfile-git://"+username+":"+repo+"/"+file.path,"//test");
                         }
                     }
                 });
