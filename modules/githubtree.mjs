@@ -301,6 +301,43 @@ export function pullGitRepository(params, callbackrefresh) {
     });
 }
 
+export function cacheRepo(params, callbackrefresh) {
+
+    var username=params.username;
+    var repo=params.repo;
+    var startpath=params.path || "";
+    var maxdepth=params.depth || 1;
+
+    waitForOctokit(function(){
+        var octokit = getGitHub({ auth: getToken() });
+        var recurseGit = function (path, depth, callback) {
+            var _path = path;
+            if (_path.slice(-1) == "/") _path = _path.slice(0, -1);
+            octokit.repos.getContent({
+                owner: username,
+                repo: repo,
+                path: path
+            }).then((sha) => {
+                var directories = [];
+                sha.data.forEach(function (file) {
+                    if (file.name.substring(0, 1) != ".") {
+                        if (file.path && file.type == "dir" && file.name.substring(0, 1) != ".") {
+                            recurseGit(file.path, 0, callback);
+                        }
+                        else{
+                            console.log("cache:"+file.path);
+                        }
+                    }
+                });
+                callback();
+            }).catch((e) => { console.log("error:"+e); callback(); });;;
+    
+    
+        }
+        recurseGit(startpath, 0, function () { if (callbackrefresh) callbackrefresh("done", repo, ""); });
+    });
+}
+
 
 
 

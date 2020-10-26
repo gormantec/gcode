@@ -636,32 +636,8 @@ function _toolbarButtonClicked() {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
                                 if(name.substring(0,14)=="/node_modules/")
                                 {
-                                    var result=null;
-                                    var error=null;
-                                    try{
-
-                                        console.log("get name");
-                                        githubtree.getGitFile(myLogin, "_repo", name.substring(1), function (e, d) {
-                                            result=d;
-                                            error=e;
-                                            console.log("d="+d);
-                                            console.log("e="+e);
-                                            if(!d && !e) error="no result";
-                                        });
-                                    }catch(e){
-                                        console.log(e);
-                                        if(!e) e="error";
-                                        error=e;
-                                    }
-
-                                    for(var i=0;i<10 && !result && !error;i++)
-                                    {
-                                        sleep(1000);
-                                        console.log("sleep "+i);
-                                    }
-                                    
-                                    console.log(result);
-                                    return result;
+                                    var cached = localStorage.getItem("gitfile-git://"+myLogin+":"+_repo+name);
+                                    return cached;
                                 }
                                 else if(name==="asconfig.json"){
                                     return '{\n'+
@@ -1185,7 +1161,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (githubtree.getToken()) {
         githubtree.waitForOctokit(()=>{
-            githubtree.getAuthenticated().then((resp) => { myLogin=resp.data.login; });
+            githubtree.getAuthenticated().then((resp) => { 
+                myLogin=resp.data.login; 
+        
+                    var running_count = 0;
+                    var username = r.username;
+                    githubtree.cacheRepo({ username: myLogin, repo: "_repo" }, function (state, repo) { console.log("state="+state); });
+                
+
+            });
         });
     }
 
