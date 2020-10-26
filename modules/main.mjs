@@ -648,11 +648,12 @@ function _toolbarButtonClicked() {
                                         if(!e) e="error";
                                         error=e;
                                     }
-
+/*
                                     while(!result && !error)
                                     {
                                         console.log("wait");
                                     }
+                                    */
                                     console.log(result);
                                     return result;
                                 }
