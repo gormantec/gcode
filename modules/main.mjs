@@ -640,6 +640,7 @@ function _toolbarButtonClicked() {
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/"+name.substring(14));
                                     var cached = null;
                                     if(b64) cached=atob(b64);
+                                    console.log("gitfile-git://gormantec:wasmdom/"+name.substring(14));
                                     console.log(cached);
                                     return cached;
                                 }
