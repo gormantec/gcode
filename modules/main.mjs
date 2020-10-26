@@ -634,7 +634,7 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
-                                if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith("index.ts"))
+                                if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
@@ -664,8 +664,6 @@ function _toolbarButtonClicked() {
                                     '  }';
                                 }
                                 else{
-                                    console.log("**** name="+name);
-                                    console.log("**** filename="+filename);
                                     return name === filename ? editor.getValue() : null;
                                 }
                               },
