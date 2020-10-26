@@ -637,8 +637,14 @@ function _toolbarButtonClicked() {
                                         githubtree.getGitFile(myLogin, "_repo", name, function (e, d) {
                                             result=d;
                                             error=e;
+                                            console.log("d="+d);
+                                            console.log("e="+e);
+                                            if(!d && !e) error="no result";
                                         });
-                                    }catch(e){error=e}
+                                    }catch(e){
+                                        console.log(e);
+                                        error=e;
+                                    }
 
                                     while(!result && !error)
                                     {
