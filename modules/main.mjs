@@ -637,18 +637,9 @@ function _toolbarButtonClicked() {
                                     console.log(">>"+name);
                                     return editor.getValue();
                                 }
-                                else if(name == "assembly/index.ts"){
-                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
-                                    var cached = null;
-                                    if(b64){
-                                        console.log(name+" = "+"git://gormantec:wasmdom/assembly/index.ts");
-                                        cached=atob(b64);
-                                    }
-                                    return cached;
-                                }
                                 else if(name=="package.json")
                                 {
-                                    console.log("/wasmdom/package.json");
+                                    console.log(">>package.json");
                                     return '{\n'+
                                     '    "name": "wasmdom",\n'+
                                     '   "version": "1.0.0",\n'+
@@ -659,17 +650,8 @@ function _toolbarButtonClicked() {
                                     '  }';
                                       
                                 }
-                                else if(name.substring(0,9)=="assembly/" && name.endsWith(".ts"))
-                                {
-                                    var b64=localStorage.getItem("gitfile-git://gormantec::wasmdom/"+name);
-                                    var cached = null;
-                                    if(b64){
-                                        cached=atob(b64);
-                                        console.log(name+" = "+"git://gormantec:wasmdom/"+name);
-                                    }
-                                    return cached;
-                                }
                                 else if(name=="asconfig.json"){
+                                    console.log(">>asconfig.json");
                                     return '{\n'+
                                     '    "targets": {\n'+
                                     '      "debug": {\n'+
@@ -687,6 +669,25 @@ function _toolbarButtonClicked() {
                                     '    },\n'+
                                     '    "options": {}\n'+
                                     '  }';
+                                }
+                                else if(name == "assembly/index.ts"){
+                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
+                                    var cached = null;
+                                    if(b64){
+                                        console.log(name+" = "+"git://gormantec:wasmdom/assembly/index.ts");
+                                        cached=atob(b64);
+                                    }
+                                    return cached;
+                                }
+                                else if(name.substring(0,9)=="assembly/" && name.endsWith(".ts"))
+                                {
+                                    var b64=localStorage.getItem("gitfile-git://gormantec::wasmdom/"+name);
+                                    var cached = null;
+                                    if(b64){
+                                        cached=atob(b64);
+                                        console.log(name+" = "+"git://gormantec:wasmdom/"+name);
+                                    }
+                                    return cached;
                                 }
                                 else{
                                     //console.log(name);
