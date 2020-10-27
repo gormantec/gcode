@@ -633,8 +633,9 @@ function _toolbarButtonClicked() {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
-                                
-                                if(name.endsWith("src/app.ts")){
+                   
+                                console.log(">"+name);
+                                if(name.endsWith("app.ts")){
                                     console.log("*************>"+name);
                                     return editor.getValue();
                                 }
