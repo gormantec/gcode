@@ -690,7 +690,7 @@ function _toolbarButtonClicked() {
                                     return cached;
                                 }
                                 else{
-                                    if(name.indexOf("assembly")>=0)console.log("not found:"+name);
+                                    if(name.indexOf("wasmdom")>=0)console.log("not found:"+name);
                                     return null;
                                 }
                               },
