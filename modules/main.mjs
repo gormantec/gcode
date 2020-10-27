@@ -633,7 +633,12 @@ function _toolbarButtonClicked() {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
-                                if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
+                                
+                                if(name=="/node_modules/assembly/src/app.ts"){
+                                    console.log("*************>"+name);
+                                    return editor.getValue();
+                                }
+                                else if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
