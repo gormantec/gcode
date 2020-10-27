@@ -634,7 +634,7 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 
-                                if(name=="/node_modules/assembly/src/app.ts"){
+                                if(name.endsWith("src/app.ts")){
                                     console.log("*************>"+name);
                                     return editor.getValue();
                                 }
