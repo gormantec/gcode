@@ -633,18 +633,13 @@ function _toolbarButtonClicked() {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
-                   
-                                console.log("==>"+name);
                                 if(name.endsWith("app.ts")){
-                                    console.log("*************2>"+name);
                                     return editor.getValue();
                                 }
                                 else if(name == filename){
-                                    console.log("*************3>"+name);
                                     var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                     var cached = null;
                                     if(b64) cached=atob(b64);
-                                    if(cached) console.log("*************4>"+name);
                                     return cached;
                                 }
                                 else if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
@@ -654,7 +649,6 @@ function _toolbarButtonClicked() {
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
                                     if(b64) cached=atob(b64);
-                                    if(cached) console.log("*************5>"+name);
                                     return cached;
                                 }
                                 else if(name=="asconfig.json"){
@@ -689,8 +683,8 @@ function _toolbarButtonClicked() {
                                 return [];
                               }
                             }, err => {
-                              //console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                              //console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                              console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                              console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                               if (err) {
                                 console.log(">>> THROWN >>>");
                                 console.log(err);
