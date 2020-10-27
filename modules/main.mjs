@@ -679,7 +679,7 @@ function _toolbarButtonClicked() {
                                     }
                                     return cached;
                                 }
-                                else if(name.substring(0,9)=="assembly/" && name.endsWith(".ts"))
+                                else if(name.startsWith("assembly/") && name.endsWith(".ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://gormantec::wasmdom/"+name);
                                     var cached = null;
