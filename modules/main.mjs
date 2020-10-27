@@ -627,7 +627,7 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                "/node_modules/wasmdom/assembly/index.ts",
+                                "/wasmdom/assembly/index.ts",
                               "--target", "release"
                             ], {
                               stdout,
@@ -646,7 +646,19 @@ function _toolbarButtonClicked() {
                                     }
                                     return cached;
                                 }
-                                else if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
+                                else if(name=="/wasmdom/package.json")
+                                {
+                                    return '{\n'+
+                                    '    "name": "wasmdom",\n'+
+                                    '   "version": "1.0.0",\n'+
+                                    '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n'+
+                                    '   "dependencies": {\n'+
+                                    '    },\n'+
+                                    '    "private": true\n'+
+                                    '  }';
+                                      
+                                }
+                                else if(name.substring(0,9)=="/wasmdom/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
                                     
                                     
