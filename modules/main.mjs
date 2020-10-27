@@ -627,7 +627,7 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                filename,
+                                "/node_modules/assembly/index.ts",
                               "--target", "release"
                             ], {
                               stdout,
@@ -641,7 +641,7 @@ function _toolbarButtonClicked() {
                                     if(b64) cached=atob(b64);
                                     return cached;
                                 }
-                                else if(name==="asconfig.json"){
+                                else if(name=="asconfig.json"){
                                     return '{\n'+
                                     '    "targets": {\n'+
                                     '      "debug": {\n'+
@@ -660,9 +660,12 @@ function _toolbarButtonClicked() {
                                     '    "options": {}\n'+
                                     '  }';
                                 }
+                                else if(name=="/node_modules/assembly/src/app.ts"){
+                                    console.log(name);
+                                    return editor.getValue();
+                                }
                                 else{
-                                    var ret= name === filename ? editor.getValue() : null;
-                                    return ret;
+                                    return null;
                                 }
                               },
                               writeFile(name, data, baseDir) {
