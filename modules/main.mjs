@@ -627,7 +627,7 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                "git://gormantec:wasmdom/assembly/index.ts",
+                                "/node_modules/wasmdom/assembly/index.ts",
                               "--target", "release"
                             ], {
                               stdout,
