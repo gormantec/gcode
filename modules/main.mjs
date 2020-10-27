@@ -627,7 +627,7 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                filename,
+                                "git://gormantec:wasmdom/assembly/index.ts",
                               "--target", "release"
                             ], {
                               stdout,
@@ -637,11 +637,11 @@ function _toolbarButtonClicked() {
                                     console.log(">>"+name);
                                     return editor.getValue();
                                 }
-                                else if(name == filename){
+                                else if(name == "git://gormantec:wasmdom/assembly/index.ts"){
                                     var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                     var cached = null;
                                     if(b64){
-                                        console.log(name+" = "+"gitfile-git://gormantec:wasmdom/assembly/index.ts");
+                                        console.log(name+" = "+"git://gormantec:wasmdom/assembly/index.ts");
                                         cached=atob(b64);
                                     }
                                     return cached;
@@ -654,7 +654,7 @@ function _toolbarButtonClicked() {
                                     var cached = null;
                                     if(b64){
                                         cached=atob(b64);
-                                        console.log(name+" = "+"gitfile-git://gormantec:"+name.substring(14));
+                                        console.log(name+" = "+"git://gormantec:"+name.substring(14));
                                     }
                                     return cached;
                                 }
