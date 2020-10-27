@@ -640,8 +640,7 @@ function _toolbarButtonClicked() {
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
                                     if(b64) cached=atob(b64);
-                                    console.log("gitfile-git://gormantec:"+name.substring(14));
-                                    console.log(cached);
+                                    if(cached)console.log("found file: git://gormantec:"+name.substring(14));
                                     return cached;
                                 }
                                 else if(name==="asconfig.json"){
@@ -664,7 +663,9 @@ function _toolbarButtonClicked() {
                                     '  }';
                                 }
                                 else{
-                                    return name === filename ? editor.getValue() : null;
+                                    var ret= name === filename ? editor.getValue() : null;
+                                    if(!ret)console.log("not found file: "+name);
+                                    return ret;
                                 }
                               },
                               writeFile(name, data, baseDir) {
