@@ -633,14 +633,12 @@ function _toolbarButtonClicked() {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
-                                console.log(`>>> readFile: name=${name} baseDir = ${baseDir} ${name.substring(0,14)}`);
                                 if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
                                     if(b64) cached=atob(b64);
-                                    if(cached)console.log("found file: git://gormantec:"+name.substring(14));
                                     return cached;
                                 }
                                 else if(name==="asconfig.json"){
@@ -664,7 +662,6 @@ function _toolbarButtonClicked() {
                                 }
                                 else{
                                     var ret= name === filename ? editor.getValue() : null;
-                                    if(!ret)console.log("not found file: "+name);
                                     return ret;
                                 }
                               },
