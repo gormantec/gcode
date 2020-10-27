@@ -641,10 +641,12 @@ function _toolbarButtonClicked() {
                                 }
                                 else if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
+                                    
                                     var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
                                     if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
                                     if(b64) cached=atob(b64);
+                                    if(cached) console.log("*************>"+name);
                                     return cached;
                                 }
                                 else if(name=="asconfig.json"){
