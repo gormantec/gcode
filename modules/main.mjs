@@ -648,6 +648,7 @@ function _toolbarButtonClicked() {
                                 }
                                 else if(name=="/wasmdom/package.json")
                                 {
+                                    console.log("/wasmdom/package.json");
                                     return '{\n'+
                                     '    "name": "wasmdom",\n'+
                                     '   "version": "1.0.0",\n'+
