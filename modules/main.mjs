@@ -637,7 +637,7 @@ function _toolbarButtonClicked() {
                                     console.log(">>"+name);
                                     return editor.getValue();
                                 }
-                                else if(name == "git://gormantec:wasmdom/assembly/index.ts"){
+                                else if(name == "/wasmdom/assembly/index.ts"){
                                     var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                     var cached = null;
                                     if(b64){
@@ -660,8 +660,6 @@ function _toolbarButtonClicked() {
                                 }
                                 else if(name.substring(0,9)=="/wasmdom/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
-                                    
-                                    
                                     var b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
                                     if(b64){
