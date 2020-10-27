@@ -634,21 +634,28 @@ function _toolbarButtonClicked() {
                               stderr,
                               readFile(name, baseDir) {
                                 if(name.endsWith("app.ts")){
+                                    console.log(">>"+name);
                                     return editor.getValue();
                                 }
                                 else if(name == filename){
                                     var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                     var cached = null;
-                                    if(b64) cached=atob(b64);
+                                    if(b64){
+                                        console.log(name+" = "+"gitfile-git://gormantec:wasmdom/assembly/index.ts");
+                                        cached=atob(b64);
+                                    }
                                     return cached;
                                 }
                                 else if(name.substring(0,14)=="/node_modules/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
                                 {
                                     
-                                    var b64=localStorage.getItem("gitfile-git://"+myLogin+":_repo"+name);
-                                    if(!b64) b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
+                                    
+                                    var b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(14));
                                     var cached = null;
-                                    if(b64) cached=atob(b64);
+                                    if(b64){
+                                        cached=atob(b64);
+                                        console.log(name+" = "+"gitfile-git://gormantec:"+name.substring(14));
+                                    }
                                     return cached;
                                 }
                                 else if(name=="asconfig.json"){
@@ -671,7 +678,7 @@ function _toolbarButtonClicked() {
                                     '  }';
                                 }
                                 else{
-                                    console.log(name);
+                                    //console.log(name);
                                     return null;
                                 }
                               },
