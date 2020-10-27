@@ -724,6 +724,7 @@ function _toolbarButtonClicked() {
                                     return cached;
                                 }
                                 else{
+                                    if(name.indexOf("dom/document.ts")>=0)console.log("not found: "+name);
                                     return null;
                                 }
                               },
