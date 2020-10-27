@@ -650,6 +650,19 @@ function _toolbarButtonClicked() {
                                     '  }';
                                       
                                 }
+                                else if(name=="node_modules/wasmdom/package.json")
+                                {
+                                    console.log(">>package.json");
+                                    return '{\n'+
+                                    '    "name": "wasmdom",\n'+
+                                    '   "version": "1.0.0",\n'+
+                                    '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n'+
+                                    '   "dependencies": {\n'+
+                                    '    },\n'+
+                                    '    "private": true\n'+
+                                    '  }';
+                                      
+                                }
                                 else if(name=="asconfig.json"){
                                     console.log(">>asconfig.json");
                                     return '{\n'+
@@ -686,6 +699,16 @@ function _toolbarButtonClicked() {
                                     if(b64){
                                         cached=atob(b64);
                                         console.log(name+" = "+"git://gormantec:wasmdom/"+name);
+                                    }
+                                    return cached;
+                                }
+                                else if(name.startsWith("node_modules/wasmdom/assembly") && name.endsWith(".ts"))
+                                {
+                                    var b64=localStorage.getItem("gitfile-git://gormantec::wasmdom/"+name.substring(21));
+                                    var cached = null;
+                                    if(b64){
+                                        cached=atob(b64);
+                                        console.log(name+" = "+"git://gormantec:wasmdom/"+name.substring(21));
                                     }
                                     return cached;
                                 }
