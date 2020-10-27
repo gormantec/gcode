@@ -661,11 +661,11 @@ function _toolbarButtonClicked() {
                                 }
                                 else if(name.substring(0,9)=="assembly/" && name.endsWith(".ts"))
                                 {
-                                    var b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(1));
+                                    var b64=localStorage.getItem("gitfile-git://gormantec::wasmdom/"+name);
                                     var cached = null;
                                     if(b64){
                                         cached=atob(b64);
-                                        console.log(name+" = "+"git://gormantec:"+name.substring(1));
+                                        console.log(name+" = "+"git://gormantec:wasmdom/"+name);
                                     }
                                     return cached;
                                 }
