@@ -712,14 +712,14 @@ function _toolbarButtonClicked() {
                                     }
                                     return cached;
                                 }
-                                else if(name.startsWith("~lib/wasmdom") && name.endsWith(".ts"))
+                                else if(name.startsWith("node_modules/wasmdom/node_modules/wasmdom/assembly") && name.endsWith(".ts"))
                                 {
-                                    console.log(name+" ? "+"lib-> git://gormantec:wasmdom/assembly"+name.substring(12));
-                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly"+name.substring(12));
+                                    console.log(name+" ? "+"lib-> git://gormantec:wasmdom/assembly"+name.substring(50));
+                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly"+name.substring(50));
                                     var cached = null;
                                     if(b64){
                                         cached=atob(b64);
-                                        console.log(name+" = "+"lib-> git://gormantec:wasmdom/assembly"+name.substring(12));
+                                        console.log(name+" = "+"lib-> git://gormantec:wasmdom/assembly"+name.substring(50));
                                     }
                                     return cached;
                                 }
