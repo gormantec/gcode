@@ -627,7 +627,7 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                "/wasmdom/assembly/index.ts",
+                                "assembly/index.ts",
                               "--target", "release"
                             ], {
                               stdout,
@@ -637,7 +637,7 @@ function _toolbarButtonClicked() {
                                     console.log(">>"+name);
                                     return editor.getValue();
                                 }
-                                else if(name == "/wasmdom/assembly/index.ts"){
+                                else if(name == "assembly/index.ts"){
                                     var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                     var cached = null;
                                     if(b64){
@@ -646,7 +646,7 @@ function _toolbarButtonClicked() {
                                     }
                                     return cached;
                                 }
-                                else if(name=="/wasmdom/package.json")
+                                else if(name=="package.json")
                                 {
                                     console.log("/wasmdom/package.json");
                                     return '{\n'+
@@ -659,7 +659,7 @@ function _toolbarButtonClicked() {
                                     '  }';
                                       
                                 }
-                                else if(name.substring(0,9)=="/wasmdom/" && name.indexOf("assembly")>=0 && name.endsWith(".ts"))
+                                else if(name.substring(0,9)=="assembly/" && name.endsWith(".ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://gormantec:"+name.substring(1));
                                     var cached = null;
