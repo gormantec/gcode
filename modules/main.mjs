@@ -712,6 +712,17 @@ function _toolbarButtonClicked() {
                                     }
                                     return cached;
                                 }
+                                else if(name.startsWith("~lib/wasmdom") && name.endsWith(".ts"))
+                                {
+                                    console.log(name+" ? "+"lib-> git://gormantec:wasmdom/assembly"+name.substring(12));
+                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly"+name.substring(12));
+                                    var cached = null;
+                                    if(b64){
+                                        cached=atob(b64);
+                                        console.log(name+" = "+"lib-> git://gormantec:wasmdom/assembly"+name.substring(12));
+                                    }
+                                    return cached;
+                                }
                                 else{
                                     return null;
                                 }
