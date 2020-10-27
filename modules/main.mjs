@@ -705,6 +705,8 @@ function _toolbarButtonClicked() {
                                 else if(name.startsWith("node_modules/wasmdom/assembly") && name.endsWith(".ts"))
                                 {
                                     var b64=localStorage.getItem("gitfile-git://gormantec::wasmdom/"+name.substring(21));
+
+                                    console.log(name+" ? "+"git://gormantec:wasmdom/"+name.substring(21));
                                     var cached = null;
                                     if(b64){
                                         cached=atob(b64);
