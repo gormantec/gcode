@@ -690,7 +690,7 @@ function _toolbarButtonClicked() {
                                     return cached;
                                 }
                                 else{
-                                    //console.log(name);
+                                    if(name.indexOf("assembly")>=0)console.log("not found:"+name);
                                     return null;
                                 }
                               },
