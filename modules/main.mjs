@@ -627,14 +627,14 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                "/node_modules/assembly/index.ts",
+                                filename,
                               "--target", "release"
                             ], {
                               stdout,
                               stderr,
                               readFile(name, baseDir) {
                    
-                                console.log("=>"+name);
+                                console.log("==>"+name);
                                 if(name.endsWith("app.ts")){
                                     console.log("*************2>"+name);
                                     return editor.getValue();
