@@ -665,10 +665,6 @@ function _toolbarButtonClicked() {
                                     '    "options": {}\n'+
                                     '  }';
                                 }
-                                else if(name=="/node_modules/assembly/src/app.ts"){
-                                    console.log("*************>"+name);
-                                    return editor.getValue();
-                                }
                                 else{
                                     console.log(name);
                                     return null;
