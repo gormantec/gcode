@@ -320,7 +320,7 @@ export function cacheRepo(params, callbackrefresh) {
                 var directories = [];
                 sha.data.forEach(function (file) {
                     if (file.name.substring(0, 1) != ".") {
-                        if (file.path && file.type == "dir" && file.name.substring(0, 1) != "." && (depth==0 || file.path.indexOf("assembly")>=0)) {
+                        if (file.path && file.type == "dir" && file.name.substring(0, 1) != "." && (depth==0 || file.path.indexOf("assembly")>=0 || file.path.indexOf("dist")>=0)) {
                             recurseGit(file.path, depth, callback);
                         }
                         else {

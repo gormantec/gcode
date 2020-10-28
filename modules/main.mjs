@@ -720,6 +720,37 @@ function _toolbarButtonClicked() {
                                 console.log(">>> THROWN >>>");
                                 console.log(err);
                               }
+                              else{
+                                try {
+                                    var rootHTML = atob(localStorage.getItem("gitfile-git://gormantec:wasmdom/dist/index.html"));
+                                    var w=375;
+                                    var h=896*375/414;
+                                    var wh="width="+w+",height="+h;
+                                    var frame="";
+                                    /*if(mockFrame){
+                                        wh="width="+(w+40)+",height="+(h+40);
+                                        frame="?mockFrame="+mockFrame;
+                                    }*/
+                                    if (!win || win.closed) {
+                                        win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,"+wh+",top=50,left=50");
+                                        if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                        else win.document.body.style.backgroundColor = "black";
+                                    }
+                                    _uploadFile({ html: rootHTML, icon: splash }, function (error, uri) {
+                                        if (error) {
+                                            debug.log(error);
+                                        }
+                                        else {
+                                            debug.log("open window");
+                                            win.location.href = uri+frame;
+                                        }
+                    
+                                    });
+                                }
+                                catch (e) {
+                                    console.error("error:" + e);
+                                }
+                              }
                             });
                         });
                       });
