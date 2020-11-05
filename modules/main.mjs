@@ -707,7 +707,7 @@ function _toolbarButtonClicked() {
                                 }
                               },
                               writeFile(name, data, baseDir) {
-                                console.log(`>>> WRITE:${name} >>>\n${data.length}`);
+                                console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data} >> ${data}`);
                               },
                               listFiles(dirname, baseDir) {
                                 console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
