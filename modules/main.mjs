@@ -708,7 +708,7 @@ function _toolbarButtonClicked() {
                               },
                               writeFile(name, data, baseDir) {
                                 console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
-                                if(data instanceof object && Array.isArray(data))
+                                if(Array.isArray(data))
                                 {
                                     let blob = new Blob(data, { type: "application/octet-stream" }); 
                                     var reader = new FileReader(); 
