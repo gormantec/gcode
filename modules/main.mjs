@@ -707,9 +707,10 @@ function _toolbarButtonClicked() {
                                 }
                               },
                               writeFile(name, data, baseDir) {
-                                console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
-                                if(Array.isArray(data))
+                                
+                                if(typeof data == "object")
                                 {
+                                    console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
                                     let blob = new Blob(data, { type: "application/octet-stream" }); 
                                     var reader = new FileReader(); 
                                     reader.readAsDataURL(blob); 
