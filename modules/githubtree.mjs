@@ -101,12 +101,15 @@ export function saveFile(name, content, encode, callback) {
     var sha = null;
     console.log(repo);
     console.log(dirpath);
+    console.log(filename);
     console.log(repos[repo]);
     if(repos[repo][dirpath])
     {
         var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
         if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
     }
+
+    console.log("sha="+sha);
     var f = {
         owner: username,
         repo: repo,
