@@ -92,10 +92,12 @@ export function saveFile(name, content, callback) {
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
-    var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
     var sha = null;
-    if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
-
+    if(repos[repo][dirpath])
+    {
+        var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
+        if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
+    }
     var f = {
         owner: username,
         repo: repo,
