@@ -710,6 +710,7 @@ function _toolbarButtonClicked() {
                                 
                                 if(typeof data == "object")
                                 {
+                                    myInt8Array=Int8Array.from(data);
                                     console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
                                     let blob = new Blob(data, { type: "application/octet-stream" }); 
                                     var reader = new FileReader(); 
@@ -748,6 +749,7 @@ function _toolbarButtonClicked() {
                                     var h=896*375/414;
                                     var wh="width="+w+",height="+h;
                                     var frame="";
+                                    rootHTML="<html><head><script>var myInt8Array=Int8Array.from(["+myInt8Array.toString()+"]);</script></head></html>";
                                     /*if(mockFrame){
                                         wh="width="+(w+40)+",height="+(h+40);
                                         frame="?mockFrame="+mockFrame;
