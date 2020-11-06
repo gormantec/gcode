@@ -707,7 +707,7 @@ function _toolbarButtonClicked() {
                                 }
                               },
                               writeFile(name, data, baseDir) {
-                                console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data} >> ${data}`);
+                                console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
                                 if(data instanceof object && Array.isArray(data))
                                 {
                                     let blob = new Blob(data, { type: "application/octet-stream" }); 
