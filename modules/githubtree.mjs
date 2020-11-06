@@ -81,7 +81,13 @@ export function waitForOctokit(callback) {
     }, 500)
 }
 
-export function saveFile(name, content, callback) {
+export function saveFile(name, content, encode, callback) {
+
+    if(!callback)
+    {
+        callback=encode;
+        encode=true;
+    }
 
     var firstColon = name.indexOf(":", 6);
     var secondColon = name.indexOf("/", firstColon + 1);
@@ -103,7 +109,7 @@ export function saveFile(name, content, callback) {
         repo: repo,
         path: fullpath,
         message: "commit",
-        content: btoa(content),
+        content: encode?btoa(content):content,
     };
     if (sha) f.sha = sha;
 

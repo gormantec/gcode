@@ -721,10 +721,11 @@ function _toolbarButtonClicked() {
                                         var gitname="git://gormanau:gcode/dist/"+filename.slice(21, -3)+"/"+name;
                                         console.log(filename);
                                         console.log(gitname);
-                                        githubtree.saveFile(gitname,base64String.substr(base64String.indexOf(',') + 1),()=>{
+                                        githubtree.saveFile(gitname,base64String.substr(base64String.indexOf(',') + 1),false,()=>{
                                             console.log('done');
                                         });
                                     }
+                                    
                                 }
 
 
