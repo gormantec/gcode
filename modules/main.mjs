@@ -751,6 +751,7 @@ function _toolbarButtonClicked() {
                                     var wh="width="+w+",height="+h;
                                     var frame="";
                                     rootHTML="<html><head><script>var myInt8Array=Int8Array.from(["+myInt8Array.toString()+"]);</script></head></html>";
+                                    console.log(rootHTML);
                                     /*if(mockFrame){
                                         wh="width="+(w+40)+",height="+(h+40);
                                         frame="?mockFrame="+mockFrame;
