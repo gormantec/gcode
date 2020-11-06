@@ -708,19 +708,19 @@ function _toolbarButtonClicked() {
                               },
                               writeFile(name, data, baseDir) {
                                 console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data} >> ${data}`);
-                                if(data instanceof Int32Array)
+                                if(data instanceof object && Array.isArray(data))
                                 {
-                                    console.log(`>>> WRITE:Int32Array`);
+                                    let blob = new Blob(data, { type: "application/octet-stream" }); 
+                                    var reader = new FileReader(); 
+                                    reader.readAsDataURL(blob); 
+                                    reader.onloadend = function () { 
+                                    var base64String = reader.result; 
+                                    console.log('Base64 String - ', base64String); 
+                                    console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(', ') + 1)); 
+                                    }
                                 }
-                                var aInt8Array=Int8Array.from(data);
-                                if(aInt8Array instanceof Int8Array)
-                                {
-                                    console.log(`>>> WRITE:Int8Array ${aInt8Array.length}`);
-                                }
-                                if(data instanceof ArrayBuffer)
-                                {
-                                    console.log(`>>> WRITE:ArrayBuffer`);
-                                }
+
+
                               },
                               listFiles(dirname, baseDir) {
                                 console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
