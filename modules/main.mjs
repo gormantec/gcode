@@ -708,6 +708,18 @@ function _toolbarButtonClicked() {
                               },
                               writeFile(name, data, baseDir) {
                                 console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data} >> ${data}`);
+                                if(data instanceof Int32Array)
+                                {
+                                    console.log(`>>> WRITE:Int32Array`);
+                                }
+                                if(data instanceof Int8Array)
+                                {
+                                    console.log(`>>> WRITE:Int8Array`);
+                                }
+                                if(data instanceof ArrayBuffer)
+                                {
+                                    console.log(`>>> WRITE:ArrayBuffer`);
+                                }
                               },
                               listFiles(dirname, baseDir) {
                                 console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
