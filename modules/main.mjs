@@ -715,9 +715,15 @@ function _toolbarButtonClicked() {
                                     var reader = new FileReader(); 
                                     reader.readAsDataURL(blob); 
                                     reader.onloadend = function () { 
-                                    var base64String = reader.result; 
-                                    console.log('Base64 String - ', base64String); 
-                                    console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(', ') + 1)); 
+                                        var base64String = reader.result; 
+                                        console.log('Base64 String - ', base64String); 
+                                        console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(',') + 1)); 
+                                        var gitname="git://gormanau:gcode/dist/"+filename.slice(21, -3)+"/"+name;
+                                        console.log(filename);
+                                        console.log(gitname);
+                                        githubtree.saveFile(gitname,base64String.substr(base64String.indexOf(',') + 1),()=>{
+                                            console.log('done');
+                                        });
                                     }
                                 }
 
