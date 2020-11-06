@@ -620,6 +620,7 @@ function _toolbarButtonClicked() {
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin+"$ asc " + filename + " --target release\n");
+            var myInt8Array=Int8Array.from([1]);
             try {
                 var _run = function () {
                     require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
