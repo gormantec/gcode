@@ -99,6 +99,9 @@ export function saveFile(name, content, encode, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
     var sha = null;
+    console.log(repo);
+    console.log(dirpath);
+    console.log(repos[repo]);
     if(repos[repo][dirpath])
     {
         var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
