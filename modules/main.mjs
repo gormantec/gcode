@@ -712,9 +712,10 @@ function _toolbarButtonClicked() {
                                 {
                                     console.log(`>>> WRITE:Int32Array`);
                                 }
-                                if(data instanceof Int8Array)
+                                var aInt8Array=Int8Array.from(data);
+                                if(aInt8Array instanceof Int8Array)
                                 {
-                                    console.log(`>>> WRITE:Int8Array`);
+                                    console.log(`>>> WRITE:Int8Array ${aInt8Array.length}`);
                                 }
                                 if(data instanceof ArrayBuffer)
                                 {
