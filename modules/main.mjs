@@ -579,10 +579,7 @@ function _createHtml() {
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
     rootHead.appendChild(_script);
-    var _module = window.document.createElement("script");
-    _module.setAttribute("type", "module");
-    _module.text = "\n" + code + "\n";
-    rootHead.appendChild(_module);
+
     return rootHTML;
 }
 
@@ -791,6 +788,11 @@ function _toolbarButtonClicked() {
             debug.log(myLogin+"$ launch webApp " + filename + "\n");
             try {
                 var rootHTML = _createHtml();
+                var _module = window.document.createElement("script");
+                
+                _module.setAttribute("type", "module");
+                _module.text = "\n" + editor.getValue() + "\n";
+                rootHTML.querySelector("head").appendChild(_module);
                 var w=375;
                 var h=896*375/414;
                 var wh="width="+w+",height="+h;

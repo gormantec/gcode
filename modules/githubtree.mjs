@@ -109,12 +109,10 @@ export async function saveFile(name, content, encode, callback) {
         if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
     }
     else{
-        console.log("?????");
         var result=await pullGitRepository({ username: username, repo: repo, path:dirpath });
         console.log(result);
         if(repos[repo][dirpath])
         {
-            console.log(":) :)");
             var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
             if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
         }
