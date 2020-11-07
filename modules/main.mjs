@@ -743,7 +743,6 @@ function _toolbarButtonClicked() {
                               else{
                                 try {
                                     var rootHTML = _createHtml();
-                                    
                                     var _module = window.document.createElement("script");
                                     //_module.setAttribute("type", "module");
                                     _module.text = "\nwindow.wasmdom=Uint8Array.from(["+myUint8Array.toString()+"]);\n";
@@ -762,7 +761,7 @@ function _toolbarButtonClicked() {
                                         if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                                         else win.document.body.style.backgroundColor = "black";
                                     }
-                                    _uploadFile({ html: rootHTML, icon: splash }, function (error, uri) {
+                                    _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                                         if (error) {
                                             debug.log(error);
                                         }
