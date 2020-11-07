@@ -3,7 +3,7 @@ import * as githubtree from '../modules/githubtree.mjs';
 
 var editor;
 
-var debug = { log:function(v){console.log(v);} };
+var debug = { log: function (v) { console.log(v); } };
 
 //int variables   
 
@@ -480,13 +480,13 @@ function _uploadFile(params, callback) {
     //encodedicon ###ICONURI###
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
-var splashBackgroundColor =null;
-var splash =null;
-var mockFrame=null;
+var splashBackgroundColor = null;
+var splash = null;
+var mockFrame = null;
 function _createHtml() {
-    splashBackgroundColor =null;
-    splash =null;
-    mockFrame=null;
+    splashBackgroundColor = null;
+    splash = null;
+    mockFrame = null;
     var rootHTML = window.document.createElement("html");
     var rootHead = window.document.createElement("head");
     var rootBody = window.document.createElement("body");
@@ -499,16 +499,16 @@ function _createHtml() {
     if (!icon || icon == code) icon = splash;
     var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
     if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
-    debug.log("icon180x180="+icon180x180);
+    debug.log("icon180x180=" + icon180x180);
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
-    debug.log("splashColor="+splashColor);
+    debug.log("splashColor=" + splashColor);
     mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (mockFrame == code) mockFrame = null;
-    debug.log("mockFrame="+mockFrame);
+    debug.log("mockFrame=" + mockFrame);
     splashBackgroundColor = code.replace(/\/\*.*?splashBackgroundColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashBackgroundColor == code) splashBackgroundColor = "black";
-    debug.log("splashBackgroundColor="+splashBackgroundColor);
+    debug.log("splashBackgroundColor=" + splashBackgroundColor);
     if (!splashColor && splashBackgroundColor) splashColor = getTextColor(splashBackgroundColor);
     var splashDuration = code.replace(/\/\*.*?splashDuration:.*?([0-9]*)[\n].*?\*\/.*/s, '$1');
     if (splashDuration == code) splashDuration = null;
@@ -597,12 +597,22 @@ function _createHtml() {
 }
 
 var win;
-var myLogin="";
+var myLogin = "";
 
 function sleep(delay) {
     var start = new Date().getTime();
     while (new Date().getTime() < start + delay);
-  }
+}
+
+function _Uint8ArrayToHex(aUint8Array) {
+    return aUint8Array.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function _HexToUint8Array(hex) {
+    var intArray=[];
+    for(var i=0;i<hex.length;i=i+2)intArray.push(parseInt(hex.substr(i,2),16));
+    return Uint8Array.from(intArray);
+}
+
 
 function _toolbarButtonClicked() {
 
@@ -616,7 +626,7 @@ function _toolbarButtonClicked() {
 
         var filename = document.getElementById("filename").innerText;
         if (filename.endsWith(".js")) {
-            debug.log(myLogin+"$ nodejs " + filename + "\n");
+            debug.log(myLogin + "$ nodejs " + filename + "\n");
             try {
                 var _run = function () {
                     eval(editor.getValue());
@@ -629,172 +639,172 @@ function _toolbarButtonClicked() {
             debug.log("${myLogin}$");
         }
         else if (filename.endsWith(".ts")) {
-            debug.log(myLogin+"$ asc " + filename + " --target release\n");
-            var myUint8Array=Uint8Array.from([1]);
+            debug.log(myLogin + "$ asc " + filename + " --target release\n");
+            var myUint8Array = Uint8Array.from([1]);
             try {
                 var _run = function () {
-                    require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
+                    require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
                                 "assembly/index.ts",
-                              "--target", "release",
-                              "--runtime", "full"
+                                "--target", "release",
+                                "--runtime", "full"
                             ], {
-                              stdout,
-                              stderr,
-                              readFile(name, baseDir) {
-                                if(name.endsWith("app.ts")){
-                                    console.log(">>"+name);
-                                    return editor.getValue();
-                                }
-                                else if(name=="package.json")
-                                {
-                                    console.log(">>package.json");
-                                    return '{\n'+
-                                    '    "name": "wasmdom",\n'+
-                                    '   "version": "1.0.0",\n'+
-                                    '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n'+
-                                    '   "dependencies": {\n'+
-                                    '    },\n'+
-                                    '    "private": true\n'+
-                                    '  }';
-                                      
-                                }
-                                else if(name=="node_modules/wasmdom/package.json")
-                                {
-                                    console.log(">>package.json");
-                                    return '{\n'+
-                                    '    "name": "wasmdom",\n'+
-                                    '   "version": "1.0.0",\n'+
-                                    '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n'+
-                                    '   "dependencies": {\n'+
-                                    '    },\n'+
-                                    '    "private": true\n'+
-                                    '  }';
-                                      
-                                }
-                                else if(name=="asconfig.json"){
-                                    console.log(">>asconfig.json");
-                                    return '{\n'+
-                                    '    "targets": {\n'+
-                                    '      "debug": {\n'+
-                                    '        "binaryFile": "untouched.wasm",\n'+
-                                    '        "textFile": "untouched.wat",\n'+
-                                    '        "sourceMap": true,\n'+
-                                    '        "debug": true\n'+
-                                    '      },\n'+
-                                    '      "release": {\n'+
-                                    '        "binaryFile": "optimized.wasm",\n'+
-                                    '        "textFile": "optimized.wat",\n'+
-                                    '        "sourceMap": true,\n'+
-                                    '        "optimize": true\n'+
-                                    '      }\n'+
-                                    '    },\n'+
-                                    '    "options": {}\n'+
-                                    '  }';
-                                }
-                                else if(name == "assembly/index.ts"){
-                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
-                                    var cached = null;
-                                    if(b64){
-                                        console.log(name+" = "+"git://gormantec:wasmdom/assembly/index.ts");
-                                        cached=atob(b64);
+                                stdout,
+                                stderr,
+                                readFile(name, baseDir) {
+                                    if (name.endsWith("app.ts")) {
+                                        console.log(">>" + name);
+                                        return editor.getValue();
                                     }
-                                    return cached;
-                                }
-                                else if(name.startsWith("assembly/") && name.endsWith(".ts"))
-                                {
-                                    var b64=localStorage.getItem("gitfile-git://gormantec:wasmdom/"+name);
-                                    var cached = null;
-                                    if(b64){
-                                        cached=atob(b64);
-                                        console.log(name+" = "+"git://gormantec:wasmdom/"+name);
+                                    else if (name == "package.json") {
+                                        console.log(">>package.json");
+                                        return '{\n' +
+                                            '    "name": "wasmdom",\n' +
+                                            '   "version": "1.0.0",\n' +
+                                            '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n' +
+                                            '   "dependencies": {\n' +
+                                            '    },\n' +
+                                            '    "private": true\n' +
+                                            '  }';
+
                                     }
-                                    return cached;
-                                }
-                                else{
-                                    return null;
-                                }
-                              },
-                              writeFile(name, data, baseDir) {
-                                
-                                if(typeof data == "object")
-                                {
-                                    myUint8Array=Uint8Array.from(data);
-                                    console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
-                                    let blob = new Blob(data, { type: "application/octet-stream" }); 
-                                    var reader = new FileReader(); 
-                                    reader.readAsDataURL(blob); 
-                                    reader.onloadend = function () { 
-                                        var base64String = reader.result; 
-                                        //console.log('Base64 String - ', base64String); 
-                                        //console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(',') + 1)); 
-                                        var gitname="git://gormanau:gcode/dist/"+filename.slice(21, -3)+"/"+name;
-                                        console.log(filename);
-                                        console.log(gitname);
-                                        githubtree.saveFile(gitname,base64String.substr(base64String.indexOf(',') + 1),false,()=>{
+                                    else if (name == "node_modules/wasmdom/package.json") {
+                                        console.log(">>package.json");
+                                        return '{\n' +
+                                            '    "name": "wasmdom",\n' +
+                                            '   "version": "1.0.0",\n' +
+                                            '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n' +
+                                            '   "dependencies": {\n' +
+                                            '    },\n' +
+                                            '    "private": true\n' +
+                                            '  }';
+
+                                    }
+                                    else if (name == "asconfig.json") {
+                                        console.log(">>asconfig.json");
+                                        return '{\n' +
+                                            '    "targets": {\n' +
+                                            '      "debug": {\n' +
+                                            '        "binaryFile": "untouched.wasm",\n' +
+                                            '        "textFile": "untouched.wat",\n' +
+                                            '        "sourceMap": true,\n' +
+                                            '        "debug": true\n' +
+                                            '      },\n' +
+                                            '      "release": {\n' +
+                                            '        "binaryFile": "optimized.wasm",\n' +
+                                            '        "textFile": "optimized.wat",\n' +
+                                            '        "sourceMap": true,\n' +
+                                            '        "optimize": true\n' +
+                                            '      }\n' +
+                                            '    },\n' +
+                                            '    "options": {}\n' +
+                                            '  }';
+                                    }
+                                    else if (name == "assembly/index.ts") {
+                                        var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
+                                        var cached = null;
+                                        if (b64) {
+                                            console.log(name + " = " + "git://gormantec:wasmdom/assembly/index.ts");
+                                            cached = atob(b64);
+                                        }
+                                        return cached;
+                                    }
+                                    else if (name.startsWith("assembly/") && name.endsWith(".ts")) {
+                                        var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/" + name);
+                                        var cached = null;
+                                        if (b64) {
+                                            cached = atob(b64);
+                                            console.log(name + " = " + "git://gormantec:wasmdom/" + name);
+                                        }
+                                        return cached;
+                                    }
+                                    else {
+                                        return null;
+                                    }
+                                },
+                                writeFile(name, data, baseDir) {
+
+                                    if (typeof data == "object") {
+                                        myUint8Array = Uint8Array.from(data);
+                                        githubtree.saveFile(gitname, _Uint8ArrayToHex(myUint8Array), () => {
                                             console.log('done');
                                         });
+                                        console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
+                                        /*
+                                        let blob = new Blob(data, { type: "application/octet-stream" });
+                                        var reader = new FileReader();
+                                        reader.readAsDataURL(blob);
+                                        reader.onloadend = function () {
+                                            var base64String = reader.result;
+                                            //console.log('Base64 String - ', base64String); 
+                                            //console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(',') + 1)); 
+                                            var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
+                                            console.log(filename);
+                                            console.log(gitname);
+                                            githubtree.saveFile(gitname, base64String.substr(base64String.indexOf(',') + 1), false, () => {
+                                                console.log('done');
+                                            });
+                                        }*/
+
                                     }
-                                    
+
+
+                                },
+                                listFiles(dirname, baseDir) {
+                                    console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
+                                    return [];
                                 }
-
-
-                              },
-                              listFiles(dirname, baseDir) {
-                                console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
-                                return [];
-                              }
                             }, err => {
-                              console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                              console.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                              if (err) {
-                                console.log(">>> THROWN >>>");
-                                console.log(err);
-                              }
-                              else{
-                                try {
-                                    var rootHTML = _createHtml();
-                                    var _script1 = window.document.createElement("script");
-                                    _script1.text = "\nwindow.wasmdom=Uint8Array.from(["+myUint8Array.toString()+"]);\n";
-                                    rootHTML.querySelector("body").appendChild(_script1);
-                                    var _script2 = window.document.createElement("script");
-                                    _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                                    rootHTML.querySelector("body").appendChild(_script2);
-                                    var w=375;
-                                    var h=896*375/414;
-                                    var wh="width="+w+",height="+h;
-                                    var frame="";
-                                    console.log(rootHTML);
-                                    /*if(mockFrame){
-                                        wh="width="+(w+40)+",height="+(h+40);
-                                        frame="?mockFrame="+mockFrame;
-                                    }*/
-                                    if (!win || win.closed) {
-                                        win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,"+wh+",top=50,left=50");
-                                        if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                                        else win.document.body.style.backgroundColor = "black";
+                                console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                if (err) {
+                                    console.log(">>> THROWN >>>");
+                                    console.log(err);
+                                }
+                                else {
+                                    try {
+                                        var rootHTML = _createHtml();
+                                        var _script1 = window.document.createElement("script");
+                                        _script1.text = "\nwindow.wasmdom=Uint8Array.from([" + myUint8Array.toString() + "]);\n";
+                                        rootHTML.querySelector("body").appendChild(_script1);
+                                        var _script2 = window.document.createElement("script");
+                                        _script2.src = "https://gcode.com.au/js/wasmdom.js";
+                                        rootHTML.querySelector("body").appendChild(_script2);
+                                        var w = 375;
+                                        var h = 896 * 375 / 414;
+                                        var wh = "width=" + w + ",height=" + h;
+                                        var frame = "";
+                                        console.log(rootHTML);
+                                        /*if(mockFrame){
+                                            wh="width="+(w+40)+",height="+(h+40);
+                                            frame="?mockFrame="+mockFrame;
+                                        }*/
+                                        if (!win || win.closed) {
+                                            win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
+                                            if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                            else win.document.body.style.backgroundColor = "black";
+                                        }
+                                        _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                                            if (error) {
+                                                debug.log(error);
+                                            }
+                                            else {
+                                                debug.log("open window");
+                                                win.location.href = uri + frame;
+                                            }
+
+                                        });
                                     }
-                                    _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                                        if (error) {
-                                            debug.log(error);
-                                        }
-                                        else {
-                                            debug.log("open window");
-                                            win.location.href = uri+frame;
-                                        }
-                    
-                                    });
+                                    catch (e) {
+                                        console.error("error:" + e);
+                                    }
                                 }
-                                catch (e) {
-                                    console.error("error:" + e);
-                                }
-                              }
                             });
                         });
-                      });
+                    });
                 }
                 _run();
             }
@@ -804,23 +814,23 @@ function _toolbarButtonClicked() {
             debug.log("\n");
         }
         else if (filename.endsWith(".mjs")) {
-            debug.log(myLogin+"$ launch webApp " + filename + "\n");
+            debug.log(myLogin + "$ launch webApp " + filename + "\n");
             try {
                 var rootHTML = _createHtml();
                 var _module = window.document.createElement("script");
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + editor.getValue() + "\n";
                 rootHTML.querySelector("head").appendChild(_module);
-                var w=375;
-                var h=896*375/414;
-                var wh="width="+w+",height="+h;
-                var frame="";
-                if(mockFrame){
-                    wh="width="+(w+40)+",height="+(h+40);
-                    frame="?mockFrame="+mockFrame;
+                var w = 375;
+                var h = 896 * 375 / 414;
+                var wh = "width=" + w + ",height=" + h;
+                var frame = "";
+                if (mockFrame) {
+                    wh = "width=" + (w + 40) + ",height=" + (h + 40);
+                    frame = "?mockFrame=" + mockFrame;
                 }
                 if (!win || win.closed) {
-                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,"+wh+",top=50,left=50");
+                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                     else win.document.body.style.backgroundColor = "black";
                 }
@@ -830,7 +840,7 @@ function _toolbarButtonClicked() {
                     }
                     else {
                         debug.log("open window");
-                        win.location.href = uri+frame;
+                        win.location.href = uri + frame;
                     }
 
                 });
@@ -842,7 +852,7 @@ function _toolbarButtonClicked() {
         }
         else if (filename.endsWith(".py")) {
             try {
-                debug.log(myLogin+"$ python " + filename)
+                debug.log(myLogin + "$ python " + filename)
                 Sk.pre = "output";
                 Sk.configure({
                     output: consolelog, read: builtinRead
@@ -863,7 +873,7 @@ function _toolbarButtonClicked() {
 
         var doSomething = function () {
             githubtree.getAuthenticated().then((resp) => {
-                myLogin=resp.data.login;
+                myLogin = resp.data.login;
                 if (resp.data.login) {
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
                     if (gitRepoName) {
@@ -1282,11 +1292,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
     if (githubtree.getToken()) {
-        githubtree.waitForOctokit(()=>{
-            githubtree.getAuthenticated().then((resp) => { 
-                myLogin=resp.data.login; 
+        githubtree.waitForOctokit(() => {
+            githubtree.getAuthenticated().then((resp) => {
+                myLogin = resp.data.login;
                 console.log("cacheRepo");
-                githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state="+state); });
+                githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
         });
     }
