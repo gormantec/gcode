@@ -743,9 +743,10 @@ function _toolbarButtonClicked() {
                               else{
                                 try {
                                     var rootHTML = _createHtml();
+                                    
                                     var _module = window.document.createElement("script");
                                     //_module.setAttribute("type", "module");
-                                    _module.text = "\nvar myInt8Array=Int8Array.from(["+myInt8Array.toString()+"]);\n";
+                                    _module.text = "\nwindow.wasmdom=ArrayBuffer.from(["+myInt8Array.toString()+"]);\n";
                                     rootHTML.querySelector("head").appendChild(_module);
                                     var w=375;
                                     var h=896*375/414;
