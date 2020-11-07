@@ -639,7 +639,8 @@ function _toolbarButtonClicked() {
                             const stderr = asc.createMemoryStream();
                             asc.main([
                                 "assembly/index.ts",
-                              "--target", "release"
+                              "--target", "release",
+                              "--runtime", "full"
                             ], {
                               stdout,
                               stderr,
