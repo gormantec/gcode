@@ -1,1 +1,702 @@
-(()=>{var e={642:e=>{var t=[],n=function(e){if(console.log(e),!e)throw"undefined object!";var n=t.findIndex((t=>t.object===e));if(n<0){var r=parseInt(Date.now()/6e4)+parseInt(2e9*Math.random());t.push({id:r,object:e}),n=t.length-1}return t[n].id},r=function(e){var n=t.findIndex((t=>t.id==e));return t[n]?t[n].object:(console.log("Could not find pointer="+e+" at "+n+" in "+t),null)},o=function(e){var n=t.findIndex((t=>t.id==e));t.splice(n,1)};e.exports.init=function(e){var t={},i=n(e),a=n(e.document),s=n(e.document.documentElement),l=n(e.document.head),u=n(e.document.body);return{get wasm(){return t},set wasm(e){t=e},imports:{wasmdom:{getWindow:()=>i,getDocument:()=>a,getDocumentElement:()=>s,getBody:e=>u,getHead:e=>l,createElement:r=>{var o=t.__getString(r),i=e.document.createElement(o);return n(i)},nodeName:e=>{var n=r(e),o="";return n&&n.nodeName&&(o=n.nodeName),console.log("nodeName="+o),t.__retain(t.__allocString(o))},setTimeout:(e,n)=>(setTimeout((function(){t.__alertTimeout(e)}),n),0),appendChild:(e,t)=>{var n=r(t);r(e).appendChild(n)},setAttribute:(e,n,o)=>{r(e).setAttribute(t.__getString(n),t.__getString(o))},setInnerText:(e,n)=>{r(e).innerText=t.__getString(n)},getInnerText:e=>t.__retain(t.__allocString(r(e).innerText)),getAttribute:(e,n)=>{var o=r(e).getAttribute(t.__getString(n));return o||(o="[#WASMDOM:null]"),t.__retain(t.__allocString(o))},consoleLog:e=>{console.log("%c[AS] "+t.__getString(e),"color: #008800")},setInnerHTML:(e,n)=>{r(e).innerHTML=t.__getString(n)},getInnerHTML:e=>t.__retain(t.__allocString(r(e).innerHTML)),setAccessKey:(e,n)=>{r(e).accessKey=t.__getString(n)},getAccessKey:e=>t.__retain(t.__allocString(r(e).accessKey)),children:e=>{for(var o=r(e).children,i=[],a=0;a<o.length;a++)i.push(n(o[a]));return t.__retain(t.__allocArray(t.Int32Array_ID,i))},querySelector:(e,o)=>{var i=t.__getString(o),a=r(e).querySelector(i);return a?n(a):-1},querySelectorAll:(e,o)=>{r(e).querySelectorAll(t.__getString(st));for(var i=[],a=0;a<c.length;a++)i.push(n(c[a]));return i},remove:e=>{r(e).remove(),o(e)},removeChild:(e,t)=>{r(e).removeChild(r(t)),o(t)},insertBefore:(e,t,n)=>{r(e).insertBefore(r(t),n>-1?r(n):null)},addEventListener:(e,n)=>{var o=t.__getString(n);r(e).addEventListener(o,(()=>{t.__alertEventListener(e,t.__allocString(o))}))},setStyleProperty:(e,n,o)=>{t.__getString(n),t.__getString(o),r(e).style.setProperty(t.__getString(n),t.__getString(o))},getStyleProperty:(e,n)=>{var o=t.__getString(n);return t.__retain(t.__allocString(r(e).style.getPropertyValue(o)))},getResponseText:e=>{if(r(e)instanceof Response){var t=r(e).text();return n(t)}return-1},getResponseJSON:e=>{if(r(e)instanceof Response){var t=r(e).text();return n(t)}return-1},fetch:e=>n(fetch(t.__getString(e))),then:e=>{r(e).then((r=>{if(r instanceof Response){var o=n(r);t.__alertPromise(e,o)}else t.__alertPromiseText(e,t.__retain(t.__allocString(r.toString())))}))}}}}}},824:(e,t)=>{"use strict";const n="undefined"!=typeof BigUint64Array,r=Symbol(),o=new TextDecoder("utf-16le");function i(e,t){const n=new Uint32Array(e)[t+-4>>>2]>>>1,r=new Uint16Array(e,t,n);return n<=32?String.fromCharCode.apply(String,r):o.decode(r)}function a(e){const t={};function n(e,t){return e?i(e.buffer,t):"<yet unknown>"}const r=e.env=e.env||{};return r.abort=r.abort||function(e,o,i,a){const s=t.memory||r.memory;throw Error(`abort: ${n(s,e)} at ${n(s,o)}:${i}:${a}`)},r.trace=r.trace||function(e,o,...i){const a=t.memory||r.memory;console.log(`trace: ${n(a,e)}${o?" ":""}${i.slice(0,o).join(", ")}`)},r.seed=r.seed||Date.now,e.Math=e.Math||Math,e.Date=e.Date||Date,t}function s(e,t){const r=t.exports,o=r.memory,a=r.table,s=r.__alloc,c=r.__retain,l=r.__rtti_base||-1;function u(e){const t=function(e){const t=new Uint32Array(o.buffer);if((e>>>=0)>=t[l>>>2])throw Error("invalid id: "+e);return t[(l+4>>>2)+2*e]}(e);if(!(7&t))throw Error(`not an array: ${e}, flags=${t}`);return t}function f(e){const t=new Uint32Array(o.buffer);if((e>>>=0)>=t[l>>>2])throw Error("invalid id: "+e);return t[(l+4>>>2)+2*e+1]}function _(e){return 31-Math.clz32(e>>>6&31)}function y(e,t,n){const r=o.buffer;if(n)switch(e){case 2:return new Float32Array(r);case 3:return new Float64Array(r)}else switch(e){case 0:return new(t?Int8Array:Uint8Array)(r);case 1:return new(t?Int16Array:Uint16Array)(r);case 2:return new(t?Int32Array:Uint32Array)(r);case 3:return new(t?BigInt64Array:BigUint64Array)(r)}throw Error("unsupported align: "+e)}function d(e){const t=new Uint32Array(o.buffer),n=u(t[e+-8>>>2]),r=_(n);let i=4&n?e:t[e+4>>>2];const a=2&n?t[e+12>>>2]:t[i+-4>>>2]>>>r;return y(r,2048&n,4096&n).subarray(i>>>=r,i+a)}function m(e,t,n){return new e(p(e,t,n))}function p(e,t,n){const r=o.buffer,i=new Uint32Array(r),a=i[n+4>>>2];return new e(r,a,i[a+-4>>>2]>>>t)}function w(t,n,r){e["__get"+n]=m.bind(null,t,r),e[`__get${n}View`]=p.bind(null,t,r)}return e.__allocString=function(e){const t=e.length,n=s(t<<1,1),r=new Uint16Array(o.buffer);for(var i=0,a=n>>>1;i<t;++i)r[a+i]=e.charCodeAt(i);return n},e.__getString=function(e){const t=o.buffer;if(1!==new Uint32Array(t)[e+-8>>>2])throw Error("not a string: "+e);return i(t,e)},e.__allocArray=function(e,t){const n=u(e),r=_(n),i=t.length,a=s(i<<r,4&n?e:0);let l;if(4&n)l=a;else{const t=s(2&n?16:12,e),u=new Uint32Array(o.buffer);u[t+0>>>2]=c(a),u[t+4>>>2]=a,u[t+8>>>2]=i<<r,2&n&&(u[t+12>>>2]=i),l=t}const f=y(r,2048&n,4096&n);if(16384&n)for(let e=0;e<i;++e)f[(a>>>r)+e]=c(t[e]);else f.set(t,a>>>r);return l},e.__getArrayView=d,e.__getArray=function(e){const t=d(e),n=t.length,r=new Array(n);for(let e=0;e<n;e++)r[e]=t[e];return r},e.__getArrayBuffer=function(e){const t=o.buffer,n=new Uint32Array(t)[e+-4>>>2];return t.slice(e,e+n)},[Int8Array,Uint8Array,Uint8ClampedArray,Int16Array,Uint16Array,Int32Array,Uint32Array,Float32Array,Float64Array].forEach((e=>{w(e,e.name,31-Math.clz32(e.BYTES_PER_ELEMENT))})),n&&[BigUint64Array,BigInt64Array].forEach((e=>{w(e,e.name.slice(3),3)})),e.__instanceof=function(e,t){const n=new Uint32Array(o.buffer);let r=n[e+-8>>>2];if(r<=n[l>>>2])do{if(r==t)return!0;r=f(r)}while(r);return!1},e.memory=e.memory||o,e.table=e.table||a,g(r,e)}function c(e){return"undefined"!=typeof Response&&e instanceof Response}function l(e){return e instanceof WebAssembly.Module}async function u(e,t={}){if(c(e=await e))return f(e,t);const n=l(e)?e:await WebAssembly.compile(e),r=a(t),o=await WebAssembly.instantiate(n,t);return{module:n,instance:o,exports:s(r,o)}}async function f(e,t={}){if(!WebAssembly.instantiateStreaming)return u(c(e=await e)?e.arrayBuffer():e,t);const n=a(t),r=await WebAssembly.instantiateStreaming(e,t),o=s(n,r.instance);return{...r,exports:o}}function g(e,t={}){t=Object.create(t);const n=e.__argumentsLength?t=>{e.__argumentsLength.value=t}:e.__setArgumentsLength||e.__setargc||(()=>{});for(let o in e){if(!Object.prototype.hasOwnProperty.call(e,o))continue;const i=e[o];let a=o.split("."),s=t;for(;a.length>1;){let e=a.shift();Object.prototype.hasOwnProperty.call(s,e)||(s[e]={}),s=s[e]}let c=a[0],l=c.indexOf("#");if(l>=0){const t=c.substring(0,l),a=s[t];if(void 0===a||!a.prototype){const e=function(...t){return e.wrap(e.prototype.constructor(0,...t))};e.prototype={valueOf(){return this[r]}},e.wrap=function(t){return Object.create(e.prototype,{[r]:{value:t,writable:!1}})},a&&Object.getOwnPropertyNames(a).forEach((t=>Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(a,t)))),s[t]=e}if(c=c.substring(l+1),s=s[t].prototype,/^(get|set):/.test(c)){if(!Object.prototype.hasOwnProperty.call(s,c=c.substring(4))){let t=e[o.replace("set:","get:")],n=e[o.replace("get:","set:")];Object.defineProperty(s,c,{get(){return t(this[r])},set(e){n(this[r],e)},enumerable:!0})}}else"constructor"===c?(s[c]=(...e)=>(n(e.length),i(...e))).original=i:(s[c]=function(...e){return n(e.length),i(this[r],...e)}).original=i}else/^(get|set):/.test(c)?Object.prototype.hasOwnProperty.call(s,c=c.substring(4))||Object.defineProperty(s,c,{get:e[o.replace("set:","get:")],set:e[o.replace("get:","set:")],enumerable:!0}):"function"==typeof i&&i!==n?(s[c]=(...e)=>(n(e.length),i(...e))).original=i:s[c]=i}return t}t.instantiate=u,t.instantiateSync=function(e,t={}){const n=l(e)?e:new WebAssembly.Module(e),r=a(t),o=new WebAssembly.Instance(n,t);return{module:n,instance:o,exports:s(r,o)}},t.instantiateStreaming=f,t.demangle=g}},t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={exports:{}};return e[r](o,o.exports,n),o.exports}(()=>{const e=n(824),t=n(642).init(window);window.wasmdom instanceof Uint8Array&&console.log("found Uint8Array"),e.instantiate(window.wasmdom instanceof Uint8Array?window.wasmdom:fetch("wasmdom.wasm"),t.imports).then((({exports:e})=>{console.log("found exports"),console.log(e),t.wasm=e,e.show()}))})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 642:
+/***/ ((module) => {
+
+    var objects = [];
+    var getPointer = function (object) {
+      console.log(object);
+      if(!object) throw "undefined object!";
+      var index = objects.findIndex(item => item.object === object);
+      if (index < 0) {
+        var d=parseInt((Date.now())/60000);
+        var r=parseInt(Math.random() * 2000000000);
+        var id = d + r;
+        objects.push({id:id,object:object});
+        index = objects.length-1;
+      }
+      return objects[index].id;
+    };
+    
+    var getObject = function (pointer) {
+      var i = objects.findIndex(item => item.id == pointer);
+      if(objects[i])return objects[i].object;
+      else{
+        console.log("Could not find pointer="+pointer+ " at "+ i + " in "+objects);
+        return null;
+      }
+    };
+    
+    var removeObject = function (pointer) {
+      var i = objects.findIndex(item => item.id == pointer);
+      objects.splice(i, 1);
+    };
+    
+    
+    function init(window) {
+      var _wasm={};
+      var _wp=getPointer(window);
+      var _dp=getPointer(window.document);
+      var _ep=getPointer(window.document.documentElement);
+      var _hp=getPointer(window.document.head);
+      var _bp=getPointer(window.document.body);
+      return {
+        get wasm(){
+          return _wasm;},
+        set wasm(w){
+          _wasm=w;
+        },
+        imports:{
+        wasmdom: {
+          getWindow: ()=>{
+            return _wp;
+          },
+          getDocument: ()=>{
+            return _dp;
+          },
+          getDocumentElement: ()=>{
+            return _ep;
+          },
+          getBody: (parent)=>{
+            return _bp;
+          },
+          getHead: (parent)=>{
+            return _hp;
+          },
+          createElement: (name)=>{
+            var sname=_wasm.__getString(name);
+            var e = window.document.createElement(sname);
+            return getPointer(e);
+          },
+          nodeName: (parent)=>{
+            var e=getObject(parent);
+            var n = "";
+            if(e && e.nodeName)n=e.nodeName;
+            console.log("nodeName="+n);
+            var ptr=_wasm.__retain(_wasm.__allocString(n));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr;
+          },
+          setTimeout: (guid,duration)=>{
+            setTimeout(function(){
+              _wasm.__alertTimeout(guid);
+            },duration);
+            return 0;
+          },
+          appendChild: (parent, child)=>{
+            var childo=getObject(child);
+            getObject(parent).appendChild(childo);
+          },
+          setAttribute: (parent, name, value)=>{
+            getObject(parent).setAttribute(_wasm.__getString(name), _wasm.__getString(value));
+          },
+          setInnerText: (parent, value)=>{
+            getObject(parent).innerText = _wasm.__getString(value);
+          },
+          getInnerText: (e)=>{
+            var ptr=_wasm.__retain(_wasm.__allocString(getObject(e).innerText));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr;
+          },
+          getAttribute: (parent, name)=>{
+            var st=(getObject(parent).getAttribute(_wasm.__getString(name)));
+            if(!st)st="[#WASMDOM:null]";
+            var ptr=_wasm.__retain(_wasm.__allocString(st));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr
+          },
+          consoleLog: message => {
+            console.log("%c[AS] "+_wasm.__getString(message),"color: #008800");
+          }
+          ,setInnerHTML: (e,st)=>{
+            getObject(e).innerHTML = _wasm.__getString(st);
+          }
+          ,getInnerHTML: (e)=>{
+            var ptr=_wasm.__retain(_wasm.__allocString(getObject(e).innerHTML));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr;
+          }
+          ,setAccessKey: (e,key)=>{
+            getObject(e).accessKey = _wasm.__getString(key);
+          }
+          ,getAccessKey: (e)=>{
+            var ptr=_wasm.__retain(_wasm.__allocString(getObject(e).accessKey));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr;
+          }
+          ,children: (e)=>{
+            var c=getObject(e).children;
+            var ar=[];
+            for(var i=0;i<c.length;i++)
+            {
+              ar.push(getPointer(c[i]));
+            }
+    
+            var ptr=_wasm.__retain(_wasm.__allocArray(_wasm.Int32Array_ID,ar));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr;//new Float64Array(ar);
+          }
+          ,querySelector: (e,st)=>{
+            var ss=_wasm.__getString(st);
+            var result=getObject(e).querySelector(ss);
+            if(!result) return -1;
+            else return getPointer(result);
+          }
+          ,querySelectorAll: (e,q)=>{
+            var result=getObject(e).querySelectorAll(_wasm.__getString(st));
+            var ar=[];
+            for(var i=0;i<c.length;i++)
+            {
+              ar.push(getPointer(c[i]));
+            }
+            return ar;
+          }
+          ,remove: (e)=>{
+            getObject(e).remove();
+            removeObject(e);
+          }
+          ,removeChild: (e,c)=>{
+            getObject(e).removeChild(getObject(c));
+            removeObject(c);
+          }
+          ,insertBefore: (p,n,e)=>{
+            getObject(p).insertBefore(getObject(n),e>-1?getObject(e):null);
+          }
+          ,addEventListener: (p,ss)=>{
+            var st=_wasm.__getString(ss);
+            getObject(p).addEventListener(st,()=>{
+              _wasm.__alertEventListener(p,_wasm.__allocString(st));
+            });
+          }
+          ,setStyleProperty: (p,name,value)=>{
+            var pName=_wasm.__getString(name);
+            var pvalue=_wasm.__getString(value);
+            getObject(p).style.setProperty(_wasm.__getString(name),_wasm.__getString(value));
+          }
+          ,getStyleProperty: (p,name)=>{
+            var pName=_wasm.__getString(name);
+            var ptr=_wasm.__retain(_wasm.__allocString(getObject(p).style.getPropertyValue(pName)));
+            //setTimeout(()=>{_wasm.__release(ptr);},10000);
+            return ptr;
+          },
+          getResponseText: (p)=>{
+            var r=getObject(p);
+            if(r instanceof Response){
+              var textPromise = getObject(p).text();
+              return getPointer(textPromise);
+            }
+            else return -1;
+          },
+          getResponseJSON: (p)=>{
+            var r=getObject(p);
+            if(r instanceof Response){
+              var textPromise = getObject(p).text();
+              return getPointer(textPromise);
+            }
+            else return -1;
+          },
+          fetch: (uri)=>
+          {
+            var p= getPointer(fetch(_wasm.__getString(uri)));
+            return p;
+          },
+          then: (p)=>
+          {
+            var promise= getObject(p);
+            promise.then((res)=>{
+              if(res instanceof Response)
+              {
+                var r= getPointer(res);
+                _wasm.__alertPromise(p,r);
+              }
+              else {
+                _wasm.__alertPromiseText(p,_wasm.__retain(_wasm.__allocString(res.toString())));
+              }
+            });
+          }
+    
+        }
+      }
+      };
+    }
+    
+    module.exports.init=init;
+    
+    /***/ }),
+    
+    /***/ 824:
+    /***/ ((__unused_webpack_module, exports) => {
+    
+    "use strict";
+    
+    
+    // Runtime header offsets
+    const ID_OFFSET = -8;
+    const SIZE_OFFSET = -4;
+    
+    // Runtime ids
+    const ARRAYBUFFER_ID = 0;
+    const STRING_ID = 1;
+    // const ARRAYBUFFERVIEW_ID = 2;
+    
+    // Runtime type information
+    const ARRAYBUFFERVIEW = 1 << 0;
+    const ARRAY = 1 << 1;
+    const STATICARRAY = 1 << 2;
+    // const SET = 1 << 3;
+    // const MAP = 1 << 4;
+    const VAL_ALIGN_OFFSET = 6;
+    // const VAL_ALIGN = 1 << VAL_ALIGN_OFFSET;
+    const VAL_SIGNED = 1 << 11;
+    const VAL_FLOAT = 1 << 12;
+    // const VAL_NULLABLE = 1 << 13;
+    const VAL_MANAGED = 1 << 14;
+    // const KEY_ALIGN_OFFSET = 15;
+    // const KEY_ALIGN = 1 << KEY_ALIGN_OFFSET;
+    // const KEY_SIGNED = 1 << 20;
+    // const KEY_FLOAT = 1 << 21;
+    // const KEY_NULLABLE = 1 << 22;
+    // const KEY_MANAGED = 1 << 23;
+    
+    // Array(BufferView) layout
+    const ARRAYBUFFERVIEW_BUFFER_OFFSET = 0;
+    const ARRAYBUFFERVIEW_DATASTART_OFFSET = 4;
+    const ARRAYBUFFERVIEW_DATALENGTH_OFFSET = 8;
+    const ARRAYBUFFERVIEW_SIZE = 12;
+    const ARRAY_LENGTH_OFFSET = 12;
+    const ARRAY_SIZE = 16;
+    
+    const BIGINT = typeof BigUint64Array !== "undefined";
+    const THIS = Symbol();
+    
+    const STRING_DECODE_THRESHOLD = 32;
+    const decoder = new TextDecoder("utf-16le");
+    
+    /** Gets a string from an U32 and an U16 view on a memory. */
+    function getStringImpl(buffer, ptr) {
+      const len = new Uint32Array(buffer)[ptr + SIZE_OFFSET >>> 2] >>> 1;
+      const arr = new Uint16Array(buffer, ptr, len);
+      if (len <= STRING_DECODE_THRESHOLD) {
+        return String.fromCharCode.apply(String, arr);
+      }
+      return decoder.decode(arr);
+    }
+    
+    /** Prepares the base module prior to instantiation. */
+    function preInstantiate(imports) {
+      const extendedExports = {};
+    
+      function getString(memory, ptr) {
+        if (!memory) return "<yet unknown>";
+        return getStringImpl(memory.buffer, ptr);
+      }
+    
+      // add common imports used by stdlib for convenience
+      const env = (imports.env = imports.env || {});
+      env.abort = env.abort || function abort(msg, file, line, colm) {
+        const memory = extendedExports.memory || env.memory; // prefer exported, otherwise try imported
+        throw Error(`abort: ${getString(memory, msg)} at ${getString(memory, file)}:${line}:${colm}`);
+      };
+      env.trace = env.trace || function trace(msg, n, ...args) {
+        const memory = extendedExports.memory || env.memory;
+        console.log(`trace: ${getString(memory, msg)}${n ? " " : ""}${args.slice(0, n).join(", ")}`);
+      };
+      env.seed = env.seed || Date.now;
+      imports.Math = imports.Math || Math;
+      imports.Date = imports.Date || Date;
+    
+      return extendedExports;
+    }
+    
+    /** Prepares the final module once instantiation is complete. */
+    function postInstantiate(extendedExports, instance) {
+      const exports = instance.exports;
+      const memory = exports.memory;
+      const table = exports.table;
+      const alloc = exports["__alloc"];
+      const retain = exports["__retain"];
+      const rttiBase = exports["__rtti_base"] || ~0; // oob if not present
+    
+      /** Gets the runtime type info for the given id. */
+      function getInfo(id) {
+        const U32 = new Uint32Array(memory.buffer);
+        const count = U32[rttiBase >>> 2];
+        if ((id >>>= 0) >= count) throw Error(`invalid id: ${id}`);
+        return U32[(rttiBase + 4 >>> 2) + id * 2];
+      }
+    
+      /** Gets and validate runtime type info for the given id for array like objects */
+      function getArrayInfo(id) {
+        const info = getInfo(id);
+        if (!(info & (ARRAYBUFFERVIEW | ARRAY | STATICARRAY))) throw Error(`not an array: ${id}, flags=${info}`);
+        return info;
+      }
+    
+      /** Gets the runtime base id for the given id. */
+      function getBase(id) {
+        const U32 = new Uint32Array(memory.buffer);
+        const count = U32[rttiBase >>> 2];
+        if ((id >>>= 0) >= count) throw Error(`invalid id: ${id}`);
+        return U32[(rttiBase + 4 >>> 2) + id * 2 + 1];
+      }
+    
+      /** Gets the runtime alignment of a collection's values. */
+      function getValueAlign(info) {
+        return 31 - Math.clz32((info >>> VAL_ALIGN_OFFSET) & 31); // -1 if none
+      }
+    
+      /** Gets the runtime alignment of a collection's keys. */
+      // function getKeyAlign(info) {
+      //   return 31 - Math.clz32((info >>> KEY_ALIGN_OFFSET) & 31); // -1 if none
+      // }
+    
+      /** Allocates a new string in the module's memory and returns its retained pointer. */
+      function __allocString(str) {
+        const length = str.length;
+        const ptr = alloc(length << 1, STRING_ID);
+        const U16 = new Uint16Array(memory.buffer);
+        for (var i = 0, p = ptr >>> 1; i < length; ++i) U16[p + i] = str.charCodeAt(i);
+        return ptr;
+      }
+    
+      extendedExports.__allocString = __allocString;
+    
+      /** Reads a string from the module's memory by its pointer. */
+      function __getString(ptr) {
+        const buffer = memory.buffer;
+        const id = new Uint32Array(buffer)[ptr + ID_OFFSET >>> 2];
+        if (id !== STRING_ID) throw Error(`not a string: ${ptr}`);
+        return getStringImpl(buffer, ptr);
+      }
+    
+      extendedExports.__getString = __getString;
+    
+      /** Gets the view matching the specified alignment, signedness and floatness. */
+      function getView(alignLog2, signed, float) {
+        const buffer = memory.buffer;
+        if (float) {
+          switch (alignLog2) {
+            case 2: return new Float32Array(buffer);
+            case 3: return new Float64Array(buffer);
+          }
+        } else {
+          switch (alignLog2) {
+            case 0: return new (signed ? Int8Array : Uint8Array)(buffer);
+            case 1: return new (signed ? Int16Array : Uint16Array)(buffer);
+            case 2: return new (signed ? Int32Array : Uint32Array)(buffer);
+            case 3: return new (signed ? BigInt64Array : BigUint64Array)(buffer);
+          }
+        }
+        throw Error(`unsupported align: ${alignLog2}`);
+      }
+    
+      /** Allocates a new array in the module's memory and returns its retained pointer. */
+      function __allocArray(id, values) {
+        const info = getArrayInfo(id);
+        const align = getValueAlign(info);
+        const length = values.length;
+        const buf = alloc(length << align, info & STATICARRAY ? id : ARRAYBUFFER_ID);
+        let result;
+        if (info & STATICARRAY) {
+          result = buf;
+        } else {
+          const arr = alloc(info & ARRAY ? ARRAY_SIZE : ARRAYBUFFERVIEW_SIZE, id);
+          const U32 = new Uint32Array(memory.buffer);
+          U32[arr + ARRAYBUFFERVIEW_BUFFER_OFFSET >>> 2] = retain(buf);
+          U32[arr + ARRAYBUFFERVIEW_DATASTART_OFFSET >>> 2] = buf;
+          U32[arr + ARRAYBUFFERVIEW_DATALENGTH_OFFSET >>> 2] = length << align;
+          if (info & ARRAY) U32[arr + ARRAY_LENGTH_OFFSET >>> 2] = length;
+          result = arr;
+        }
+        const view = getView(align, info & VAL_SIGNED, info & VAL_FLOAT);
+        if (info & VAL_MANAGED) {
+          for (let i = 0; i < length; ++i) view[(buf >>> align) + i] = retain(values[i]);
+        } else {
+          view.set(values, buf >>> align);
+        }
+        return result;
+      }
+    
+      extendedExports.__allocArray = __allocArray;
+    
+      /** Gets a live view on an array's values in the module's memory. Infers the array type from RTTI. */
+      function __getArrayView(arr) {
+        const U32 = new Uint32Array(memory.buffer);
+        const id = U32[arr + ID_OFFSET >>> 2];
+        const info = getArrayInfo(id);
+        const align = getValueAlign(info);
+        let buf = info & STATICARRAY
+          ? arr
+          : U32[arr + ARRAYBUFFERVIEW_DATASTART_OFFSET >>> 2];
+        const length = info & ARRAY
+          ? U32[arr + ARRAY_LENGTH_OFFSET >>> 2]
+          : U32[buf + SIZE_OFFSET >>> 2] >>> align;
+        return getView(align, info & VAL_SIGNED, info & VAL_FLOAT).subarray(buf >>>= align, buf + length);
+      }
+    
+      extendedExports.__getArrayView = __getArrayView;
+    
+      /** Copies an array's values from the module's memory. Infers the array type from RTTI. */
+      function __getArray(arr) {
+        const input = __getArrayView(arr);
+        const len = input.length;
+        const out = new Array(len);
+        for (let i = 0; i < len; i++) out[i] = input[i];
+        return out;
+      }
+    
+      extendedExports.__getArray = __getArray;
+    
+      /** Copies an ArrayBuffer's value from the module's memory. */
+      function __getArrayBuffer(ptr) {
+        const buffer = memory.buffer;
+        const length = new Uint32Array(buffer)[ptr + SIZE_OFFSET >>> 2];
+        return buffer.slice(ptr, ptr + length);
+      }
+    
+      extendedExports.__getArrayBuffer = __getArrayBuffer;
+    
+      /** Copies a typed array's values from the module's memory. */
+      function getTypedArray(Type, alignLog2, ptr) {
+        return new Type(getTypedArrayView(Type, alignLog2, ptr));
+      }
+    
+      /** Gets a live view on a typed array's values in the module's memory. */
+      function getTypedArrayView(Type, alignLog2, ptr) {
+        const buffer = memory.buffer;
+        const U32 = new Uint32Array(buffer);
+        const bufPtr = U32[ptr + ARRAYBUFFERVIEW_DATASTART_OFFSET >>> 2];
+        return new Type(buffer, bufPtr, U32[bufPtr + SIZE_OFFSET >>> 2] >>> alignLog2);
+      }
+    
+      /** Attach a set of get TypedArray and View functions to the exports. */
+      function attachTypedArrayFunctions(ctor, name, align) {
+        extendedExports[`__get${name}`] = getTypedArray.bind(null, ctor, align);
+        extendedExports[`__get${name}View`] = getTypedArrayView.bind(null, ctor, align);
+      }
+    
+      [
+        Int8Array,
+        Uint8Array,
+        Uint8ClampedArray,
+        Int16Array,
+        Uint16Array,
+        Int32Array,
+        Uint32Array,
+        Float32Array,
+        Float64Array
+      ].forEach(ctor => {
+        attachTypedArrayFunctions(ctor, ctor.name, 31 - Math.clz32(ctor.BYTES_PER_ELEMENT));
+      });
+    
+      if (BIGINT) {
+        [BigUint64Array, BigInt64Array].forEach(ctor => {
+          attachTypedArrayFunctions(ctor, ctor.name.slice(3), 3);
+        });
+      }
+    
+      /** Tests whether an object is an instance of the class represented by the specified base id. */
+      function __instanceof(ptr, baseId) {
+        const U32 = new Uint32Array(memory.buffer);
+        let id = U32[ptr + ID_OFFSET >>> 2];
+        if (id <= U32[rttiBase >>> 2]) {
+          do {
+            if (id == baseId) return true;
+            id = getBase(id);
+          } while (id);
+        }
+        return false;
+      }
+    
+      extendedExports.__instanceof = __instanceof;
+    
+      // Pull basic exports to extendedExports so code in preInstantiate can use them
+      extendedExports.memory = extendedExports.memory || memory;
+      extendedExports.table  = extendedExports.table  || table;
+    
+      // Demangle exports and provide the usual utility on the prototype
+      return demangle(exports, extendedExports);
+    }
+    
+    function isResponse(src) {
+      return typeof Response !== "undefined" && src instanceof Response;
+    }
+    
+    function isModule(src) {
+      return src instanceof WebAssembly.Module;
+    }
+    
+    /** Asynchronously instantiates an AssemblyScript module from anything that can be instantiated. */
+    async function instantiate(source, imports = {}) {
+      if (isResponse(source = await source)) return instantiateStreaming(source, imports);
+      const module = isModule(source) ? source : await WebAssembly.compile(source);
+      const extended = preInstantiate(imports);
+      const instance = await WebAssembly.instantiate(module, imports);
+      const exports = postInstantiate(extended, instance);
+      return { module, instance, exports };
+    }
+    
+    exports.instantiate = instantiate;
+    
+    /** Synchronously instantiates an AssemblyScript module from a WebAssembly.Module or binary buffer. */
+    function instantiateSync(source, imports = {}) {
+      const module = isModule(source) ? source : new WebAssembly.Module(source);
+      const extended = preInstantiate(imports);
+      const instance = new WebAssembly.Instance(module, imports);
+      const exports = postInstantiate(extended, instance);
+      return { module, instance, exports };
+    }
+    
+    exports.instantiateSync = instantiateSync;
+    
+    /** Asynchronously instantiates an AssemblyScript module from a response, i.e. as obtained by `fetch`. */
+    async function instantiateStreaming(source, imports = {}) {
+      if (!WebAssembly.instantiateStreaming) {
+        return instantiate(
+          isResponse(source = await source)
+            ? source.arrayBuffer()
+            : source,
+          imports
+        );
+      }
+      const extended = preInstantiate(imports);
+      const result = await WebAssembly.instantiateStreaming(source, imports);
+      const exports = postInstantiate(extended, result.instance);
+      return { ...result, exports };
+    }
+    
+    exports.instantiateStreaming = instantiateStreaming;
+    
+    /** Demangles an AssemblyScript module's exports to a friendly object structure. */
+    function demangle(exports, extendedExports = {}) {
+      extendedExports = Object.create(extendedExports);
+      const setArgumentsLength = exports["__argumentsLength"]
+        ? length => { exports["__argumentsLength"].value = length; }
+        : exports["__setArgumentsLength"] || exports["__setargc"] || (() => { /* nop */ });
+      for (let internalName in exports) {
+        if (!Object.prototype.hasOwnProperty.call(exports, internalName)) continue;
+        const elem = exports[internalName];
+        let parts = internalName.split(".");
+        let curr = extendedExports;
+        while (parts.length > 1) {
+          let part = parts.shift();
+          if (!Object.prototype.hasOwnProperty.call(curr, part)) curr[part] = {};
+          curr = curr[part];
+        }
+        let name = parts[0];
+        let hash = name.indexOf("#");
+        if (hash >= 0) {
+          const className = name.substring(0, hash);
+          const classElem = curr[className];
+          if (typeof classElem === "undefined" || !classElem.prototype) {
+            const ctor = function(...args) {
+              return ctor.wrap(ctor.prototype.constructor(0, ...args));
+            };
+            ctor.prototype = {
+              valueOf() { return this[THIS]; }
+            };
+            ctor.wrap = function(thisValue) {
+              return Object.create(ctor.prototype, { [THIS]: { value: thisValue, writable: false } });
+            };
+            if (classElem) Object.getOwnPropertyNames(classElem).forEach(name =>
+              Object.defineProperty(ctor, name, Object.getOwnPropertyDescriptor(classElem, name))
+            );
+            curr[className] = ctor;
+          }
+          name = name.substring(hash + 1);
+          curr = curr[className].prototype;
+          if (/^(get|set):/.test(name)) {
+            if (!Object.prototype.hasOwnProperty.call(curr, name = name.substring(4))) {
+              let getter = exports[internalName.replace("set:", "get:")];
+              let setter = exports[internalName.replace("get:", "set:")];
+              Object.defineProperty(curr, name, {
+                get() { return getter(this[THIS]); },
+                set(value) { setter(this[THIS], value); },
+                enumerable: true
+              });
+            }
+          } else {
+            if (name === 'constructor') {
+              (curr[name] = (...args) => {
+                setArgumentsLength(args.length);
+                return elem(...args);
+              }).original = elem;
+            } else { // instance method
+              (curr[name] = function(...args) { // !
+                setArgumentsLength(args.length);
+                return elem(this[THIS], ...args);
+              }).original = elem;
+            }
+          }
+        } else {
+          if (/^(get|set):/.test(name)) {
+            if (!Object.prototype.hasOwnProperty.call(curr, name = name.substring(4))) {
+              Object.defineProperty(curr, name, {
+                get: exports[internalName.replace("set:", "get:")],
+                set: exports[internalName.replace("get:", "set:")],
+                enumerable: true
+              });
+            }
+          } else if (typeof elem === "function" && elem !== setArgumentsLength) {
+            (curr[name] = (...args) => {
+              setArgumentsLength(args.length);
+              return elem(...args);
+            }).original = elem;
+          } else {
+            curr[name] = elem;
+          }
+        }
+      }
+      return extendedExports;
+    }
+    
+    exports.demangle = demangle;
+    
+    
+    /***/ })
+    
+    /******/ 	});
+    /************************************************************************/
+    /******/ 	// The module cache
+    /******/ 	var __webpack_module_cache__ = {};
+    /******/ 	
+    /******/ 	// The require function
+    /******/ 	function __webpack_require__(moduleId) {
+    /******/ 		// Check if module is in cache
+    /******/ 		if(__webpack_module_cache__[moduleId]) {
+    /******/ 			return __webpack_module_cache__[moduleId].exports;
+    /******/ 		}
+    /******/ 		// Create a new module (and put it into the cache)
+    /******/ 		var module = __webpack_module_cache__[moduleId] = {
+    /******/ 			// no module.id needed
+    /******/ 			// no module.loaded needed
+    /******/ 			exports: {}
+    /******/ 		};
+    /******/ 	
+    /******/ 		// Execute the module function
+    /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+    /******/ 	
+    /******/ 		// Return the exports of the module
+    /******/ 		return module.exports;
+    /******/ 	}
+    /******/ 	
+    /************************************************************************/
+    (() => {
+    const loader = __webpack_require__(824);
+    const importObject = __webpack_require__(642).init(window);
+    if(window.wasmdom instanceof Uint8Array)console.log("found Uint8Array");
+    loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:fetch('wasmdom.wasm'), importObject.imports
+    ).then(({exports}) =>{
+        console.log("found exports");
+        console.log(exports);
+        importObject.wasm = exports;
+        exports.show();
+    }
+    );
+    
+    
+    })();
+    
+    /******/ })()
+    ;
