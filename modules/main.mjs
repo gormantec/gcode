@@ -742,12 +742,15 @@ function _toolbarButtonClicked() {
                               }
                               else{
                                 try {
-                                    var rootHTML = atob(localStorage.getItem("gitfile-git://gormantec:wasmdom/dist/index.html"));
+                                    var rootHTML = _createHtml();
+                                    var _module = window.document.createElement("script");
+                                    //_module.setAttribute("type", "module");
+                                    _module.text = "\nvar myInt8Array=Int8Array.from(["+myInt8Array.toString()+"]);\n";
+                                    rootHTML.querySelector("head").appendChild(_module);
                                     var w=375;
                                     var h=896*375/414;
                                     var wh="width="+w+",height="+h;
                                     var frame="";
-                                    rootHTML="<html><head><script>var myInt8Array=Int8Array.from(["+myInt8Array.toString()+"]);</script></head></html>";
                                     console.log(rootHTML);
                                     /*if(mockFrame){
                                         wh="width="+(w+40)+",height="+(h+40);
