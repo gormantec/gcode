@@ -524,6 +524,9 @@ function _createHtml() {
     var longName = appName;
     var shortName = appName;
     var display = "standalone";
+
+
+
     var _link = window.document.createElement("meta");
     _link.setAttribute("name", "mobile-web-app-capable");
     _link.setAttribute("content", "yes");
@@ -552,6 +555,16 @@ function _createHtml() {
     _link = window.document.createElement("link");
     _link.setAttribute("rel", "apple-touch-icon");
     _link.setAttribute("href", "###ICONURI###");
+    _link = window.document.createElement("link");
+    _link.setAttribute("rel", "apple-touch-icon-precomposed");
+    _link.setAttribute("href", "###ICONURI###");
+    _link = window.document.createElement("link");
+    _link.setAttribute("rel", "icon");
+    _link.setAttribute("href", "###ICONURI###");
+
+
+
+
     rootHead.appendChild(_link);
     if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
         var _style = window.document.createElement("style");
