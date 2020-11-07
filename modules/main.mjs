@@ -789,7 +789,6 @@ function _toolbarButtonClicked() {
             try {
                 var rootHTML = _createHtml();
                 var _module = window.document.createElement("script");
-                
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + editor.getValue() + "\n";
                 rootHTML.querySelector("head").appendChild(_module);
