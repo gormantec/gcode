@@ -688,10 +688,17 @@
     if(window.wasmdom instanceof Uint8Array)console.log("found Uint8Array");
     loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:fetch('wasmdom.wasm'), importObject.imports
     ).then(({exports}) =>{
-        console.log("found exports");
+        console.log("found exports.");
         console.log(exports);
-        importObject.wasm = exports;
-        exports.show();
+        if(exports["__alloc"] && exports["show"])
+        {
+            importObject.wasm = exports;
+            exports.show();
+        }
+        else{
+            console.log("could not find module.");
+        }
+    
     }
     );
     
