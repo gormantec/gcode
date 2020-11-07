@@ -758,10 +758,10 @@ function _toolbarButtonClicked() {
                                     var rootHTML = _createHtml();
                                     var _script1 = window.document.createElement("script");
                                     _script1.text = "\nwindow.wasmdom=Uint8Array.from(["+myUint8Array.toString()+"]);\n";
-                                    rootHTML.querySelector("head").appendChild(_script1);
+                                    rootHTML.querySelector("body").appendChild(_script1);
                                     var _script2 = window.document.createElement("script");
                                     _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                                    rootHTML.querySelector("head").appendChild(_script2);
+                                    rootHTML.querySelector("body").appendChild(_script2);
                                     var w=375;
                                     var h=896*375/414;
                                     var wh="width="+w+",height="+h;
