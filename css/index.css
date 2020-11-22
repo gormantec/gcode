@@ -310,6 +310,9 @@ div.toolbarButton img{
     right:0px;
     background-color: black;
     z-index: 100;
+    background-image: url('https://gcode.com.au/images/ios/ios-appicon-180-180.png');
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
 }
 
 @media only screen and (max-width: 576px) {
