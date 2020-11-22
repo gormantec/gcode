@@ -132,6 +132,7 @@ function _new() {
                         "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
                         "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
                         "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                        "mockFrame: iphoneX" + "\n  " +
                         "splashBackgroundColor: #005040" + "\n  " +
                         "splashDuration: 2000" +
                         "\n\n*/\n\n" + _samplecode);
