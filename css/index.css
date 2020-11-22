@@ -298,12 +298,12 @@ div.toolbarButton img{
     position: absolute;
     bottom: 0px;
     left:0px;
-    right:0px;
+    right:0px; 
 }
 
 #splashScreen
 {
-    position: fixed;
+    position: fixed; 
     bottom: 0px;
     top: 0px;
     left:0px;
