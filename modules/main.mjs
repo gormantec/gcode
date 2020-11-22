@@ -1324,8 +1324,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
-    document.getElementById("splashScreen").hidden=true;
+    setTimeout(function(){
+        document.getElementById("splashScreen").hidden=true;
+    },2000);
+    
 
 });
 
