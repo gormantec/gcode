@@ -1325,7 +1325,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
+    document.getElementById("splashScreen").hidden=true;
 
 });
 
