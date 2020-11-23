@@ -650,8 +650,10 @@ function _toolbarButtonClicked() {
                             const stderr = asc.createMemoryStream();
                             asc.main([
                                 "assembly/index.ts",
-                                "--target", "release",
-                                "--runtime", "full"
+                                "-O3",
+                                "--runtime", "full",
+                                "--binaryFile", "optimized.wasm",
+                                "--textFile", "optimized.wat"
                             ], {
                                 stdout,
                                 stderr,
@@ -663,7 +665,7 @@ function _toolbarButtonClicked() {
                                     else if (name == "package.json") {
                                         console.log(">>package.json");
                                         return '{\n' +
-                                            '    "name": "wasmdom",\n' +
+                                            '    "name": "wasmdom",\n' +   
                                             '   "version": "1.0.0",\n' +
                                             '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n' +
                                             '   "dependencies": {\n' +
@@ -685,6 +687,8 @@ function _toolbarButtonClicked() {
 
                                     }
                                     else if (name == "asconfig.json") {
+                                        return null;
+                                        /*
                                         console.log(">>asconfig.json");
                                         return '{\n' +
                                             '    "targets": {\n' +
@@ -707,6 +711,7 @@ function _toolbarButtonClicked() {
                                             '        "runtime": "full"\n' +
                                             '      }\n' +
                                             '  }';
+                                            */
                                     }
                                     else if (name == "assembly/index.ts") {
                                         var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
