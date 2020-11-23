@@ -692,16 +692,20 @@ function _toolbarButtonClicked() {
                                             '        "binaryFile": "untouched.wasm",\n' +
                                             '        "textFile": "untouched.wat",\n' +
                                             '        "sourceMap": true,\n' +
-                                            '        "debug": true\n' +
+                                            '        "debug": true,\n' +
+                                            '        "runtime": "full"\n' +
                                             '      },\n' +
                                             '      "release": {\n' +
                                             '        "binaryFile": "optimized.wasm",\n' +
                                             '        "textFile": "optimized.wat",\n' +
                                             '        "sourceMap": true,\n' +
-                                            '        "optimize": true\n' +
+                                            '        "optimize": true,\n' +
+                                            '        "runtime": "full"\n' +
                                             '      }\n' +
                                             '    },\n' +
-                                            '    "options": {}\n' +
+                                            '    "options": {\n' +
+                                            '        "runtime": "full"\n' +
+                                            '      }\n' +
                                             '  }';
                                     }
                                     else if (name == "assembly/index.ts") {
