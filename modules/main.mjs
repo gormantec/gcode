@@ -730,6 +730,7 @@ function _toolbarButtonClicked() {
 
                                     if (typeof data == "object") {
                                         myUint8Array = Uint8Array.from(data);
+                                        var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
                                         githubtree.saveFile(gitname, _Uint8ArrayToHex(myUint8Array), () => {
                                             console.log('done');
                                         });
