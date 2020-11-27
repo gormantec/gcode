@@ -738,7 +738,7 @@ function _toolbarButtonClicked() {
                                 writeFile(name, data, baseDir) {
 
                                     if (typeof data == "object") {
-                                        //application/wasm
+                                        
 
 
                                 
@@ -753,7 +753,7 @@ function _toolbarButtonClicked() {
                                         }, false);
                                       
                  
-                                        reader.readAsDataURL(data);
+                                        reader.readAsDataURL(new Blob(data,{type : 'application/wasm'}));
                                         
 
 
