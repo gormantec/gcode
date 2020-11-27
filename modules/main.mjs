@@ -794,7 +794,7 @@ function _toolbarButtonClicked() {
                                         }, false);
                                       
                  
-                                        reader.readAsDataURL(new Blob(data,{type : 'application/wasm'}));
+                                        reader.readAsDataURL(new Blob(Uint8Array.from(data),{type : 'application/wasm'}));
                                         
 /*
 
