@@ -741,7 +741,7 @@ function _toolbarButtonClicked() {
                                         //application/wasm
 
 
-                                        application/wasm
+                                
 
                                         const reader = new FileReader();
 
