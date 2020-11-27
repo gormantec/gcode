@@ -737,7 +737,7 @@ function _toolbarButtonClicked() {
                                 },
                                 writeFile(name, data, baseDir) {
 
-                                    if (typeof data == "object") {
+                                    if (typeof data == "object" && name=="optimized.wasm") {
                                         
 
 
@@ -747,15 +747,56 @@ function _toolbarButtonClicked() {
 
                                         reader.addEventListener("load", function () {
                                           // convert image file to base64 string
-                                          console.log("------------------");
+                                          console.log("-------"+name+"-------");
                                           console.log(reader.result);
+                                          var dataURL=reader.result;
                                           console.log("------------------");
+
+                                          try {
+                                            var rootHTML = _createHtml();
+                                            var _script1 = window.document.createElement("script");
+                                            _script1.text = "\nwindow.wasmdomURL=\""+dataURL+"\";\n";
+                                            rootHTML.querySelector("body").appendChild(_script1);
+                                            var _script2 = window.document.createElement("script");
+                                            _script2.src = "https://gcode.com.au/js/wasmdom.js";
+                                            rootHTML.querySelector("body").appendChild(_script2);
+                                            var w = 375;
+                                            var h = 896 * 375 / 414;
+                                            var wh = "width=" + w + ",height=" + h;
+                                            var frame = "";
+                                            console.log(rootHTML);
+                                            /*if(mockFrame){
+                                                wh="width="+(w+40)+",height="+(h+40);
+                                                frame="?mockFrame="+mockFrame;
+                                            }*/
+                                            if (!win || win.closed) {
+                                                win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
+                                                if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                                else win.document.body.style.backgroundColor = "black";
+                                            }
+                                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                                                if (error) {
+                                                    debug.log(error);
+                                                }
+                                                else {
+                                                    debug.log("open window");
+                                                    win.location.href = uri + frame;
+                                                }
+    
+                                            });
+                                        }
+                                        catch (e) {
+                                            console.error("error:" + e);
+                                        }
+
+
+
                                         }, false);
                                       
                  
                                         reader.readAsDataURL(new Blob(data,{type : 'application/wasm'}));
                                         
-
+/*
 
                                         myUint8Array = Uint8Array.from(data);
                                         var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
@@ -763,7 +804,7 @@ function _toolbarButtonClicked() {
                                             console.log('done');
                                         });
                                         console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
-                                        /*
+                                        
                                         let blob = new Blob(data, { type: "application/octet-stream" });
                                         var reader = new FileReader();
                                         reader.readAsDataURL(blob);
@@ -795,42 +836,7 @@ function _toolbarButtonClicked() {
                                     console.log(err);
                                 }
                                 else {
-                                    try {
-                                        var rootHTML = _createHtml();
-                                        var _script1 = window.document.createElement("script");
-                                        _script1.text = "\nwindow.wasmdom=Uint8Array.from([" + myUint8Array.toString() + "]);\n";
-                                        rootHTML.querySelector("body").appendChild(_script1);
-                                        var _script2 = window.document.createElement("script");
-                                        _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                                        rootHTML.querySelector("body").appendChild(_script2);
-                                        var w = 375;
-                                        var h = 896 * 375 / 414;
-                                        var wh = "width=" + w + ",height=" + h;
-                                        var frame = "";
-                                        console.log(rootHTML);
-                                        /*if(mockFrame){
-                                            wh="width="+(w+40)+",height="+(h+40);
-                                            frame="?mockFrame="+mockFrame;
-                                        }*/
-                                        if (!win || win.closed) {
-                                            win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
-                                            if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                                            else win.document.body.style.backgroundColor = "black";
-                                        }
-                                        _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                                            if (error) {
-                                                debug.log(error);
-                                            }
-                                            else {
-                                                debug.log("open window");
-                                                win.location.href = uri + frame;
-                                            }
 
-                                        });
-                                    }
-                                    catch (e) {
-                                        console.error("error:" + e);
-                                    }
                                 }
                             });
                         });
