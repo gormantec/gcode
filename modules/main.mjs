@@ -738,6 +738,25 @@ function _toolbarButtonClicked() {
                                 writeFile(name, data, baseDir) {
 
                                     if (typeof data == "object") {
+                                        //application/wasm
+
+
+                                        application/wasm
+
+                                        const reader = new FileReader();
+
+                                        reader.addEventListener("load", function () {
+                                          // convert image file to base64 string
+                                          console.log("------------------");
+                                          console.log(reader.result);
+                                          console.log("------------------");
+                                        }, false);
+                                      
+                 
+                                        reader.readAsDataURL(data);
+                                        
+
+
                                         myUint8Array = Uint8Array.from(data);
                                         var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
                                         githubtree.saveFile(gitname, _Uint8ArrayToHex(myUint8Array), () => {

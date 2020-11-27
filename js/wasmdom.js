@@ -528,23 +528,11 @@ function isModule(src) {
 
 /** Asynchronously instantiates an AssemblyScript module from anything that can be instantiated. */
 async function instantiate(source, imports = {}) {
-  if (isResponse(source = await source)){
-    console.log("isResponse=true");
-    return instantiateStreaming(source, imports);
-  }
-  if(isModule(source))console.log("source");
-
+  if (isResponse(source = await source)) return instantiateStreaming(source, imports);
   const module = isModule(source) ? source : await WebAssembly.compile(source);
   const extended = preInstantiate(imports);
-  console.log("preInstantiate");
-  console.log(extended);
   const instance = await WebAssembly.instantiate(module, imports);
-  console.log("instance");
-  console.log(instance);
-  console.log(instance.exports);
   const exports = postInstantiate(extended, instance);
-  console.log("exports");
-  console.log(exports);
   return { module, instance, exports };
 }
 
