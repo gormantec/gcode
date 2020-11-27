@@ -528,11 +528,23 @@ function isModule(src) {
 
 /** Asynchronously instantiates an AssemblyScript module from anything that can be instantiated. */
 async function instantiate(source, imports = {}) {
-  if (isResponse(source = await source)) return instantiateStreaming(source, imports);
+  if (isResponse(source = await source)){
+    console.log("isResponse=true");
+    return instantiateStreaming(source, imports);
+  }
+  if(isModule(source))console.log("source");
+
   const module = isModule(source) ? source : await WebAssembly.compile(source);
   const extended = preInstantiate(imports);
+  console.log("preInstantiate");
+  console.log(extended);
   const instance = await WebAssembly.instantiate(module, imports);
+  console.log("instance");
+  console.log(instance);
+  console.log(instance.exports);
   const exports = postInstantiate(extended, instance);
+  console.log("exports");
+  console.log(exports);
   return { module, instance, exports };
 }
 
@@ -686,9 +698,17 @@ const loader = __webpack_require__(824);
 const importObject = __webpack_require__(642).init(window);
 if(window.wasmdom instanceof Uint8Array)console.log("found Uint8Array");
 loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:fetch('wasmdom.wasm'), importObject.imports
-).then(({exports}) =>{
+).then(({module, instance, exports}) =>{
     console.log("found exports.");
     console.log(exports);
+    console.log("------ __alloc1 ------");
+    console.log(exports["__alloc"]);
+    console.log("------ __alloc1 ------");
+    console.log("found instance exports.");
+    console.log(instance.exports);
+    console.log("------ __alloc2 ------");
+    console.log(instance.exports["__alloc"]);
+    console.log("------ __alloc2 ------");
     if(exports["__retain"] && exports["__allocArray"] && exports["__allocString"] && exports["show"])
     {
         importObject.wasm = exports;
