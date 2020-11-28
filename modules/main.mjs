@@ -794,7 +794,7 @@ function _toolbarButtonClicked() {
                                         }, false);
 
 
-                                        const view = new DataView(Uint8Array.from(data));
+                                        const view = new DataView(Uint8Array.from(data).buffer);
 
                                         //console.log(view.buffer.byteLength);
                  
