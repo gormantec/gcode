@@ -755,7 +755,7 @@ function _toolbarButtonClicked() {
                                           try {
                                             var rootHTML = _createHtml();
                                             var _script1 = window.document.createElement("script");
-                                            _script1.text = "\nwindow.wasmdomURL=\""+dataURL+"\";\n";
+                                            //_script1.text = "\nwindow.wasmdomURL=\""+dataURL+"\";\n";
                                             rootHTML.querySelector("body").appendChild(_script1);
                                             var _script2 = window.document.createElement("script");
                                             _script2.src = "https://gcode.com.au/js/wasmdom.js";

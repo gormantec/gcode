@@ -685,7 +685,7 @@ exports.demangle = demangle;
 const loader = __webpack_require__(824);
 const importObject = __webpack_require__(642).init(window);
 if(window.wasmdom instanceof Uint8Array)console.log("found Uint8Array");
-loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:(window.wasmdomURL)?fetch(window.wasmdomURL):fetch('wasmdom.wasm'), importObject.imports
+loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:(window.wasmdomURL)?fetch(window.wasmdomURL):fetch('https://gcode.com.au/modules/wasmdom.wasm'), importObject.imports
 ).then(({module, instance, exports}) =>{
     console.log("found exports.");
     console.log(exports);
