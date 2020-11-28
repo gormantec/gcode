@@ -792,13 +792,9 @@ function _toolbarButtonClicked() {
 
 
                                         }, false);
-
-
-                                        const view = new DataView(Uint8Array.from(data).buffer);
-
-                                        //console.log(view.buffer.byteLength);
+                                      
                  
-                                        reader.readAsDataURL(new Blob(view.buffer,{type : 'application/wasm'}));
+                                        reader.readAsDataURL(new Blob([Uint8Array.from(data)],{type : 'application/wasm'}));
                                         
 /*
 
