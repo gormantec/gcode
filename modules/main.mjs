@@ -110,19 +110,25 @@ function _delete() {
 
 
 function _new() {
+    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
+    if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
+        aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
+    }
+    if (aFilename != null) {
+        var sampleName = "";
+        if (aFilename.endsWith(".mjs")) sampleName = "modules/sample.mjs";
+        else if (aFilename.endsWith(".ts")) sampleName = "modules/sample.ts";
+        else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
+        else sampleName = "modules/sample.txt";
 
-    fetch("modules/sample.mjs")
-        .then(
-            response => response.text()
-        ).then(
-            text => {
-                var _samplecode = text;
+        fetch(sampleName)
+            .then(
+                response => response.text()
+            ).then(
+                text => {
+                    var _samplecode = text;
 
-                var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
-                if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
-                    aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
-                }
-                if (aFilename != null) {
+
                     document.getElementById("filename").innerText = aFilename;
                     selectedFileWidget = aFilename;
                     editor.setValue("/*\n\n  " +
@@ -149,8 +155,8 @@ function _new() {
                         _refresh();
                     }
                 }
-            }
-        );
+            );
+    }
 }
 
 function _openFile(element) {
@@ -609,8 +615,8 @@ function _Uint8ArrayToHex(aUint8Array) {
     return aUint8Array.map(b => b.toString(16).padStart(2, "0")).join("");
 }
 function _HexToUint8Array(hex) {
-    var intArray=[];
-    for(var i=0;i<hex.length;i=i+2)intArray.push(parseInt(hex.substr(i,2),16));
+    var intArray = [];
+    for (var i = 0; i < hex.length; i = i + 2)intArray.push(parseInt(hex.substr(i, 2), 16));
     return Uint8Array.from(intArray);
 }
 
@@ -665,7 +671,7 @@ function _toolbarButtonClicked() {
                                     else if (name == "package.json") {
                                         console.log(">>package.json");
                                         return '{\n' +
-                                            '    "name": "wasmdom",\n' +   
+                                            '    "name": "wasmdom",\n' +
                                             '   "version": "1.0.0",\n' +
                                             '   "description": "gormantec implementation of assembly script for DOM based PWA apps.",\n' +
                                             '   "dependencies": {\n' +
@@ -737,88 +743,88 @@ function _toolbarButtonClicked() {
                                 },
                                 writeFile(name, data, baseDir) {
 
-                                    if (typeof data == "object" && name=="optimized.wasm") {
-                                        
+                                    if (typeof data == "object" && name == "optimized.wasm") {
 
 
-                                
+
+
 
                                         const reader = new FileReader();
 
                                         reader.addEventListener("load", function () {
-                                          // convert image file to base64 string
-                                          console.log("-------"+name+"-------");
-                                          console.log(reader.result);
-                                          var dataURL=reader.result;
-                                          console.log("------------------");
+                                            // convert image file to base64 string
+                                            console.log("-------" + name + "-------");
+                                            console.log(reader.result);
+                                            var dataURL = reader.result;
+                                            console.log("------------------");
 
-                                          try {
-                                            var rootHTML = _createHtml();
-                                            var _script1 = window.document.createElement("script");
-                                            //_script1.text = "\nwindow.wasmdomURL=\""+dataURL+"\";\n";
-                                            rootHTML.querySelector("body").appendChild(_script1);
-                                            var _script2 = window.document.createElement("script");
-                                            _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                                            rootHTML.querySelector("body").appendChild(_script2);
-                                            var w = 375;
-                                            var h = 896 * 375 / 414;
-                                            var wh = "width=" + w + ",height=" + h;
-                                            var frame = "";
-                                            console.log(rootHTML);
-                                            /*if(mockFrame){
-                                                wh="width="+(w+40)+",height="+(h+40);
-                                                frame="?mockFrame="+mockFrame;
-                                            }*/
-                                            if (!win || win.closed) {
-                                                win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
-                                                if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                                                else win.document.body.style.backgroundColor = "black";
+                                            try {
+                                                var rootHTML = _createHtml();
+                                                var _script1 = window.document.createElement("script");
+                                                //_script1.text = "\nwindow.wasmdomURL=\""+dataURL+"\";\n";
+                                                rootHTML.querySelector("body").appendChild(_script1);
+                                                var _script2 = window.document.createElement("script");
+                                                _script2.src = "https://gcode.com.au/js/wasmdom.js";
+                                                rootHTML.querySelector("body").appendChild(_script2);
+                                                var w = 375;
+                                                var h = 896 * 375 / 414;
+                                                var wh = "width=" + w + ",height=" + h;
+                                                var frame = "";
+                                                console.log(rootHTML);
+                                                /*if(mockFrame){
+                                                    wh="width="+(w+40)+",height="+(h+40);
+                                                    frame="?mockFrame="+mockFrame;
+                                                }*/
+                                                if (!win || win.closed) {
+                                                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
+                                                    if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                                    else win.document.body.style.backgroundColor = "black";
+                                                }
+                                                _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                                                    if (error) {
+                                                        debug.log(error);
+                                                    }
+                                                    else {
+                                                        debug.log("open window");
+                                                        win.location.href = uri + frame;
+                                                    }
+
+                                                });
                                             }
-                                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                                                if (error) {
-                                                    debug.log(error);
-                                                }
-                                                else {
-                                                    debug.log("open window");
-                                                    win.location.href = uri + frame;
-                                                }
-    
-                                            });
-                                        }
-                                        catch (e) {
-                                            console.error("error:" + e);
-                                        }
+                                            catch (e) {
+                                                console.error("error:" + e);
+                                            }
 
 
 
                                         }, false);
-                                      
-                 
-                                        reader.readAsDataURL(new Blob([Uint8Array.from(data)],{type : 'application/wasm'}));
-                                        
-/*
 
-                                        myUint8Array = Uint8Array.from(data);
-                                        var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
-                                        githubtree.saveFile(gitname, _Uint8ArrayToHex(myUint8Array), () => {
-                                            console.log('done');
-                                        });
-                                        console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
+
+                                        reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+
+                                        /*
                                         
-                                        let blob = new Blob(data, { type: "application/octet-stream" });
-                                        var reader = new FileReader();
-                                        reader.readAsDataURL(blob);
-                                        reader.onloadend = function () {
-                                            var base64String = reader.result;
-                                            //console.log('Base64 String - ', base64String); 
-                                            //console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(',') + 1)); 
-                                            var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
-                                            console.log(filename);
-                                            console.log(gitname);
-                                            githubtree.saveFile(gitname, base64String.substr(base64String.indexOf(',') + 1), false, () => {
-                                                console.log('done');
-                                            });
-                                        }*/
+                                                                                myUint8Array = Uint8Array.from(data);
+                                                                                var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
+                                                                                githubtree.saveFile(gitname, _Uint8ArrayToHex(myUint8Array), () => {
+                                                                                    console.log('done');
+                                                                                });
+                                                                                console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
+                                                                                
+                                                                                let blob = new Blob(data, { type: "application/octet-stream" });
+                                                                                var reader = new FileReader();
+                                                                                reader.readAsDataURL(blob);
+                                                                                reader.onloadend = function () {
+                                                                                    var base64String = reader.result;
+                                                                                    //console.log('Base64 String - ', base64String); 
+                                                                                    //console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(',') + 1)); 
+                                                                                    var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
+                                                                                    console.log(filename);
+                                                                                    console.log(gitname);
+                                                                                    githubtree.saveFile(gitname, base64String.substr(base64String.indexOf(',') + 1), false, () => {
+                                                                                        console.log('done');
+                                                                                    });
+                                                                                }*/
 
                                     }
 
@@ -1252,27 +1258,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    
-        (function () {
-            var old = console.log;
-            var olde = console.error;
-            var logger = document.getElementById('log');
-            var pageBottom = document.getElementById('pageBottom');
-            console.log = function (message) {
-                if (typeof message == 'object') {
-                    logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
-                    pageBottomScroll.scrollTo({left:0, top:pageBottomScroll.scrollHeight,behavior: 'smooth'});
-                } else {
-                    logger.innerHTML += "<div>" + message + '</div>';
-                    pageBottomScroll.scrollTo({left:0, top:pageBottomScroll.scrollHeight,behavior: 'smooth'});
-                }
+
+    (function () {
+        var old = console.log;
+        var olde = console.error;
+        var logger = document.getElementById('log');
+        var pageBottom = document.getElementById('pageBottom');
+        console.log = function (message) {
+            if (typeof message == 'object') {
+                logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
+                pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
+            } else {
+                logger.innerHTML += "<div>" + message + '</div>';
+                pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
             }
-            console.error = function (message) {
-                logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
-                pageBottomScroll.scrollTo({left:0, top:pageBottomScroll.scrollHeight,behavior: 'smooth'});
-            }
-        })();
-    
+        }
+        console.error = function (message) {
+            logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
+            pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
+        }
+    })();
+
 
 
 
@@ -1360,10 +1366,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-    setTimeout(function(){
-        document.getElementById("splashScreen").hidden=true;
-    },2000);
-    
+    setTimeout(function () {
+        document.getElementById("splashScreen").hidden = true;
+    }, 2000);
+
 
 });
 
