@@ -760,15 +760,15 @@ loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:(window
 ).then(({module, instance, exports}) =>{
     console.log("found exports.");
     console.log(exports);
-    console.log("------ __alloc1 ------");
-    console.log(exports["__alloc"]);
-    console.log("------ __alloc1 ------");
+    console.log("------ __new ------");
+    console.log(exports["__new"]);
+    console.log("------ __new ------");
     console.log("found instance exports.");
     console.log(instance.exports);
-    console.log("------ __alloc2 ------");
-    console.log(instance.exports["__alloc"]);
-    console.log("------ __alloc2 ------");
-    if(exports["__retain"] && exports["__allocArray"] && exports["__allocString"] && exports["show"])
+    console.log("------ __new ------");
+    console.log(instance.exports["__new"]);
+    console.log("------ __new ------");
+    if(exports["__retain"] && exports["__newArray"] && exports["__newString"] && exports["show"])
     {
         importObject.wasm = exports;
         exports.show();
@@ -776,8 +776,8 @@ loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:(window
     else{
         console.log("could not find module.");
         console.log("__retain = "+exports["__retain"]);
-        console.log("__allocArray = "+exports["__allocArray"]);
-        console.log("__allocString = "+exports["__allocString"]);
+        console.log("__newArray = "+exports["__newArray"]);
+        console.log("__newString = "+exports["__newString"]);
         console.log("show = "+exports["show"]);
     }
 
