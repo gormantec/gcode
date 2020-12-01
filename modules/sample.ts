@@ -1,16 +1,3 @@
-/*
-
-  filename:git://gormanau:gcode/new-file-11836571.mjs
-  created: 2020-9-3T09:09:32
-  appName: gcode
-  splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png
-  icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png
-  icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png
-  splashBackgroundColor: #005040
-  splashDuration: 2000
-
-*/
-
 import { Window, Document, Debug, Console } from "../dom";
 import { PWA, PWAParams, Page, PageParams, Div, DivParams } from '../pwa';
 
