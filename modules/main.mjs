@@ -664,6 +664,7 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
+                                    console.log(" ----> "+name);
                                     if (name.endsWith("app.ts")) {
                                         console.log(">>" + name);
                                         return editor.getValue();
@@ -693,7 +694,7 @@ function _toolbarButtonClicked() {
 
                                     }
                                     else if (name.startsWith("node_modules/@wasmdom/assembly/")) {
-                                        console.log("got: "+name);
+                                        
                                         var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/" + name.substring(22));
                                         var cached = null;
                                         if (b64) {
