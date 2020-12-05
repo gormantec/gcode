@@ -1156,7 +1156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
-        extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+        extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); }, "Ctrl-Space": "autocomplete" },
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
