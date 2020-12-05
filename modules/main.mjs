@@ -664,8 +664,10 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
-                                    
+
                                     if(name.startsWith("@wasmdom/"))name="../"+name.substring(8);
+
+                                    console.log("-->"+name);
                                     
                                     if (name.endsWith("app.ts")) {
                                         console.log("Got App:" + name);
