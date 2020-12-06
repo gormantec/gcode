@@ -301,6 +301,11 @@ div.toolbarButton img{
     right:0px; 
 }
 
+dialog button{
+    color:white;
+    background-color: #1859E2;
+}
+
 #splashScreen
 {
     position: fixed; 
