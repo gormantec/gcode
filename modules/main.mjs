@@ -1,6 +1,6 @@
 
 import * as githubtree from '../modules/githubtree.mjs';
-import dialogPolyfill from './node_modules/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import dialogPolyfill from '../dist/dialog-polyfill/dialog-polyfill.esm.js';
 
 var editor;
 
