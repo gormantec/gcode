@@ -650,7 +650,7 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error(e);
             }
-            debug.log("${myLogin}$");
+            debug.log(myLogin+"$");
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
