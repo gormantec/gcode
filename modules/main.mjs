@@ -131,19 +131,21 @@ function _new(aFilename) {
                 text => {
                     var _samplecode = text;
 
+                    var appStuff="";
+                    if(aFilename.endsWith(".mjs") || aFilename.endsWith(".ts"))appStuff="appName: gcode" + "\n  " +
+                    "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
+                    "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                    "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                    "mockFrame: iphoneX" + "\n  " +
+                    "splashBackgroundColor: #005040" + "\n  " +
+                    "splashDuration: 2000";
 
                     document.getElementById("filename").innerText = aFilename;
                     selectedFileWidget = aFilename;
                     editor.setValue("/*\n\n  " +
                         "filename:" + aFilename + "\n  " +
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
-                        "appName: gcode" + "\n  " +
-                        "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
-                        "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                        "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                        "mockFrame: iphoneX" + "\n  " +
-                        "splashBackgroundColor: #005040" + "\n  " +
-                        "splashDuration: 2000" +
+                        appStuff +
                         "\n\n*/\n\n" + _samplecode);
                     _setEditorMode();
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
