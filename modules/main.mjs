@@ -110,6 +110,9 @@ function _delete() {
 
 
 function _new() {
+
+
+    document.getElementById("newFileDialog").showModal();
     var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
     if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
         aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
@@ -1132,6 +1135,14 @@ window.addEventListener('resize', function (event) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    var newFileDialog=document.getElementById("newFileDialog");
+
+    document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
+        document.getElementById('newFileDialogConfirmButton').value = selectEl.value;
+      });
+      newFileDialog.addEventListener('close', function onClose() {
+        console.log(newFileDialog.returnValue + " button clicked - " + (new Date()).toString());
+      });
     //resize page
 
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";

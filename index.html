@@ -77,6 +77,25 @@
 </head>
 
 <body>
+    <dialog id="newFileDialog">
+        <form method="dialog">
+          <p><label>App Type:
+            <select id="newFileDialogSelect">
+              <option></option>
+              <option>Commandline - JavaScript</option>
+              <option>Commandline - Python</option>
+              <option>Mobile App - JavaScript</option>
+              <option>Mobile App - AssemblyScript</option>
+            </select>
+          </label></p>
+          <menu>
+            <button value="cancel">Cancel</button>
+            <button id="newFileDialogConfirmButton" value="default">Ok</button>
+          </menu>
+        </form>
+      </dialog>
+
+
     <div class="cm-s-theme CodeMirror header">
         <div id="sideBarButton" class="pageLeftToolbarButton">
             <i class="material-icons-outlined">keyboard_arrow_down</i>
