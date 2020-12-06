@@ -301,9 +301,32 @@ div.toolbarButton img{
     right:0px; 
 }
 
-dialog button{
-    color:white;
-    background-color: #1859E2;
+dialog form menu button{
+
+    background-color: #3871E1;
+    color: white;
+    border-color: #3871E1;
+    border-style: solid;
+    border-radius: 3px;
+    padding: 4px 12px 4px 12px;
+}
+dialog form menu .cancelButton{
+
+    color: #3871E1;
+    background-color: white;
+    border-color: #DBDCE0;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 4px 12px 4px 12px;
+}
+
+
+dialog form menu {
+
+    text-align: right;
+    margin-bottom: 0px;
+    margin-top: 25px;
 }
 
 #splashScreen
