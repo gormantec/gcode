@@ -337,6 +337,11 @@ dialog form select{
     min-width: 340px;
 }
 
+dialog form input{
+    padding: 6px;
+    min-width: 340px;
+}
+
 
 dialog form menu {
 
