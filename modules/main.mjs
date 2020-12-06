@@ -633,6 +633,7 @@ function _toolbarButtonClicked() {
 
     if (this.dataset.action == "addFile") {
         document.getElementById("newFileDialogName").value="sample-"+(Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
+        document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogName").value;
         document.getElementById("newFileDialog").showModal();
         
     } else if (this.dataset.action == "saveFile") {
