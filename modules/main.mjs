@@ -629,6 +629,7 @@ function _toolbarButtonClicked() {
 
 
     if (this.dataset.action == "addFile") {
+        document.getElementById("newFileDialogName").setValue((Math.round(Date.now() / 1000) - 1592000000) + ".js");
         document.getElementById("newFileDialog").showModal();
         
     } else if (this.dataset.action == "saveFile") {
@@ -1138,11 +1139,14 @@ window.addEventListener('resize', function (event) {
 document.addEventListener("DOMContentLoaded", function () {
 
     var newFileDialog=document.getElementById("newFileDialog");
+    var newFileDialogName=document.getElementById("newFileDialogName");
 
     dialogPolyfill.registerDialog(newFileDialog);
 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
-        document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogSelect").value;
+        var name=newFileDialogName.value.indexOf(".")>0?newFileDialogName.value.substring(newFileDialogName.value.lastIndexOf(".")):newFileDialogName.value;
+        newFileDialogName.setValue(name + document.getElementById("newFileDialogSelect").value);
+        document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
       });
       newFileDialog.addEventListener('close', function onClose() {
         _new(newFileDialog.returnValue);
