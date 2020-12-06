@@ -328,6 +328,10 @@ dialog form select{
     padding: 6px;
 }
 
+dialog form label{
+    color:#616367;
+}
+
 dialog form select{
     padding: 6px;
     min-width: 340px;

@@ -80,14 +80,14 @@
 <body>
     <dialog id="newFileDialog">
         <form method="dialog">
-          <p><label>App Type:
+          <p><label for="newFileDialogSelect">App Type:</label>
             <select id="newFileDialogSelect">
               <option value=".js" selected>Commandline - JavaScript</option>
               <option value=".py">Commandline - Python</option>
               <option value=".mjs">Mobile App - JavaScript</option>
               <option value=".ts">Mobile App - AssemblyScript</option>
             </select>
-          </label></p>
+          </p>
           <menu>
             <button class="cancelButton" value="cancel">Cancel</button>
             <button id="newFileDialogConfirmButton" value=".js">OK</button>
