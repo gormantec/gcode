@@ -110,11 +110,9 @@ function _delete() {
 
 
 
-function _new(appType) {
+function _new(aFilename) {
 
 
-    
-    var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
     if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
         aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
     }
