@@ -350,6 +350,10 @@ dialog form menu {
     margin-top: 25px;
     min-width:120px;
 }
+dialog{
+    border-radius: 3px;
+    padding-top: 25px;
+}
 
 #splashScreen
 {
