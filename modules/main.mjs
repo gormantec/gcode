@@ -1148,8 +1148,11 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
       });
       newFileDialog.addEventListener('close', function onClose() {
-        _new(newFileDialog.returnValue);
-        console.log(newFileDialog.returnValue + " button clicked - " + (new Date()).toString());
+          if(newFileDialog.returnValue!="cancel")
+          {
+            _new(newFileDialog.returnValue);
+          }
+        
       });
     //resize page
 
