@@ -309,7 +309,9 @@ dialog form menu button{
     border-style: solid;
     border-radius: 3px;
     padding: 4px 12px 4px 12px;
-    font-weight: bold;
+    font-weight:500;
+    min-width: 70px;
+    min-height: 30px;
 }
 dialog form menu .cancelButton{
 
