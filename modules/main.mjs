@@ -139,14 +139,16 @@ function _new(aFilename) {
                     "mockFrame: iphoneX" + "\n  " +
                     "splashBackgroundColor: #005040" + "\n  " +
                     "splashDuration: 2000";
+                    var pyChar="";
+                    if(aFilename.endsWith(".py"))pyChar="#";
 
                     document.getElementById("filename").innerText = aFilename;
                     selectedFileWidget = aFilename;
-                    editor.setValue("/*\n\n  " +
-                        "filename:" + aFilename + "\n  " +
-                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n  " +
+                    editor.setValue(pyChar+"/*\n"+pyChar+"\n"+pyChar+"  " +
+                        "filename:" + aFilename + "\n"+pyChar+"  " +
+                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n"+pyChar+"  " +
                         appStuff +
-                        "\n\n*/\n\n" + _samplecode);
+                        "\n"+pyChar+"\n"+pyChar+"*/\n\n" + _samplecode);
                     _setEditorMode();
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
                         function () {
