@@ -1143,7 +1143,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dialogPolyfill.registerDialog(newFileDialog);
 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
-        var name=newFileDialogName.value.indexOf(".")>0?newFileDialogName.value.substring(newFileDialogName.value.lastIndexOf(".")):newFileDialogName.value;
+        var name=newFileDialogName.value.indexOf(".")>0?newFileDialogName.value.substring(0,newFileDialogName.value.lastIndexOf(".")):newFileDialogName.value;
         newFileDialogName.value=(name + document.getElementById("newFileDialogSelect").value);
         document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
       });
