@@ -628,7 +628,7 @@ function _toolbarButtonClicked() {
 
 
     if (this.dataset.action == "addFile") {
-        document.getElementById("newFileDialogName").setValue((Math.round(Date.now() / 1000) - 1592000000) + ".js");
+        document.getElementById("newFileDialogName").value=(Math.round(Date.now() / 1000) - 1592000000) + ".js";
         document.getElementById("newFileDialog").showModal();
         
     } else if (this.dataset.action == "saveFile") {
