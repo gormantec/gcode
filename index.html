@@ -31,6 +31,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <link rel='stylesheet' href='css/index.css'>
+    <link rel="stylesheet" type="text/css" href="dist/dialog-polyfill.css" />
     <script type="module">
         // PWA worker config from: https://www.pwabuilder.com/serviceworker
         import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
@@ -81,16 +82,15 @@
         <form method="dialog">
           <p><label>App Type:
             <select id="newFileDialogSelect">
-              <option></option>
-              <option>Commandline - JavaScript</option>
-              <option>Commandline - Python</option>
-              <option>Mobile App - JavaScript</option>
-              <option>Mobile App - AssemblyScript</option>
+              <option value=".js" selected>Commandline - JavaScript</option>
+              <option value=".py">Commandline - Python</option>
+              <option value=".mjs">Mobile App - JavaScript</option>
+              <option value=".ts">Mobile App - AssemblyScript</option>
             </select>
           </label></p>
           <menu>
             <button value="cancel">Cancel</button>
-            <button id="newFileDialogConfirmButton" value="default">Ok</button>
+            <button id="newFileDialogConfirmButton" value=".js">Ok</button>
           </menu>
         </form>
       </dialog>

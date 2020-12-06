@@ -1,5 +1,6 @@
 
 import * as githubtree from '../modules/githubtree.mjs';
+import dialogPolyfill from './node_modules/dialog-polyfill/dist/dialog-polyfill.esm.js';
 
 var editor;
 
@@ -109,10 +110,10 @@ function _delete() {
 
 
 
-function _new() {
+function _new(appType) {
 
 
-    document.getElementById("newFileDialog").showModal();
+    
     var aFilename = prompt("Filename", "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs");
     if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
         aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
@@ -628,7 +629,8 @@ function _toolbarButtonClicked() {
 
 
     if (this.dataset.action == "addFile") {
-        _new();
+        document.getElementById("newFileDialog").showModal();
+        
     } else if (this.dataset.action == "saveFile") {
         _save();
     }
@@ -1137,10 +1139,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var newFileDialog=document.getElementById("newFileDialog");
 
+    dialogPolyfill.registerDialog(newFileDialog);
+
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
         document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogSelect").value;
       });
       newFileDialog.addEventListener('close', function onClose() {
+        _new(newFileDialog.returnValue);
         console.log(newFileDialog.returnValue + " button clicked - " + (new Date()).toString());
       });
     //resize page
