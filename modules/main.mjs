@@ -1144,7 +1144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
         var name=newFileDialogName.value.indexOf(".")>0?newFileDialogName.value.substring(newFileDialogName.value.lastIndexOf(".")):newFileDialogName.value;
-        newFileDialogName.setValue(name + document.getElementById("newFileDialogSelect").value);
+        newFileDialogName.value=(name + document.getElementById("newFileDialogSelect").value);
         document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
       });
       newFileDialog.addEventListener('close', function onClose() {
