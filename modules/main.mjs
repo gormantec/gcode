@@ -1138,7 +1138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var newFileDialog=document.getElementById("newFileDialog");
 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
-        document.getElementById('newFileDialogConfirmButton').value = selectEl.value;
+        document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogSelect").value;
       });
       newFileDialog.addEventListener('close', function onClose() {
         console.log(newFileDialog.returnValue + " button clicked - " + (new Date()).toString());
