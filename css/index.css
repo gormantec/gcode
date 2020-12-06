@@ -309,6 +309,7 @@ dialog form menu button{
     border-style: solid;
     border-radius: 3px;
     padding: 4px 12px 4px 12px;
+    font-weight: bold;
 }
 dialog form menu .cancelButton{
 
@@ -321,12 +322,22 @@ dialog form menu .cancelButton{
     padding: 4px 12px 4px 12px;
 }
 
+dialog form select{
+    padding: 6px;
+}
+
+dialog form select{
+    padding: 6px;
+    min-width: 340px;
+}
+
 
 dialog form menu {
 
     text-align: right;
     margin-bottom: 0px;
     margin-top: 25px;
+    min-width:120px;
 }
 
 #splashScreen
