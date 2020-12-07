@@ -684,6 +684,7 @@ function _toolbarButtonClicked() {
                                         return editor.getValue();
                                     }
                                     else if (name == "assembly/index.ts") {
+                                        console.log("FOUND !!! -->"+name);
                                         var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                         var cached = null;
                                         if (b64) {
