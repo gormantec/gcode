@@ -736,10 +736,10 @@ function _toolbarButtonClicked() {
                                                 var wh = "width=" + w + ",height=" + h;
                                                 var frame = "";
                                                 console.log(rootHTML);
-                                                /*if(mockFrame){
+                                                if(mockFrame){
                                                     wh="width="+(w+40)+",height="+(h+40);
                                                     frame="?mockFrame="+mockFrame;
-                                                }*/
+                                                }
                                                 if (!win || win.closed) {
                                                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
                                                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
