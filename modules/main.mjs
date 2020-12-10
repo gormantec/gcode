@@ -690,7 +690,8 @@ function _toolbarButtonClicked() {
                                     else if(name.startsWith("/node_modules/near-sdk-as"))
                                     {
                                         console.log("https://gcode.com.au/dist/near-sdk-as" +name.substring(25));
-                                        return await fetch("https://gcode.com.au/dist/near-sdk-as" +name.substring(25));
+                                        var result =  await fetch("https://gcode.com.au/dist/near-sdk-as" +name.substring(25));
+                                        return result.text();
                                     }
                                     else{
                                         console.log("not found:" + name);
