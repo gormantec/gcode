@@ -709,6 +709,7 @@ function _toolbarButtonClicked() {
                         });
                     });
                 }
+                _run();
             }
             catch(e){console.log(e);}
         }
