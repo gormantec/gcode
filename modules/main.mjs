@@ -681,6 +681,11 @@ function _toolbarButtonClicked() {
                                         console.log("Got App:" + name);
                                         return editor.getValue();
                                     }
+                                    else if(name.endsWith("as_types.d.ts"))
+                                    {
+                                        console.log("!!!!!!!!!!!not found:" + name);
+                                        return null;
+                                    }
                                     else{
                                         console.log("not found:" + name);
                                         return null;
