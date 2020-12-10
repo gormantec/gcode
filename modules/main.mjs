@@ -690,7 +690,7 @@ function _toolbarButtonClicked() {
                                     else if (name.indexOf("node_modules/")>=0) {
                                         var pos=name.lastIndexOf("node_modules/") +13;
                                         console.log("found:" + name);
-                                        var result = null;
+                            
                                         var _name = name;
                                         //while(result==null) var a=Math.random*Math.random*Math.random;
                                         var b64 = localStorage.getItem("dist/" + _name.substring(pos));
@@ -703,16 +703,13 @@ function _toolbarButtonClicked() {
                                         else {
                                             failed=true;
                                             fetch("https://gcode.com.au/dist/" + _name.substring(pos))
-                                                .then(response => response.text())
+                                                .then(response =>response.ok?response.text():null)
                                                 .then(text => {
-                                                    result = text;
                                                     console.log("downloaded:" + _name);
-                                                    if(_name.indexOf("/vm")>=0)
+                                                    if(text || text.indexOf("Page not found · GitHub Pages")<0)
                                                     {
-                                                        console.log(result);
+                                                        localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
                                                     }
-                                                    localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
-
                                                 }).catch((error) => { console.log("fetch error:" + error); });
                                             return null;
                                         }
