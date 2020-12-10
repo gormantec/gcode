@@ -747,7 +747,7 @@ function _toolbarButtonClicked() {
                                 else{
                                     if(stderr.toString().startsWith("ERROR TS6054: File") && tryCount<5){
                                         tryCount++;
-                                        _run();
+                                        window.setTimeout(_run,2000);
                                     }
                                     else{
                                         console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
