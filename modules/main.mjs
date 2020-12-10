@@ -663,6 +663,7 @@ function _toolbarButtonClicked() {
             debug.log(myLogin + "$ echo 'Create dApp'\n");
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             try {
+                var failed=false;
                 var _run = async function () {
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
@@ -700,7 +701,7 @@ function _toolbarButtonClicked() {
                                             return cached;
                                         }
                                         else {
-
+                                            failed=true;
                                             fetch("https://gcode.com.au/dist/" + _name.substring(pos))
                                                 .then(response => response.text())
                                                 .then(text => {
@@ -740,15 +741,22 @@ function _toolbarButtonClicked() {
                                     return [];
                                 }
                             }, err => {
-                                console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                console.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                                if (err) {
-                                    console.log(">>> THROWN >>>");
-                                    console.log(err);
+                                if(failed)
+                                {
+                                    console.log("try again");
                                 }
-                                else {
+                                else{
+                                    console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                    console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                    if (err) {
+                                        console.log(">>> THROWN >>>");
+                                        console.log(err);
+                                    }
+                                    else {
+    
+                                    }
+                                }
 
-                                }
                             });
                         });
                     });
