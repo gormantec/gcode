@@ -658,6 +658,34 @@ function _toolbarButtonClicked() {
             }
             debug.log(myLogin+"$");
         }
+        else if (filename.endsWith(".dapp.ts")) {
+            debug.log(myLogin + "$ asc " + filename + " --target release\n");
+            var myUint8Array = Uint8Array.from([1]);
+            try {
+                var _run = function () {
+                    require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
+                        asc.ready.then(() => {
+                            const stdout = asc.createMemoryStream();
+                            const stderr = asc.createMemoryStream();
+                            asc.main([
+                                "assembly/index.ts",
+                                "-O3",
+                                "--runtime", "full",
+                                "--binaryFile", "optimized.wasm",
+                                "--textFile", "optimized.wat"
+                            ], {
+                                stdout,
+                                stderr,
+                                readFile(name, baseDir) {
+
+                                }
+                            });
+                        });
+                    });
+                }
+            }
+            catch(e){}
+        }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             var myUint8Array = Uint8Array.from([1]);
