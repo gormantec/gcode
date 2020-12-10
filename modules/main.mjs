@@ -701,7 +701,7 @@ function _toolbarButtonClicked() {
                                         else {
 
                                             fetch("https://gcode.com.au/dist/near-sdk-as" + _name.substring(pos))
-                                                .then(response => response.json())
+                                                .then(response => response.text())
                                                 .then(text => {
                                                     result = text;
                                                     console.log("downloaded:" + _name);
