@@ -663,9 +663,11 @@ function _toolbarButtonClicked() {
             debug.log(myLogin + "$ echo 'Create dApp'\n");
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             try {
-                var failed=false;
+                
                 var tryCount=0;
                 var _run = async function () {
+                    var failed=false;
+                    var downloading=0;
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
                             const stdout = asc.createMemoryStream();
@@ -702,17 +704,21 @@ function _toolbarButtonClicked() {
                                             return cached;
                                         }
                                         else {
-                                            //failed=true;
+                                            downloading++;
                                             fetch("https://gcode.com.au/dist/" + _name.substring(pos))
                                                 .then(response =>response.ok?response.text():null)
                                                 .then(text => {
-                                                    
                                                     if(text)
                                                     {
-                                                        console.log("downloaded:" + _name);
+                                                        //console.log("downloaded:" + _name);
+                                                        if(!failed)window.setTimeout(_run,2000);
+                                                        failed=true;
                                                         localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
                                                     }
-                                                }).catch((error) => { console.log("fetch error:" + error); });
+                                                }).catch((error) => { console.log("fetch error:" + error); })
+                                                .finally(()=>{
+                                                    downloading--;
+                                                });
                                             return null;
                                         }
                                         
@@ -740,30 +746,32 @@ function _toolbarButtonClicked() {
                                     return [];
                                 }
                             }, err => {
-                                if(failed)
-                                {
-                                    console.log("try again");
-                                }
-                                else{
-                                    if(stderr.toString().startsWith("ERROR TS6054: File") && tryCount<10){
-                                        tryCount++;
-                                        stdout.
-                                        window.setTimeout(_run,2000);
+                                var waitForDownload=function(thenDo){
+                                    if(downloading==0)thenDo();
+                                    else{
+                                        window.setTimeout(()=>{
+                                            waitForDownload(thenDo);
+                                        },500);
+                                    }
+                                };
+                                waitForDownload(()=>{
+                                    if(failed)
+                                    {
+                                        console.log("trying again after downloading depenadnt files..");
                                     }
                                     else{
-                                        //console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                        //console.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                                        if (err) {
-                                            console.log(">>> THROWN >>>");
-                                            console.log(err);
-                                        }
-                                        else {
-                                            console.log("Compiled Ok");
-                                        }
+    
+                                            console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                            console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                            if (err) {
+                                                console.log(">>> THROWN >>>");
+                                                console.log(err);
+                                            }
+                                            else {
+                                                console.log("Compiled Ok");
+                                            }
                                     }
-
-                                }
-
+                                })
                             });
                         });
                     });
