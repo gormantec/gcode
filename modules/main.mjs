@@ -664,6 +664,7 @@ function _toolbarButtonClicked() {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             try {
                 var failed=false;
+                var tryCount=0;
                 var _run = async function () {
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
@@ -744,7 +745,8 @@ function _toolbarButtonClicked() {
                                     console.log("try again");
                                 }
                                 else{
-                                    if(stderr.toString().startsWith("ERROR TS6054: File")){
+                                    if(stderr.toString().startsWith("ERROR TS6054: File") && tryCount<5){
+                                        tryCount++;
                                         _run();
                                     }
                                     else{
