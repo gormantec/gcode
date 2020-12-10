@@ -692,21 +692,21 @@ function _toolbarButtonClicked() {
                                         var result = null;
                                         var _name = name;
                                         //while(result==null) var a=Math.random*Math.random*Math.random;
-                                        var b64 = localStorage.getItem("dist/near-sdk-" + _name.substring(pos));
+                                        var b64 = localStorage.getItem("dist/" + _name.substring(pos));
                                         var cached = null;
                                         if (b64) {
                                             cached = atob(b64);
-                                            console.log("got cache: dist/near-sdk-" + _name.substring(pos));
+                                            console.log("got cache: dist/" + _name.substring(pos));
                                             return cached;
                                         }
                                         else {
 
-                                            fetch("https://gcode.com.au/dist/near-sdk-" + _name.substring(pos))
+                                            fetch("https://gcode.com.au/dist/" + _name.substring(pos))
                                                 .then(response => response.text())
                                                 .then(text => {
                                                     result = text;
                                                     console.log("downloaded:" + _name);
-                                                    localStorage.setItem("dist/near-sdk-" + _name.substring(pos), btoa(text));
+                                                    localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
 
                                                 }).catch((error) => { console.log("fetch error:" + error); });
                                             return null;
