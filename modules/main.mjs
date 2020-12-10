@@ -706,6 +706,10 @@ function _toolbarButtonClicked() {
                                                 .then(text => {
                                                     result = text;
                                                     console.log("downloaded:" + _name);
+                                                    if(_name.indexOf("/vm")>=0)
+                                                    {
+                                                        console.log(result);
+                                                    }
                                                     localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
 
                                                 }).catch((error) => { console.log("fetch error:" + error); });
