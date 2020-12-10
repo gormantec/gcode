@@ -685,26 +685,27 @@ function _toolbarButtonClicked() {
                                         console.log("!!!!!!!!!!!not found:" + name);
                                         return null;
                                     }
-                                    else if (name.startsWith("/node_modules/near-sdk-as")) {
+                                    else if (name.startsWith("/node_modules/near-sdk-as") || name.startsWith("node_modules/near-sdk-as")) {
+                                        var pos=name.startsWith("/") ? 25:24;
                                         console.log("found:" + name);
                                         var result = null;
                                         var _name = name;
                                         //while(result==null) var a=Math.random*Math.random*Math.random;
-                                        var b64 = localStorage.getItem("dist/near-sdk-as" + _name.substring(25));
+                                        var b64 = localStorage.getItem("dist/near-sdk-as" + _name.substring(pos));
                                         var cached = null;
                                         if (b64) {
                                             cached = atob(b64);
-                                            console.log("got cache: dist/near-sdk-as" + _name.substring(25));
+                                            console.log("got cache: dist/near-sdk-as" + _name.substring(pos));
                                             return cached;
                                         }
                                         else {
 
-                                            fetch("https://gcode.com.au/dist/near-sdk-as" + _name.substring(25))
+                                            fetch("https://gcode.com.au/dist/near-sdk-as" + _name.substring(pos))
                                                 .then(response => response.json())
                                                 .then(text => {
                                                     result = text;
                                                     console.log("downloaded:" + _name);
-                                                    localStorage.setItem("dist/near-sdk-as" + _name.substring(25), btoa(text));
+                                                    localStorage.setItem("dist/near-sdk-as" + _name.substring(pos), btoa(text));
 
                                                 }).catch((error) => { console.log("fetch error:" + error); });
                                             return null;
