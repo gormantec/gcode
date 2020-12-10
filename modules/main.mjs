@@ -119,6 +119,7 @@ function _new(aFilename) {
     if (aFilename != null) {
         var sampleName = "";
         if (aFilename.endsWith(".mjs")) sampleName = "modules/sample.mjs";
+        else if (aFilename.endsWith(".dapp.ts")) sampleName = "modules/sample.dapp.ts";
         else if (aFilename.endsWith(".ts")) sampleName = "modules/sample.ts";
         else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
         else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
