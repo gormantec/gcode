@@ -706,7 +706,7 @@ function _toolbarButtonClicked() {
                                                 .then(response =>response.ok?response.text():null)
                                                 .then(text => {
                                                     console.log("downloaded:" + _name);
-                                                    if(text && text.indexOf("Page not found · GitHub Pages")<0)
+                                                    if(text)
                                                     {
                                                         localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
                                                     }
