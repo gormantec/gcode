@@ -686,8 +686,8 @@ function _toolbarButtonClicked() {
                                         console.log("!!!!!!!!!!!not found:" + name);
                                         return null;
                                     }
-                                    else if (name.startsWith("/node_modules/near-sdk-") || name.startsWith("node_modules/near-sdk-")) {
-                                        var pos=name.startsWith("/") ? 23:22;
+                                    else if (name.indexOf("node_modules/")>=0) {
+                                        var pos=name.lastIndexOf("node_modules/") +13;
                                         console.log("found:" + name);
                                         var result = null;
                                         var _name = name;
