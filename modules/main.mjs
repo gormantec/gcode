@@ -757,7 +757,15 @@ function _toolbarButtonClicked() {
                                 waitForDownload(()=>{
                                     if(failed)
                                     {
-                                        console.log("trying again after downloading depenadnt files..");
+                                        if(tryCount>0)
+                                        {
+                                            console.log("\b..");
+                                        }
+                                        else{
+                                            console.log("downloading depenadnt files..");
+                                        }
+                                        tryCount++;
+
                                     }
                                     else{
     
@@ -1385,7 +1393,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
                 pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
             } else {
-                logger.innerHTML += "<div>" + message + '</div>';
+                if(message.startsWith("\b"))
+                {
+                    message=logger.lastChild.innerText+message;
+                    logger.innerHTML.slice(0,-6)+=  message + '</div>';
+                }
+                else{
+                    logger.innerHTML += "<div>" + message + '</div>';
+                }
                 pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
             }
         }
