@@ -671,8 +671,8 @@ function _toolbarButtonClicked() {
                                 filename,
                                 "-O3",
                                 "--runtime", "full",
-                                "--binaryFile", "optimized.wasm",
-                                "--textFile", "optimized.wat"
+                                "--binaryFile", "dapp.wasm",
+                                "--textFile", "dapp.wat"
                             ], {
                                 stdout,
                                 stderr,
@@ -689,7 +689,7 @@ function _toolbarButtonClicked() {
                                 },
                                 writeFile(name, data, baseDir) {
 
-                                    if (typeof data == "object" && name == "optimized.wasm") {
+                                    if (typeof data == "object" && name == "dapp.wasm") {
                                         const reader = new FileReader();
                                         reader.addEventListener("load", function () {
                                             // convert image file to base64 string
@@ -704,7 +704,7 @@ function _toolbarButtonClicked() {
                     });
                 }
             }
-            catch(e){}
+            catch(e){console.log(e);}
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
