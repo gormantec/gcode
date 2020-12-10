@@ -745,13 +745,14 @@ function _toolbarButtonClicked() {
                                     console.log("try again");
                                 }
                                 else{
-                                    if(stderr.toString().startsWith("ERROR TS6054: File") && tryCount<5){
+                                    if(stderr.toString().startsWith("ERROR TS6054: File") && tryCount<10){
                                         tryCount++;
+                                        stdout.
                                         window.setTimeout(_run,2000);
                                     }
                                     else{
-                                        console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                        console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                        //console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                        //console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                         if (err) {
                                             console.log(">>> THROWN >>>");
                                             console.log(err);
