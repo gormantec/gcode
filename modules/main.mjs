@@ -680,7 +680,7 @@ function _toolbarButtonClicked() {
                                 stderr,
                                 readFile(name, baseDir) {
                                     if (name == filename) {
-                                        console.log("Got App:" + name);
+                                        //console.log("Got App:" + name);
                                         return editor.getValue();
                                     }
                                     else if (name.endsWith("as_types.d.ts")) {
@@ -689,7 +689,7 @@ function _toolbarButtonClicked() {
                                     }
                                     else if (name.indexOf("node_modules/")>=0) {
                                         var pos=name.lastIndexOf("node_modules/") +13;
-                                        console.log("found:" + name);
+                                        //console.log("found:" + name);
                             
                                         var _name = name;
                                         //while(result==null) var a=Math.random*Math.random*Math.random;
@@ -697,17 +697,18 @@ function _toolbarButtonClicked() {
                                         var cached = null;
                                         if (b64) {
                                             cached = atob(b64);
-                                            console.log("got cache: dist/" + _name.substring(pos));
+                                            //console.log("got cache: dist/" + _name.substring(pos));
                                             return cached;
                                         }
                                         else {
-                                            failed=true;
+                                            //failed=true;
                                             fetch("https://gcode.com.au/dist/" + _name.substring(pos))
                                                 .then(response =>response.ok?response.text():null)
                                                 .then(text => {
-                                                    console.log("downloaded:" + _name);
+                                                    
                                                     if(text)
                                                     {
+                                                        console.log("downloaded:" + _name);
                                                         localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
                                                     }
                                                 }).catch((error) => { console.log("fetch error:" + error); });
