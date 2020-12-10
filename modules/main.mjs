@@ -704,6 +704,20 @@ function _toolbarButtonClicked() {
                                         }, false);
                                         reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                                     }
+                                },
+                                listFiles(dirname, baseDir) {
+                                    console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
+                                    return [];
+                                }
+                            }, err => {
+                                console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                if (err) {
+                                    console.log(">>> THROWN >>>");
+                                    console.log(err);
+                                }
+                                else {
+
                                 }
                             });
                         });
