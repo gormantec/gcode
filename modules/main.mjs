@@ -660,7 +660,6 @@ function _toolbarButtonClicked() {
         }
         else if (filename.endsWith(".dapp.ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            var myUint8Array = Uint8Array.from([1]);
             try {
                 var _run = function () {
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
@@ -683,6 +682,7 @@ function _toolbarButtonClicked() {
                                         return editor.getValue();
                                     }
                                     else{
+                                        console.log("not found:" + name);
                                         return null;
                                     }
 
