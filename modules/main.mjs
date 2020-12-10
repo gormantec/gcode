@@ -1205,7 +1205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             name=newFileDialogName.value.substring(0,newFileDialogName.value.lastIndexOf(".dapp.ts"));
         }
-        if(newFileDialogName.value.indexOf(".")>0)
+        else if(newFileDialogName.value.indexOf(".")>0)
         {
             name=newFileDialogName.value.substring(0,newFileDialogName.value.lastIndexOf("."));
         }
