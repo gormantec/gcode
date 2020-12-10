@@ -662,7 +662,7 @@ function _toolbarButtonClicked() {
             debug.log(myLogin + "$ echo 'Create dApp'\n");
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             try {
-                var _run = function () {
+                var _run = async function () {
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
                             const stdout = asc.createMemoryStream();
@@ -690,7 +690,7 @@ function _toolbarButtonClicked() {
                                     else if(name.startsWith("/node_modules/near-sdk-as"))
                                     {
                                         console.log("https://gcode.com.au/dist/near-sdk-as" +name.substring(25));
-                                        return "https://gcode.com.au/dist/near-sdk-as" +name.substring(25);
+                                        return await fetch("https://gcode.com.au/dist/near-sdk-as" +name.substring(25));
                                     }
                                     else{
                                         console.log("not found:" + name);
