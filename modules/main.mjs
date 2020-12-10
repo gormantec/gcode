@@ -686,7 +686,18 @@ function _toolbarButtonClicked() {
                                         return null;
                                     }
 
-                                }
+                                },
+                                writeFile(name, data, baseDir) {
+
+                                    if (typeof data == "object" && name == "optimized.wasm") {
+                                        const reader = new FileReader();
+                                        reader.addEventListener("load", function () {
+                                            // convert image file to base64 string
+                                            console.log(reader.result);
+                                            var dataURL = reader.result;
+                                        }, false);
+                                        reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+                                    }
                             });
                         });
                     });
