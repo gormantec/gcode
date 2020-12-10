@@ -131,24 +131,24 @@ function _new(aFilename) {
                 text => {
                     var _samplecode = text;
 
-                    var appStuff="";
-                    if(aFilename.endsWith(".mjs") || aFilename.endsWith(".ts"))appStuff="appName: gcode" + "\n  " +
-                    "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
-                    "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                    "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                    "mockFrame: iphoneX" + "\n  " +
-                    "splashBackgroundColor: #005040" + "\n  " +
-                    "splashDuration: 2000";
-                    var pyChar="";
-                    if(aFilename.endsWith(".py"))pyChar="#";
+                    var appStuff = "";
+                    if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
+                        "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
+                        "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                        "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                        "mockFrame: iphoneX" + "\n  " +
+                        "splashBackgroundColor: #005040" + "\n  " +
+                        "splashDuration: 2000";
+                    var pyChar = "";
+                    if (aFilename.endsWith(".py")) pyChar = "#";
 
                     document.getElementById("filename").innerText = aFilename;
                     selectedFileWidget = aFilename;
-                    editor.setValue(pyChar+"/*\n"+pyChar+"\n"+pyChar+"  " +
-                        "filename:" + aFilename + "\n"+pyChar+"  " +
-                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n"+pyChar+"  " +
+                    editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
+                        "filename:" + aFilename + "\n" + pyChar + "  " +
+                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
                         appStuff +
-                        "\n"+pyChar+"\n"+pyChar+"*/\n\n" + _samplecode);
+                        "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
                     _setEditorMode();
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
                         function () {
@@ -635,10 +635,10 @@ function _toolbarButtonClicked() {
 
 
     if (this.dataset.action == "addFile") {
-        document.getElementById("newFileDialogName").value="sample-"+(Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
+        document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
         document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogName").value;
         document.getElementById("newFileDialog").showModal();
-        
+
     } else if (this.dataset.action == "saveFile") {
         _save();
     }
@@ -656,7 +656,7 @@ function _toolbarButtonClicked() {
             catch (e) {
                 console.error(e);
             }
-            debug.log(myLogin+"$");
+            debug.log(myLogin + "$");
         }
         else if (filename.endsWith(".dapp.ts")) {
             debug.log(myLogin + "$ echo 'Create dApp'\n");
@@ -677,37 +677,41 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
-                                    if(name==filename)
-                                    {
+                                    if (name == filename) {
                                         console.log("Got App:" + name);
                                         return editor.getValue();
                                     }
-                                    else if(name.endsWith("as_types.d.ts"))
-                                    {
+                                    else if (name.endsWith("as_types.d.ts")) {
                                         console.log("!!!!!!!!!!!not found:" + name);
                                         return null;
                                     }
-                                    else if(name.startsWith("/node_modules/near-sdk-as"))
-                                    {
-                                        console.log("https://gcode.com.au/dist/near-sdk-as" +name.substring(25));
-                                        var result=null;
-                                        fetch("https://gcode.com.au/dist/near-sdk-as" +name.substring(25))
-                                          .then(response => response.json())
-                                          .then(text=>{result=text;
-                                            console.log("found");
-                                            localStorage.setItem("dist/near-sdk-as" +name.substring(25),btoa(text));
-
-                                        }).catch((error)=>{console.log(error);});
+                                    else if (name.startsWith("/node_modules/near-sdk-as")) {
+                                        console.log("found:" + name);
+                                        var result = null;
+                                        var _name = name;
                                         //while(result==null) var a=Math.random*Math.random*Math.random;
-                                        var b64 = localStorage.getItem("dist/near-sdk-as" +name.substring(25));
+                                        var b64 = localStorage.getItem("dist/near-sdk-as" + _name.substring(25));
                                         var cached = null;
                                         if (b64) {
                                             cached = atob(b64);
-                                            console.log(name + " = " + "dist/near-sdk-as" +name.substring(25));
+                                            console.log("got cache: dist/near-sdk-as" + _name.substring(25));
+                                            return cached;
                                         }
-                                        return cached;
+                                        else {
+
+                                            fetch("https://gcode.com.au/dist/near-sdk-as" + _name.substring(25))
+                                                .then(response => response.json())
+                                                .then(text => {
+                                                    result = text;
+                                                    console.log("downloaded:" + _name);
+                                                    localStorage.setItem("dist/near-sdk-as" + _name.substring(25), btoa(text));
+
+                                                }).catch((error) => { console.log("fetch error:" + error); });
+                                            return null;
+                                        }
+                                        
                                     }
-                                    else{
+                                    else {
                                         console.log("not found:" + name);
                                         return null;
                                     }
@@ -745,7 +749,7 @@ function _toolbarButtonClicked() {
                 }
                 _run();
             }
-            catch(e){console.log(e);}
+            catch (e) { console.log(e); }
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
@@ -767,16 +771,16 @@ function _toolbarButtonClicked() {
                                 stderr,
                                 readFile(name, baseDir) {
 
-                                    if(name.startsWith("@wasmdom/"))name="../"+name.substring(8);
+                                    if (name.startsWith("@wasmdom/")) name = "../" + name.substring(8);
 
-                                    console.log("-->"+name);
-                                    
+                                    console.log("-->" + name);
+
                                     if (name.endsWith("app.ts")) {
                                         console.log("Got App:" + name);
                                         return editor.getValue();
                                     }
                                     else if (name == "assembly/index.ts") {
-                                        console.log("FOUND !!! -->"+name);
+                                        console.log("FOUND !!! -->" + name);
                                         var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
                                         var cached = null;
                                         if (b64) {
@@ -818,7 +822,7 @@ function _toolbarButtonClicked() {
                                             try {
                                                 var rootHTML = _createHtml();
                                                 var _script1 = window.document.createElement("script");
-                                                _script1.text = "\nwindow.wasmdomURL=\""+dataURL+"\";\n";
+                                                _script1.text = "\nwindow.wasmdomURL=\"" + dataURL + "\";\n";
                                                 rootHTML.querySelector("body").appendChild(_script1);
                                                 var _script2 = window.document.createElement("script");
                                                 _script2.src = "https://gcode.com.au/js/wasmdom.js";
@@ -828,9 +832,9 @@ function _toolbarButtonClicked() {
                                                 var wh = "width=" + w + ",height=" + h;
                                                 var frame = "";
                                                 console.log(rootHTML);
-                                                if(mockFrame){
-                                                    wh="width="+(w+40)+",height="+(h+40);
-                                                    frame="?mockFrame="+mockFrame;
+                                                if (mockFrame) {
+                                                    wh = "width=" + (w + 40) + ",height=" + (h + 40);
+                                                    frame = "?mockFrame=" + mockFrame;
                                                 }
                                                 if (!win || win.closed) {
                                                     win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
@@ -1235,35 +1239,32 @@ window.addEventListener('resize', function (event) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    var newFileDialog=document.getElementById("newFileDialog");
-    var newFileDialogName=document.getElementById("newFileDialogName");
+    var newFileDialog = document.getElementById("newFileDialog");
+    var newFileDialogName = document.getElementById("newFileDialogName");
 
     dialogPolyfill.registerDialog(newFileDialog);
 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
-        var name="";
-        if(newFileDialogName.value.indexOf(".dapp.ts")>0)
-        {
-            name=newFileDialogName.value.substring(0,newFileDialogName.value.lastIndexOf(".dapp.ts"));
+        var name = "";
+        if (newFileDialogName.value.indexOf(".dapp.ts") > 0) {
+            name = newFileDialogName.value.substring(0, newFileDialogName.value.lastIndexOf(".dapp.ts"));
         }
-        else if(newFileDialogName.value.indexOf(".")>0)
-        {
-            name=newFileDialogName.value.substring(0,newFileDialogName.value.lastIndexOf("."));
+        else if (newFileDialogName.value.indexOf(".") > 0) {
+            name = newFileDialogName.value.substring(0, newFileDialogName.value.lastIndexOf("."));
         }
-        else{
-            name=newFileDialogName.value;
+        else {
+            name = newFileDialogName.value;
         }
-        
-        newFileDialogName.value=(name + document.getElementById("newFileDialogSelect").value);
+
+        newFileDialogName.value = (name + document.getElementById("newFileDialogSelect").value);
         document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
-      });
-      newFileDialog.addEventListener('close', function onClose() {
-          if(newFileDialog.returnValue!="cancel")
-          {
+    });
+    newFileDialog.addEventListener('close', function onClose() {
+        if (newFileDialog.returnValue != "cancel") {
             _new(newFileDialog.returnValue);
-          }
-        
-      });
+        }
+
+    });
     //resize page
 
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
