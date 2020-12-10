@@ -693,10 +693,19 @@ function _toolbarButtonClicked() {
                                         var result=null;
                                         fetch("https://gcode.com.au/dist/near-sdk-as" +name.substring(25))
                                           .then(response => response.json())
-                                          .then(text=>{result=text;})
-                                          .catch((error)=>{result="error"});
-                                        while(result==null) var a=Math.random*Math.random*Math.random;
-                                        return result.text();
+                                          .then(text=>{result=text;
+                                            console.log("found");
+                                            localStorage.setItem("dist/near-sdk-as" +name.substring(25),btoa(text));
+
+                                        }).catch((error)=>{console.log(error);});
+                                        //while(result==null) var a=Math.random*Math.random*Math.random;
+                                        var b64 = localStorage.getItem("dist/near-sdk-as" +name.substring(25));
+                                        var cached = null;
+                                        if (b64) {
+                                            cached = atob(b64);
+                                            console.log(name + " = " + "dist/near-sdk-as" +name.substring(25));
+                                        }
+                                        return cached;
                                     }
                                     else{
                                         console.log("not found:" + name);
