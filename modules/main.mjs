@@ -659,6 +659,7 @@ function _toolbarButtonClicked() {
             debug.log(myLogin+"$");
         }
         else if (filename.endsWith(".dapp.ts")) {
+            debug.log(myLogin + "$ echo 'Create dApp'\n");
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             try {
                 var _run = function () {
