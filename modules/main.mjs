@@ -668,7 +668,7 @@ function _toolbarButtonClicked() {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                "assembly/index.ts",
+                                filename,
                                 "-O3",
                                 "--runtime", "full",
                                 "--binaryFile", "optimized.wasm",
@@ -677,6 +677,14 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
+                                    if(name==filename)
+                                    {
+                                        console.log("Got App:" + name);
+                                        return editor.getValue();
+                                    }
+                                    else{
+                                        return null;
+                                    }
 
                                 }
                             });
