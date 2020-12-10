@@ -724,7 +724,7 @@ function _toolbarButtonClicked() {
                                         
                                     }
                                     else {
-                                        console.log("not found:" + name);
+                                        //console.log("not found:" + name);
                                         return null;
                                     }
 
