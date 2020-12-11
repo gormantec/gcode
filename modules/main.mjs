@@ -1396,7 +1396,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if(message.startsWith("\b"))
                 {
                     var lll=logger.innerHTML;
-                    logger.innerHTML=  lll.substring(0,lll.lastIndexOf("</div>"))+message.substring(2) + 'xxx </div>';
+                    logger.innerHTML=  lll.substring(0,lll.lastIndexOf("</div>"))+message.substring(1) + '</div>';
                 }
                 else{
                     logger.innerHTML += "<div>" + message + '</div>';
