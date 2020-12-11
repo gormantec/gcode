@@ -769,10 +769,10 @@ function _toolbarButtonClicked() {
                                     }
                                     else{
     
-                                            console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                            console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                            if(stdout.toString().trim().length()>0)console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                            if(stderr.toString().trim().length()>0)console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                             if (err) {
-                                                console.log(">>> THROWN >>>");
+                                                console.log(">>> ERROR THROWN >>>");
                                                 console.log(err);
                                             }
                                             else {
