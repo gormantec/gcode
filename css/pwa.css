@@ -211,3 +211,9 @@ div.pwapage div.pwadiv{
     }
  }
 
+ @media only screen and (max-height: 8500px) {
+    body {
+      zoom: 0.75;
+    }
+  }
+
