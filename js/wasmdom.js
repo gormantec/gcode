@@ -54,6 +54,11 @@ function init(window,_fetch,_Response) {
       getWindow: ()=>{
         return _wp;
       },
+      getWindowLocationSearch: ()=>{
+        var ptr=_wasm.__retain(_wasm.__newString(window.location.search));
+        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        return ptr;
+      },
       getDocument: ()=>{
         return _dp;
       },
@@ -755,19 +760,11 @@ else {}
 (() => {
 const loader = __webpack_require__(745);
 const importObject = __webpack_require__(642).init(window);
-if(window.wasmdom instanceof Uint8Array)console.log("found Uint8Array");
-loader.instantiate((window.wasmdom instanceof Uint8Array)?window.wasmdom:(window.wasmdomURL)?fetch(window.wasmdomURL):fetch('https://gcode.com.au/modules/wasmdom.wasm'), importObject.imports
-).then(({module, instance, exports}) =>{
-    console.log("found exports.");
-    console.log(exports);
-    console.log("------ __new ------");
-    console.log(exports["__new"]);
-    console.log("------ __new ------");
-    console.log("found instance exports.");
-    console.log(instance.exports);
-    console.log("------ __new ------");
-    console.log(instance.exports["__new"]);
-    console.log("------ __new ------");
+var doFetch=true;
+var wasmdomFile="https://gcode.com.au/modules/wasmdom.wasm";
+if(window.wasmdomUint8Array instanceof Uint8Array){wasmdomFile=window.wasmdomUint8Array;doFetch=false;console.log("found Uint8Array");}
+else if(window.wasmdomURL && window.wasmdomURL.length>0){wasmdomFile=window.wasmdomURL;console.log("found wasmdomURL");}
+loader.instantiate(doFetch?fetch(wasmdomFile):wasmdomFile, importObject.imports).then(({module, instance, exports}) =>{
     if(exports["__retain"] && exports["__newArray"] && exports["__newString"] && exports["show"])
     {
         importObject.wasm = exports;
