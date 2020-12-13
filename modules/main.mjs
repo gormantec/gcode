@@ -866,11 +866,17 @@ function _toolbarButtonClicked() {
                                                 rootHTML.querySelector("body").appendChild(_script2);
                                                 var w = 375;
                                                 var h = 896 * 375 / 414;
+                                                if(screen.height<=768)
+                                                {
+                                                    w=Math.floor(w*0.75);
+                                                    h=Math.floor(h*0.75);
+                                                    mockPadding=Math.floor(mockPadding*0.75);
+                                                }
                                                 var wh = "width=" + w + ",height=" + h;
                                                 var frame = "";
                                                 console.log(rootHTML);
                                                 if (mockFrame) {
-                                                    wh = "width=" + (w + 40) + ",height=" + (h + 40);
+                                                    wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
                                                     frame = "?mockFrame=" + mockFrame;
                                                 }
                                                 if (!win || win.closed) {
@@ -963,10 +969,17 @@ function _toolbarButtonClicked() {
                 rootHTML.querySelector("head").appendChild(_module);
                 var w = 375;
                 var h = 896 * 375 / 414;
+                var mockPadding=40;
+                if(screen.height<=768)
+                {
+                    w=Math.floor(w*0.75);
+                    h=Math.floor(h*0.75);
+                    mockPadding=Math.floor(mockPadding*0.75);
+                }
                 var wh = "width=" + w + ",height=" + h;
                 var frame = "";
                 if (mockFrame) {
-                    wh = "width=" + (w + 40) + ",height=" + (h + 40);
+                    wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
                     frame = "?mockFrame=" + mockFrame;
                 }
                 if (!win || win.closed) {
