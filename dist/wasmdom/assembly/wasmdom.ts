@@ -1,5 +1,6 @@
 export declare function createElement(s: string): i32;
 export declare function templateContent(e: i32): i32;
+export declare function getTimezoneOffset(): i32;
 export declare function setAttribute(e: i32,name: string,value:string): void;
 export declare function getAttribute(e: i32,name: string): string;
 export declare function setInnerText(e: i32,s: string): void;

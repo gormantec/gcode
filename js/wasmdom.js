@@ -59,6 +59,9 @@ function init(window,_fetch,_Response) {
         //setTimeout(()=>{_wasm.__release(ptr);},10000);
         return ptr;
       },
+      getTimezoneOffset: ()=>{
+        return new Date().getTimezoneOffset();
+      },
       getDocument: ()=>{
         return _dp;
       },
@@ -762,6 +765,7 @@ const loader = __webpack_require__(745);
 const importObject = __webpack_require__(642).init(window);
 var doFetch=true;
 var wasmdomFile="https://gcode.com.au/modules/wasmdom.wasm";
+if(window.location.hostname.indexOf("localhost")>=0)wasmdomFile="/wasmdom.wasm";
 if(window.wasmdomUint8Array instanceof Uint8Array){wasmdomFile=window.wasmdomUint8Array;doFetch=false;console.log("found Uint8Array");}
 else if(window.wasmdomURL && window.wasmdomURL.length>0){wasmdomFile=window.wasmdomURL;console.log("found wasmdomURL");}
 loader.instantiate(doFetch?fetch(wasmdomFile):wasmdomFile, importObject.imports).then(({module, instance, exports}) =>{

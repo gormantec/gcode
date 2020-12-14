@@ -1,6 +1,9 @@
-import { Window} from "../dom/document";
+import { Window,Date } from "../dom/document";
 import { Element} from "../dom/element";
 import { PWA, Div } from "../pwa";
+
+
+
 
 export function addMockFrame( win:Window,  aPWA:PWA,  mockFrame:string):Element
 {
@@ -12,18 +15,19 @@ export function addMockFrame( win:Window,  aPWA:PWA,  mockFrame:string):Element
     var frame:Element = win.document.createElement('div');
     frame.className = "pwadiv mockFrame " + mockFrame;
     win.document.body.appendChild(frame);
-    aPWA.pwaRoot.style.left = "20px";
-    aPWA.pwaRoot.style.right = "20px";
-    aPWA.pwaRoot.style.top = "20px";
-    aPWA.pwaRoot.style.bottom = "20px";
-    aPWA.pwaOverlay.style.left = "20px";
-    aPWA.pwaOverlay.style.right = "20px";
-    aPWA.pwaOverlay.style.top = "20px";
-    aPWA.pwaOverlay.style.bottom = "20px";
+    var shift=0;
+
     var div:Element;
-    if(mockFrame=="iphoneX")
+    if(mockFrame.toLowerCase()=="iphonex")
     {
-        
+        aPWA.pwaRoot.style.left = "20px";
+        aPWA.pwaRoot.style.right = "20px";
+        aPWA.pwaRoot.style.top = "20px";
+        aPWA.pwaRoot.style.bottom = "20px";
+        aPWA.pwaOverlay.style.left = "20px";
+        aPWA.pwaOverlay.style.right = "20px";
+        aPWA.pwaOverlay.style.top = "20px";
+        aPWA.pwaOverlay.style.bottom = "20px";
         div = win.document.createElement('div');
         div.setAttribute("style", "position:fixed;top:14px;margin-left:-95px;width:190px;left:50%;height:30px;background-color:black;border-bottom-left-radius:20px;border-bottom-right-radius:20px;");
         aPWA.pwaOverlay.element.appendChild(div);
@@ -39,33 +43,71 @@ export function addMockFrame( win:Window,  aPWA:PWA,  mockFrame:string):Element
         div = win.document.createElement('div');
         div.setAttribute("style", "position:fixed;top:20px;margin-left:40px;width:8px;left:50%;height:8px;background-color:#323232;border-radius:4px;");
         aPWA.pwaOverlay.element.appendChild(div);
-        div = win.document.createElement('div');
-        div.setAttribute("id", "pwaStatusBarTime");
-        div.setAttribute("style", "position:fixed;top:25px;background-color:none;color:black;width: 50px;left: 10%;height: 20px;text-align: right;font-weight: 900;");
-        //div.innerText="22:59";
-        var date:f64=<f64>Date.now();
-        div.innerText=("0"+Math.floor(Math.round(date/(1000*60*60*24))*24).toString()).slice(-2)+":"+("0"+Math.round(Math.floor(date/(1000*60*60))*60).toString()).slice(-2);
-        //).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);
-        aPWA.pwaOverlay.element.appendChild(div);
-        //((_div)=>{setInterval(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
-
     }
+    else{
+        shift=60;
+        aPWA.pwaRoot.style.left = "20px";
+        aPWA.pwaRoot.style.right = "20px";
+        aPWA.pwaRoot.style.top = "80px";
+        aPWA.pwaRoot.style.bottom = "80px";
+        aPWA.pwaOverlay.style.left = "20px";
+        aPWA.pwaOverlay.style.right = "20px";
+        aPWA.pwaOverlay.style.top = "80px";
+        aPWA.pwaOverlay.style.bottom = "80px";
+
+        div = win.document.createElement('div');
+        div.setAttribute("style", "position:fixed;top:20px;background-color:black;left:20px;right: 20px;height:60px");
+        aPWA.pwaOverlay.element.appendChild(div);
+
+        div = win.document.createElement('div');
+        div.setAttribute("style", "position:fixed;bottom:20px;background-color:black;left:20px;right: 20px;height:60px");
+        aPWA.pwaOverlay.element.appendChild(div);
+
+        div = win.document.createElement('div');
+        div.setAttribute("style", "position:fixed;top:44px;margin-right:-20px;width:40px;right:50%;height:4px;background-color:#323232;border-radius:2px;");
+        aPWA.pwaOverlay.element.appendChild(div);
+        div = win.document.createElement('div');
+
+        div = win.document.createElement('div');
+        div.setAttribute("style", "position:fixed;top:28px;margin-right:-2px;width:8px;right:50%;height:8px;background-color:#323232;border-radius:4px;");
+        aPWA.pwaOverlay.element.appendChild(div);
+
+        div = win.document.createElement('div');
+        div.setAttribute("style", "position:fixed;top:42px;margin-right:35px;width:8px;right:50%;height:8px;background-color:#323232;border-radius:4px;");
+        aPWA.pwaOverlay.element.appendChild(div);
+
+        div = win.document.createElement('div');
+        div.setAttribute("style", "position:fixed;bottom:28px;margin-right:-10px;width:40px;right:50%;height:40px;border-color:#323232;border-radius:20px;border-width:3px;border-style: solid;");
+        aPWA.pwaOverlay.element.appendChild(div);
+
+      
+    }
+    div = win.document.createElement('div');
+    div.setAttribute("id", "pwaStatusBarTime");
+    div.setAttribute("style", "position:fixed;top:"+(25+shift).toString()+"px;background-color:none;color:white;width: 50px;left: 10%;height: 20px;text-align: right;font-weight: 900;");
+
+    div.innerText=new Date(Date.now()).get24HourTime();
+    aPWA.pwaOverlay.element.appendChild(div);
+    
+    //((_div)=>{setInterval(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
+
     div = win.document.createElement('div');
     div.innerText="signal_cellular_alt";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:23px;background-color:none;color:black;width:20px;right: 20%;font-size:20px;");
+    div.setAttribute("style", "position:fixed;top:"+(23+shift).toString()+"px;background-color:none;color:white;width:20px;right: 20%;font-size:20px;");
     aPWA.pwaOverlay.element.appendChild(div);
+
 
     div = win.document.createElement('div');
     div.innerText="wifi";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:23px;background-color:none;color:black;width:20px;right: 20%;margin-right:-25px;font-size:20px;");
+    div.setAttribute("style", "position:fixed;top:"+(23+shift).toString()+"px;background-color:none;color:white;width:20px;right: 20%;margin-right:-25px;font-size:20px;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="battery_charging_full";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:16px;background-color:none;color:black;width:20px;margin-right:-50px;right: 20%;font-size:28px;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg)");
+    div.setAttribute("style", "position:fixed;top:"+(16+shift).toString()+"px;background-color:none;color:white;width:20px;margin-right:-50px;right: 20%;font-size:28px;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg)");
     aPWA.pwaOverlay.element.appendChild(div);
 
     frame.appendChild(splashdiv);

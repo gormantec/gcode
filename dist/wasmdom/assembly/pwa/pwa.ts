@@ -1,4 +1,4 @@
-import { Window, Document, URLSearchParams, setTimeout, fetch, Promise, Response } from "../dom/document";
+import { Window, Date, Document, URLSearchParams, setTimeout, fetch, Promise, Response } from "../dom/document";
 import { Element, EventCallback, Callback } from "../dom/element";
 import { Debug } from "../dom/debug";
 import { Style } from "../dom/style";

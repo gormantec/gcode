@@ -296,5 +296,47 @@ function fetch(uri:string):Promise
     }
 }
 
+class DomDate extends Date{
 
-export { Debug, Document, Console, Window, URLSearchParams,Promise,Response,fetch, setTimeout };
+    _getTimezoneOffset:i32=99999999;
+
+    
+    
+    get24HourTimeUTC():string
+    {
+        var date:f64=<f64>this.getTime();
+        var days:f64=date/(<f64>(1000*60*60*24));
+        var hours:f64=date/(<f64>(1000*60*60));
+        return ("00"+(<i64>((days-Math.floor(days))*<f64>24)).toString()).slice(-2)+":"+("00"+(<i64>((hours-Math.floor(hours))*<f64>60)).toString()).slice(-2);
+    }
+
+    get24HourTime():string
+    {
+        var date:f64=<f64>this.getTime();
+        var days:f64=date/(<f64>(1000*60*60*24));
+        var hours:f64=date/(<f64>(1000*60*60));
+        return ("00"+this.getHours().toString()).slice(-2)+":"+("00"+this.getMinutes().toString()).slice(-2);
+    }
+
+    getHours():i32
+    {
+        var date:f64=<f64>this.getTime()-<f64>(this.getTimezoneOffset()*60*1000);
+        var days:f64=date/(<f64>(1000*60*60*24));
+        return <i32>((days-Math.floor(days))*<f64>24);
+    }
+    getMinutes():i32
+    {
+        var date:f64=<f64>this.getTime()-<f64>(this.getTimezoneOffset()*60*1000);
+        var hours:f64=date/(<f64>(1000*60*60));
+        return <i32>(<i64>((hours-Math.floor(hours))*<f64>60));
+    }
+    getTimezoneOffset():i32
+    {
+        if(this._getTimezoneOffset==99999999)this._getTimezoneOffset=jsdom.getTimezoneOffset();
+        return this._getTimezoneOffset;
+    }
+
+}
+
+
+export { Debug, Document, Console, Window, URLSearchParams,Promise,Response,fetch, setTimeout,DomDate as Date };
