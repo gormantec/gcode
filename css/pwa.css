@@ -18,13 +18,18 @@ body {
     width:100%;
     overflow: hidden;
 }
-.iphoneX{
-    border-radius: 30px;
+
+.mockFrame{
+    border-radius: 10px;
     border-style: solid;
     border-color: darkgrey;
     border-width: 2px;
     background-color: black;
     padding: 18px;
+}
+
+.iphoneX{
+    border-radius: 30px;
 }
 
 .pwadiv{
