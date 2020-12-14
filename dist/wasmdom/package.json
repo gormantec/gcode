@@ -1,0 +1,40 @@
+{
+  "name": "wasmdom",
+  "version": "1.0.0",
+  "description": "gormantec implementation of assembly script for DOM based PWA apps.",
+  "scripts": {
+    "test": "node tests",
+    "asbuild:untouched": "asc assembly/index.ts --target debug",
+    "asbuild:optimized": "asc assembly/index.ts --target release",
+    "asbuild:releasewww": "asc assembly/index.ts --target releasewww",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized && npm run asbuild:releasewww",
+    "serve-demo": "cd dist && static-server -z",
+    "webpack": "npm run asbuild:releasewww && npx webpack && cp -f ./dist/main.js ../gcode/js/wasmdom.js && cp -R -f ./package.json ../gcode/dist/wasmdom && cp -R -f ./assembly/* ../gcode/dist/wasmdom/assembly && cp -f ./dist/wasmdom.wasm ../gcode/modules/wasmdom.wasm && npm run serve-demo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gormantec/wasmdom.git"
+  },
+  "keywords": [
+    "wasm",
+    "js",
+    "dom"
+  ],
+  "author": "gormantec",
+  "bugs": {
+    "url": "https://github.com/gormantec/wasmdom/issues"
+  },
+  "homepage": "https://github.com/gormantec/wasmdom#readme",
+  "dependencies": {
+    "@assemblyscript/loader": "^0.17.3",
+    "jsdom": "^16.4.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.17.3",
+    "static-server": "^2.2.1",
+    "webpack": "^5.9.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "private": true
+}
