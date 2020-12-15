@@ -75,7 +75,7 @@ export function addFrame(win, aPWA, mockFrame) {
     }
     div = win.document.createElement('div');
     div.setAttribute("id", "pwaStatusBarTime");
-    div.setAttribute("style", "position:fixed;top:"+(25+shift).toString()+"px;background-color:none;color:black;width: 50px;left: 10%;height: 20px;text-align: right;font-weight: 900;");
+    div.setAttribute("style", "position:fixed;top:"+(25+shift).toString()+"px;background-color:none;color:white;width: 50px;left: 10%;height: 20px;text-align: right;font-weight: 900;");
     div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);
     aPWA.pwaOverlay.element.appendChild(div);
     ((_div)=>{setInterval(function(){_div.innerText=(new Date()).getHours()+":"+("0"+(new Date()).getMinutes()).slice(-2);},30000);})(div);
@@ -83,19 +83,19 @@ export function addFrame(win, aPWA, mockFrame) {
     div = win.document.createElement('div');
     div.innerText="signal_cellular_alt";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:"+(23+shift).toString()+"px;background-color:none;color:black;width:20px;right: 20%;font-size:20px;");
+    div.setAttribute("style", "position:fixed;top:"+(23+shift).toString()+"px;background-color:none;color:white;width:20px;right: 20%;font-size:20px;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="wifi";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:"+(23+shift).toString()+"px;background-color:none;color:black;width:20px;right: 20%;margin-right:-25px;font-size:20px;");
+    div.setAttribute("style", "position:fixed;top:"+(23+shift).toString()+"px;background-color:none;color:white;width:20px;right: 20%;margin-right:-25px;font-size:20px;");
     aPWA.pwaOverlay.element.appendChild(div);
 
     div = win.document.createElement('div');
     div.innerText="battery_charging_full";
     div.className="material-icons";
-    div.setAttribute("style", "position:fixed;top:"+(16+shift).toString()+"px;background-color:none;color:black;width:20px;margin-right:-50px;right: 20%;font-size:28px;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg)");
+    div.setAttribute("style", "position:fixed;top:"+(16+shift).toString()+"px;background-color:none;color:white;width:20px;margin-right:-50px;right: 20%;font-size:28px;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg)");
     aPWA.pwaOverlay.element.appendChild(div);
 
 
