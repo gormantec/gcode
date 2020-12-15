@@ -867,7 +867,7 @@ function _toolbarButtonClicked() {
                                                     mockPadding=Math.floor(mockPadding*0.75);
                                                     wpos="top=0,left=0";
                                                 }
-                                                var wh = "width=" + parsInt(w) + ",height=" + parseInt(h);
+                                                var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
                                                 var frame = "";
                                                 console.log(rootHTML);
                                                 if (mockFrame) {
@@ -968,7 +968,7 @@ function _toolbarButtonClicked() {
                     mockPadding=Math.floor(mockPadding*0.75);
                     wpos="top=0,left=0";
                 }
-                var wh = "width=" + w + ",height=" + h;
+                var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
                 var frame = "";
                 if (mockFrame) {
                     wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
