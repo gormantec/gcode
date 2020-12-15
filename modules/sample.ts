@@ -1,5 +1,5 @@
-import { Window, Document, Debug, Console } from "../dom";
-import { PWA, PWAParams, Page, PageParams, Div, DivParams } from '.';
+import { Window, Document, Debug, Console } from "wasmdom/dom";
+import { PWA, PWAParams, Page, PageParams, Div, DivParams } from 'wasmdom/pwa';
 
 var homePage: Page;
 var secondPage: Page;
