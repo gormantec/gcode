@@ -686,21 +686,13 @@ function _toolbarButtonClicked() {
                                         //console.log("Got App:" + name);
                                         return editor.getValue();
                                     }
-                                    else if (name.endsWith("as_types.d.ts")) {
-                                        console.log("!!!!!!!!!!!not found:" + name);
-                                        return null;
-                                    }
                                     else if (name.indexOf("node_modules/")>=0) {
                                         var pos=name.lastIndexOf("node_modules/") +13;
-                                        //console.log("found:" + name);
-                            
                                         var _name = name;
-                                        //while(result==null) var a=Math.random*Math.random*Math.random;
                                         var b64 = localStorage.getItem("dist/" + _name.substring(pos));
                                         var cached = null;
                                         if (b64) {
                                             cached = atob(b64);
-                                            //console.log("got cache: dist/" + _name.substring(pos));
                                             return cached;
                                         }
                                         else {
@@ -710,7 +702,6 @@ function _toolbarButtonClicked() {
                                                 .then(text => {
                                                     if(text)
                                                     {
-                                                        //console.log("downloaded:" + _name);
                                                         if(!failed)window.setTimeout(_run,2000);
                                                         failed=true;
                                                         localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
@@ -724,17 +715,15 @@ function _toolbarButtonClicked() {
                                         
                                     }
                                     else {
-                                        //console.log("not found:" + name);
                                         return null;
                                     }
 
                                 },
                                 writeFile(name, data, baseDir) {
 
-                                    if (typeof data == "object" && name == "dapp.wasm") {
+                                    if (typeof data == "object" && name == "dapp.wasm" && !failed) {
                                         const reader = new FileReader();
                                         reader.addEventListener("load", function () {
-                                            // convert image file to base64 string
                                             console.log(reader.result);
                                             var dataURL = reader.result;
                                         }, false);
@@ -779,7 +768,7 @@ function _toolbarButtonClicked() {
                                                 console.log("Compiled Ok");
                                             }
                                     }
-                                })
+                                });
                             });
                         });
                     });
@@ -792,13 +781,16 @@ function _toolbarButtonClicked() {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             var myUint8Array = Uint8Array.from([1]);
             try {
-                var _run = function () {
+                var tryCount=0;
+                var _run = async function () {
+                    var failed=false;
+                    var downloading=0;
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             asc.main([
-                                "assembly/index.ts",
+                                "node_modules/wasmdom/assembly/index.ts",
                                 "-O3",
                                 "--runtime", "full",
                                 "--binaryFile", "optimized.wasm",
@@ -807,48 +799,47 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
-
-                                    if (name.startsWith("@wasmdom/")) name = "../" + name.substring(8);
-
-                                    console.log("-->" + name);
-
                                     if (name.endsWith("app.ts")) {
                                         console.log("Got App:" + name);
                                         return editor.getValue();
                                     }
-                                    else if (name == "assembly/index.ts") {
-                                        console.log("FOUND !!! -->" + name);
-                                        var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/assembly/index.ts");
-                                        var cached = null;
-                                        if (b64) {
-                                            console.log(name + " = " + "git://gormantec:wasmdom/assembly/index.ts");
-                                            cached = atob(b64);
-                                        }
-                                        return cached;
-                                    }
-                                    else if (name.startsWith("assembly/") && name.endsWith(".ts")) {
-                                        var b64 = localStorage.getItem("gitfile-git://gormantec:wasmdom/" + name);
+                                    else if (name.indexOf("node_modules/")>=0) {
+                                        var pos=name.lastIndexOf("node_modules/") +13;
+                                        var _name = name;
+                                        var b64 = localStorage.getItem("dist/" + _name.substring(pos));
                                         var cached = null;
                                         if (b64) {
                                             cached = atob(b64);
-                                            console.log(name + " = " + "git://gormantec:wasmdom/" + name);
+                                            return cached;
                                         }
-                                        return cached;
+                                        else {
+                                            downloading++;
+                                            fetch("https://gcode.com.au/dist/" + _name.substring(pos))
+                                                .then(response =>response.ok?response.text():null)
+                                                .then(text => {
+                                                    if(text)
+                                                    {
+                                                        if(!failed)window.setTimeout(_run,2000);
+                                                        failed=true;
+                                                        localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
+                                                    }
+                                                }).catch((error) => { console.log("fetch error:" + error); })
+                                                .finally(()=>{
+                                                    downloading--;
+                                                });
+                                            return null;
+                                        }
+                                        
                                     }
                                     else {
                                         return null;
                                     }
+
                                 },
                                 writeFile(name, data, baseDir) {
 
-                                    if (typeof data == "object" && name == "optimized.wasm") {
-
-
-
-
-
+                                    if (typeof data == "object" && name == "optimized.wasm" && !failed) {
                                         const reader = new FileReader();
-
                                         reader.addEventListener("load", function () {
                                             // convert image file to base64 string
                                             console.log("-------" + name + "-------");
@@ -898,38 +889,8 @@ function _toolbarButtonClicked() {
                                             catch (e) {
                                                 console.error("error:" + e);
                                             }
-
-
-
                                         }, false);
-
-
                                         reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
-
-                                        /*
-                                        
-                                                                                myUint8Array = Uint8Array.from(data);
-                                                                                var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
-                                                                                githubtree.saveFile(gitname, _Uint8ArrayToHex(myUint8Array), () => {
-                                                                                    console.log('done');
-                                                                                });
-                                                                                console.log(`>>> WRITE:${name} >>>\n${data.length} >> type=${typeof data}`);
-                                                                                
-                                                                                let blob = new Blob(data, { type: "application/octet-stream" });
-                                                                                var reader = new FileReader();
-                                                                                reader.readAsDataURL(blob);
-                                                                                reader.onloadend = function () {
-                                                                                    var base64String = reader.result;
-                                                                                    //console.log('Base64 String - ', base64String); 
-                                                                                    //console.log('Base64 String without Tags- ', base64String.substr(base64String.indexOf(',') + 1)); 
-                                                                                    var gitname = "git://gormanau:gcode/dist/" + filename.slice(21, -3) + "/" + name;
-                                                                                    console.log(filename);
-                                                                                    console.log(gitname);
-                                                                                    githubtree.saveFile(gitname, base64String.substr(base64String.indexOf(',') + 1), false, () => {
-                                                                                        console.log('done');
-                                                                                    });
-                                                                                }*/
-
                                     }
 
 
@@ -939,15 +900,40 @@ function _toolbarButtonClicked() {
                                     return [];
                                 }
                             }, err => {
-                                console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                console.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                                if (err) {
-                                    console.log(">>> THROWN >>>");
-                                    console.log(err);
-                                }
-                                else {
+                                var waitForDownload=function(thenDo){
+                                    if(downloading==0)thenDo();
+                                    else{
+                                        window.setTimeout(()=>{
+                                            waitForDownload(thenDo);
+                                        },500);
+                                    }
+                                };
+                                waitForDownload(()=>{
+                                    if(failed)
+                                    {
+                                        if(tryCount>0)
+                                        {
+                                            console.log("\b..");
+                                        }
+                                        else{
+                                            console.log("downloading depenadnt files..");
+                                        }
+                                        tryCount++;
 
-                                }
+                                    }
+                                    else{
+    
+                                            if(stdout.toString().trim().length()>0)console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                            if(stderr.toString().trim().length()>0)console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                            if (err) {
+                                                console.log(">>> ERROR THROWN >>>");
+                                                console.log(err);
+                                            }
+                                            else {
+                                                console.log("Compiled Ok");
+                                            }
+                                    }
+                                });
                             });
                         });
                     });
