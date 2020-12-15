@@ -799,6 +799,7 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
+                                    
                                     if (name.endsWith("wasmdom/assembly/src/app.ts")) {
                                         return editor.getValue();
                                     }
@@ -808,6 +809,7 @@ function _toolbarButtonClicked() {
                                         var b64 = localStorage.getItem("dist/" + _name.substring(pos));
                                         var cached = null;
                                         if (b64) {
+                                            console.log("got "+name);
                                             cached = atob(b64);
                                             return cached;
                                         }
