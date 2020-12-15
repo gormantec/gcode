@@ -799,8 +799,7 @@ function _toolbarButtonClicked() {
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
-                                    if (name.endsWith("app.ts")) {
-                                        console.log("Got App:" + name);
+                                    if (name.endsWith("wasmdom/assembly/src/app.ts")) {
                                         return editor.getValue();
                                     }
                                     else if (name.indexOf("node_modules/")>=0) {
