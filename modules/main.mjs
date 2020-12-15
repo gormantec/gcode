@@ -924,8 +924,8 @@ function _toolbarButtonClicked() {
                                     }
                                     else{
     
-                                            if(stdout.toString().trim().length()>0)console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                            if(stderr.toString().trim().length()>0)console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                            if(stdout && stdout.toString() && stdout.toString().trim().length()>0)console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                            if(stderr && stderr.toString() && stderr.toString().trim().length()>0)console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                             if (err) {
                                                 console.log(">>> ERROR THROWN >>>");
                                                 console.log(err);
