@@ -758,8 +758,8 @@ function _toolbarButtonClicked() {
                                     }
                                     else{
     
-                                            if(stdout.toString().trim().length()>0)console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                            if(stderr.toString().trim().length()>0)console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                            if(stdout.toString().trim()!="")console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                            if(stderr.toString().trim()!="")console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                             if (err) {
                                                 console.log(">>> ERROR THROWN >>>");
                                                 console.log(err);
@@ -856,6 +856,8 @@ function _toolbarButtonClicked() {
                                                 var _script2 = window.document.createElement("script");
                                                 _script2.src = "https://gcode.com.au/js/wasmdom.js";
                                                 rootHTML.querySelector("body").appendChild(_script2);
+
+                                                var wpos="top=50,left=50";
                                                 var w = 375;
                                                 var h = 896 * 375 / 414;
                                                 if(screen.height<=768)
@@ -863,8 +865,9 @@ function _toolbarButtonClicked() {
                                                     w=Math.floor(w*0.75);
                                                     h=Math.floor(h*0.75);
                                                     mockPadding=Math.floor(mockPadding*0.75);
+                                                    wpos="top=0,left=0";
                                                 }
-                                                var wh = "width=" + w + ",height=" + h;
+                                                var wh = "width=" + parsInt(w) + ",height=" + parseInt(h);
                                                 var frame = "";
                                                 console.log(rootHTML);
                                                 if (mockFrame) {
@@ -872,7 +875,7 @@ function _toolbarButtonClicked() {
                                                     frame = "?mockFrame=" + mockFrame;
                                                 }
                                                 if (!win || win.closed) {
-                                                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
+                                                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ","+wpos);
                                                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                                                     else win.document.body.style.backgroundColor = "black";
                                                 }
@@ -924,9 +927,9 @@ function _toolbarButtonClicked() {
                                     }
                                     else{
     
-                                            if(stdout && stdout.toString() && stdout.toString().trim().length()>0)console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                            if(stderr && stderr.toString() && stderr.toString().trim().length()>0)console.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                                            if (err) {
+                                        if(stdout.toString().trim()!="")console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                        if(stderr.toString().trim()!="")console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                        if (err) {
                                                 console.log(">>> ERROR THROWN >>>");
                                                 console.log(err);
                                             }
@@ -954,14 +957,16 @@ function _toolbarButtonClicked() {
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + editor.getValue() + "\n";
                 rootHTML.querySelector("head").appendChild(_module);
+                var wpos="top=50,left=50";
                 var w = 375;
-                var h = 896 * 375 / 414;
+                var h = 896 * 375 / 414; //iphoneX=896/414
                 var mockPadding=40;
                 if(screen.height<=768)
                 {
                     w=Math.floor(w*0.75);
                     h=Math.floor(h*0.75);
                     mockPadding=Math.floor(mockPadding*0.75);
+                    wpos="top=0,left=0";
                 }
                 var wh = "width=" + w + ",height=" + h;
                 var frame = "";
@@ -970,7 +975,7 @@ function _toolbarButtonClicked() {
                     frame = "?mockFrame=" + mockFrame;
                 }
                 if (!win || win.closed) {
-                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ",top=50,left=50");
+                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ","+wpos);
                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                     else win.document.body.style.backgroundColor = "black";
                 }
