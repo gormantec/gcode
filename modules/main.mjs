@@ -858,7 +858,8 @@ function _toolbarButtonClicked() {
 
                                                 var wpos="top=50,left=50";
                                                 var w = 375;
-                                                var h = 896 * 375 / 414;
+                                                var h = 896 * 375 / 414; //iphoneX=896/414
+                                                var mockPadding=40;
                                                 if(screen.height<=768)
                                                 {
                                                     w=Math.floor(w*0.75);
@@ -868,7 +869,6 @@ function _toolbarButtonClicked() {
                                                 }
                                                 var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
                                                 var frame = "";
-                                                console.log(rootHTML);
                                                 if (mockFrame) {
                                                     wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
                                                     frame = "?mockFrame=" + mockFrame;
