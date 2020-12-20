@@ -18,10 +18,20 @@ var debug = { log: function (v) { console.log(v); } };
 var leftToolbarWidth = 50;
 var leftToolbarFontSize = leftToolbarWidth - 26;
 var leftPageWidth = 170;
+
+var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0;
+
+if(screenWidth<=1024)
+{
+    leftPageWidth = 200;
+}
+
 var selectedFileWidget = null;
 var pageBottomHeight = 150;
 var dirIconOpened = "keyboard_arrow_down";
 var dirIconClosed = "keyboard_arrow_right";
+
+
 
 function htmlToElement(html) {
     var template = document.createElement('template');

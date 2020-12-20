@@ -369,8 +369,7 @@ dialog{
     background-repeat: no-repeat; /* Do not repeat the image */
 }
 
-@media only screen and (max-width: 576px),
-       only screen and (max-width: 11in)  {
+@media only screen and (max-width: 1024px) {
     #pageLeftToolbarTop i {
         font-size: 36px;
     }
