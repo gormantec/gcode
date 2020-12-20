@@ -23,7 +23,7 @@ var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0
 
 if(screenWidth<=1024)
 {
-    leftPageWidth = 200;
+    leftPageWidth = 300;
 }
 
 var selectedFileWidget = null;
