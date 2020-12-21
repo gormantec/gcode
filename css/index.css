@@ -138,6 +138,7 @@ pre#log{
     font-size: 8pt;
     text-align: right;
     padding-top: 4px;
+    white-space: nowrap;
 }
 
 #pageLeftToolbar {
@@ -174,6 +175,7 @@ pre#log{
     font-weight: bolder;
     text-decoration: none;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .dirWidgetSelected {
