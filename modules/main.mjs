@@ -1231,6 +1231,7 @@ document.addEventListener("DOMContentLoaded", function () {
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
+        moz: true,
         extraKeys: { 
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); }, 
             "Ctrl-Space": "autocomplete",
