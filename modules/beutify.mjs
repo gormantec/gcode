@@ -3,12 +3,6 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.j
 import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js';
 
 
-
-console.log("js_beautify");
-console.log(js_beautify);
-console.log("css_beautify");
-console.log(css_beautify);
-
 var the={};
 
 
