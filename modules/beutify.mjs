@@ -1,6 +1,6 @@
-import {js_beautify} from 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js';
-import {css_beautify} from 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js';
-import {html_beautify} from 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js';
+import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js';
+import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js';
+import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js';
 
 
 
@@ -28,11 +28,11 @@ export function beautify(theEditor) {
     the.lastInput = source;
 
     if (language === 'html') {
-      output = html_beautify(source, opts);
+      output = window.html_beautify(source, opts);
     } else if (language === 'css') {
-      output = css_beautify(source, opts);
+      output = window.css_beautify(source, opts);
     } else {
-      output = js_beautify(source, opts);
+      output = window.js_beautify(source, opts);
     }
 
     theEditor.setValue(output);
