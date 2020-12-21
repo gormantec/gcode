@@ -1,13 +1,12 @@
 
 import * as githubtree from '../modules/githubtree.mjs';
+import {beautify} from '../modules/beutify.mjs';
 import dialogPolyfill from '../dist/dialog-polyfill/dialog-polyfill.esm.js';
-import * as jsbeutify from 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js';
 
 
-console.log("jsbeutify");
-console.log(jsbeutify);
-console.log("jsbeutify.js_beautify");
-console.log(jsbeutify.js_beautify);
+console.log("beautify");
+console.log(beautify);
+
 
 var editor;
 
