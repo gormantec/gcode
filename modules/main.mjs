@@ -1237,7 +1237,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "Ctrl-Enter": function (cm) { beautify(editor) } 
          },
         foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        lint: true
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
