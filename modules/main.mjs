@@ -249,7 +249,7 @@ function _setEditorMode() {
         editor.setOption("mode", "javascript");
     }
     else if (selectedFileWidget.endsWith(".ts")) {
-        editor.setOption("mode", "javascript");
+        editor.setOption("mode", "typescript");
     }
     else if (selectedFileWidget.endsWith(".py")) {
         editor.setOption("mode", "python");
