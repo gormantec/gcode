@@ -4,7 +4,7 @@ import {beautify} from '../modules/beutify.mjs';
 import dialogPolyfill from '../dist/dialog-polyfill/dialog-polyfill.esm.js';
 
 
-console.log("beautify");
+console.log("--> beautify");
 console.log(beautify);
 
 
