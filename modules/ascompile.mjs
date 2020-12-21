@@ -114,6 +114,4 @@ export function run(mainFilename,editorFilename,outputFilename,callback){
         _run();
     }
     catch (e) { console.log(e); }
-
-
 }

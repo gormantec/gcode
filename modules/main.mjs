@@ -675,11 +675,11 @@ function _toolbarButtonClicked() {
         else if (filename.endsWith(".dapp.ts")) {
             debug.log(myLogin + "$ echo 'Create dApp'\n");
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            require(["/modules/ascompile.mjs"],({run})=>{run(filename,filename);});
+            import('/modules/ascompile.mjs').then(({run})=>{run(filename,filename);});
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            require(["/modules/ascompile.mjs"],({run})=>{run("node_modules/wasmdom/assembly/index.ts","wasmdom/assembly/src/app.ts");});
+            import('/modules/ascompile.mjs').then(({run})=>{run("node_modules/wasmdom/assembly/index.ts","wasmdom/assembly/src/app.ts");});
             var myUint8Array = Uint8Array.from([1]);
             try {
                 var tryCount=0;
