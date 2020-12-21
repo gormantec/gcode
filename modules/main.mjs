@@ -1231,8 +1231,11 @@ document.addEventListener("DOMContentLoaded", function () {
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
-        extraKeys: { "Ctrl-Space": function (cm) { cm.foldCode(cm.getCursor()); }, "Ctrl-Space": "autocomplete" },
-        extraKeys: { "Ctrl-Enter": function (cm) { beautify(editor) }, "Ctrl-Enter": "beutify" },
+        extraKeys: { 
+            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); }, 
+            "Ctrl-Space": "autocomplete",
+            "Ctrl-Enter": function (cm) { beautify(editor) } 
+         },
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
