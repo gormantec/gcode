@@ -1,6 +1,7 @@
-import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js';
-import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js';
-import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js';
+//import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js';
+//import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js';
+//import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js';
+
 
 
 var the={};
@@ -22,11 +23,15 @@ export function beautify(theEditor) {
     the.lastInput = source;
 
     if (language === 'html') {
-      output = window.html_beautify(source, opts);
+      var html_beautify = require("https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js").html_beautify;
+      output = html_beautify(source, opts);
     } else if (language === 'css') {
-      output = window.css_beautify(source, opts);
+
+      var css_beautify = require("https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js").css_beautify;
+      output = css_beautify(source, opts);
     } else {
-      output = window.js_beautify(source, opts);
+      var js_beautify = require("https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js").js_beautify;
+      output = js_beautify(source, opts);
     }
 
     theEditor.setValue(output);
