@@ -23,25 +23,30 @@ export function beautify(theEditor) {
     the.lastInput = source;
 
     if (language === 'html') {
-      var html_beautify = require("https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js").html_beautify;
+      var html_beautify = require(["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js"],({html_beautify})=>{
+        output=html_beautify(source, opts);
+          theEditor.setValue(output);
+          the.lastOutput = output;
+          the.lastOpts = selectedOptions;
+          the.beautify_in_progress = false;
+        });
       output = html_beautify(source, opts);
     } else if (language === 'css') {
 
-      var css_beautify = require("https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js").css_beautify;
-      output = css_beautify(source, opts);
+      var css_beautify = require(["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js"],({css_beautify})=>{
+        output=css_beautify(source, opts);
+        theEditor.setValue(output);
+        the.lastOutput = output;
+        the.lastOpts = selectedOptions;
+        the.beautify_in_progress = false;
+      });
     } else {
-      var js_beautify = require("https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js").js_beautify;
-      output = js_beautify(source, opts);
+      var js_beautify = require(["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js"],({js_beautify})=>{
+        output=js_beautify(source, opts);
+        theEditor.setValue(output);
+        the.lastOutput = output;
+        the.lastOpts = selectedOptions;
+        the.beautify_in_progress = false;
+      });
     }
-
-    theEditor.setValue(output);
-
-  
-    the.lastOutput = output;
-    the.lastOpts = selectedOptions;
-  
-    $('#open-issue').show();
-    set_editor_mode();
-  
-    the.beautify_in_progress = false;
   }
