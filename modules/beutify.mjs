@@ -7,7 +7,7 @@
 var the={};
 
 
-export function beautify(theEditor) {
+export function beautify(theEditor,options) {
     if (the.beautify_in_progress || !theEditor) {
       return;
     }
@@ -18,7 +18,7 @@ export function beautify(theEditor) {
   
     var source = theEditor.getValue() ,
         output,
-        opts = {};
+        opts = options || {};
 
     the.lastInput = source;
 
@@ -27,7 +27,7 @@ export function beautify(theEditor) {
         output=html_beautify(source, opts);
           theEditor.setValue(output);
           the.lastOutput = output;
-          the.lastOpts = selectedOptions;
+          the.lastOpts = opts;
           the.beautify_in_progress = false;
         });
       output = html_beautify(source, opts);
@@ -37,7 +37,7 @@ export function beautify(theEditor) {
         output=css_beautify(source, opts);
         theEditor.setValue(output);
         the.lastOutput = output;
-        the.lastOpts = selectedOptions;
+        the.lastOpts = opts;
         the.beautify_in_progress = false;
       });
     } else {
@@ -45,7 +45,7 @@ export function beautify(theEditor) {
         output=js_beautify(source, opts);
         theEditor.setValue(output);
         the.lastOutput = output;
-        the.lastOpts = selectedOptions;
+        the.lastOpts = opts;
         the.beautify_in_progress = false;
       });
     }
