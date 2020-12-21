@@ -1,7 +1,7 @@
 
-import * as githubtree from '../modules/githubtree.mjs';
-import {beautify} from '../modules/beutify.mjs';
-import dialogPolyfill from '../dist/dialog-polyfill/dialog-polyfill.esm.js';
+import * as githubtree from '/modules/githubtree.mjs';
+import {beautify} from '/modules/beutify.mjs';
+import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
 
 
 
