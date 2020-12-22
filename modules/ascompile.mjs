@@ -33,6 +33,9 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                     cached = atob(b64);
                                     return cached;
                                 }
+                                else if (b64=="NA") {
+                                    return null;
+                                }
                                 else {
                                     downloading++;
                                     fetch("https://gcode.com.au/dist/" + _name.substring(pos))
@@ -43,6 +46,9 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                                 if(!failed)window.setTimeout(_run,2000);
                                                 failed=true;
                                                 localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
+                                            }
+                                            else{
+                                                localStorage.setItem("dist/" + _name.substring(pos), "NA");
                                             }
                                         }).catch((error) => { console.log("fetch error:" + error); })
                                         .finally(()=>{
