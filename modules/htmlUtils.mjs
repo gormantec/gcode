@@ -161,3 +161,59 @@ export function createHtml(code) {
 
     return {"rootHTML":rootHTML,"splashBackgroundColor":splashBackgroundColor,"splash":splash,"mockFrame":mockFrame};
 }
+
+export function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
+
+export function uint8ArrayToHex(aUint8Array) {
+    return aUint8Array.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+export function hexToUint8Array(hex) {
+    var intArray = [];
+    for (var i = 0; i < hex.length; i = i + 2)intArray.push(parseInt(hex.substr(i, 2), 16));
+    return Uint8Array.from(intArray);
+}
+
+export function sms(params, callback) {
+
+    var html = params.html;
+    var icon = params.icon;
+
+    var xxx = localStorage.getItem("phonenumber");
+    if (xxx == null) xxx = "+61440000XXX";
+    var phonenumber = prompt("Please enter your number", xxx);
+    while (phonenumber != null && (!phonenumber.startsWith("+") || !$.isNumeric(phonenumber.substring(1)))) {
+        phonenumber = prompt("Please use format +61440000000", xxx);
+    }
+    if (phonenumber != null) {
+
+        localStorage.setItem("phonenumber", phonenumber);
+
+        getImage(icon, function (e, iconBase64) {
+
+            var body = { encodedhtml: btoa(html) };
+            if (iconBase64) body.encodedicon = iconBase64;
+
+            fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
+                method: 'post',
+                mode: "cors",
+                credentials: 'omit',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body),
+            }).then(response => response.json()).then(data => {
+                callback(null, "https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/" + data.uri);
+            }).catch((error) => {
+                callback(error);
+            });
+        });
+    }
+    else {
+        alert("no sms sent");
+    }
+}

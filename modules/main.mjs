@@ -4,8 +4,6 @@ import { beautify } from '/modules/beutify.mjs';
 import { htmlToElement,uuidv4,getImage,createHtml } from '/modules/htmlUtils.mjs';
 import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
 
-
-
 var editor;
 
 var debug = { log: function (v) { console.log(v); } };
@@ -15,22 +13,15 @@ var debug = { log: function (v) { console.log(v); } };
 var leftToolbarWidth = 50;
 var leftToolbarFontSize = leftToolbarWidth - 26;
 var leftPageWidth = 170;
-
 var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0;
-
-if (screenWidth <= 1024) {
-    leftPageWidth = 300;
-}
-
+if (screenWidth <= 1024) leftPageWidth = 300;
 var selectedFileWidget = null;
 var pageBottomHeight = 150;
 var dirIconOpened = "keyboard_arrow_down";
 var dirIconClosed = "keyboard_arrow_right";
-
-
-
-
-
+var xx = "";
+var win;
+var myLogin = "";
 
 function _save() {
     var filename = document.getElementById("filename").innerText;
@@ -63,8 +54,6 @@ function _save() {
         localStorage.setItem("lastFileName", filename);
     }
 }
-
-
 
 function _delete() {
     var filename = document.getElementById("filename").innerText;
@@ -106,8 +95,6 @@ function _delete() {
     }
 
 }
-
-
 
 function _new(aFilename) {
 
@@ -322,7 +309,6 @@ function builtinRead(x) {
     return Sk.builtinFiles["files"][x];
 }
 
-var xx = "";
 function consolelog(x) {
 
     if (x == "\n") {
@@ -361,7 +347,6 @@ function _onclickFilename() {
     };
 }
 
-
 function getCode(guid, callback) {
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
     var h = window.outerHeight || document.documentElement.clientHeight || 0;
@@ -388,49 +373,6 @@ function getCode(guid, callback) {
         }
 
     }, 500);
-}
-
-
-
-function _sms(params, callback) {
-
-    var html = params.html;
-    var icon = params.icon;
-
-    var xxx = localStorage.getItem("phonenumber");
-    if (xxx == null) xxx = "+61440000XXX";
-    var phonenumber = prompt("Please enter your number", xxx);
-    while (phonenumber != null && (!phonenumber.startsWith("+") || !$.isNumeric(phonenumber.substring(1)))) {
-        phonenumber = prompt("Please use format +61440000000", xxx);
-    }
-    if (phonenumber != null) {
-
-        localStorage.setItem("phonenumber", phonenumber);
-
-        getImage(icon, function (e, iconBase64) {
-
-            var body = { encodedhtml: btoa(html) };
-            if (iconBase64) body.encodedicon = iconBase64;
-
-            fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
-                method: 'post',
-                mode: "cors",
-                credentials: 'omit',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body),
-            }).then(response => response.json()).then(data => {
-                callback(null, "https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/" + data.uri);
-            }).catch((error) => {
-                callback(error);
-            });
-        });
-    }
-    else {
-        alert("no sms sent");
-    }
 }
 
 function _uploadFile(params, callback) {
@@ -462,26 +404,6 @@ function _uploadFile(params, callback) {
     //encodedicon ###ICONURI###
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
-
-
-
-var win;
-var myLogin = "";
-
-function sleep(delay) {
-    var start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
-}
-
-function _Uint8ArrayToHex(aUint8Array) {
-    return aUint8Array.map(b => b.toString(16).padStart(2, "0")).join("");
-}
-function _HexToUint8Array(hex) {
-    var intArray = [];
-    for (var i = 0; i < hex.length; i = i + 2)intArray.push(parseInt(hex.substr(i, 2), 16));
-    return Uint8Array.from(intArray);
-}
-
 
 function _toolbarButtonClicked() {
 
@@ -846,7 +768,6 @@ function _open(params) {
 
 }
 
-
 function _refresh(params) {
     var values = [],
         keys = Object.keys(localStorage),
@@ -921,7 +842,6 @@ window.addEventListener('resize', function (event) {
         if (editor) editor.refresh();
     }
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -1158,73 +1078,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
-
-/*
-
-3024-day.css                                       01-Mar-2017 09:09                1987
-3024-night.css                                     01-Mar-2017 09:09                2076
-abcdef.css                                         25-May-2017 09:15                1969
-ambiance-mobile.css                                19-Aug-2015 13:47                 103
-ambiance.css                                       25-May-2017 09:15               26493
-ayu-dark.css                                       14-Nov-2019 08:24                2247
-ayu-mirage.css                                     14-Nov-2019 08:24                2361
-base16-dark.css                                    01-Mar-2017 09:09                2112
-base16-light.css                                   21-Nov-2018 08:14                2124
-bespin.css                                         01-Mar-2017 09:09                1413
-blackboard.css                                     01-Mar-2017 09:09                1931
-cobalt.css                                         25-May-2017 09:15                1726
-colorforth.css                                     25-May-2017 09:15                1677
-darcula.css                                        25-Sep-2019 11:24                2686
-dracula.css                                        25-May-2017 09:15                2042
-duotone-dark.css                                   25-May-2017 09:15                2614
-duotone-light.css                                  25-May-2017 09:15                2719
-eclipse.css                                        25-May-2017 09:15                1187
-elegant.css                                        01-Mar-2017 09:09                 781
-erlang-dark.css                                    25-May-2017 09:15                2286
-gruvbox-dark.css                                   15-Sep-2018 08:37                1736
-hopscotch.css                                      01-Mar-2017 09:09                1469
-icecoder.css                                       25-May-2017 09:15                2515
-idea.css                                           26-Jun-2018 07:43                1672
-isotope.css                                        01-Mar-2017 09:09                1442
-lesser-dark.css                                    14-Feb-2019 07:15                2637
-liquibyte.css                                      25-May-2017 09:15                3991
-lucario.css                                        20-Mar-2018 15:42                1914
-material-darker.css                                23-Aug-2019 13:26                2607
-material-ocean.css                                 23-Aug-2019 13:26                2576
-material-palenight.css                             23-Aug-2019 13:26                2724
-material.css                                       23-Aug-2019 13:26                2354
-mbo.css                                            01-Mar-2017 09:09                2112
-mdn-like.css                                       25-May-2017 09:15                5196
-midnight.css                                       08-May-2019 08:49                1856
-monokai.css                                        22-May-2018 08:47                2179
-moxer.css                                          23-Aug-2019 14:30                2369
-neat.css                                           01-Mar-2017 09:09                 688
-neo.css                                            19-Aug-2015 13:47                 947
-night.css                                          25-May-2017 09:15                1746
-nord.css                                           18-Feb-2019 08:25                2088
-oceanic-next.css                                   10-Jan-2018 09:06                2258
-panda-syntax.css                                   11-Mar-2019 16:53                1804
-paraiso-dark.css                                   01-Mar-2017 09:09                2078
-paraiso-light.css                                  01-Mar-2017 09:09                2078
-pastel-on-dark.css                                 25-May-2017 09:15                2485
-railscasts.css                                     01-Mar-2017 09:09                1514
-rubyblue.css                                       25-May-2017 09:15                1801
-seti.css                                           25-May-2017 09:15                2009
-shadowfox.css                                      10-Jan-2018 16:54                2440
-solarized.css                                      08-Nov-2017 08:45                5426
-ssms.css                                           29-Mar-2018 14:49                 751
-the-matrix.css                                     25-May-2017 09:15                1940
-tomorrow-night-bright.css                          01-Mar-2017 09:09                1769
-tomorrow-night-eighties.css                        01-Mar-2017 09:09                2439
-ttcn.css                                           25-May-2017 09:15                2440
-twilight.css                                       25-May-2017 09:15                2164
-vibrant-ink.css                                    14-Feb-2019 07:15                2142
-xq-dark.css                                        25-May-2017 09:15                3033
-xq-light.css                                       25-May-2017 09:15                2255
-yeti.css                                           25-May-2017 09:15                1884
-yonce.css                                          19-Aug-2019 12:07                3075
-zenburn.css                                        18-Mar-2020 06:51                2001
-
-*/
 
