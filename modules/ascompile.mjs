@@ -107,7 +107,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                         console.log("Compiled Ok");
                                         var readTryCount=0;
                                         var waitRead=()=>{
-                                            if(dataURL=="reading" || (dataURL==null && readTryCount<5)
+                                            if(dataURL=="reading" || (dataURL==null && readTryCount<10)
                                             {
                                                 if(readTryCount==0)console.log("reading file..");
                                                 else console.log("\b..");
