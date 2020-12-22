@@ -64,7 +64,6 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 dataURL="reading";
                                 reader.addEventListener("load", function () {
                                     dataURL = reader.result;
-                                    console.log("------>"+dataURL);
                                 }, false);
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
@@ -108,7 +107,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                         console.log("Compiled Ok");
                                         var readTryCount=0;
                                         var waitRead=()=>{
-                                            if(dataURL=="reading")
+                                            if(dataURL=="reading" || (dataURL==null && readTryCount<5)
                                             {
                                                 if(readTryCount==0)console.log("reading file..");
                                                 else console.log("\b..");
