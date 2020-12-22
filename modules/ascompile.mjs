@@ -1,8 +1,9 @@
-export function run(mainFilename,editorFilename,outputFilename,callback){
+export function run(sourceCode,mainFilename,editorFilename,outputFilename,callback){
 
     try {
                 
         var tryCount=0;
+        var dataURL=null;
         var _run = async function () {
             var failed=false;
             var downloading=0;
@@ -21,7 +22,7 @@ export function run(mainFilename,editorFilename,outputFilename,callback){
                         readFile(name, baseDir) {
                             if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
                                 //console.log("Got App:" + name);
-                                return editor.getValue();
+                                return sourceCode;
                             }
                             else if (name.indexOf("node_modules/")>=0) {
                                 var pos=name.lastIndexOf("node_modules/") +13;
@@ -60,10 +61,9 @@ export function run(mainFilename,editorFilename,outputFilename,callback){
 
                             if (typeof data == "object" && name == outputFilename && !failed) {
                                 const reader = new FileReader();
+                                dataURL="reading";
                                 reader.addEventListener("load", function () {
-                                    console.log(reader.result);
-                                    var dataURL = reader.result;
-                                    callback(dataURL);
+                                    dataURL = reader.result;
                                 }, false);
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
@@ -101,9 +101,25 @@ export function run(mainFilename,editorFilename,outputFilename,callback){
                                     if (err) {
                                         console.log(">>> ERROR THROWN >>>");
                                         console.log(err);
+                                        callback(err);
                                     }
                                     else {
                                         console.log("Compiled Ok");
+                                        var readTryCount=0;
+                                        var waitRead=()=>{
+                                            if(dataURL=="reading")
+                                            {
+                                                if(readTryCount==0)console.log("reading file..");
+                                                else console.log("\b..");
+                                                readTryCount++;
+                                                setTimeout(waitRead,500);
+                                            }
+                                            else{
+                                                callback(null,{"dataURL":dataURL});
+                                            }
+                                        };
+                                        waitRead();
+                                        
                                     }
                             }
                         });

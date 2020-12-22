@@ -1,6 +1,6 @@
 
 import * as githubtree from '/modules/githubtree.mjs';
-import {beautify} from '/modules/beutify.mjs';
+import { beautify } from '/modules/beutify.mjs';
 import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
 
 
@@ -17,8 +17,7 @@ var leftPageWidth = 170;
 
 var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0;
 
-if(screenWidth<=1024)
-{
+if (screenWidth <= 1024) {
     leftPageWidth = 300;
 }
 
@@ -249,7 +248,7 @@ function _setEditorMode() {
         editor.setOption("mode", "javascript");
     }
     else if (selectedFileWidget.endsWith(".ts")) {
-        editor.setOption("mode", "text/typescript");    
+        editor.setOption("mode", "text/typescript");
     }
     else if (selectedFileWidget.endsWith(".py")) {
         editor.setOption("mode", "python");
@@ -675,178 +674,74 @@ function _toolbarButtonClicked() {
         else if (filename.endsWith(".dapp.ts")) {
             debug.log(myLogin + "$ echo 'Create dApp'\n");
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            import('/modules/ascompile.mjs').then(({run})=>{run(filename,filename);});
+            import('/modules/ascompile.mjs').then(({ run }) => {
+                run(
+                    editor.getValue(),
+                    filename,
+                    filename,
+                    "optimized.wasm",
+                    (d) => { console.log(d); }
+                );
+            });
         }
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            import('/modules/ascompile.mjs').then(({run})=>{run("node_modules/wasmdom/assembly/index.ts","wasmdom/assembly/src/app.ts");});
-            var myUint8Array = Uint8Array.from([1]);
-            try {
-                var tryCount=0;
-                var _run = async function () {
-                    var failed=false;
-                    var downloading=0;
-                    require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
-                        asc.ready.then(() => {
-                            const stdout = asc.createMemoryStream();
-                            const stderr = asc.createMemoryStream();
-                            asc.main([
-                                "node_modules/wasmdom/assembly/index.ts",
-                                "-O3",
-                                "--runtime", "full",
-                                "--binaryFile", "optimized.wasm",
-                                "--textFile", "optimized.wat"
-                            ], {
-                                stdout,
-                                stderr,
-                                readFile(name, baseDir) {
-                                    
-                                    if (name.endsWith("wasmdom/assembly/src/app.ts")) {
-                                        return editor.getValue();
-                                    }
-                                    else if (name.indexOf("node_modules/")>=0) {
-                                        var pos=name.lastIndexOf("node_modules/") +13;
-                                        var _name = name;
-                                        var b64 = localStorage.getItem("dist/" + _name.substring(pos));
-                                        var cached = null;
-                                        if (b64) {
-                                            cached = atob(b64);
-                                            return cached;
-                                        }
-                                        else {
-                                            downloading++;
-                                            fetch("https://gcode.com.au/dist/" + _name.substring(pos))
-                                                .then(response =>response.ok?response.text():null)
-                                                .then(text => {
-                                                    if(text)
-                                                    {
-                                                        if(!failed)window.setTimeout(_run,2000);
-                                                        failed=true;
-                                                        localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
-                                                    }
-                                                }).catch((error) => { console.log("fetch error:" + error); })
-                                                .finally(()=>{
-                                                    downloading--;
-                                                });
-                                            return null;
-                                        }
-                                        
-                                    }
-                                    else {
-                                        return null;
-                                    }
+            import('/modules/ascompile.mjs').then(({ run }) => {
+                run(
+                    editor.getValue(),
+                    "node_modules/wasmdom/assembly/index.ts",
+                    "wasmdom/assembly/src/app.ts",
+                    "optimized.wasm",
+                    (d) => {
+                        console.log(d);
+                        try {
+                            var rootHTML = _createHtml();
+                            var _script1 = window.document.createElement("script");
+                            _script1.text = "\nwindow.wasmdomURL=\"" + dataURL + "\";\n";
+                            rootHTML.querySelector("body").appendChild(_script1);
+                            var _script2 = window.document.createElement("script");
+                            _script2.src = "https://gcode.com.au/js/wasmdom.js";
+                            rootHTML.querySelector("body").appendChild(_script2);
 
-                                },
-                                writeFile(name, data, baseDir) {
-
-                                    if (typeof data == "object" && name == "optimized.wasm" && !failed) {
-                                        const reader = new FileReader();
-                                        reader.addEventListener("load", function () {
-                                            // convert image file to base64 string
-                                            console.log("-------" + name + "-------");
-                                            console.log(reader.result);
-                                            var dataURL = reader.result;
-                                            console.log("------------------");
-
-                                            try {
-                                                var rootHTML = _createHtml();
-                                                var _script1 = window.document.createElement("script");
-                                                _script1.text = "\nwindow.wasmdomURL=\"" + dataURL + "\";\n";
-                                                rootHTML.querySelector("body").appendChild(_script1);
-                                                var _script2 = window.document.createElement("script");
-                                                _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                                                rootHTML.querySelector("body").appendChild(_script2);
-
-                                                var wpos="top=50,left=50";
-                                                var w = 375;
-                                                var h = 896 * 375 / 414; //iphoneX=896/414
-                                                var mockPadding=40;
-                                                if(screen.height<=768)
-                                                {
-                                                    w=Math.floor(w*0.75);
-                                                    h=Math.floor(h*0.75);
-                                                    mockPadding=Math.floor(mockPadding*0.75);
-                                                    wpos="top=0,left=0";
-                                                }
-                                                var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
-                                                var frame = "";
-                                                if (mockFrame) {
-                                                    wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
-                                                    frame = "?mockFrame=" + mockFrame;
-                                                }
-                                                if (!win || win.closed) {
-                                                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ","+wpos);
-                                                    if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                                                    else win.document.body.style.backgroundColor = "black";
-                                                }
-                                                _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                                                    if (error) {
-                                                        debug.log(error);
-                                                    }
-                                                    else {
-                                                        debug.log("open window");
-                                                        win.location.href = uri + frame;
-                                                    }
-
-                                                });
-                                            }
-                                            catch (e) {
-                                                console.error("error:" + e);
-                                            }
-                                        }, false);
-                                        reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
-                                    }
-
-
-                                },
-                                listFiles(dirname, baseDir) {
-                                    console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
-                                    return [];
+                            var wpos = "top=50,left=50";
+                            var w = 375;
+                            var h = 896 * 375 / 414; //iphoneX=896/414
+                            var mockPadding = 40;
+                            if (screen.height <= 768) {
+                                w = Math.floor(w * 0.75);
+                                h = Math.floor(h * 0.75);
+                                mockPadding = Math.floor(mockPadding * 0.75);
+                                wpos = "top=0,left=0";
+                            }
+                            var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
+                            var frame = "";
+                            if (mockFrame) {
+                                wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
+                                frame = "?mockFrame=" + mockFrame;
+                            }
+                            if (!win || win.closed) {
+                                win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
+                                if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                else win.document.body.style.backgroundColor = "black";
+                            }
+                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                                if (error) {
+                                    debug.log(error);
                                 }
-                            }, err => {
-                                var waitForDownload=function(thenDo){
-                                    if(downloading==0)thenDo();
-                                    else{
-                                        window.setTimeout(()=>{
-                                            waitForDownload(thenDo);
-                                        },500);
-                                    }
-                                };
-                                waitForDownload(()=>{
-                                    if(failed)
-                                    {
-                                        if(tryCount>0)
-                                        {
-                                            console.log("\b..");
-                                        }
-                                        else{
-                                            console.log("downloading depenadnt files..");
-                                        }
-                                        tryCount++;
+                                else {
+                                    debug.log("open window");
+                                    win.location.href = uri + frame;
+                                }
 
-                                    }
-                                    else{
-    
-                                        if(stdout.toString().trim()!="")console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                        if(stderr.toString().trim()!="")console.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                                        if (err) {
-                                                console.log(">>> ERROR THROWN >>>");
-                                                console.log(err);
-                                            }
-                                            else {
-                                                console.log("Compiled Ok");
-                                            }
-                                    }
-                                });
                             });
-                        });
-                    });
-                }
-                _run();
-            }
-            catch (e) {
-                console.error(e);
-            }
+                        }
+                        catch (e) {
+                            console.error("error:" + e);
+                        }
+                    }
+                );
+            });
+
             debug.log("\n");
         }
         else if (filename.endsWith(".mjs")) {
@@ -857,16 +752,15 @@ function _toolbarButtonClicked() {
                 _module.setAttribute("type", "module");
                 _module.text = "\n" + editor.getValue() + "\n";
                 rootHTML.querySelector("head").appendChild(_module);
-                var wpos="top=50,left=50";
+                var wpos = "top=50,left=50";
                 var w = 375;
                 var h = 896 * 375 / 414; //iphoneX=896/414
-                var mockPadding=40;
-                if(screen.height<=768)
-                {
-                    w=Math.floor(w*0.75);
-                    h=Math.floor(h*0.75);
-                    mockPadding=Math.floor(mockPadding*0.75);
-                    wpos="top=0,left=0";
+                var mockPadding = 40;
+                if (screen.height <= 768) {
+                    w = Math.floor(w * 0.75);
+                    h = Math.floor(h * 0.75);
+                    mockPadding = Math.floor(mockPadding * 0.75);
+                    wpos = "top=0,left=0";
                 }
                 var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
                 var frame = "";
@@ -875,7 +769,7 @@ function _toolbarButtonClicked() {
                     frame = "?mockFrame=" + mockFrame;
                 }
                 if (!win || win.closed) {
-                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + ","+wpos);
+                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                     else win.document.body.style.backgroundColor = "black";
                 }
@@ -1232,11 +1126,11 @@ document.addEventListener("DOMContentLoaded", function () {
         theme: theme,
         matchBrackets: true,
         moz: true,
-        extraKeys: { 
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); }, 
+        extraKeys: {
+            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete",
-            "Ctrl-Enter": function (cm) { beautify(editor) } 
-         },
+            "Ctrl-Enter": function (cm) { beautify(editor) }
+        },
         foldGutter: true,
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
         lint: { 'esversion': '8' }
@@ -1304,12 +1198,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
                 pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
             } else {
-                if(message.startsWith("\b"))
-                {
-                    var lll=logger.innerHTML;
-                    logger.innerHTML=  lll.substring(0,lll.lastIndexOf("</div>"))+message.substring(1) + '</div>';
+                if (message.startsWith("\b")) {
+                    var lll = logger.innerHTML;
+                    logger.innerHTML = lll.substring(0, lll.lastIndexOf("</div>")) + message.substring(1) + '</div>';
                 }
-                else{
+                else {
                     logger.innerHTML += "<div>" + message + '</div>';
                 }
                 pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
