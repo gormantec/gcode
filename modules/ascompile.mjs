@@ -64,6 +64,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 dataURL="reading";
                                 reader.addEventListener("load", function () {
                                     dataURL = reader.result;
+                                    console.log("------>"+dataURL);
                                 }, false);
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
