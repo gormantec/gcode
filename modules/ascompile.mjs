@@ -24,6 +24,26 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 //console.log("Got App:" + name);
                                 return sourceCode;
                             }
+                            else if(name.endsWith("asconfig.json"))
+                            {
+                                console.log("got "+name);
+                                return '{\n' +
+                                '    "targets": {\n' +
+                                '      "release": {\n' +
+                                '        "optimizeLevel": 3,\n' +
+                                '        "shrinkLevel": 3\n' +
+                                '      },\n' +
+                                '      "debug": {\n' +
+                                '        "debug": true\n' +
+                                '      }\n' +
+                                '    },\n' +
+                                '    "options": {\n' +
+                                '      "runtime": "none",\n' +
+                                '      "transform": ["visitor-as/dist/examples/includeBytesTransform.js", "near-sdk-bindgen", "visitor-as/dist/examples/exportAs.js"]\n'+
+                                '    },\n' +
+                                '   "entries": ["./assembly/bindgen.ts"]\n' +
+                                  '}\n';
+                            }
                             else if (name.indexOf("node_modules/")>=0) {
                                 var pos=name.lastIndexOf("node_modules/") +13;
                                 var _name = name;

@@ -1,0 +1,1 @@
+export window.contract.contractId
