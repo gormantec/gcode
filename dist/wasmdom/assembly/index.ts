@@ -1,5 +1,5 @@
 // The entry file of your WebAssembly module.
-import { Window, Document, Debug, Console, Promise, Response } from "./dom/document";
+import { Window, Document, Debug, Console, Promise, Response } from "./dom"; 
 import { run } from "./src/app";
 
 var window: Window;
