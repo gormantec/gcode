@@ -1,1 +1,3 @@
-export window.contract.contractId
+export function uploadNear(){
+    
+}
