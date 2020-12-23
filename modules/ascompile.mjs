@@ -28,11 +28,11 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 '    "targets": {\n' +
                                 '      "release": {\n' +
                                 '        "optimizeLevel": 3,\n' +
-                                '        "shrinkLevel": 3\n' +
+                                '        "shrinkLevel": 3,\n' +
                                 '        "binaryFile": "'+outputFilename+'"\n'+
                                 '      },\n' +
                                 '      "debug": {\n' +
-                                '        "debug": true\n' +
+                                '        "debug": true,\n' +
                                 '        "binaryFile": "'+outputFilename+'"\n'+
                                 '      }\n' +
                                 '    },\n' +
