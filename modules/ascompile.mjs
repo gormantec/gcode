@@ -12,10 +12,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                     const stdout = asc.createMemoryStream();
                     const stderr = asc.createMemoryStream();
                     asc.main([
-                        mainFilename,
-                        "-O3",
-                        "--runtime", "full",
-                        "--binaryFile", outputFilename
+                        mainFilename
                     ], {
                         stdout,
                         stderr,
@@ -32,9 +29,11 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 '      "release": {\n' +
                                 '        "optimizeLevel": 3,\n' +
                                 '        "shrinkLevel": 3\n' +
+                                '        "binaryFile": "'+outputFilename+'",\n'+
                                 '      },\n' +
                                 '      "debug": {\n' +
                                 '        "debug": true\n' +
+                                '        "binaryFile": "'+outputFilename+'",\n'+
                                 '      }\n' +
                                 '    },\n' +
                                 '    "options": {\n' +
