@@ -22,15 +22,15 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 //console.log("Got App:" + name);
                                 return sourceCode;
                             }
-                            else if(name=="asconfig.json" )
-                            {
-                                console.log("got near-sdk-as file:"+name);
-                                return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true } "options": {} }';
-                            }
                             else if(name=="asconfig.json" && sourceCode.indexOf("near-sdk-as")>0)
                             {
                                 console.log("got near-sdk-as file:"+name);
                                 return '{"extends": "near-sdk-as/asconfig.json"}';
+                            }
+                            else if(name=="asconfig.json" )
+                            {
+                                console.log("got file:"+name);
+                                return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }';
                             }
                             else if (name.indexOf("node_modules/")>=0) {
                                 var pos=name.lastIndexOf("node_modules/") +13;
