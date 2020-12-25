@@ -22,6 +22,11 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 //console.log("Got App:" + name);
                                 return sourceCode;
                             }
+                            else if(name=="asconfig.json" )
+                            {
+                                console.log("got near-sdk-as file:"+name);
+                                return '{ "targets": {  "release": { "binaryFile": "build/optimized.wasm", "optimize": true } "options": {} }';
+                            }
                             else if(name=="asconfig.json" && sourceCode.indexOf("near-sdk-as")>0)
                             {
                                 console.log("got near-sdk-as file:"+name);
