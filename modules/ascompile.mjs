@@ -17,6 +17,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                         stdout,
                         stderr,
                         readFile(name, baseDir) {
+                            console.log("f="+name);
                             if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
                                 //console.log("Got App:" + name);
                                 return sourceCode;
@@ -61,7 +62,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 
                             }
                             else {
-                                console.log("??> "+name);
+                                console.log(" ?? > "+name);
                                 return null;
                             }
 
