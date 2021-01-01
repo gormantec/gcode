@@ -1,0 +1,53 @@
+{
+    "features": [{
+            "name": "fileManager",
+            "navPosition": 1,
+            "enabled": true,
+          	"uri":"/modules/features/fileManager.mjs"
+        },
+        {
+            "name": "helpMenu",
+            "navPosition": 2,
+            "enabled": true,
+          	"uri":"/modules/features/helpMenu.mjs"
+
+        },
+        {
+            "name": "dragDropBuilder",
+            "navPosition": 3,
+            "enabled": true,
+          	"uri":"/modules/features/dragDropBuilder.mjs"
+        },
+        {
+            "name": "addFeature",
+            "navPosition": 4,
+            "enabled": true,
+          	"uri":"/modules/features/addFeature.mjs"
+
+        }
+    ],
+    "options": [{
+            "name": "defaultAppSettings",
+            "enabled": true,
+            "data": {
+                "filename": "sample-16933536.ts",
+                "appName": "gcode",
+                "splash": "https://gcode.com.au/images/ios/ios-appicon-180-180.png",
+                "icon": ",https://gcode.com.au/images/ios/ios-appicon-180-180op.png",
+                "icon180x180": "https://gcode.com.au/images/ios/ios-appicon-180-180op.png",
+                "mockFrame": "iphoneX",
+                "splashBackgroundColor": "#005040",
+                "splashDuration": "2000"
+            }
+        },
+        {
+            "name": "defaultScreenSettings",
+            "enabled": true,
+            "data": {
+              "leftMenuPaneWidth":170,
+              "pageBottomHeight": 150,
+              "leftMenuStartMinimised":false
+            }
+        }
+    ]
+}
