@@ -13,5 +13,8 @@ export async function loadFeatures()
     let pageLeftToolbar=window.document.querySelector("#pageLeftToolbar");
     let terminalButton=window.document.querySelector("#terminalButton");
     pageLeftToolbar.insertBefore(d,terminalButton);
+
+    document.getElementById(meta.id).onclick = function () { prompt(meta.id); };
+    
     
 }
