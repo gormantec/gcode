@@ -1,7 +1,7 @@
 export async function loadFeatures()
 {
 
-    let { getLeftMenuItem } = await import('/modules/features/helpMenu.mjs');
+    let { getLeftMenuItem,getLeftMenuItemFunction } = await import('/modules/features/helpMenu.mjs');
     let meta=getLeftMenuItem();
     let d=window.document.createElement("div");
     let i=window.document.createElement("i");
@@ -14,7 +14,10 @@ export async function loadFeatures()
     let terminalButton=window.document.querySelector("#terminalButton");
     pageLeftToolbar.insertBefore(d,terminalButton);
 
-    document.getElementById(meta.id).onclick = function () { prompt(meta.id); };
+    if(getLeftMenuItemFunction && {}.toString.call(getLeftMenuItemFunction) === '[object Function]')
+    {
+        document.getElementById(meta.id).onclick = getLeftMenuItemFunction;
+    }
     
     
 }
