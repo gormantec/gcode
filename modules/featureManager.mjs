@@ -12,6 +12,6 @@ export async function loadFeatures()
     d.appendChild(i);
     let pageLeftToolbar=window.document.querySelector("#pageLeftToolbar");
     let terminalButton=window.document.querySelector("#terminalButton");
-    pageLeftToolbar.insertBefore(pageLeftToolbar,terminalButton);
+    pageLeftToolbar.insertBefore(d,terminalButton);
     
 }
