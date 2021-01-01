@@ -1,6 +1,6 @@
-
 import * as githubtree from '/modules/githubtree.mjs';
 import { beautify } from '/modules/beutify.mjs';
+import { loadFeatures } from '/modules/featureManager.mjs';
 import { htmlToElement,uuidv4,getImage,createHtml } from '/modules/htmlUtils.mjs';
 import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
 
@@ -848,6 +848,9 @@ window.addEventListener('resize', function (event) {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+
+
+    loadFeatures();
 
     var newFileDialog = document.getElementById("newFileDialog");
     var newFileDialogName = document.getElementById("newFileDialogName");
