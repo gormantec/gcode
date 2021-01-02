@@ -7,7 +7,7 @@ export async function loadFeatures()
     arr=arr.sort((a,b)=>a.navPosition>b.navPosition);
     arr.forEach((feature)=>{
 
-        let { onload,menuMetadata,menuAction,toolbarMetadata,dialogMetadata,toolbarAction } = await import(feature.uri).catch(()=>{console.log("import error");});
+        let { afterLoad,menuMetadata,menuAction,toolbarMetadata,dialogMetadata,toolbarAction } = await import(feature.uri).catch(()=>{console.log("import error");});
         if(menuMetadata)
         {
             let meta=menuMetadata;
@@ -118,7 +118,7 @@ export async function loadFeatures()
             });
         }
 
-        if(isFunction(onload)) onload();
+        if(isFunction(afterLoad)) afterLoad();
 
     }); 
     
