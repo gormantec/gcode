@@ -135,34 +135,34 @@ function _open(params) {
         document.getElementById("pageLeft").style.right = "0px";
         document.getElementById("pageLeft").style.width = "unset";
         document.getElementById("pageMiddle").style.display = "none";
-        document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 22) + "px";
-        document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+        document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 22) + "px";
+        document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
 
     }
     else {
         if (!(params && params.visible) && document.getElementById("pageLeft").style.display != "none") {
 
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+            document.getElementById("pageLeft").style.width = window.leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageMiddle").style.display = "";
             if (window.editor) window.editor.refresh();
-            document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+            document.getElementById("pageMiddle").style.left = (window.leftToolbarWidth + 1) + "px";
+            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 21) + "px";
+            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
 
 
         }
         else {
 
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+            document.getElementById("pageLeft").style.width = window.leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
             if (window.editor) window.editor.refresh();
-            document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+            document.getElementById("pageMiddle").style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + window.leftPageWidth + 22) + "px";
+            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
         }
     }
 
