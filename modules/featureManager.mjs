@@ -6,7 +6,7 @@ export async function loadFeatures() {
     arr = arr.sort((a, b) => a.navPosition > b.navPosition);
     arr.forEach((feature) => {
         try {
-            let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = await import(feature.uri);
+            let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(feature.uri);
             if (menuMetadata) {
                 let meta = menuMetadata;
                 if (isArray(menuMetadata) && menuMetadata.length > 0) meta = menuMetadata[0];
