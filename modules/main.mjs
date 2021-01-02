@@ -423,41 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme'); });
 
 
-    editor.on("change", function () {
-        var filename = document.getElementById("filename").innerText;
-        if (!filename.startsWith("git://")) {
-            _save();
-        }
-        else {
-            var pageLeftBody = document.getElementById("pageLeftBody");
-            var fileWidget = pageLeftBody.querySelector("div.fileWidget[data-name='" + filename + "']");
-
-            if (fileWidget && fileWidget.style.fontStyle != "italic") {
-                var firstColon = filename.indexOf(":", 6);
-                var secondColon = filename.indexOf("/", firstColon + 1);
-                var username = filename.substring(6, firstColon);
-                var repo = filename.substring(firstColon + 1, secondColon);
-                var path = filename.substring(secondColon + 1);
-
-                githubtree.getGitFile(username, repo, path, function (e, d) {
-                    if (d != editor.getValue()) {
-                        fileWidget.style.fontStyle = "italic";
-                        fileWidget.style.color = "#cce6ff";
-                        localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
-                    }
-                    else {
-                        localStorage.removeItem("gitfile-" + filename);
-                        fileWidget.style.fontStyle = "";
-                        fileWidget.style.color = "";
-                    }
-                });
-            }
-            else {
-                localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
-            }
-
-        }
-    });
+    
 
     //get last filename
 
@@ -484,7 +450,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("sideBarButton").onclick = _toggleSideBar;
     document.getElementById("filename").onclick = _onclickFilename;
     document.getElementById("runHeaderButton").onclick = _runCode;
-    
+
     //load features
 
     loadFeatures();
