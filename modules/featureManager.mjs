@@ -9,8 +9,7 @@ export async function loadFeatures() {
         {
             let f=arr[ii];
             console.log(''+f.uri);
-            let res2 = await fetch(''+f.uri);
-            //, { "method": "HEAD" }
+            let res2 = await fetch(f.uri,{ "method": "HEAD" });
             if (res2.ok) {
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(f.uri);
                 if (menuMetadata) {
