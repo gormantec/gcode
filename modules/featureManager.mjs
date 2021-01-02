@@ -112,14 +112,10 @@ export async function loadFeatures() {
                 }
 
                 if (isFunction(afterLoad)) afterLoad();
-
-
             }
         }
     }
-
 }
-
 
 function isFunction(f) {
     return (f && {}.toString.call(f) === '[object Function]');
