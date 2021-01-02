@@ -1,6 +1,6 @@
 export async function loadFeatures() {
 
-    let res = await fetch('/.config.json');
+    let res = await fetch('/config.json');
     if (res.ok) {
         let json = await res.json();
         let arr = Array.from(json.features);
