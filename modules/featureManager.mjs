@@ -77,7 +77,7 @@ export async function loadFeatures() {
                         menu.appendChild(b_cancel);
                         menu.appendChild(b_ok);
                         if (isArray(dialog.content)) {
-                            Array.fom(dialog.content).forEach((widget) => {
+                            Array.from(dialog.content).forEach((widget) => {
                                 if (widget.type.startsWith("input")) {
                                     var type = "text";
                                     if (widget.type.indexOf("/") > 0) type = widget.type.substring(widget.type.indexOf("/") + 1);
