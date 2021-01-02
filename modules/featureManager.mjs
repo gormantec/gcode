@@ -5,10 +5,10 @@ export async function loadFeatures() {
         let json = await res.json();
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
-        arr.forEach((feature) => {
-            let res2 = await fetch(feature.uri, { method: 'HEAD' });
+        arr.forEach((f) => {
+            let res2 = await fetch(f.uri, { method: 'HEAD' });
             if (res2.ok) {
-                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(feature.uri);
+                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(f.uri);
                 if (menuMetadata) {
                     let meta = menuMetadata;
                     if (isArray(menuMetadata) && menuMetadata.length > 0) meta = menuMetadata[0];
@@ -137,10 +137,10 @@ export async function refreshFeatures() {
         let json = await res.json();
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
-        arr.forEach((feature) => {
-            let res2 = await fetch(feature.uri, { method: 'HEAD' });
+        arr.forEach((f) => {
+            let res2 = await fetch(f.uri, { method: 'HEAD' });
             if (res2.ok) {
-                let { refresh } = import(feature.uri);
+                let { refresh } = import(f.uri);
                 if (isFunction(refresh)) refresh();
             }
         });
