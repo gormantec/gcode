@@ -6,7 +6,8 @@ export async function loadFeatures() {
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
         arr.forEach((feature) => {
-            try {
+            let res2 = await fetch(feature.uri, { method: 'HEAD' });
+            if (res2.ok) {
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(feature.uri);
                 if (menuMetadata) {
                     let meta = menuMetadata;
@@ -112,9 +113,6 @@ export async function loadFeatures() {
 
 
             }
-            catch (e) {
-                console.log("import error:" + e);
-            }
         }
         );
     }
@@ -133,13 +131,18 @@ function isArray(a) {
 
 }
 
-export function refreshFeatures() {
+export async function refreshFeatures() {
     let res = await fetch('/.config.json');
-    let json = await res.json();
-    let arr = Array.from(json.features);
-    arr = arr.sort((a, b) => a.navPosition > b.navPosition);
-    arr.forEach((feature) => {
-        let { refresh } = await import(feature.uri).catch(() => { console.log("import error"); });
-        if (isFunction(refresh)) refresh();
-    });
+    if (res.ok) {
+        let json = await res.json();
+        let arr = Array.from(json.features);
+        arr = arr.sort((a, b) => a.navPosition > b.navPosition);
+        arr.forEach((feature) => {
+            let res2 = await fetch(feature.uri, { method: 'HEAD' });
+            if (res2.ok) {
+                let { refresh } = import(feature.uri);
+                if (isFunction(refresh)) refresh();
+            }
+        });
+    }
 }
