@@ -6,42 +6,49 @@ var dirIconClosed = "keyboard_arrow_right";
 var xx = "";
 var win;
 
-export function menuMetadata(){
+export const menuMetadata = { "id": "openButton", "class": "pageLeftToolbarButton", "materialIcon": "file_copy" };
 
-    _open({ visible: true });
-    return {"id":"openButton","class":"pageLeftToolbarButton","materialIcon":"file_copy"};
+export const toolbarMetadata = [
+        { "dataAction": "saveFile", "materialIcon": "save" },
+        { "dataAction": "addFile", "materialIcon": "post_add" },
+        { "dataAction": "addGitRepo", "imageIcon": "/images/git.png" },
+        { "dataAction": "addDirectory", "materialIcon": "create_new_folder" },
+        { "dataAction": "deleteFile", "materialIcon": "delete_forever" },
+    ];
 
-}
+export const dialogMetadata = [
+    {
+        "id": "newFileDialog", 
+        "content": [
+            { "id": "newFileDialogName", "type": "input/text", "label": "Filename:" },
+            { "id": "newFileDialogSelect", "type": "select", "label": "App Type:", "options":[
+                {"value":".js","text":"Commandline - JavaScript","selected":true},
+                {"value":".py","text":"Commandline - Python","selected":false},
+                {"value":".mjs","text":"Mobile App - JavaScript","selected":false},
+                {"value":".ts","text":"Mobile App - AssemblyScript","selected":false},
+                {"value":".dapp.ts","text":"dApp - AssemblyScript","selected":false},
+            ]},
+        ], 
+        "ok": {"id":"newFileDialogConfirmButton","value": ".js"}
+    }
+];
 
-export function menuAction(p){
+export function menuAction(p) {
     return _open(p);
 }
 
-export function _toolbarAction(p)
-{
+export function _toolbarAction(p) {
     return _toolbarAction(p);
 }
 
-export function toolbarMetadata(){
-
-    return [
-        {"dataAction":"saveFile","materialIcon":"save"},
-        {"dataAction":"addFile","materialIcon":"post_add"},
-        {"dataAction":"addGitRepo","imageIcon":"/images/git.png"},
-        {"dataAction":"addDirectory","materialIcon":"create_new_folder"},
-        {"dataAction":"deleteFile","materialIcon":"delete_forever"},
-    ];
-
-}
-
-export function refresh()
-{
+export function refresh() {
     _refresh();
 }
 
 export function onload();
 {
-    
+
+    _open({ visible: true });
 
     var newFileDialog = document.getElementById("newFileDialog");
     var newFileDialogName = document.getElementById("newFileDialogName");
@@ -70,7 +77,29 @@ export function onload();
 
     });
 
-
+    /*
+    
+        <dialog id="newFileDialog">
+            <form method="dialog">
+                <p><label for="newFileDialogName">Filename:</label>
+                  <input type="text" id="newFileDialogName"/>
+                </p>
+                <p><label for="newFileDialogSelect">App Type:</label>
+                  <select id="newFileDialogSelect">
+                    <option value=".js" selected>Commandline - JavaScript</option>
+                    <option value=".py">Commandline - Python</option>
+                    <option value=".mjs">Mobile App - JavaScript</option>
+                    <option value=".ts">Mobile App - AssemblyScript</option>
+                    <option value=".dapp.ts">dApp - AssemblyScript</option>
+                  </select>
+                </p>
+              <menu>
+                <button class="cancelButton" value="cancel">Cancel</button>
+                <button id="newFileDialogConfirmButton" value=".js">OK</button>
+              </menu>
+            </form>
+          </dialog>
+    */
 
 }
 
