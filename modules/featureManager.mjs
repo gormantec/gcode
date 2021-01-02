@@ -115,7 +115,7 @@ export async function loadFeatures() {
                         }
                         form.appendChild(menu);
                         d.appendChild(form);
-                        document.insertBefore(d, document.firstChild);
+                        document.body.insertBefore(d, document.body.firstChild);
                     });
                 }
 
