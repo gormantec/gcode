@@ -93,6 +93,7 @@ export async function loadFeatures() {
                                     input.setAttribute("type", type);
                                     p.appendChild(label);
                                     p.appendChild(input);
+                                    form.appendChild(p);
                                 }
                                 else if (widget.type.startsWith("select")) {
                                     console.log("found select");
@@ -114,6 +115,7 @@ export async function loadFeatures() {
 
                                     p.appendChild(label);
                                     p.appendChild(select);
+                                    form.appendChild(p);
                                 }
                             });
                         }
