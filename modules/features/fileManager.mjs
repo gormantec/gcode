@@ -37,7 +37,7 @@ export function menuAction(p) {
     return _open(p);
 }
 
-export function _toolbarAction(p) {
+export function toolbarAction(p) {
     return _toolbarAction(p);
 }
 
