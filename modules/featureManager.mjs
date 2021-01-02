@@ -141,12 +141,14 @@ export async function refreshFeatures() {
         let json = await res.json();
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
-        arr.forEach((f) => {
+        for(var ii=0;ii<arr.length;ii++)
+        {
+            let f=arr[ii];
             let res2 = await fetch(f.uri, { method: 'HEAD' });
             if (res2.ok) {
                 let { refresh } = import(f.uri);
                 if (isFunction(refresh)) refresh();
             }
-        });
+        };
     }
 }
