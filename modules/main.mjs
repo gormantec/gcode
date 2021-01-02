@@ -48,7 +48,7 @@ function _onclickFilename() {
     };
 }
 
-_refresh()
+function _refresh()
 {
     refreshFeatures();
 }
