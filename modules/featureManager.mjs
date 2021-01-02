@@ -7,7 +7,10 @@ export async function loadFeatures() {
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
         arr.forEach((f) => {
             console.log(''+f.uri);
-            let res2 = await fetch(''+f.uri, { "method": "HEAD" });
+            let res2 = 
+                        await 
+                                fetch(''+f.uri);
+            //, { "method": "HEAD" }
             if (res2.ok) {
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(f.uri);
                 if (menuMetadata) {
