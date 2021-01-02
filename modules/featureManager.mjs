@@ -5,11 +5,10 @@ export async function loadFeatures() {
         let json = await res.json();
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
-        for(var ii=0;ii<arr.length;ii++)
-        {
-            let f=arr[ii];
-            console.log(''+f.uri);
-            let res2 = await fetch(f.uri,{ "method": "HEAD" });
+        for (var ii = 0; ii < arr.length; ii++) {
+            let f = arr[ii];
+            console.log('' + f.uri);
+            let res2 = await fetch(f.uri, { "method": "HEAD" });
             if (res2.ok) {
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(f.uri);
                 if (menuMetadata) {
@@ -117,13 +116,10 @@ export async function loadFeatures() {
 
             }
         }
-        }
-
     }
 
-
-
 }
+
 
 function isFunction(f) {
     return (f && {}.toString.call(f) === '[object Function]');
@@ -141,9 +137,8 @@ export async function refreshFeatures() {
         let json = await res.json();
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
-        for(var ii=0;ii<arr.length;ii++)
-        {
-            let f=arr[ii];
+        for (var ii = 0; ii < arr.length; ii++) {
+            let f = arr[ii];
             let res2 = await fetch(f.uri, { method: 'HEAD' });
             if (res2.ok) {
                 let { refresh } = import(f.uri);
