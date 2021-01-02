@@ -45,7 +45,7 @@ export function refresh() {
     _refresh();
 }
 
-export function afterLoad();
+export function afterLoad()
 {
 
     _open({ visible: true });
