@@ -341,6 +341,33 @@ function consolelog(x) {
     }
 }
 
+function _setEditorMode() {
+    if (selectedFileWidget.endsWith(".js")) {
+        editor.setOption("mode", "javascript");
+    }
+    else if (selectedFileWidget.endsWith(".mjs")) {
+        editor.setOption("mode", "javascript");
+    }
+    else if (selectedFileWidget.endsWith(".ts")) {
+        editor.setOption("mode", "text/typescript");
+    }
+    else if (selectedFileWidget.endsWith(".py")) {
+        editor.setOption("mode", "python");
+    }
+    else if (selectedFileWidget.endsWith(".dart")) {
+        editor.setOption("mode", "dart");
+    }
+    else if (selectedFileWidget.endsWith(".css")) {
+        editor.setOption("mode", "css");
+    }
+    else if (selectedFileWidget.endsWith(".json")) {
+        editor.setOption("mode", "javascript");
+    }
+    else if (selectedFileWidget.endsWith(".htm") || selectedFileWidget.endsWith(".html")) {
+        editor.setOption("mode", "htmlmixed");
+    }
+}
+
 
 window.addEventListener('resize', function (event) {
 
