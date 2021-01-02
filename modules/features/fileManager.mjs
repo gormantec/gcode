@@ -9,6 +9,8 @@ var dirIconClosed = "keyboard_arrow_right";
 var xx = "";
 var win;
 
+var selectedFileWidget = null;
+
 export const menuMetadata = { "id": "openButton", "class": "pageLeftToolbarButton", "materialIcon": "file_copy" };
 
 export const toolbarMetadata = [
@@ -52,6 +54,8 @@ export function afterLoad()
 {
 
     _open({ visible: true });
+
+    selectedFileWidget = document.getElementById("filename").innerText;
 
 
     var newFileDialog = document.getElementById("newFileDialog");

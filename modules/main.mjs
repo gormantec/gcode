@@ -14,7 +14,6 @@ var leftToolbarFontSize = leftToolbarWidth - 26;
 var leftPageWidth = 170;
 var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0;
 if (screenWidth <= 1024) leftPageWidth = 300;
-var selectedFileWidget = null;
 var pageBottomHeight = 150;
 
 var myLogin = "";
@@ -23,8 +22,8 @@ var myLogin = "";
 function _onclickFilename() {
     document.getElementById("filename").onclick = null;
     var input = document.createElement("input");
-    selectedFileWidget = document.getElementById("filename").innerText;
-    input.value = selectedFileWidget;
+    var oldfilename = document.getElementById("filename").innerText;
+    input.value = oldfilename;
     document.getElementById("filename").innerHTML = "";
     document.getElementById("filename").appendChild(input);
     input.onkeypress = function (e) {
@@ -36,10 +35,10 @@ function _onclickFilename() {
             if (filename == "" || filename == null) return false;
             localStorage.setItem("file-" + filename, btoa(editor.getValue()));
             localStorage.setItem("lastFileName", filename);
-            localStorage.removeItem("file-" + selectedFileWidget);
-            selectedFileWidget = input.value;
+            localStorage.removeItem("file-" + oldfilename);
+        
             input.onkeypress = null;
-            document.getElementById("filename").innerHTML = selectedFileWidget;
+            document.getElementById("filename").innerHTML = filename;
             document.getElementById("filename").onclick = _onclickFilename;
             _refresh();
             return false;
@@ -341,28 +340,29 @@ function consolelog(x) {
 }
 
 function _setEditorMode() {
-    if (selectedFileWidget.endsWith(".js")) {
+    var filename = document.getElementById("filename").innerText;
+    if (filename.endsWith(".js")) {
         editor.setOption("mode", "javascript");
     }
-    else if (selectedFileWidget.endsWith(".mjs")) {
+    else if (filename.endsWith(".mjs")) {
         editor.setOption("mode", "javascript");
     }
-    else if (selectedFileWidget.endsWith(".ts")) {
+    else if (filename.endsWith(".ts")) {
         editor.setOption("mode", "text/typescript");
     }
-    else if (selectedFileWidget.endsWith(".py")) {
+    else if (filename.endsWith(".py")) {
         editor.setOption("mode", "python");
     }
-    else if (selectedFileWidget.endsWith(".dart")) {
+    else if (filename.endsWith(".dart")) {
         editor.setOption("mode", "dart");
     }
-    else if (selectedFileWidget.endsWith(".css")) {
+    else if (filename.endsWith(".css")) {
         editor.setOption("mode", "css");
     }
-    else if (selectedFileWidget.endsWith(".json")) {
+    else if (filename.endsWith(".json")) {
         editor.setOption("mode", "javascript");
     }
-    else if (selectedFileWidget.endsWith(".htm") || selectedFileWidget.endsWith(".html")) {
+    else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
         editor.setOption("mode", "htmlmixed");
     }
 }
@@ -399,6 +399,19 @@ window.addEventListener('resize', function (event) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    //get last filename
+
+    var lastFileName = localStorage.getItem("lastFileName");
+    if (lastFileName) {
+        document.getElementById("filename").innerText = lastFileName;
+        _setEditorMode();
+        editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
+    }
+    else {
+        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
+    }
+
+    //load features
 
     loadFeatures();
 
@@ -407,9 +420,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
-
     document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
 
+
+    // add event listeners
 
     document.getElementById("terminalButton").onclick = _toggleTerminal;
     document.getElementById("sideBarButton").onclick = _toggleSideBar;
@@ -417,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("runHeaderButton").onclick = _runCode;
 
     
-
+    //configure editor
 
     var theme = "material-darker2";
     editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
@@ -437,17 +451,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme'); });
-
-    var lastFileName = localStorage.getItem("lastFileName");
-    if (lastFileName) {
-        document.getElementById("filename").innerText = lastFileName;
-        selectedFileWidget = lastFileName;
-        _setEditorMode();
-        editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
-    }
-    else {
-        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
-    }
 
 
     editor.on("change", function () {
@@ -485,6 +488,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
     });
+
+
+    //divert console output to webpage.
 
 /*()
     (function () {
@@ -587,14 +593,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 var running_count = 0;
                 var username = r.username;
                 githubtree.pullGitRepository({ username: r.username, repo: r.repo }, function (state, repo) {
+                    var filename = document.getElementById("filename").innerText;
                     if (state == "running") {
                         running_count++;
                         if (Math.floor(running_count / 10) * 10 == running_count) {
-                            githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget, _openDir, _openFile);
+                            githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
                         }
                     }
                     if (state == "done") {
-                        githubtree.refreshGitTree(username, repo, toDiv, selectedFileWidget, _openDir, _openFile);
+                        githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
                     }
                 });
             }
