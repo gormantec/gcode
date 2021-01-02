@@ -14,8 +14,11 @@ export async function loadFeatures() {
             if (res2.ok) {
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(f.uri);
                 if (menuMetadata) {
+                    console.log("menuMetadata: exists");
                     let meta = menuMetadata;
                     if (isArray(menuMetadata) && menuMetadata.length > 0) meta = menuMetadata[0];
+
+                    console.log("menuMetadata: ("+meta.id+") isArray="+isArray(menuMetadata) );
                     if (meta.id) {
                         let d = window.document.createElement("div");
                         let i = window.document.createElement("i");
