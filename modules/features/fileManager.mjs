@@ -1,6 +1,9 @@
 /* Feature Name: File Manager */
 
 
+import { htmlToElement,uuidv4 } from '/modules/htmlUtils.mjs';
+
+
 var dirIconOpened = "keyboard_arrow_down";
 var dirIconClosed = "keyboard_arrow_right";
 var xx = "";
@@ -50,11 +53,9 @@ export function afterLoad()
 
     _open({ visible: true });
 
+
     var newFileDialog = document.getElementById("newFileDialog");
-    var newFileDialogName = document.getElementById("newFileDialogName");
-
-    dialogPolyfill.registerDialog(newFileDialog);
-
+    var newFileDialogName = document.getElementById("newFileDialogName");                    
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
         var name = "";
         if (newFileDialogName.value.indexOf(".dapp.ts") > 0) {
@@ -76,30 +77,6 @@ export function afterLoad()
         }
 
     });
-
-    /*
-    
-        <dialog id="newFileDialog">
-            <form method="dialog">
-                <p><label for="newFileDialogName">Filename:</label>
-                  <input type="text" id="newFileDialogName"/>
-                </p>
-                <p><label for="newFileDialogSelect">App Type:</label>
-                  <select id="newFileDialogSelect">
-                    <option value=".js" selected>Commandline - JavaScript</option>
-                    <option value=".py">Commandline - Python</option>
-                    <option value=".mjs">Mobile App - JavaScript</option>
-                    <option value=".ts">Mobile App - AssemblyScript</option>
-                    <option value=".dapp.ts">dApp - AssemblyScript</option>
-                  </select>
-                </p>
-              <menu>
-                <button class="cancelButton" value="cancel">Cancel</button>
-                <button id="newFileDialogConfirmButton" value=".js">OK</button>
-              </menu>
-            </form>
-          </dialog>
-    */
 
 }
 

@@ -1,8 +1,7 @@
 import * as githubtree from '/modules/githubtree.mjs';
 import { beautify } from '/modules/beutify.mjs';
 import { loadFeatures,refreshFeatures } from '/modules/featureManager.mjs';
-import { htmlToElement,uuidv4,getImage,createHtml } from '/modules/htmlUtils.mjs';
-import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
+import { getImage,createHtml } from '/modules/htmlUtils.mjs';
 
 var editor;
 

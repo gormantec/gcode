@@ -1,3 +1,5 @@
+import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
+
 export async function loadFeatures() {
 
 
@@ -115,7 +117,9 @@ export async function loadFeatures() {
                         }
                         form.appendChild(menu);
                         d.appendChild(form);
-                        document.body.insertBefore(d, document.body.firstChild);
+                        document.body.insertBefore(d, document.body.firstChild);                    
+                        dialogPolyfill.registerDialog(d);
+
                     });
                 }
 
