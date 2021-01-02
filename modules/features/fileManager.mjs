@@ -2,6 +2,7 @@
 
 
 import { htmlToElement,uuidv4 } from '/modules/htmlUtils.mjs';
+import * as githubtree from '/modules/githubtree.mjs';
 
 
 var dirIconOpened = "keyboard_arrow_down";
@@ -109,7 +110,7 @@ function _open(params) {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "none";
             document.getElementById("pageMiddle").style.display = "";
-            if (editor) editor.refresh();
+            if (window.editor) window.editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + 1) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
@@ -122,7 +123,7 @@ function _open(params) {
             document.getElementById("pageLeft").style.width = leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
-            if (editor) editor.refresh();
+            if (window.editor) window.editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -213,13 +214,13 @@ function _new(aFilename) {
 
                     document.getElementById("filename").innerText = aFilename;
                     selectedFileWidget = aFilename;
-                    editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
+                    window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
                         "filename:" + aFilename + "\n" + pyChar + "  " +
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
                         appStuff +
                         "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
-                    _setEditorMode();
-                    if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, editor.getValue(),
+                    window._setEditorMode();
+                    if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),
                         function () {
                             var gitParts = githubtree.getGitParts(selectedFileWidget);
                             githubtree.refreshGitTree(gitParts.username, gitParts.repo, toDiv, selectedFileWidget, _openDir, _openFile);
@@ -249,8 +250,8 @@ function _openFile(element) {
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
 
-            editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
-            _setEditorMode();
+            window.editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
+            window._setEditorMode();
         }
         else {
             var filename = element.dataset.name;
@@ -269,7 +270,7 @@ function _openFile(element) {
             selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
-            _setEditorMode();
+            window._setEditorMode();
             githubtree.getGitFile(username, repo, path, function (e, d) {
                 var cached = localStorage.getItem("gitfile-" + filename);
                 if (cached) {
@@ -285,7 +286,7 @@ function _openFile(element) {
                         element.style.color = "";
                     }
                 }
-                editor.setValue(d);
+                window.editor.setValue(d);
             });
         }
     }
@@ -297,32 +298,6 @@ function _openFile(element) {
 
 }
 
-function _setEditorMode() {
-    if (selectedFileWidget.endsWith(".js")) {
-        editor.setOption("mode", "javascript");
-    }
-    else if (selectedFileWidget.endsWith(".mjs")) {
-        editor.setOption("mode", "javascript");
-    }
-    else if (selectedFileWidget.endsWith(".ts")) {
-        editor.setOption("mode", "text/typescript");
-    }
-    else if (selectedFileWidget.endsWith(".py")) {
-        editor.setOption("mode", "python");
-    }
-    else if (selectedFileWidget.endsWith(".dart")) {
-        editor.setOption("mode", "dart");
-    }
-    else if (selectedFileWidget.endsWith(".css")) {
-        editor.setOption("mode", "css");
-    }
-    else if (selectedFileWidget.endsWith(".json")) {
-        editor.setOption("mode", "javascript");
-    }
-    else if (selectedFileWidget.endsWith(".htm") || selectedFileWidget.endsWith(".html")) {
-        editor.setOption("mode", "htmlmixed");
-    }
-}
 
 function _openDir(element) {
 
@@ -502,7 +477,7 @@ function getCode(guid, callback) {
 function _save() {
     var filename = document.getElementById("filename").innerText;
     if (filename && filename.substring(0, 6) == "git://") {
-        githubtree.saveFile(filename, editor.getValue(), function (e, d) {
+        githubtree.saveFile(filename, window.editor.getValue(), function (e, d) {
             if (e) {
                 debug.log(e);
             }
@@ -526,7 +501,7 @@ function _save() {
     }
     else {
         if (filename == "" || selectedFileWidget == null) return;
-        localStorage.setItem("file-" + filename, btoa(editor.getValue()));
+        localStorage.setItem("file-" + filename, btoa(window.editor.getValue()));
         localStorage.setItem("lastFileName", filename);
     }
 }
@@ -562,7 +537,7 @@ function _delete() {
         localStorage.removeItem("file-" + filename);
         localStorage.setItem("lastFileName", "");
         document.getElementById("filename").innerText = "";
-        editor.setValue("");
+        window.editor.setValue("");
         selectedFileWidget = null;
         Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
             if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;

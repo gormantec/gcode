@@ -339,6 +339,8 @@ function consolelog(x) {
     }
 }
 
+
+
 function _setEditorMode() {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
