@@ -12,7 +12,8 @@ export async function loadFeatures() {
             console.log('' + f.uri);
             let res2 = await fetch(f.uri, { "method": "HEAD" });
             if (res2.ok) {
-                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = import(f.uri);
+                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = await import(f.uri);
+
                 if (menuMetadata) {
                     console.log("menuMetadata: exists");
                     let meta = menuMetadata;
@@ -120,6 +121,9 @@ export async function loadFeatures() {
 
                 if (isFunction(afterLoad)) afterLoad();
             }
+            else{
+                console.log("Error: "+f.uri+" does not exist.");
+            }
         }
     }
 }
@@ -144,7 +148,7 @@ export async function refreshFeatures() {
             let f = arr[ii];
             let res2 = await fetch(f.uri, { method: 'HEAD' });
             if (res2.ok) {
-                let { refresh } = import(f.uri);
+                let { refresh } = await import(f.uri);
                 if (isFunction(refresh)) refresh();
             }
         };
