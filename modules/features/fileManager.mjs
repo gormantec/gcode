@@ -255,7 +255,7 @@ function _new(aFilename) {
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
                         appStuff +
                         "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
-                    window._setEditorMode();
+                    window.setEditorMode();
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),
                         function () {
                             var gitParts = githubtree.getGitParts(selectedFileWidget);
@@ -287,7 +287,7 @@ function _openFile(element) {
             element.className = "fileWidget fileWidgetSelected";
 
             window.editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
-            window._setEditorMode();
+            window.setEditorMode();
         }
         else {
             var filename = element.dataset.name;
@@ -306,7 +306,7 @@ function _openFile(element) {
             selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
-            window._setEditorMode();
+            window.setEditorMode();
             githubtree.getGitFile(username, repo, path, function (e, d) {
                 var cached = localStorage.getItem("gitfile-" + filename);
                 if (cached) {

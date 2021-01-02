@@ -3,7 +3,6 @@ import { beautify } from '/modules/beutify.mjs';
 import { loadFeatures,refreshFeatures } from '/modules/featureManager.mjs';
 import { getImage,createHtml } from '/modules/htmlUtils.mjs';
 
-var editor;
 
 var debug = { log: function (v) { console.log(v); } };
 
@@ -33,7 +32,7 @@ function _onclickFilename() {
             // Enter pressed
             var filename = input.value;
             if (filename == "" || filename == null) return false;
-            localStorage.setItem("file-" + filename, btoa(editor.getValue()));
+            localStorage.setItem("file-" + filename, btoa(window.editor.getValue()));
             localStorage.setItem("lastFileName", filename);
             localStorage.removeItem("file-" + oldfilename);
         
@@ -71,7 +70,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "";
-            if (editor) editor.refresh();
+            if (window.editor) window.editor.refresh();
             document.getElementById("pageLeftToolbar").style.display = "none";
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
@@ -86,7 +85,7 @@ function _toggleSideBar() {
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
             document.getElementById("pageMiddle").style.display = "";
-            if (editor) editor.refresh();
+            if (window.editor) window.editor.refresh();
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
@@ -114,7 +113,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
-            if (editor) editor.refresh();
+            if (window.editor) window.editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
@@ -132,7 +131,7 @@ function _runCode()
             debug.log(myLogin + "$ nodejs " + filename + "\n");
             try {
                 var _run = function () {
-                    eval(editor.getValue());
+                    eval(window.editor.getValue());
                 }
                 _run();
             }
@@ -146,7 +145,7 @@ function _runCode()
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             import('/modules/ascompile.mjs').then(({ run }) => {
                 run(
-                    editor.getValue(),
+                    window.editor.getValue(),
                     filename,
                     filename,
                     "optimized.wasm",
@@ -157,7 +156,7 @@ function _runCode()
         else if (filename.endsWith(".ts")) {
             debug.log(myLogin + "$ asc " + filename + " --target release\n");
             import('/modules/ascompile.mjs').then(({ run }) => {
-                var code=editor.getValue();
+                var code=window.editor.getValue();
                 run(
                     code,
                     "node_modules/wasmdom/assembly/index.ts",
@@ -226,7 +225,7 @@ function _runCode()
         else if (filename.endsWith(".mjs")) {
             debug.log(myLogin + "$ launch webApp " + filename + "\n");
             try {
-                var code=editor.getValue();
+                var code=window.editor.getValue();
                 var result = createHtml(code);
                 var splashBackgroundColor=result.splashBackgroundColor;
                 var splash=result.splash;
@@ -235,7 +234,7 @@ function _runCode()
 
                 var _module = window.document.createElement("script");
                 _module.setAttribute("type", "module");
-                _module.text = "\n" + editor.getValue() + "\n";
+                _module.text = "\n" + window.editor.getValue() + "\n";
                 rootHTML.querySelector("head").appendChild(_module);
                 var wpos = "top=50,left=50";
                 var w = 375;
@@ -282,7 +281,7 @@ function _runCode()
                     output: consolelog, read: builtinRead
                 });
                 var myPromise = Sk.misceval.asyncToPromise(function () {
-                    return Sk.importMainWithBody("<stdin>", false, editor.getValue(), true);
+                    return Sk.importMainWithBody("<stdin>", false, window.editor.getValue(), true);
                 });
                 debug.log("$");
             }
@@ -341,33 +340,35 @@ function consolelog(x) {
 
 
 
-function _setEditorMode() {
+window.setEditorMode=function() {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
-        editor.setOption("mode", "javascript");
+        window.editor.setOption("mode", "javascript");
     }
     else if (filename.endsWith(".mjs")) {
-        editor.setOption("mode", "javascript");
+        window.editor.setOption("mode", "javascript");
     }
     else if (filename.endsWith(".ts")) {
-        editor.setOption("mode", "text/typescript");
+        window.editor.setOption("mode", "text/typescript");
     }
     else if (filename.endsWith(".py")) {
-        editor.setOption("mode", "python");
+        window.editor.setOption("mode", "python");
     }
     else if (filename.endsWith(".dart")) {
-        editor.setOption("mode", "dart");
+        window.editor.setOption("mode", "dart");
     }
     else if (filename.endsWith(".css")) {
-        editor.setOption("mode", "css");
+        window.editor.setOption("mode", "css");
     }
     else if (filename.endsWith(".json")) {
-        editor.setOption("mode", "javascript");
+        window.editor.setOption("mode", "javascript");
     }
     else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
-        editor.setOption("mode", "htmlmixed");
+        window.editor.setOption("mode", "htmlmixed");
     }
 }
+
+
 
 
 window.addEventListener('resize', function (event) {
@@ -387,7 +388,7 @@ window.addEventListener('resize', function (event) {
             document.getElementById("pageLeft").style.right = "0px";
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "";
-            if (editor) editor.refresh();
+            if (window.editor) window.editor.refresh();
         }
     }
     else {
@@ -395,7 +396,7 @@ window.addEventListener('resize', function (event) {
         document.getElementById("pageLeft").style.right = "unset";
         document.getElementById("pageLeft").style.width = leftPageWidth + "px";
         document.getElementById("pageMiddle").style.display = "";
-        if (editor) editor.refresh();
+        if (window.editor) window.editor.refresh();
     }
 });
 
@@ -404,7 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //configure editor
 
     var theme = "material-darker2";
-    editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
+    window.editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
@@ -412,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
         extraKeys: {
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete",
-            "Ctrl-Enter": function (cm) { beautify(editor) }
+            "Ctrl-Enter": function (cm) { beautify(window.editor) }
         },
         foldGutter: true,
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
@@ -430,8 +431,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var lastFileName = localStorage.getItem("lastFileName");
     if (lastFileName) {
         document.getElementById("filename").innerText = lastFileName;
-        _setEditorMode();
-        editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
+        window.setEditorMode();
+        window.editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
     }
     else {
         document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
