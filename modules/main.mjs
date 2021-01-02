@@ -400,38 +400,6 @@ window.addEventListener('resize', function (event) {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-
-    //get last filename
-
-    var lastFileName = localStorage.getItem("lastFileName");
-    if (lastFileName) {
-        document.getElementById("filename").innerText = lastFileName;
-        _setEditorMode();
-        editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
-    }
-    else {
-        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
-    }
-
-    //load features
-
-    loadFeatures();
-
-
-    //resize page
-
-    document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
-    var w = window.outerWidth || document.documentElement.clientWidth || 0;
-    document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
-
-
-    // add event listeners
-
-    document.getElementById("terminalButton").onclick = _toggleTerminal;
-    document.getElementById("sideBarButton").onclick = _toggleSideBar;
-    document.getElementById("filename").onclick = _onclickFilename;
-    document.getElementById("runHeaderButton").onclick = _runCode;
-
     
     //configure editor
 
@@ -490,6 +458,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
     });
+
+    //get last filename
+
+    var lastFileName = localStorage.getItem("lastFileName");
+    if (lastFileName) {
+        document.getElementById("filename").innerText = lastFileName;
+        _setEditorMode();
+        editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
+    }
+    else {
+        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
+    }
+
+    //resize page
+
+    document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
+    var w = window.outerWidth || document.documentElement.clientWidth || 0;
+    document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
+
+
+    // add event listeners
+
+    document.getElementById("terminalButton").onclick = _toggleTerminal;
+    document.getElementById("sideBarButton").onclick = _toggleSideBar;
+    document.getElementById("filename").onclick = _onclickFilename;
+    document.getElementById("runHeaderButton").onclick = _runCode;
+    
+    //load features
+
+    loadFeatures();
 
 
     //divert console output to webpage.
