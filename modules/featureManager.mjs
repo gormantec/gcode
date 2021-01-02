@@ -1,5 +1,7 @@
 export async function loadFeatures() {
 
+
+
     let res = await fetch('/config.json');
     if (res.ok) {
         let json = await res.json();
@@ -25,6 +27,8 @@ export async function loadFeatures() {
                         let pageLeftToolbar = window.document.querySelector("#pageLeftToolbar");
                         let terminalButton = window.document.querySelector("#terminalButton");
                         pageLeftToolbar.insertBefore(d, terminalButton);
+
+                        console.log("Added: "+meta.id + " to  "+pageLeftToolbar);
 
                         if (isFunction(menuAction)) {
                             document.getElementById(meta.id).onclick = menuAction;
