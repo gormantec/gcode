@@ -132,7 +132,7 @@ export async function loadFeatures() {
                         afterLoad();
                     }
                     catch(e){
-                        console.log("Error: running afterLoad in "+f.uri);
+                        console.log("Error: running afterLoad in "+f.uri+" :: "+e);
                     }
                 }
             }
