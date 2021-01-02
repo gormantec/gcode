@@ -127,7 +127,14 @@ export async function loadFeatures() {
                     });
                 }
 
-                if (isFunction(afterLoad)) afterLoad();
+                if (isFunction(afterLoad)){
+                    try{
+                        afterLoad();
+                    }
+                    catch(e){
+                        console.log("Error: running afterLoad in "+f.uri);
+                    }
+                }
             }
             else{
                 console.log("Error: "+f.uri+" does not exist.");
