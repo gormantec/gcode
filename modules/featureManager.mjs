@@ -50,7 +50,7 @@ export async function loadFeatures() {
                         let i = window.document.createElement("i");
                         let img = window.document.createElement("img");
                         d.setAttribute("class", "toolbarButton");
-                        d.setAttribute("data-action", button.dataAction);
+                        d.dataset.action=button.dataAction;
                         if (button.materialIcon) {
                             i.setAttribute("class", "material-icons");
                             i.innerText = button.materialIcon;
