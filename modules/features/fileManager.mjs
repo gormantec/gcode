@@ -43,6 +43,10 @@ export function menuAction(p) {
     return _open(p);
 }
 
+export function dialogAction(action) {
+    console.log(action);
+}
+
 
 
 

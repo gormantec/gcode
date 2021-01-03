@@ -93,6 +93,10 @@ export async function loadFeatures() {
                                     p.appendChild(label);
                                     p.appendChild(input);
                                     form.appendChild(p);
+                                    input.addEventListener('change', () => {
+                                        var r={"id":widget.id,"type":"input","action":"change","value":this.value};
+                                        dialogAction(r);
+                                      });
                                 }
                                 else if (widget.type.startsWith("select")) {
                                     console.log("found select");
@@ -115,11 +119,19 @@ export async function loadFeatures() {
                                     p.appendChild(label);
                                     p.appendChild(select);
                                     form.appendChild(p);
+                                    select.addEventListener('change', () => {
+                                        var r={"id":widget.id,"type":"select","action":"change","value":this.value};
+                                        dialogAction(r);
+                                      });
                                 }
                             });
                         }
                         form.appendChild(menu);
                         d.appendChild(form);
+                        d.addEventListener('close', () => {
+                            var r={"id":dialog.id,"type":"dialog","action":"close","value":this.returnValue};
+                            dialogAction(r);
+                          });
                         document.body.insertBefore(d, document.body.firstChild);                    
                         dialogPolyfill.registerDialog(d);
 
