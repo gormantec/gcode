@@ -39,8 +39,7 @@ export async function loadFeatures() {
 
                         if (isFunction(menuAction)) {
                             console.log((new Function(";("+menuAction.toString()+")();")).toString());
-
-                            document.getElementById(meta.id).onclick = new Function(";("+menuAction.toString()+")();");
+                            document.getElementById(meta.id).onclick = menuAction;
                         }
                     }
                 }
