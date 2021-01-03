@@ -74,6 +74,7 @@ export function afterLoad(dialogs)
         newFileDialogName.value = (name + document.getElementById("newFileDialogSelect").value);
         document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
     });
+    /*
     newFileDialog.addEventListener('close', function onClose() {
 
         console.log("Close:"+newFileDialog.returnValue);
@@ -117,7 +118,7 @@ export function afterLoad(dialogs)
             }
 
         }
-    });
+    });*/
 
 }
 
