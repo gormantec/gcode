@@ -399,7 +399,7 @@ export function toolbarAction(e) {
 
     var button = e.target || e.srcElement;
 
-    console.log("clicked: "+button.getAttribute('id')+" "+JSON.stringify(button));
+    console.log("clicked: "+button.getAttribute('data-action')+" "+JSON.stringify(button));
 
     if (button.dataset.action == "addFile") {
         document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
