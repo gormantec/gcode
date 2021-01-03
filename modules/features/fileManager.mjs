@@ -59,6 +59,7 @@ export function afterLoad(dialogs)
     var newFileDialog = dialogs["newFileDialog"];
     var newFileDialogName = newFileDialog.querySelector("#newFileDialogName");                 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
+        console.log("Change");
         var name = "";
         if (newFileDialogName.value.indexOf(".dapp.ts") > 0) {
             name = newFileDialogName.value.substring(0, newFileDialogName.value.lastIndexOf(".dapp.ts"));
@@ -76,9 +77,9 @@ export function afterLoad(dialogs)
     newFileDialog.addEventListener('close', function onClose() {
 
         console.log("Close:"+newFileDialog.returnValue);
-        if (newFileDialog.returnValue != "cancel") {
-            _new(newFileDialog.returnValue);
-        }
+        //if (newFileDialog.returnValue != "cancel") {
+        //    _new(newFileDialog.returnValue);
+       // }
 
     });
 
