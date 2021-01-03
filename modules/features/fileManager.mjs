@@ -43,9 +43,8 @@ export function menuAction(p) {
     return _open(p);
 }
 
-export function toolbarAction(p) {
-    return _toolbarAction(p);
-}
+
+
 
 export function refresh() {
     _refresh();
@@ -396,18 +395,17 @@ function _openDir(element) {
 
 }
 
-function _toolbarAction() {
+export function toolbarAction(button,event) {
 
-
-    if (this.dataset.action == "addFile") {
+    if (button.dataset.action == "addFile") {
         document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
         document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogName").value;
         document.getElementById("newFileDialog").showModal();
 
-    } else if (this.dataset.action == "saveFile") {
+    } else if (button.dataset.action == "saveFile") {
         _save();
     }
-    else if (this.dataset.action == "addGitRepo") {
+    else if (button.dataset.action == "addGitRepo") {
         var guid = uuidv4();
 
         var doSomething = function () {
@@ -469,10 +467,8 @@ function _toolbarAction() {
             });
         }
 
-
-
     }
-    else if (this.dataset.action == "deleteFile") {
+    else if (button.dataset.action == "deleteFile") {
         _delete();
     }
 }
