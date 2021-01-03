@@ -11,18 +11,14 @@ export async function loadFeatures() {
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
         for (var ii = 0; ii < arr.length; ii++) {
             let f = arr[ii];
-            console.log('' + f.uri);
             let res2 = await fetch(f.uri, { "method": "HEAD" });
             if (res2.ok) {
                 let dialogs=[];
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = await import(f.uri);
 
                 if (menuMetadata) {
-                    console.log("menuMetadata: exists");
                     let meta = menuMetadata;
                     if (isArray(menuMetadata) && menuMetadata.length > 0) meta = menuMetadata[0];
-
-                    console.log("menuMetadata: ("+meta.id+") isArray="+isArray(menuMetadata) );
                     if (meta.id) {
                         let d = window.document.createElement("div");
                         let i = window.document.createElement("i");
@@ -34,9 +30,6 @@ export async function loadFeatures() {
                         let pageLeftToolbar = window.document.querySelector("#pageLeftToolbar");
                         let terminalButton = window.document.querySelector("#terminalButton");
                         pageLeftToolbar.insertBefore(d, terminalButton);
-
-                        console.log("Added: "+meta.id + " to  "+pageLeftToolbar);
-
                         if (isFunction(menuAction)) {
                             console.log((new Function(";("+menuAction.toString()+")();")).toString());
                             document.getElementById(meta.id).onclick = menuAction;
