@@ -74,6 +74,8 @@ export function afterLoad(dialogs)
         document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
     });
     newFileDialog.addEventListener('close', function onClose() {
+
+        console.log(newFileDialog.returnValue);
         if (newFileDialog.returnValue != "cancel") {
             _new(newFileDialog.returnValue);
         }
@@ -214,7 +216,7 @@ function _refresh(params) {
 
 function _new(aFilename) {
 
-
+    console.log("_new");
     if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
         aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
     }
@@ -227,11 +229,13 @@ function _new(aFilename) {
         else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
         else sampleName = "modules/sample.txt";
 
+        console.log("fetch");
         fetch(sampleName)
             .then(
                 response => response.text()
             ).then(
                 text => {
+                    console.log("text");
                     var _samplecode = text;
 
                     var appStuff = "";
@@ -261,7 +265,9 @@ function _new(aFilename) {
                         }
                     );
                     else {
+                        console.log("_save");
                         _save();
+                        console.log("_refresh");
                         _refresh();
                     }
                 }
