@@ -76,9 +76,11 @@ export async function loadFeatures() {
                         let b_cancel = window.document.createElement("button");
                         b_cancel.setAttribute("class", "cancelButton");
                         b_cancel.setAttribute("value", "cancel");
+                        b_cancel.innerText="Cancel";
                         let b_ok = window.document.createElement("button");
                         b_ok.setAttribute("id", dialog.ok.id);
                         b_ok.setAttribute("value", dialog.ok.value);
+                        b_ok.innerText="Ok";
                         menu.appendChild(b_cancel);
                         menu.appendChild(b_ok);
                         if (isArray(dialog.content)) {
