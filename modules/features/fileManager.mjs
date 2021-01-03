@@ -51,16 +51,14 @@ export function refresh() {
     _refresh();
 }
 
-export function afterLoad()
+export function afterLoad(dialogs)
 {
 
     _open({ visible: true });
 
     selectedFileWidget = document.getElementById("filename").innerText;
-
-
-    var newFileDialog = document.getElementById("newFileDialog");
-    var newFileDialogName = document.getElementById("newFileDialogName");                    
+    var newFileDialog = dialogs["newFileDialog"];
+    var newFileDialogName = newFileDialog.querySelector("#newFileDialogName");                 
     document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
         var name = "";
         if (newFileDialogName.value.indexOf(".dapp.ts") > 0) {

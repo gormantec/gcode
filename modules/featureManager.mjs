@@ -14,6 +14,7 @@ export async function loadFeatures() {
             console.log('' + f.uri);
             let res2 = await fetch(f.uri, { "method": "HEAD" });
             if (res2.ok) {
+                let dialogs=[];
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, dialogMetadata, toolbarAction } = await import(f.uri);
 
                 if (menuMetadata) {
@@ -68,6 +69,8 @@ export async function loadFeatures() {
                 if (isArray(dialogMetadata)) {
                     dialogMetadata.forEach((dialog) => {
                         let d = window.document.createElement("dialog");
+                        d.setAttribute("id", dialog.id);
+                        dialogs[dialog.id] = d;
                         let form = window.document.createElement("form");
                         let menu = window.document.createElement("menu");
                         let b_cancel = window.document.createElement("button");
@@ -129,7 +132,7 @@ export async function loadFeatures() {
 
                 if (isFunction(afterLoad)){
                     try{
-                        afterLoad();
+                        afterLoad(dialogs);
                     }
                     catch(e){
                         console.error(e);
