@@ -61,7 +61,7 @@ export async function loadFeatures() {
                             d.appendChild(img);
                         }
                         pageLeftToolbar.appendChild(d);
-                        d.onclick = (e)=>toolbarAction(this,e);
+                        d.addEventListener("click", toolbarAction);
                     });
 
                 }
