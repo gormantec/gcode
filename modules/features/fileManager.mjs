@@ -397,7 +397,7 @@ function _openDir(element) {
 
 export function toolbarAction(e) {
 
-    var button = e.target || e.srcElement;
+    var button = e.currentTarget;
 
     console.log("clicked: "+button.getAttribute('data-action')+" "+JSON.stringify(e));
 
