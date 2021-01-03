@@ -75,7 +75,7 @@ export function afterLoad(dialogs)
     });
     newFileDialog.addEventListener('close', function onClose() {
 
-        console.log(newFileDialog.returnValue);
+        console.log("Close:"+newFileDialog.returnValue);
         if (newFileDialog.returnValue != "cancel") {
             _new(newFileDialog.returnValue);
         }
