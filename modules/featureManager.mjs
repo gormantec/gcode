@@ -38,7 +38,8 @@ export async function loadFeatures() {
                         console.log("Added: "+meta.id + " to  "+pageLeftToolbar);
 
                         if (isFunction(menuAction)) {
-                            document.getElementById(meta.id).onclick = menuAction;
+                            consile.log((new Function(";("+menuAction.toString()+")();").toString());
+                            document.getElementById(meta.id).onclick = new Function(";("+menuAction.toString()+")();");
                         }
                     }
                 }
