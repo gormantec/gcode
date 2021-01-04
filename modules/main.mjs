@@ -1,7 +1,9 @@
 import * as githubtree from '/modules/githubtree.mjs';
 import { beautify } from '/modules/beutify.mjs';
+import { save } from '/modules/gcodeStorage.mjs';
 import { loadFeatures,refreshFeatures } from '/modules/featureManager.mjs';
 import { getImage,createHtml } from '/modules/htmlUtils.mjs';
+
 
 
 var debug = { log: function (v) { console.log(v); } };
@@ -16,6 +18,7 @@ if (screenWidth <= 1024) leftPageWidth = 300;
 var pageBottomHeight = 150;
 
 var myLogin = "";
+var win;
 
 
 function _onclickFilename() {
@@ -74,7 +77,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeftToolbar").style.display = "none";
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 31) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
 
@@ -86,7 +89,7 @@ function _toggleSideBar() {
             document.getElementById("pageMiddle").style.right = "0px";
             document.getElementById("pageMiddle").style.display = "";
             if (window.editor) window.editor.refresh();
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 31) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
         }
@@ -101,7 +104,7 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "none";
             document.getElementById("pageLeftToolbar").style.display = "";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 21) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 31) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_left";
         }
@@ -115,7 +118,7 @@ function _toggleSideBar() {
             document.getElementById("pageMiddle").style.display = "";
             if (window.editor) window.editor.refresh();
             document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 22) + "px";
+            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 32) + "px";
             document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_left";
         }
@@ -453,6 +456,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("runHeaderButton").onclick = _runCode;
 
     //load features
+
+    _toggleSideBar();
 
     loadFeatures();
 

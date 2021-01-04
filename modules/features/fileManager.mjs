@@ -1,41 +1,43 @@
 /* Feature Name: File Manager */
 
 
-import { htmlToElement,uuidv4 } from '/modules/htmlUtils.mjs';
+import { htmlToElement, uuidv4 } from '/modules/htmlUtils.mjs';
 import * as githubtree from '/modules/githubtree.mjs';
 
 
 var dirIconOpened = "keyboard_arrow_down";
 var dirIconClosed = "keyboard_arrow_right";
 var xx = "";
-var win;
+
 
 var selectedFileWidget = null;
 
 export const menuMetadata = { "id": "openButton", "class": "pageLeftToolbarButton", "materialIcon": "file_copy" };
 
 export const toolbarMetadata = [
-        { "dataAction": "saveFile", "materialIcon": "save" },
-        { "dataAction": "addFile", "materialIcon": "post_add" },
-        { "dataAction": "addGitRepo", "imageIcon": "/images/git.png" },
-        { "dataAction": "addDirectory", "materialIcon": "create_new_folder" },
-        { "dataAction": "deleteFile", "materialIcon": "delete_forever" },
-    ];
+    { "dataAction": "saveFile", "materialIcon": "save" },
+    { "dataAction": "addFile", "materialIcon": "post_add" },
+    { "dataAction": "addGitRepo", "imageIcon": "/images/git.png" },
+    { "dataAction": "addDirectory", "materialIcon": "create_new_folder" },
+    { "dataAction": "deleteFile", "materialIcon": "delete_forever" },
+];
 
 export const dialogMetadata = [
     {
-        "id": "newFileDialog", 
+        "id": "newFileDialog",
         "content": [
             { "id": "newFileDialogName", "type": "input/text", "label": "Filename:" },
-            { "id": "newFileDialogSelect", "type": "select", "label": "App Type:", "options":[
-                {"value":".js","text":"Commandline - JavaScript","selected":true},
-                {"value":".py","text":"Commandline - Python","selected":false},
-                {"value":".mjs","text":"Mobile App - JavaScript","selected":false},
-                {"value":".ts","text":"Mobile App - AssemblyScript","selected":false},
-                {"value":".dapp.ts","text":"dApp - AssemblyScript","selected":false},
-            ]},
-        ], 
-        "ok": {"id":"newFileDialogConfirmButton","value": ".js"}
+            {
+                "id": "newFileDialogSelect", "type": "select", "label": "App Type:", "options": [
+                    { "value": ".js", "text": "Commandline - JavaScript", "selected": true },
+                    { "value": ".py", "text": "Commandline - Python", "selected": false },
+                    { "value": ".mjs", "text": "Mobile App - JavaScript", "selected": false },
+                    { "value": ".ts", "text": "Mobile App - AssemblyScript", "selected": false },
+                    { "value": ".dapp.ts", "text": "dApp - AssemblyScript", "selected": false },
+                ]
+            },
+        ],
+        "ok": {  "value": ".js" }
     }
 ];
 
@@ -43,51 +45,39 @@ export function menuAction(p) {
     return _open(p);
 }
 
-export function dialogAction(action) {
-    console.log(action);
+export function dialogAction(event) {
+    console.log(event);
+    if ( event.type=="dialog" && event.id=="newFileDialog" && event.value != "cancel") {
+        _new(event.value);
+    }
+    else if(event.type=="select" && event.id=="newFileDialogSelect")
+    {
+        var name = "";
+        var nameValue=event.getInputValue("newFileDialogName");
+        if (nameValue.indexOf(".dapp.ts") > 0) {
+            name = nameValue.substring(0, nameValue.lastIndexOf(".dapp.ts"));
+        }
+        else if (nameValue.indexOf(".") > 0) {
+            name = nameValue.substring(0, nameValue.lastIndexOf("."));
+        }
+        else {
+            name = nameValue;
+        }
+        name=(name + event.value);
+        event.setInputValue("newFileDialogName",name);
+        event.setInputValue("confirmButton",name);
+    }
 }
-
-
-
 
 export function refresh() {
     _refresh();
 }
 
-export function afterLoad(dialogs)
-{
+export function afterLoad() {
 
     _open({ visible: true });
 
     selectedFileWidget = document.getElementById("filename").innerText;
-    var newFileDialog = dialogs["newFileDialog"];
-    var newFileDialogName = newFileDialog.querySelector("#newFileDialogName");                 
-    document.getElementById("newFileDialogSelect").addEventListener('change', function onSelect(e) {
-        console.log("Change");
-        var name = "";
-        if (newFileDialogName.value.indexOf(".dapp.ts") > 0) {
-            name = newFileDialogName.value.substring(0, newFileDialogName.value.lastIndexOf(".dapp.ts"));
-        }
-        else if (newFileDialogName.value.indexOf(".") > 0) {
-            name = newFileDialogName.value.substring(0, newFileDialogName.value.lastIndexOf("."));
-        }
-        else {
-            name = newFileDialogName.value;
-        }
-
-        newFileDialogName.value = (name + document.getElementById("newFileDialogSelect").value);
-        document.getElementById('newFileDialogConfirmButton').value = newFileDialogName.value;
-    });
-    /*
-    newFileDialog.addEventListener('close', function onClose() {
-
-        console.log("Close:"+newFileDialog.returnValue);
-        //if (newFileDialog.returnValue != "cancel") {
-        //    _new(newFileDialog.returnValue);
-       // }
-
-    });
-
     window.editor.on("change", function () {
         var filename = document.getElementById("filename").innerText;
         if (!filename.startsWith("git://")) {
@@ -122,9 +112,92 @@ export function afterLoad(dialogs)
             }
 
         }
-    });*/
+    });
 
 }
+
+export function toolbarAction(e) {
+
+    var button = e.currentTarget;
+
+    console.log("clicked: " + button.outerHTML + " " + JSON.stringify(button.dataset));
+
+    if (button.dataset.action == "addFile") {
+        document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
+        document.getElementById('confirmButton').value = document.getElementById("newFileDialogName").value;
+        document.getElementById("newFileDialog").showModal();
+
+    } else if (button.dataset.action == "saveFile") {
+        _save();
+    }
+    else if (button.dataset.action == "addGitRepo") {
+        var guid = uuidv4();
+
+        var doSomething = function () {
+            githubtree.getAuthenticated().then((resp) => {
+                myLogin = resp.data.login;
+                if (resp.data.login) {
+                    var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
+                    if (gitRepoName) {
+                        var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
+                        var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
+                        if (repo != "<reponame>") {
+                            var gitRepositories = localStorage.getItem("git-repositories");
+                            var data = {};
+                            if (!gitRepositories) {
+                                data = {};
+                                data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
+                                localStorage.setItem("git-repositories", JSON.stringify(data));
+                            }
+                            else {
+                                data = JSON.parse(gitRepositories);
+                                data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
+                                localStorage.setItem("git-repositories", JSON.stringify(data));
+                            }
+                            var toDiv = document.getElementById("pageLeftBody");
+                            Object.values(data).forEach(function (r, x) {
+                                var running_count = 0;
+                                githubtree.pullGitRepository({ username: r.username, repo: r.repo }, function (state, repo) {
+                                    if (state == "running") {
+                                        running_count++;
+                                        if (Math.floor(running_count / 10) * 10 == running_count) {
+                                            githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
+                                        }
+                                    }
+                                    if (state == "done") {
+                                        githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                }
+            }).catch(() => githubtree.setToken(null));
+        };
+
+        if (githubtree.getToken()) {
+            doSomething();
+        }
+        else {
+            getCode(guid, (e, code) => {
+                if (!e) {
+                    fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
+                        response => response.json()
+                    ).then((json) => {
+                        console.log("set new token");
+                        githubtree.setToken(json.data.access_token);
+                        doSomething();
+                    });
+                }
+            });
+        }
+
+    }
+    else if (button.dataset.action == "deleteFile") {
+        _delete();
+    }
+}
+
 
 
 
@@ -407,87 +480,6 @@ function _openDir(element) {
 
 }
 
-export function toolbarAction(e) {
-
-    var button = e.currentTarget;
-
-    console.log("clicked: "+button.outerHTML+" "+JSON.stringify(button.dataset));
-
-    if (button.dataset.action == "addFile") {
-        document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
-        document.getElementById('newFileDialogConfirmButton').value = document.getElementById("newFileDialogName").value;
-        document.getElementById("newFileDialog").showModal();
-
-    } else if (button.dataset.action == "saveFile") {
-        _save();
-    }
-    else if (button.dataset.action == "addGitRepo") {
-        var guid = uuidv4();
-
-        var doSomething = function () {
-            githubtree.getAuthenticated().then((resp) => {
-                myLogin = resp.data.login;
-                if (resp.data.login) {
-                    var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
-                    if (gitRepoName) {
-                        var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
-                        var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
-                        if (repo != "<reponame>") {
-                            var gitRepositories = localStorage.getItem("git-repositories");
-                            var data = {};
-                            if (!gitRepositories) {
-                                data = {};
-                                data["git://" + username + ":" + repo] = { "username": username, "repo": repo };
-                                localStorage.setItem("git-repositories", JSON.stringify(data));
-                            }
-                            else {
-                                data = JSON.parse(gitRepositories);
-                                data["git://" + username + ":" + repo] = ({ "username": username, "repo": repo });
-                                localStorage.setItem("git-repositories", JSON.stringify(data));
-                            }
-                            var toDiv = document.getElementById("pageLeftBody");
-                            Object.values(data).forEach(function (r, x) {
-                                var running_count = 0;
-                                githubtree.pullGitRepository({ username: r.username, repo: r.repo }, function (state, repo) {
-                                    if (state == "running") {
-                                        running_count++;
-                                        if (Math.floor(running_count / 10) * 10 == running_count) {
-                                            githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
-                                        }
-                                    }
-                                    if (state == "done") {
-                                        githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
-                                    }
-                                });
-                            });
-                        }
-                    }
-                }
-            }).catch(() => githubtree.setToken(null));
-        };
-
-        if (githubtree.getToken()) {
-            doSomething();
-        }
-        else {
-            getCode(guid, (e, code) => {
-                if (!e) {
-                    fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
-                        response => response.json()
-                    ).then((json) => {
-                        console.log("set new token");
-                        githubtree.setToken(json.data.access_token);
-                        doSomething();
-                    });
-                }
-            });
-        }
-
-    }
-    else if (button.dataset.action == "deleteFile") {
-        _delete();
-    }
-}
 
 
 function getCode(guid, callback) {
