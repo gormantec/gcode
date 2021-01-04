@@ -10,11 +10,11 @@ var debug = { log: function (v) { console.log(v); } };
 
 //int variables   
 
-var leftToolbarWidth = 50;
-var leftToolbarFontSize = leftToolbarWidth - 26;
-var leftPageWidth = 170;
+window.leftToolbarWidth = 50;
+var leftToolbarFontSize = window.leftToolbarWidth - 26;
+window.leftPageWidth = 170;
 var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0;
-if (screenWidth <= 1024) leftPageWidth = 300;
+if (screenWidth <= 1024) window.leftPageWidth = 300;
 var pageBottomHeight = 150;
 
 var myLogin = "";
@@ -77,8 +77,8 @@ function _toggleSideBar() {
             document.getElementById("pageLeftToolbar").style.display = "none";
             document.getElementById("pageMiddle").style.left = "0px";
             document.getElementById("pageMiddle").style.right = "0px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 31) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
+            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
 
         }
@@ -89,8 +89,8 @@ function _toggleSideBar() {
             document.getElementById("pageMiddle").style.right = "0px";
             document.getElementById("pageMiddle").style.display = "";
             if (window.editor) window.editor.refresh();
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 31) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
+            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_right";
         }
 
@@ -104,22 +104,22 @@ function _toggleSideBar() {
             document.getElementById("pageLeft").style.width = "unset";
             document.getElementById("pageMiddle").style.display = "none";
             document.getElementById("pageLeftToolbar").style.display = "";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + 31) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
+            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_left";
         }
         else {
 
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeft").style.right = "unset";
-            document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+            document.getElementById("pageLeft").style.width = window.leftPageWidth + "px";
             document.getElementById("pageLeft").style.display = "";
             document.getElementById("pageLeftToolbar").style.display = "";
             document.getElementById("pageMiddle").style.display = "";
             if (window.editor) window.editor.refresh();
-            document.getElementById("pageMiddle").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
-            document.getElementById("filename").style.marginLeft = (leftToolbarWidth + leftPageWidth + 32) + "px";
-            document.getElementById("runHeaderButton").style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+            document.getElementById("pageMiddle").style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
+            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + window.leftPageWidth + 32) + "px";
+            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
             document.getElementById("sideBarButton").getElementsByTagName("i")[0].innerText = "keyboard_arrow_left";
         }
     }
@@ -397,7 +397,7 @@ window.addEventListener('resize', function (event) {
     else {
         document.getElementById("pageLeft").style.display = "";
         document.getElementById("pageLeft").style.right = "unset";
-        document.getElementById("pageLeft").style.width = leftPageWidth + "px";
+        document.getElementById("pageLeft").style.width = window.leftPageWidth + "px";
         document.getElementById("pageMiddle").style.display = "";
         if (window.editor) window.editor.refresh();
     }
@@ -445,7 +445,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
     var w = window.outerWidth || document.documentElement.clientWidth || 0;
-    document.getElementById("pageLeftToolbar").style.width = leftToolbarWidth + "px";
+    document.getElementById("pageLeftToolbar").style.width = window.leftToolbarWidth + "px";
 
 
     // add event listeners
@@ -457,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //load features
 
+    _toggleSideBar();
     _toggleSideBar();
 
     loadFeatures();
@@ -507,9 +508,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (w >= 576) {
             const dx = m_posx - e.x;
             m_posx = e.x;
-            leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx);
-            panel.style.width = leftPageWidth + "px";
-            panelMiddle.style.left = (leftToolbarWidth + leftPageWidth + 2) + "px";
+            window.leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx);
+            panel.style.width = window.leftPageWidth + "px";
+            panelMiddle.style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
         }
 
     }

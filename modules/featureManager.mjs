@@ -31,8 +31,7 @@ export async function loadFeatures() {
                         let terminalButton = window.document.querySelector("#terminalButton");
                         pageLeftToolbar.insertBefore(d, terminalButton);
                         if (isFunction(menuAction)) {
-                            //console.log((new Function(";("+menuAction.toString()+")();")).toString());
-                            document.getElementById(meta.id).onclick = menuAction;
+                            d.addEventListener("click", (e)=>menuAction({event:e}));
                         }
                     }
                 }
