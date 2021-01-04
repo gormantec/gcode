@@ -168,7 +168,6 @@ function _runCode()
                     (e,d) => {
                         if(!e)
                         {
-                            console.log(d);
                             try {
                                 var result = createHtml(code);
                                 var splashBackgroundColor=result.splashBackgroundColor;
@@ -465,8 +464,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //divert console output to webpage.
 
-/*()
-    (function () {
+(function () {
         var old = console.log;
         var olde = console.error;
         var logger = document.getElementById('log');
@@ -491,8 +489,6 @@ document.addEventListener("DOMContentLoaded", function () {
             pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
         }
     })();
-
-*/
 
 
     const BORDER_SIZE = 4;
@@ -550,7 +546,6 @@ document.addEventListener("DOMContentLoaded", function () {
         githubtree.waitForOctokit(() => {
             githubtree.getAuthenticated().then((resp) => {
                 myLogin = resp.data.login;
-                console.log("cacheRepo");
                 githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
         });

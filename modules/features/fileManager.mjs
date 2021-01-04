@@ -42,12 +42,11 @@ export const dialogMetadata = [
 ];
 
 export function menuAction(p) {
-    
+
     return _open(p);
 }
 
 export function dialogAction(event) {
-    console.log(event);
     if ( event.type=="dialog" && event.id=="newFileDialog" && event.value != "cancel") {
         _new(event.value);
     }
@@ -120,9 +119,6 @@ export function afterLoad() {
 export function toolbarAction(e) {
 
     var button = e.currentTarget;
-
-    console.log("clicked: " + button.outerHTML + " " + JSON.stringify(button.dataset));
-
     if (button.dataset.action == "addFile") {
         document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
         document.getElementById('confirmButton').value = document.getElementById("newFileDialogName").value;
@@ -185,7 +181,6 @@ export function toolbarAction(e) {
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
                     ).then((json) => {
-                        console.log("set new token");
                         githubtree.setToken(json.data.access_token);
                         doSomething();
                     });
@@ -296,7 +291,6 @@ function _refresh(params) {
 
 function _new(aFilename) {
 
-    console.log("_new");
     if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
         aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
     }
@@ -309,13 +303,11 @@ function _new(aFilename) {
         else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
         else sampleName = "modules/sample.txt";
 
-        console.log("fetch");
         fetch(sampleName)
             .then(
                 response => response.text()
             ).then(
                 text => {
-                    console.log("text");
                     var _samplecode = text;
 
                     var appStuff = "";
@@ -345,9 +337,7 @@ function _new(aFilename) {
                         }
                     );
                     else {
-                        console.log("_save");
                         _save();
-                        console.log("_refresh");
                         _refresh();
                     }
                 }
