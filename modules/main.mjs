@@ -1,4 +1,3 @@
-import * as githubtree from '/modules/githubtree.mjs';
 import { beautify } from '/modules/beutify.mjs';
 import { loadFeatures,refreshFeatures } from '/modules/featureManager.mjs';
 import { getImage,createHtml } from '/modules/htmlUtils.mjs';
@@ -543,39 +542,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, false);
 
-    if (githubtree.getToken()) {
-        githubtree.waitForOctokit(() => {
-            githubtree.getAuthenticated().then((resp) => {
-                myLogin = resp.data.login;
-                githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
-            });
-        });
-    }
 
-    var gitRepositories = localStorage.getItem("git-repositories");
-    if (gitRepositories) {
-        var data = {};
-        data = JSON.parse(gitRepositories);
-        var toDiv = document.getElementById("pageLeftBody");
-        Object.values(data).forEach(function (r, x) {
-            if (r.username && r.repo) {
-                var running_count = 0;
-                var username = r.username;
-                githubtree.pullGitRepository({ username: r.username, repo: r.repo }, function (state, repo) {
-                    var filename = document.getElementById("filename").innerText;
-                    if (state == "running") {
-                        running_count++;
-                        if (Math.floor(running_count / 10) * 10 == running_count) {
-                            githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
-                        }
-                    }
-                    if (state == "done") {
-                        githubtree.refreshGitTree(username, repo, toDiv, filename, _openDir, _openFile);
-                    }
-                });
-            }
-        });
-    }
     setTimeout(function () {
         document.getElementById("splashScreen").hidden = true;
     }, 2000);
