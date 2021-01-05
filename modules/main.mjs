@@ -1,8 +1,8 @@
 import * as githubtree from '/modules/githubtree.mjs';
 import { beautify } from '/modules/beutify.mjs';
-import { save } from '/modules/gcodeStorage.mjs';
 import { loadFeatures,refreshFeatures } from '/modules/featureManager.mjs';
 import { getImage,createHtml } from '/modules/htmlUtils.mjs';
+import { save,load,remove } from '/modules/gcodeStorage.mjs';
 
 
 
@@ -19,6 +19,7 @@ var pageBottomHeight = 150;
 
 var myLogin = "";
 var win;
+var xx = "";
 
 
 function _onclickFilename() {
@@ -35,9 +36,9 @@ function _onclickFilename() {
             // Enter pressed
             var filename = input.value;
             if (filename == "" || filename == null) return false;
-            localStorage.setItem("file-" + filename, btoa(window.editor.getValue()));
+            save(filename,window.editor.getValue());
             localStorage.setItem("lastFileName", filename);
-            localStorage.removeItem("file-" + oldfilename);
+            remove(oldfilename);
         
             input.onkeypress = null;
             document.getElementById("filename").innerHTML = filename;
@@ -434,7 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (lastFileName) {
         document.getElementById("filename").innerText = lastFileName;
         window.setEditorMode();
-        window.editor.setValue(atob(localStorage.getItem("file-" + lastFileName)));
+        window.editor.setValue(load(lastFileName,true));
     }
     else {
         document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";

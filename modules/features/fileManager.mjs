@@ -3,11 +3,12 @@
 
 import { htmlToElement, uuidv4 } from '/modules/htmlUtils.mjs';
 import * as githubtree from '/modules/githubtree.mjs';
+import { save,load,remove,listNames } from '/modules/gcodeStorage.mjs';
 
 
 var dirIconOpened = "keyboard_arrow_down";
 var dirIconClosed = "keyboard_arrow_right";
-var xx = "";
+
 
 
 var selectedFileWidget = null;
@@ -244,29 +245,21 @@ function _open(params) {
 }
 
 function _refresh(params) {
-    var values = [],
-        keys = Object.keys(localStorage),
-        i = keys.length;
+    var values = [];
     var defaultParent = htmlToElement("<div id=\"defaultParent\"></div>");
     var pageLeft = htmlToElement("<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>");
     pageLeft.addEventListener("click", function () { _openDir(this); });
     defaultParent.appendChild(pageLeft);
-    keys.sort();
-    keys.reverse();
-
+    var filenames=listNames();
+    var i=filenames.length;
     while (i--) {
-
-        if (keys[i].startsWith("file-") && keys[i] != "file-") {
             var nextname = "";
             var selectedClass = "";
-            if (i > 0) nextname = "data-nextname='" + keys[i - 1].substring(5) + "'";
-            if (selectedFileWidget == keys[i].substring(5)) selectedClass = " fileWidgetSelected";
-            var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + keys[i].substring(5) + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + keys[i].substring(5) + "</div>");
+            if (i > 0) nextname = "data-nextname='" + filenames[i - 1] + "'";
+            if (selectedFileWidget == filenames[i]) selectedClass = " fileWidgetSelected";
+            var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + filenames[i] + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + filenames[i] + "</div>");
             defaultParent.appendChild(_child);
             _child.addEventListener("click", function () { _openFile(this); });
-
-
-        }
     }
     var pageLeftBody = document.getElementById("pageLeftBody");
     var oldDefaultParent = pageLeftBody.querySelector("div#defaultParent");
@@ -359,7 +352,7 @@ function _openFile(element) {
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
 
-            window.editor.setValue(atob(localStorage.getItem("file-" + element.dataset.name)));
+            window.editor.setValue(load(element.dataset.name,true));
             window.setEditorMode();
         }
         else {
@@ -529,8 +522,9 @@ function _save() {
         delete fileWidget.style.fontStyle;
     }
     else {
-        if (filename == "" || selectedFileWidget == null) return;
-        localStorage.setItem("file-" + filename, btoa(window.editor.getValue()));
+        if (filename == "" || filename == null) return;
+        save(filename, window.editor.getValue());
+        console.log("saved");
         localStorage.setItem("lastFileName", filename);
     }
 }
@@ -563,7 +557,7 @@ function _delete() {
         });
     }
     else {
-        localStorage.removeItem("file-" + filename);
+        remove(filename);
         localStorage.setItem("lastFileName", "");
         document.getElementById("filename").innerText = "";
         window.editor.setValue("");

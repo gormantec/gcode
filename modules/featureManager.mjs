@@ -1,12 +1,29 @@
 import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
-import { save } from '/modules/gcodeStorage.mjs';
+import { save, load } from '/modules/gcodeStorage.mjs';
+
+function parsableJSON(value) {
+    try {
+        JSON.parse(value);
+        return true;
+    } catch (ex) {
+        return false;
+    }
+}
 
 export async function loadFeatures() {
 
-    let res = await fetch('/config.json');
-    if (res.ok) {
-        let json = await res.json();
-        save(".config.json",json);
+    let s=load(".config.json");
+    let json = parsableJSON(s)?JSON.parse(s):null;
+    let ok = false;
+    if (!json) {
+        var res = await fetch('/config.json');
+        ok = res.ok;
+        if(res.ok)json = await res.json();
+    }
+    else ok = true;
+    if (ok) {
+        
+        save(".config.json", json, false);
         let arr = Array.from(json.features);
         arr = arr.sort((a, b) => a.navPosition > b.navPosition);
         for (var ii = 0; ii < arr.length; ii++) {
@@ -31,7 +48,7 @@ export async function loadFeatures() {
                         let terminalButton = window.document.querySelector("#terminalButton");
                         pageLeftToolbar.insertBefore(d, terminalButton);
                         if (isFunction(menuAction)) {
-                            d.addEventListener("click", (e)=>menuAction({event:e}));
+                            d.addEventListener("click", (e) => menuAction({ event: e }));
                         }
                     }
                 }
@@ -95,7 +112,7 @@ export async function loadFeatures() {
                                     form.appendChild(p);
                                     if (isFunction(dialogAction)) {
                                         input.addEventListener('change', (e) => {
-                                            var r = { "id": input.id, "type": "input", "action": "change", "value": input.value,"setInputValue":(id,v)=>d.querySelector("#"+id)?d.querySelector("#"+id).value=v:null,"getInputValue":(id)=>d.querySelector("#"+id)?d.querySelector("#"+id).value:null};
+                                            var r = { "id": input.id, "type": "input", "action": "change", "value": input.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
                                             dialogAction(r);
                                         });
                                     }
@@ -123,7 +140,7 @@ export async function loadFeatures() {
                                     form.appendChild(p);
                                     if (isFunction(dialogAction)) {
                                         select.addEventListener('change', (e) => {
-                                            var r = { "id": select.id, "type": "select", "action": "change", "value": select.value,"setInputValue":(id,v)=>d.querySelector("#"+id)?d.querySelector("#"+id).value=v:null,"getInputValue":(id)=>d.querySelector("#"+id)?d.querySelector("#"+id).value:null};
+                                            var r = { "id": select.id, "type": "select", "action": "change", "value": select.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
                                             dialogAction(r);
                                         });
                                     }
@@ -134,7 +151,7 @@ export async function loadFeatures() {
                         d.appendChild(form);
                         if (isFunction(dialogAction)) {
                             d.addEventListener('close', (e) => {
-                                var r = { "id": d.id, "type": "dialog", "action": "close", "value": d.returnValue,"setInputValue":(id,v)=>d.querySelector("#"+id)?d.querySelector("#"+id).value=v:null,"getInputValue":(id)=>d.querySelector("#"+id)?d.querySelector("#"+id).value:null};
+                                var r = { "id": d.id, "type": "dialog", "action": "close", "value": d.returnValue, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
                                 dialogAction(r);
                             });
                         }

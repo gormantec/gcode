@@ -1,9 +1,10 @@
 const FILE_PREFIX = "File-";
 const CONTENT_TYPE_PREFIX = "ContentType-";
 
-export function save(filename, data) {
+export function save(filename, data, overwrite = true) {
     let saveData = null;
     let contentType = "[object String]";
+    if (!overwrite && localStorage.getItem(FILE_PREFIX  + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
         saveData = btoa(data);
         contentType = "[object String]";
@@ -18,14 +19,14 @@ export function save(filename, data) {
         contentType = "[object Uint8Array]";
     }
     else if ({}.toString.call(data) == "[object Array]") {
-        saveData = btoa(JSON.stringify({array:data}));
+        saveData = btoa(JSON.stringify({ array: data }));
         contentType = "[object Array]";
     }
-    else{
+    else {
         return;
     }
-    localStorage.setItem(FILE_PREFIX +"-"+ filename, saveData);
-    localStorage.setItem(CONTENT_TYPE_PREFIX +"-"+ filename, contentType);
+    localStorage.setItem(FILE_PREFIX  + filename, saveData);
+    localStorage.setItem(CONTENT_TYPE_PREFIX  + filename, contentType);
 }
 
 function canJSON(value) {
@@ -37,29 +38,44 @@ function canJSON(value) {
     }
 }
 
-export function open(filename) {
+export function load(filename,asString = false) {
     let b64 = localStorage.getItem(FILE_PREFIX + filename);
-    let contentType = localStorage.getItem(FILE_PREFIX + filename);
-    if (contentType == "[object String]")
-    {
+    let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
+    console.log(contentType);
+    if (contentType == "[object String]") {
         return atob(b64);
     }
-    else if (contentType == "[object Object]")
-    {
-        return JSON.parse(atob(b64));
+    else if (contentType == "[object Object]") {
+        return asString?atob(b64):JSON.parse(atob(b64));
     }
-    else if (contentType == "[object Uint8Array]")
-    {
-        return atob(str).split('').map(function (c) { return c.charCodeAt(0); });
+    else if (contentType == "[object Uint8Array]") {
+        var result=atob(str).split('').map(function (c) { return c.charCodeAt(0); });
+        return asString?result.toString():result;
     }
-    else if (contentType == "[object Array]")
-    {
-        return JSON.parse(atob(b64)).array;
+    else if (contentType == "[object Array]") {
+        return asString?JSON.parse(atob(b64)).array.toString():JSON.parse(atob(b64)).array;
     }
-    
+
 }
 
 export function remove(filename) {
     localStorage.removeItem(FILE_PREFIX + filename);
     localStorage.removeItem(CONTENT_TYPE_PREFIX + filename);
+}
+
+export function listNames() {
+    var keys = Object.keys(localStorage);
+    var files=[];
+    if(keys)
+    {
+        var i = keys.length;
+        keys.sort();
+        keys.reverse();
+        while (i--) {
+            if (keys[i].startsWith(FILE_PREFIX) && keys[i] != FILE_PREFIX) {
+                files.push(keys[i].substring(FILE_PREFIX.length));
+            }
+        }
+    }
+    return files;
 }
