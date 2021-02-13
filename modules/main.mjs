@@ -558,21 +558,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         
     };
-    if (githubtree.getToken()) {
-        doSomething();
-    }
-    else {
-        githubtree.getCode(guid, (e, code) => {
-            if (!e) {
-                fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
-                    response => response.json()
-                ).then((json) => {
-                    githubtree.setToken(json.data.access_token);
-                    doSomething();
-                });
-            }
-        });
-    }
+
 
 
 });
