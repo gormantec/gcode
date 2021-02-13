@@ -346,13 +346,15 @@ window.setEditorMode=function() {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
+        editor.setOption("lint", CodeMirror.lint.javascript);
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
+        editor.setOption("lint", CodeMirror.lint.javascript);
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
-        editor.setOption("lint", CodeMirror.lint.typescript)
+        editor.setOption("lint", CodeMirror.lint.typescript);
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
@@ -365,6 +367,7 @@ window.setEditorMode=function() {
     }
     else if (filename.endsWith(".json")) {
         window.editor.setOption("mode", "javascript");
+        editor.setOption("lint", CodeMirror.lint.javascript);
     }
     else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
         window.editor.setOption("mode", "htmlmixed");
