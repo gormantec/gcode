@@ -119,6 +119,7 @@ export function afterLoad() {
         githubtree.waitForOctokit(() => {
             githubtree.getAuthenticated().then((resp) => {
                 myLogin = resp.data.login;
+                console.log(resp.data);
                 githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
         });
@@ -168,6 +169,7 @@ export function toolbarAction(e) {
         var doSomething = function () {
             githubtree.getAuthenticated().then((resp) => {
                 myLogin = resp.data.login;
+                console.log(resp.data);
                 if (resp.data.login) {
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
                     if (gitRepoName) {
