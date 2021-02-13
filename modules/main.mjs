@@ -552,12 +552,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("splashScreen").hidden = true;
     }, 2000);
 
-    var doSomething=function(){
-        waitForOctokit(()=>{
-            console.log(githubtree.getAuthenticated());
-        });
-        
-    };
+
 
 
 

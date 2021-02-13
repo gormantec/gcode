@@ -77,6 +77,12 @@ export function refresh() {
 export function afterLoad() {
 
     var guid = uuidv4();
+    var doSomething=function(){
+        waitForOctokit(()=>{
+            console.log(githubtree.getAuthenticated());
+        });
+        
+    };
 
     if (githubtree.getToken()) {
         doSomething();
