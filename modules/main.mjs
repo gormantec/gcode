@@ -352,6 +352,7 @@ window.setEditorMode=function() {
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
+        editor.setOption("lint", CodeMirror.lint.typescript)
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
@@ -421,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         foldGutter: true,
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        lint: true //{ 'esversion': '6' }
+        lint: { 'esversion': 10 }
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
