@@ -78,7 +78,7 @@ export function afterLoad() {
 
     var guid = uuidv4();
     var doSomething=function(){
-        waitForOctokit(()=>{
+        githubtree.waitForOctokit(()=>{
             console.log(githubtree.getAuthenticated());
         });
         
