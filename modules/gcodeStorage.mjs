@@ -42,19 +42,24 @@ export function load(filename,asString = false) {
     let b64 = localStorage.getItem(FILE_PREFIX + filename);
     let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
     console.log(contentType);
+    var result;
     if (contentType == "[object String]") {
-        return atob(b64);
+        result= atob(b64);
     }
     else if (contentType == "[object Object]") {
-        return asString?atob(b64):JSON.parse(atob(b64));
+        result= asString?atob(b64):JSON.parse(atob(b64));
     }
     else if (contentType == "[object Uint8Array]") {
-        var result=atob(str).split('').map(function (c) { return c.charCodeAt(0); });
-        return asString?result.toString():result;
+        var result1=atob(str).split('').map(function (c) { return c.charCodeAt(0); });
+        result= asString?result1.toString():result1;
     }
     else if (contentType == "[object Array]") {
-        return asString?JSON.parse(atob(b64)).array.toString():JSON.parse(atob(b64)).array;
+        result= asString?JSON.parse(atob(b64)).array.toString():JSON.parse(atob(b64)).array;
     }
+    console.log("filename="+filename);
+    console.log("asString="+asString);
+    console.log(result);
+    return result;
 
 }
 
