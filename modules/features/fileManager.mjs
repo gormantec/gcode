@@ -213,7 +213,7 @@ export function toolbarAction(e) {
             doSomething();
         }
         else {
-            getCode(guid, (e, code) => {
+            githubtree.getCode(guid, (e, code) => {
                 if (!e) {
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
@@ -502,33 +502,7 @@ function _openDir(element) {
 
 
 
-function getCode(guid, callback) {
-    var w = window.outerWidth || document.documentElement.clientWidth || 0;
-    var h = window.outerHeight || document.documentElement.clientHeight || 0;
-    var x = (window.screenX || window.screenLeft || 0);
-    var y = (window.screenY || window.screenTop || 0);
-    var win = window.open("https://github.com/login/oauth/authorize?scope=user:email%20user:login%20repo&client_id=0197d74da25302207cf6&state=" + guid, "github Auth", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=600,top=" + (y - 300 + h / 2) + ",left=" + (x - 188 + w / 2));
 
-    var count = 0;
-    var loop = setInterval(function () {
-        count++;
-        var queryString = "";
-        try { queryString = win.location.search; } catch (e) { }
-        const urlParams = new URLSearchParams(queryString);
-        const code = urlParams.get('code')
-        if (code) {
-            clearInterval(loop);
-            win.close();
-            return callback(null, code);
-        }
-        else if (count > 240) {
-            clearInterval(loop);
-            win.close();
-            return callback({ error: "timeout" });
-        }
-
-    }, 500);
-}
 
 
 
