@@ -76,6 +76,8 @@ export function refresh() {
 
 export function afterLoad() {
 
+    var guid = uuidv4();
+
     if (githubtree.getToken()) {
         doSomething();
     }
