@@ -368,6 +368,8 @@ window.setEditorMode=function() {
     else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
         window.editor.setOption("mode", "htmlmixed");
     }
+
+    console.log(window.editor.getOption("mode"));
 }
 
 
@@ -521,7 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     panel.addEventListener("mousedown", function (e) {
-
+        console.log(window.editor.getOption("mode"));
         if (e.offsetX > (panel.clientWidth - BORDER_SIZE)) {
             m_posx = e.x;
             document.addEventListener("mousemove", resizex, false);
