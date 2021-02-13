@@ -519,7 +519,7 @@ function getCode(guid, callback) {
             win.close();
             return callback(null, code);
         }
-        else if (count > 200) {
+        else if (count > 240) {
             clearInterval(loop);
             win.close();
             return callback({ error: "timeout" });
