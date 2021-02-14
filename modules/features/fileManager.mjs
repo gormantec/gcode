@@ -145,6 +145,7 @@ export function afterLoad() {
                 window.myLogin = resp.data.login;
                 console.log(resp.data.login);
                 console.log(resp.data);
+                document.querySelector("#userIcon").style.backgroundImange = resp.data.avatar_url;
                 githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
         });
