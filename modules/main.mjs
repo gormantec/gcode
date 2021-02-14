@@ -512,12 +512,14 @@ document.addEventListener("DOMContentLoaded", function () {
             window.leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx);
             panel.style.width = window.leftPageWidth + "px";
             panelMiddle.style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
-            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
-            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
         }
         else{
-            document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
-            document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
+            if(document.getElementById("pageLeftToolbar").style.display != "none")
+            {
+
+                document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
+                document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
+            }
         }
     }
 
