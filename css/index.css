@@ -29,6 +29,16 @@ body {
     background-color: #005040;
 }
 
+#userIcon{
+    float: right;
+    margin-top:-8px;
+    margin-right:2px;
+    width:40px;
+    height:40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 #filename {
     position: absolute;
     font-size: 16px;
@@ -414,6 +424,10 @@ dialog{
     }
     .pageLeftToolbarButton i {
         font-size: 42px;
+    }
+    #userIcon{
+        width:50px;
+        height:50px;
     }
     
   }
