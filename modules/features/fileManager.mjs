@@ -142,7 +142,8 @@ export function afterLoad() {
     if (githubtree.getToken()) {
         githubtree.waitForOctokit(() => {
             githubtree.getAuthenticated().then((resp) => {
-                myLogin = resp.data.login;
+                window.myLogin = resp.data.login;
+                console.log(resp.data.login);
                 console.log(resp.data);
                 githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
