@@ -38,7 +38,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                             else if(name=="asconfig.json" && dapp!=true)
                             {
                                 window.debug.log("got file:"+name);
-                                return JSON.stringify({ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} });
+                                return JSON.stringify({ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }});
                             }
                             else if (name.indexOf("node_modules/")>=0) {
                                 var pos=name.lastIndexOf("node_modules/") +13;
