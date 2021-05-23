@@ -21,8 +21,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         stderr,
                         readFile(name, baseDir) {
                             //console.log("name = " + name + "  baseDir = " + baseDir);
-                            if (baseDir == "." && load(name) && name!="NA") {
-                                return load(name, true);
+                            const _fileData=load(name,true);
+                            if (baseDir == "." &&  _fileData && _fileData!="NA") {
+                                return _fileData;
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
                                 window.debug.log("Got App:" + name);
