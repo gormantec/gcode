@@ -478,6 +478,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //divert console output to webpage.
 
+    /*
+
 (function () {
         var old = console.log;
         var olde = console.error;
@@ -503,6 +505,8 @@ document.addEventListener("DOMContentLoaded", function () {
             pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
         }
     })();
+
+    */
 
 
     const BORDER_SIZE = 4;
