@@ -380,7 +380,7 @@ window.setEditorMode=function() {
     }
 
     window.debug.log(window.editor.getOption("mode"));
-    window.debug.log(window.editor);
+    window.debug.log(window.editor.options);
     //window.editor
 }
 
