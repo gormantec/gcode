@@ -380,6 +380,8 @@ window.setEditorMode=function() {
     }
 
     console.log(window.editor.getOption("mode"));
+    console.log(JSON.stringify(window.editor));
+    //window.editor
 }
 
 
@@ -420,6 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var theme = "material-darker2";
     window.editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
+        value:"/* NONE */",
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
