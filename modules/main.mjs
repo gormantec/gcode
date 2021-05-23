@@ -430,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         foldGutter: true,
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        lint: { 'esversion': 6 }
+        lint: { esversion: 8 }
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
