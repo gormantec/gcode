@@ -20,7 +20,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         stdout,
                         stderr,
                         readFile(name, baseDir) {
-                            console.log("name = " + name + "  baseDir = " + baseDir);
+                            //console.log("name = " + name + "  baseDir = " + baseDir);
                             if (baseDir == "." && load(name)) {
                                 return load(name, true);
                             }
@@ -42,6 +42,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 const _fileString = load(_name, true);
               
                                 if (_fileString) {
+                                    console.log("found:"+_name);
                                     return _fileString;
                                 }
                                 else if (_fileString == "NA") {
@@ -56,6 +57,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 if (!failed) window.setTimeout(_run, 2000);
                                                 failed = true;
                                                 save(_name,text);
+                                                console.log("added:"+_name);
                                             }
                                             else {
                                                 _name(_name, "NA");
