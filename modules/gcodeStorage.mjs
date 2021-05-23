@@ -84,7 +84,7 @@ export function listNames() {
         keys.sort();
         keys.reverse();
         while (i--) {
-            if (keys[i].startsWith(FILE_PREFIX) && keys[i] != FILE_PREFIX) {
+            if (keys[i].startsWith(FILE_PREFIX) && !keys[i].startsWith(FILE_PREFIX+"dist/") && keys[i] != FILE_PREFIX) {
                 files.push(keys[i].substring(FILE_PREFIX.length));
             }
         }
