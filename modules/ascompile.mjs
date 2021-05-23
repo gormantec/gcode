@@ -73,7 +73,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                             }
                             else {
-                                window.debug.log(" ?? > " + name);
                                 return null;
                             }
 
