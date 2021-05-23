@@ -38,7 +38,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                             }
                             else if (name.startsWith("/node_modules/")) {
 
-                                const _name = "dist/" + _name.substring(14)
+                                const _name = "dist/" + name.substring(14)
                                 const _fileString = load(_name, true);
               
                                 if (_fileString) {
