@@ -58,7 +58,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             if (text) {
                                                 if (!failed) window.setTimeout(_run, 2000);
                                                 failed = true;
-                                                try{ save(_name,text); } catch(e){console.log("Seve error: "+e);save(_name,"NA");}
+                                                try{ save(_name,text); } catch(e){console.log("Save error: "+e);save(_name,"NA");}
                                                 console.log("added:"+_name);
                                             }
                                             else {
