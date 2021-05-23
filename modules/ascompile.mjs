@@ -22,7 +22,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         readFile(name, baseDir) {
                             //console.log("name = " + name + "  baseDir = " + baseDir);
                             const _fileData=load(name,true);
-                            if (baseDir == "." &&  _fileData && _fileData!="NA") {
+                            if (baseDir == "." &&  _fileData && name.indexOf("node_modules")<0) {
                                 return _fileData;
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
@@ -42,7 +42,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 const _name = "dist/" + name.substring(14)
                                 const _fileString = load(_name, true);
               
-                                if (_fileString) {
+                                if (_fileString && _fileString != "NA") {
                                     console.log("found:"+_name);
                                     return _fileString;
                                 }
