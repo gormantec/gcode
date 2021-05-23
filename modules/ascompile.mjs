@@ -17,19 +17,19 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                         stdout,
                         stderr,
                         readFile(name, baseDir) {
-                            console.log("f="+name);
+                            window.debug.log("f="+name);
                             if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
-                                //console.log("Got App:" + name);
+                                //window.debug.log("Got App:" + name);
                                 return sourceCode;
                             }
                             else if(name=="asconfig.json" && sourceCode.indexOf("near-sdk-as")>0)
                             {
-                                console.log("got near-sdk-as file:"+name);
+                                window.debug.log("got near-sdk-as file:"+name);
                                 return '{"extends": "near-sdk-as/asconfig.json"}';
                             }
                             else if(name=="asconfig.json" )
                             {
-                                console.log("got file:"+name);
+                                window.debug.log("got file:"+name);
                                 return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }';
                             }
                             else if (name.indexOf("node_modules/")>=0) {
@@ -58,7 +58,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                             else{
                                                 localStorage.setItem("dist/" + _name.substring(pos), "NA");
                                             }
-                                        }).catch((error) => { console.log("fetch error:" + error); })
+                                        }).catch((error) => { window.debug.log("fetch error:" + error); })
                                         .finally(()=>{
                                             downloading--;
                                         });
@@ -67,7 +67,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 
                             }
                             else {
-                                console.log(" ?? > "+name);
+                                window.debug.log(" ?? > "+name);
                                 return null;
                             }
 
@@ -84,7 +84,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                             }
                         },
                         listFiles(dirname, baseDir) {
-                            console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
+                            window.debug.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
                             return [];
                         }
                     }, err => {
@@ -101,31 +101,31 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                             {
                                 if(tryCount>0)
                                 {
-                                    console.log("\b..");
+                                    window.debug.log("\b..");
                                 }
                                 else{
-                                    console.log("downloading depenadnt files..");
+                                    window.debug.log("downloading depenadnt files..");
                                 }
                                 tryCount++;
 
                             }
                             else{
 
-                                    if(stdout.toString().trim()!="")console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                    if(stderr.toString().trim()!="")console.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                    if(stdout.toString().trim()!="")window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                    if(stderr.toString().trim()!="")window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                     if (err) {
-                                        console.log(">>> ERROR THROWN >>>");
-                                        console.log(err);
+                                        window.debug.log(">>> ERROR THROWN >>>");
+                                        window.debug.log(err);
                                         callback(err);
                                     }
                                     else {
-                                        console.log("Compiled Ok");
+                                        window.debug.log("Compiled Ok");
                                         var readTryCount=0;
                                         var waitRead=()=>{
                                             if(dataURL=="reading" || (dataURL==null && readTryCount<10))
                                             {
-                                                if(readTryCount==0)console.log("reading file..");
-                                                else console.log("\b..");
+                                                if(readTryCount==0)window.debug.log("reading file..");
+                                                else window.debug.log("\b..");
                                                 readTryCount++;
                                                 setTimeout(waitRead,500);
                                             }
@@ -144,5 +144,5 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
         }
         _run();
     }
-    catch (e) { console.log(e); }
+    catch (e) { window.debug.log(e); }
 }

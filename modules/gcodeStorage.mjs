@@ -41,7 +41,7 @@ function canJSON(value) {
 export function load(filename,asString = false) {
     let b64 = localStorage.getItem(FILE_PREFIX + filename);
     let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
-    console.log(contentType);
+    window.debug.log(contentType);
     var result="";
     if (contentType == "[object String]") {
         result= atob(b64);
@@ -56,9 +56,9 @@ export function load(filename,asString = false) {
     else if (contentType == "[object Array]") {
         result= asString?JSON.parse(atob(b64)).array.toString():JSON.parse(atob(b64)).array;
     }
-    //console.log("filename="+filename);
-    //console.log("asString="+asString);
-    //console.log(result);
+    //window.debug.log("filename="+filename);
+    //window.debug.log("asString="+asString);
+    //window.debug.log(result);
     return result;
 
 }

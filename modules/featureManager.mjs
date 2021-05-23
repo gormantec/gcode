@@ -96,7 +96,7 @@ export async function loadFeatures() {
                         menu.appendChild(b_ok);
                         if (isArray(dialog.content)) {
                             Array.from(dialog.content).forEach((widget) => {
-                                console.log(widget);
+                                window.debug.log(widget);
                                 if (widget.type.startsWith("input")) {
                                     var type = "text";
                                     if (widget.type.indexOf("/") > 0) type = widget.type.substring(widget.type.indexOf("/") + 1);
@@ -118,7 +118,7 @@ export async function loadFeatures() {
                                     }
                                 }
                                 else if (widget.type.startsWith("select")) {
-                                    console.log("found select");
+                                    window.debug.log("found select");
                                     let select = window.document.createElement("select");
                                     let p = window.document.createElement("p");
                                     let label = window.document.createElement("label");
@@ -171,7 +171,7 @@ export async function loadFeatures() {
                 }
             }
             else {
-                console.log("Error: " + f.uri + " does not exist.");
+                window.debug.log("Error: " + f.uri + " does not exist.");
             }
         }
     }

@@ -1,7 +1,7 @@
 window.PWA=window.PWA || {};
 window.PWA.globals=window.PWA.globals || {};
 
-var debug = debug || { log:function(v){console.log(v);} }; 
+window.debug = window.debug || { log: function (v) { window.debug.console(v); } };
 
 class PWA {
     constructor(params) {

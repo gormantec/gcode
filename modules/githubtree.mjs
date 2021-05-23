@@ -99,10 +99,10 @@ export async function saveFile(name, content, encode, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
     var sha = null;
-    console.log(repo);
-    console.log(dirpath);
-    console.log(filename);
-    console.log(repos[repo]);
+    window.debug.log(repo);
+    window.debug.log(dirpath);
+    window.debug.log(filename);
+    window.debug.log(repos[repo]);
     if(repos[repo][dirpath])
     {
         var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
@@ -110,7 +110,7 @@ export async function saveFile(name, content, encode, callback) {
     }
     else{
         var result=await pullGitRepository({ username: username, repo: repo, path:dirpath });
-        console.log(result);
+        window.debug.log(result);
         if(repos[repo][dirpath])
         {
             var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
@@ -118,7 +118,7 @@ export async function saveFile(name, content, encode, callback) {
         }
     }
 
-    console.log("sha="+sha);
+    window.debug.log("sha="+sha);
     var f = {
         owner: username,
         repo: repo,
@@ -132,7 +132,7 @@ export async function saveFile(name, content, encode, callback) {
     octokit.repos.createOrUpdateFileContents(f).then((d) => {
         if (!sha) addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha: d.data.content.sha, type: "file" });
         callback(null, d);
-    }).catch((e) => { console.log(e); callback(e); });;
+    }).catch((e) => { window.debug.log(e); callback(e); });;
 }
 export function deleteFile(name, callback) {
     var firstColon = name.indexOf(":", 6);
@@ -158,7 +158,7 @@ export function deleteFile(name, callback) {
     octokit.repos.deleteFile(f).then((d) => {
         repos[repo][dirpath].files = repos[repo][dirpath].files.filter(function (obj) { return obj.name != filename; });
         callback(null, d);
-    }).catch((e) => { console.log(e); callback(e); });;
+    }).catch((e) => { window.debug.log(e); callback(e); });;
 }
 
 export function getToken() {
@@ -305,7 +305,7 @@ export function getGitFile(username, repo, path, callback) {
         repo: repo,
         path: path
     };
-    octokit.repos.getContent(params).then((d) => callback(null, atob(d.data.content))).catch((e) => { console.log(e); callback(e); });;
+    octokit.repos.getContent(params).then((d) => callback(null, atob(d.data.content))).catch((e) => { window.debug.log(e); callback(e); });;
 }
 
 export function pullGitRepository(params, callbackrefresh) {
@@ -344,7 +344,7 @@ export function pullGitRepository(params, callbackrefresh) {
                         }
                     });
                     callback();
-                }).catch((e) => { console.log("error:"+e); callback(); });;;
+                }).catch((e) => { window.debug.log("error:"+e); callback(); });;;
         
         
             }
@@ -406,7 +406,7 @@ export function cacheRepo(params, callbackrefresh) {
                     }
                 });
                 //callback();
-            }).catch((e) => { console.log("error:"+e); callback("error",repo,""+e); });;;
+            }).catch((e) => { window.debug.log("error:"+e); callback("error",repo,""+e); });;;
     
     
         }
