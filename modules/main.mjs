@@ -354,7 +354,10 @@ window.setEditorMode=function() {
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
-        window.editor.setOption('lint', { options: { esversion: 8 }});
+        window.editor.setOption("typescript", "true");
+        window.editor.setOption('lint', { options: { esversion: 8,typescript: true }});
+
+        
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
