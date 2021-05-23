@@ -51,6 +51,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 }
                                 else {
                                     downloading++;
+                                    console.log("fetch: https://gcode.com.au/"+_name);
                                     fetch("https://gcode.com.au/"+_name)
                                         .then(response => response.ok ? response.text() : null)
                                         .then(text => {
@@ -74,6 +75,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                             }
                             else {
+                                console.log("????: https://gcode.com.au/"+_name);
                                 return null;
                             }
 
