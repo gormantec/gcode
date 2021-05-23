@@ -60,7 +60,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 console.log("added:"+_name);
                                             }
                                             else {
-                                                _name(_name, "NA");
+                                                save(_name, "NA");
                                             }
                                         }).catch((error) => { window.debug.log("fetch error:" + error); })
                                         .finally(() => {
