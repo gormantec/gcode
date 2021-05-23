@@ -5,7 +5,7 @@ import { save,load,remove } from '/modules/gcodeStorage.mjs';
 
 
 
-window.debug = window.debug || { log: function (v) { window.debug.console(v); } };
+window.debug = window.debug || { log: function (v) { console.log(v); } };
 
 //int variables   
 
