@@ -1,5 +1,5 @@
 export function run(sourceCode,mainFilename,editorFilename,outputFilename,callback){
-
+    console.log("editorFilename:"+editorFilename);
     try {
                 
         var tryCount=0;
