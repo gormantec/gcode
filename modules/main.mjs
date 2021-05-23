@@ -438,8 +438,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var lastFileName = localStorage.getItem("lastFileName");
     if (lastFileName) {
         document.getElementById("filename").innerText = lastFileName;
-        window.setEditorMode();
         window.editor.setValue(load(lastFileName,true));
+        window.setEditorMode();
     }
     else {
         document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
