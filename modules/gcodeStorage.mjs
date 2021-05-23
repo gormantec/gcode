@@ -1,25 +1,28 @@
 const FILE_PREFIX = "File-";
 const CONTENT_TYPE_PREFIX = "ContentType-";
 
+
+
+
 export function save(filename, data, overwrite = true) {
     let saveData = null;
     let contentType = "[object String]";
     if (!overwrite && localStorage.getItem(FILE_PREFIX  + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
-        saveData = btoa(data);
+        saveData = window.btoa(unescape(encodeURIComponent(data)));
         contentType = "[object String]";
     }
     else if ({}.toString.call(data) == "[object Object]" && canJSON(data)) {
-        saveData = btoa(JSON.stringify(data));
+        saveData = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))));
         contentType = "[object Object]";
     }
     else if ({}.toString.call(data) == "[object Uint8Array]") {
         var decoder = new TextDecoder('utf8');
-        saveData = btoa(decoder.decode(data));
+        saveData = window.btoa(unescape(encodeURIComponent(decoder.decode(data))));
         contentType = "[object Uint8Array]";
     }
     else if ({}.toString.call(data) == "[object Array]") {
-        saveData = btoa(JSON.stringify({ array: data }));
+        saveData = window.btoa(unescape(encodeURIComponent(JSON.stringify({ array: data }))));
         contentType = "[object Array]";
     }
     else {
@@ -49,17 +52,17 @@ export function load(filename,asString = false) {
     //window.debug.log(contentType);
     var result=null;
     if (contentType == "[object String]") {
-        result= atob(b64);
+        result= decodeURIComponent(escape(window.atob(b64)));
     }
     else if (contentType == "[object Object]") {
-        result= asString?atob(b64):JSON.parse(atob(b64));
+        result= asString?decodeURIComponent(escape(window.atob(b64))):JSON.parse(decodeURIComponent(escape(window.atob(b64))));
     }
     else if (contentType == "[object Uint8Array]") {
-        var result1=atob(str).split('').map(function (c) { return c.charCodeAt(0); });
+        var result1=decodeURIComponent(escape(window.atob(str))).split('').map(function (c) { return c.charCodeAt(0); });
         result= asString?result1.toString():result1;
     }
     else if (contentType == "[object Array]") {
-        result= asString?JSON.parse(atob(b64)).array.toString():JSON.parse(atob(b64)).array;
+        result= asString?JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array.toString():JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array;
     }
 
     //window.debug.log("result="+result);
