@@ -353,9 +353,8 @@ window.setEditorMode=function() {
         window.editor.setOption('lint', { options: { esversion: 8 }});
     }
     else if (filename.endsWith(".ts")) {
-        window.editor.setOption("mode", "text/typescript");
-        window.editor.setOption("typescript", "true");
-        window.editor.setOption('lint', { options: { esversion: 8,typescript: true }});
+        window.editor.setOption("mode", { name: "javascript", typescript: true });
+        window.editor.setOption('lint', { options: { esversion: 8 }});
 
         
     }
