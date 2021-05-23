@@ -1,5 +1,5 @@
 
-import { save,load,remove,parent } from '/modules/gcodeStorage.mjs';
+import { save,load } from '/modules/gcodeStorage.mjs';
 
 export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,callback){
     console.log("editorFilename:"+editorFilename);
@@ -20,8 +20,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                         stdout,
                         stderr,
                         readFile(name, baseDir) {
-                            console.log("name = "+name);
-                            console.log("baseDir = "+baseDir);
+                            console.log("name = "+name +"  baseDir = "+baseDir);
                             if(baseDir=="." && load(name))
                             {
                                 return load(name,true);
