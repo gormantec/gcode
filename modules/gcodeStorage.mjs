@@ -62,7 +62,7 @@ export function load(filename,asString = false) {
         result= asString?JSON.parse(atob(b64)).array.toString():JSON.parse(atob(b64)).array;
     }
 
-    window.debug.log("result="+result);
+    //window.debug.log("result="+result);
     //window.debug.log("filename="+filename);
     //window.debug.log("asString="+asString);
     //window.debug.log(result);
