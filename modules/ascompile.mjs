@@ -22,9 +22,9 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                         readFile(name, baseDir) {
                             console.log("name = "+name);
                             console.log("baseDir = "+baseDir);
-                            if(load(editorFilename))
+                            if(baseDir=="." && load(name))
                             {
-                                return load(editorFilename,true);
+                                return load(name,true);
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
                                 window.debug.log("Got App:" + name);
@@ -38,7 +38,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                             else if(name=="asconfig.json" && dapp!=true)
                             {
                                 window.debug.log("got file:"+name);
-                                return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }';
+                                return JSON.stringify({ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} });
                             }
                             else if (name.indexOf("node_modules/")>=0) {
                                 var pos=name.lastIndexOf("node_modules/") +13;
