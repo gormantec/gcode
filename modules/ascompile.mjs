@@ -58,7 +58,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             if (text) {
                                                 if (!failed) window.setTimeout(_run, 2000);
                                                 failed = true;
-                                                save(_name,text);
+                                                //save(_name,text);
                                                 console.log("added:"+_name);
                                             }
                                             else {
