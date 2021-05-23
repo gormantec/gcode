@@ -21,7 +21,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         stderr,
                         readFile(name, baseDir) {
                             //console.log("name = " + name + "  baseDir = " + baseDir);
-                            if (baseDir == "." && load(name)) {
+                            if (baseDir == "." && load(name) && name!="NA") {
                                 return load(name, true);
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
