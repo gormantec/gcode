@@ -43,7 +43,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 const _fileString = load(_name, true);
               
                                 if (_fileString && _fileString != "NA") {
-                                    console.log("found:"+_name);
+                                    //console.log("found:"+_name);
                                     return _fileString;
                                 }
                                 else if (_fileString == "NA") {
