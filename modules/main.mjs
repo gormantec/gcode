@@ -516,7 +516,6 @@ document.addEventListener("DOMContentLoaded", function () {
         else{
             if(document.getElementById("pageLeftToolbar").style.display != "none")
             {
-
                 document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
                 document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
             }
