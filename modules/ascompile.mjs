@@ -35,7 +35,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                                 return '{"extends": "near-sdk-as/asconfig.json"}';
                                 //return null;
                             }
-                            else if(name=="asconfig.json" )
+                            else if(name=="asconfig.json" && dapp!=true)
                             {
                                 window.debug.log("got file:"+name);
                                 return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }';
