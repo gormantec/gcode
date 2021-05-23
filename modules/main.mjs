@@ -346,34 +346,27 @@ window.setEditorMode=function() {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption("lint", CodeMirror.lint.javascript)
-        window.editor.setOption('lint', { options: { esversion: 6 }});
-        window.editor.setOption("lint", CodeMirror.lint.javascript);
+        window.editor.setOption('lint', { options: { esversion: 8 }});
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption("lint", CodeMirror.lint.javascript)
-        window.editor.setOption('lint', { options: { esversion: 6 }});
+        window.editor.setOption('lint', { options: { esversion: 8 }});
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
-        window.editor.setOption("lint", CodeMirror.lint.typescript);
+        window.editor.setOption('lint', { options: { esversion: 8 }});
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
-        window.editor.setOption("lint", CodeMirror.lint.python);
     }
     else if (filename.endsWith(".dart")) {
         window.editor.setOption("mode", "dart");
-        editor.setOption("lint", CodeMirror.lint.dart);
     }
     else if (filename.endsWith(".css")) {
         window.editor.setOption("mode", "css");
-        editor.setOption("lint", CodeMirror.lint.css);
     }
     else if (filename.endsWith(".json")) {
         window.editor.setOption("mode", "javascript");
-        editor.setOption("lint", CodeMirror.lint.javascript);
     }
     else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
         window.editor.setOption("mode", "htmlmixed");
@@ -419,6 +412,18 @@ window.addEventListener('resize', function (event) {
 document.addEventListener("DOMContentLoaded", function () {
     
     //configure editor
+
+    CodeMirror.defineMIME("text/javascript", "javascript");
+    CodeMirror.defineMIME("text/ecmascript", "javascript");
+    CodeMirror.defineMIME("application/javascript", "javascript");
+    CodeMirror.defineMIME("application/x-javascript", "javascript");
+    CodeMirror.defineMIME("application/ecmascript", "javascript");
+    CodeMirror.defineMIME("application/json", { name: "javascript", json: true });
+    CodeMirror.defineMIME("application/x-json", { name: "javascript", json: true });
+    CodeMirror.defineMIME("application/manifest+json", { name: "javascript", json: true })
+    CodeMirror.defineMIME("application/ld+json", { name: "javascript", jsonld: true });
+    CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+    CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
 
     var theme = "material-darker2";
     window.editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
