@@ -75,7 +75,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                             }
                             else {
-                                console.log("????: https://gcode.com.au/"+_name);
+                                console.log("????: "+name);
                                 return null;
                             }
 
