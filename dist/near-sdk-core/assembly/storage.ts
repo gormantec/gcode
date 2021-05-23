@@ -1,5 +1,5 @@
 import { env } from "./env";
-import { util } from "./util";
+import { isPrimitive, util } from "./util";
 
 /**
  * This class represents contract storage.
@@ -114,7 +114,6 @@ export class Storage {
    * @param key The unique identifier associated with a value in a key-value store
    * @returns True if the given key is present in the storage.
    */
-  @inline
   static hasKey(key: string): bool {
     return this.contains(key);
   }
@@ -205,7 +204,7 @@ export class Storage {
    * @returns A value of type T stored under the given key.
    */
   static getPrimitive<T>(key: string, defaultValue: T): T {
-    if (!isInteger<T>() && !isString<T>()) {
+    if (!isPrimitive<T>()) {
       ERROR(
         "Operation not supported. Please use storage.get<T> for non-primitives"
       );

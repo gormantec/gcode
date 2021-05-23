@@ -9,8 +9,9 @@
     }
   },
   "options": {
-    "runtime": "none",
-    "transform": ["visitor-as/dist/examples/includeBytesTransform.js", "near-sdk-bindgen", "visitor-as/dist/examples/exportAs.js"]
+    "runtime": "stub",
+    "transform": ["visitor-as/dist/examples/includeBytesTransform.js", "near-sdk-bindgen", "visitor-as/dist/examples/exportAs.js"],
+    "lib": "./assembly/json.lib.ts"
   },
   "entries": ["./assembly/bindgen.ts"]
   

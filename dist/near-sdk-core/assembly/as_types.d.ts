@@ -37,6 +37,11 @@ declare function defaultValue<T>(): T;
 declare function notPayable(): void;
 
 /**
+ * Throw if attached deposit does not equal 1 yoctoNEAR..
+ */
+ declare function oneYocto(): void;
+
+/**
  * Produces a warning during transform that element is deprecated.
  */
 declare function deprecated(_any: any): void;
@@ -50,3 +55,21 @@ declare function includeBytes(path: string): StaticArray<u8>;
  * Rename Wasm module export to any string including keywords.
  */
 declare function exportAs(_func: any, name: string): void;
+
+
+/**
+ * Declare that a singleton method should commit updates 
+ * to the state of the singleton contract so that changes persist.
+ */
+declare function mutateState(): (target: any,
+  propertyKey: string,
+  descriptor: any) => void;
+
+/**
+ * 
+ * Asserts that a contract method is private, e.i.
+ * Context.contractName == Context.predecessor
+ */
+declare function contractPrivate(): (target: any,
+propertyKey: string,
+descriptor: any) => void;

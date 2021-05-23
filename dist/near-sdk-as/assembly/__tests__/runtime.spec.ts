@@ -59,7 +59,20 @@ describe("Encodings", () => {
     expect(encoded).toBe("AAFaZA==", "Incorrect keys contents");
     const decoded = base64.decode("AAFaZA==");
     expect(decoded).toStrictEqual(
-      decoded,
+      array,
+      "Incorrect decoded value after base64 roundtrip"
+    );
+  });
+
+  it("base64 large array", () => {
+    const bytes = new Uint8Array(20000);
+    for(let n=0; n<bytes.length; n++) {
+      bytes[n] = n & 0xff;
+    }
+    const encoded = base64.encode(bytes);  
+    const decoded = base64.decode(encoded);
+    expect(decoded).toStrictEqual(
+      bytes,
       "Incorrect decoded value after base64 roundtrip"
     );
   });
@@ -147,10 +160,14 @@ describe("outcome", () => {
 
   it("should return acturate logs", () => {
     logging.log("hello world");
+    let nine = 9;
+    const str = `should handle string interpolation ${nine} ${false}`;
+    logging.log(str);
     expect(VM.logs()).toIncludeEqual(
       "hello world",
       'log should include "hello world"'
     );
+    expect(VM.logs()).toIncludeEqual(str);
   });
 
   it("should increase the storage usage more when first added", () => {
@@ -316,6 +333,13 @@ describe("Storage", (): void => {
     expect(storage.get<string>("nonexistent", null)).toBeNull(
       "Incorrect data value for get<T> string nonexistent key"
     );
+    const bigPi: f64 = 3.14159265358979323851280895940618620443274267017841339111328125;
+    storage.set("f64", bigPi);
+    expect(storage.getPrimitive<f64>("f64", 0)).toBeCloseTo(bigPi);
+
+    const pi: f32 = 3.14159265358979323851280895940;
+    storage.set("f32", pi);
+    expect(storage.getPrimitive<f32>("f32", 0)).toBeCloseTo(pi);
   });
 
   it("Keys", () => {
@@ -691,6 +715,16 @@ describe("Context", () => {
     });
   });
 
+  it("should be consistent after modification", () => {
+    storage.set("key", "value");
+    log(VM.outcome());
+    let before = Context.storageUsage;
+    VMContext.setAttached_deposit(u128.Zero); // creates a copy of the context with new attached deposit
+    log(VM.outcome());
+    let after = Context.storageUsage;
+    expect(before).toBe(after);
+  });
+
   it("should be editable", () => {
     VMContext.setCurrent_account_id("contractaccount");
     expect(Context.contractName).toBe("contractaccount", "Wrong contract name");
@@ -716,6 +750,18 @@ describe("Context", () => {
     expect(Context.usedGas <= 1000000000).toBe(true, "Wrong used gas");
     // expect(Context.usedGas > 0).toBe(true, "Wrong used gas");
     // expect(Context.storageUsage).toBe(0, "Wrong storage usage"); TODO: test when implemented
+  });
+
+  
+  it("should handle adding validators", () => {
+    VMContext.setValidator("john.near", u128.One);
+    expect(env.validator_stake("john.near")).toStrictEqual(u128.One);
+    expect(env.validator_total_stake()).toStrictEqual(u128.One);
+  });
+  
+  it("should handle no validators", () => {
+    expect(env.validator_stake("john.near")).toStrictEqual(u128.Zero);
+    expect(env.validator_total_stake()).toStrictEqual(u128.Zero);
   });
 });
 
