@@ -346,24 +346,30 @@ window.setEditorMode=function() {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
-        editor.setOption("lint", CodeMirror.lint.javascript);
+        window.editor.setOption("lint", CodeMirror.lint.javascript)
+        window.editor.setOption('lint', { options: { esversion: 6 }});
+        window.editor.setOption("lint", CodeMirror.lint.javascript);
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
-        editor.setOption("lint", CodeMirror.lint.javascript);
+        window.editor.setOption("lint", CodeMirror.lint.javascript)
+        window.editor.setOption('lint', { options: { esversion: 6 }});
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
-        editor.setOption("lint", CodeMirror.lint.typescript);
+        window.editor.setOption("lint", CodeMirror.lint.typescript);
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
+        window.editor.setOption("lint", CodeMirror.lint.python);
     }
     else if (filename.endsWith(".dart")) {
         window.editor.setOption("mode", "dart");
+        editor.setOption("lint", CodeMirror.lint.dart);
     }
     else if (filename.endsWith(".css")) {
         window.editor.setOption("mode", "css");
+        editor.setOption("lint", CodeMirror.lint.css);
     }
     else if (filename.endsWith(".json")) {
         window.editor.setOption("mode", "javascript");
@@ -424,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         foldGutter: true,
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        lint: { 'esversion': '6' }
+        lint: { 'esversion': 6 }
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
