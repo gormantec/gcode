@@ -20,7 +20,8 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                         stdout,
                         stderr,
                         readFile(name, baseDir) {
-                            window.debug.log("f="+name);
+                            console.log("name = "+name);
+                            console.log("baseDir = "+baseDir);
                             if(load(editorFilename))
                             {
                                 return load(editorFilename,true);
@@ -31,8 +32,8 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                             }
                             else if(name=="asconfig.json" && dapp==true)
                             {
-                                window.debug.log("got near-sdk-as file:"+name);
-                                return null;//JSON.stringify({"extends": "near-sdk-as/asconfig.json"});
+                                consolelog("dapp asconfig:"+name);
+                                JSON.stringify({"extends": "near-sdk-as/asconfig.json"});
                             }
                             else if(name=="asconfig.json" && dapp!=true)
                             {
