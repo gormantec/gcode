@@ -41,6 +41,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                                 return JSON.stringify({ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }});
                             }
                             else if (name.indexOf("node_modules/")>=0) {
+                                /*
                                 var pos=name.lastIndexOf("node_modules/") +13;
                                 var _name = name;
                                 var b64 = localStorage.getItem("dist/" + _name.substring(pos));
@@ -72,6 +73,8 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                                         });
                                     return null;
                                 }
+                                */
+                               return null;
                                 
                             }
                             else {

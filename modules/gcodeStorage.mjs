@@ -46,7 +46,7 @@ export function parent(filename)
 export function load(filename,asString = false) {
     let b64 = localStorage.getItem(FILE_PREFIX + filename);
     let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
-    window.debug.log(contentType);
+    //window.debug.log(contentType);
     var result=null;
     if (contentType == "[object String]") {
         result= atob(b64);
