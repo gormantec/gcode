@@ -26,14 +26,13 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                                 return load(editorFilename,true);
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
-                                //window.debug.log("Got App:" + name);
+                                window.debug.log("Got App:" + name);
                                 return sourceCode;
                             }
                             else if(name=="asconfig.json" && dapp==true)
                             {
                                 window.debug.log("got near-sdk-as file:"+name);
                                 return JSON.stringify({"extends": "near-sdk-as/asconfig.json"});
-                                //return null;
                             }
                             else if(name=="asconfig.json" && dapp!=true)
                             {
