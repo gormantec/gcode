@@ -1,7 +1,7 @@
 
 import { save,load,remove,parent } from '/modules/gcodeStorage.mjs';
 
-export function run(sourceCode,mainFilename,editorFilename,outputFilename,callback){
+export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,callback){
     console.log("editorFilename:"+editorFilename);
     try {
                 
@@ -29,18 +29,16 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                                 //window.debug.log("Got App:" + name);
                                 return sourceCode;
                             }
-                            else if(name=="asconfig.json" && sourceCode.indexOf("near-sdk-as")>0)
+                            else if(name=="asconfig.json" && dapp==true)
                             {
                                 window.debug.log("got near-sdk-as file:"+name);
-                                //return '{"extends": "near-sdk-as/asconfig.json"}';
-                                return null;
+                                return '{"extends": "near-sdk-as/asconfig.json"}';
+                                //return null;
                             }
                             else if(name=="asconfig.json" )
                             {
                                 window.debug.log("got file:"+name);
-                                //return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }';
-                                return null;
-
+                                return '{ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }';
                             }
                             else if (name.indexOf("node_modules/")>=0) {
                                 var pos=name.lastIndexOf("node_modules/") +13;

@@ -152,6 +152,7 @@ function _runCode()
                     filename,
                     filename,
                     "optimized.wasm",
+                    true,
                     (e,d) => { if(!e) window.debug.log(d); }
                 );
             });
@@ -165,6 +166,7 @@ function _runCode()
                     "node_modules/wasmdom/assembly/index.ts",
                     "wasmdom/assembly/src/app.ts",
                     "optimized.wasm",
+                    false,
                     (e,d) => {
                         if(!e)
                         {
