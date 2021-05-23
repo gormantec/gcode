@@ -45,6 +45,7 @@ export class u256 {
     return new u256(value, mask, mask, mask);
   }
 
+  @inline
   static fromBits(
     l0: u32, l1: u32, l2: u32, l3: u32,
     h0: u32, h1: u32, h2: u32, h3: u32,
@@ -62,7 +63,9 @@ export class u256 {
     // @ts-ignore
     if (array instanceof u8[]) {
       return bigEndian
+        // @ts-ignore
         ? u256.fromBytesBE(<u8[]>array)
+        // @ts-ignore
         : u256.fromBytesLE(<u8[]>array);
     } else if (array instanceof Uint8Array) {
       return bigEndian
@@ -73,6 +76,7 @@ export class u256 {
     }
   }
 
+  @inline
   static fromBytesLE(array: u8[]): u256 {
     assert(array.length && (array.length & 31) == 0);
     // @ts-ignore
@@ -85,9 +89,9 @@ export class u256 {
     );
   }
 
+  @inline
   static fromBytesBE(array: u8[]): u256 {
     assert(array.length && (array.length & 31) == 0);
-    // @ts-ignore
     var buffer = array.dataStart;
     return new u256(
       bswap<u64>(load<u64>(buffer, 3 * sizeof<u64>())),
@@ -97,9 +101,9 @@ export class u256 {
     );
   }
 
+  @inline
   static fromUint8ArrayLE(array: Uint8Array): u256 {
     assert(array.length && (array.length & 31) == 0);
-    // @ts-ignore
     var buffer = array.dataStart;
     return new u256(
         load<u64>(buffer, 0 * sizeof<u64>()),
@@ -109,9 +113,9 @@ export class u256 {
     );
   }
 
+  @inline
   static fromUint8ArrayBE(array: Uint8Array): u256 {
     assert(array.length && (array.length & 31) == 0);
-    // @ts-ignore
     var buffer = array.dataStart;
     return new u256(
         bswap<u64>(load<u64>(buffer, 3 * sizeof<u64>())),
@@ -363,18 +367,18 @@ export class u256 {
     if (shift <= 64) {
       if (shift == 0) return value;
       let hi2 =  value.hi2 >> off;
-      let hi1 = (value.hi1 >> off) | (hi2 << (64 - off));
-      let lo2 = (value.lo2 >> off) | (hi1 << (64 - off));
-      let lo1 = (value.lo1 >> off) | (lo2 << (64 - off));
+      let hi1 = (value.hi1 >> off) | (value.hi2 << 64 - off);
+      let lo2 = (value.lo2 >> off) | (value.hi1 << 64 - off);
+      let lo1 = (value.lo1 >> off) | (value.lo2 << 64 - off);
       return new u256(lo1, lo2, hi1, hi2);
     } else if (shift > 64 && shift <= 128) {
-      let hi1 = value.hi2 >> (128 - off);
+      let hi1 = value.hi2 >> 128 - off;
       return new u256(value.lo2, value.hi1, hi1);
     } else if (shift > 128 && shift <= 192) {
-      let lo2 = value.hi2 >> (192 - off);
+      let lo2 = value.hi2 >> 192 - off;
       return new u256(value.hi1, lo2);
     } else {
-      return new u256(value.hi2 >> (256 - off));
+      return new u256(value.hi2 >> 256 - off);
     }
   }
 
@@ -385,7 +389,10 @@ export class u256 {
 
   @inline @operator('==')
   static eq(a: u256, b: u256): bool {
-    return a.lo1 == b.lo1 && a.lo2 == b.lo2 && a.hi1 == b.hi1 && a.hi2 == b.hi2;
+    return (
+      a.lo1 == b.lo1 && a.lo2 == b.lo2 &&
+      a.hi1 == b.hi1 && a.hi2 == b.hi2
+    );
   }
 
   @inline @operator('!=')
@@ -395,7 +402,9 @@ export class u256 {
 
   @operator('<')
   static lt(a: u256, b: u256): bool {
-    var ah2 = a.hi2, ah1 = a.hi1, bh2 = b.hi2, bh1 = b.hi1, al2 = a.lo2, bl2 = b.lo2;
+    var ah2 = a.hi2, ah1 = a.hi1,
+        bh2 = b.hi2, bh1 = b.hi1,
+        al2 = a.lo2, bl2 = b.lo2;
     if (ah2 == bh2) {
       if (ah1 == bh1) {
         return al2 == bl2 ? a.lo1 < b.lo1 : al2 < bl2
@@ -422,6 +431,7 @@ export class u256 {
     return !u256.lt(a, b);
   }
 
+  @inline
   static popcnt(value: u256): i32 {
     var count = popcnt(value.lo1);
     if (value.lo2) count += popcnt(value.lo2);
@@ -430,6 +440,7 @@ export class u256 {
     return <i32>count;
   }
 
+  @inline
   static clz(value: u256): i32 {
          if (value.hi2) return <i32>(clz(value.hi2) + 0);
     else if (value.hi1) return <i32>(clz(value.hi1) + 64);
@@ -437,6 +448,7 @@ export class u256 {
     else                return <i32>(clz(value.lo1) + 192);
   }
 
+  @inline
   static ctz(value: u256): i32 {
          if (value.lo1) return <i32>(ctz(value.lo1) + 0);
     else if (value.lo2) return <i32>(ctz(value.lo2) + 64);
@@ -523,6 +535,7 @@ export class u256 {
     return <bool>(this.lo1 | this.lo2 | this.hi1 | this.hi2);
   }
 
+  @inline
   private toArrayBufferLE(buffer: usize): void {
     store<u64>(buffer, this.lo1, 0 * sizeof<u64>());
     store<u64>(buffer, this.lo2, 1 * sizeof<u64>());
@@ -530,6 +543,7 @@ export class u256 {
     store<u64>(buffer, this.hi2, 3 * sizeof<u64>());
   }
 
+  @inline
   private toArrayBufferBE(buffer: usize): void {
     store<u64>(buffer, bswap(this.hi2), 0 * sizeof<u64>());
     store<u64>(buffer, bswap(this.hi1), 1 * sizeof<u64>());
@@ -582,7 +596,6 @@ export class u256 {
   @inline
   toBytes(bigEndian: bool = false): u8[] {
     var result = new Array<u8>(32);
-    // @ts-ignore
     this.toArrayBuffer(result.dataStart, bigEndian);
     return result;
   }
@@ -595,12 +608,10 @@ export class u256 {
   @inline
   toUint8Array(bigEndian: bool = false): Uint8Array {
     var result = new Uint8Array(32);
-    // @ts-ignore
     this.toArrayBuffer(result.dataStart, bigEndian);
     return result;
   }
 
-  @inline
   clone(): u256 {
     return new u256(this.lo1, this.lo2, this.hi1, this.hi2);
   }
@@ -614,6 +625,7 @@ export class u256 {
     if (radix == 16) {
       let shift: i32 = 252 - (u256.clz(it) & ~3);
       while (shift >= 0) {
+        // @ts-ignore
         it >>= shift;
         result = result.concat(HEX_CHARS.charAt(<i32>(it.lo1 & 15)));
         shift -= 4;

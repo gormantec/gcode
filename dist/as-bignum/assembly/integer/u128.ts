@@ -15,7 +15,8 @@ import {
   __udivmod128_10,
 
   __divmod_quot_hi,
-  __divmod_rem,
+  __divmod_rem_lo,
+  __divmod_rem_hi,
 } from '../globals';
 
 import { atou128, u128toa10 } from '../utils';
@@ -116,26 +117,17 @@ export class u128 {
     }
   }
 
+  @inline
   static fromBytesLE(array: u8[]): u128 {
-    assert(array.length && (array.length & 15) == 0);
-    // @ts-ignore
-    var buffer = array.dataStart;
-    return new u128(
-      load<u64>(buffer, 0 * sizeof<u64>()),
-      load<u64>(buffer, 1 * sizeof<u64>())
-    );
+    return u128.fromUint8ArrayLE(changetype<Uint8Array>(array));
   }
 
+  @inline
   static fromBytesBE(array: u8[]): u128 {
-    assert(array.length && (array.length & 15) == 0);
-    // @ts-ignore
-    var buffer = array.dataStart;
-    return new u128(
-      bswap<u64>(load<u64>(buffer, 1 * sizeof<u64>())),
-      bswap<u64>(load<u64>(buffer, 0 * sizeof<u64>()))
-    );
+    return u128.fromUint8ArrayBE(changetype<Uint8Array>(array));
   }
 
+  @inline
   static fromUint8ArrayLE(array: Uint8Array): u128 {
     assert(array.length && (array.length & 15) == 0);
     // @ts-ignore
@@ -146,6 +138,7 @@ export class u128 {
     );
   }
 
+  @inline
   static fromUint8ArrayBE(array: Uint8Array): u128 {
     assert(array.length && (array.length & 15) == 0);
     // @ts-ignore
@@ -246,12 +239,13 @@ export class u128 {
 
   @inline @operator.prefix('-')
   neg(): u128 {
-    var lo = ~this.lo, hi = ~this.hi;
+    var lo = ~this.lo;
+    var hi = ~this.hi;
     var lo1 = lo + 1;
     return new u128(lo1, hi + u64(lo1 < lo));
   }
 
-  @inline @operator.prefix('++')
+  @operator.prefix('++')
   preInc(): this {
     var lo = this.lo;
     var lo1 = lo + 1;
@@ -260,7 +254,7 @@ export class u128 {
     return this;
   }
 
-  @inline @operator.prefix('--')
+  @operator.prefix('--')
   preDec(): this {
     var lo = this.lo;
     var lo1 = lo - 1;
@@ -269,12 +263,12 @@ export class u128 {
     return this;
   }
 
-  @inline @operator.postfix('++')
+  @operator.postfix('++')
   postInc(): u128 {
     return this.clone().preInc();
   }
 
-  @inline @operator.postfix('--')
+  @operator.postfix('--')
   postDec(): u128 {
     return this.clone().preDec();
   }
@@ -348,74 +342,42 @@ export class u128 {
 
   @inline
   static rotl(value: u128, shift: i32): u128 {
-    shift &= 127;
-    if (shift == 0) return value;
+    let n = shift & 127;
+    if (n == 0) return value.clone();
 
-    var shift64 = (128 - shift) as u64;
-
-    var mod1 = ((((shift64 + 127) | shift64) & 64) >> 6) - 1;
-    var mod2 = (shift64 >> 6) - 1;
-
-    shift64 &= 63;
-
-    var vl = value.lo;
-    var vh = value.hi;
-    var hi1 = vh >> shift64;
-    var lo1 = hi1 & ~mod2;
-
-    lo1 |= ((vl >> shift64) | ((vh << (64 - shift64)) & mod1)) & mod2;
-    hi1 &= mod2;
-
-    shift64 = shift;
-
-    mod1 = ((((shift64 + 127) | shift64) & 64) >> 6) - 1;
-    mod2 = (shift64 >> 6) - 1;
-
-    shift64 &= 63;
-
-    var lo2 = vl << shift64;
-    var hi2 = lo2 & ~mod2;
-
-    hi2 |= ((vh << shift64) | ((vl >> (64 - shift64)) & mod1)) & mod2;
-    lo2 &= mod2;
-
-    return new u128(lo1 | lo2, hi1 | hi2);
+    let lo = value.lo;
+    let hi = value.hi;
+    if (n == 64) {
+      return new u128(hi, lo);
+    }
+    if (n & 64) {
+      let t = lo; lo = hi; hi = t;
+    }
+    let slo = lo << n;
+    let shi = hi << n;
+    let rlo = lo >> (64 - n);
+    let rhi = hi >> (64 - n);
+    return new u128(slo | rhi, shi | rlo);
   }
 
   @inline
   static rotr(value: u128, shift: i32): u128 {
-    shift &= 127;
-    if (shift == 0) return value;
+    let n = shift & 127;
+    if (n == 0) return value.clone();
 
-    var shift64 = (128 - shift) as u64;
-
-    var mod1 = ((((shift64 + 127) | shift64) & 64) >> 6) - 1;
-    var mod2 = (shift64 >> 6) - 1;
-
-    shift64 &= 63;
-
-    var vl = value.lo;
-    var vh = value.hi;
-    var lo1 = vl << shift64;
-    var hi1 = lo1 & ~mod2;
-
-    hi1 |= ((vh << shift64) | ((vl >> (64 - shift64)) & mod1)) & mod2;
-    lo1 &= mod2;
-
-    shift64 = shift;
-
-    mod1 = ((((shift64 + 127) | shift64) & 64) >> 6) - 1;
-    mod2 = (shift64 >> 6) - 1;
-
-    shift64 &= 63;
-
-    var hi2 = vh >> shift64;
-    var lo2 = hi2 & ~mod2;
-
-    lo2 |= ((vl >> shift64) | ((vh << (64 - shift64)) & mod1)) & mod2;
-    hi2 &= mod2;
-
-    return new u128(lo1 | lo2, hi1 | hi2);
+    let lo = value.lo;
+    let hi = value.hi;
+    if (n == 64) {
+      return new u128(hi, lo);
+    }
+    if (n & 64) {
+      let t = lo; lo = hi; hi = t;
+    }
+    let slo = lo >> n;
+    let shi = hi >> n;
+    let rlo = lo << (64 - n);
+    let rhi = hi << (64 - n);
+    return new u128(slo | rhi, shi | rlo);
   }
 
   @inline @operator('+')
@@ -454,7 +416,7 @@ export class u128 {
   @inline @operator('%')
   static rem(a: u128, b: u128): u128 {
     __udivmod128(a.lo, a.hi, b.lo, b.hi);
-    return u128.from(__divmod_rem);
+    return new u128(__divmod_rem_lo, __divmod_rem_hi);
   }
 
   @inline
@@ -468,7 +430,7 @@ export class u128 {
   @inline
   static rem10(value: u128): u128 {
     __udivmod128_10(value.lo, value.hi);
-    return u128.from(__divmod_rem);
+    return new u128(__divmod_rem_lo, __divmod_rem_hi);
   }
 
   /**
@@ -630,18 +592,20 @@ export class u128 {
 
    /**
    * Get ordering
-   * if a > b then result is greater than 0
-   * if a < b then result is lesser than 0
-   * if a = b then result is eqal to 0
+   * if a > b then result is  1
+   * if a < b then result is -1
+   * if a = b then result is  0
    * @param  a 128-bit unsigned integer
    * @param  b 128-bit unsigned integer
    * @returns  32-bit signed integer
    */
   @inline
   static ord(a: u128, b: u128): i32 {
-    var dlo: i64 = a.lo - b.lo;
-    var dhi: i64 = a.hi - b.hi;
-    return <i32>select<i64>(dhi, dlo, dhi != 0);
+    var dlo = a.lo - b.lo;
+    var dhi = a.hi - b.hi;
+    var cmp = <i32>select<i64>(dhi, dlo, dhi != 0);
+    // normalize to [-1, 0, 1]
+    return i32(cmp > 0) - i32(cmp < 0);
   }
 
   /**
@@ -684,12 +648,6 @@ export class u128 {
     return value.clone().sqr();
   }
 
-  // wide mul: u128 * u128 = u256
-  static mulq(a: u128, b: u128): u256 {
-    // TODO
-    return u256.Zero;
-  }
-
   /**
    * Calculate inplace squared 128-bit unsigned integer (this ** 2)
    * @returns 128-bit unsigned integer
@@ -719,6 +677,56 @@ export class u128 {
     this.hi = hi;
 
     return this;
+  }
+
+  /**
+   * Calculate multiply and division as `number * numerator / denominator`
+   * without overflow in multiplication part.
+   *
+   * @returns 128-bit unsigned integer
+   */
+  static muldiv(number: u128, numerator: u128, denominator: u128): u128 {
+    let a = number;
+    let b = numerator;
+    let c = denominator;
+
+    let ql = __udivmod128(b.lo, b.hi, c.lo, c.hi);
+
+    let qn = new u128(ql, __divmod_quot_hi);             // b / c
+    let rn = new u128(__divmod_rem_lo, __divmod_rem_hi); // b % c
+
+    let q = u128.Zero;
+    let r = u128.Zero;
+    let n = a.clone();
+
+    while (!n.isZero()) {
+      if (n.lo & 1) {
+        // @ts-ignore
+        q += qn;
+        // @ts-ignore
+        r += rn;
+        if (r >= c) {
+          // @ts-ignore
+          ++q;
+          // @ts-ignore
+          r -= c;
+        }
+      }
+      // @ts-ignore
+      n >>= 1;
+      // @ts-ignore
+      qn <<= 1;
+      // @ts-ignore
+      rn <<= 1;
+
+      if (rn >= c) {
+        // @ts-ignore
+        ++qn;
+        // @ts-ignore
+        rn -= c;
+      }
+    }
+    return q;
   }
 
   /**
@@ -880,7 +888,6 @@ export class u128 {
   @inline
   toBytes(bigEndian: bool = false): u8[] {
     var result = new Array<u8>(16);
-    // @ts-ignore
     this.toArrayBuffer(result.dataStart, bigEndian);
     return result;
   }
@@ -893,7 +900,6 @@ export class u128 {
   @inline
   toUint8Array(bigEndian: bool = false): Uint8Array {
     var result = new Uint8Array(16);
-    // @ts-ignore
     this.toArrayBuffer(result.dataStart, bigEndian);
     return result;
   }
@@ -902,7 +908,6 @@ export class u128 {
   * Return copy of current 128-bit value
   * @returns 128-bit unsigned integer
   */
-  @inline
   clone(): u128 {
     return new u128(this.lo, this.hi);
   }
