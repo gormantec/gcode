@@ -1,15 +1,15 @@
 
-import { save,load } from '/modules/gcodeStorage.mjs';
+import { save, load } from '/modules/gcodeStorage.mjs';
 
-export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,callback){
-    console.log("editorFilename:"+editorFilename);
+export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
+    console.log("editorFilename:" + editorFilename);
     try {
-                
-        var tryCount=0;
-        var dataURL=null;
+
+        var tryCount = 0;
+        var dataURL = null;
         var _run = async function () {
-            var failed=false;
-            var downloading=0;
+            var failed = false;
+            var downloading = 0;
             require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                 asc.ready.then(() => {
                     const stdout = asc.createMemoryStream();
@@ -20,64 +20,58 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                         stdout,
                         stderr,
                         readFile(name, baseDir) {
-                            console.log("name = "+name +"  baseDir = "+baseDir);
-                            if(baseDir=="." && load(name))
-                            {
-                                return load(name,true);
+                            console.log("name = " + name + "  baseDir = " + baseDir);
+                            if (baseDir == "." && load(name)) {
+                                return load(name, true);
                             }
-                            if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
+                            if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
                                 window.debug.log("Got App:" + name);
                                 return sourceCode;
                             }
-                            else if(name=="asconfig.json" && dapp==true)
-                            {
-                                console.log("dapp asconfig:"+name);
-                                JSON.stringify({"extends": "near-sdk-as/asconfig.json"});
+                            else if (name == "asconfig.json" && dapp == true) {
+                                console.log("dapp asconfig:" + name);
+                                JSON.stringify({ "extends": "near-sdk-as/asconfig.json" });
                             }
-                            else if(name=="asconfig.json" && dapp!=true)
-                            {
-                                window.debug.log("got file:"+name);
-                                return JSON.stringify({ "targets": {  "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} }});
+                            else if (name == "asconfig.json" && dapp != true) {
+                                window.debug.log("got file:" + name);
+                                return JSON.stringify({ "targets": { "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} } });
                             }
-                            else if (name.indexOf("node_modules/")>=0) {
-                                /*
-                                var pos=name.lastIndexOf("node_modules/") +13;
-                                var _name = name;
-                                var b64 = localStorage.getItem("dist/" + _name.substring(pos));
-                                var cached = null;
-                                if (b64) {
-                                    cached = atob(b64);
-                                    return cached;
+                            else if (name.startsWith("/node_modules/")) {
+
+                                const _name = "dist/" + _name.substring(14)
+                                const _fileString = load(_name, true);
+              
+                                if (_fileString) {
+                                    return _fileString;
                                 }
-                                else if (b64=="NA") {
+                                else if (_fileString == "NA") {
                                     return null;
                                 }
                                 else {
                                     downloading++;
-                                    fetch("https://gcode.com.au/dist/" + _name.substring(pos))
-                                        .then(response =>response.ok?response.text():null)
+                                    fetch("https://gcode.com.au/"+_name)
+                                        .then(response => response.ok ? response.text() : null)
                                         .then(text => {
-                                            if(text)
-                                            {
-                                                if(!failed)window.setTimeout(_run,2000);
-                                                failed=true;
-                                                localStorage.setItem("dist/" + _name.substring(pos), btoa(text));
+                                            if (text) {
+                                                if (!failed) window.setTimeout(_run, 2000);
+                                                failed = true;
+                                                save(_name,text);
                                             }
-                                            else{
-                                                localStorage.setItem("dist/" + _name.substring(pos), "NA");
+                                            else {
+                                                _name(_name, "NA");
                                             }
                                         }).catch((error) => { window.debug.log("fetch error:" + error); })
-                                        .finally(()=>{
+                                        .finally(() => {
                                             downloading--;
                                         });
                                     return null;
                                 }
-                                */
-                               return null;
-                                
+
+                                return null;
+
                             }
                             else {
-                                window.debug.log(" ?? > "+name);
+                                window.debug.log(" ?? > " + name);
                                 return null;
                             }
 
@@ -86,7 +80,7 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
 
                             if (typeof data == "object" && name == outputFilename && !failed) {
                                 const reader = new FileReader();
-                                dataURL="reading";
+                                dataURL = "reading";
                                 reader.addEventListener("load", function () {
                                     dataURL = reader.result;
                                 }, false);
@@ -98,54 +92,51 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,dapp,c
                             return [];
                         }
                     }, err => {
-                        var waitForDownload=function(thenDo){
-                            if(downloading==0)thenDo();
-                            else{
-                                window.setTimeout(()=>{
+                        var waitForDownload = function (thenDo) {
+                            if (downloading == 0) thenDo();
+                            else {
+                                window.setTimeout(() => {
                                     waitForDownload(thenDo);
-                                },500);
+                                }, 500);
                             }
                         };
-                        waitForDownload(()=>{
-                            if(failed)
-                            {
-                                if(tryCount>0)
-                                {
+                        waitForDownload(() => {
+                            if (failed) {
+                                if (tryCount > 0) {
                                     window.debug.log("\b..");
                                 }
-                                else{
+                                else {
                                     window.debug.log("downloading depenadnt files..");
                                 }
                                 tryCount++;
 
                             }
-                            else{
+                            else {
 
-                                    if(stdout.toString().trim()!="")window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                    if(stderr.toString().trim()!="")window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
-                                    if (err) {
-                                        window.debug.log(">>> ERROR THROWN >>>");
-                                        window.debug.log(err);
-                                        callback(err);
-                                    }
-                                    else {
-                                        window.debug.log("Compiled Ok");
-                                        var readTryCount=0;
-                                        var waitRead=()=>{
-                                            if(dataURL=="reading" || (dataURL==null && readTryCount<10))
-                                            {
-                                                if(readTryCount==0)window.debug.log("reading file..");
-                                                else window.debug.log("\b..");
-                                                readTryCount++;
-                                                setTimeout(waitRead,500);
-                                            }
-                                            else{
-                                                callback(null,{"dataURL":dataURL});
-                                            }
-                                        };
-                                        waitRead();
-                                        
-                                    }
+                                if (stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                if (stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                if (err) {
+                                    window.debug.log(">>> ERROR THROWN >>>");
+                                    window.debug.log(err);
+                                    callback(err);
+                                }
+                                else {
+                                    window.debug.log("Compiled Ok");
+                                    var readTryCount = 0;
+                                    var waitRead = () => {
+                                        if (dataURL == "reading" || (dataURL == null && readTryCount < 10)) {
+                                            if (readTryCount == 0) window.debug.log("reading file..");
+                                            else window.debug.log("\b..");
+                                            readTryCount++;
+                                            setTimeout(waitRead, 500);
+                                        }
+                                        else {
+                                            callback(null, { "dataURL": dataURL });
+                                        }
+                                    };
+                                    waitRead();
+
+                                }
                             }
                         });
                     });
