@@ -38,11 +38,16 @@ function canJSON(value) {
     }
 }
 
+export function parent(filename)
+{
+    return null;
+}
+
 export function load(filename,asString = false) {
     let b64 = localStorage.getItem(FILE_PREFIX + filename);
     let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
     window.debug.log(contentType);
-    var result="";
+    var result=null;
     if (contentType == "[object String]") {
         result= atob(b64);
     }

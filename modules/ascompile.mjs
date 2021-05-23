@@ -1,3 +1,6 @@
+
+import { save,load,remove,parent } from '/modules/gcodeStorage.mjs';
+
 export function run(sourceCode,mainFilename,editorFilename,outputFilename,callback){
     console.log("editorFilename:"+editorFilename);
     try {
@@ -18,6 +21,10 @@ export function run(sourceCode,mainFilename,editorFilename,outputFilename,callba
                         stderr,
                         readFile(name, baseDir) {
                             window.debug.log("f="+name);
+                            if(load(editorFilename))
+                            {
+                                return load(editorFilename,true);
+                            }
                             if (name == editorFilename || (name.indexOf("wasmdom/")>=0 && name.endsWith(editorFilename))) {
                                 //window.debug.log("Got App:" + name);
                                 return sourceCode;
