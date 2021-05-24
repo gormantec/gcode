@@ -26,11 +26,11 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 return _fileData;
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
-                                window.debug.log("Got App:" + name);
+                                //window.debug.log("Got App:" + name);
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
-                                console.log("dapp asconfig:" + name);
+                                //console.log("dapp asconfig:" + name);
                                 JSON.stringify({ "extends": "near-sdk-as/asconfig.json" });
                             }
                             else if (name == "asconfig.json" && dapp != true) {
@@ -51,7 +51,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 }
                                 else {
                                     downloading++;
-                                    console.log("fetch: https://gcode.com.au/"+_name);
+                                    //console.log("fetch: https://gcode.com.au/"+_name);
                                     fetch("https://gcode.com.au/"+_name)
                                         .then(response => response.ok ? response.text() : null)
                                         .then(text => {
@@ -59,7 +59,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 if (!failed) window.setTimeout(_run, 2000);
                                                 failed = true;
                                                 try{ save(_name,text); } catch(e){console.log("Save error: "+e);save(_name,"NA");}
-                                                console.log("added:"+_name);
+                                                //console.log("added:"+_name);
                                             }
                                             else {
                                                 save(_name, "NA");
@@ -75,17 +75,19 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                             }
                             else {
-                                console.log("????: "+name);
+                                //console.log("????: "+name);
                                 return null;
                             }
 
                         },
                         writeFile(name, data, baseDir) {
-
+                            console.log("write file: "+name);
+                            console.log("write file: "+(typeof data));
                             if (typeof data == "object" && name == outputFilename && !failed) {
                                 const reader = new FileReader();
                                 dataURL = "reading";
                                 reader.addEventListener("load", function () {
+                                    console.log("write load: "+(typeof reader.result));
                                     dataURL = reader.result;
                                 }, false);
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
@@ -117,8 +119,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                             }
                             else {
 
-                                if (stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                if (stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                //if (stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                //if (stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                 if (err) {
                                     window.debug.log(">>> ERROR THROWN >>>");
                                     window.debug.log(err);
