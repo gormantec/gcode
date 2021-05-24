@@ -92,7 +92,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     dataURL = reader.result;
                                 }, false);
 
-                                createDownload(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+                                createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                                 
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
@@ -180,7 +180,7 @@ function dataURItoBlob(dataURI) {
     });
 }
 
-function createDownload(blob)
+function createDownload(blobname,blob)
 {
     //var blob = dataURItoBlob(message.content);
 
@@ -189,7 +189,7 @@ function createDownload(blob)
     var save = document.createElement('a'),
         event;
     save.href = blobUrl;
-    save.download = message.identifier;
+    save.download = blobname;
 
     event = document.createEvent('Event');
     event.initEvent('click', true, true);
