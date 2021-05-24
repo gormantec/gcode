@@ -130,6 +130,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     window.debug.log("Compiled Ok");
                                     var readTryCount = 0;
                                     var waitRead = () => {
+                                        console.log(dataURL);
                                         if (dataURL == "reading" || (dataURL == null && readTryCount < 100)) {
                                             if (readTryCount == 0) window.debug.log("reading file..");
                                             else window.debug.log("\b..");
