@@ -16,7 +16,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     const stderr = asc.createMemoryStream();
                     asc.main([
                         mainFilename,
-                        "--binaryFile", "myModule.wasm",
+                        "--binaryFile", outputFilename,
                     ], {
                         stdout,
                         stderr,
