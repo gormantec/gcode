@@ -186,15 +186,13 @@ function createDownload(blobname,blob)
 
     var blobUrl = URL.createObjectURL(blob);
 
-    var save = document.createElement('a'),
-        event;
+    var save = document.createElement('a');
     save.href = blobUrl;
     save.download = blobname;
-
-    event = document.createEvent('Event');
-    event.initEvent('click', true, true);
-
-    save.dispatchEvent(event);
-    (window.URL || window.webkitURL).revokeObjectURL(save.href);
+    save.innerHTML="[download]";
+    document.getElementById("userIcon").insertBefore(save,document.getElementById("userIcon").firstChild);
+    save.addEventListener("click",()=>{
+        save.remove();
+    });
 
 }
