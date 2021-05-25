@@ -142,6 +142,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             setTimeout(waitRead, 500);
                                         }
                                         else {
+                                            upload(dataURL);
+                                            test();
                                             callback(null, { "dataURL": dataURL });
                                         }
                                     };
