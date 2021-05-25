@@ -1,5 +1,6 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
+import { test,upload } from '/modules/nearAapp.mjs';
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
@@ -199,3 +200,4 @@ function createDownload(blobname,blob)
     });
 
 }
+
