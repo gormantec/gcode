@@ -3,6 +3,7 @@ export function upload() {
 }
 
 export function test() {
+    console.log("TEST!");
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], async ({ nearApi }) => {
 
 
