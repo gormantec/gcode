@@ -32,9 +32,11 @@ export function test() {
         const wallet = new nearApi.WalletConnection(near);
         //const account = await near.account("gormantec.testnet");
         if (!wallet.isSignedIn()) {
+            console.log("wallet not signed");
             wallet.requestSignIn("gormantec.testnet");
         }
 
+        console.log(wallet.isSignedIn());
         const contract = new nearApi.Contract(
             wallet.account(), // the account object that is connecting
             "dev-1621939186587-7091001",
