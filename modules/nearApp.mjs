@@ -45,6 +45,5 @@ export function test() {
     console.log("TEST1!");
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
         doNear(nearApi);
-
     });
 }
