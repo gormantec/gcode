@@ -36,7 +36,7 @@ export function test() {
             wallet.requestSignIn("gormantec.testnet");
         }
 
-        console.log(wallet.isSignedIn());
+        console.log("isSignedIn:"+wallet.isSignedIn());
         const contract = new nearApi.Contract(
             wallet.account(), // the account object that is connecting
             "dev-1621939186587-7091001",
@@ -46,6 +46,9 @@ export function test() {
                 changeMethods: ["setGreeting"], // change methods modify state
             }
         );
+        
+        console.log("contract");
+        console.log(contract);
 
         await contract.setGreeting(
             {
