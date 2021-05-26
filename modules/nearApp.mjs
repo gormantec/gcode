@@ -41,7 +41,7 @@ async function doNear(nearApi) {
 
 export function test() {
     console.log("TEST1!");
-    require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], async ({ nearApi }) => {
+    require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], ({ nearApi }) => {
 
         console.log("TEST2!");
         doNear(nearApi);
