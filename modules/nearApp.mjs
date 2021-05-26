@@ -3,6 +3,8 @@ export function upload() {
 }
 
 async function doNear(nearApi) {
+
+    const keyStore=new nearApi.keyStores.BrowserLocalStorageKeyStore();
     const near = new nearApi.Near({
         keyStore: keyStore,
         networkId: 'testnet',
@@ -41,14 +43,8 @@ async function doNear(nearApi) {
 
 export function test() {
     console.log("TEST1!");
-    require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], (A,B,C) => {
-
-        console.log("A="+A);
-        console.log("B="+B);
-        console.log("C="+C);
-        console.log(nearApi);
-        console.log(window.nearApi);
-        doNear(window.nearApi);
+    require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
+        doNear(nearApi);
 
     });
 }
