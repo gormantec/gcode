@@ -3,9 +3,10 @@ export function upload() {
 }
 
 export function test() {
+    console.log("TEST1!");
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], async ({ nearApi }) => {
 
-
+        console.log("TEST2!");
         const keyStore = new nearApi.keyStores.BrowserLocalStorageKeyStore();
 
         const near = new nearApi.Near({
@@ -31,9 +32,11 @@ export function test() {
         const wallet = new nearApi.WalletConnection(near);
         //const account = await near.account("gormantec.testnet");
         if (!wallet.isSignedIn()) {
+            console.log("wallet not signed");
             wallet.requestSignIn("gormantec.testnet");
         }
 
+        console.log("isSignedIn:"+wallet.isSignedIn());
         const contract = new nearApi.Contract(
             wallet.account(), // the account object that is connecting
             "dev-1621939186587-7091001",
@@ -43,6 +46,9 @@ export function test() {
                 changeMethods: ["setGreeting"], // change methods modify state
             }
         );
+        
+        console.log("contract");
+        console.log(contract);
 
         await contract.setGreeting(
             {
