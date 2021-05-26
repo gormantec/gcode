@@ -446,8 +446,17 @@ document.addEventListener("DOMContentLoaded", function () {
     var lastFileName = localStorage.getItem("lastFileName");
     if (lastFileName) {
         document.getElementById("filename").innerText = lastFileName;
-        window.editor.setValue(load(lastFileName,true));
-        window.setEditorMode();
+        try{
+
+            window.editor.setValue(load(lastFileName,true));
+            window.setEditorMode();
+        }
+        catch(e)
+        {
+            console.log(lastFileName);
+            console.log(load(lastFileName,true));
+            console.log(e);
+        }
     }
     else {
         document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
