@@ -1,6 +1,6 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
-import { test,upload } from '/modules/nearApp.mjs';
+import { test, upload } from '/modules/nearApp.mjs';
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
