@@ -41,10 +41,12 @@ async function doNear(nearApi) {
 
 export function test() {
     console.log("TEST1!");
-    require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], (nearApi) => {
+    import("https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js").then((A,B,C)=>{
 
-        console.log("TEST2!");
-        doNear(nearApi);
+        console.log("A="+A);
+        console.log("B="+B);
+        console.log("C="+C);
+        doNear(A);
 
     });
 }
