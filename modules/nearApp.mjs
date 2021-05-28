@@ -43,13 +43,19 @@ async function doNear(nearApi,config) {
         let prom = Promise.cast(mycontract[e.method](e.parameters));
         //let r = await prom;
         console.log(prom);
+        var waitBoolean=true;
         prom.then((r)=>{
             console.log(r);
             if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
+            waitBoolean=false;
         });
         
 
-        await new Promise((resolve, reject) => setTimeout(resolve, 6000));
+        await new Promise((resolve, reject) => {
+            const intV=setInterval(()=>{
+                if(!waitBoolean){clearInterval(intV); resolve();}
+            }, 500);
+        });
     });
 
 }
