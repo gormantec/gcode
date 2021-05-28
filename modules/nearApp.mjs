@@ -22,7 +22,7 @@ async function doNear(nearApi,config) {
 
     const wallet = new nearApi.WalletConnection(near);
     if (!wallet.isSignedIn()) {
-        wallet.requestSignIn("gormantec.testnet");
+        wallet.requestSignIn(config.myAccountId);
     }
     console.log(wallet);
     if(window.wconsole)window.wconsole.log("using wallet: "+wallet._authData.accountId);
@@ -33,7 +33,7 @@ async function doNear(nearApi,config) {
     });
     
 
-    const mycontract = new nearApi.Contract(wallet.account(), config.accountId,ct);
+    const mycontract = new nearApi.Contract(wallet.account(), config.contractId,ct);
     if(window.wconsole)window.wconsole.log("using mycontract: "+mycontract);
     console.log(mycontract.contractId);
     const list=config.methods;
@@ -55,7 +55,7 @@ async function doNear(nearApi,config) {
 
 export function test() {
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
-        doNear(nearApi,{accountId:"hello.gormantec.testnet",methods:[{method:"setGreeting",type:"changeMethods",parameters:{message:"hello test"}},{method:"getGreeting",type:"viewMethods",parameters:{accountId:"hello.gormantec.testnet"}}]});
+        doNear(nearApi,{myAccountId:"gormantec.testnet",contractId:"hello.gormantec.testnet",methods:[{method:"setGreeting",type:"changeMethods",parameters:{message:"hello test"}},{method:"getGreeting",type:"viewMethods",parameters:{accountId:"gormantec.testnet"}}]});
     });
 }
 

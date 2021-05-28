@@ -1,0 +1,19 @@
+{
+    "accountId": "hello.gormantec.testnet",
+    "methods": [
+        {
+            "method": "setGreeting",
+            "type": "changeMethods",
+            "parameters": {
+                "message": "hello test"
+            }
+        },
+        {
+            "method": "getGreeting",
+            "type": "viewMethods",
+            "parameters": {
+                "accountId": "hello.gormantec.testnet"
+            }
+        }
+    ]
+}
