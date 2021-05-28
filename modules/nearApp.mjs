@@ -60,7 +60,7 @@ export function test() {
             myAccountId: "gormantec.testnet", 
             contractId: "hello.gormantec.testnet", 
             methods: [
-                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello ("+(Math.round(Date.now() / 1000)-1622206047)+")" } }, 
+                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello "+(Math.round(Date.now() / 1000)-1622206047) } }, 
                 { method: "getGreeting", type: "viewMethods", parameters: { accountId: "gormantec.testnet" } 
             }] });
     });
