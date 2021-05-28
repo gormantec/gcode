@@ -169,7 +169,7 @@ function _runCode()
                         '};\n'+
                         'var button=new Div({borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n'+
                         'button.onclick(function(){console.log("RUN");test();});\n'+
-                        'mainPage.appendChild(button);\n'
+                        'mainPage.appendChild(button);\n';
 
                         
                         
