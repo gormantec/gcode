@@ -168,8 +168,9 @@ function _runCode()
                         '  consolePage.innerHTML=consolePage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}'+
                         '};\n'+
                         'var button=new Div({class:"floatingActionButton",borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n'+
-                        'button.onclick(function(){console.log("RUN");test();});\n'+
+                        
                         'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});'+
+                        'button.onclick(function(){console.log("RUN");consolePage.innerHTML="";test();});\n'+
                         'mainPage.appendChild(button);\n'+
                         'mainPage.appendChild(consolePage);\n';
 
