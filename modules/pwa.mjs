@@ -403,6 +403,16 @@ class Div {
     get style() {
         return this.element.style;
     }
+
+    get innerHTML()
+    {
+        return this.element.innerHTML;
+    }
+
+    set innerHTML(htmlString)
+    {
+        this.element.innerHTML=htmlString;
+    }
 }
 
 class Page extends Div {
