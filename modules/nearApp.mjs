@@ -59,7 +59,7 @@ export function test() {
             myAccountId: "gormantec.testnet", 
             contractId: "hello.gormantec.testnet", 
             methods: [
-                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello test" } }, 
+                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello ("+Math.round(Date.now() / 1000)+")" } }, 
                 { method: "getGreeting", type: "viewMethods", parameters: { accountId: "gormantec.testnet" } 
             }] });
     });
