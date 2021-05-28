@@ -164,6 +164,11 @@ function _runCode()
                             var mockFrame=result.mockFrame;
                             var rootHTML=result.rootHTML;
 
+                            
+                            var _script1 = window.document.createElement("script");
+                            _script1.src = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+                            rootHTML.querySelector("head").appendChild(_script1);
+
                             var _script2 = window.document.createElement("script");
                             _script2.src = "https://gcode.com.au/modules/nearApp.mjs";
                             _script2.type="module";
