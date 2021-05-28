@@ -16,7 +16,6 @@ async function doNear(nearApi,config) {
 
     console.log(near);
     const wallet = new nearApi.WalletConnection(near);
-    //const account = await near.account("gormantec.testnet");
     if (!wallet.isSignedIn()) {
         wallet.requestSignIn("gormantec.testnet");
     }
