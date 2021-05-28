@@ -2,9 +2,9 @@ export function upload() {
 
 }
 
-async function doNear(nearApi,config) {
+async function doNear(nearApi, config) {
 
-    const keyStore=new nearApi.keyStores.BrowserLocalStorageKeyStore();
+    const keyStore = new nearApi.keyStores.BrowserLocalStorageKeyStore();
     const near = new nearApi.Near({
         keyStore: keyStore,
         networkId: 'testnet',
@@ -13,11 +13,11 @@ async function doNear(nearApi,config) {
     });
 
 
-    if(window.wconsole)window.wconsole.log("connecting to near..");
-    
-    if(window.wconsole)window.wconsole.log("on network: "+near.connection.networkId);
+    if (window.wconsole) window.wconsole.log("connecting to near..");
 
-    
+    if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
+
+
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
 
     const wallet = new nearApi.WalletConnection(near);
@@ -25,24 +25,24 @@ async function doNear(nearApi,config) {
         wallet.requestSignIn(config.myAccountId);
     }
     console.log(wallet);
-    if(window.wconsole)window.wconsole.log("using wallet: "+wallet._authData.accountId);
-    var ct={};
+    if (window.wconsole) window.wconsole.log("using wallet: " + wallet._authData.accountId);
+    var ct = {};
     config.methods.forEach(e => {
-        ct[e.type]=ct[e.type] || [];
+        ct[e.type] = ct[e.type] || [];
         ct[e.type].push(e.method);
     });
-    
 
-    const mycontract = new nearApi.Contract(wallet.account(), config.contractId,ct);
-    if(window.wconsole)window.wconsole.log("using mycontract: "+mycontract);
+
+    const mycontract = new nearApi.Contract(wallet.account(), config.contractId, ct);
+    if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract);
     console.log(mycontract.contractId);
-    const list=config.methods;
-    var doLoop=(i)=>{
-        if(window.wconsole)window.wconsole.log(list[i].method+'('+JSON.stringify(list[i].parameters)+')');
-        mycontract[list[i].method](list[i].parameters).then((r)=>{
-            console.log("loop: "+i);
-            if(window.wconsole)window.wconsole.log(list[i].method+"() result = \""+r+"\"");
-            if((i+1)<list.length)doLoop(i+1);
+    const list = config.methods;
+    var doLoop = (i) => {
+        if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(list[i].parameters) + ')');
+        mycontract[list[i].method](list[i].parameters).then((r) => {
+            console.log("loop: " + i);
+            if (window.wconsole) window.wconsole.log(list[i].method + "() result = \"" + r + "\"");
+            if ((i + 1) < list.length) doLoop(i + 1);
         });
     };
     doLoop(0);
@@ -55,7 +55,13 @@ async function doNear(nearApi,config) {
 
 export function test() {
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
-        doNear(nearApi,{myAccountId:"gormantec.testnet",contractId:"hello.gormantec.testnet",methods:[{method:"setGreeting",type:"changeMethods",parameters:{message:"hello test"}},{method:"getGreeting",type:"viewMethods",parameters:{accountId:"gormantec.testnet"}}]});
+        doNear(nearApi, { 
+            myAccountId: "gormantec.testnet", 
+            contractId: "hello.gormantec.testnet", 
+            methods: [
+                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello test" } }, 
+                { method: "getGreeting", type: "viewMethods", parameters: { accountId: "gormantec.testnet" } 
+            }] });
     });
 }
 
