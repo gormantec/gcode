@@ -33,10 +33,10 @@ async function doNear(nearApi) {
         }
     );
 
-    if(window.wconsole)window.wconsole.log('setGreeting("hello.10")');
+    if(window.wconsole)window.wconsole.log('setGreeting("hello test")');
     var response=await contract.setGreeting(
         {
-            message: "hello.10", // argument name and value - pass empty object if no args required
+            message: "hello test", // argument name and value - pass empty object if no args required
         }
     );
     console.log(response);
