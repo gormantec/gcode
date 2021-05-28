@@ -12,9 +12,13 @@ async function doNear(nearApi,config) {
         walletUrl: 'https://wallet.testnet.near.org'
     });
 
+
     if(window.wconsole)window.wconsole.log(near.connection.networkId);
 
     console.log(near);
+    console.log("near..");
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+
     const wallet = new nearApi.WalletConnection(near);
     if (!wallet.isSignedIn()) {
         wallet.requestSignIn("gormantec.testnet");
