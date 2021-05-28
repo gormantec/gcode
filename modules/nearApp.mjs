@@ -32,7 +32,7 @@ async function doNear(nearApi,config) {
 
     config.methods.forEach(e => {
         if(window.wconsole)window.wconsole.log(e.method+'('+e.parameters+')');
-        var r = await contract[e.method](e.parameters);
+        //var r = await contract[e.method](e.parameters);
         if(window.wconsole)window.wconsole.log(e.method+" => "+r);
     });
 
