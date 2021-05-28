@@ -47,3 +47,5 @@ export function test() {
         doNear(nearApi);
     });
 }
+
+test();

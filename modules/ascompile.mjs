@@ -143,7 +143,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         }
                                         else {
                                             upload(dataURL);
-                                            test();
+                                            //test();
                                             callback(null, { "dataURL": dataURL });
                                         }
                                     };
