@@ -12,13 +12,14 @@ async function doNear(nearApi, config) {
         walletUrl: 'https://wallet.testnet.near.org'
     });
 
-
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+    
     if (window.wconsole) window.wconsole.log("connecting to near..");
 
     if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
 
 
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+    
 
     const wallet = new nearApi.WalletConnection(near);
     if (!wallet.isSignedIn()) {
