@@ -35,10 +35,10 @@ async function doNear(nearApi,config) {
 
     const mycontract = new nearApi.Contract(wallet.account(), config.accountId,ct);
     if(window.wconsole)window.wconsole.log("using mycontract: "+mycontract);
-    console.log(mycontract);
+    console.log(mycontract.contractId);
     const list=config.methods;
     var doLoop=(i)=>{
-        if(window.wconsole)window.wconsole.log(list[i].method+'('+list[i].parameters+')');
+        if(window.wconsole)window.wconsole.log(list[i].method+'('+JSON.stringify(list[i].parameters)+')');
         mycontract[list[i].method](list[i].parameters).then((r)=>{
             console.log("loop: "+i);
             if(window.wconsole)window.wconsole.log(list[i].method+"() result = \""+r+"\"");
