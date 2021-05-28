@@ -46,7 +46,7 @@ async function doNear(nearApi) {
         }
     );
     console.log(response);
-    if(window.wconsole)window.wconsole.log(response);
+    if(window.wconsole)window.wconsole.log("getGreeting=>"+response);
 
 
 }
