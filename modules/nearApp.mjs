@@ -21,7 +21,7 @@ async function doNear(nearApi) {
         wallet.requestSignIn("gormantec.testnet");
     }
     console.log(wallet);
-    if(window.wconsole)window.wconsole.log("wallet=>"+wallet._authData.accountId);
+    if(window.wconsole)window.wconsole.log("wallet => "+wallet._authData.accountId);
 
     const contract = new nearApi.Contract(
         wallet.account(), // the account object that is connecting
@@ -32,7 +32,7 @@ async function doNear(nearApi) {
             changeMethods: ["setGreeting"], // change methods modify state
         }
     );
-
+    console.log(contract);
     if(window.wconsole)window.wconsole.log('setGreeting("hello test")');
     await contract.setGreeting(
         {
@@ -46,7 +46,7 @@ async function doNear(nearApi) {
         }
     );
     console.log(response);
-    if(window.wconsole)window.wconsole.log("getGreeting=>"+response);
+    if(window.wconsole)window.wconsole.log("getGreeting => "+response);
 
 
 }
