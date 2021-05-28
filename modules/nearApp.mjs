@@ -2,7 +2,7 @@ export function upload() {
 
 }
 
-async function doNear(nearApi) {
+async function doNear(nearApi,config) {
 
     const keyStore=new nearApi.keyStores.BrowserLocalStorageKeyStore();
     const near = new nearApi.Near({
@@ -22,32 +22,20 @@ async function doNear(nearApi) {
     }
     console.log(wallet);
     if(window.wconsole)window.wconsole.log("wallet => "+wallet._authData.accountId);
+    var ct={};
+    config.methods.forEach(e => {
+        ct[e.type]=ct[e.type] || [];
+        ct[e.type].push(e.method);
+    });
 
-    const contract = new nearApi.Contract(
-        wallet.account(), // the account object that is connecting
-        "hello.gormantec.testnet",
-        {
-            // name of contract you're connecting to
-            viewMethods: ["getGreeting"], // view methods do not change state but usually return a value
-            changeMethods: ["setGreeting"], // change methods modify state
-        }
-    );
+    const contract = new nearApi.Contract(wallet.account(), config.accountId,ct);
     console.log(contract);
-    if(window.wconsole)window.wconsole.log('setGreeting("hello test")');
-    await contract.setGreeting(
-        {
-            message: "hello test", // argument name and value - pass empty object if no args required
-        }
-    );
 
-    var response=await contract.getGreeting(
-        {
-            accountId: wallet._authData.accountId, // argument name and value - pass empty object if no args required
-        }
-    );
-    console.log(response);
-    if(window.wconsole)window.wconsole.log("getGreeting => "+response);
-
+    config.methods.forEach(e => {
+        if(window.wconsole)window.wconsole.log(e.method+'('+e.parameters+')');
+        var response = await contract[e.method](e.parameters);
+        if(window.wconsole)window.wconsole.log(e.method+" => "+response);
+    });
 
 }
 
@@ -56,7 +44,7 @@ async function doNear(nearApi) {
 export function test() {
     console.log("TEST1!");
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
-        doNear(nearApi);
+        doNear(nearApi,{accountId:"hello.gormantec.testnet",methods:[{method:"setGreeting",type:"changeMethods",parameters:{message:"hello test"}},{method:"getGreeting",type:"viewMethods",parameters:{accountId:"hello.gormantec.testnet"}}]});
     });
 }
 
