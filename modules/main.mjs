@@ -158,16 +158,27 @@ function _runCode()
                         if(!e) {
                         window.debug.log(d);
                         try {
+
+                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n\nvar aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});'
+                        
+                        aPWA.show();
+
                             var result = createHtml((code && code.trim().substring(0,2)=="/*")?code.substring(0,code.indexOf("*/")+2):"");
                             var splashBackgroundColor=result.splashBackgroundColor;
                             var splash=result.splash;
                             var mockFrame=result.mockFrame;
                             var rootHTML=result.rootHTML;
 
+                            var _module = window.document.createElement("script");
+                            _module.setAttribute("type", "module");
+                            _module.text = "\n" + jApp + "\n";
+                            rootHTML.querySelector("head").appendChild(_module);
                             
                             var _script1 = window.document.createElement("script");
                             _script1.src = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
                             rootHTML.querySelector("head").appendChild(_script1);
+
+
 
                             var _script2 = window.document.createElement("script");
                             _script2.src = "https://gcode.com.au/modules/nearApp.mjs";
