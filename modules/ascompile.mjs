@@ -27,7 +27,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 return _fileData;
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
-                                //window.debug.log("Got App:" + name);
+                                window.debug.log("Got App:" + name);
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
