@@ -147,6 +147,7 @@ function _runCode()
             window.debug.log(myLogin + "$ echo 'Create dApp'\n");
             window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
             import('/modules/ascompile.mjs').then(({ run }) => {
+                var code=window.editor.getValue();
                 run(
                     window.editor.getValue(),
                     filename,
@@ -157,7 +158,7 @@ function _runCode()
                         if(!e) {
                         window.debug.log(d);
                         try {
-                            var result = createHtml((code.trim().substring(0,2)="/*")?code.substring(0,code.indexOf("*/")+2):"");
+                            var result = createHtml((code && code.trim().substring(0,2)=="/*")?code.substring(0,code.indexOf("*/")+2):"");
                             var splashBackgroundColor=result.splashBackgroundColor;
                             var splash=result.splash;
                             var mockFrame=result.mockFrame;
