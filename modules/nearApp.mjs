@@ -38,6 +38,7 @@ async function doNear(nearApi,config) {
             }
         );
 
+        await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     });
 
 }
