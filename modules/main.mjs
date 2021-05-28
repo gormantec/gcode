@@ -153,7 +153,60 @@ function _runCode()
                     filename,
                     "optimized.wasm",
                     true,
-                    (e,d) => { if(!e) window.debug.log(d); }
+                    (e,d) => { 
+                        if(!e) {
+                        window.debug.log(d);
+                        try {
+                            var result = createHtml((code.trim().substring(0,2)="/*")?code.substring(0,code.indexOf("*/")+2):"");
+                            var splashBackgroundColor=result.splashBackgroundColor;
+                            var splash=result.splash;
+                            var mockFrame=result.mockFrame;
+                            var rootHTML=result.rootHTML;
+                            var _script1 = window.document.createElement("script");
+                            _script1.text = "\nwindow.wasmdomURL=\"" + d.dataURL + "\";\n";
+                            rootHTML.querySelector("body").appendChild(_script1);
+                            var _script2 = window.document.createElement("script");
+                            _script2.src = "https://gcode.com.au/js/wasmdom.js";
+                            rootHTML.querySelector("body").appendChild(_script2);
+
+                            var wpos = "top=50,left=50";
+                            var w = 375;
+                            var h = 896 * 375 / 414; //iphoneX=896/414
+                            var mockPadding = 40;
+                            if (screen.height <= 768) {
+                                w = Math.floor(w * 0.75);
+                                h = Math.floor(h * 0.75);
+                                mockPadding = Math.floor(mockPadding * 0.75);
+                                wpos = "top=0,left=0";
+                            }
+                            var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
+                            var frame = "";
+                            if (mockFrame) {
+                                wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
+                                frame = "?mockFrame=" + mockFrame;
+                            }
+                            if (!win || win.closed) {
+                                win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
+                                if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                else win.document.body.style.backgroundColor = "black";
+                            }
+                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                                if (error) {
+                                    window.debug.log(error);
+                                }
+                                else {
+                                    window.debug.log("open window");
+                                    win.location.href = uri + frame;
+                                }
+
+                            });
+                        }
+                        catch (e) {
+                            console.error("error:" + e);
+                        }
+
+                     }
+                     }
                 );
             });
         }

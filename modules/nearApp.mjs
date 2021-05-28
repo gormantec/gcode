@@ -23,7 +23,7 @@ async function doNear(nearApi) {
 
     const contract = new nearApi.Contract(
         wallet.account(), // the account object that is connecting
-        "dev-1621939186587-7091001",
+        "hello.gormantec.testnet",
         {
             // name of contract you're connecting to
             viewMethods: ["getGreeting"], // view methods do not change state but usually return a value
