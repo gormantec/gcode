@@ -159,7 +159,7 @@ function _runCode()
                         window.debug.log(d);
                         try {
 
-                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n\nvar aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\naPWA.show();\n\nvar mainPage=new Page({color: "black",child: new Div({innerHTML:""})});\naPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n mainPage.innerHTML=mainPage.innerHTML+"<p style=\\"font-size:smaller;padding-left:5px;padding-right:5px;padding-top:5px\\">near$ "+text+"</p>"\n}};'
+                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n\nvar aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\naPWA.show();\n\nvar mainPage=new Page({color: "black",child: new Div({innerHTML:""})});\naPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n mainPage.innerHTML=mainPage.innerHTML+"<p style=\\"font-size:smaller;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}};'
                         
                         
 
