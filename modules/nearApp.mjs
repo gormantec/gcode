@@ -13,7 +13,7 @@ async function doNear(nearApi, config) {
     });
 
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    
+
     if (window.wconsole) window.wconsole.log("connecting to near..");
 
     if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
@@ -60,7 +60,7 @@ export function test() {
             myAccountId: "gormantec.testnet", 
             contractId: "hello.gormantec.testnet", 
             methods: [
-                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello ("+Math.round(Date.now() / 1000)+")" } }, 
+                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello ("+(Math.round(Date.now() / 1000)-1622206047)+")" } }, 
                 { method: "getGreeting", type: "viewMethods", parameters: { accountId: "gormantec.testnet" } 
             }] });
     });
