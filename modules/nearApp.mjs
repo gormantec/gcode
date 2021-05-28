@@ -21,7 +21,7 @@ async function doNear(nearApi) {
         wallet.requestSignIn("gormantec.testnet");
     }
     console.log(wallet);
-    if(window.wconsole)window.wconsole.log(JSON.stringify(wallet));
+    if(window.wconsole)window.wconsole.log("wallet: "+wallet._authData.accountId);
 
     const contract = new nearApi.Contract(
         wallet.account(), // the account object that is connecting
@@ -34,13 +34,20 @@ async function doNear(nearApi) {
     );
 
     if(window.wconsole)window.wconsole.log('setGreeting("hello test")');
-    var response=await contract.setGreeting(
+    await contract.setGreeting(
         {
             message: "hello test", // argument name and value - pass empty object if no args required
         }
     );
+
+    var response=await contract.getGreeting(
+        {
+            accountId: wallet._authData.accountId, // argument name and value - pass empty object if no args required
+        }
+    );
     console.log(response);
-    if(window.wconsole)window.wconsole.log(JSON.stringify(response));
+    if(window.wconsole)window.wconsole.log(response);
+
 
 }
 
