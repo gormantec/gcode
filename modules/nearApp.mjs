@@ -39,6 +39,8 @@ async function doNear(nearApi,config) {
 
     config.methods.forEach(e => {
         if(window.wconsole)window.wconsole.log(e.method+'('+e.parameters+')');
+        var test1=await ( async ()=>{return 100;})();
+        console.log(test1);
         mycontract[e.method](e.parameters).then((r)=>{
                 console.log(r);
                 if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
