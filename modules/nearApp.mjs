@@ -47,6 +47,8 @@ async function doNear(nearApi,config) {
             }
         );
 
+        //await Promise.resolve(mycontract[e.method](e.parameters));
+
         await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     });
 
