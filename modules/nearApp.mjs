@@ -47,7 +47,7 @@ async function doNear(nearApi,config) {
     //        }
     //    );
 
-        let prom = Promise.resolve(mycontract[e.method](e.parameters));
+        let prom = Promise.cast(mycontract[e.method](e.parameters));
         let r = await prom;
         console.log(r);
         if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
@@ -57,10 +57,7 @@ async function doNear(nearApi,config) {
 
 }
 
-async function doProm(p)
-{
-    return await Promise.resolve(p);
-}
+
 
 
 
