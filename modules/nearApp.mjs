@@ -51,11 +51,7 @@ async function doNear(nearApi,config) {
         });
         
 
-        await new Promise((resolve, reject) => {
-            const intV=setInterval(()=>{
-                if(!waitBoolean){clearInterval(intV); resolve();}
-            }, 500);
-        });
+        await new Promise((resolve, reject) => setTimeout(resolve, 6000));
     });
 
 }
