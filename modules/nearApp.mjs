@@ -11,7 +11,7 @@ async function doNear(nearApi) {
         nodeUrl: 'https://rpc.testnet.near.org',
         walletUrl: 'https://wallet.testnet.near.org'
     });
-
+    if(window.wconsole)window.wconsole.innerHTML=window.wconsole.innerHTML+"near<br>";
 
     console.log(near);
     const wallet = new nearApi.WalletConnection(near);
@@ -20,6 +20,7 @@ async function doNear(nearApi) {
         wallet.requestSignIn("gormantec.testnet");
     }
     console.log(wallet);
+    if(window.wconsole)window.wconsole.innerHTML=window.wconsole.innerHTML+wallet+"<br>";
 
     const contract = new nearApi.Contract(
         wallet.account(), // the account object that is connecting
@@ -31,11 +32,12 @@ async function doNear(nearApi) {
         }
     );
 
-    await contract.setGreeting(
+    var response=await contract.setGreeting(
         {
             message: "hello.10", // argument name and value - pass empty object if no args required
         }
     );
+    if(window.wconsole)window.wconsole.innerHTML=window.wconsole.innerHTML+response+"<br>";
 
 }
 
