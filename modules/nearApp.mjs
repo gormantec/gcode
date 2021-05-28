@@ -39,9 +39,9 @@ async function doNear(nearApi,config) {
     const list=config.methods;
     var doLoop=(i)=>{
         if(window.wconsole)window.wconsole.log(list[i].method+'('+list[i].parameters+')');
-        mycontract[list[i].method](e.parameters).then(()=>{
+        mycontract[list[i].method](list[i].parameters).then((r)=>{
             console.log("loop: "+i);
-            if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
+            if(window.wconsole)window.wconsole.log(list[i].method+"() result = \""+r+"\"");
             if((i+1)<list.length)doLoop(i+1);
         });
     };
