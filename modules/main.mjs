@@ -159,9 +159,9 @@ function _runCode()
                         window.debug.log(d);
                         try {
 
-                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n\nvar aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});'
+                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n\nvar aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\naPWA.show();'
                         
-                        aPWA.show();
+                        
 
                             var result = createHtml((code && code.trim().substring(0,2)=="/*")?code.substring(0,code.indexOf("*/")+2):"");
                             var splashBackgroundColor=result.splashBackgroundColor;
