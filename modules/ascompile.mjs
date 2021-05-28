@@ -1,6 +1,5 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
-import { test, upload } from '/modules/nearApp.mjs';
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
@@ -142,7 +141,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             setTimeout(waitRead, 500);
                                         }
                                         else {
-                                            upload(dataURL);
+                                            //upload(dataURL);
                                             //test();
                                             callback(null, { "dataURL": dataURL });
                                         }
