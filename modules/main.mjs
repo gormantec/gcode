@@ -159,7 +159,18 @@ function _runCode()
                         window.debug.log(d);
                         try {
 
-                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n\nvar aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\naPWA.show();\n\nvar mainPage=new Page({color: "black",child: new Div({innerHTML:""})});\naPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n mainPage.innerHTML=mainPage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}};'
+                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n'+
+                        'import { test } from "https://gcode.com.au/modules/nearApp.mjs";\n\n'+
+                        'var aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\n'+
+                        'aPWA.show();\n\n'+
+                        'var mainPage=new Page({color: "black",paddingTop:"45px", child: new Div({innerHTML:""})});\n'+
+                        'aPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n'+
+                        '  mainPage.innerHTML=mainPage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}'+
+                        '};\n'+
+                        'var button=new Div({borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n'+
+                        'button.onclick(function(){console.log("RUN");test();});\n'+
+                        'mainPage.appendChild(button);\n'
+
                         
                         
 
@@ -168,18 +179,13 @@ function _runCode()
                             var splash=result.splash;
                             var mockFrame=result.mockFrame;
                             var rootHTML=result.rootHTML;
-
                             var _module = window.document.createElement("script");
                             _module.setAttribute("type", "module");
                             _module.text = "\n" + jApp + "\n";
                             rootHTML.querySelector("head").appendChild(_module);
-                            
                             var _script1 = window.document.createElement("script");
                             _script1.src = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
                             rootHTML.querySelector("head").appendChild(_script1);
-
-
-
                             var _script2 = window.document.createElement("script");
                             _script2.src = "https://gcode.com.au/modules/nearApp.mjs";
                             _script2.type="module";
