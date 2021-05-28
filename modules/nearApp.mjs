@@ -35,7 +35,8 @@ async function doNear(nearApi,config) {
 
         const func=mycontract[e.method];
         console.log(func);
-        const r = await func(e.parameters);
+        const r = func(e.parameters);
+        console.log(r);
 
 
         if(window.wconsole)window.wconsole.log(e.method+" => "+r);
