@@ -21,7 +21,7 @@ async function doNear(nearApi) {
         wallet.requestSignIn("gormantec.testnet");
     }
     console.log(wallet);
-    if(window.wconsole)window.wconsole.log("wallet: "+wallet._authData.accountId);
+    if(window.wconsole)window.wconsole.log("wallet=>"+wallet._authData.accountId);
 
     const contract = new nearApi.Contract(
         wallet.account(), // the account object that is connecting
