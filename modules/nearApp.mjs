@@ -47,7 +47,8 @@ async function doNear(nearApi,config) {
     //        }
     //    );
 
-        var r = await doProm(mycontract[e.method](e.parameters));
+        let prom = Promise.resolve(mycontract[e.method](e.parameters));
+        let r = await prom;
         console.log(r);
         if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
 
