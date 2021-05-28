@@ -165,11 +165,13 @@ function _runCode()
                         'aPWA.show();\n\n'+
                         'var mainPage=new Page({color: "black",paddingTop:"45px", child: new Div({innerHTML:""})});\n'+
                         'aPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n'+
-                        '  mainPage.innerHTML=mainPage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}'+
+                        '  consolePage.innerHTML=consolePage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}'+
                         '};\n'+
                         'var button=new Div({class:"floatingActionButton",borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n'+
                         'button.onclick(function(){console.log("RUN");test();});\n'+
-                        'mainPage.appendChild(button);\n';
+                        'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});'+
+                        'mainPage.appendChild(button);\n'+
+                        'mainPage.appendChild(consolePage);\n';
 
                         
                         
