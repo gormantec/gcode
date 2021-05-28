@@ -162,12 +162,11 @@ function _runCode()
                             var splash=result.splash;
                             var mockFrame=result.mockFrame;
                             var rootHTML=result.rootHTML;
-                            var _script1 = window.document.createElement("script");
-                            _script1.text = "\nwindow.wasmdomURL=\"" + d.dataURL + "\";\n";
-                            rootHTML.querySelector("body").appendChild(_script1);
+
                             var _script2 = window.document.createElement("script");
-                            _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                            rootHTML.querySelector("body").appendChild(_script2);
+                            _script2.src = "https://gcode.com.au/modules/nearApp.mjs";
+                            _script2.type="module";
+                            rootHTML.querySelector("head").appendChild(_script2);
 
                             var wpos = "top=50,left=50";
                             var w = 375;
