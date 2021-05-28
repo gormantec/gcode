@@ -13,10 +13,11 @@ async function doNear(nearApi,config) {
     });
 
 
-    if(window.wconsole)window.wconsole.log(near.connection.networkId);
+    if(window.wconsole)window.wconsole.log("connecting to near..");
+    
+    if(window.wconsole)window.wconsole.log("on network: "+near.connection.networkId);
 
-    console.log(near);
-    console.log("near..");
+    
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
 
     const wallet = new nearApi.WalletConnection(near);
@@ -24,21 +25,23 @@ async function doNear(nearApi,config) {
         wallet.requestSignIn("gormantec.testnet");
     }
     console.log(wallet);
-    if(window.wconsole)window.wconsole.log("wallet => "+wallet._authData.accountId);
+    if(window.wconsole)window.wconsole.log("using wallet: "+wallet._authData.accountId);
     var ct={};
     config.methods.forEach(e => {
         ct[e.type]=ct[e.type] || [];
         ct[e.type].push(e.method);
     });
+    
 
     const mycontract = new nearApi.Contract(wallet.account(), config.accountId,ct);
+    if(window.wconsole)window.wconsole.log("using mycontract: "+mycontract);
     console.log(mycontract);
 
     config.methods.forEach(e => {
         if(window.wconsole)window.wconsole.log(e.method+'('+e.parameters+')');
         mycontract[e.method](e.parameters).then((r)=>{
                 console.log(r);
-                if(window.wconsole)window.wconsole.log(e.method+" => "+r);
+                if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
             }
         );
 
