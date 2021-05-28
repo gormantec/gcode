@@ -27,14 +27,14 @@ async function doNear(nearApi,config) {
         ct[e.type].push(e.method);
     });
 
-    const contract = new nearApi.Contract(wallet.account(), config.accountId,ct);
-    console.log(contract);
+    const mycontract = new nearApi.Contract(wallet.account(), config.accountId,ct);
+    console.log(mycontract);
 
     config.methods.forEach(e => {
         if(window.wconsole)window.wconsole.log(e.method+'('+e.parameters+')');
 
-        const func=contract[e.method];
-        var r = await func(e.parameters);
+        const func=mycontract[e.method];
+        const r = await func(e.parameters);
 
 
         if(window.wconsole)window.wconsole.log(e.method+" => "+r);
