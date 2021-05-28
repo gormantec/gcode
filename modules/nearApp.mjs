@@ -39,19 +39,24 @@ async function doNear(nearApi,config) {
 
     config.methods.forEach(e => {
         if(window.wconsole)window.wconsole.log(e.method+'('+e.parameters+')');
-        var test1=await ( async ()=>{return 100;})();
+        //var test1=await ( async ()=>{return 100;})();
         console.log(test1);
-        mycontract[e.method](e.parameters).then((r)=>{
-                console.log(r);
-                if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
-            }
-        );
+    //    mycontract[e.method](e.parameters).then((r)=>{
+    //            console.log(r);
+    //            if(window.wconsole)window.wconsole.log(e.method+"() result = \""+r+"\"");
+    //        }
+    //    );
 
-        //await Promise.resolve(mycontract[e.method](e.parameters));
+        await doProm(mycontract[e.method](e.parameters));
 
         await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     });
 
+}
+
+async function doProm(p)
+{
+    return await Promise.resolve(p);
 }
 
 
