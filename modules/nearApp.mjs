@@ -47,6 +47,7 @@ async function doNear(nearApi,config) {
     //        }
     //    );
 
+    
         let prom = Promise.cast(mycontract[e.method](e.parameters));
         let r = await prom;
         console.log(r);
