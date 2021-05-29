@@ -1,3 +1,7 @@
+/**
+ * @Class();
+ * @Near({"accountId":"gormantec.testnet", "contractId": "hello.gormantec.testnet"});
+ */
 
 import { Context, logging, storage } from 'near-sdk-as'
 
