@@ -143,7 +143,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         else {
                                             //upload(dataURL);
                                             //test();
-                                            callback(null, { "dataURL": dataURL });
+                                            compile("sdfsdf").then(()=>{
+
+                                                callback(null, { "dataURL": dataURL });
+
+                                            });
+                                            
                                         }
                                     };
                                     waitRead();
