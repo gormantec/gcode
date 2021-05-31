@@ -7,7 +7,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
         var tryCount = 0;
         var dataURL = null;
-        var _run = async function () {
+        var _run = async function () {   
             var failed = false;
             var downloading = 0;
             require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
