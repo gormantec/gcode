@@ -5,8 +5,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
     console.log("editorFilename:" + editorFilename);
     try {
 
-        var tryCount = 0;
-        var dataURL = null;
+        var tryCount = 0;//test  
+        var dataURL = null;   
         var _run = async function () {   
             var failed = false;
             var downloading = 0;
