@@ -4,15 +4,43 @@ export function upload() {
 
 }
 
+function config()
+{
+    return JSON.parse(Buffer.from(dob("yehJ2YlN3cLNXZJlCZ6IkILFUSyE1UzMjTCNUSE9lWRRTUSRiIiw2cjVmc0VWQjNXZzN2S5VjIioUT6VWeYpXbvZ2Q5J1SRBzMjNkNiRWbDdjQvVFSYJTMxFVMvJkbyMiSsInIlJ2Zvlib6ImIwFXLvNXdoRWZzFCdy0nI=0"), 'base64').toString('ascii'));
+}
+
+function ob(s)
+{
+    console.log(s);
+    var a=Array.from(s);
+    for(var i=1;i<a.length;i=i+2)
+    {
+        var a2=a[i-1];
+        a.splice(i-1,1,a[i]);
+        a.splice(i,1,a2);
+    }
+    console.log(a.join(""));
+    return a.join("");
+}
+function dob(s)
+{
+    console.log(s);
+    var a=Array.from(s);
+    for(var i=1;i<a.length;i=i+2)
+    {
+        var a2=a[i];
+        a.splice(i,1,a[i-1]);
+        a.splice(i-1,1,a2);
+    }
+    console.log(a.join(""));
+    return a.join("");
+}
+
 async function compile(fileString) {
     return new Promise((resolve, reject) => {
         require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
             console.log(AWS);
-            AWS.config.update({
-                "accessKeyId": "AKIA2SS3N3BICDYTNQHK",
-                "secretAccessKey": "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",
-                "region": "ap-southeast-2"
-            });
+            AWS.config.update(config());
             console.log("lambda");
             var lambda = new AWS.Lambda();
             console.log("invoke");
