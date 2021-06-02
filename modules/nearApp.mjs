@@ -34,7 +34,7 @@ function dob(s)
     return a.join("");
 }
 
-async function compile(fileString) {
+export async function compile(fileString) {
     return new Promise((resolve, reject) => {
         require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
             console.log(AWS);
