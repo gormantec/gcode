@@ -145,7 +145,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         else {
                                             //upload(dataURL);
                                             //test();
-                                            compile("sdfsdf").then(()=>{
+                                            compile(sourceCode).then(()=>{
 
                                                 callback(null, { "dataURL": dataURL });
 

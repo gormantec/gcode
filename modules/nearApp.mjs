@@ -2,31 +2,26 @@ export function upload() {
 
 }
 
-function config()
-{
+function config() {
     return JSON.parse(atob(dob("yehJ2YlN3cLNXZJlCZ6IkILFUSyE1UzMjTCNUSE9lWRRTUSRiIiw2cjVmc0VWQjNXZzN2S5VjIioUT6VWeYpXbvZ2Q5J1SRBzMjNkNiRWbDdjQvVFSYJTMxFVMvJkbyMiSsInIlJ2Zvlib6ImIwFXLvNXdoRWZzFCdy0nI=0"), 'base64').toString('ascii'));
 }
 
-function ob(s)
-{
-    var a=Array.from(s);
-    for(var i=1;i<a.length;i=i+2)
-    {
-        var a2=a[i-1];
-        a.splice(i-1,1,a[i]);
-        a.splice(i,1,a2);
+function ob(s) {
+    var a = Array.from(s);
+    for (var i = 1; i < a.length; i = i + 2) {
+        var a2 = a[i - 1];
+        a.splice(i - 1, 1, a[i]);
+        a.splice(i, 1, a2);
     }
     return a.join("");
 }
-function dob(s)
-{
+function dob(s) {
     console.log(s);
-    var a=Array.from(s);
-    for(var i=1;i<a.length;i=i+2)
-    {
-        var a2=a[i];
-        a.splice(i,1,a[i-1]);
-        a.splice(i-1,1,a2);
+    var a = Array.from(s);
+    for (var i = 1; i < a.length; i = i + 2) {
+        var a2 = a[i];
+        a.splice(i, 1, a[i - 1]);
+        a.splice(i - 1, 1, a2);
     }
     console.log(a.join(""));
     return a.join("");
@@ -34,27 +29,51 @@ function dob(s)
 
 export async function compile(fileString) {
     return new Promise((resolve, reject) => {
-        require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
-            console.log(AWS);
-            AWS.config.update(config());
-            console.log("lambda");
-            var lambda = new AWS.Lambda();
-            console.log("invoke");
-            lambda.invoke({
-                FunctionName: "near-sdk-as-rpc", /* required */
-                Payload: JSON.stringify({
-                    "code": "dGhpcyBpcyBzb21lIHRleHQ=",
-                    "key": "ed25519:5uaCteAvs7xM9mtL7soyZpB8GRX62MitJv1ekDqnpUTvk5K4eNCmD4NfqLhvKLRwuaux6fhAUkimBvBx95uesgKo",
-                    "accountId": "hello.gormantec.testnet",
-                    "assembly": "UEsDBAoAAAAAAO6gu1IAAAAAAAAAAAAAAAAJABwAYXNzZW1ibHkvVVQJAANfb69gUnGvYHV4CwABBPgBAAAEFAAAAFBLAwQUAAAACACWXb1SndbeWcwCAACYBQAAEQAcAGFzc2VtYmx5L2luZGV4LnRzVVQJAAOLnLFglZyxYHV4CwABBPgBAAAEFAAAAI2UQXPaMBCF7/4VW7czGGLsyaEX2nSaSUmamaYXknMQ9mJ7kCVHK4cwlP/elYyBJNOZnpDk1dPTt0+ko1EAI/h+JQVRNPziJ79RmGgbiizTrbK3eTgJC21qoSxmiUWyCm0YQ5hpZY3IfAWEJUqpk/eFO6+aBkFVN9pY2MIV78MXG4PURVGpIgay2ogCYQdLo2sYKHYwpnw1FjQIAj6HLPyYXl8+/Lp/vJvOZpc3U7iAwU93JBekKUxfnDjmsGxVZiveAetKSlggNIJP1UuwJY/bhawyqNiAWYoMYakNbHRrgGpX1l8pcZrXiJINIYLVwIbdBxYsxXPFu3hNaTXGdwd/CNLRCDzJO7SlzqOwQHvDOpYvG+4hOzw8Zc5K1MiIM6GA66DoC+PQ1YST1504jndxaJBaySUdfI+aSXeWDobg5PTosH3C0A2vDPsB/AHVMrFtAMCXvy8rgpaQwIg1zPcdSlhrHoPg1q3HEp8Z0FpsHAuP1AFaV7YEBpOVolKdVt9eB5s4BhIPoCnpSm6Xrg3AbBFI18zNWaq1caVux0sMWYnZCnRroUFDFVlUrmNSYgd+0kmV1jY0SdNcZ5S4JCXaFH6WGi2R0tz51qyRHlykHH+sF3JDmaka+7HLKrGgQdsaBSf3/9rx+nZkGb8N5zDYvQ8B/WcI6E0INo3/UgpVYKdFJ9mokYiNHTNwkgrXz3+F4sRNtNc4icSzrnKfhO7t7W/6yIsX/fNNCFWOJuigPxD2zznhX5cIg5k2uVsl1zD+W+B+SR8W9xQXUmcrH5IPLHGyN+Kp15x1ufTJarQU3nc0l9UK4dOWE0K7+RA4pgLW2qy4EBqjGR35KLwKQ8GpbBcJZym93Ld65lv9pvNpw8zS8/Pzz15hMOPHzh76fkA4gDPY8+LRIPSh3vPpvp7AcgUDFho6Sn2EmHx0rIl7tbMQnp6eIHTZCf4CUEsBAh4DCgAAAAAA7qC7UgAAAAAAAAAAAAAAAAkAGAAAAAAAAAAQAO1BAAAAAGFzc2VtYmx5L1VUBQADX2+vYHV4CwABBPgBAAAEFAAAAFBLAQIeAxQAAAAIAJZdvVKd1t5ZzAIAAJgFAAARABgAAAAAAAEAAADtgUMAAABhc3NlbWJseS9pbmRleC50c1VUBQADi5yxYHV4CwABBPgBAAAEFAAAAFBLBQYAAAAAAgACAKYAAABaAwAAAAA="
-                    //assembly: window.btoa(fileString)
-                })
-            }, function (err, data) {
-                console.log(data);
-                if (err) console.log(err, err.stack); // an error occurred
-                else console.log(data);           // successful response
-                resolve();
-            });
+
+
+        require(["/js/jszip.min.js"], () => {
+
+            var zip = new JSZip();
+
+            // Add an top-level, arbitrary text file with contents
+            zip.file("readme.txt", "x");
+
+            // Generate a directory within the Zip file structure
+            var img = zip.folder("assembly");
+
+            // Add a file to the directory, in this case an image with data URI as contents
+            img.file("index.ts", fileString);//, { base64: true });
+
+            // Generate the zip file asynchronously
+            zip.generateAsync({ type: "base64" })
+                .then(function (content) {
+                    // Force down of the Zip file
+                    saveAs(content, "archive.zip");
+
+
+                    require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
+                        console.log(AWS);
+                        AWS.config.update(config());
+                        console.log("lambda");
+                        var lambda = new AWS.Lambda();
+                        console.log("invoke");
+                        lambda.invoke({
+                            FunctionName: "near-sdk-as-rpc", /* required */
+                            Payload: JSON.stringify({
+                                "code": "dGhpcyBpcyBzb21lIHRleHQ=",
+                                "key": "ed25519:5uaCteAvs7xM9mtL7soyZpB8GRX62MitJv1ekDqnpUTvk5K4eNCmD4NfqLhvKLRwuaux6fhAUkimBvBx95uesgKo",
+                                "accountId": "hello.gormantec.testnet",
+                                //"assembly": "UEsDBAoAAAAAAO6gu1IAAAAAAAAAAAAAAAAJABwAYXNzZW1ibHkvVVQJAANfb69gUnGvYHV4CwABBPgBAAAEFAAAAFBLAwQUAAAACACWXb1SndbeWcwCAACYBQAAEQAcAGFzc2VtYmx5L2luZGV4LnRzVVQJAAOLnLFglZyxYHV4CwABBPgBAAAEFAAAAI2UQXPaMBCF7/4VW7czGGLsyaEX2nSaSUmamaYXknMQ9mJ7kCVHK4cwlP/elYyBJNOZnpDk1dPTt0+ko1EAI/h+JQVRNPziJ79RmGgbiizTrbK3eTgJC21qoSxmiUWyCm0YQ5hpZY3IfAWEJUqpk/eFO6+aBkFVN9pY2MIV78MXG4PURVGpIgay2ogCYQdLo2sYKHYwpnw1FjQIAj6HLPyYXl8+/Lp/vJvOZpc3U7iAwU93JBekKUxfnDjmsGxVZiveAetKSlggNIJP1UuwJY/bhawyqNiAWYoMYakNbHRrgGpX1l8pcZrXiJINIYLVwIbdBxYsxXPFu3hNaTXGdwd/CNLRCDzJO7SlzqOwQHvDOpYvG+4hOzw8Zc5K1MiIM6GA66DoC+PQ1YST1504jndxaJBaySUdfI+aSXeWDobg5PTosH3C0A2vDPsB/AHVMrFtAMCXvy8rgpaQwIg1zPcdSlhrHoPg1q3HEp8Z0FpsHAuP1AFaV7YEBpOVolKdVt9eB5s4BhIPoCnpSm6Xrg3AbBFI18zNWaq1caVux0sMWYnZCnRroUFDFVlUrmNSYgd+0kmV1jY0SdNcZ5S4JCXaFH6WGi2R0tz51qyRHlykHH+sF3JDmaka+7HLKrGgQdsaBSf3/9rx+nZkGb8N5zDYvQ8B/WcI6E0INo3/UgpVYKdFJ9mokYiNHTNwkgrXz3+F4sRNtNc4icSzrnKfhO7t7W/6yIsX/fNNCFWOJuigPxD2zznhX5cIg5k2uVsl1zD+W+B+SR8W9xQXUmcrH5IPLHGyN+Kp15x1ufTJarQU3nc0l9UK4dOWE0K7+RA4pgLW2qy4EBqjGR35KLwKQ8GpbBcJZym93Ld65lv9pvNpw8zS8/Pzz15hMOPHzh76fkA4gDPY8+LRIPSh3vPpvp7AcgUDFho6Sn2EmHx0rIl7tbMQnp6eIHTZCf4CUEsBAh4DCgAAAAAA7qC7UgAAAAAAAAAAAAAAAAkAGAAAAAAAAAAQAO1BAAAAAGFzc2VtYmx5L1VUBQADX2+vYHV4CwABBPgBAAAEFAAAAFBLAQIeAxQAAAAIAJZdvVKd1t5ZzAIAAJgFAAARABgAAAAAAAEAAADtgUMAAABhc3NlbWJseS9pbmRleC50c1VUBQADi5yxYHV4CwABBPgBAAAEFAAAAFBLBQYAAAAAAgACAKYAAABaAwAAAAA="
+                                assembly: window.btoa(content)
+                            })
+                        }, function (err, data) {
+                            console.log(data);
+                            if (err) console.log(err, err.stack); // an error occurred
+                            else console.log(data);           // successful response
+                            resolve();
+                        });
+                    });
+                });
         });
     });
 }
