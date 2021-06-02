@@ -121,5 +121,3 @@ export function test() {
         });
     });
 }
-
-test();
