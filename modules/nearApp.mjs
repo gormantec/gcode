@@ -1,5 +1,3 @@
-import AWS from "https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"
-
 export function upload() {
 
 }
