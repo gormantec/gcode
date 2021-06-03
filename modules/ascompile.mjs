@@ -9,6 +9,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
         var tryCount = 0;//test  
         var dataURL = null;   
+        var dataBlob = null;   
         var _run = async function () {   
             var failed = false;
             var downloading = 0;
@@ -94,7 +95,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     dataURL = reader.result;
                                 }, false);
 
-                                //createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));  
+                                //createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' })); 
+                                dataBlob=new Blob([Uint8Array.from(data)]);
                                 
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
@@ -145,7 +147,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         else {
                                             //upload(dataURL);
                                             //test();
-                                            compile(sourceCode).then((x)=>{
+                                            var b64data=dataURL.replace(/^data:application\/wasm';base64,/, "")
+                                            console.log("b64data: "+b64data);
+                                            compile([{name:"assembly/index.ts",data:sourceCode,type:"string"},
+                                                        {name:"out/webcompileb64.wasm",data:b64data,type:"base64"},
+                                                        {name:"out/webcompileblob.wasm",data:dataBlob,type:"blob"},
+                                                    ]).then((x)=>{
                                                 
                                                 b64toBlob(x,'application/zip').then(blob=>{
                                                     createDownload("assembly.zip",blob, { type: 'application/zip' });

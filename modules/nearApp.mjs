@@ -27,22 +27,27 @@ function dob(s) {
     return a.join("");
 }
 
-export async function compile(fileString) {
+export async function compile(filesArray) {
     return new Promise((resolve, reject) => {
 
 
         require(["/js/jszip.min.js"], (JSZip) => {
-
             var zip = new JSZip();
-
-            // Add an top-level, arbitrary text file with contents
             zip.file("readme.txt", "x");
+            filesArray.forEach((inFile)=>{
+                const fName=str.substring(str.lastIndexOf('/')+1);
+                const dName=str.substring(0,str.lastIndexOf('/'));
+                const dir = zip.folder(dName);
+                if(inFile.type=="base64")
+                {
+                    dir.file(fName, inFile.data, { base64: true });
+                }
+                else
+                {
+                    dir.file(fName, inFile.data);
+                }
+            });
 
-            // Generate a directory within the Zip file structure
-            var img = zip.folder("assembly");
-
-            // Add a file to the directory, in this case an image with data URI as contents
-            img.file("index.ts", fileString);//, { base64: true });
 
             // Generate the zip file asynchronously
             zip.generateAsync({ type: "base64" })
