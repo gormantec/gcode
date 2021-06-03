@@ -31,7 +31,7 @@ export async function compile(fileString) {
     return new Promise((resolve, reject) => {
 
 
-        require(["/js/jszip.min.js"], () => {
+        require(["/js/jszip.min.js"], (JSZip) => {
 
             var zip = new JSZip();
 
