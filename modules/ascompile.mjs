@@ -142,12 +142,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             if (readTryCount == 0) window.debug.log("reading file..");
                                             else window.debug.log("\b..");
                                             readTryCount++;
-                                            setTimeout(waitRead, 500);
+                                            setTimeout(waitRead, 500);  
                                         }
                                         else {
                                             //upload(dataURL);
                                             //test();
-                                            var b64data=dataURL.replace(/^data:application\/wasm';base64,/, "")
+                                            var b64data=dataURL.substring(dataURL.indexOf(";base64,")+8);
                                             console.log("b64data: "+b64data);
                                             compile([{name:"assembly/index.ts",data:sourceCode,type:"string"},
                                                         {name:"out/webcompileb64.wasm",data:b64data,type:"base64"},
