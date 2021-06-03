@@ -48,7 +48,7 @@ export async function compile(fileString) {
             zip.generateAsync({ type: "base64" })
                 .then(function (content) {
                     // Force down of the Zip file
-                    saveAs(content, "archive.zip");
+                    //saveAs(content, "archive.zip");
 
 
                     require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
