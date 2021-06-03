@@ -145,7 +145,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         else {
                                             //upload(dataURL);
                                             //test();
-                                            compile(sourceCode).then(()=>{
+                                            compile(sourceCode).then((x)=>{
+                                                console.log("compile:"+x);
 
                                                 callback(null, { "dataURL": dataURL });
 
