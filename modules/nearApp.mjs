@@ -35,8 +35,8 @@ export async function compile(filesArray) {
             var zip = new JSZip();
             zip.file("readme.txt", "x");
             filesArray.forEach((inFile)=>{
-                const fName=str.substring(str.lastIndexOf('/')+1);
-                const dName=str.substring(0,str.lastIndexOf('/'));
+                const fName=inFile.name.substring(inFile.name.lastIndexOf('/')+1);
+                const dName=inFile.name.substring(0,inFile.name.lastIndexOf('/'));
                 const dir = zip.folder(dName);
                 if(inFile.type=="base64")
                 {
