@@ -94,7 +94,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     dataURL = reader.result;
                                 }, false);
 
-                                //createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+                                //createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));  
                                 
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
