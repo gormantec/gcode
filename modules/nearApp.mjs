@@ -87,7 +87,7 @@ async function doNear(nearApi, config) {
         nodeUrl: 'https://rpc.testnet.near.org',
         walletUrl: 'https://wallet.testnet.near.org'
     });
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+    await new Promise((resolve, reject) => setTimeout(resolve, 500));
     if (window.wconsole) window.wconsole.log("connecting to near..");
     if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
     const wallet = new nearApi.WalletConnection(near);
