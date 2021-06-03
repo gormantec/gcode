@@ -94,7 +94,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     dataURL = reader.result;
                                 }, false);
 
-                                createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+                                //createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                                 
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                             }
@@ -146,7 +146,11 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             //upload(dataURL);
                                             //test();
                                             compile(sourceCode).then((x)=>{
-                                                console.log("compile:"+x);
+                                                
+                                                b64toBlob(x,'application/zip').then(blob=>{
+                                                    createDownload("assembly.zip",blob, { type: 'application/zip' });
+                                                });
+                                                
 
                                                 callback(null, { "dataURL": dataURL });
 
@@ -167,6 +171,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
     }
     catch (e) { window.debug.log(e); }
 }
+
+const b64toBlob = (base64, type = 'application/octet-stream') => 
+  fetch(`data:${type};base64,${base64}`).then(res => res.blob())
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string

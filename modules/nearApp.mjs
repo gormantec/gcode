@@ -49,6 +49,7 @@ export async function compile(fileString) {
                 .then(function (content) {
                     // Force down of the Zip file
                     //saveAs(content, "archive.zip");
+                    console.log(content);
 
 
                     require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
@@ -70,7 +71,7 @@ export async function compile(fileString) {
                             console.log(data);
                             if (err) console.log(err, err.stack); // an error occurred
                             else console.log(data);           // successful response
-                            resolve();
+                            resolve(content);
                         });
                     });
                 });
