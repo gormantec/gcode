@@ -1,20 +1,11 @@
 /**
  * @Class();
- * @Near({"accountId":"gormantec.testnet", "contractId": "hello.gormantec.testnet"});
+ * @Near({"accountId":"hello.gormantec.testnet", "contractId": "hello.gormantec.testnet"});
  */
 
 import { Context, logging, storage } from 'near-sdk-as'
 
 const DEFAULT_MESSAGE = 'Hello'
-
-/** 
- * @Method("getGreeting");
- * @testing({"name":"can get greeting","test":{"accountId":"accountId"},"result":"hello"});
-*/
-export function getGreeting(accountId: string): string | null {
-  return storage.get<string>(accountId, DEFAULT_MESSAGE)
-}
-
 
 /** 
  * @Method("setGreeting");
@@ -25,3 +16,13 @@ export function setGreeting(message: string): void {
   logging.log( 'Saving greeting "' + message + '" for account "' + account_id + '"')
   storage.set(account_id, message)
 }
+
+/** 
+ * @Method("getGreeting");
+ * @testing({"name":"can get greeting","test":{"accountId":"accountId"},"result":"hello"});
+*/
+export function getGreeting(accountId: string): string | null {
+  return storage.get<string>(accountId, DEFAULT_MESSAGE)
+}
+
+
