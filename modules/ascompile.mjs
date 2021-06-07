@@ -1,18 +1,24 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
 
-import { compile ,login } from '/modules/nearApp.mjs';
+import { compile, login } from '/modules/nearApp.mjs';
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
     try {
         if (dapp) {
-            compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" }]).then((x) => {
-                b64toBlob(x, 'application/zip').then(blob => {
-                    createDownload("assembly.zip", blob, { type: 'application/zip' });
-                });
-                callback(null, { "dataURL": x });
+            var accountId = sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"accountId":"(.*?)".*$/, "$1");
+            var contractId = sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"contractId":"(.*?)".*$/, "$1");
+            console.log(accountId);
+            login({ accountId: accountId, contractId: contractId }).then(() => {
 
+                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" }]).then((x) => {
+                    b64toBlob(x, 'application/zip').then(blob => {
+                        createDownload("assembly.zip", blob, { type: 'application/zip' });
+                    });
+                    callback(null, { "dataURL": x });
+
+                });
             });
         }
         else {
@@ -159,26 +165,24 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 //test();
                                                 var b64data = dataURL.substring(dataURL.indexOf(";base64,") + 8);
 
-                                                var accountId=sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"accountId":"(.*?)".*$/, "$1");
-                                                var contractId=sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"contractId":"(.*?)".*$/, "$1");
-                                                console.log(accountId);
-                                                login({accountId:accountId,contractId:contractId}).then(()=>{
-                                                    console.log("login::done");
-                                                    compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },
-                                                    { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
-                                                    { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
-                                                    ]).then((x) => {
-    
-                                                        b64toBlob(x, 'application/zip').then(blob => {
-                                                            createDownload("assembly.zip", blob, { type: 'application/zip' });
-                                                        });
-    
-    
-                                                        callback(null, { "dataURL": dataURL });
-    
+
+
+                                                console.log("login::done");
+                                                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },
+                                                { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
+                                                { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
+                                                ]).then((x) => {
+
+                                                    b64toBlob(x, 'application/zip').then(blob => {
+                                                        createDownload("assembly.zip", blob, { type: 'application/zip' });
                                                     });
+
+
+                                                    callback(null, { "dataURL": dataURL });
+
                                                 });
-   
+
+
 
                                             }
                                         };
