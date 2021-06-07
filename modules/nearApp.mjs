@@ -44,10 +44,22 @@ export async function login(config) {
             const wallet = new nearApi.WalletConnection(near);
             if (!wallet.isSignedIn()) {
                 console.log("requestSignIn");
-                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(resolve).catch((e)=>{
+                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(()=>{
+                    wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
+                    resolve();
+                }).catch((e)=>{
                     console.log("error");
                     console.log(e);
-                    reject();
+                    if(e.indexOf("[-32000]")>0)
+                    {
+                        near.createAccount(config.accountId).then(()=>{
+                            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
+                            resolve();
+                        }).catch((e)=>{console.log("ceare error: "+e);reject();});
+                    }
+                    else{
+                        reject();
+                    }
                 });
             }
             else {
