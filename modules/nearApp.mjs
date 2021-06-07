@@ -49,7 +49,7 @@ export async function login(config) {
                 }).catch((e)=>{
                     console.log("error");
                     console.log(e);
-                    if(e.indexOf("[-32000]")>0)
+                    if((""+e).indexOf("[-32000]")>0)
                     {
                         console.log("try and create");
                         near.createAccount(config.accountId).then(()=>{
