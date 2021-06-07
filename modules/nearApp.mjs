@@ -26,10 +26,22 @@ function dob(s) {
     console.log(a.join(""));
     return a.join("");
 }
+var keyStore;
+function nearConfig(nearApi)
+{
+    keyStore = keyStore || new nearApi.keyStores.BrowserLocalStorageKeyStore();
+    return {
+        keyStore: keyStore,
+        networkId: 'testnet',
+        nodeUrl: 'https://rpc.testnet.near.org',
+        walletUrl: 'https://wallet.testnet.near.org'
+    };
+}
 export async function login(config) {
     return new Promise((resolve, reject) => {
-        console.log(config);
         require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
+            const near = new nearApi.Near(nearConfig(nearApi));
+            const wallet = new nearApi.WalletConnection(near);
             if (!wallet.isSignedIn()) {
                 wallet.requestSignIn(config.accountId, "gcode by gormantec").then(resolve).catch(reject);
             }
@@ -85,14 +97,8 @@ export async function compile(filesArray) {
 }
 
 async function doNear(nearApi, config) {
-
-    const keyStore = new nearApi.keyStores.BrowserLocalStorageKeyStore();
-    const near = new nearApi.Near({
-        keyStore: keyStore,
-        networkId: 'testnet',
-        nodeUrl: 'https://rpc.testnet.near.org',
-        walletUrl: 'https://wallet.testnet.near.org'
-    });
+    
+    const near = new nearApi.Near(nearConfig(nearApi));
     await new Promise((resolve, reject) => setTimeout(resolve, 500));
     if (window.wconsole) window.wconsole.log("connecting to near..");
     if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
