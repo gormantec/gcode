@@ -28,6 +28,7 @@ function dob(s) {
 }
 export async function login(config) {
     return new Promise((resolve, reject) => {
+        console.log(config);
         require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
             if (!wallet.isSignedIn()) {
                 wallet.requestSignIn(config.accountId, "gcode by gormantec").then(resolve).catch(reject);
