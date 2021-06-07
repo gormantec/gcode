@@ -163,6 +163,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 var contractId=sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"contractId":"(.*?)".*$/, "$1");
                                                 console.log(accountId);
                                                 login({accountId:accountId,contractId:contractId}).then(()=>{
+                                                    console.log("login::done");
                                                     compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },
                                                     { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
                                                     { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
