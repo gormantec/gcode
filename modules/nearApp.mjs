@@ -60,7 +60,7 @@ export async function compile(filesArray) {
                             Payload: JSON.stringify({
                                 "code": "dGhpcyBpcyBzb21lIHRleHQ=",
                                 "key": "ed25519:5uaCteAvs7xM9mtL7soyZpB8GRX62MitJv1ekDqnpUTvk5K4eNCmD4NfqLhvKLRwuaux6fhAUkimBvBx95uesgKo",
-                                "accountId": "hello.gormantec.testnet",
+                                "accountId": "hello.gcode.testnet",
                                 assembly: content
                             })
                         }, function (err, data) {
@@ -92,7 +92,7 @@ async function doNear(nearApi, config) {
         wallet.requestSignIn(config.myAccountId,"gcode by gormantec");
     }
     else{
-        wallet.account.addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU");
+        wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU");
     }
     console.log(wallet);
     if (window.wconsole) window.wconsole.log("using wallet: " + wallet._authData.accountId);
@@ -126,12 +126,12 @@ async function doNear(nearApi, config) {
 export function test() {
     require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
         doNear(nearApi, {
-            myAccountId: "gormantec.testnet",
-            contractId: "hello.gormantec.testnet",
+            myAccountId: "hello.gcode.testnet",
+            contractId: "hello.gcode.testnet",
             methods: [
                 { method: "setGreeting", type: "changeMethods", parameters: { message: "hello " + (Math.round(Date.now() / 1000) - 1622206047) } },
                 {
-                    method: "getGreeting", type: "viewMethods", parameters: { accountId: "gormantec.testnet" }
+                    method: "getGreeting", type: "viewMethods", parameters: { accountId: "hello.gcode.testnet" }
                 }]
         });
     });
