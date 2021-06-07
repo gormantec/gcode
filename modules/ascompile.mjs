@@ -1,7 +1,7 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
 
-import { compile } from '/modules/nearApp.mjs';
+import { compile ,login } from '/modules/nearApp.mjs';
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
@@ -162,20 +162,22 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 var accountId=sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"accountId":"(.*?)".*$/, "$1");
                                                 var contractId=sourceCode.replace(/^.*?@Class[\s\S]*?@Near\({"contractId":"(.*?)".*$/, "$1");
                                                 console.log(accountId);
-
-                                                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },
-                                                { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
-                                                { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
-                                                ],{accountId:accountId,contractId:contractId}).then((x) => {
-
-                                                    b64toBlob(x, 'application/zip').then(blob => {
-                                                        createDownload("assembly.zip", blob, { type: 'application/zip' });
+                                                login({accountId:accountId,contractId:contractId}).then(()=>{
+                                                    compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },
+                                                    { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
+                                                    { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
+                                                    ]).then((x) => {
+    
+                                                        b64toBlob(x, 'application/zip').then(blob => {
+                                                            createDownload("assembly.zip", blob, { type: 'application/zip' });
+                                                        });
+    
+    
+                                                        callback(null, { "dataURL": dataURL });
+    
                                                     });
-
-
-                                                    callback(null, { "dataURL": dataURL });
-
                                                 });
+   
 
                                             }
                                         };

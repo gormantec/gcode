@@ -26,31 +26,32 @@ function dob(s) {
     console.log(a.join(""));
     return a.join("");
 }
-
-export async function compile(filesArray,config) {
+export async function login(config) {
     return new Promise((resolve, reject) => {
+        require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
+            if (!wallet.isSignedIn()) {
+                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(resolve).catch(reject);
+            }
+            else {
+                wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
+            }
+        });
+    })
+}
 
-        if (!wallet.isSignedIn()) {
-            wallet.requestSignIn(config.accountId,"gcode by gormantec");
-        }
-        else{
-            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU");
-        }
-
-
+export async function compile(filesArray) {
+    return new Promise((resolve, reject) => {
         require(["/js/jszip.min.js"], (JSZip) => {
             var zip = new JSZip();
             zip.file("readme.txt", "x");
-            filesArray.forEach((inFile)=>{
-                const fName=inFile.name.substring(inFile.name.lastIndexOf('/')+1);
-                const dName=inFile.name.substring(0,inFile.name.lastIndexOf('/'));
+            filesArray.forEach((inFile) => {
+                const fName = inFile.name.substring(inFile.name.lastIndexOf('/') + 1);
+                const dName = inFile.name.substring(0, inFile.name.lastIndexOf('/'));
                 const dir = zip.folder(dName);
-                if(inFile.type=="base64")
-                {
+                if (inFile.type == "base64") {
                     dir.file(fName, inFile.data, { base64: true });
                 }
-                else
-                {
+                else {
                     dir.file(fName, inFile.data);
                 }
             });
@@ -96,9 +97,9 @@ async function doNear(nearApi, config) {
     if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
     const wallet = new nearApi.WalletConnection(near);
     if (!wallet.isSignedIn()) {
-        wallet.requestSignIn(config.myAccountId,"gcode by gormantec");
+        wallet.requestSignIn(config.myAccountId, "gcode by gormantec");
     }
-    else{
+    else {
         wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU");
     }
     console.log(wallet);
