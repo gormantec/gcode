@@ -7,8 +7,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
     console.log("editorFilename:" + editorFilename);
     try {
         if (dapp) {
-            var accountId = sourceCode.replace(/^[\s\S]*?@Class[\s\S]*?@Near\({"accountId":"(.*?)"[\s\S]*$/, "$1");
-            var contractId = sourceCode.replace(/^[\s\S]*?@Class[\s\S]*?@Near\({"contractId":"(.*?)"[\s\S]*$/, "$1");
+            var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
+            var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
+            if(accountId==sourceCode)accountId="";
+            if(contractId==sourceCode)contractId="";
             console.log(accountId);
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
