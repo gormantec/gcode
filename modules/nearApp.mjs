@@ -27,8 +27,15 @@ function dob(s) {
     return a.join("");
 }
 
-export async function compile(filesArray) {
+export async function compile(filesArray,config) {
     return new Promise((resolve, reject) => {
+
+        if (!wallet.isSignedIn()) {
+            wallet.requestSignIn(config.accountId,"gcode by gormantec");
+        }
+        else{
+            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU");
+        }
 
 
         require(["/js/jszip.min.js"], (JSZip) => {
