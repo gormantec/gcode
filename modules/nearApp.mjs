@@ -46,7 +46,6 @@ export async function login(config) {
                 console.log("requestSignIn");
                 wallet.requestSignIn(config.accountId, "gcode by gormantec").then(()=>{
                     wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
-                    resolve();
                 }).catch((e)=>{
                     console.log("error");
                     console.log(e);
