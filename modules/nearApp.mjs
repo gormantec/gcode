@@ -51,6 +51,7 @@ export async function login(config) {
                     console.log(e);
                     if(e.indexOf("[-32000]")>0)
                     {
+                        console.log("try and create");
                         near.createAccount(config.accountId).then(()=>{
                             wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
                             resolve();
