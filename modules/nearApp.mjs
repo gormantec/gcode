@@ -43,9 +43,15 @@ export async function login(config) {
             const near = new nearApi.Near(nearConfig(nearApi));
             const wallet = new nearApi.WalletConnection(near);
             if (!wallet.isSignedIn()) {
-                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(resolve).catch(reject);
+                console.log("requestSignIn");
+                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(resolve).catch((e)=>{
+                    console.log("error");
+                    console.log(e);
+                    reject();
+                });
             }
             else {
+                console.log("addKey");
                 wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
             }
         });
@@ -97,7 +103,7 @@ export async function compile(filesArray) {
 }
 
 async function doNear(nearApi, config) {
-    
+
     const near = new nearApi.Near(nearConfig(nearApi));
     await new Promise((resolve, reject) => setTimeout(resolve, 500));
     if (window.wconsole) window.wconsole.log("connecting to near..");
