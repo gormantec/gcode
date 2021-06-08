@@ -53,7 +53,7 @@ export async function login(config) {
                     if((""+e).indexOf("[-32000]")>0)
                     {
                         console.log("try and create");
-                        near.createAccount(config.accountId).then(()=>{
+                        near.createAccount(config.accountId,config.helperUrl).then(()=>{
                             wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
                             resolve();
                         }).catch((e)=>{console.log("ceare error: "+e);reject();});
