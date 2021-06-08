@@ -53,9 +53,11 @@ export async function login(config) {
                     if((""+e).indexOf("[-32000]")>0)
                     {
                         console.log("try and create");
-                        near.createAccount(config.accountId).then(()=>{
+                        var aKeyPair=nearApi.KeyPair.fromRandom("ED25519");
+                        near.createAccount(config.accountId,aKeyPair.getPublicKey()).then(()=>{
                             wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then((x)=>{
                                 console.log("Created account!");
+                                keyStore.setKey("testnet", config.accountId,aKeyPair);
                                 console.log(x);
                                 resolve();
                             }).catch(reject);
