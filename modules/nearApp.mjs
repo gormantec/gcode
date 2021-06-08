@@ -54,9 +54,16 @@ export async function login(config) {
                     {
                         console.log("try and create");
                         near.createAccount(config.accountId).then(()=>{
-                            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
-                            resolve();
-                        }).catch((e)=>{console.log("ceare error: "+e);reject();});
+                            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then((x)=>{
+                                console.log("Created account!");
+                                console.log(x);
+                                resolve();
+                            }).catch(reject);
+                        }).catch((e)=>{
+                            console.log("create error: ");
+                            console.log(e);
+                            reject();
+                        });
                     }
                     else{
                         reject();
