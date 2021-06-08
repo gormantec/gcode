@@ -41,7 +41,7 @@ function nearConfig(nearApi)
 export async function login(config) {
     return new Promise((resolve, reject) => {
         require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
-            const near = new nearApi.Near(nearConfig(nearApi));
+            const near = new nearApi.Near(nearConfig(nearApi));   
             const wallet = new nearApi.WalletConnection(near);
             if (!wallet.isSignedIn()) {
                 console.log("requestSignIn");
