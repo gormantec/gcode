@@ -4,7 +4,9 @@ import { save, load } from '/modules/gcodeStorage.mjs';
 import { compile, login } from '/modules/nearApp.mjs';
 import { getScript } from '/modules/getScript.mjs';
 
-import { require } from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+import * as require  from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+
+console.log(require);
 
 //const getNearApi=getScript('https://cdn.jsdelivr.net/npm/assemblyscript@0.19.2/dist/asc.js', ["asc"]);
 
