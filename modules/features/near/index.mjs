@@ -1,2 +1,2 @@
-export {login} from './accounts';
-export {compile,test} from './nearApp';
+export {login} from './accounts.mjs';
+export {compile,test} from './nearApp.mjs';
