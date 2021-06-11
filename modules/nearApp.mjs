@@ -1,3 +1,11 @@
+import { getScript } from '/modules/getScript.mjs';
+
+const getNearApi=getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
+const getAWS=getScript('https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js', ["AWS"]);
+const getJSZip=getScript('/js/jszip.min.js', ["JSZip"]);
+
+
+
 export function upload() {
 
 }
@@ -41,8 +49,7 @@ function nearConfig(nearApi)
 export async function login(config) {
 
     return new Promise((resolve, reject) => {
-        
-        require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
+        getNearApi.then(({ nearApi }) => {
             const near = new nearApi.Near(nearConfig(nearApi));   
             const wallet = new nearApi.WalletConnection(near);
             if (!wallet.isSignedIn()) {
@@ -84,7 +91,7 @@ export async function login(config) {
 
 export async function compile(filesArray) {
     return new Promise((resolve, reject) => {
-        require(["/js/jszip.min.js"], (JSZip) => {
+        getJSZip.then(({ JSZip }) => {
             var zip = new JSZip();
             zip.file("readme.txt", "x");
             filesArray.forEach((inFile) => {
@@ -100,7 +107,7 @@ export async function compile(filesArray) {
             });
             zip.generateAsync({ type: "base64" })
                 .then(function (content) {
-                    require(["https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js"], () => {
+                    getAWS.then(({ AWS }) => {
                         console.log(AWS);
                         AWS.config.update(config());
                         console.log("lambda");
@@ -169,7 +176,7 @@ async function doNear(nearApi, config) {
 
 
 export function test() {
-    require(["https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"], () => {
+    getNearApi.then(({ nearApi }) => {
         doNear(nearApi, {
             myAccountId: "hello.gcode.testnet",
             contractId: "hello.gcode.testnet",

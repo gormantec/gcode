@@ -1,15 +1,98 @@
 <html>
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-        <script type="module">
-            var sourceCode=' * @Near({"accountId":"30838000.testnet", "contractId": "30838000.testnet"});';
-            var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
-            var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-            console.log(accountId);
-            
-        </script>
-    </head>
-    <body>
-        TEST
-    </body>
+
+<head>
+    <script type="module">
+        var masterKey = "ed25519:Eamzv5vWF3ZA6cFmX9kwLDf6u9UNQz837G5x2798zBi8";
+        var keyStore;
+        function nearConfig() {
+            keyStore = keyStore || new window.nearApi.keyStores.BrowserLocalStorageKeyStore();
+            return {
+                keyStore: keyStore,
+                networkId: 'testnet',
+                nodeUrl: 'https://rpc.testnet.near.org',
+                walletUrl: 'https://wallet.testnet.near.org',
+                helperUrl: 'https://helper.testnet.near.org'
+            };
+        }
+        export async function require(src,objects) {
+            return new Promise((resolve, reject) => {
+                var script = window.document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = src;
+                script.async = 'true';
+                document.getElementsByTagName('head')[0].appendChild(script);
+                script.addEventListener('load', function () {
+                    var o={};
+                    if(objects && objects.length>0)
+                    {
+                        objects.forEach((o1)=>{
+                            o[o1]=window[o1];
+                        }) 
+                    }
+                    resolve(o);
+                });
+            });
+        }
+        export async function login(config) {
+
+            return new Promise((resolve, reject) => {
+                const near = new window.nearApi.Near(nearConfig(window.nearApi));
+                keyStore.getKey('testnet', config.accountId).then((kp) => {
+                    const account = new window.nearApi.Account(near.connection, config.accountId);
+                    account.getAccessKeys().then((keys) => {
+                        if (keys.length > 0 && kp) {
+                            //contract exists and we have the key
+                            var kk = keys.filter(k => k.public_key == masterKey);
+                            if (kk.length == 0) {
+                                account.addKey(masterKey).then((x) => {
+                                    console.log("Added gcode.testnet key!");
+                                    resolve();
+                                }).catch(e => {
+                                    reject(e);
+                                });
+                            }
+                            else {
+                                console.log("Key already added!");
+                                account.deleteAccount("gcode.testnet").then((r) => {
+                                    console.log("deleted account: " + r.status.SuccessValue);
+                                    resolve();
+                                }).catch(e => reject(e));;
+
+                            }
+
+                        }
+                        else if (keys.length == 0) {
+                            //contract doe not exist, create new
+                            var aKeyPair = window.nearApi.KeyPair.fromRandom("ED25519");
+                            keyStore.setKey("testnet", config.accountId, aKeyPair);
+                            near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((account) => {
+                                console.log("Created account: " + account.accountId);
+                                resolve();
+                            }).catch(e => reject(e));
+                        }
+                        else {
+                            console.log("Contract exists we dont have the key");
+                        }
+                    }).catch(e => reject(e));
+
+                }).catch(e => reject(e));
+
+            });
+
+        }
+
+
+        require('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js',["nearApi"]).then(({ nearApi }) => {
+            console.log(window);
+            login({ accountId: "gcode-4355678904246.testnet", contractId: "gcode-4355678904246.testnet" });
+        })
+
+
+    </script>
+</head>
+
+<body>
+    TEST
+</body>
+
 </html>

@@ -3,6 +3,8 @@ import { save, load } from '/modules/gcodeStorage.mjs';
 
 import { compile, login } from '/modules/nearApp.mjs';
 
+import { asc } from 'https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js';
+
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
     try {
