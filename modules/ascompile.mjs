@@ -4,7 +4,9 @@ import { save, load } from '/modules/gcodeStorage.mjs';
 import { compile, login } from '/modules/nearApp.mjs';
 import { getScript } from '/modules/getScript.mjs';
 
-const getNearApi=getScript('https://cdn.jsdelivr.net/npm/assemblyscript@0.19.2/dist/asc.js', ["asc"]);
+import { require } from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+
+//const getNearApi=getScript('https://cdn.jsdelivr.net/npm/assemblyscript@0.19.2/dist/asc.js', ["asc"]);
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
@@ -37,7 +39,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             var _run = async function () {
                 var failed = false;
                 var downloading = 0;
-                getNearApi.then(({ asc }) => {
+                require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
                     asc.ready.then(() => {
                         const stdout = asc.createMemoryStream();
                         const stderr = asc.createMemoryStream();
