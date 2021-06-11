@@ -15,6 +15,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             if(accountId==sourceCode)accountId="";
             if(contractId==sourceCode)contractId="";
             console.log(accountId);
+            /*
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
                 compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" }]).then((x) => {
@@ -25,6 +26,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                 });
             });
+            */
+            callback(null, { "dataURL": "" });
         }
         else {
 
