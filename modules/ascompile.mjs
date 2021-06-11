@@ -1,6 +1,6 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
-import { compile, login } from '/modules/near/index.mjs';
+import { compile, login } from '/modules/near';
 import { getScript } from '/modules/getScript.mjs';
 
 const getRequire=getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
