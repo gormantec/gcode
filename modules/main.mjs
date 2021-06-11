@@ -162,7 +162,7 @@ function _runCode()
                         try {
 
                         var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n'+
-                        'import { test } from "https://gcode.com.au/modules/nearApp.mjs";\n\n'+
+                        'import { test } from "https://gcode.com.au/modules/near/nearApp.mjs";\n\n'+
                         'var aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\n'+
                         'aPWA.show();\n\n'+
                         'var mainPage=new Page({color: "black",paddingTop:"45px", child: new Div({innerHTML:""})});\n'+
