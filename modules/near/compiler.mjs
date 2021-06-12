@@ -78,7 +78,7 @@ export async function compile(config) {
                 .then(function (content) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
-                        nearCfg.keyStore.getKey("testnet", config.accountId).then((key)=>{
+                        nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
                             getAWS.then(({ AWS }) => {
                                 AWS.config.update(awsConfig());
                                 console.log("lambda");
@@ -87,68 +87,69 @@ export async function compile(config) {
                                 lambda.invoke({
                                     FunctionName: "near-sdk-as-rpc", /* required  */
                                     Payload: JSON.stringify({
-                                        "code": "dGhpcyBpcyBzb21lIHRleHQ=",   
+                                        "code": "dGhpcyBpcyBzb21lIHRleHQ=",
                                         "key": key.toString(),
                                         "accountId": config.accountId,
                                         assembly: content
                                     })
                                 }, function (err, data) {
-                                    if(data.StatusCode==200)
-                                    {
+                                    if (data.StatusCode == 200) {
                                         console.log(JSON.parse(JSON.parse(data.Payload).body).data);
                                         if (err) console.log(err, err.stack); // an error occurred
                                         else console.log(data);           // successful response
-                                        resolve({content:content,response:JSON.parse(JSON.parse(data.Payload).body).data});
+                                        resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
                                     }
-                                    else{
-                                        reject({code:data.StatusCode,error:"000:"+data.Payload});
+                                    else {
+                                        reject({ code: data.StatusCode, error: "000:" + data.Payload });
                                     }
                                 });
-                            }).catch(e => reject({code:500,error:"001:"+e}));
-                        }).catch(e => reject({code:500,error:"002:"+e}));
+                            }).catch(e => reject({ code: 500, error: "001:" + e }));
+                        }).catch(e => reject({ code: 500, error: "002:" + e }));
 
-                    }).catch(e => reject({code:500,error:"003:"+e}));
+                    }).catch(e => reject({ code: 500, error: "003:" + e }));
                 });
-        }).catch(e => reject({code:500,error:"004:"+e}));
+        }).catch(e => reject({ code: 500, error: "004:" + e }));
     });
 }
 
 async function doNear(nearApi, config) {
 
-    const nearCfg = nearConfig(nearApi);
-    const near = new nearApi.Near(nearCfg);
+
+    window.wconsole=window.wconsole || window.console;
     await new Promise((resolve, reject) => setTimeout(resolve, 500));
-    if (window.wconsole) window.wconsole.log("connecting to near..");
-    if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
-    const wallet = new nearApi.WalletConnection(near);
-    if (!wallet.isSignedIn()) {
-        wallet.requestSignIn(config.myAccountId, "gcode by gormantec");
-    }
-    else {
-        wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU");
-    }
-    console.log(wallet);
-    if (window.wconsole) window.wconsole.log("using wallet: " + wallet._authData.accountId);
-    var ct = {};
-    config.methods.forEach(e => {
-        ct[e.type] = ct[e.type] || [];
-        ct[e.type].push(e.method);
-    });
+    return new Promise((resolve, reject) => {
+
+        getNearApi.then(({ nearApi }) => {
+            const nearCfg = nearConfig(nearApi);
+            const near = new nearApi.Near(nearCfg);
+            const account = new nearApi.Account(near.connection, config.accountId);
+            console.log("testing");
+            if (window.wconsole) window.wconsole.log("connecting to near..");
+            if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
+            if (window.wconsole) window.wconsole.log("using wallet: " + wallet._authData.accountId);
+            var ct = {};
+            config.methods.forEach(e => {
+                ct[e.type] = ct[e.type] || [];
+                ct[e.type].push(e.method);
+            });
 
 
-    const mycontract = new nearApi.Contract(wallet.account(), config.contractId, ct);
-    if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract.contractId);
-    console.log(mycontract.contractId);
-    const list = config.methods;
-    var doLoop = (i) => {
-        if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(list[i].parameters) + ')');
-        mycontract[list[i].method](list[i].parameters).then((r) => {
-            console.log("loop: " + i);
-            if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
-            if ((i + 1) < list.length) doLoop(i + 1);
+            const mycontract = new nearApi.Contract(wallet.account(), config.contractId, ct);
+            if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract.contractId);
+            console.log(mycontract.contractId);
+            const list = config.methods;
+            var doLoop = (i) => {
+                if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(list[i].parameters) + ')');
+                mycontract[list[i].method](list[i].parameters).then((r) => {
+                    console.log("loop: " + i);
+                    if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
+                    if ((i + 1) < list.length) doLoop(i + 1);
+                    else resolve();
+                });
+            };
+            doLoop(0);
         });
-    };
-    doLoop(0);
+    });
 
 }
 
@@ -156,8 +157,8 @@ async function doNear(nearApi, config) {
 
 
 
-export function test(testcases) {
+export async function test(testcases) {
     getNearApi.then(({ nearApi }) => {
         doNear(nearApi, testcases);
-    }).catch(e => reject({code:500,error:"005:"+e}));
+    }).catch(e => reject({ code: 500, error: "005:" + e }));
 }

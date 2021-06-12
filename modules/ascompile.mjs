@@ -188,13 +188,17 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     ]}).then((x) => {
     
                                                         b64toBlob(x.content, 'application/zip').then(blob => {
-                                                            createDownload("assembly.zip", blob, { type: 'application/zip' });
+                                                            //createDownload("assembly.zip", blob, { type: 'application/zip' });
                                                         });
 
-                                                        test(x.response.testdata);
+                                                        test(x.response.testdata).then(()=>{
+
+                                                            callback(null, { "dataURL": dataURL });
+
+                                                        });
     
     
-                                                        callback(null, { "dataURL": dataURL });
+                                                        
     
                                                     });
     
