@@ -184,7 +184,8 @@ export function toolbarAction(e) {
 
     var button = e.currentTarget;
     if (button.dataset.action == "addFile") {
-        document.getElementById("newFileDialogName").value = "sample-" + (Math.round(Date.now() / 1000) - 1592000000) + document.getElementById("newFileDialogSelect").value;
+        const randName="gcode-" + (Math.round(Date.now()/1000)*10000+Math.round(Math.random()*9999)).toString(16) ;
+        document.getElementById("newFileDialogName").value = randName+ document.getElementById("newFileDialogSelect").value;
         document.getElementById('confirmButton').value = document.getElementById("newFileDialogName").value;
         document.getElementById("newFileDialog").showModal();
 
@@ -366,6 +367,10 @@ function _new(aFilename) {
             ).then(
                 text => {
                     var _samplecode = text;
+                    var randName="gcode-" + (Math.round(Date.now()/1000)*10000+Math.round(Math.random()*9999)).toString(16) ;
+                    if(aFilename.startsWith("code-") && aFilename.endsWith(".dapp.ts"))randName=aFilename.substring(0,aFilename.indexOf(".dapp.ts"))
+                    _samplecode=_samplecode.replace("gcode-0000000000000000",randName);
+
 
                     var appStuff = "";
                     if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
