@@ -19,7 +19,7 @@ export function setGreeting(message: string): void {
 
 /** 
  * @Method("getGreeting");
- * @testing({"name":"can get greeting","test":{"accountId":"@{Near.accountId}"},"result":"hello"});
+ * @testing({"name":"can get greeting","test":{"accountId":"@Near.accountId"},"result":"hello"});
 */
 export function getGreeting(accountId: string): string | null {
   return storage.get<string>(accountId, DEFAULT_MESSAGE)
