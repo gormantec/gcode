@@ -43,20 +43,15 @@ export async function login(config) {
                         if (kk.length == 0) {
                             account.addKey(masterKey).then((x) => {
                                 console.log("Added gcode.testnet key!");
-                                resolve();
+                                resolve({code:201});
                             }).catch(e => {
                                 reject(e);
                             });
                         }
                         else {
-                            console.log("Key already added!");
-                            account.deleteAccount("gcode.testnet").then((r) => {
-                                console.log("deleted account: " + r.status.SuccessValue);
-                                resolve();
-                            }).catch(e => reject(e));;
-
+                            console.log("gcode.testnet key already added!");
+                            resolve({code:202});
                         }
-
                     }
                     else if (keys.length == 0) {
                         //contract doe not exist, create new
@@ -69,6 +64,7 @@ export async function login(config) {
                     }
                     else {
                         console.log("Contract exists we dont have the key");
+                        reject({code:409});
                     }
                 }).catch(e => reject(e));
 
