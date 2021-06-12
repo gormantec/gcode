@@ -1,6 +1,6 @@
 
 import { save, load } from '/modules/gcodeStorage.mjs';
-import { compile, login } from '/modules/near/index.mjs';
+import { compile, login, test } from '/modules/near/index.mjs';
 import { getScript } from '/modules/getScript.mjs';
 import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
 
@@ -187,9 +187,11 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
                                                     ]}).then((x) => {
     
-                                                        b64toBlob(x, 'application/zip').then(blob => {
+                                                        b64toBlob(x.content, 'application/zip').then(blob => {
                                                             createDownload("assembly.zip", blob, { type: 'application/zip' });
                                                         });
+
+                                                        test(x.response);
     
     
                                                         callback(null, { "dataURL": dataURL });

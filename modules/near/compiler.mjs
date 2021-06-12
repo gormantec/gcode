@@ -95,10 +95,10 @@ export async function compile(config) {
                                 }, function (err, data) {
                                     if(data.StatusCode==200)
                                     {
-                                        console.log(JSON.parse(data.Payload.body.data));
+                                        console.log(JSON.parse(data.Payload));
                                         if (err) console.log(err, err.stack); // an error occurred
                                         else console.log(data);           // successful response
-                                        resolve(content);
+                                        resolve({content:content,response:JSON.parse(data.Payload)});
                                     }
                                     else{
                                         reject({code:data.StatusCode,error:"000:"+data.Payload});
@@ -156,16 +156,8 @@ async function doNear(nearApi, config) {
 
 
 
-export function test(config) {
+export function test(testcases) {
     getNearApi.then(({ nearApi }) => {
-        doNear(nearApi, {
-            myAccountId: config.accountId,
-            contractId: config.contractId,
-            methods: [
-                { method: "setGreeting", type: "changeMethods", parameters: { message: "hello " + (Math.round(Date.now() / 1000) - 1622206047) } },
-                {
-                    method: "getGreeting", type: "viewMethods", parameters: { accountId: config.accountId }
-                }]
-        });
+        doNear(nearApi, testcases);
     }).catch(e => reject({code:500,error:"005:"+e}));
 }
