@@ -56,6 +56,7 @@ export function dialogAction(event) {
     }
     else if(event.type=="select" && event.id=="nearDialogSelect")
     {
+        event.setInputValue("confirmButton",event.value);
     }
 }
 
