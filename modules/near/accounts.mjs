@@ -67,7 +67,7 @@ export async function login(config) {
                                 }).catch(e => {
                                     console.log("Error:: adding gcode.testnet key!");
                                 });
-                            },5000);
+                            },500);
 
                         }).catch(e => reject(e));
                     }
