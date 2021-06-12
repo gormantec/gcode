@@ -18,6 +18,7 @@ export async function upload() {
 
 
 export async function compile(config) {
+    
     return new Promise((resolve, reject) => {
         getJSZip.then(({ JSZip }) => {
             var zip = new JSZip();

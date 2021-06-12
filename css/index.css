@@ -357,6 +357,19 @@ dialog form input{
     float:right;
 }
 
+dialog .timerOuter{
+ background-color: grey;
+ width:320px;
+ height:40px;
+}
+
+dialog .timerInner{
+    background-color: rgb(0, 153, 255);
+    width:10%;
+    height:100%;
+}
+   
+
 
 dialog form menu {
 

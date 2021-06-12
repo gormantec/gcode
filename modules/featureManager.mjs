@@ -92,6 +92,13 @@ export async function loadFeatures() {
                         dialogs[dialog.id] = d;
                         if(dialog.type=="timer")
                         {
+                            let outer = window.document.createElement("div");
+                            inner.setAttribute("class", "timerOuter");
+                            let inner = window.document.createElement("div");   
+                            inner.setAttribute("class", "timerInner");
+                            inner.setAttribute("id", dialog.id+"Value");
+                            outer.appendChild(inner);
+                            d.appendChild(outer);
                             document.body.insertBefore(d, document.body.firstChild);
                             dialogPolyfill.registerDialog(d);
                         }

@@ -16,6 +16,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             if(contractId==sourceCode)contractId="";
             console.log(accountId);
             login({ accountId: accountId, contractId: contractId }).then(() => {
+                document.querySelector("#nearDialogTimer").showModal();
+                document.querySelector("#nearDialogTimerValue").style.width="80%";
                 compile({
                     accountId:accountId,
                     contractId:contractId,
