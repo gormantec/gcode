@@ -80,7 +80,7 @@ export async function compile(config) {
                         const nearCfg = nearConfig(nearApi);
                         getAWS.then(({ AWS }) => {
                             console.log(AWS);
-                            AWS.config.update(awsConfig);
+                            AWS.config.update(awsConfig());
                             console.log("lambda");
                             var lambda = new AWS.Lambda();
                             console.log("invoke");
