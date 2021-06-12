@@ -78,28 +78,30 @@ export async function compile(config) {
                 .then(function (content) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
-                        console.log("privateKey1: "+nearCfg.keyStore.getKey().toString());
-                        console.log("privateKey2: "+nearCfg.keyStore.getKey().privateKey);
-                        getAWS.then(({ AWS }) => {
-                            AWS.config.update(awsConfig());
-                            console.log("lambda");
-                            var lambda = new AWS.Lambda();
-                            console.log("invoke");
-                            lambda.invoke({
-                                FunctionName: "near-sdk-as-rpc", /* required */
-                                Payload: JSON.stringify({
-                                    "code": "dGhpcyBpcyBzb21lIHRleHQ=",
-                                    "key": nearCfg.keyStore.getKey().toString(),
-                                    "accountId": config.accountId,
-                                    assembly: content
-                                })
-                            }, function (err, data) {
-                                console.log(data);
-                                if (err) console.log(err, err.stack); // an error occurred
-                                else console.log(data);           // successful response
-                                resolve(content);
+                        nearCfg.keyStore.getKey().toString().then((privateKey)=>{
+                            console.log(privateKey);
+                            getAWS.then(({ AWS }) => {
+                                AWS.config.update(awsConfig());
+                                console.log("lambda");
+                                var lambda = new AWS.Lambda();
+                                console.log("invoke");
+                                lambda.invoke({
+                                    FunctionName: "near-sdk-as-rpc", /* required */
+                                    Payload: JSON.stringify({
+                                        "code": "dGhpcyBpcyBzb21lIHRleHQ=",
+                                        "key": privateKey,
+                                        "accountId": config.accountId,
+                                        assembly: content
+                                    })
+                                }, function (err, data) {
+                                    console.log(data);
+                                    if (err) console.log(err, err.stack); // an error occurred
+                                    else console.log(data);           // successful response
+                                    resolve(content);
+                                });
                             });
                         });
+
                     }).catch(() => { });
                 });
         });
