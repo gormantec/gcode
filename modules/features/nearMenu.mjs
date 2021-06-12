@@ -6,7 +6,7 @@ export const menuMetadata =  {"id":"removeNear","class":"pageLeftToolbarButton",
 
 export function menuAction(){
 
-    document.getElementById("newFileDialog").showModal();
+    document.getElementById("nearDialog").showModal();
 }
 
 
