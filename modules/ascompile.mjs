@@ -21,10 +21,14 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     contractId:contractId,
                     filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
                 }).then((x) => {
-                    b64toBlob(x, 'application/zip').then(blob => {
+                    b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
-                    callback(null, { "dataURL": x });
+                    test(x.response.testdata).then(()=>{
+
+                        callback(null, { "dataURL": x.content ,testdata:x.response.testdata});
+
+                    });
 
                 });
             });
@@ -188,7 +192,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     ]}).then((x) => {
     
                                                         b64toBlob(x.content, 'application/zip').then(blob => {
-                                                            //createDownload("assembly.zip", blob, { type: 'application/zip' });
+                                                            createDownload("assembly.zip", blob, { type: 'application/zip' });
                                                         });
 
                                                         test(x.response.testdata).then(()=>{
