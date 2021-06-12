@@ -24,7 +24,14 @@
             "enabled": true,
           	"uri":"/modules/features/addFeature.mjs"
 
-        }
+        },
+        {
+            "name": "nearMenu",
+            "navPosition": 5,
+            "enabled": true,
+          	"uri":"/modules/features/nearMenu.mjs"
+
+        },
     ],
     "options": [{
             "name": "defaultAppSettings",
