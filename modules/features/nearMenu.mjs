@@ -1,6 +1,7 @@
 /* Feature Name: Help Menu */
 
 import { login, remove, compile, test } from '/modules/near/index.mjs';
+import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
 
 export const menuMetadata = { "id": "removeNear", "class": "pageLeftToolbarButton", "materialIcon": "https://grants.near.org/Public/Custom/22766/near_icon_wht.png" };
 
@@ -43,7 +44,14 @@ export function dialogAction(event) {
             login({ accountId: accountId, contractId: contractId }).catch(e => console.log(e));
         }
         else if (event.value == "compile") {
-            compile({ accountId: accountId, contractId: contractId }).catch(e => console.log(e));
+            login({ accountId: accountId, contractId: contractId }).then(() => {
+
+                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" }]).then((x) => {
+                    b64toBlob(x, 'application/zip').then(blob => {
+                        createDownload("assembly.zip", blob, { type: 'application/zip' });
+                    });
+                });
+            });
         }
         else if (event.value == "test") {
             test({ accountId: accountId, contractId: contractId });

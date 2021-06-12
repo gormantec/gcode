@@ -2,6 +2,7 @@
 import { save, load } from '/modules/gcodeStorage.mjs';
 import { compile, login } from '/modules/near/index.mjs';
 import { getScript } from '/modules/getScript.mjs';
+import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
 
 const getRequire=getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
@@ -209,8 +210,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
     catch (e) { window.debug.log(e); }
 }
 
-const b64toBlob = (base64, type = 'application/octet-stream') =>
-    fetch(`data:${type};base64,${base64}`).then(res => res.blob())
+
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
@@ -234,22 +234,5 @@ function dataURItoBlob(dataURI) {
     });
 }
 
-function createDownload(blobname, blob) {
-    //var blob = dataURItoBlob(message.content);
 
-    var blobUrl = URL.createObjectURL(blob);
-
-    var save = document.createElement('a');
-    save.style.marginLeft = "-80px";
-    save.style.marginTop = "10px";
-    save.style.color = "white";
-    save.href = blobUrl;
-    save.download = blobname;
-    save.innerHTML = "[download]";
-    document.getElementById("userIcon").insertBefore(save, document.getElementById("userIcon").firstChild);
-    save.addEventListener("click", () => {
-        save.remove();
-    });
-
-}
 
