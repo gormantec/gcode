@@ -15,48 +15,6 @@ export function upload() {
 }
 
 
-export async function login(config) {
-
-    return new Promise((resolve, reject) => {
-        getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
-            const near = new nearApi.Near(nearCfg);
-            const wallet = new nearApi.WalletConnection(near);
-            if (!wallet.isSignedIn()) {
-                console.log("requestSignIn");
-                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(() => {
-                    wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
-                }).catch((e) => {
-                    console.log("error");
-                    console.log(e);
-                    if (("" + e).indexOf("[-32000]") > 0) {
-                        console.log("try and create");
-                        var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
-                        near.createAccount(config.accountId, aKeyPair.getPublicKey()).then(() => {
-                            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then((x) => {
-                                console.log("Created account!");
-                                nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
-                                console.log(x);
-                                resolve();
-                            }).catch(reject);
-                        }).catch((e) => {
-                            console.log("create error: ");
-                            console.log(e);
-                            reject();
-                        });
-                    }
-                    else {
-                        reject();
-                    }
-                });
-            }
-            else {
-                console.log("addKey");
-                wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
-            }
-        });
-    })
-}
 
 export async function compile(config) {
     return new Promise((resolve, reject) => {
@@ -126,7 +84,7 @@ async function doNear(nearApi, config) {
             console.log("testing");
             if (window.wconsole) window.wconsole.log("connecting to near..");
             if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
-            if (window.wconsole) window.wconsole.log("using wallet: " + wallet._authData.accountId);
+            if (window.wconsole) window.wconsole.log("using account: " + config.accountId);
             var ct = {};
             config.methods.forEach(e => {
                 ct[e.type] = ct[e.type] || [];
@@ -134,7 +92,7 @@ async function doNear(nearApi, config) {
             });
 
 
-            const mycontract = new nearApi.Contract(wallet.account(), config.contractId, ct);
+            const mycontract = new nearApi.Contract(account, config.contractId, ct);
             if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract.contractId);
             console.log(mycontract.contractId);
             const list = config.methods;
