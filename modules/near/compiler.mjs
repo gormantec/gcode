@@ -4,7 +4,7 @@ import { nearConfig } from './nearConfig.mjs';
 
 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
 const getAWS = getScript('https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js', ["AWS"]);
-const getJSZip = getScript('https:gcode.com.au/js/jszip.min.js', ["JSZip"]);
+const getJSZip = getScript('https://gcode.com.au/js/jszip.min.js', ["JSZip"]);
 
 
 
