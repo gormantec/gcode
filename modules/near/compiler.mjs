@@ -85,18 +85,24 @@ export async function compile(config) {
                                 var lambda = new AWS.Lambda();
                                 console.log("invoke");
                                 lambda.invoke({
-                                    FunctionName: "near-sdk-as-rpc", /* required */
+                                    FunctionName: "near-sdk-as-rpc", /* required  */
                                     Payload: JSON.stringify({
-                                        "code": "dGhpcyBpcyBzb21lIHRleHQ=",
+                                        "code": "dGhpcyBpcyBzb21lIHRleHQ=",   
                                         "key": key.toString(),
                                         "accountId": config.accountId,
                                         assembly: content
                                     })
                                 }, function (err, data) {
-                                    console.log(JSON.parse(data.Payload.body.data));
-                                    if (err) console.log(err, err.stack); // an error occurred
-                                    else console.log(data);           // successful response
-                                    resolve(content);
+                                    if(data.StatusCode==200)
+                                    {
+                                        console.log(JSON.parse(data.Payload.body.data));
+                                        if (err) console.log(err, err.stack); // an error occurred
+                                        else console.log(data);           // successful response
+                                        resolve(content);
+                                    }
+                                    else{
+                                        reject({code:data.StatusCode,error:"000:"+data.Payload});
+                                    }
                                 });
                             }).catch(e => reject({code:500,error:"001:"+e}));
                         }).catch(e => reject({code:500,error:"002:"+e}));
