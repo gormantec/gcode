@@ -1,6 +1,6 @@
 /* Feature Name: Help Menu */
 
-import { remove } from '/modules/near/index.mjs';
+import { login, remove, compile, test } from '/modules/near/index.mjs';
 
 export const menuMetadata =  {"id":"removeNear","class":"pageLeftToolbarButton","materialIcon":"https://grants.near.org/Public/Custom/22766/near_icon_wht.png"};
 
@@ -18,6 +18,9 @@ export const dialogMetadata = [
             {
                 "id": "nearDialogSelect", "type": "select", "label": "Action:", "options": [
                     { "value": "remove", "text": "Remove", "selected": true },
+                    { "value": "create", "text": "Create"},
+                    { "value": "compile", "text": "Compile"},
+                    { "value": "test", "text": "Test"},
                 ]
             },
         ],
@@ -30,7 +33,25 @@ export function dialogAction(event) {
         var sourceCode=window.editor.getValue();
         var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-        remove({ accountId: accountId, contractId: contractId });
+        remove({ accountId: accountId, contractId: contractId }).catch(e=>console.log(e));
+    }
+    else if ( event.type=="dialog" && event.id=="nearDialog" && event.value == "create") {
+        var sourceCode=window.editor.getValue();
+        var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
+        var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
+        login({ accountId: accountId, contractId: contractId }).catch(e=>console.log(e));
+    }
+    else if ( event.type=="dialog" && event.id=="nearDialog" && event.value == "compile") {
+        var sourceCode=window.editor.getValue();
+        var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
+        var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
+        compile({ accountId: accountId, contractId: contractId }).catch(e=>console.log(e));
+    }
+    else if ( event.type=="dialog" && event.id=="nearDialog" && event.value == "test") {
+        var sourceCode=window.editor.getValue();
+        var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
+        var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
+        test({ accountId: accountId, contractId: contractId });
     }
     else if(event.type=="select" && event.id=="nearDialogSelect")
     {

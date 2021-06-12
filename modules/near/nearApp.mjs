@@ -175,15 +175,15 @@ async function doNear(nearApi, config) {
 
 
 
-export function test() {
+export function test(config) {
     getNearApi.then(({ nearApi }) => {
         doNear(nearApi, {
-            myAccountId: "hello.gcode.testnet",
-            contractId: "hello.gcode.testnet",
+            myAccountId: config.accountId,
+            contractId: config.contractId,
             methods: [
                 { method: "setGreeting", type: "changeMethods", parameters: { message: "hello " + (Math.round(Date.now() / 1000) - 1622206047) } },
                 {
-                    method: "getGreeting", type: "viewMethods", parameters: { accountId: "hello.gcode.testnet" }
+                    method: "getGreeting", type: "viewMethods", parameters: { accountId: config.accountId}
                 }]
         });
     });
