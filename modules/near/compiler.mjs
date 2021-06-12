@@ -78,6 +78,7 @@ export async function compile(config) {
                 .then(function (content) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
+                        console.log("privateKey");
                         nearCfg.keyStore.getKey().toString().then((privateKey)=>{
                             console.log(privateKey);
                             getAWS.then(({ AWS }) => {
