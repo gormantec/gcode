@@ -92,8 +92,8 @@ export async function loadFeatures() {
                         dialogs[dialog.id] = d;
                         if(dialog.type=="timer")
                         {
-                            let outer = window.document.createElement("div");
-                            inner.setAttribute("class", "timerOuter");
+                            let outer = window.document.createElement("div");   
+                            outer.setAttribute("class", "timerOuter");
                             let inner = window.document.createElement("div");   
                             inner.setAttribute("class", "timerInner");
                             inner.setAttribute("id", dialog.id+"Value");
