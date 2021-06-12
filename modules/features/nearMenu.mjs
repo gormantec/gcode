@@ -19,7 +19,7 @@ export const dialogMetadata = [
     {
         "id": "nearDialog",
         "content": [
-            { "id": "nearDialogName", "type": "input/text", "label": "Account:" },
+            { "id": "nearDialogName", "type": "input/text", "label": "Account:",value:"xxxxxx",readonly:"readonly" },
             {
                 "id": "nearDialogSelect", "type": "select", "label": "Action:", "options": [
                     { "value": "remove", "text": "Remove", "selected": true },
