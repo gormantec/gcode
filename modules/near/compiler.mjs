@@ -51,14 +51,17 @@ export async function compile(config) {
                                         assembly: content
                                     })
                                 }, function (err, data) {
-                                    if (data.StatusCode == 200) {
+                                    if (data && data.StatusCode == 200) {
                                         console.log(JSON.parse(JSON.parse(data.Payload).body).data);
                                         if (err) console.log(err, err.stack); // an error occurred
                                         else console.log(data);           // successful response
                                         resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
                                     }
-                                    else {
+                                    else if (data && data.StatusCode!=null) {
                                         reject({ code: data.StatusCode, error: "000:" + data.Payload });
+                                    }
+                                    else {
+                                        reject({ code: 500, error: "000:" +err});
                                     }
                                 });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
