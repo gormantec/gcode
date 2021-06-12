@@ -18,6 +18,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             login({ accountId: accountId, contractId: contractId }).then(() => {
                 document.querySelector("#nearDialogTimer").showModal();
                 document.querySelector("#nearDialogTimerValue").style.width="10%";
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="20%";},10000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="30%";},20000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="40%";},30000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="50%";},40000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="60%";},50000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="70%";},60000);
                 compile({
                     accountId:accountId,
                     contractId:contractId,
