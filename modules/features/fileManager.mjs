@@ -369,7 +369,7 @@ function _new(aFilename) {
                     var _samplecode = text;
                     var randName="gcode-" + (Math.round(Date.now()/1000)*10000+Math.round(Math.random()*9999)).toString(16) ;
                     if(aFilename.startsWith("code-") && aFilename.endsWith(".dapp.ts"))randName=aFilename.substring(0,aFilename.indexOf(".dapp.ts"))
-                    _samplecode=_samplecode.replace("gcode-0000000000000000",randName);
+                    _samplecode=_samplecode.replace(/gcode-0000000000000000/g,randName);
 
 
                     var appStuff = "";
