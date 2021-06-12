@@ -368,7 +368,7 @@ function _new(aFilename) {
                 text => {
                     var _samplecode = text;
                     var randName="gcode-" + (Math.round(Date.now()/1000)*10000+Math.round(Math.random()*9999)).toString(16) ;
-                    if(aFilename.startsWith("code-") && aFilename.endsWith(".dapp.ts"))randName=aFilename.substring(0,aFilename.indexOf(".dapp.ts"))
+                    if(aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts"))randName=aFilename.substring(0,aFilename.indexOf(".dapp.ts"))
                     _samplecode=_samplecode.replace(/gcode-[0-9a-gA-G]*?\.testnet/g,randName+".testnet");
 
 
