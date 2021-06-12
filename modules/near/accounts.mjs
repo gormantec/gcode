@@ -9,7 +9,8 @@ var masterKey = "ed25519:Eamzv5vWF3ZA6cFmX9kwLDf6u9UNQz837G5x2798zBi8";
 export async function remove(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const near = new nearApi.Near(nearConfig(nearApi));
+            const nearCfg = nearConfig(nearApi);
+            const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);
             console.log("Key already added!");
             account.deleteAccount("gcode.testnet").then((r) => {
@@ -24,8 +25,9 @@ export async function login(config) {
 
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const near = new nearApi.Near(nearConfig(nearApi));
-            keyStore.getKey('testnet', config.accountId).then((kp) => {
+            const nearCfg = nearConfig(nearApi);
+            const near = new nearApi.Near(nearCfg);
+            nearCfg.keyStore.getKey('testnet', config.accountId).then((kp) => {
                 const account = new nearApi.Account(near.connection, config.accountId);
                 account.getAccessKeys().then((keys) => {
                     if (keys.length > 0 && kp) {
@@ -47,7 +49,7 @@ export async function login(config) {
                     else if (keys.length == 0) {
                         //contract doe not exist, create new
                         var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
-                        keyStore.setKey("testnet", config.accountId, aKeyPair);
+                        nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
                         near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((account) => {
                             console.log("Created account: " + account.accountId);
                         
