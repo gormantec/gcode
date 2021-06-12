@@ -93,7 +93,7 @@ export async function compile(config) {
                                         assembly: content
                                     })
                                 }, function (err, data) {
-                                    console.log(data);
+                                    console.log(JSON.parse(data.Payload.body.data));
                                     if (err) console.log(err, err.stack); // an error occurred
                                     else console.log(data);           // successful response
                                     resolve(content);
