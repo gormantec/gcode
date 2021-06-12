@@ -23,9 +23,9 @@ export async function remove(config) {
             console.log("Key already added!");
             account.deleteAccount("gcode.testnet").then((r) => {
                 console.log("deleted account: " + r.status.SuccessValue);
-                resolve();
-            }).catch(e => reject(e));
-        }).catch(e => reject(e));
+                resolve({code:200,message:"deleted"});
+            }).catch(e => reject({code:500,error:""+e}));
+        }).catch(e => reject({code:500,error:""+e}));
     });
 }
 
@@ -43,14 +43,14 @@ export async function login(config) {
                         if (kk.length == 0) {
                             account.addKey(masterKey).then((x) => {
                                 console.log("Added gcode.testnet key!");
-                                resolve({code:202});
+                                resolve({code:202,message:"updated"});
                             }).catch(e => {
-                                reject(e);
+                                reject({code:500,error:""+e});
                             });
                         }
                         else {
                             console.log("gcode.testnet key already added!");
-                            resolve({code:202});
+                            resolve({code:202,message:"already exists"});
                         }
                     }
                     else if (keys.length == 0) {
@@ -59,25 +59,26 @@ export async function login(config) {
                         keyStore.setKey("testnet", config.accountId, aKeyPair);
                         near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((account) => {
                             console.log("Created account: " + account.accountId);
-                            resolve({code:201});
-
+                        
                             setTimeout(()=>{
                                 account.addKey(masterKey).then((x) => {
                                     console.log("Added gcode.testnet key!");
+                                    resolve({code:201,message:"created"});
                                 }).catch(e => {
                                     console.log("Error:: adding gcode.testnet key!");
+                                    reject({code:500,error:""+e});
                                 });
                             },500);
 
-                        }).catch(e => reject(e));
+                        }).catch(e => reject({code:500,error:""+e}));
                     }
                     else {
                         console.log("Contract exists we dont have the key");
                         reject({code:409});
                     }
-                }).catch(e => reject(e));
+                }).catch(e => reject({code:500,error:""+e}));
 
-            }).catch(e => reject(e));
+            }).catch(e => reject({code:500,error:""+e}));
 
         });
 
