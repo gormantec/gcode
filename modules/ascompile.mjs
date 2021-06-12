@@ -17,21 +17,41 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             console.log(accountId);
             login({ accountId: accountId, contractId: contractId }).then(() => {
                 document.querySelector("#nearDialogTimer").showModal();
-                document.querySelector("#nearDialogTimerValue").style.width="80%";
+                document.querySelector("#nearDialogTimerValue").style.width="10%";
                 compile({
                     accountId:accountId,
                     contractId:contractId,
                     filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
                 }).then((x) => {
+
+                    document.querySelector("#nearDialogTimerValue").style.width="80%";
                     b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
                     test(x.response.testdata).then(()=>{
-
+                        document.querySelector("#nearDialogTimerValue").style.width="100%";
                         callback(null, { "dataURL": x.content ,testdata:x.response.testdata});
+                        setTimeout(()=>{
+                            document.querySelector("#nearDialogTimerValue").close();
+                            document.querySelector("#nearDialogTimerValue").style.width="10%";
+                        },1000);
 
+                    }).catch(()=>{
+                        document.querySelector("#nearDialogTimerValue").style.width="100%";
+                        callback(null, { });
+                        setTimeout(()=>{
+                            document.querySelector("#nearDialogTimerValue").close();
+                            document.querySelector("#nearDialogTimerValue").style.width="10%";
+                        },1000);
                     });
 
+                }).catch(()=>{
+                    document.querySelector("#nearDialogTimerValue").style.width="100%";
+                    callback(null, { });
+                    setTimeout(()=>{
+                        document.querySelector("#nearDialogTimerValue").close();
+                        document.querySelector("#nearDialogTimerValue").style.width="10%";
+                    },1000);
                 });
             });
         }
