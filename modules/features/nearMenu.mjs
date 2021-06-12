@@ -62,3 +62,10 @@ export function dialogAction(event) {
     }
 }
 
+export function afterLoad()
+{
+    var sourceCode = window.editor.getValue();
+    var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
+    var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
+    document.getElementById("nearDialogName").value=accountId;
+}
