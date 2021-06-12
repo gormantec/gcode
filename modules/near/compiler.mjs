@@ -10,8 +10,9 @@ const getJSZip = getScript('https:gcode.com.au/js/jszip.min.js', ["JSZip"]);
 
 
 
-export function upload() {
-
+export async function upload() {
+    return new Promise((resolve, reject) => {
+    });
 }
 
 
