@@ -1,19 +1,10 @@
 import { getScript } from '/modules/getScript.mjs';
+import { nearConfig,keyStore }  from '/modules/nearConfig.mjs';
 
 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
 
 var masterKey = "ed25519:Eamzv5vWF3ZA6cFmX9kwLDf6u9UNQz837G5x2798zBi8";
-var keyStore;
-function nearConfig(nearApi) {
-    keyStore = keyStore || new nearApi.keyStores.BrowserLocalStorageKeyStore();
-    return {
-        keyStore: keyStore,
-        networkId: 'testnet',
-        nodeUrl: 'https://rpc.testnet.near.org',
-        walletUrl: 'https://wallet.testnet.near.org',
-        helperUrl: 'https://helper.testnet.near.org'
-    };
-}
+
 
 export async function remove(config) {
     return new Promise((resolve, reject) => {

@@ -1,8 +1,12 @@
 import { getScript } from '/modules/getScript.mjs';
+import { awsConfig } from '/modules/awsConfig.mjs';
+import { nearConfig } from '/modules/nearConfig.mjs';
 
-const getNearApi=getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
-const getAWS=getScript('https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js', ["AWS"]);
-const getJSZip=getScript('/js/jszip.min.js', ["JSZip"]);
+const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
+const getAWS = getScript('https://sdk.amazonaws.com/js/aws-sdk-2.918.0.min.js', ["AWS"]);
+const getJSZip = getScript('/js/jszip.min.js', ["JSZip"]);
+
+
 
 
 
@@ -10,73 +14,38 @@ export function upload() {
 
 }
 
-function config() {
-    return JSON.parse(atob(dob("yehJ2YlN3cLNXZJlCZ6IkILFUSyE1UzMjTCNUSE9lWRRTUSRiIiw2cjVmc0VWQjNXZzN2S5VjIioUT6VWeYpXbvZ2Q5J1SRBzMjNkNiRWbDdjQvVFSYJTMxFVMvJkbyMiSsInIlJ2Zvlib6ImIwFXLvNXdoRWZzFCdy0nI=0"), 'base64').toString('ascii'));
-}
 
-function ob(s) {
-    var a = Array.from(s);
-    for (var i = 1; i < a.length; i = i + 2) {
-        var a2 = a[i - 1];
-        a.splice(i - 1, 1, a[i]);
-        a.splice(i, 1, a2);
-    }
-    return a.join("");
-}
-function dob(s) {
-    console.log(s);
-    var a = Array.from(s);
-    for (var i = 1; i < a.length; i = i + 2) {
-        var a2 = a[i];
-        a.splice(i, 1, a[i - 1]);
-        a.splice(i - 1, 1, a2);
-    }
-    console.log(a.join(""));
-    return a.join("");
-}
-var keyStore;
-function nearConfig(nearApi)
-{
-    keyStore = keyStore || new nearApi.keyStores.BrowserLocalStorageKeyStore();
-    return {
-        keyStore: keyStore,
-        networkId: 'testnet',
-        nodeUrl: 'https://rpc.testnet.near.org',
-        walletUrl: 'https://wallet.testnet.near.org',
-        helperUrl: 'https://helper.testnet.near.org'
-    };
-}
 export async function login(config) {
 
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const near = new nearApi.Near(nearConfig(nearApi));   
+            const nearCfg = nearConfig(nearApi);
+            const near = new nearApi.Near(nearCfg);
             const wallet = new nearApi.WalletConnection(near);
             if (!wallet.isSignedIn()) {
                 console.log("requestSignIn");
-                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(()=>{
+                wallet.requestSignIn(config.accountId, "gcode by gormantec").then(() => {
                     wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then(resolve).catch(reject);
-                }).catch((e)=>{
+                }).catch((e) => {
                     console.log("error");
                     console.log(e);
-                    if((""+e).indexOf("[-32000]")>0)
-                    {
+                    if (("" + e).indexOf("[-32000]") > 0) {
                         console.log("try and create");
-                        var aKeyPair=nearApi.KeyPair.fromRandom("ED25519");
-                        near.createAccount(config.accountId,aKeyPair.getPublicKey()).then(()=>{
-                            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then((x)=>{
+                        var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
+                        near.createAccount(config.accountId, aKeyPair.getPublicKey()).then(() => {
+                            wallet.account().addKey("Ha2YdgiYfvUfUAwapfJWqQEHyND81nkKdbkwYhw2wtMU").then((x) => {
                                 console.log("Created account!");
-                                keyStore.setKey("testnet", config.accountId,aKeyPair);
+                                nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
                                 console.log(x);
                                 resolve();
                             }).catch(reject);
-                        }).catch((e)=>{
+                        }).catch((e) => {
                             console.log("create error: ");
                             console.log(e);
                             reject();
                         });
                     }
-                    else{
+                    else {
                         reject();
                     }
                 });
@@ -89,12 +58,12 @@ export async function login(config) {
     })
 }
 
-export async function compile(filesArray) {
+export async function compile(config) {
     return new Promise((resolve, reject) => {
         getJSZip.then(({ JSZip }) => {
             var zip = new JSZip();
             zip.file("readme.txt", "x");
-            filesArray.forEach((inFile) => {
+            config.filesArray.forEach((inFile) => {
                 const fName = inFile.name.substring(inFile.name.lastIndexOf('/') + 1);
                 const dName = inFile.name.substring(0, inFile.name.lastIndexOf('/'));
                 const dir = zip.folder(dName);
@@ -107,27 +76,30 @@ export async function compile(filesArray) {
             });
             zip.generateAsync({ type: "base64" })
                 .then(function (content) {
-                    getAWS.then(({ AWS }) => {
-                        console.log(AWS);
-                        AWS.config.update(config());
-                        console.log("lambda");
-                        var lambda = new AWS.Lambda();
-                        console.log("invoke");
-                        lambda.invoke({
-                            FunctionName: "near-sdk-as-rpc", /* required */
-                            Payload: JSON.stringify({
-                                "code": "dGhpcyBpcyBzb21lIHRleHQ=",
-                                "key": "ed25519:5uaCteAvs7xM9mtL7soyZpB8GRX62MitJv1ekDqnpUTvk5K4eNCmD4NfqLhvKLRwuaux6fhAUkimBvBx95uesgKo",
-                                "accountId": "hello.gcode.testnet",
-                                assembly: content
-                            })
-                        }, function (err, data) {
-                            console.log(data);
-                            if (err) console.log(err, err.stack); // an error occurred
-                            else console.log(data);           // successful response
-                            resolve(content);
+                    getNearApi.then(({ nearApi }) => {
+                        const nearCfg = nearConfig(nearApi);
+                        getAWS.then(({ AWS }) => {
+                            console.log(AWS);
+                            AWS.config.update(awsConfig);
+                            console.log("lambda");
+                            var lambda = new AWS.Lambda();
+                            console.log("invoke");
+                            lambda.invoke({
+                                FunctionName: "near-sdk-as-rpc", /* required */
+                                Payload: JSON.stringify({
+                                    "code": "dGhpcyBpcyBzb21lIHRleHQ=",
+                                    "key": nearCfg.keyStore.getKey().secretKey,
+                                    "accountId": config.accountId,
+                                    assembly: content
+                                })
+                            }, function (err, data) {
+                                console.log(data);
+                                if (err) console.log(err, err.stack); // an error occurred
+                                else console.log(data);           // successful response
+                                resolve(content);
+                            });
                         });
-                    });
+                    }).catch(() => { });
                 });
         });
     });
@@ -135,7 +107,8 @@ export async function compile(filesArray) {
 
 async function doNear(nearApi, config) {
 
-    const near = new nearApi.Near(nearConfig(nearApi));
+    const nearCfg = nearConfig(nearApi);
+    const near = new nearApi.Near(nearCfg);
     await new Promise((resolve, reject) => setTimeout(resolve, 500));
     if (window.wconsole) window.wconsole.log("connecting to near..");
     if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
@@ -183,7 +156,7 @@ export function test(config) {
             methods: [
                 { method: "setGreeting", type: "changeMethods", parameters: { message: "hello " + (Math.round(Date.now() / 1000) - 1622206047) } },
                 {
-                    method: "getGreeting", type: "viewMethods", parameters: { accountId: config.accountId}
+                    method: "getGreeting", type: "viewMethods", parameters: { accountId: config.accountId }
                 }]
         });
     });

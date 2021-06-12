@@ -15,10 +15,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             if(accountId==sourceCode)accountId="";
             if(contractId==sourceCode)contractId="";
             console.log(accountId);
-            
             login({ accountId: accountId, contractId: contractId }).then(() => {
-
-                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" }]).then((x) => {
+                compile({
+                    accountId:accountId,
+                    contractId:contractId,
+                    filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
+                }).then((x) => {
                     b64toBlob(x, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
@@ -171,14 +173,19 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     //upload(dataURL);
                                                     //test();
                                                     var b64data = dataURL.substring(dataURL.indexOf(";base64,") + 8);
+                                                    var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
+                                                    var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
     
     
     
                                                     console.log("login::done");
-                                                    compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },
+                                                    compile({
+                                                        accountId:accountId,
+                                                        contractId:contractId,
+                                                        filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" },
                                                     { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
                                                     { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
-                                                    ]).then((x) => {
+                                                    ]}).then((x) => {
     
                                                         b64toBlob(x, 'application/zip').then(blob => {
                                                             createDownload("assembly.zip", blob, { type: 'application/zip' });
