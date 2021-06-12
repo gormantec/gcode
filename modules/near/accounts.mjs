@@ -1,5 +1,5 @@
 import { getScript } from '/modules/getScript.mjs';
-import { nearConfig,keyStore }  from '/modules/nearConfig.mjs';
+import { nearConfig }  from '/modules/nearConfig.mjs';
 
 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
 
