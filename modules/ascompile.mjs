@@ -25,8 +25,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                 });
             });
-            
-            callback(null, { "dataURL": "" });
         }
         else {
 
