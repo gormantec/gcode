@@ -191,7 +191,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                             createDownload("assembly.zip", blob, { type: 'application/zip' });
                                                         });
 
-                                                        test(x.response);
+                                                        test(x.response.testdata);
     
     
                                                         callback(null, { "dataURL": dataURL });

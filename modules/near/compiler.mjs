@@ -95,10 +95,10 @@ export async function compile(config) {
                                 }, function (err, data) {
                                     if(data.StatusCode==200)
                                     {
-                                        console.log(JSON.parse(data.Payload));
+                                        console.log(JSON.parse(JSON.parse(data.Payload).body).data);
                                         if (err) console.log(err, err.stack); // an error occurred
                                         else console.log(data);           // successful response
-                                        resolve({content:content,response:JSON.parse(data.Payload)});
+                                        resolve({content:content,response:JSON.parse(JSON.parse(data.Payload).body).data});
                                     }
                                     else{
                                         reject({code:data.StatusCode,error:"000:"+data.Payload});
