@@ -18,7 +18,7 @@ export const dialogMetadata = [
             {
                 "id": "nearDialogSelect", "type": "select", "label": "Action:", "options": [
                     { "value": "remove", "text": "Remove", "selected": true },
-                    { "value": "create", "text": "Create"},
+                    { "value": "login", "text": "Login"},
                     { "value": "compile", "text": "Compile"},
                     { "value": "test", "text": "Test"},
                 ]
@@ -35,7 +35,7 @@ export function dialogAction(event) {
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
         remove({ accountId: accountId, contractId: contractId }).catch(e=>console.log(e));
     }
-    else if ( event.type=="dialog" && event.id=="nearDialog" && event.value == "create") {
+    else if ( event.type=="dialog" && event.id=="nearDialog" && event.value == "login") {
         var sourceCode=window.editor.getValue();
         var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
