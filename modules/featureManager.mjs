@@ -43,7 +43,14 @@ export async function loadFeatures() {
                         d.setAttribute("class", meta.class);
                         i.setAttribute("class", "material-icons-outlined");
                         i.innerText = meta.materialIcon;
-                        d.appendChild(i);
+                        if(meta.materialIcon.startsWith("https://"))
+                        {
+                            d.style.backgroundImage="url('"+meta.materialIcon+"')";
+                            d.style.backgroundSize="cover";
+                        }
+                        else{
+                            d.appendChild(i);
+                        }
                         let pageLeftToolbar = window.document.querySelector("#pageLeftToolbar");
                         let terminalButton = window.document.querySelector("#terminalButton");
                         pageLeftToolbar.insertBefore(d, terminalButton);

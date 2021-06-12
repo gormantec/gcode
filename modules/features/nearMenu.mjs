@@ -2,7 +2,7 @@
 
 import { remove } from '/modules/near/index.mjs';
 
-export const menuMetadata =  {"id":"removeNear","class":"pageLeftToolbarButton","materialIcon":"delete_forever"};
+export const menuMetadata =  {"id":"removeNear","class":"pageLeftToolbarButton","materialIcon":"https://grants.near.org/Public/Custom/22766/near_icon_wht.png"};
 
 export function menuAction(){
     var sourceCode=window.editor.getValue();
