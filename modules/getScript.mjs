@@ -1,4 +1,4 @@
-import { cyrb53 } from '/modules/cyrb53.mjs';
+import { cyrb53 } from './cyrb53.mjs';
 
 const resolved = {};
 

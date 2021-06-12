@@ -90,83 +90,92 @@ export async function loadFeatures() {
                         let d = window.document.createElement("dialog");
                         d.setAttribute("id", dialog.id);
                         dialogs[dialog.id] = d;
-                        let form = window.document.createElement("form");
-                        form.setAttribute("method", "dialog");
-                        let menu = window.document.createElement("menu");
-                        let b_cancel = window.document.createElement("button");
-                        b_cancel.setAttribute("class", "cancelButton");
-                        b_cancel.setAttribute("value", "cancel");
-                        b_cancel.innerText = "Cancel";
-                        let b_ok = window.document.createElement("button");
-                        b_ok.setAttribute("id", "confirmButton");
-                        b_ok.setAttribute("value", dialog.ok.value);
-                        b_ok.innerText = "Ok";
-                        menu.appendChild(b_cancel);
-                        menu.appendChild(b_ok);
-                        if (isArray(dialog.content)) {
-                            Array.from(dialog.content).forEach((widget) => {
-                                window.debug.log(widget);
-                                if (widget.type.startsWith("input")) {
-                                    var type = "text";
-                                    if (widget.type.indexOf("/") > 0) type = widget.type.substring(widget.type.indexOf("/") + 1);
-                                    let input = window.document.createElement("input");
-                                    let p = window.document.createElement("p");
-                                    let label = window.document.createElement("label");
-                                    label.setAttribute("for", widget.id);
-                                    label.innerText = widget.label;
-                                    input.setAttribute("id", widget.id);
-                                    input.setAttribute("type", type);
-                                    if(widget.readonly)input.setAttribute("readonly",widget.readonly);
-                                    p.appendChild(label);
-                                    p.appendChild(input);
-                                    form.appendChild(p);
-                                    if (isFunction(dialogAction)) {
-                                        input.addEventListener('change', (e) => {
-                                            var r = { "id": input.id, "type": "input", "action": "change", "value": input.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
-                                            dialogAction(r);
-                                        });
+                        if(dialog.type=="timer")
+                        {
+                            document.body.insertBefore(d, document.body.firstChild);
+                            dialogPolyfill.registerDialog(d);
+                        }
+                        else
+                        {
+                            let form = window.document.createElement("form");
+                            form.setAttribute("method", "dialog");
+                            let menu = window.document.createElement("menu");
+                            let b_cancel = window.document.createElement("button");
+                            b_cancel.setAttribute("class", "cancelButton");
+                            b_cancel.setAttribute("value", "cancel");
+                            b_cancel.innerText = "Cancel";
+                            let b_ok = window.document.createElement("button");
+                            b_ok.setAttribute("id", "confirmButton");
+                            b_ok.setAttribute("value", dialog.ok.value);
+                            b_ok.innerText = "Ok";
+                            menu.appendChild(b_cancel);
+                            menu.appendChild(b_ok);
+                            if (isArray(dialog.content)) {
+                                Array.from(dialog.content).forEach((widget) => {
+                                    window.debug.log(widget);
+                                    if (widget.type.startsWith("input")) {
+                                        var type = "text";
+                                        if (widget.type.indexOf("/") > 0) type = widget.type.substring(widget.type.indexOf("/") + 1);
+                                        let input = window.document.createElement("input");
+                                        let p = window.document.createElement("p");
+                                        let label = window.document.createElement("label");
+                                        label.setAttribute("for", widget.id);
+                                        label.innerText = widget.label;
+                                        input.setAttribute("id", widget.id);
+                                        input.setAttribute("type", type);
+                                        if(widget.readonly)input.setAttribute("readonly",widget.readonly);
+                                        p.appendChild(label);
+                                        p.appendChild(input);
+                                        form.appendChild(p);
+                                        if (isFunction(dialogAction)) {
+                                            input.addEventListener('change', (e) => {
+                                                var r = { "id": input.id, "type": "input", "action": "change", "value": input.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
+                                                dialogAction(r);
+                                            });
+                                        }
                                     }
-                                }
-                                else if (widget.type.startsWith("select")) {
-                                    window.debug.log("found select");
-                                    let select = window.document.createElement("select");
-                                    let p = window.document.createElement("p");
-                                    let label = window.document.createElement("label");
-                                    label.setAttribute("for", widget.id);
-                                    label.innerText = widget.label;
-                                    select.setAttribute("id", widget.id);
-                                    if (isArray(widget.options)) {
-                                        Array.from(widget.options).forEach((o) => {
-                                            let option = window.document.createElement("option");
-                                            option.setAttribute("value", o.value);
-                                            option.innerText = o.text;
-                                            option.selected = (o.selected == true);
-                                            select.appendChild(option);
-                                        });
+                                    else if (widget.type.startsWith("select")) {
+                                        window.debug.log("found select");
+                                        let select = window.document.createElement("select");
+                                        let p = window.document.createElement("p");
+                                        let label = window.document.createElement("label");
+                                        label.setAttribute("for", widget.id);
+                                        label.innerText = widget.label;
+                                        select.setAttribute("id", widget.id);
+                                        if (isArray(widget.options)) {
+                                            Array.from(widget.options).forEach((o) => {
+                                                let option = window.document.createElement("option");
+                                                option.setAttribute("value", o.value);
+                                                option.innerText = o.text;
+                                                option.selected = (o.selected == true);
+                                                select.appendChild(option);
+                                            });
+                                        }
+    
+                                        p.appendChild(label);
+                                        p.appendChild(select);
+                                        form.appendChild(p);
+                                        if (isFunction(dialogAction)) {
+                                            select.addEventListener('change', (e) => {
+                                                var r = { "id": select.id, "type": "select", "action": "change", "value": select.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
+                                                dialogAction(r);
+                                            });
+                                        }
                                     }
+                                });
+                            }
+                            form.appendChild(menu);
+                            d.appendChild(form);
+                            if (isFunction(dialogAction)) {
+                                d.addEventListener('close', (e) => {
+                                    var r = { "id": d.id, "type": "dialog", "action": "close", "value": d.returnValue, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
+                                    dialogAction(r);
+                                });
+                            }
+                            document.body.insertBefore(d, document.body.firstChild);
+                            dialogPolyfill.registerDialog(d);
+                        }
 
-                                    p.appendChild(label);
-                                    p.appendChild(select);
-                                    form.appendChild(p);
-                                    if (isFunction(dialogAction)) {
-                                        select.addEventListener('change', (e) => {
-                                            var r = { "id": select.id, "type": "select", "action": "change", "value": select.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
-                                            dialogAction(r);
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                        form.appendChild(menu);
-                        d.appendChild(form);
-                        if (isFunction(dialogAction)) {
-                            d.addEventListener('close', (e) => {
-                                var r = { "id": d.id, "type": "dialog", "action": "close", "value": d.returnValue, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
-                                dialogAction(r);
-                            });
-                        }
-                        document.body.insertBefore(d, document.body.firstChild);
-                        dialogPolyfill.registerDialog(d);
 
                     });
                 }

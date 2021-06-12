@@ -26,6 +26,10 @@ export const dialogMetadata = [
             },
         ],
         "ok": { "value": "remove" }
+    },
+    {
+        "id": "nearDialogTimer",
+        "type": "timer"
     }
 ];
 
