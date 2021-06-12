@@ -342,6 +342,7 @@ dialog form menu .cancelButton{
 
 dialog form label{
     color:#616367;
+    min-width:80px;
 }
 
 dialog form select{
