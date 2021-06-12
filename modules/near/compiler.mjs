@@ -78,6 +78,8 @@ export async function compile(config) {
                 .then(function (content) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
+                        console.log("privateKey1: "+nearCfg.keyStore.getKey().toString());
+                        console.log("privateKey2: "+nearCfg.keyStore.getKey().privateKey);
                         getAWS.then(({ AWS }) => {
                             AWS.config.update(awsConfig());
                             console.log("lambda");
@@ -87,7 +89,7 @@ export async function compile(config) {
                                 FunctionName: "near-sdk-as-rpc", /* required */
                                 Payload: JSON.stringify({
                                     "code": "dGhpcyBpcyBzb21lIHRleHQ=",
-                                    "key": nearCfg.keyStore.getKey().secretKey,
+                                    "key": nearCfg.keyStore.getKey().toString(),
                                     "accountId": config.accountId,
                                     assembly: content
                                 })
