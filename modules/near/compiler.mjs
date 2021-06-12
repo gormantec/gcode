@@ -78,9 +78,9 @@ export async function compile(config) {
                 .then(function (content) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
-                        console.log("privateKey");
-                        nearCfg.keyStore.getKey().toString().then((privateKey)=>{
-                            console.log(privateKey);
+                        nearCfg.keyStore.getKey().then((key)=>{
+                            console.log("privateKey1: "+key.toString());
+                            console.log("privateKey2: "+key.secretKey);
                             getAWS.then(({ AWS }) => {
                                 AWS.config.update(awsConfig());
                                 console.log("lambda");
@@ -90,7 +90,7 @@ export async function compile(config) {
                                     FunctionName: "near-sdk-as-rpc", /* required */
                                     Payload: JSON.stringify({
                                         "code": "dGhpcyBpcyBzb21lIHRleHQ=",
-                                        "key": privateKey,
+                                        "key": key.toString(),
                                         "accountId": config.accountId,
                                         assembly: content
                                     })
@@ -100,12 +100,12 @@ export async function compile(config) {
                                     else console.log(data);           // successful response
                                     resolve(content);
                                 });
-                            });
-                        });
+                            }).catch(e => reject({code:500,error:"001:"+e}));
+                        }).catch(e => reject({code:500,error:"002:"+e}));
 
-                    }).catch(() => { });
+                    }).catch(e => reject({code:500,error:"003:"+e}));
                 });
-        });
+        }).catch(e => reject({code:500,error:"004:"+e}));
     });
 }
 
@@ -163,5 +163,5 @@ export function test(config) {
                     method: "getGreeting", type: "viewMethods", parameters: { accountId: config.accountId }
                 }]
         });
-    });
+    }).catch(e => reject({code:500,error:"005:"+e}));
 }
