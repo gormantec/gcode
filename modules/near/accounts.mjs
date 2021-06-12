@@ -24,8 +24,8 @@ export async function remove(config) {
             account.deleteAccount("gcode.testnet").then((r) => {
                 console.log("deleted account: " + r.status.SuccessValue);
                 resolve({code:200,message:"deleted"});
-            }).catch(e => reject({code:500,error:"001"+e}));
-        }).catch(e => reject({code:500,error:"002"+e}));
+            }).catch(e => reject({code:500,error:"001:"+e}));
+        }).catch(e => reject({code:500,error:"002:"+e}));
     });
 }
 
@@ -70,15 +70,15 @@ export async function login(config) {
                                 });
                             },500);
 
-                        }).catch(e => reject({code:500,error:"005"+e}));
+                        }).catch(e => reject({code:500,error:"005:"+e}));
                     }
                     else {
                         console.log("Contract exists we dont have the key");
                         reject({code:409});
                     }
-                }).catch(e => reject({code:500,error:"006"+e}));
+                }).catch(e => reject({code:500,error:"006:"+e}));
 
-            }).catch(e => reject({code:500,error:"007"+e}));
+            }).catch(e => reject({code:500,error:"007:"+e}));
 
         });
 

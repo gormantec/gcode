@@ -29,6 +29,7 @@ export const dialogMetadata = [
 ];
 
 export function dialogAction(event) {
+    console.log(event);
     if ( event.type=="dialog" && event.id=="nearDialog" && event.value == "remove") {
         var sourceCode=window.editor.getValue();
         var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
