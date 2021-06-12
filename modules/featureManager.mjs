@@ -116,6 +116,7 @@ export async function loadFeatures() {
                                     label.innerText = widget.label;
                                     input.setAttribute("id", widget.id);
                                     input.setAttribute("type", type);
+                                    if(widget.readonly)input.setAttribute("readonly",widget.readonly);
                                     p.appendChild(label);
                                     p.appendChild(input);
                                     form.appendChild(p);

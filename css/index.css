@@ -334,11 +334,11 @@ dialog form menu .cancelButton{
     border-width: 1px;
     border-radius: 3px;
     padding: 4px 12px 4px 12px;
+
+    
 }
 
-dialog form select{
-    padding: 6px;
-}
+
 
 dialog form label{
     color:#616367;
@@ -346,12 +346,14 @@ dialog form label{
 
 dialog form select{
     padding: 6px;
-    min-width: 340px;
+    min-width: 300px;
+    float:right;
 }
 
 dialog form input{
     padding: 6px;
-    min-width: 320px;
+    min-width: 300px;
+    float:right;
 }
 
 
