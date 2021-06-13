@@ -4,9 +4,10 @@ import { login, contract } from "https://gcode.com.au/modules/near/index.mjs"
 /* example backend dApp call */
 login({accountId:"gcode-ec42edf808f.testnet",contractId:"gcode-ec42edf808f.testnet"}).then((config)=>{
   config.methods=["*getGreeting"];
-  var aContract=contract(config);
-  aContract.getGreeting({"accountId": "hello.gormantec.testnet"}).then((response)=>{
-    console.log(response);
+  contract(config).then((ct)=>{
+    ct.getGreeting({"accountId": "hello.gormantec.testnet"}).then((response)=>{
+      console.log(response);
+    });
   });
 });
 

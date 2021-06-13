@@ -34,7 +34,7 @@ export function contract(config) {
             });
             const mycontract = new nearApi.Contract(account, config.contractId, ct);
             resolve(mycontract);
-        });
+        }).catch(e => reject({ code: 500, error: "011:" + e }));
     });
 }
 
