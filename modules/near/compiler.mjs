@@ -120,13 +120,12 @@ async function doNear(nearApi, config) {
             if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract.contractId);
             console.log(mycontract.contractId);
             const list = config.methods;
+            let success = true;
             var doLoop = (i) => {
 
                 var modP = list[i].parameters;
                 for (const key in modP) {
                     if (modP.hasOwnProperty(key)) {
-                        console.log(modP[key]);
-                        if (window.wconsole) window.wconsole.log("modP[key]: " + modP[key]);
                         if (modP[key].startsWith("@Near.") && config[modP[key].substring(6)]) modP[key] = config[modP[key].substring(6)];
                     }
                 }
@@ -134,8 +133,10 @@ async function doNear(nearApi, config) {
                 mycontract[list[i].method](modP).then((r) => {
                     console.log("loop: " + i);
                     if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
+                    if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
+                    else { window.wconsole.log( "[FAILED]"); success = false; }
                     if ((i + 1) < list.length) doLoop(i + 1);
-                    else resolve();
+                    else resolve(success);
                 });
             };
             doLoop(0);
