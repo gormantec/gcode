@@ -236,7 +236,7 @@ function _runCode() {
                                             const nearCfg = nearConfig(nearApi);
                                             nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
                                                 const lll = function (e) {
-                                                    console.log("Received Post: "+url);
+                                                    console.log("Received Post: "+e.origin);
                                                     if (e.origin !== win.location.href) return;
                                                     console.log("Send Post to: "+uri);
                                                     win.postMessage({ accountId: accountId, key: key.toString() }, uri);
