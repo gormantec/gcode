@@ -40,7 +40,7 @@ class PWA {
             });
         }
         this.alertDialog.innerHTML="<p>"+message+"</p>";
-        this.alertDialog.showModal();
+        this.alertDialog.element.showModal();
     }
 
     setNavigateBackPage(navigateBackPage) {
