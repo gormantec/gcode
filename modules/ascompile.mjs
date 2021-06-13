@@ -38,7 +38,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         document.querySelector("#nearDialogTimerValue").style.width="100%";
                         callback(null, { "dataURL": x.content ,testdata:x.response.testdata});
                         setTimeout(()=>{
-                            document.querySelector("#nearDialogTimerValue").close();
+                            document.querySelector("#nearDialogTimer").close();
                             document.querySelector("#nearDialogTimerValue").style.width="10%";
                         },1000);
 
@@ -46,7 +46,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         document.querySelector("#nearDialogTimerValue").style.width="100%";
                         callback(null, { });
                         setTimeout(()=>{
-                            document.querySelector("#nearDialogTimerValue").close();
+                            document.querySelector("#nearDialogTimer").close();
                             document.querySelector("#nearDialogTimerValue").style.width="10%";
                         },1000);
                     });
@@ -55,7 +55,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     document.querySelector("#nearDialogTimerValue").style.width="100%";
                     callback(null, { });
                     setTimeout(()=>{
-                        document.querySelector("#nearDialogTimerValue").close();
+                        document.querySelector("#nearDialogTimer").close();
                         document.querySelector("#nearDialogTimerValue").style.width="10%";
                     },1000);
                 });
