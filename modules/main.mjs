@@ -230,12 +230,13 @@ function _runCode() {
                                             getNearApi.then(({ nearApi }) => {
                                                 const nearCfg = nearConfig(nearApi);
                                                 nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
+                                                    console.log("Post");
                                                     win.postMessage({ accountId:accountId,key: key.toString() }, uri);
                                                 })
                                             })
                                         });
 
-                                    }, 1000);
+                                    }, 10000);
 
                                 }
 
