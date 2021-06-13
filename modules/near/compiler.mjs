@@ -107,6 +107,8 @@ async function doNear(nearApi, config) {
                 var modP=list[i].parameters;
                 for (const key in modP) {
                     if (modP.hasOwnProperty(key)) {
+                        console.log(modP[key]);
+                        if (window.wconsole) window.wconsole.log("modP[key]: " + modP[key]);
                         if(modP[key].startsWith("@Near.") && config[modP[key].substring(6)])modP[key]=config[modP[key].substring(6)];
                     }
                 }
