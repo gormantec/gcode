@@ -88,6 +88,7 @@ export function afterLoad() {
         doSomething();
     }
     else {
+        /*
         githubtree.getCode(guid, (e, code) => {
             if (!e) {
                 fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
@@ -98,6 +99,7 @@ export function afterLoad() {
                 });
             }
         });
+        */
     }
 
     _open({ visible: true });

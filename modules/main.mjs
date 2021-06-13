@@ -237,7 +237,7 @@ function _runCode() {
                                             nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
                                                 const lll = function (e) {
                                                     console.log("Received Post: "+e.origin);
-                                                    if (e.origin !== win.location.href) return;
+                                                    if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
                                                     console.log("Send Post to: "+uri);
                                                     win.postMessage({ accountId: accountId, key: key.toString() }, uri);
                                                     window.removeEventListener("message", lll);
