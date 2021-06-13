@@ -180,7 +180,7 @@ function _runCode() {
                                 '    addkey(e.data);\n' +
                                 '} , false);\n' +
                                 'window.addEventListener("load", (event) => {\n' +
-                                '    parent.postMessage("loaded","https://gcode.com.au");\n' +
+                                '    parent.postMessage("loaded");\n' +
                                 '});\n';
 
 
