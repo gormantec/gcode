@@ -16,7 +16,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             if(contractId==sourceCode)contractId="";
             console.log(accountId);
             document.querySelector("#nearDialogTimer").showModal();
-            document.querySelector("#nearDialogTimerValue").style.width="10%";
+            document.querySelector("#nearDialogTimerValue").style.width="5%";
+            setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="10%";},4000);
+            setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="15%";},4000);
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="20%";},10000);
