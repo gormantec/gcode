@@ -26,7 +26,7 @@ export function contract(config) {
             var ct = {};
             config.methods.forEach(e => {
                 var m={};
-                if(typeof e == "string") {m ={method:(e.sunstring(0,1=="*"))?e.substring(1):e, type:(e.sunstring(0,1=="*"))?"viewMethods":"changeMethods"};}
+                if(typeof e == "string") {m ={method:(e.substring(0,1=="*"))?e.substring(1):e, type:(e.substring(0,1=="*"))?"viewMethods":"changeMethods"};}
                 if(typeof e == "object" && e.type && e.method) {m ={method:e.method, type:e.type};}
                 else {m = e};
                 ct[e.type] = ct[e.type] || [];
