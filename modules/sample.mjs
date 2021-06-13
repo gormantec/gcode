@@ -1,4 +1,11 @@
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+import { login, contract } from "https://gcode.com.au/modules/near/index.mjs"
+
+login({accountId:"gcode-ec42edf808f.testnet",contractId:"gcode-ec42edf808f.testnet"}).then((config)=>{
+  config.methods=["*getGreeting"];
+  var aContract=contract(config);
+  aContract.getGreeting({"accountId": "hello.gormantec.testnet"});
+});
 
 
 var homePage=new Page({
