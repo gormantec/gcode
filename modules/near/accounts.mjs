@@ -22,7 +22,7 @@ export function contract(config) {
         getNearApi.then(({ nearApi }) => {
             const nearCfg = nearConfig(nearApi);
             const near = new nearApi.Near(nearCfg);
-            const account = new nearApi.Account(near.connection, config.accountId);
+            const account = new nearApi.Account(near.connection, config.accountId);  /**/ 
             var ct = {};
             config.methods.forEach(e => {
                 var m={};
