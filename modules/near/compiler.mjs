@@ -103,7 +103,7 @@ async function doNear(nearApi, config) {
             console.log(mycontract.contractId);
             const list = config.methods;
             var doLoop = (i) => {
-                if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(list[i].parameters) + ')');
+                
                 var modP=list[i].parameters;
                 for (const key in modP) {
                     if (modP.hasOwnProperty(key)) {
@@ -112,6 +112,7 @@ async function doNear(nearApi, config) {
                         if(modP[key].startsWith("@Near.") && config[modP[key].substring(6)])modP[key]=config[modP[key].substring(6)];
                     }
                 }
+                if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(modP) + ')');
                 mycontract[list[i].method](modP).then((r) => {
                     console.log("loop: " + i);
                     if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
