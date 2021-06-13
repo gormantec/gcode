@@ -27,7 +27,7 @@ export function contract(config) {
             config.methods.forEach(e => {
                 var m={};
                 if(typeof e == "string") {m ={method:(e.sunstring(0,1=="*"))?e.substring(1):e, type:(e.sunstring(0,1=="*"))?"viewMethods":"changeMethods"};}
-                if(typeof e == "object" && e.type && e.method) {m ={method:e.method, type=e.type};}
+                if(typeof e == "object" && e.type && e.method) {m ={method:e.method, type:e.type};}
                 else {m = e};
                 ct[e.type] = ct[e.type] || [];
                 ct[e.type].push(e.method);
@@ -68,14 +68,18 @@ export async function login(config) {
                         if (kk.length == 0) {
                             account.addKey(masterKey).then((x) => {
                                 console.log("Added gcode.testnet key!");
-                                resolve({ code: 202, message: "updated" });
+                                config.code=202;
+                                config.message="updated";
+                                resolve(config);
                             }).catch(e => {
                                 reject({ code: 500, error: "003:" + e });
                             });
                         }
                         else {
                             console.log("gcode.testnet key already added!");
-                            resolve({ code: 202, message: "already exists" });
+                            config.code=202;
+                            config.message="already exists";
+                            resolve(config);
                         }
                     }
                     else if (keys.length == 0) {
@@ -88,7 +92,9 @@ export async function login(config) {
                             setTimeout(() => {
                                 account.addKey(masterKey).then((x) => {
                                     console.log("Added gcode.testnet key!");
-                                    resolve({ code: 201, message: "created" });
+                                    config.code=201;
+                                    config.message="created";
+                                    resolve(config);
                                 }).catch(e => {
                                     console.log("Error:: adding gcode.testnet key!");
                                     reject({ code: 500, error: "004:" + e });
