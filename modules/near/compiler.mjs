@@ -18,7 +18,7 @@ export async function upload() {
 
 
 export async function compile(config) {
-    
+
     return new Promise((resolve, reject) => {
         getJSZip.then(({ JSZip }) => {
             var zip = new JSZip();
@@ -39,13 +39,28 @@ export async function compile(config) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
                         nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
+
+                            fetch("https://near.gcode.com.au/", {
+                                method: 'post',
+                                body: JSON.stringify({
+                                    "code": "dGhpcyBpcyBzb21lIHRleHQ=",
+                                    "key": key.toString(),
+                                    "accountId": config.accountId,
+                                    assembly: content
+                                })
+                            }).then(function (response) {
+                                return response.json();
+                            }).then(function (data) {
+                                resolve({ content: content, response: data });
+                            }).catch(e => reject({ code: 500, error: "001:" + e }));
+                            /*
                             getAWS.then(({ AWS }) => {
                                 AWS.config.update(awsConfig());
                                 console.log("lambda");
                                 var lambda = new AWS.Lambda();
                                 console.log("invoke");
                                 lambda.invoke({
-                                    FunctionName: "near-sdk-as-rpc", /* required  */
+                                    FunctionName: "near-sdk-as-rpc", 
                                     Payload: JSON.stringify({
                                         "code": "dGhpcyBpcyBzb21lIHRleHQ=",
                                         "key": key.toString(),
@@ -68,6 +83,8 @@ export async function compile(config) {
                                     }
                                 });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
+
+                            */
                         }).catch(e => reject({ code: 500, error: "002:" + e }));
 
                     }).catch(e => reject({ code: 500, error: "003:" + e }));
@@ -79,7 +96,7 @@ export async function compile(config) {
 async function doNear(nearApi, config) {
 
 
-    window.wconsole=window.wconsole || window.console;
+    window.wconsole = window.wconsole || window.console;
     await new Promise((resolve, reject) => setTimeout(resolve, 500));
     return new Promise((resolve, reject) => {
 
@@ -103,13 +120,13 @@ async function doNear(nearApi, config) {
             console.log(mycontract.contractId);
             const list = config.methods;
             var doLoop = (i) => {
-                
-                var modP=list[i].parameters;
+
+                var modP = list[i].parameters;
                 for (const key in modP) {
                     if (modP.hasOwnProperty(key)) {
                         console.log(modP[key]);
                         if (window.wconsole) window.wconsole.log("modP[key]: " + modP[key]);
-                        if(modP[key].startsWith("@Near.") && config[modP[key].substring(6)])modP[key]=config[modP[key].substring(6)];
+                        if (modP[key].startsWith("@Near.") && config[modP[key].substring(6)]) modP[key] = config[modP[key].substring(6)];
                     }
                 }
                 if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(modP) + ')');
