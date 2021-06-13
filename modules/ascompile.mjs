@@ -25,13 +25,15 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="50%";},40000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="60%";},50000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="70%";},60000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="80%";},70000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="90%";},80000);
                 compile({
                     accountId:accountId,
                     contractId:contractId,
                     filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
                 }).then((x) => {
 
-                    document.querySelector("#nearDialogTimerValue").style.width="80%";
+                    document.querySelector("#nearDialogTimerValue").style.width="95%";
                     b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
