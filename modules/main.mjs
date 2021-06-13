@@ -235,13 +235,15 @@ function _runCode() {
                                         getNearApi.then(({ nearApi }) => {
                                             const nearCfg = nearConfig(nearApi);
                                             nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
-                                                console.log("Post");
+                                                
 
                                                 const lll = function (e) {
+                                                    console.log("Received Post");
                                                     if (e.origin !== win.location.href) return;
                                                     console.log(e);
                                                     win.postMessage({ accountId: accountId, key: key.toString() }, uri);
                                                     window.removeEventListener("message", lll);
+                                                    console.log("Send Post");
                                                 };
                                                 window.addEventListener("message", lll, false);
                                             })
