@@ -52,7 +52,7 @@ export async function compile(config) {
                                 return response.json();
                             }).then(function (data) {
                                 console.log(data);
-                                resolve({ content: content, response: data });
+                                resolve({ content: content, response: data.data.data });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
                             /*
                             getAWS.then(({ AWS }) => {
