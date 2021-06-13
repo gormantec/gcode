@@ -159,7 +159,7 @@ function _runCode() {
                     if (!e) {
                         window.debug.log(d);
                         try {
-                            const accountId=d.testdata.accountId;
+                            const accountId = d.testdata.accountId;
                             var jApp = 'import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n' +
                                 'import { test, addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
                                 'var aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\n' +
@@ -173,12 +173,16 @@ function _runCode() {
                                 'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});' +
                                 'button.onclick(function(){console.log("RUN");consolePage.innerHTML="";test(' + JSON.stringify(d.testdata) + ');});\n' +
                                 'mainPage.appendChild(button);\n' +
-                                'mainPage.appendChild(consolePage);\n'+
-                                'window.addEventListener("message", function(e) {\n'+
-                                'if (event.origin !== "https://gcode.com.au") return;\n'+
-                                '    console.log(e.data);\n'+
-                                '    addkey(e.data);\n'+
-                                '} , false);\n';
+                                'mainPage.appendChild(consolePage);\n' +
+                                'window.addEventListener("message", function(e) {\n' +
+                                'if (e.origin !== "https://gcode.com.au") return;\n' +
+                                '    console.log(e.data);\n' +
+                                '    addkey(e.data);\n' +
+                                '} , false);\n' +
+                                'window.addEventListener("load", (event) => {\n' +
+                                '    parent.postMessage("loaded","https://gcode.com.au");\n' +
+                                '});\n';
+
 
 
 
@@ -225,19 +229,26 @@ function _runCode() {
                                 else {
                                     window.debug.log("open window");
                                     win.location.href = uri + frame;
-                                    setTimeout(() => {
-                                        import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
-                                            const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
-                                            getNearApi.then(({ nearApi }) => {
-                                                const nearCfg = nearConfig(nearApi);
-                                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
-                                                    console.log("Post");
-                                                    win.postMessage({ accountId:accountId,key: key.toString() }, uri);
-                                                })
-                                            })
-                                        });
 
-                                    }, 10000);
+                                    import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
+                                        const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
+                                        getNearApi.then(({ nearApi }) => {
+                                            const nearCfg = nearConfig(nearApi);
+                                            nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
+                                                console.log("Post");
+
+                                                const lll = function (e) {
+                                                    if (e.origin !== win.location.href) return;
+                                                    console.log(e);
+                                                    win.postMessage({ accountId: accountId, key: key.toString() }, uri);
+                                                    window.removeEventListener("message", lll);
+                                                };
+                                                window.addEventListener("message", lll, false);
+                                            })
+                                        })
+                                    });
+
+
 
                                 }
 
