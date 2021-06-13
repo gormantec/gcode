@@ -170,7 +170,7 @@ function _runCode() {
                                 '};\n' +
                                 'var button=new Div({class:"floatingActionButton",borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n' +
                                 'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});' +
-                                'button.onclick(function(){console.log("RUN");consolePage.innerHTML="";test(' + JSON.stringify(d.testdata) + ');});\n' +
+                                'button.onclick(function(){console.log("RUN TEST");consolePage.innerHTML="";test(' + JSON.stringify(d.testdata) + ');});\n' +
                                 'mainPage.appendChild(button);\n' +
                                 'mainPage.appendChild(consolePage);\n' +
                                 'window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
