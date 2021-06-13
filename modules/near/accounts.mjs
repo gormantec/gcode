@@ -29,8 +29,8 @@ export function contract(config) {
                 console.log(typeof e);
                 if (typeof e == "string") {
                     m = {
-                        method: (e.substring(0, 1 == "*")) ? e.substring(1) : e,
-                        type: (e.substring(0, 1 == "*")) ? "viewMethods" : "changeMethods"
+                        method: (e.substring(0, 1) == "*") ? e.substring(1) : e,
+                        type: (e.substring(0, 1) == "*") ? "viewMethods" : "changeMethods"
                     };
                 }
                 else if (e.type && e.method) { m = { method: e.method, type: e.type }; }
