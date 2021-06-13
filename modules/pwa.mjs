@@ -26,7 +26,22 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
 
-
+    alert(message)
+    {
+        if (!this.alertDialog)
+        {
+            this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog", innerHTML: ""});
+            this.alertDialog.style.backgroundColor = this.primaryColor;
+            this.alertDialog.style.color = this.primaryColorText;
+            this.pwaRoot.appendChild(this.alertDialog);
+            const _this=this;
+            this.alertDialog.onclick(function () {
+                _this.alertDialog.close();
+            });
+        }
+        this.alertDialog.innerHTML="<p>"+message+"</p>";
+        this.alertDialog.showModal();
+    }
 
     setNavigateBackPage(navigateBackPage) {
         this.navigateBackPage = navigateBackPage;
