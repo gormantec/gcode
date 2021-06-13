@@ -15,9 +15,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             if(accountId==sourceCode)accountId="";
             if(contractId==sourceCode)contractId="";
             console.log(accountId);
+            document.querySelector("#nearDialogTimer").showModal();
+            document.querySelector("#nearDialogTimerValue").style.width="10%";
             login({ accountId: accountId, contractId: contractId }).then(() => {
-                document.querySelector("#nearDialogTimer").showModal();
-                document.querySelector("#nearDialogTimerValue").style.width="10%";
+
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="20%";},10000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="30%";},20000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="40%";},30000);
@@ -59,6 +60,13 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         document.querySelector("#nearDialogTimerValue").style.width="10%";
                     },1000);
                 });
+            }).catch(()=>{
+                document.querySelector("#nearDialogTimerValue").style.width="100%";
+                callback(null, { });
+                setTimeout(()=>{
+                    document.querySelector("#nearDialogTimer").close();
+                    document.querySelector("#nearDialogTimerValue").style.width="10%";
+                },1000);
             });
         }
         else {

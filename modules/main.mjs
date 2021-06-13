@@ -1,7 +1,8 @@
 import { beautify } from '/modules/beutify.mjs';
-import { loadFeatures,refreshFeatures } from '/modules/featureManager.mjs';
-import { getImage,createHtml } from '/modules/htmlUtils.mjs';
-import { save,load,remove } from '/modules/gcodeStorage.mjs';
+import { loadFeatures, refreshFeatures } from '/modules/featureManager.mjs';
+import { getImage, createHtml } from '/modules/htmlUtils.mjs';
+import { save, load, remove } from '/modules/gcodeStorage.mjs';
+import { getScript } from '/modules/getScript.mjs';
 
 
 
@@ -37,10 +38,10 @@ function _onclickFilename() {
             // Enter pressed
             var filename = input.value;
             if (filename == "" || filename == null) return false;
-            save(filename,window.editor.getValue());
+            save(filename, window.editor.getValue());
             localStorage.setItem("lastFileName", filename);
             remove(oldfilename);
-        
+
             input.onkeypress = null;
             document.getElementById("filename").innerHTML = filename;
             document.getElementById("filename").onclick = _onclickFilename;
@@ -50,8 +51,7 @@ function _onclickFilename() {
     };
 }
 
-function _refresh()
-{
+function _refresh() {
     refreshFeatures();
 }
 
@@ -128,62 +128,65 @@ function _toggleSideBar() {
 
 }
 
-function _runCode()
-{
+function _runCode() {
 
-        var filename = document.getElementById("filename").innerText;
-        if (filename.endsWith(".js")) {
-            window.debug.log(myLogin + "$ nodejs " + filename + "\n");
-            try {
-                var _run = function () {
-                    eval(window.editor.getValue());
-                }
-                _run();
+    var filename = document.getElementById("filename").innerText;
+    if (filename.endsWith(".js")) {
+        window.debug.log(myLogin + "$ nodejs " + filename + "\n");
+        try {
+            var _run = function () {
+                eval(window.editor.getValue());
             }
-            catch (e) {
-                console.error(e);
-            }
-            window.debug.log(myLogin + "$");
+            _run();
         }
-        else if (filename.endsWith(".dapp.ts")) {
-            window.debug.log(myLogin + "$ echo 'Create dApp'\n");
-            window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            import('/modules/ascompile.mjs').then(({ run }) => {
-                var code=window.editor.getValue();
-                run(
-                    window.editor.getValue(),
-                    filename,
-                    filename,
-                    "optimized.wasm",
-                    true,
-                    (e,d) => { 
-                        if(!e) {
+        catch (e) {
+            console.error(e);
+        }
+        window.debug.log(myLogin + "$");
+    }
+    else if (filename.endsWith(".dapp.ts")) {
+        window.debug.log(myLogin + "$ echo 'Create dApp'\n");
+        window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
+        import('/modules/ascompile.mjs').then(({ run }) => {
+            var code = window.editor.getValue();
+            run(
+                window.editor.getValue(),
+                filename,
+                filename,
+                "optimized.wasm",
+                true,
+                (e, d) => {
+                    if (!e) {
                         window.debug.log(d);
                         try {
+                            const accountId=d.testdata.accountId;
+                            var jApp = 'import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n' +
+                                'import { test, addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
+                                'var aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\n' +
+                                'aPWA.show();\n\n' +
+                                'var mainPage=new Page({color: "black",paddingTop:"45px", child: new Div({innerHTML:""})});\n' +
+                                'aPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n' +
+                                '  consolePage.innerHTML=consolePage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}' +
+                                '};\n' +
+                                'var button=new Div({class:"floatingActionButton",borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n' +
 
-                        var jApp='import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n'+
-                        'import { test } from "https://gcode.com.au/modules/near/index.mjs";\n\n'+
-                        'var aPWA=new PWA({\ntitle:"Gorman Technology Pty Ltd",\nfooter:"https://www.gormantec.com",\nprimaryColor:"#005040",\n});\n\n'+
-                        'aPWA.show();\n\n'+
-                        'var mainPage=new Page({color: "black",paddingTop:"45px", child: new Div({innerHTML:""})});\n'+
-                        'aPWA.setPage(mainPage);\nwindow.wconsole={\nlog:(text)=>{\n'+
-                        '  consolePage.innerHTML=consolePage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}'+
-                        '};\n'+
-                        'var button=new Div({class:"floatingActionButton",borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n'+
-                        
-                        'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});'+
-                        'button.onclick(function(){console.log("RUN");consolePage.innerHTML="";test('+JSON.stringify(d.testdata)+');});\n'+
-                        'mainPage.appendChild(button);\n'+
-                        'mainPage.appendChild(consolePage);\n';
+                                'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});' +
+                                'button.onclick(function(){console.log("RUN");consolePage.innerHTML="";test(' + JSON.stringify(d.testdata) + ');});\n' +
+                                'mainPage.appendChild(button);\n' +
+                                'mainPage.appendChild(consolePage);\n'+
+                                'window.addEventListener("message", function(e) {\n'+
+                                '    console.log(e.data);\n'+
+                                '    addkey(e.data);\n'+
+                                '} , false);\n';
 
-                        
-                        
 
-                            var result = createHtml((code && code.trim().substring(0,2)=="/*")?code.substring(0,code.indexOf("*/")+2):"");
-                            var splashBackgroundColor=result.splashBackgroundColor;
-                            var splash=result.splash;
-                            var mockFrame=result.mockFrame;
-                            var rootHTML=result.rootHTML;
+
+
+                            var result = createHtml((code && code.trim().substring(0, 2) == "/*") ? code.substring(0, code.indexOf("*/") + 2) : "");
+                            var splashBackgroundColor = result.splashBackgroundColor;
+                            var splash = result.splash;
+                            var mockFrame = result.mockFrame;
+                            var rootHTML = result.rootHTML;
                             var _module = window.document.createElement("script");
                             _module.setAttribute("type", "module");
                             _module.text = "\n" + jApp + "\n";
@@ -191,7 +194,86 @@ function _runCode()
                             //var _script1 = window.document.createElement("script");
                             //_script1.src = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
                             //rootHTML.querySelector("head").appendChild(_script1);
-                            
+
+
+                            var wpos = "top=50,left=50";
+                            var w = 375;
+                            var h = 896 * 375 / 414; //iphoneX=896/414
+                            var mockPadding = 40;
+                            if (screen.height <= 768) {
+                                w = Math.floor(w * 0.75);
+                                h = Math.floor(h * 0.75);
+                                mockPadding = Math.floor(mockPadding * 0.75);
+                                wpos = "top=0,left=0";
+                            }
+                            var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
+                            var frame = "";
+                            if (mockFrame) {
+                                wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
+                                frame = "?mockFrame=" + mockFrame;
+                            }
+                            if (!win || win.closed) {
+                                win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
+                                if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                                else win.document.body.style.backgroundColor = "black";
+                            }
+                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                                if (error) {
+                                    window.debug.log(error);
+                                }
+                                else {
+                                    window.debug.log("open window");
+                                    win.location.href = uri + frame;
+                                    setTimeout(() => {
+                                        import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
+                                            const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
+                                            getNearApi.then(({ nearApi }) => {
+                                                const nearCfg = nearConfig(nearApi);
+                                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
+                                                    win.postMessage({ accountId:accountId,key: key.toString() }, uri);
+                                                })
+                                            })
+                                        });
+
+                                    }, 1000);
+
+                                }
+
+                            });
+                        }
+                        catch (e) {
+                            console.error("error:" + e);
+                        }
+
+                    }
+                }
+            );
+        });
+    }
+    else if (filename.endsWith(".ts")) {
+        window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
+        import('/modules/ascompile.mjs').then(({ run }) => {
+            var code = window.editor.getValue();
+            run(
+                code,
+                "/node_modules/wasmdom/assembly/index.ts",
+                "wasmdom/assembly/src/app.ts",
+                "optimized.wasm",
+                false,
+                (e, d) => {
+                    if (!e) {
+                        try {
+                            var result = createHtml(code);
+                            var splashBackgroundColor = result.splashBackgroundColor;
+                            var splash = result.splash;
+                            var mockFrame = result.mockFrame;
+                            var rootHTML = result.rootHTML;
+                            var _script1 = window.document.createElement("script");
+                            _script1.text = "\nwindow.wasmdomURL=\"" + d.dataURL + "\";\n";
+                            rootHTML.querySelector("body").appendChild(_script1);
+                            var _script2 = window.document.createElement("script");
+                            _script2.src = "https://gcode.com.au/js/wasmdom.js";
+                            rootHTML.querySelector("body").appendChild(_script2);
 
                             var wpos = "top=50,left=50";
                             var w = 375;
@@ -228,148 +310,81 @@ function _runCode()
                         catch (e) {
                             console.error("error:" + e);
                         }
+                    }
 
-                     }
-                     }
-                );
+                }
+            );
+        });
+
+        window.debug.log("\n");
+    }
+    else if (filename.endsWith(".mjs")) {
+        window.debug.log(myLogin + "$ launch webApp " + filename + "\n");
+        try {
+            var code = window.editor.getValue();
+            var result = createHtml(code);
+            var splashBackgroundColor = result.splashBackgroundColor;
+            var splash = result.splash;
+            var mockFrame = result.mockFrame;
+            var rootHTML = result.rootHTML;
+
+            var _module = window.document.createElement("script");
+            _module.setAttribute("type", "module");
+            _module.text = "\n" + window.editor.getValue() + "\n";
+            rootHTML.querySelector("head").appendChild(_module);
+            var wpos = "top=50,left=50";
+            var w = 375;
+            var h = 896 * 375 / 414; //iphoneX=896/414
+            var mockPadding = 40;
+            if (screen.height <= 768) {
+                w = Math.floor(w * 0.75);
+                h = Math.floor(h * 0.75);
+                mockPadding = Math.floor(mockPadding * 0.75);
+                wpos = "top=0,left=0";
+            }
+            var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
+            var frame = "";
+            if (mockFrame) {
+                wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
+                frame = "?mockFrame=" + mockFrame;
+            }
+            if (!win || win.closed) {
+                win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
+                if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
+                else win.document.body.style.backgroundColor = "black";
+            }
+            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                if (error) {
+                    window.debug.log(error);
+                }
+                else {
+                    window.debug.log("open window");
+                    win.location.href = uri + frame;
+                }
+
             });
         }
-        else if (filename.endsWith(".ts")) {
-            window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
-            import('/modules/ascompile.mjs').then(({ run }) => {
-                var code=window.editor.getValue();
-                run(
-                    code,
-                    "/node_modules/wasmdom/assembly/index.ts",
-                    "wasmdom/assembly/src/app.ts",
-                    "optimized.wasm",
-                    false,
-                    (e,d) => {
-                        if(!e)
-                        {
-                            try {
-                                var result = createHtml(code);
-                                var splashBackgroundColor=result.splashBackgroundColor;
-                                var splash=result.splash;
-                                var mockFrame=result.mockFrame;
-                                var rootHTML=result.rootHTML;
-                                var _script1 = window.document.createElement("script");
-                                _script1.text = "\nwindow.wasmdomURL=\"" + d.dataURL + "\";\n";
-                                rootHTML.querySelector("body").appendChild(_script1);
-                                var _script2 = window.document.createElement("script");
-                                _script2.src = "https://gcode.com.au/js/wasmdom.js";
-                                rootHTML.querySelector("body").appendChild(_script2);
-    
-                                var wpos = "top=50,left=50";
-                                var w = 375;
-                                var h = 896 * 375 / 414; //iphoneX=896/414
-                                var mockPadding = 40;
-                                if (screen.height <= 768) {
-                                    w = Math.floor(w * 0.75);
-                                    h = Math.floor(h * 0.75);
-                                    mockPadding = Math.floor(mockPadding * 0.75);
-                                    wpos = "top=0,left=0";
-                                }
-                                var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
-                                var frame = "";
-                                if (mockFrame) {
-                                    wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
-                                    frame = "?mockFrame=" + mockFrame;
-                                }
-                                if (!win || win.closed) {
-                                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
-                                    if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                                    else win.document.body.style.backgroundColor = "black";
-                                }
-                                _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                                    if (error) {
-                                        window.debug.log(error);
-                                    }
-                                    else {
-                                        window.debug.log("open window");
-                                        win.location.href = uri + frame;
-                                    }
-    
-                                });
-                            }
-                            catch (e) {
-                                console.error("error:" + e);
-                            }
-                        }
-                        
-                    }
-                );
+        catch (e) {
+            console.error("error:" + e);
+        }
+        window.debug.log("\n");
+    }
+    else if (filename.endsWith(".py")) {
+        try {
+            window.debug.log(myLogin + "$ python " + filename)
+            Sk.pre = "output";
+            Sk.configure({
+                output: consolelog, read: builtinRead
             });
-
-            window.debug.log("\n");
+            var myPromise = Sk.misceval.asyncToPromise(function () {
+                return Sk.importMainWithBody("<stdin>", false, window.editor.getValue(), true);
+            });
+            window.debug.log("$");
         }
-        else if (filename.endsWith(".mjs")) {
-            window.debug.log(myLogin + "$ launch webApp " + filename + "\n");
-            try {
-                var code=window.editor.getValue();
-                var result = createHtml(code);
-                var splashBackgroundColor=result.splashBackgroundColor;
-                var splash=result.splash;
-                var mockFrame=result.mockFrame;
-                var rootHTML=result.rootHTML;
-
-                var _module = window.document.createElement("script");
-                _module.setAttribute("type", "module");
-                _module.text = "\n" + window.editor.getValue() + "\n";
-                rootHTML.querySelector("head").appendChild(_module);
-                var wpos = "top=50,left=50";
-                var w = 375;
-                var h = 896 * 375 / 414; //iphoneX=896/414
-                var mockPadding = 40;
-                if (screen.height <= 768) {
-                    w = Math.floor(w * 0.75);
-                    h = Math.floor(h * 0.75);
-                    mockPadding = Math.floor(mockPadding * 0.75);
-                    wpos = "top=0,left=0";
-                }
-                var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
-                var frame = "";
-                if (mockFrame) {
-                    wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
-                    frame = "?mockFrame=" + mockFrame;
-                }
-                if (!win || win.closed) {
-                    win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
-                    if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                    else win.document.body.style.backgroundColor = "black";
-                }
-                _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                    if (error) {
-                        window.debug.log(error);
-                    }
-                    else {
-                        window.debug.log("open window");
-                        win.location.href = uri + frame;
-                    }
-
-                });
-            }
-            catch (e) {
-                console.error("error:" + e);
-            }
-            window.debug.log("\n");
+        catch (e) {
+            console.error(e);
         }
-        else if (filename.endsWith(".py")) {
-            try {
-                window.debug.log(myLogin + "$ python " + filename)
-                Sk.pre = "output";
-                Sk.configure({
-                    output: consolelog, read: builtinRead
-                });
-                var myPromise = Sk.misceval.asyncToPromise(function () {
-                    return Sk.importMainWithBody("<stdin>", false, window.editor.getValue(), true);
-                });
-                window.debug.log("$");
-            }
-            catch (e) {
-                console.error(e);
-            }
-        }
+    }
 }
 
 function _uploadFile(params, callback) {
@@ -421,21 +436,21 @@ function consolelog(x) {
 
 
 
-window.setEditorMode=function() {
+window.setEditorMode = function () {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 8 }});
+        window.editor.setOption('lint', { options: { esversion: 8 } });
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 8 }});
+        window.editor.setOption('lint', { options: { esversion: 8 } });
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", { name: "javascript", typescript: true });
         window.editor.setOption('lint', false);
 
-        
+
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
@@ -491,14 +506,14 @@ window.addEventListener('resize', function (event) {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    
+
     //configure editor
 
 
 
     var theme = "material-darker2";
     window.editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
-        value:"/* NONE */",
+        value: "/* NONE */",
         lineNumbers: true,
         theme: theme,
         matchBrackets: true,
@@ -516,22 +531,21 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme'); });
 
 
-    
+
 
     //get last filename
 
     var lastFileName = localStorage.getItem("lastFileName");
     if (lastFileName) {
         document.getElementById("filename").innerText = lastFileName;
-        try{
+        try {
 
-            window.editor.setValue(load(lastFileName,true));
+            window.editor.setValue(load(lastFileName, true));
             window.setEditorMode();
         }
-        catch(e)
-        {
+        catch (e) {
             console.log(lastFileName);
-            console.log(load(lastFileName,true));
+            console.log(load(lastFileName, true));
             console.log(e);
         }
     }
@@ -611,9 +625,8 @@ document.addEventListener("DOMContentLoaded", function () {
             panel.style.width = window.leftPageWidth + "px";
             panelMiddle.style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
         }
-        else{
-            if(document.getElementById("pageLeftToolbar").style.display != "none")
-            {
+        else {
+            if (document.getElementById("pageLeftToolbar").style.display != "none") {
                 document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
                 document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
             }
