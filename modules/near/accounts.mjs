@@ -17,6 +17,27 @@ export function addkey(config) {
     });
 }
 
+export function contract(config) {
+    return new Promise((resolve, reject) => {
+        getNearApi.then(({ nearApi }) => {
+            const nearCfg = nearConfig(nearApi);
+            const near = new nearApi.Near(nearCfg);
+            const account = new nearApi.Account(near.connection, config.accountId);
+            var ct = {};
+            config.methods.forEach(e => {
+                var m={};
+                if(typeof e == "string") {m ={method:(e.sunstring(0,1=="*"))?e.substring(1):e, type:(e.sunstring(0,1=="*"))?"viewMethods":"changeMethods"};}
+                if(typeof e == "object" && e.type && e.method) {m ={method:e.method, type=e.type};}
+                else {m = e};
+                ct[e.type] = ct[e.type] || [];
+                ct[e.type].push(e.method);
+            });
+            const mycontract = new nearApi.Contract(account, config.contractId, ct);
+            resolve(mycontract);
+        });
+    });
+}
+
 export async function remove(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
