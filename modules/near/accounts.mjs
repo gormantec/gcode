@@ -26,11 +26,17 @@ export function contract(config) {
             var ct = {};
             config.methods.forEach(e => {
                 var m={};
+                console.log(typeof e);
                 if(typeof e == "string") {m ={method:(e.substring(0,1=="*"))?e.substring(1):e, type:(e.substring(0,1=="*"))?"viewMethods":"changeMethods"};}
                 if(typeof e == "object" && e.type && e.method) {m ={method:e.method, type:e.type};}
                 else {m = e};
-                ct[e.type] = ct[e.type] || [];
-                ct[e.type].push(e.method);
+
+                if(m.type && m.method)
+                {
+                    ct[m.type] = ct[m.type] || [];
+                    ct[m.type].push(m.method);
+                }
+
             });
             console.log({account:account, contractId:config.contractId, ContractMethods:ct});
             const mycontract = new nearApi.Contract(account, config.contractId, ct);
