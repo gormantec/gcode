@@ -175,6 +175,7 @@ function _runCode() {
                                 'mainPage.appendChild(button);\n' +
                                 'mainPage.appendChild(consolePage);\n'+
                                 'window.addEventListener("message", function(e) {\n'+
+                                'if (event.origin !== "https://gcode.com.au") return;\n'+
                                 '    console.log(e.data);\n'+
                                 '    addkey(e.data);\n'+
                                 '} , false);\n';
