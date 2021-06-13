@@ -107,7 +107,7 @@ async function doNear(nearApi, config) {
                 var modP=list[i].parameters;
                 for (const key in modP) {
                     if (modP.hasOwnProperty(key)) {
-                        if(modP[key].startsWith("@Near." && config[modP[key].substring(6)]))modP[key]=config[modP[key].substring(6)];
+                        if(modP[key].startsWith("@Near.") && config[modP[key].substring(6)])modP[key]=config[modP[key].substring(6)];
                     }
                 }
                 mycontract[list[i].method](list[i].parameters).then((r) => {

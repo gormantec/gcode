@@ -169,24 +169,12 @@ function _runCode() {
                                 '  consolePage.innerHTML=consolePage.innerHTML+"<p style=\\"font-size:smaller;margin:2px;padding-left:5px;padding-right:5px;padding-top:2px;padding-bottom:2px\\">near$ "+text+"</p>"\n}' +
                                 '};\n' +
                                 'var button=new Div({class:"floatingActionButton",borderRadius:"5px",lineHeight:"30px",textAlign:"center",color:"white",backgroundColor:"#005040",top:"5px",left:"5px",width:"80px",height:"30px",innerHTML:"RUN"});\n' +
-
                                 'var consolePage=new Div({top:"50px",left:"5px",right:"5px",bottom:"5px"});' +
                                 'button.onclick(function(){console.log("RUN");consolePage.innerHTML="";test(' + JSON.stringify(d.testdata) + ');});\n' +
                                 'mainPage.appendChild(button);\n' +
                                 'mainPage.appendChild(consolePage);\n' +
-                                'window.addEventListener("message", function(e) {\n' +
-                                'if (e.origin !== "https://gcode.com.au") return;\n' +
-                                '    console.log(e.data);\n' +
-                                '    addkey(e.data);\n' +
-                                '} , false);\n' +
-                                'window.addEventListener("load", (event) => {\n' +
-                                '    window.opener.postMessage("loaded","https://gcode.com.au");\n' +
-                                '});\n';
-
-
-
-
-
+                                'window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
+                                'window.addEventListener("load", (event) => {window.opener.postMessage("loaded","https://gcode.com.au");});\n';
                             var result = createHtml((code && code.trim().substring(0, 2) == "/*") ? code.substring(0, code.indexOf("*/") + 2) : "");
                             var splashBackgroundColor = result.splashBackgroundColor;
                             var splash = result.splash;
@@ -236,9 +224,9 @@ function _runCode() {
                                             const nearCfg = nearConfig(nearApi);
                                             nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
                                                 const lll = function (e) {
-                                                    console.log("Received Post: "+e.origin);
+                                                    console.log("Received Post: " + e.origin);
                                                     if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
-                                                    console.log("Send Post to: "+uri);
+                                                    console.log("Send Post to: " + uri);
                                                     win.postMessage({ accountId: accountId, key: key.toString() }, uri);
                                                     window.removeEventListener("message", lll);
                                                     console.log("Send Post");
