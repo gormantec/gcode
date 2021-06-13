@@ -51,6 +51,7 @@ export async function compile(config) {
                             }).then(function (response) {
                                 return response.json();
                             }).then(function (data) {
+                                console.log(data);
                                 resolve({ content: content, response: data });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
                             /*
