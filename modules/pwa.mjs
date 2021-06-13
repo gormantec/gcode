@@ -36,7 +36,7 @@ class PWA {
             this.pwaRoot.appendChild(this.alertDialog);
             const _this=this;
             this.alertDialog.onclick(function () {
-                _this.alertDialog.close();
+                _this.alertDialog.element.close();
             });
         }
         this.alertDialog.innerHTML="<p>"+message+"</p>";
