@@ -112,7 +112,7 @@ async function doNear(nearApi, config) {
                         if(modP[key].startsWith("@Near.") && config[modP[key].substring(6)])modP[key]=config[modP[key].substring(6)];
                     }
                 }
-                mycontract[list[i].method](list[i].parameters).then((r) => {
+                mycontract[list[i].method](modP).then((r) => {
                     console.log("loop: " + i);
                     if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
                     if ((i + 1) < list.length) doLoop(i + 1);
