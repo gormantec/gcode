@@ -18,16 +18,23 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             document.querySelector("#nearDialogTimer").showModal();
             document.querySelector("#nearDialogTimerValue").style.width="5%";
             setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="10%";},4000);
-            setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="15%";},4000);
+            setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="15%";},8000);
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="20%";},10000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="25%";},15000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="30%";},20000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="35%";},25000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="40%";},30000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="45%";},35000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="50%";},40000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="55%";},45000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="60%";},50000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="65%";},55000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="70%";},60000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="75%";},65000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="80%";},70000);
+                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="85%";},75000);
                 setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="90%";},80000);
                 compile({
                     accountId:accountId,
