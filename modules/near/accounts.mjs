@@ -103,14 +103,14 @@ export async function login(config) {
                             setTimeout(() => {
                                 account.addKey(masterKey).then((x) => {
                                     console.log("Added gcode.testnet key!");
-                                    config.code = 201;
-                                    config.message = "created";
-                                    resolve(config);
                                 }).catch(e => {
                                     console.log("Error:: adding gcode.testnet key!");
                                     reject({ code: 500, error: "004:" + e });
                                 });
                             }, 5000);
+                            config.code = 201;
+                            config.message = "created";
+                            resolve(config);
 
                         }).catch(e => reject({ code: 500, error: "005:" + e }));
                     }

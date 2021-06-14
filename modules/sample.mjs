@@ -48,8 +48,8 @@ window.setTimeout(function () {
   const myID = "gcode-0000000000000.testnet";
   const targetContract = "home.gormantec.testnet";
   const errors=(e)=>{aPWA.alert("<u><b>Error</b></u><p>"+e+"</p>");};
+  aPWA.alert("<u><b>Logged into NEAR testnet</b>");
   login({ accountId: myID, contractId: targetContract }).then((config) => {
-    aPWA.alert("<u><b>Logged into NEAR testnet</b>");
     config.methods = ["*getGreeting", "setGreeting"];
     contract(config).then((ct) => {
       aPWA.alert("<u><b>Got DAPP Contract</b>");
