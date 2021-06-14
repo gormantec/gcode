@@ -27,7 +27,11 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
     setAlert(message) {
-        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog", innerHTML: "" });
+        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog" });
+        this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "" });
+        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK" });
+        this.alertDialog.appendChild(this.alertDialogContent);
+        this.alertDialog.appendChild(this.alertDialogOK);
         this.alertDialog.style.backgroundColor = this.primaryColor;
         this.alertDialog.style.color = this.primaryColorText;
         this.pwaRoot.appendChild(this.alertDialog);
@@ -37,7 +41,7 @@ class PWA {
         });
     }
     alert(message) {
-        this.alertDialog.innerHTML = "<p>" + message + "</p>";
+        this.alertDialog.alertDialogContent = "<p>" + message + "</p>";
         this.alertDialog.showModal();
     }
 
