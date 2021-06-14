@@ -29,7 +29,7 @@ class PWA {
     setAlert(message) {
         this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog",backgroundColor:"white" });
         this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "" });
-        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"30px" });
+        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"30px",color:this.primaryColor });
         this.alertDialog.appendChild(this.alertDialogContent);
         this.alertDialog.appendChild(this.alertDialogOK);
         this.pwaRoot.appendChild(this.alertDialog);
