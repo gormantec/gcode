@@ -111,6 +111,12 @@ div.pwapage div.pwadiv{
     background-color: var(--primaryColor);
     color: var(--primaryColorText);
 }
+#alertDialogOK{
+    float:right;
+    margin-bottom:0px;
+    right:5px;
+    bottom:5px;
+}
 
 .floatingActionButton{
     position: absolute;
