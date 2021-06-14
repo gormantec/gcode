@@ -43,9 +43,9 @@ window.setTimeout(function () {
   login({ accountId: myID, contractId: "hello.gormantec.testnet" }).then((config) => {
     config.methods = ["*getGreeting", "setGreeting"];
     contract(config).then((ct) => {
-      ct.setGreeting({ "message": "I set this at "+(new Date()).toString() }).then((response) => {
+      ct.setGreeting({ "message": "I set this at "+(new Date()).toTimeString().sunstring(0,8) }).then((response) => {
         ct.getGreeting({ "accountId": myID }).then((response) => {
-          aPWA.alert("Message from hello.gormantec.near was:<br>"+response);
+          aPWA.alert("Message from DAPP was:<br>"+response);
         });
       });
     });
