@@ -342,13 +342,13 @@ class Div {
         }
         if (params && params.width) {
             this.element.style.width = params.width;
-            if (!params.right) this.element.style.removeProperty("right");
-            if (!params.left) this.element.style.removeProperty("left");
+            if (!params.right) this.element.style.right="";
+            if (!params.left) this.element.style.left="";
         }
         if (params && params.height) {
             this.element.style.height = params.height;
-            if (!params.top) this.element.style.removeProperty("top");
-            if (!params.bottom) this.element.style.removeProperty("bottom");
+            if (!params.top) this.element.style.top="";
+            if (!params.bottom) this.element.style.bottom="";
         }
         if (params && params.backgroundColor) this.element.style.backgroundColor = params.backgroundColor;
         if (params && params.backgroundPosition) this.element.style.backgroundPosition = params.backgroundPosition;
