@@ -37,6 +37,8 @@ class PWA {
         });
     }
     alert(message) {
+        console.log(this.alertDialog.element);
+        console.log(this.alertDialog.element.tagName);
         this.alertDialog.innerHTML = "<p>" + message + "</p>";
         this.alertDialog.showModal();
     }
@@ -363,11 +365,13 @@ class Div {
 
     }
     showModal() {
+        console.log(this.element.tagName);
         if (this.element.tagName.toLowerCase == "dialog") {
             this.element.showModal();
         }
     }
     close() {
+        console.log(this.element.tagName);
         if (this.element.tagName.toLowerCase == "dialog") {
             this.element.close();
         }
