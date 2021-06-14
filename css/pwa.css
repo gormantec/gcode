@@ -126,6 +126,8 @@ div.pwapage div.pwadiv{
     margin-bottom:0px;
     right:5px;
     bottom:5px;
+    background-color: white;
+    color: #00000099;
 }
 
 .floatingActionButton{
