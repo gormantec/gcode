@@ -98,8 +98,8 @@ export async function login(config) {
                         var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
                         nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
                         near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((naccount) => {
+                            console.log(naccount);
                             console.log("Created account: " + naccount.accountId);
-
                             setTimeout(() => {
                                 account.addKey(masterKey).then((x) => {
                                     console.log("Added gcode.testnet key!");
