@@ -40,7 +40,9 @@ window.setTimeout(function () {
 window.setTimeout(function () {
   /* example backend dApp calling hello.gormantec.testnet */
   const myID = "gcode-ec45c15fa75.testnet";
-  login({ accountId: myID, contractId: "hello.gormantec.testnet" }).then((config) => {
+  const targetContract = "home.gormantec.testnet";
+  const errors=(e)=>{aPWA.alert("<u><b>Error</b></u><p>"+e+"</p>");};
+  login({ accountId: myID, contractId: targetContract }).then((config) => {
     aPWA.alert("<u><b>Logged into NEAR testnet</b>");
     config.methods = ["*getGreeting", "setGreeting"];
     contract(config).then((ct) => {
@@ -49,8 +51,8 @@ window.setTimeout(function () {
         aPWA.alert("<u><b>DAPP message value set</b>");
         ct.getGreeting({ "accountId": myID }).then((response) => {
           aPWA.alert("<u><b>Message from DAPP was</b></u><p>"+response+"</p>");
-        });
-      });
-    });
+        }).catch(errors);
+      }).catch(errors);
+    }).catch(errors);
   });
 }, 2000);
