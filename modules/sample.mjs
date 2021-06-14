@@ -39,15 +39,18 @@ window.setTimeout(function () {
 
 window.setTimeout(function () {
   /* example backend dApp calling hello.gormantec.testnet */
-  const myID = "gcode-00000000000000.testnet";
+  const myID = "gcode-ec45c15fa75.testnet";
   login({ accountId: myID, contractId: "hello.gormantec.testnet" }).then((config) => {
+    aPWA.alert("<u><b>Logged into NEAR testnet</b>");
     config.methods = ["*getGreeting", "setGreeting"];
     contract(config).then((ct) => {
+      aPWA.alert("<u><b>Got DAPP Contract</b>");
       ct.setGreeting({ "message": "I set this at "+(new Date()).toTimeString().substring(0,8) }).then((response) => {
+        aPWA.alert("<u><b>DAPP message value set</b>");
         ct.getGreeting({ "accountId": myID }).then((response) => {
-          aPWA.alert("Message from DAPP was:<br>"+response);
+          aPWA.alert("<u><b>Message from DAPP was</b></u><p>"+response+"</p>");
         });
       });
     });
   });
-}, 3000);
+}, 2000);
