@@ -441,11 +441,11 @@ window.setEditorMode = function () {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 8 } });
+        window.editor.setOption('lint', { options: { esversion: 6 } });
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 8 } });
+        window.editor.setOption('lint', { options: { esversion: 6 } });
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", { name: "javascript", typescript: true });
@@ -525,7 +525,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         foldGutter: true,
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        lint: { esversion: 8 }
+        lint: { esversion: 6 }
     });
 
     Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });

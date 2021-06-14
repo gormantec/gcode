@@ -37,8 +37,6 @@ class PWA {
         });
     }
     alert(message) {
-        console.log(this.alertDialog.element);
-        console.log(this.alertDialog.element.tagName);
         this.alertDialog.innerHTML = "<p>" + message + "</p>";
         this.alertDialog.showModal();
     }
@@ -365,18 +363,12 @@ class Div {
 
     }
     showModal() {
-        console.log(this.element);
-        console.log(this.element.tagName);
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
-            console.log("showModal");
             this.element.showModal();
         }
     }
     close() {
-        console.log(this.element);
-        console.log(this.element.tagName);
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
-            console.log("close");
             this.element.close();
         }
     }
