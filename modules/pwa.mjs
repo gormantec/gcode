@@ -1,7 +1,7 @@
-window.PWA=window.PWA || {};
-window.PWA.globals=window.PWA.globals || {};
+window.PWA = window.PWA || {};
+window.PWA.globals = window.PWA.globals || {};
 
-var debug = debug || { log:function(v){console.log(v);} }; 
+var debug = debug || { log: function (v) { console.log(v); } };
 
 class PWA {
     constructor(params) {
@@ -19,28 +19,26 @@ class PWA {
         this.pwaOverlay = new Div({ id: "pwaoverlay" });
         this.setHeader();
         this.setBody();
+        this.setAlert();
         this.setFooter();
         this.setFloatingActionButton();
         var _this = this;
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
-
-    alert(message)
-    {
-        if (!this.alertDialog)
-        {
-            this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog", innerHTML: ""});
-            this.alertDialog.style.backgroundColor = this.primaryColor;
-            this.alertDialog.style.color = this.primaryColorText;
-            this.pwaRoot.appendChild(this.alertDialog);
-            const _this=this;
-            this.alertDialog.onclick(function () {
-                _this.alertDialog.element.close();
-            });
-        }
-        this.alertDialog.innerHTML="<p>"+message+"</p>";
-        this.alertDialog.element.showModal();
+    setAlert(message) {
+        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog", innerHTML: "" });
+        this.alertDialog.style.backgroundColor = this.primaryColor;
+        this.alertDialog.style.color = this.primaryColorText;
+        this.pwaRoot.appendChild(this.alertDialog);
+        const _thisAlertDialog = this.alertDialog;
+        this.alertDialog.onclick(function () {
+            _thisAlertDialog.close();
+        });
+    }
+    alert(message) {
+        this.alertDialog.innerHTML = "<p>" + message + "</p>";
+        this.alertDialog.showModal();
     }
 
     setNavigateBackPage(navigateBackPage) {
@@ -79,7 +77,7 @@ class PWA {
             child: new Div({
                 tagName: "i",
                 class: "material-icons",
-                classNameOverride:true,
+                classNameOverride: true,
                 innerText: "keyboard_arrow_left"
             })
         });
@@ -149,27 +147,27 @@ class PWA {
         var _meta = targetDocument.createElement("meta");
         _meta.setAttribute("name", name);
         _meta.setAttribute("content", content);
-        if(!targetDocument.querySelector('meta[name="'+name+'"]')){
-            var linkStyleOrScript=targetDocument.querySelector("head link");
-            if(linkStyleOrScript) linkStyleOrScript=targetDocument.querySelector("head style");
-            if(linkStyleOrScript) linkStyleOrScript=targetDocument.querySelector("head script");
-            targetDocument.head.insertBefore(_meta,linkStyleOrScript);
+        if (!targetDocument.querySelector('meta[name="' + name + '"]')) {
+            var linkStyleOrScript = targetDocument.querySelector("head link");
+            if (linkStyleOrScript) linkStyleOrScript = targetDocument.querySelector("head style");
+            if (linkStyleOrScript) linkStyleOrScript = targetDocument.querySelector("head script");
+            targetDocument.head.insertBefore(_meta, linkStyleOrScript);
         }
     }
     addLink(targetDocument, rel, href) {
         var _meta = targetDocument.createElement("link");
         _meta.setAttribute("rel", rel);
         _meta.setAttribute("href", href);
-        var styleOrScript=targetDocument.querySelector("head style");
-        if(styleOrScript) styleOrScript=targetDocument.querySelector("head script");
-        targetDocument.head.insertBefore(_meta,styleOrScript);
+        var styleOrScript = targetDocument.querySelector("head style");
+        if (styleOrScript) styleOrScript = targetDocument.querySelector("head script");
+        targetDocument.head.insertBefore(_meta, styleOrScript);
     }
     addStyle(targetDocument, href, callback) {
         var _style = targetDocument.createElement("link");
         _style.setAttribute("rel", "stylesheet");
         _style.setAttribute("href", href);
         if (callback) _style.onload = function () { callback(); }
-        targetDocument.head.insertBefore(_style,targetDocument.querySelector("head script"));
+        targetDocument.head.insertBefore(_style, targetDocument.querySelector("head script"));
     }
 
     addModule(targetDocument, href) {
@@ -192,21 +190,21 @@ class PWA {
 
     show(win) {
 
-        var msec=(new Date()).getTime();
+        var msec = (new Date()).getTime();
         win = win || window;
         const urlParams = new URLSearchParams(win.location.search);
-        var mockFrame=urlParams.get("mockFrame");
-        var rootWindow=win.document.body;
-        var aPWA=this;
-        if( mockFrame && !( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) ) {
-            (async () => {try{rootWindow=(await import('/modules/'+mockFrame+'.mjs')).addFrame(win,aPWA, mockFrame);}catch(e){debug.log(e);}})();
+        var mockFrame = urlParams.get("mockFrame");
+        var rootWindow = win.document.body;
+        var aPWA = this;
+        if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+            (async () => { try { rootWindow = (await import('/modules/' + mockFrame + '.mjs')).addFrame(win, aPWA, mockFrame); } catch (e) { debug.log(e); } })();
         }
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
-        win.document.head.insertBefore(_title,win.document.head.firstChild);
-        if(!window.PWA.globals.splashColor) rootWindow.style.backgroundColor = this.primaryColor;
-        if(!window.PWA.globals.splashColor) rootWindow.style.color = this.primaryColorText;
-        if(window.PWA.globals.icon180x180 && !this.icon180x180) this.icon180x180=window.PWA.globals.icon180x180;
+        win.document.head.insertBefore(_title, win.document.head.firstChild);
+        if (!window.PWA.globals.splashColor) rootWindow.style.backgroundColor = this.primaryColor;
+        if (!window.PWA.globals.splashColor) rootWindow.style.color = this.primaryColorText;
+        if (window.PWA.globals.icon180x180 && !this.icon180x180) this.icon180x180 = window.PWA.globals.icon180x180;
         rootWindow.style.color = this.primaryColorText;
         this.addMeta(win.document, "mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-touch-fullscreen", "yes");
@@ -216,16 +214,16 @@ class PWA {
         this.addMeta(win.document, "viewport", "viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
         this.addMeta(win.document, "theme-color", this.primaryColor);
-        
+
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://gcode.com.au/css/pwa.css", function () {
-                debug.log("splashDuration:"+window.PWA.globals.splashDuration);
-                if(window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
-                else if(!_this.splashDuration) _this.splashDuration=2000;
-                var timeoutMs=_this.splashDuration-((new Date()).getTime()-msec);
-                debug.log("timeoutMs:"+timeoutMs);
-                if(timeoutMs<0)timeoutMs=10;
+                debug.log("splashDuration:" + window.PWA.globals.splashDuration);
+                if (window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
+                else if (!_this.splashDuration) _this.splashDuration = 2000;
+                var timeoutMs = _this.splashDuration - ((new Date()).getTime() - msec);
+                debug.log("timeoutMs:" + timeoutMs);
+                if (timeoutMs < 0) timeoutMs = 10;
                 setTimeout(function () {
                     while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
                     rootWindow.style.backgroundColor = this.primaryColor;
@@ -282,10 +280,10 @@ class Div {
 
     constructor(params) {
         var tagName = "div";
-        
+
         if (params && params.tagName) tagName = params.tagName;
         this.element = document.createElement(tagName);
-        if(params && !params.classNameOverride)this.element.className = "pwadiv";
+        if (params && !params.classNameOverride) this.element.className = "pwadiv";
         if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.innerText) {
             debug.log("innerText:" + params.innerText);
@@ -322,7 +320,7 @@ class Div {
         else if (params instanceof HTMLElement) this.element.appendChild(params);
         else if (params instanceof String) this.element.innerHTML = params;
         if (params && params.id) this.element.id = params.id;
-        if (params && params.class) this.element.className = (this.element.className + " "+params.class).trim();
+        if (params && params.class) this.element.className = (this.element.className + " " + params.class).trim();
         if (params && params.color) this.element.style.color = params.color;
         if (params && params.top) this.element.style.top = params.top;
         if (params && params.bottom) this.element.style.bottom = params.bottom;
@@ -355,7 +353,7 @@ class Div {
         if (params && params.backgroundSize) this.element.style.backgroundSize = params.backgroundSize;
 
 
-        
+
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
@@ -363,6 +361,16 @@ class Div {
             this.element.onclick = afunc;
         }
 
+    }
+    showModal() {
+        if (this.element.tagName.toLowerCase == "dialog") {
+            this.element.showModal();
+        }
+    }
+    close() {
+        if (this.element.tagName.toLowerCase == "dialog") {
+            this.element.close();
+        }
     }
 
     htmlToElement(html) {
@@ -421,14 +429,12 @@ class Div {
         return this.element.style;
     }
 
-    get innerHTML()
-    {
+    get innerHTML() {
         return this.element.innerHTML;
     }
 
-    set innerHTML(htmlString)
-    {
-        this.element.innerHTML=htmlString;
+    set innerHTML(htmlString) {
+        this.element.innerHTML = htmlString;
     }
 }
 
