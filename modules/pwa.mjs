@@ -41,7 +41,7 @@ class PWA {
         });
     }
     alert(message) {
-        this.alertDialog.alertDialogContent = "<p>" + message + "</p>";
+        this.alertDialogContent = "<p>" + message + "</p>";
         this.alertDialog.showModal();
     }
 
