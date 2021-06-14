@@ -38,10 +38,10 @@ window.setTimeout(function () {
 }, 1000);
 
 /** 
- * Delete this is you are not building a DAPP
- * This is an example of calling a DAPP on the NEAR blockchain. You required an ID on the blockchain,
- * the below generates you one. If you signup to NEAR and want to use your own, just replease the myID 
- * account ID below.
+ * <h2>Delete everything below here if you are not building a DAPP</h2>
+ * This is an example of calling a DAPP on the NEAR testnet. You required an ID on the blockchain,
+ * the below generates one for you. If you signup to NEAR and want to use your own, just replease
+ * the myID account ID below.
  */
 window.setTimeout(function () {
   /* example backend dApp calling hello.gormantec.testnet */
