@@ -118,14 +118,14 @@ div.pwapage div.pwadiv{
     margin-bottom:0px;
     right:5px;
     bottom:5px;
+    margin-bottom:0px;
+    right:5px;
+    bottom:5px;
 }
 
 #alertDialogContent{
     position: relative;
     float:right;
-    margin-bottom:0px;
-    right:5px;
-    bottom:5px;
     background-color: white;
     color: #00000099;
 }
