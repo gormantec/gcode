@@ -46,15 +46,15 @@ window.setTimeout(function () {
 window.setTimeout(function () {
   /* example backend dApp calling hello.gormantec.testnet */
   const myID = "gcode-0000000000000.testnet";
-  const targetContract = "home.gormantec.testnet";
+  const targetContract = "hello.gormantec.testnet";
   const errors=(e)=>{aPWA.alert("<u><b>Error</b></u><p>"+e+"</p>");};
-  aPWA.alert("<u><b>Logged into NEAR testnet</b>");
+  aPWA.alert("<u><b>NEAR testnet</b><p><i>Logginging in......</i></p>");
   login({ accountId: myID, contractId: targetContract }).then((config) => {
     config.methods = ["*getGreeting", "setGreeting"];
     contract(config).then((ct) => {
-      aPWA.alert("<u><b>Got DAPP Contract</b>");
+      aPWA.alert("<u><b>NEAR testnet</b><p>Got DAPP Contract.</p>");
       ct.setGreeting({ "message": "I set this at "+(new Date()).toTimeString().substring(0,8) }).then((response) => {
-        aPWA.alert("<u><b>DAPP message value set</b>");
+        aPWA.alert("<u><b>NEAR testnet</b><p>Set message on DAPP</p>");
         ct.getGreeting({ "accountId": myID }).then((response) => {
           aPWA.alert("<u><b>Message from DAPP was</b></u><p>"+response+"</p>");
         }).catch(errors);
