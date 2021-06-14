@@ -27,9 +27,9 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
     setAlert(message) {
-        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog",backgroundColor:"white" });
-        this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "" });
-        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"30px",color:this.primaryColor });
+        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog",backgroundColor:this.primaryColorText });
+        this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "",backgroundColor:this.primaryColorText,color:"black" });
+        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"30px",color:this.primaryColor,backgroundColor:this.primaryColorText });
         this.alertDialog.appendChild(this.alertDialogContent);
         this.alertDialog.appendChild(this.alertDialogOK);
         this.pwaRoot.appendChild(this.alertDialog);
