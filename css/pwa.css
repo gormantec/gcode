@@ -118,8 +118,8 @@ div.pwapage div.pwadiv{
     width: 30px;
     padding: 5px;
     margin:0px;
-    background-color: var(--primaryColor);
-    color: var(--primaryColorText);
+    background-color: white;
+    color: #00000099;
     border-radius: 20px;
     top: unset;
     left:unset;
