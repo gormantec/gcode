@@ -367,7 +367,7 @@ class Div {
     showModal() {
         console.log(this.element);
         console.log(this.element.tagName);
-        if (this.element.tagName.toUpperCase == "DIALOG") {
+        if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
             console.log("showModal");
             this.element.showModal();
         }
@@ -375,7 +375,7 @@ class Div {
     close() {
         console.log(this.element);
         console.log(this.element.tagName);
-        if (this.element.tagName.toUpperCase == "DIALOG") {
+        if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
             console.log("close");
             this.element.close();
         }
