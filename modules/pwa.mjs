@@ -367,14 +367,16 @@ class Div {
     showModal() {
         console.log(this.element);
         console.log(this.element.tagName);
-        if (this.element.tagName.toLowerCase == "dialog") {
+        if (this.element.tagName.toUpperCase == "DIALOG") {
+            console.log("showModal");
             this.element.showModal();
         }
     }
     close() {
         console.log(this.element);
         console.log(this.element.tagName);
-        if (this.element.tagName.toLowerCase == "dialog") {
+        if (this.element.tagName.toUpperCase == "DIALOG") {
+            console.log("close");
             this.element.close();
         }
     }
