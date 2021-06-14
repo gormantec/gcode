@@ -109,8 +109,8 @@ div.pwapage div.pwadiv{
     overflow: hidden;
     pointer-events: none;
     border-radius: 10px;
-    background-color: var(--primaryColor);
-    color: var(--primaryColorText);
+    background-color: white;
+    color: #00000099;
 }
 #alertDialogOK{
     position: relative;
@@ -134,8 +134,8 @@ div.pwapage div.pwadiv{
     width: 30px;
     padding: 5px;
     margin:0px;
-    background-color: white;
-    color: #00000099;
+    background-color: var(--primaryColor);
+    color: var(--primaryColorText);
     border-radius: 20px;
     top: unset;
     left:unset;
