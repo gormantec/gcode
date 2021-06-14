@@ -39,7 +39,7 @@ window.setTimeout(function () {
 
 window.setTimeout(function () {
   /* example backend dApp calling hello.gormantec.testnet */
-  const myID = "gcode-ec45c15fa75.testnet";
+  const myID = "gcode-0000000000000.testnet";
   const targetContract = "home.gormantec.testnet";
   const errors=(e)=>{aPWA.alert("<u><b>Error</b></u><p>"+e+"</p>");};
   login({ accountId: myID, contractId: targetContract }).then((config) => {
