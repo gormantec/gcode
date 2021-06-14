@@ -1,17 +1,6 @@
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 import { login, contract } from "https://gcode.com.au/modules/near/index.mjs"
 
-/* example backend dApp call */
-login({accountId:"gcode-ec42edf808f.testnet",contractId:"gcode-ec42edf808f.testnet"}).then((config)=>{
-  config.methods=["*getGreeting"];
-  contract(config).then((ct)=>{
-    ct.getGreeting({"accountId": "hello.gormantec.testnet"}).then((response)=>{
-      console.log(response);
-    });
-  });
-});
-
-
 var homePage=new Page({
   color:"white", 
   backgroundColor:"black", 
@@ -45,5 +34,18 @@ aPWA.pwaBody.style.backgroundColor="black";
 
 window.setTimeout(function(){
 	aPWA.setPage(homePage);
+  console.log('PAGE LOADED!');
 },1000);
-console.log('new javascript file!');
+
+window.setTimeout(function(){
+  /* example backend dApp calling code-ec459f19b6a.testnet */
+login({accountId:"gcode-ec44b846bf8.testnet",contractId:"gcode-ec44b846bf8.testnet"}).then((config)=>{
+  config.methods=["*getGreeting"];
+  contract(config).then((ct)=>{
+    ct.getGreeting({"accountId": "gcode-ec44b846bf8.testnet"}).then((response)=>{
+      console.log("response: "+response);
+      aPWA.alert(response+" from NEAR!");
+    });
+  });
+});
+},3000);
