@@ -365,12 +365,14 @@ class Div {
 
     }
     showModal() {
+        console.log(this.element);
         console.log(this.element.tagName);
         if (this.element.tagName.toLowerCase == "dialog") {
             this.element.showModal();
         }
     }
     close() {
+        console.log(this.element);
         console.log(this.element.tagName);
         if (this.element.tagName.toLowerCase == "dialog") {
             this.element.close();
