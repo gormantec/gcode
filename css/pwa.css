@@ -114,6 +114,7 @@ div.pwapage div.pwadiv{
     background-color: white;
     color: #00000099;
     border-width:1px;
+    border-color:var(--primaryColor);
     
 }
 
