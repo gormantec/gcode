@@ -103,7 +103,7 @@ div.pwapage div.pwadiv{
 #alertDialog{
     position: fixed;
     margin-top:150px;
-    padding:5px;
+    padding:2px;
     text-align: center;
     height: 80px;
     width:300px;
@@ -111,10 +111,7 @@ div.pwapage div.pwadiv{
     overflow: hidden;
     pointer-events: none;
     border-radius: 10px;
-    background-color: white;
     color: #00000099;
-    border-width:2px;
-    border-color:var(--primaryColor);
     
 }
 
