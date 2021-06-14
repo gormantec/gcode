@@ -1,5 +1,5 @@
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-import { login, contract } from "https://gcode.com.au/modules/near/index.mjs"
+import { login, contract } from "https://gcode.com.au/modules/near/index.mjs";
 
 var homePage=new Page({
   color:"white", 
