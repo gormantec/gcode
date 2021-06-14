@@ -40,6 +40,7 @@ class PWA {
     }
     alert(message) {
         this.alertDialogContent.innerHTML = "<p>" + message + "</p>";
+        this.alertDialog.close();
         this.alertDialog.showModal();
     }
 
