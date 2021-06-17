@@ -5,7 +5,7 @@ import { Signer, InMemorySigner } from './signer';
  * @param config Contains connection info details
  * @returns {Provider}
  */
-function getProvider(config: any): Provider {
+ function getProvider(config: any): Provider {
     switch (config.type) {
         case undefined:
             return config;
@@ -23,15 +23,12 @@ function getSigner(config: any): Signer {
         case undefined:
             return config;
         case 'InMemorySigner': {
-            return new InMemorySigner(config.keyStore);
+            return new InMemorySigner(config.keyStore); 
         }
         default: throw new Error(`Unknown signer type ${config.type}`);
     }
 }
 
-/**
- * Connects an account to a given network via a given provider
- */
 export class Connection {
     readonly networkId: string;
     readonly provider: Provider;
