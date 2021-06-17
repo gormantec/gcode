@@ -19,6 +19,14 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             document.querySelector("#nearDialogTimerValue").style.width = "5%";
             setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "10%"; }, 4000);
             setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "15%"; }, 8000);
+            var closeTimer=() => {
+                document.querySelector("#nearDialogTimerValue").style.width = "100%";
+                callback(null, {});
+                setTimeout(() => {
+                    document.querySelector("#nearDialogTimer").close();
+                    document.querySelector("#nearDialogTimerValue").style.width = "10%";
+                }, 1000);
+            };
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "20%"; }, 10000);
@@ -46,39 +54,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
-                    test(x.response.testdata).then(() => {
-                        document.querySelector("#nearDialogTimerValue").style.width = "100%";
-                        callback(null, { "dataURL": x.content, testdata: x.response.testdata });
-                        setTimeout(() => {
-                            document.querySelector("#nearDialogTimer").close();
-                            document.querySelector("#nearDialogTimerValue").style.width = "10%";
-                        }, 1000);
-
-                    }).catch(() => {
-                        document.querySelector("#nearDialogTimerValue").style.width = "100%";
-                        callback(null, {});
-                        setTimeout(() => {
-                            document.querySelector("#nearDialogTimer").close();
-                            document.querySelector("#nearDialogTimerValue").style.width = "10%";
-                        }, 1000);
-                    });
-
-                }).catch(() => {
-                    document.querySelector("#nearDialogTimerValue").style.width = "100%";
-                    callback(null, {});
-                    setTimeout(() => {
-                        document.querySelector("#nearDialogTimer").close();
-                        document.querySelector("#nearDialogTimerValue").style.width = "10%";
-                    }, 1000);
-                });
-            }).catch(() => {
-                document.querySelector("#nearDialogTimerValue").style.width = "100%";
-                callback(null, {});
-                setTimeout(() => {
-                    document.querySelector("#nearDialogTimer").close();
-                    document.querySelector("#nearDialogTimerValue").style.width = "10%";
-                }, 1000);
-            });
+                    test(x.response.testdata).then(closeTimer).catch(closeTimer);
+                }).catch(closeTimer);
+            }).catch(closeTimer);
         }
         else {
 
@@ -100,7 +78,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 stdout,
                                 stderr,
                                 readFile(name, baseDir) {
-                                    //console.log("name = " + name + "  baseDir = " + baseDir);
                                     const _fileData = load(name, true);
                                     if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                         return _fileData;
@@ -110,11 +87,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         return sourceCode;
                                     }
                                     else if (name == "asconfig.json" && dapp == true) {
-                                        //console.log("dapp asconfig:" + name);
                                         JSON.stringify({ "extends": "near-sdk-as/asconfig.json" });
                                     }
                                     else if (name == "asconfig.json" && dapp != true) {
-                                        //window.debug.log("got file:" + name);
                                         return JSON.stringify({ "targets": { "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} } });
                                     }
                                     else if (name.startsWith("/node_modules/")) {
@@ -123,7 +98,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         const _fileString = load(_name, true);
 
                                         if (_fileString && _fileString != "NA") {
-                                            //console.log("found:"+_name);
                                             return _fileString;
                                         }
                                         else if (_fileString == "NA") {
@@ -131,7 +105,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         }
                                         else {
                                             downloading++;
-                                            //console.log("fetch: https://gcode.com.au/"+_name);
                                             fetch("https://gcode.com.au/" + _name)
                                                 .then(response => response.ok ? response.text() : null)
                                                 .then(text => {
@@ -139,7 +112,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                         if (!failed) window.setTimeout(_run, 2000);
                                                         failed = true;
                                                         try { save(_name, text); } catch (e) { console.log("Save error: " + e); save(_name, "NA"); }
-                                                        //console.log("added:"+_name);
                                                     }
                                                     else {
                                                         save(_name, "NA");
@@ -155,7 +127,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                                     }
                                     else {
-                                        //console.log("????: "+name);
                                         return null;
                                     }
 
