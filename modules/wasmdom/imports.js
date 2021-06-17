@@ -49,8 +49,8 @@ export function init(window,_fetch,_Response) {
         return _wp;
       },
       getWindowLocationSearch: ()=>{
-        var ptr=_wasm.__retain(_wasm.__newString(window.location.search));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(window.location.search));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;
       },
       getTimezoneOffset: ()=>{
@@ -77,8 +77,8 @@ export function init(window,_fetch,_Response) {
         var e=getObject(parent);
         var n = "";
         if(e && e.nodeName)n=e.nodeName;
-        var ptr=_wasm.__retain(_wasm.__newString(n));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(n));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;
       },
       setTimeout: (guid,duration)=>{
@@ -98,15 +98,15 @@ export function init(window,_fetch,_Response) {
         getObject(parent).innerText = _wasm.__getString(value);
       },
       getInnerText: (e)=>{
-        var ptr=_wasm.__retain(_wasm.__newString(getObject(e).innerText));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(getObject(e).innerText));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;
       },
       getAttribute: (parent, name)=>{
         var st=(getObject(parent).getAttribute(_wasm.__getString(name)));
         if(!st)st="[#WASMDOM:null]";
-        var ptr=_wasm.__retain(_wasm.__newString(st));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(st));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr
       },
       consoleLog: message => {
@@ -116,16 +116,16 @@ export function init(window,_fetch,_Response) {
         getObject(e).innerHTML = _wasm.__getString(st);
       }
       ,getInnerHTML: (e)=>{
-        var ptr=_wasm.__retain(_wasm.__newString(getObject(e).innerHTML));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(getObject(e).innerHTML));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;
       }
       ,setAccessKey: (e,key)=>{
         getObject(e).accessKey = _wasm.__getString(key);
       }
       ,getAccessKey: (e)=>{
-        var ptr=_wasm.__retain(_wasm.__newString(getObject(e).accessKey));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(getObject(e).accessKey));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;
       }
       ,children: (e)=>{
@@ -136,8 +136,8 @@ export function init(window,_fetch,_Response) {
           ar.push(getPointer(c[i]));
         }
 
-        var ptr=_wasm.__retain(_wasm.__newArray(_wasm.Int32Array_ID,ar));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newArray(_wasm.Int32Array_ID,ar));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;//new Float64Array(ar);
       }
       ,querySelector: (e,st)=>{
@@ -179,8 +179,8 @@ export function init(window,_fetch,_Response) {
       }
       ,getStyleProperty: (p,name)=>{
         var pName=_wasm.__getString(name);
-        var ptr=_wasm.__retain(_wasm.__newString(getObject(p).style.getPropertyValue(pName)));
-        //setTimeout(()=>{_wasm.__release(ptr);},10000);
+        var ptr=_wasm.__pin(_wasm.__newString(getObject(p).style.getPropertyValue(pName)));
+        //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
         return ptr;
       },
       getResponseText: (p)=>{
@@ -214,7 +214,7 @@ export function init(window,_fetch,_Response) {
             _wasm.__alertPromise(p,r);
           }
           else {
-            _wasm.__alertPromiseText(p,_wasm.__retain(_wasm.__newString(res.toString())));
+            _wasm.__alertPromiseText(p,_wasm.__pin(_wasm.__newString(res.toString())));
           }
         });
       }
