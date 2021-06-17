@@ -2,9 +2,9 @@
 import { save, load } from '/modules/gcodeStorage.mjs';
 import { compile, login, test } from '/modules/near/index.mjs';
 import { getScript } from '/modules/getScript.mjs';
-import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
+import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
 
-const getRequire=getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
+const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
@@ -12,72 +12,72 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
         if (dapp) {
             var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
             var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-            if(accountId==sourceCode)accountId="";
-            if(contractId==sourceCode)contractId="";
+            if (accountId == sourceCode) accountId = "";
+            if (contractId == sourceCode) contractId = "";
             console.log(accountId);
             document.querySelector("#nearDialogTimer").showModal();
-            document.querySelector("#nearDialogTimerValue").style.width="5%";
-            setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="10%";},4000);
-            setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="15%";},8000);
+            document.querySelector("#nearDialogTimerValue").style.width = "5%";
+            setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "10%"; }, 4000);
+            setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "15%"; }, 8000);
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="20%";},10000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="25%";},15000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="30%";},20000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="35%";},25000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="40%";},30000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="45%";},35000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="50%";},40000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="55%";},45000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="60%";},50000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="65%";},55000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="70%";},60000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="75%";},65000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="80%";},70000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="85%";},75000);
-                setTimeout(()=>{document.querySelector("#nearDialogTimerValue").style.width="90%";},80000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "20%"; }, 10000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "25%"; }, 15000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "30%"; }, 20000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "35%"; }, 25000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "40%"; }, 30000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "45%"; }, 35000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "50%"; }, 40000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "55%"; }, 45000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "60%"; }, 50000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "65%"; }, 55000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "70%"; }, 60000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "75%"; }, 65000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "80%"; }, 70000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "85%"; }, 75000);
+                setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "90%"; }, 80000);
                 compile({
-                    accountId:accountId,
-                    contractId:contractId,
-                    filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
+                    accountId: accountId,
+                    contractId: contractId,
+                    filesArray: [{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
                 }).then((x) => {
 
-                    document.querySelector("#nearDialogTimerValue").style.width="95%";
+                    document.querySelector("#nearDialogTimerValue").style.width = "95%";
                     b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
-                    test(x.response.testdata).then(()=>{
-                        document.querySelector("#nearDialogTimerValue").style.width="100%";
-                        callback(null, { "dataURL": x.content ,testdata:x.response.testdata});
-                        setTimeout(()=>{
+                    test(x.response.testdata).then(() => {
+                        document.querySelector("#nearDialogTimerValue").style.width = "100%";
+                        callback(null, { "dataURL": x.content, testdata: x.response.testdata });
+                        setTimeout(() => {
                             document.querySelector("#nearDialogTimer").close();
-                            document.querySelector("#nearDialogTimerValue").style.width="10%";
-                        },1000);
+                            document.querySelector("#nearDialogTimerValue").style.width = "10%";
+                        }, 1000);
 
-                    }).catch(()=>{
-                        document.querySelector("#nearDialogTimerValue").style.width="100%";
-                        callback(null, { });
-                        setTimeout(()=>{
+                    }).catch(() => {
+                        document.querySelector("#nearDialogTimerValue").style.width = "100%";
+                        callback(null, {});
+                        setTimeout(() => {
                             document.querySelector("#nearDialogTimer").close();
-                            document.querySelector("#nearDialogTimerValue").style.width="10%";
-                        },1000);
+                            document.querySelector("#nearDialogTimerValue").style.width = "10%";
+                        }, 1000);
                     });
 
-                }).catch(()=>{
-                    document.querySelector("#nearDialogTimerValue").style.width="100%";
-                    callback(null, { });
-                    setTimeout(()=>{
+                }).catch(() => {
+                    document.querySelector("#nearDialogTimerValue").style.width = "100%";
+                    callback(null, {});
+                    setTimeout(() => {
                         document.querySelector("#nearDialogTimer").close();
-                        document.querySelector("#nearDialogTimerValue").style.width="10%";
-                    },1000);
+                        document.querySelector("#nearDialogTimerValue").style.width = "10%";
+                    }, 1000);
                 });
-            }).catch(()=>{
-                document.querySelector("#nearDialogTimerValue").style.width="100%";
-                callback(null, { });
-                setTimeout(()=>{
+            }).catch(() => {
+                document.querySelector("#nearDialogTimerValue").style.width = "100%";
+                callback(null, {});
+                setTimeout(() => {
                     document.querySelector("#nearDialogTimer").close();
-                    document.querySelector("#nearDialogTimerValue").style.width="10%";
-                },1000);
+                    document.querySelector("#nearDialogTimerValue").style.width = "10%";
+                }, 1000);
             });
         }
         else {
@@ -88,8 +88,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             var _run = async function () {
                 var failed = false;
                 var downloading = 0;
-                getRequire.then(({require})=>{
-                    require([ "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js" ], ({ asc }) => {
+                getRequire.then(({ require }) => {
+                    require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
                         asc.ready.then(() => {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
@@ -118,10 +118,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         return JSON.stringify({ "targets": { "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} } });
                                     }
                                     else if (name.startsWith("/node_modules/")) {
-    
+
                                         const _name = "dist/" + name.substring(14)
                                         const _fileString = load(_name, true);
-    
+
                                         if (_fileString && _fileString != "NA") {
                                             //console.log("found:"+_name);
                                             return _fileString;
@@ -150,15 +150,15 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 });
                                             return null;
                                         }
-    
+
                                         return null;
-    
+
                                     }
                                     else {
                                         //console.log("????: "+name);
                                         return null;
                                     }
-    
+
                                 },
                                 writeFile(name, data, baseDir) {
                                     console.log("write file: " + name);
@@ -170,10 +170,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             console.log("write load: " + (typeof reader.result));
                                             dataURL = reader.result;
                                         }, false);
-    
-                                        //createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' })); 
+
+                                        createDownload(name,new Blob([Uint8Array.from(data)], { type: 'application/wasm' })); 
                                         dataBlob = new Blob([Uint8Array.from(data)]);
-    
+
                                         reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                                     }
                                 },
@@ -199,10 +199,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             window.debug.log("downloading depenadnt files..");
                                         }
                                         tryCount++;
-    
+
                                     }
                                     else {
-    
+
                                         if (stdout && stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
                                         if (stderr && stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                         if (err) {
@@ -221,44 +221,14 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     setTimeout(waitRead, 500);
                                                 }
                                                 else {
-                                                    //upload(dataURL);
-                                                    //test();
                                                     var b64data = dataURL.substring(dataURL.indexOf(";base64,") + 8);
                                                     var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
                                                     var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-    
-    
-    
-                                                    console.log("login::done");
-                                                    compile({
-                                                        accountId:accountId,
-                                                        contractId:contractId,
-                                                        filesArray:[{ name: "assembly/index.ts", data: sourceCode, type: "string" },
-                                                    { name: "out/webcompileb64.wasm", data: b64data, type: "base64" },
-                                                    { name: "out/webcompileblob.wasm", data: dataBlob, type: "blob" },
-                                                    ]}).then((x) => {
-    
-                                                        b64toBlob(x.content, 'application/zip').then(blob => {
-                                                            createDownload("assembly.zip", blob, { type: 'application/zip' });
-                                                        });
-
-                                                        test(x.response.testdata).then(()=>{
-
-                                                            callback(null, { "dataURL": dataURL });
-
-                                                        });
-    
-    
-                                                        
-    
-                                                    });
-    
-    
-    
+                                                    callback(null, { "dataURL": dataURL ,dataBlob:dataBlob});
                                                 }
                                             };
                                             waitRead();
-    
+
                                         }
                                     }
                                 });
