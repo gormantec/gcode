@@ -33,7 +33,7 @@ export const dialogMetadata = [
                     { "value": ".js", "text": "Commandline - JavaScript", "selected": true },
                     { "value": ".py", "text": "Commandline - Python", "selected": false },
                     { "value": ".mjs", "text": "Mobile App - JavaScript", "selected": false },
-                    //{ "value": ".ts", "text": "Mobile App - AssemblyScript", "selected": false },
+                    { "value": ".ts", "text": "Mobile App - AssemblyScript", "selected": false },
                     { "value": ".dapp.ts", "text": "dApp - AssemblyScript", "selected": false },
                 ]
             },

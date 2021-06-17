@@ -16,6 +16,7 @@ export function addkey(config) {
         }).catch(e => reject({ code: 500, error: "000:" + e }));
     });
 }
+    
 
 export function contract(config) {
     return new Promise((resolve, reject) => {
