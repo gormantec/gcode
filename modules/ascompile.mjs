@@ -203,8 +203,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     }
                                     else {
     
-                                        if (stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                        if (stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                        if (stdout && stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                        if (stderr && stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                         if (err) {
                                             window.debug.log(">>> ERROR THROWN >>>");
                                             window.debug.log(err);
