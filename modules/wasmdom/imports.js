@@ -27,7 +27,7 @@ var removeObject = function (pointer) {
 };
 
 // only include _fetch if this is in NODE
-function init(window,_fetch,_Response) {
+export function init(window,_fetch,_Response) {
   if(_fetch)fetch=_fetch;
   if(_Response)Response=_Response;
   
@@ -223,5 +223,3 @@ function init(window,_fetch,_Response) {
   }
   };
 }
-
-module.exports.init=init;
