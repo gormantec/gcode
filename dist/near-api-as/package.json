@@ -4,7 +4,7 @@
     "description": "gormantec implementation of assembly script for Near API.",
     "scripts": {
         "test": "node tests",
-        "asbuild:untouched": "asc assembly/index.ts --target debug",
+        "asbuild:untouched": "asc assembly/index.ts --traceResolution --path ../ --target debug",
         "asbuild:optimized": "asc assembly/index.ts --target release",
         "asbuild:releasewww": "asc assembly/index.ts --target releasewww",
         "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized && npm run asbuild:releasewww",
