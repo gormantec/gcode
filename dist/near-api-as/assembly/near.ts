@@ -7,7 +7,6 @@ import { InMemorySigner } from "./signer";
 class NearConfig{
 
     keyStore:KeyStore;
-
     networkId:string;
     masterAccount:string|null;
     constructor(keyStore:KeyStore,networkId:string,masterAccount:string|null)
