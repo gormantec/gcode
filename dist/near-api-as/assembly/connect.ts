@@ -12,7 +12,7 @@ class Deps{
 export class ConnectConfig extends NearConfig{
     keyPath: string;
     deps:Deps;
-    constructor(keyStore:KeyStore,networkId:string,masterAccount:string|null,keyPath:string)
+    constructor(keyStore:KeyStore,networkId:string,masterAccount:string,keyPath:string)
     {
         super(keyStore,networkId,masterAccount);
         this.keyPath=keyPath;

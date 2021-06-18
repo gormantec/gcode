@@ -7,18 +7,8 @@ export class Contract{
     }
 
 }
-export interface ContractMethods {
-    /**
-     * Methods that change state. These methods cost gas and require a signed transaction.
-     * 
-     * @see {@link Account.functionCall}
-     */
-    changeMethods: string[];
+export class ContractMethods {
 
-    /**
-     * View methods do not require a signed transaction.
-     * 
-     * @@see {@link Account.viewFunction}
-     */
+    changeMethods: string[];
     viewMethods: string[];
 }
