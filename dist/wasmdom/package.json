@@ -1,6 +1,7 @@
 {
   "name": "wasmdom",
   "version": "1.0.0",
+  "types": "assembly/index.ts",
   "description": "gormantec implementation of assembly script for DOM based PWA apps.",
   "scripts": {
     "test": "node tests",

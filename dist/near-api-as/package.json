@@ -28,6 +28,7 @@
         "assemblyscript": "^0.19.3"
     },
     "dependencies": {
-        "@assemblyscript/loader": "^0.19.3"
+        "@assemblyscript/loader": "^0.19.3",
+        "assemblyscript-json": "^1.0.0"
     }
 }

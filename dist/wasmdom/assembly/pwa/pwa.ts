@@ -1,4 +1,6 @@
-import { Window, Date, Document, URLSearchParams, setTimeout, fetch, Promise, Response } from "../dom/document";
+import { Date, Document, URLSearchParams } from "../dom/document";
+import { Window, setTimeout, fetch,  } from "../dom/window";
+import { Promise, Response } from "../dom/promise";
 import { Element, EventCallback, Callback } from "../dom/element";
 import { Debug } from "../dom/debug";
 import { Style } from "../dom/style";
@@ -392,7 +394,7 @@ class Div {
         else if (params && params.innerHTML && (<string>params.innerHTML).substring(0, 4).toLowerCase() == "url(") {
             var _uri = (<string>params.innerHTML).trim().substring(4, (<string>params.innerHTML).length - 1);
 
-            var prom: Promise = fetch(_uri);
+            var prom: Promise = fetch(_uri,"GET","");
             _thisDiv = this;
             prom.then((r: Response) => {
                 return r.text();

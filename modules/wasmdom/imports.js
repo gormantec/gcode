@@ -199,10 +199,21 @@ export function init(window,_fetch,_Response) {
         }
         else return -1;
       },
-      fetch: (uri)=>
+      fetch: (uri,method,body)=>
       {
-        var p= getPointer(fetch(_wasm.__getString(uri)));
-        return p;
+        var m=_wasm.__getString(method);
+        var b=_wasm.__getString(body);
+        var u=_wasm.__getString(uri);
+        if(!b || b=="" || b.trim().substring(0,1)!="{")
+        {
+          var p= getPointer(fetch(u));
+          return p;
+        }
+        else {
+          var p= getPointer(fetch(u,{method:method,body:body}));
+          return p;
+        }
+
       },
       then: (p)=>
       {
