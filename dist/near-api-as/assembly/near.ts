@@ -9,14 +9,16 @@ class NearConfig{
     keyStore:KeyStore;
     networkId:string;
     masterAccount:string;
+    contractId:string;
+    accountId:string;
     constructor(keyStore:KeyStore,networkId:string,masterAccount:string)
     {
         this.keyStore=keyStore;
         this.networkId=networkId;
-        this.masterAccount=masterAccount
+        this.masterAccount=masterAccount;
+        this.accountId=masterAccount;
+        this.contractId=masterAccount;
     }
-
-    
 }
 
 class Near{
