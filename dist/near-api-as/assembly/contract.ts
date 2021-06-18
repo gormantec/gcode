@@ -9,6 +9,6 @@ export class Contract{
 }
 export class ContractMethods {
 
-    changeMethods: string[];
-    viewMethods: string[];
+    changeMethods: string[]=[];
+    viewMethods: string[]=[];
 }
