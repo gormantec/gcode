@@ -1,5 +1,5 @@
 import { Account } from "./account";
-import {Window} from "../../wasmdom/assembly/dom";
+import { Window } from "wasmdom/dom";
 
 export class Contract{
     constructor(account:Account,contractId:string,methods:ContractMethods)
