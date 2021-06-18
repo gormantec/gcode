@@ -4,10 +4,10 @@ export class Signer{
 
 }
 
-export class InMemorySigner{
+export class InMemorySigner extends Signer{
 
     constructor(keyStore:KeyStore)
     {
-
+        super();
     }
 }

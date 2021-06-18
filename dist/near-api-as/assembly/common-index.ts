@@ -1,8 +1,8 @@
-import {Account} from "./account";
-import {Contract} from "./contract";
-import {Near} from "./near";
+import { Account } from "./account";
+import { Contract } from "./contract";
+import { Near } from "./near";
 
-var accountCreator, providers, utils, transactions, validators, multisig, Connection, InMemorySigner, Signer, KeyPair, ConnectedWalletAccount, WalletAccount, WalletConnection;
+var accountCreator: string, providers: string, utils: string, transactions: string, validators: string, multisig: string, Connection: string, InMemorySigner: string, Signer: string, KeyPair: string, ConnectedWalletAccount: string, WalletAccount: string, WalletConnection: string;
 
 
 
