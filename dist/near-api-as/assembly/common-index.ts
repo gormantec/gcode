@@ -1,5 +1,5 @@
 import { Account } from "./account";
-import { Contract } from "./contract";
+import { Contract,ContractMethods } from "./contract";
 import { Near,NearConfig } from "./near";
 
 var accountCreator: string, providers: string, utils: string, transactions: string, validators: string, multisig: string, Connection: string, InMemorySigner: string, Signer: string, KeyPair: string, ConnectedWalletAccount: string, WalletAccount: string, WalletConnection: string;
@@ -17,6 +17,7 @@ export {
     Account,
     Connection,
     Contract,
+    ContractMethods,
     InMemorySigner,
     Signer,
     KeyPair,
