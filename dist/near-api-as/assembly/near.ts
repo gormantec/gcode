@@ -8,8 +8,8 @@ class NearConfig{
 
     keyStore:KeyStore;
     networkId:string;
-    masterAccount:string|null;
-    constructor(keyStore:KeyStore,networkId:string,masterAccount:string|null)
+    masterAccount:string;
+    constructor(keyStore:KeyStore,networkId:string,masterAccount:string)
     {
         this.keyStore=keyStore;
         this.networkId=networkId;
