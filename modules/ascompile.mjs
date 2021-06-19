@@ -71,6 +71,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         asc.ready.then(() => {
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
+                            const _errorHandle=console.error;
+                            console.error=()=>{};
                             try {
                                 asc.main([
                                     mainFilename,
@@ -210,6 +212,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                             catch (e) {
                                 console.log("asc error: " + e);
                             }
+                            console.error=_errorHandle;
                         });
                     });
                 });
