@@ -72,7 +72,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                             const stdout = asc.createMemoryStream();
                             const stderr = asc.createMemoryStream();
                             const _errorHandle=console.error;
-                            console.error=()=>{};
+                            console.error=()=>{console.log("error");};
                             try {
                                 asc.main([
                                     mainFilename,
