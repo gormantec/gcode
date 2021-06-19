@@ -394,7 +394,7 @@ class Div {
         else if (params && params.innerHTML && (<string>params.innerHTML).substring(0, 4).toLowerCase() == "url(") {
             var _uri = (<string>params.innerHTML).trim().substring(4, (<string>params.innerHTML).length - 1);
 
-            var prom: Promise = fetch(_uri,"GET","");
+            var prom: Promise = fetch(_uri,"GET","","");
             _thisDiv = this;
             prom.then((r: Response) => {
                 return r.text();
