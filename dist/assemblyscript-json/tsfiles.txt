@@ -1,0 +1,10 @@
+./assembly/JSON.ts
+./assembly/util/index.ts
+./assembly/encoder.ts
+./assembly/__tests__/as-pect.d.ts
+./assembly/__tests__/json-parse.spec.ts
+./assembly/__tests__/roundtrip.spec.ts
+./assembly/__tests__/to-string.spec.ts
+./assembly/__tests__/usage.spec.ts
+./assembly/index.ts
+./assembly/decoder.ts

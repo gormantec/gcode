@@ -1,0 +1,13 @@
+./assembly/wasmdom.ts
+./assembly/pwa/pwa.ts
+./assembly/pwa/index.ts
+./assembly/dom/mockFrameModule.ts
+./assembly/dom/document.ts
+./assembly/dom/debug.ts
+./assembly/dom/element.ts
+./assembly/dom/window.ts
+./assembly/dom/index.ts
+./assembly/dom/style.ts
+./assembly/dom/promise.ts
+./assembly/index.ts
+./assembly/src/app.ts

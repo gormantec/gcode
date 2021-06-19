@@ -1,0 +1,16 @@
+./dist/path.d.ts
+./dist/astBuilder.d.ts
+./dist/simpleParser.d.ts
+./dist/baseTransform.d.ts
+./dist/utils.d.ts
+./dist/decorator.d.ts
+./dist/examples/exportAs.d.ts
+./dist/examples/includeBytesTransform.d.ts
+./dist/examples/capitalize.d.ts
+./dist/examples/functionCallTransform.d.ts
+./dist/examples/list.d.ts
+./dist/visitor.d.ts
+./dist/transformer.d.ts
+./dist/base.d.ts
+./dist/index.d.ts
+./as/index.d.ts

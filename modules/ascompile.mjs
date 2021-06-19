@@ -105,7 +105,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 return _fileString;
                                             }
                                             else if (_fileString == "NA") {
-                                                return null;
+                                                return null; 
                                             }
                                             else {
                                                 downloading++;

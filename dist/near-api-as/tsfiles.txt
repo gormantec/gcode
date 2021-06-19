@@ -1,0 +1,11 @@
+./assembly/account.ts
+./assembly/common-index.ts
+./assembly/signer.ts
+./assembly/contract.ts
+./assembly/near.ts
+./assembly/providers.ts
+./assembly/connection.ts
+./assembly/connect.ts
+./assembly/index.ts
+./assembly/key_stores/unencrypted_file_system_keystore.ts
+./assembly/key_stores/index.ts
