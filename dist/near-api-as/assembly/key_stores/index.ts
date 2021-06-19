@@ -1,7 +1,7 @@
 import * as keyStores from "..";
 
 
-var BrowserLocalStorageKeyStore:string,UnencryptedFileSystemKeyStore:string ;
+var UnencryptedFileSystemKeyStore:string ;
 
 class KeyPair{
 
@@ -39,7 +39,10 @@ class MergeKeyStore extends KeyStore
         super();
     }
 }
+class BrowserLocalStorageKeyStore extends KeyStore
+{
 
+}
 export {
     KeyStore,
     InMemoryKeyStore,
