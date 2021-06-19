@@ -69,9 +69,9 @@ export class Window {
             this.guids.splice(index, 1);
         }
     }
-    public fetch(uri:string,method:string,body:string):Promise
+    public fetch(uri:string,method:string,headers:string,body:string):Promise
     {        
-        var p:i32 = jsdom.fetch(uri,method,body);
+        var p:i32 = jsdom.fetch(uri,method,headers,body);
         var pr:Promise = new Promise(p);
         return pr;
     }
@@ -110,11 +110,11 @@ export function setTimeout(callback: () => void, duration: i32): void {
     if (Window.window) Window.window.setTimeout(callback, duration);
 }
 
-export function fetch(uri:string,method:string,body:string):Promise
+export function fetch(uri:string,method:string,headers:string,body:string):Promise
 {
     if(Window.window)
     {
-        var prom:Promise=Window.window.fetch(uri,method,body);
+        var prom:Promise=Window.window.fetch(uri,method,headers,body);
         return prom;
     }
     else{
