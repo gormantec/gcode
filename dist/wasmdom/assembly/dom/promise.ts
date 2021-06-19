@@ -1,4 +1,5 @@
 import * as jsdom from "../wasmdom";
+import { Debug } from "./debug";
 
 export class Response{
     pointer:i32;
@@ -80,6 +81,7 @@ export class Promise{
         var prom:Promise|null = null;
         for(var i=0;i<Promise._promises.length && !prom;i++)
         {
+            Debug.log("find if p("+p.toString()+") == pointer("+Promise._promises[i].pointer+")");
             if(Promise._promises[i].pointer==p)
             {
                 prom=Promise._promises[i];
