@@ -1,5 +1,6 @@
 const FILE_PREFIX = "File-";
 const CONTENT_TYPE_PREFIX = "ContentType-";
+const DATE_PREFIX = "DateChange-";
 
 
 
@@ -30,6 +31,7 @@ export function save(filename, data, overwrite = true) {
     }
     localStorage.setItem(FILE_PREFIX  + filename, saveData);
     localStorage.setItem(CONTENT_TYPE_PREFIX  + filename, contentType);
+    localStorage.setItem(DATE_PREFIX  + filename, (new Date()).getTime());
 }
 
 function canJSON(value) {
@@ -46,9 +48,11 @@ export function parent(filename)
     return null;
 }
 
-export function load(filename,asString = false) {
+export function load(filename,asString = false,ageInSec=-1) {
     let b64 = localStorage.getItem(FILE_PREFIX + filename);
     let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
+    let dateChange = localStorage.getItem(DATE_PREFIX + filename);
+    if(ageInSec!=-1 && ((new Date().getTime())-ageInSec)>parseInt(dateChange)) return null;
     //window.debug.log(contentType);
     var result=null;
     if (contentType == "[object String]") {
