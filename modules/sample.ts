@@ -1,5 +1,6 @@
 import { Window, Document, Debug, Console } from "../dom";
 import { PWA, PWAParams, Page, PageParams, Div, DivParams } from '../pwa';
+import { Near, Account, NearConfig, Contract, BrowserLocalStorageKeyStore } from 'near-api-as';
 
 var homePage: Page;
 var secondPage: Page;
@@ -53,6 +54,19 @@ export function run(w: Window, d: Document, c: Console): i32 {
         aPWA.setPage(homePage);
     }, 1000);
     console.log('new javascript file!');
+
+    window.setTimeout(function () {
+        Debug.log(">>NEAR: ");
+        var aKeyStore = new BrowserLocalStorageKeyStore();
+        const config = new NearConfig(aKeyStore, "testnet", "gcode-ec464352008.testnet");
+        const near = new Near(config);
+        const account = new Account(near.connection, "gcode-ec464352008.testnet");
+        const mycontract = new Contract(account, "gcode-ec464352008.testnet", { changeMethods: ["setKey"], viewMethods: ["getKey"] });
+        mycontract.exec({ methodName: "getKey", paramaters: '{"a":"a"}}' });
+        Debug.log(">>NEAR: Contract");
+    }, 5000);
+
+
     return 0;
 
 }
