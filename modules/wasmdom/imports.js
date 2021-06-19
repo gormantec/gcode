@@ -220,12 +220,16 @@ export function init(window,_fetch,_Response) {
       {
         var promise= getObject(p);
         promise.then((res)=>{
+          console.log("__alertPromise");
+          console.log(res);
           if(res instanceof Response)
           {
             var r= getPointer(res);
+            console.log("Pointer="+p+ " Response="+r);
             _wasm.__alertPromise(p,r);
           }
           else {
+            console.log("Pointer="+p+ " Response="+r);
             _wasm.__alertPromiseText(p,_wasm.__pin(_wasm.__newString(res.toString())));
           }
         });
