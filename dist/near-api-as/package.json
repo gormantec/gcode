@@ -1,5 +1,6 @@
 {
     "name": "near-api-as",
+    "types": "assembly/index.ts",
     "version": "1.0.0",
     "description": "gormantec implementation of assembly script for Near API.",
     "scripts": {

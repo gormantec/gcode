@@ -46,7 +46,10 @@ class MergeKeyStore extends KeyStore
 }
 class BrowserLocalStorageKeyStore extends KeyStore
 {
-
+    constructor()
+    {
+        super();
+    }
 }
 export {
     KeyStore,
