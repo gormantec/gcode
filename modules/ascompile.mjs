@@ -98,7 +98,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         }
                                         else if (name.startsWith("/node_modules/")) {
 
-                                            const _name = "dist/" + name.substring(14)
+                                            const _name = "dist/" + name.substring(14);
+                                            const _fileString2 = load("dist/" + name.substring(14,name.indexOf("/",15))+"tsfiles.txt", true,10000);
+                                            console.log(_fileString2);
                                             const _fileString = load(_name, true,40000);
 
                                             if (_fileString && _fileString != "NA") {
