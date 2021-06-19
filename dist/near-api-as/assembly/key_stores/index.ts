@@ -1,19 +1,28 @@
-import * as keyStores from "..";
-
-
-var UnencryptedFileSystemKeyStore:string ;
-
 class KeyPair{
 
 }
 
 class KeyStore{
 
+    constructor()
+    {
+
+    }
+
     setKey(a:string,y:string,kp:KeyPair):void
     {
 
     }
     
+}
+
+class UnencryptedFileSystemKeyStore extends KeyStore
+{
+    constructor()
+    {
+        super();
+    }
+
 }
 
 class InMemoryKeyStore extends KeyStore
@@ -26,10 +35,6 @@ class InMemoryKeyStore extends KeyStore
 }
 class MergeKeyStoreConfig{
     writeKeyStoreIndex:i32;
-}
-
-class KeyStores{
-    keyStore:KeyStore;
 }
 
 class MergeKeyStore extends KeyStore
