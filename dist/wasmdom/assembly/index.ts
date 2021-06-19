@@ -27,11 +27,12 @@ export function __alertTimeout(guid: i32): i32 {
 }
 
 export function __alertPromise(p: i32,r: i32):i32{
-  Debug.log("Promise="+p.toString());
+  Debug.log("__alertPromise::Promise="+p.toString());
   Promise.fromPointer(p).alertResponse(new Response(r));
   return 0;
 }
 export function __alertPromiseText(p: i32,r: string):i32{
+  Debug.log("__alertPromiseText::Promise="+p.toString());
   Promise.fromPointer(p).alertResponseText(r);
   return 0;
 }
