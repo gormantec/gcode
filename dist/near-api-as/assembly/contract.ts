@@ -12,7 +12,7 @@ export class ContractMethods {
 class Method
 {
     methodName:string;
-    exec:(paramaters:string) => string;
+    exec:(params:ExecParams) => string;
 }
 
 export class Contract {
@@ -58,16 +58,21 @@ export class Contract {
             this.methods.push({methodName:options.changeMethods[i],exec:()=>{return "{}";}});
         };
     }
-    
-    exec(methodName:string,paramaters:string):void
+
+    exec(params:ExecParams):void
     {
         for(var i=0;i<this.methods.length;i++)
         {
-            if(this.methods[i].methodName==methodName)
+            if(this.methods[i].methodName==params.methodName)
             {
-                this.methods[i].exec(paramaters);
+                this.methods[i].exec(params);
             }
         }
     }
 
+}
+
+class ExecParams{
+    methodName:string;
+    paramaters:string|null;
 }
