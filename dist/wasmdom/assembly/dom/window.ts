@@ -73,12 +73,8 @@ export class Window {
     {        
         var p:i32 = jsdom.fetch(uri,method,headers,body);
         var pr:Promise = new Promise(p);
+        Debug.log("fetch Promise="+p.toString());
         return pr;
-    }
-
-    public alertPromise(p:i32,r:i32):void
-    {
-        
     }
 }
 

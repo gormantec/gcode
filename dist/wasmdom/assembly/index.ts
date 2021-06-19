@@ -27,6 +27,7 @@ export function __alertTimeout(guid: i32): i32 {
 }
 
 export function __alertPromise(p: i32,r: i32):i32{
+  Debug.log("Promise="+p.toString());
   Promise.fromPointer(p).alertResponse(new Response(r));
   return 0;
 }
