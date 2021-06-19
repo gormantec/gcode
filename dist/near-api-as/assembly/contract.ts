@@ -29,9 +29,12 @@ export class Contract {
         this.account = account;
         this.contractId = contractId;
         var i:i32=0;
+
+        Window.window.console.log("new Contract");
         for( i=0;i<options.viewMethods.length;i++) {
             this.methods.push({
                 methodName: options.viewMethods[i], exec: () => {
+                    Window.window.console.log("fetch");
 
                     fetch("https://rpc.testnet.near.org","POST",
                         `{
@@ -44,8 +47,10 @@ export class Contract {
                                 "account_id": "nearkat.testnet"
                             }
                         }`).then((r: Response) => {
+                            Window.window.console.log("then");
                             return r.text();
                         }).thenString((text: string) => {
+                            Window.window.console.log("thenString");
                             Window.window.console.log(text);
                             return null;
                         });
