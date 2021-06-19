@@ -36,7 +36,7 @@ export class Contract {
                 methodName: options.viewMethods[i], exec: () => {
                     Window.window.console.log("fetch");
 
-                    fetch("https://rpc.testnet.near.org","POST",'{"Content-Type"," application/json"}',
+                    fetch("https://rpc.testnet.near.org","POST",'{"Content-Type","application/json"}',
                         `{
                             "jsonrpc": "2.0",
                             "id": "dontcare",
