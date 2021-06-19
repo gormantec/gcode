@@ -4,7 +4,7 @@ class KeyPair{
 
 class KeyStore{
 
-    constructor()
+    constructor()     
     {
 
     }
