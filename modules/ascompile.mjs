@@ -140,16 +140,15 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         },
                                         writeFile(name, data, baseDir) {
                                             console.log("write file: " + name);
-                                            console.log("write file: " + (typeof data));
                                             if (typeof data == "object" && name == outputFilename && !failed) {
                                                 const reader = new FileReader();
                                                 dataURL = "reading";
                                                 reader.addEventListener("load", function () {
-                                                    console.log("write load: " + (typeof reader.result));
+                                                    console.log("got dataURL: " + reader.result.substring(0,30));
                                                     dataURL = reader.result;
                                                 }, false);
 
-                                                createDownload(name, new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+                                                //createDownload(name, new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                                                 dataBlob = new Blob([Uint8Array.from(data)]);
 
                                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
@@ -180,7 +179,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                                             }
                                             else {
-
+                                                console.log("!!!!!!!!!!!!!!!!");
                                                 if (stdout && stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
                                                 if (stderr && stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                                 if (err) {
