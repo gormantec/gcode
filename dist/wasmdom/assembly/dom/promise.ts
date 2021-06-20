@@ -81,7 +81,7 @@ export class Promise{
         var prom:Promise|null = null;
         for(var i=0;i<Promise._promises.length && !prom;i++)
         {
-            Debug.log("find if p("+p.toString()+") == pointer("+Promise._promises[i].pointer+")");
+            Debug.log("find if p("+p.toString()+") == pointer("+Promise._promises[i].pointer.toString()+")");
             if(Promise._promises[i].pointer==p)
             {
                 prom=Promise._promises[i];
