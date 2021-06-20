@@ -34,6 +34,7 @@ export class Promise{
     static _promises:Promise[] = [];
     constructor(pointer:i32=-1) {
         this.pointer=pointer;
+        Debug.log("Added:"+pointer.toString());
         Promise._promises.push(this);
     }
     public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
@@ -60,7 +61,7 @@ export class Promise{
             var prom:Promise|null =this.func(r);
             if(prom){
                 var i=Promise._promises.indexOf(prom);
-                Promise._promises.splice(i,1);
+                //Promise._promises.splice(i,1);
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
                 jsdom.then((<Promise>this.afterThen).pointer);
