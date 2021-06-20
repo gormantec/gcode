@@ -109,7 +109,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 else if (_fileString == "NA") {
                                                     return null;
                                                 }
-                                                else if(_name.startsWith("dist/") && _name.endsWith(".ts") && !(dist_files.files[md5("/"+_name)])){
+                                                else if(_name.startsWith("dist/") && (_name.endsWith(".ts") || _name.endsWith("package.json")) && !(dist_files.files[md5("/"+_name)])){
                                                     return null;
                                                 }
                                                 else{
