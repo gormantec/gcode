@@ -72,8 +72,10 @@ export class Window {
     public fetch(uri:string,method:string,headers:string,body:string):Promise
     {        
         var p:i32 = jsdom.fetch(uri,method,headers,body);
+
+        Debug.log("fetch Promise====>"+p.toString());
         var pr:Promise = new Promise(p);
-        Debug.log("fetch Promise="+p.toString());
+        Debug.log("fetch Promise=====>"+Promise._promises.toString());
         return pr;
     }
 }
