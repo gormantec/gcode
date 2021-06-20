@@ -110,9 +110,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     return null;
                                                 }
                                                 else if(!_name.endsWith(".ts") || dist_files.files[md5("/"+_name)]){
-                                                    console.log(dist_files.files[md5("/"+_name)]);
                                                     downloading++;
-                                                    fetch("https://gcode.com.au/" + _name)
+                                                    fetch("/" + _name)
                                                         .then(response => response.ok ? response.text() : null)
                                                         .then(text => {
                                                             if (text) {
