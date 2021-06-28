@@ -85,13 +85,15 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         stdout,
                                         stderr,
                                         readFile(name, baseDir) {
-                                            if(name.endsWith("promise.ts")) { console.log(baseDir+" / "+name); }
+                                            
                                             const _fileData = load(name, true);
                                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                                 return _fileData;
                                             }
                                             if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
+
                                                 window.debug.log("Got App:" + name);
+                                                console.log(baseDir+" / "+name); 
                                                 return sourceCode;
                                             }
                                             else if (name == "asconfig.json" && dapp == true) {
@@ -115,6 +117,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 }
                                                 else{
                                                     downloading++;
+                                                    console.log(baseDir+" / "+name); 
                                                     fetch("/" + _name)
                                                         .then(response => response.ok ? response.text() : null)
                                                         .then(text => {
