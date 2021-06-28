@@ -37,6 +37,9 @@ export class Promise{
         Debug.log("Added:"+pointer.toString());
         Promise._promises.push(this);
     }
+    public toString():string{
+        return "Promise[pointer="+this.pointer.toString()+"]";
+    }
     public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
     {
         this.afterThen= new Promise();
