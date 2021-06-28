@@ -69,7 +69,7 @@ export class Promise{
             if(prom){
                 var i:i32=Promise._promises.indexOf(prom);
                 Debug.log("removed ["+i.toString()+"] count="+Promise._promises.toString());
-                Promise._promises.splice(i,1);
+                //Promise._promises.splice(i,1);
                 Debug.log("Promises="+Promise._promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
