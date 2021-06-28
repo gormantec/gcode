@@ -31,10 +31,11 @@ export class Promise{
     func:ResponseType<Response>;
     funcText:ResponseType<string>;
     afterThen: Promise|null = null;
-    static _promises:Promise[] = [];
+    static _promises:Promise[];
     constructor(pointer:i32=-1) {
         this.pointer=pointer;
         Debug.log("Added:"+pointer.toString());
+        if(!Promise._promises)Promise._promises=[];
         Promise._promises.push(this);
         Debug.log("Promises="+Promise._promises.toString());
     }
