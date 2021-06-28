@@ -187,6 +187,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 console.log("-----------------");
                                                 if (err) {
                                                     console.log("------ERROR------");
+                                                    console.log(err);
                                                     window.debug.log(">>> ERROR THROWN >>>");
                                                     window.debug.log(err);
                                                     callback(err);
