@@ -221,19 +221,16 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     console.log("asc error: " + e);
                                 }
                                 console.error = _errorHandle;
-                            });
-
-
-                            
-                        }).catch((error) => { window.debug.log("fetch error:" + error); })
+                            }).catch(callback);                            
+                        }).catch((error) => { window.debug.log("fetch error:" + error); callback(error);})
                     });
-                });
+                }).catch(callback);
 
             }
             _run();
         }
     }
-    catch (e) { window.debug.log(e); }
+    catch (e) { window.debug.log(e); callback(e); }
 }
 
 
