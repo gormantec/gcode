@@ -58,13 +58,16 @@ export class Promise{
         return <Promise>this.afterThen;
     }
     public alertResponse(r:Response):void{
-        
+        Debug.log("got alertResponse");
+
         if(this.func)
         {
             var prom:Promise|null =this.func(r);
             if(prom){
-                var i=Promise._promises.indexOf(prom);
-                //Promise._promises.splice(i,1);
+                var i:i32=Promise._promises.indexOf(prom);
+                Debug.log("removed ["+i.toString()+"] count="+Promise._promises.toString());
+                Promise._promises.splice(i,1);
+                Debug.log("count="+Promise._promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
                 jsdom.then((<Promise>this.afterThen).pointer);
@@ -73,7 +76,7 @@ export class Promise{
 
     }
     public alertResponseText(r:string):void{
-        
+        Debug.log("got alertResponseText");
         if(this.funcText)
         {
             this.funcText(r);

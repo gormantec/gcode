@@ -76,6 +76,9 @@ export class Window {
         Debug.log("fetch Promise====>"+p.toString());
         var pr:Promise = new Promise(p);
         Debug.log("fetch Promise=====>"+Promise._promises.toString());
+
+        Promise.fromPointer(p);
+
         return pr;
     }
 }
