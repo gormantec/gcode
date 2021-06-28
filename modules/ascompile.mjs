@@ -75,7 +75,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 const stdout = asc.createMemoryStream();
                                 const stderr = asc.createMemoryStream();
                                 const _errorHandle = console.error;
-                                console.error = () => { console.log("supressed error"); };
+                                console.error = () => { console.log("."); };
                                 try {
                                     asc.main([
                                         mainFilename,
@@ -219,7 +219,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                     });
                                 }
                                 catch (e) {
-                                    console.log("asc error: " + e);
+                                    //console.log("asc error: " + e);
                                 }
                                 console.error = _errorHandle;
                             }).catch(callback);                            

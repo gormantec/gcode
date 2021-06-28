@@ -36,6 +36,7 @@ export class Promise{
         this.pointer=pointer;
         Debug.log("Added:"+pointer.toString());
         Promise._promises.push(this);
+        Debug.log("Promises="+Promise._promises.toString());
     }
     public toString():string{
         return "Promise[pointer="+this.pointer.toString()+"]";
@@ -67,7 +68,7 @@ export class Promise{
                 var i:i32=Promise._promises.indexOf(prom);
                 Debug.log("removed ["+i.toString()+"] count="+Promise._promises.toString());
                 Promise._promises.splice(i,1);
-                Debug.log("count="+Promise._promises.toString());
+                Debug.log("Promises="+Promise._promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
                 jsdom.then((<Promise>this.afterThen).pointer);
