@@ -26,8 +26,8 @@ export class Response{
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
 
-var MY_NAME="X"+Math.floor(Math.random()*1000).toString();
-var _promises:Promise[]=[];
+@global @inline const MY_NAME="XXX";
+@global @inline const _promises:Promise[]=[];
 
 export class Promise{
     pointer:i32;
