@@ -43,7 +43,9 @@ export class Promise{
     }
     public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
     {
+        Debug.log("Promises="+Promise._promises.toString());
         this.afterThen= new Promise();
+        Debug.log("Promises="+Promise._promises.toString());
         this.func=func;
         this.funcText=null;
         if(this.pointer>=0)jsdom.then(this.pointer);
