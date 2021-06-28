@@ -68,11 +68,13 @@ export class Promise{
             var prom:Promise|null =this.func(r);
             if(prom){
                 var i:i32=Promise._promises.indexOf(prom);
-                Debug.log("removed ["+i.toString()+"] count="+Promise._promises.toString());
-                //Promise._promises.splice(i,1);
+                Debug.log("Promises="+Promise._promises.toString());
+                Debug.log("removed ["+i.toString()+"] count="+Promise._promises[i].toString());
+                Promise._promises.splice(i,1);
                 Debug.log("Promises="+Promise._promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
+                Debug.log("Promises="+Promise._promises.toString());
                 jsdom.then((<Promise>this.afterThen).pointer);
             }
         }
