@@ -26,6 +26,7 @@ export class Response{
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
 
+var MY_NAME="X"+Math.floor(Math.random()*1000).toString();
 var _promises:Promise[]=[];
 
 export class Promise{
@@ -104,6 +105,7 @@ export class Promise{
         return <Promise>prom;
     }
     public static getPromises():Promise[]{
+        Debug.log(MY_NAME);
         return _promises;
     }
 }
