@@ -182,8 +182,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             }
                                             else {
                                                 console.log("--compile done---");
-                                                if (stdout && stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
-                                                if (stderr && stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                                if (stdout && stdout.toString().trim() != "") console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
+                                                if (stderr && stderr.toString().trim() != "") console.log(`>>> STDERR >>>\n${stderr.toString()}`);
                                                 console.log("-----------------");
                                                 if (err) {
                                                     console.log("------ERROR------");
