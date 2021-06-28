@@ -15,20 +15,12 @@ export class Window {
     static _window: Window;
 
     constructor() {
-
-        Debug.log("new Window(0)");
         this.document = new Document();
-        Debug.log("new Window(1)");
         this.console = new Console();
-        Debug.log("new Window(2)");
         this.pointer = jsdom.getWindow();
-        Debug.log("new Window(3)");
         this.guids = [];
-        Debug.log("new Window(4)");
         this.location = new Location();
-        Debug.log("new Window(5)");
         this.PWA = new PWAGlobals();
-        Debug.log("new Window(6)");
         Window._window = this;
     }
 
@@ -75,7 +67,7 @@ export class Window {
 
         Debug.log("fetch Promise====>"+p.toString());
         var pr:Promise = new Promise(p);
-        Debug.log("fetch Promise=====>"+Promise._promises.toString());
+        Debug.log("fetch Promise=====>"+Promise.getPromises().toString());
 
         Promise.fromPointer(p);
 
