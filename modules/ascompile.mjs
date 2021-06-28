@@ -181,10 +181,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
 
                                             }
                                             else {
-                                                console.log("!!!!!!!!!!!!!!!!");
+                                                console.log("--compile done---");
                                                 if (stdout && stdout.toString().trim() != "") window.debug.log(`>>> STDOUT >>>\n${stdout.toString()}`);
                                                 if (stderr && stderr.toString().trim() != "") window.debug.log(`>>> STDERR >>>\n${stderr.toString()}`);
+                                                console.log("-----------------");
                                                 if (err) {
+                                                    console.log("------ERROR------");
                                                     window.debug.log(">>> ERROR THROWN >>>");
                                                     window.debug.log(err);
                                                     callback(err);
@@ -194,12 +196,15 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                     var readTryCount = 0;
                                                     var waitRead = () => {
                                                         if (dataURL == "reading" || (dataURL == null && readTryCount < 100)) {
+                                                            window.debug.log("reading..");
                                                             if (readTryCount == 0) window.debug.log("reading file..");
                                                             else window.debug.log("\b..");
                                                             readTryCount++;
                                                             setTimeout(waitRead, 500);
                                                         }
                                                         else {
+
+                                                            window.debug.log("reading done");
                                                             var b64data = dataURL.substring(dataURL.indexOf(";base64,") + 8);
                                                             var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
                                                             var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
@@ -207,7 +212,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                         }
                                                     };
                                                     waitRead();
-
                                                 }
                                             }
                                         });
