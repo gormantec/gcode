@@ -1,9 +1,6 @@
 
 import * as jsdom from "../wasmdom";
-import { Document, Console } from "./document";
-import { Element, Callback } from "./element";
-import { Debug } from "./debug";
-import { Promise } from "./promise";
+import { Debug, Promise,Document, Console,Element, Callback } from "wasmdom/dom";
 
 export class Window {
     document: Document;

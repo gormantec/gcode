@@ -1,5 +1,5 @@
 import * as jsdom from "../wasmdom";
-import { Debug } from "./debug";
+import { Debug } from "wasmdom/dom";
 
 export class Response{
     pointer:i32;

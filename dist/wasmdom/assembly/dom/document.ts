@@ -1,6 +1,5 @@
 import * as jsdom from "../wasmdom";
-import { Element, Callback } from "./element";
-import { Debug } from "./debug";
+import { Element, Debug } from "wasmdom/dom";
 
 //interface CallbackTwoParams<T1 = void, T2 = void,T3 = void> {(param1: T1,param2: T2): T3;}
 
@@ -139,4 +138,4 @@ class DomDate extends Date{
 }
 
 
-export { Debug, Document, Console, URLSearchParams,DomDate as Date };
+export { Document, Console, URLSearchParams,DomDate as Date };
