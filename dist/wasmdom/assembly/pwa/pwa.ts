@@ -324,13 +324,13 @@ class PWA {
         if (this.pwaBody) this.pwaBody.style.top = this.headerHeight + "px";
     }
     hideFooter(): void {
-        if (this.pwaFooter) this.pwaFooter.style.display = "none";
-        if (this.pwaBody) this.pwaBody.style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px"
+        if (this.pwaFooter) (<Div>this.pwaFooter).style.display = "none";
+        if (this.pwaBody) (<Div>this.pwaBody).style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px"
     }
 
     hideHeader(): void {
-        if (this.pwaHeader) this.pwaHeader.style.display = "none";
-        if (this.pwaBody) this.pwaBody.style.top = "0px"
+        if (this.pwaHeader) (<Div>this.pwaHeader).style.display = "none";
+        if (this.pwaBody) (<Div>this.pwaBody).style.top = "0px"
     }
 
     dynamicallyLoadScript(url: string): void {
