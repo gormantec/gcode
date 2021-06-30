@@ -325,7 +325,7 @@ class PWA {
     }
     hideFooter(): void {
         if (this.pwaFooter) (<Div>this.pwaFooter).style.display = "none";
-        if (this.pwaBody) (<Div>this.pwaBody).style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px"
+        if (this.pwaBody) (<Div>this.pwaBody).style.bottom = (this.footerPadding * 2 + this.footerHeight).toString() + "px"
     }
 
     hideHeader(): void {
