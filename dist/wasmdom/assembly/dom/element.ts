@@ -1,5 +1,6 @@
 import * as jsdom from "../wasmdom";
-import {Style, Debug } from "wasmdom/dom";
+import {Style } from "./style";
+import { Debug } from "wasmdom-globals";
 
 //interface CallbackTwoParams<T1 = void, T2 = void,T3 = void> {(param1: T1,param2: T2): T3;}
 class EventCallback {

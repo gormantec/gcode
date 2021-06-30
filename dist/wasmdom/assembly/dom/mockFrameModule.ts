@@ -1,5 +1,7 @@
-import { Window,Date,Element } from "wasmdom/dom";
-import { PWA } from "wasmdom/pwa";
+import { Window} from "./window";
+import { Element } from "./element";
+import { Date } from "./document";
+import { PWA } from "../pwa";
 
    //** */
 

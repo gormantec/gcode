@@ -1,5 +1,5 @@
-import * as jsdom from "../wasmdom";
-import { Debug } from "wasmdom/dom";
+import * as jsdom from "wasmdom-jsdom";
+import { Debug } from "../lib/debug";
 
 export class Response{
     pointer:i32;
@@ -25,8 +25,9 @@ export class Response{
 }
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
-
+// @ts-ignore
 @global @inline const MY_NAME="XXX";
+// @ts-ignore
 @global @inline const _promises:Promise[]=[];
 
 export class Promise{

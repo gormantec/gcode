@@ -1,10 +1,9 @@
 import { Date, Document, URLSearchParams } from "../dom/document";
 import { Window, setTimeout, fetch,  } from "../dom/window";
-import { Promise, Response } from "../dom/promise";
 import { Element, EventCallback, Callback } from "../dom/element";
-import { Debug } from "../dom/debug";
 import { Style } from "../dom/style";
 import { addMockFrame } from "../dom/mockFrameModule";
+import { Debug, Promise, Response } from "wasmdom-globals"
 
 
 
@@ -398,7 +397,7 @@ class Div {
             _thisDiv = this;
             prom.then((r: Response) => {
                 return r.text();
-            }).thenString((text: string) => {
+            },null).thenString((text: string) => {
                 (<Div>_thisDiv).element.innerHTML = text;
                 _thisDiv = null;
                 return null;

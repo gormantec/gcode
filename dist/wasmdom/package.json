@@ -5,7 +5,7 @@
   "description": "gormantec implementation of assembly script for DOM based PWA apps.",
   "scripts": {
     "test": "node tests",
-    "asbuild:untouched": "asc assembly/index.ts --target debug --path ../near-sdk-as",
+    "asbuild:untouched": "asc assembly/index.ts --target debug  --traceResolution --path ../node_modules/wasmdom/dom",
     "asbuild:optimized": "asc assembly/index.ts --target release",
     "asbuild:releasewww": "asc assembly/index.ts --target releasewww",
     "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized && npm run asbuild:releasewww",
@@ -30,7 +30,9 @@
     "@assemblyscript/loader": "^0.17.3",
     "assemblyscript-json": "^1.0.0",
     "jsdom": "^16.4.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "wasmdom-globals": "file:../wasmdom-globals",
+    "wasmdom-jsdom": "file:../wasmdom-jsdom"
   },
   "devDependencies": {
     "assemblyscript": "^0.17.3",

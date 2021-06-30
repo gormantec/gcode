@@ -1,6 +1,6 @@
-import { Window, Document, Debug, Console } from "../dom";
-import { PWA, PWAParams, Page, PageParams, Div, DivParams } from '../pwa';
-import { KeyStore, BrowserLocalStorageKeyStore } from '../../../near-api-as/assembly/key_stores/index';
+import { Window, Document, Console } from "wasmdom";
+import { Debug } from "wasmdom-globals";
+import { PWA, PWAParams, Page, PageParams, Div, DivParams } from 'wasmdom';
 
 
 var homePage: Page;
