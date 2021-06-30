@@ -86,6 +86,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         stdout,
                                         stderr,
                                         readFile(name, baseDir) {
+
+                                            if(name.indexOf("wasmdom-globals")>=0)console.log(name);
                                             
                                             const _fileData = load(name, true);
                                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
