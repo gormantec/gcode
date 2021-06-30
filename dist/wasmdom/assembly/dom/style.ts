@@ -1,4 +1,4 @@
-import * as jsdom from "../wasmdom";
+import {jsdom} from "wasmdom-jsdom";
 
 export class Style{
     parentPointer: i32;

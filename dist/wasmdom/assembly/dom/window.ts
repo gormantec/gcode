@@ -1,5 +1,4 @@
-
-import * as jsdom from "../wasmdom";
+import {jsdom} from "wasmdom-jsdom";
 import {  Document, Console } from "./document";
 import { Element,Callback } from "./element";
 import { Promise,Debug } from "wasmdom-globals";
@@ -110,6 +109,6 @@ export function fetch(uri:string,method:string,headers:string,body:string):Promi
         return prom;
     }
     else{
-        return new Promise();
+        return new Promise(-1);
     }
 }

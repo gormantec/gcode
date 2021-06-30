@@ -1,4 +1,4 @@
-import * as jsdom from "../wasmdom";
+import {jsdom} from "wasmdom-jsdom";
 import {Style } from "./style";
 import { Debug } from "wasmdom-globals";
 

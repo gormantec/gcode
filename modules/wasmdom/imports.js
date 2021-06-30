@@ -44,7 +44,7 @@ export function init(window,_fetch,_Response) {
       _wasm=w;
     },
     imports:{
-    wasmdom: {
+      wasmdom_jsdom: {
       getWindow: ()=>{
         return _wp;
       },
@@ -63,6 +63,9 @@ export function init(window,_fetch,_Response) {
         return _ep;
       },
       getBody: (parent)=>{
+        return _bp;
+      },
+      templateContent: (parent)=>{
         return _bp;
       },
       getHead: (parent)=>{

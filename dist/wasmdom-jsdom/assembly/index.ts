@@ -2,6 +2,9 @@
 import { Window, Document, Console } from "wasmdom"; 
 import { Debug,Promise,Response } from "wasmdom-globals";
 import { run } from "./src/app";
+import * as jsdom from "./wasmdom_jsdom";
+
+export {jsdom};
 
 var window: Window;
 var document: Document;
