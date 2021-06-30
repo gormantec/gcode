@@ -1,5 +1,6 @@
-import { Window, Document, Debug, Console } from "../dom";
-import { PWA, PWAParams, Page, PageParams, Div, DivParams } from '../pwa';
+import { Window, Document, Console } from "wasmdom";
+import { Debug } from "wasmdom-globals";
+import { PWA, PWAParams, Page, PageParams, Div, DivParams } from 'wasmdom';
 import { Near, Account, NearConfig, Contract, BrowserLocalStorageKeyStore } from 'near-api-as';
 
 var homePage: Page;
