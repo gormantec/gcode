@@ -303,19 +303,19 @@ class PWA {
 
     }
     showFloatingActionButton(): void {
-        if (this.floatingActionButton) this.floatingActionButton.style.display = "";
+        if (this.floatingActionButton) (<Div>this.floatingActionButton).style.display = "";
     }
     hideFloatingActionButton(): void {
-        if (this.floatingActionButton) this.floatingActionButton.style.display = "none";
+        if (this.floatingActionButton) (<Div>this.floatingActionButton).style.display = "none";
     }
 
 
     showFooter(): void {
         if (this.pwaFooter) {
-            this.pwaFooter.style.display = "";
-            this.pwaFooter.style.padding = this.footerPadding + "px";
-            this.pwaFooter.style.footerHeight = (this.footerHeight - (2 * this.footerPadding)) + "px";
-            if (this.pwaBody) this.pwaBody.style.bottom = 30 + "px";
+            (<Div>this.pwaFooter).style.display = "";
+            (<Div>this.pwaFooter).style.padding = this.footerPadding + "px";
+            (<Div>this.pwaFooter).style.footerHeight = (this.footerHeight - (2 * this.footerPadding)) + "px";
+            if (this.pwaBody) (<Div>this.pwaBody).style.bottom = 30 + "px";
         }
     }
 
