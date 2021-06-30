@@ -1,4 +1,4 @@
-import * as jsdom from "wasmdom-jsdom";
+import {jsdom} from "wasmdom";
 
 class Debug {
     public static log(v: string): void {

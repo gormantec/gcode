@@ -1,6 +1,6 @@
 import { Account } from "./account";
 import { Window , fetch } from "wasmdom";
-import {  Promise,Response } from "wasmdom-globals";
+import {  Response } from "wasmdom-globals";
 //import { JSON } from "assemblyscript-json"; 
 
 
@@ -50,7 +50,7 @@ export class Contract {
                         }`).then((r: Response) => {
                             Window.window.console.log("then");
                             return r.text();
-                        }).thenString((text: string) => {
+                        },null).thenString((text: string) => {
                             Window.window.console.log("thenString");
                             Window.window.console.log(text);
                             return null;

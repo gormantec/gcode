@@ -1,4 +1,4 @@
-import * as jsdom from "wasmdom-jsdom";
+import {jsdom} from "wasmdom";
 import { Debug } from "../lib/debug";
 
 export class Response{

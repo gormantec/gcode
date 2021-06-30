@@ -498,7 +498,7 @@ public querySelectorAll(q:string):Element[]{
     Debug.log("[Element::querySelectorAll] start");
     var rs:Int32Array = jsdom.querySelectorAll(this.pointer,q);
     var e:Element[] = [];
-    var e:Array<Element> = [];
+    //var e:Array<Element> = [];
     if(rs && rs.length>0){
         for(var i:i32=0;i<rs.length;i++)
         {
