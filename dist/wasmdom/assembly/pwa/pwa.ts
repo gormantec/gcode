@@ -3,7 +3,7 @@ import { Window, setTimeout, fetch,  } from "../dom/window";
 import { Element, EventCallback, Callback } from "../dom/element";
 import { Style } from "../dom/style";
 import { addMockFrame } from "../dom/mockFrameModule";
-import { Debug, Promise, Response } from "wasmdom-globals"
+import { Debug, Promise, Response } from "wasmdom-globals";
 
 
 
