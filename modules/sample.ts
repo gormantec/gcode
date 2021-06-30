@@ -19,7 +19,7 @@ export function run(w: Window, d: Document, c: Console): i32 {
         backgroundSize: "75%",
         backgroundRepeat: "no-repeat",
         backgroundImage: "url(https://c7.uihere.com/files/614/185/190/sun-solar-flare-uv-uv-light.jpg)"
-    });
+    }); 
 
     secondPage = new Page(<PageParams>{
         color: "black",
