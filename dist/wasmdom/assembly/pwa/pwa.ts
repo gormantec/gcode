@@ -313,15 +313,15 @@ class PWA {
     showFooter(): void {
         if (this.pwaFooter) {
             (<Div>this.pwaFooter).style.display = "";
-            (<Div>this.pwaFooter).style.padding = this.footerPadding + "px";
-            (<Div>this.pwaFooter).style.footerHeight = (this.footerHeight - (2 * this.footerPadding)) + "px";
-            if (this.pwaBody) (<Div>this.pwaBody).style.bottom = 30 + "px";
+            (<Div>this.pwaFooter).style.padding = this.footerPadding.toString() + "px";
+            (<Div>this.pwaFooter).style.footerHeight = (this.footerHeight - (2 * this.footerPadding)).toString() + "px";
+            if (this.pwaBody) (<Div>this.pwaBody).style.bottom = "30px";
         }
     }
 
     showHeader(): void {
-        if (this.pwaHeader) this.pwaHeader.style.display = "";
-        if (this.pwaBody) this.pwaBody.style.top = this.headerHeight + "px";
+        if (this.pwaHeader) (<Div>this.pwaHeader).style.display = "";
+        if (this.pwaBody) (<Div>this.pwaBody).style.top = this.headerHeight + "px";
     }
     hideFooter(): void {
         if (this.pwaFooter) (<Div>this.pwaFooter).style.display = "none";
