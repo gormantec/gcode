@@ -5,6 +5,7 @@ import { getScript } from '/modules/getScript.mjs';
 import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
 import { md5 } from '/modules/htmlUtils.mjs';
 
+
 const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
@@ -90,7 +91,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                                 return _fileData;
                                             }
-                                            if (name == editorFilename || (name.indexOf("wasmdom/") >= 0 && name.endsWith(editorFilename))) {
+                                            if (name == editorFilename || (name.indexOf("wasmdom-jsdom/") >= 0 && name.endsWith(editorFilename))) {
 
                                                 window.debug.log("Got App:" + name);
                                                 console.log(baseDir+" / "+name); 
