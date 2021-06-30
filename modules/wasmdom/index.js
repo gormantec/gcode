@@ -29,6 +29,9 @@ loader.instantiate(doFetch?fetch(wasmdomFile):wasmdomFile, importObject.imports)
         console.log("__newArray = "+exports["__newArray"]);
         console.log("__newString = "+exports["__newString"]);
         console.log("show = "+exports["show"]);
+        console.log(module);
+        console.log(instance);
+        console.log(exports);
     }
 }
 );
