@@ -44,7 +44,7 @@ export function init(window,_fetch,_Response) {
       _wasm=w;
     },
     imports:{
-      wasmdom_jsdom: {
+      "wasmdom-jsdom": {
       getWindow: ()=>{
         return _wp;
       },

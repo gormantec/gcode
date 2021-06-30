@@ -2,7 +2,7 @@ const fs = require("fs");
 const loader = require("@assemblyscript/loader");
 
 const imports = {
-    wasmdom_jsdom: {
+    "wasmdom-jsdom": {
         getWindow: () => {
             return _wp;
         },
