@@ -1,6 +1,7 @@
 import { Account } from "./account";
-import { Window , Promise, fetch,Response } from "wasmdom/dom";
-import { JSON } from "assemblyscript-json"; 
+import { Window , fetch } from "wasmdom";
+import {  Promise,Response } from "wasmdom-globals";
+//import { JSON } from "assemblyscript-json"; 
 
 
 export class ContractMethods {
