@@ -1,4 +1,4 @@
 export * from "./dom";
 export * from "./pwa";
-export * as jsdom from "./wasmdom";
-
+import * as jsdom from "./wasmdom";
+export {jsdom};
