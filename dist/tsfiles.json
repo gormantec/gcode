@@ -100,7 +100,7 @@
   "a87bf1952842b5b8caf83347e3d368f4":"/dist/assemblyscript-json/assembly/__tests__/usage.spec.ts",
   "7fb9c1fc1a271e8f8324df8baf96cd06":"/dist/assemblyscript-json/assembly/index.ts",
   "9e56cad84f59a22774b40aa7cc3790a4":"/dist/assemblyscript-json/assembly/decoder.ts",
-  "9a339651f2a8ec8fe5341d26ef2de475":"/dist/wasmdom-jsdom/assembly/wasmdom_jsdom.ts",
+  "66627b998980153842a0783eb90eb327":"/dist/wasmdom-jsdom/assembly/wasmdom-jsdom.ts",
   "0354195e59904a0e3d86ed0bc0bc3a70":"/dist/wasmdom-jsdom/assembly/index.ts",
   "ac17ccfe8e5df7481d403390bf2c93db":"/dist/wasmdom-jsdom/assembly/src/app.ts",
   "4d849341fb7cf6467ed55444ca2b2b1b":"/dist/wasmdom-jsdom/index.d.ts",
