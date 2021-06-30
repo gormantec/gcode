@@ -6,4 +6,4 @@ class Debug {
     }
 };
 
-export{Debug};
+export{Debug}; 
