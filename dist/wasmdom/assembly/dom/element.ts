@@ -62,7 +62,7 @@ constructor(name:string,p:i32 = -1) {
 
 static _findElementByPointer(p:i32):Element|null
 {
-    Debug.log("[findElementByPointer:start] p="+p.toString()+" count="+this._elements.length.toString());
+    //Debug.log("[findElementByPointer:start] p="+p.toString()+" count="+this._elements.length.toString());
     var result:Element|null=null;  
     if(this._elements!=null && this._elements.length>0)
     {
@@ -72,13 +72,13 @@ static _findElementByPointer(p:i32):Element|null
         }
     }
     var r:string = (result!=null)?(<Element>result).toString():"";
-    Debug.log("[findElementByPointer:end] "+r);
+    //Debug.log("[findElementByPointer:end] "+r);
     return result;
 }
 
 static fromPointer(p:i32):Element
 {
-    Debug.log("[Element:fromPointer] "+p.toString());
+    //Debug.log("[Element:fromPointer] "+p.toString());
     var e1:Element|null = Element._findElementByPointer(p);
     if(e1){
         var e2:Element =e1;
@@ -156,7 +156,7 @@ public childElementCount():i32 {return 0;}
  * Returns a collection of an element's child nodes (including text and comment nodes)
  */
 public get childNodes():Element[]{
-    Debug.log("childNodes");
+    //Debug.log("childNodes");
     return this.children;
 }
 
@@ -251,7 +251,7 @@ public set className(s:string|null)
  * Returns the first child node of an element
  */
 public get firstChild():Element|null{
-    Debug.log("[firstChild:start]");
+    //Debug.log("[firstChild:start]");
     var rs:Int32Array = jsdom.children(this.pointer);
     if(rs.length<1){
         return null;
@@ -352,7 +352,7 @@ public set innerText(text:string){jsdom.setInnerText(this.pointer,text)};
  */
 public insertBefore( newnode:Element,existingnode:Element|null):void
 {
-    Debug.log("[insertBefore:start]");
+    //Debug.log("[insertBefore:start]");
     if(existingnode){
         jsdom.insertBefore(this.pointer,newnode.pointer,existingnode.pointer);
     }
@@ -495,7 +495,7 @@ public get nodeName():string{
  * Returns all child elements that matches a specified CSS selector(s) of an element
  */
 public querySelectorAll(q:string):Element[]{
-    Debug.log("[Element::querySelectorAll] start");
+    //Debug.log("[Element::querySelectorAll] start");
     var rs:Int32Array = jsdom.querySelectorAll(this.pointer,q);
     var e:Element[] = [];
     //var e:Array<Element> = [];
@@ -505,7 +505,7 @@ public querySelectorAll(q:string):Element[]{
             e.push(Element.fromPointer(rs[i]));
         }
     }
-    Debug.log("[Element::querySelectorAll] end");
+    //Debug.log("[Element::querySelectorAll] end");
     return e;
 }
 

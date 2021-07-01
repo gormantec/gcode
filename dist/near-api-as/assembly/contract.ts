@@ -32,7 +32,7 @@ export class Contract {
         this.contractId = contractId;
         var i: i32 = 0;
 
-        Window.window.console.log("new Contract");
+        //Window.window.console.log("new Contract");
         for (i = 0; i < options.viewMethods.length; i++) {
             const _methodName = options.viewMethods[i];
             this.methods.push({
@@ -59,7 +59,7 @@ export class Contract {
         }
         var p: string = "{}";
         if (params.paramaters) p = <string>params.paramaters;
-        Window.window.console.log("fetch");
+        //Window.window.console.log("fetch");
         let p1:Promise=fetch("https://rpc." + this.account.connection.networkId + ".near.org", "POST", '{"Content-Type":"application/json"}',
             `{
             "jsonrpc": "2.0",
@@ -74,7 +74,7 @@ export class Contract {
             }
             }`);
             let p2:Promise=p1.then((r: Response) => {
-                Window.window.console.log("then");
+                //Window.window.console.log("then");
                 return r.text();
             }, null);
 
