@@ -203,7 +203,7 @@ export function init(window,_fetch,_Response) {
         else return -1;
       },
       newPromise: ()=>{
-        var p=new Promise();
+        var p=new Promise((resolve,reject)=>{});
         return getPointer(p);
       },
       fetch: (uri,method,headers,body)=>
