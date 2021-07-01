@@ -92,7 +92,7 @@ export class Contract {
                             }
                             else if(arr[i].isInteger){
 
-                                let v:number=(<JSON.Integer>arr[i]).valueOf();
+                                let v:i64=(<JSON.Integer>arr[i]).valueOf();
                                 aUint8Array[i]=<u32>v;
                             }
                         }
