@@ -1,7 +1,7 @@
 import { Account } from "./account";
 import { Window , fetch } from "wasmdom";
 import {  Response } from "wasmdom-globals";
-//import { JSON } from "assemblyscript-json"; 
+import { JSON } from "assemblyscript-json"; 
 import { encode, decode } from "as-base64";
 
 
@@ -80,6 +80,10 @@ export class Contract {
                     },null).thenString((text: string) => {
                         Window.window.console.log("thenString");
                         Window.window.console.log(text);
+                        let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
+                        let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
+                        let resultValueObj: JSON.Value = (<JSON.Value>resultObj.getValue("result"));
+                        Window.window.console.log(resultValueObj.toString());
                         return null;
                     });
             }

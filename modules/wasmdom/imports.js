@@ -197,7 +197,7 @@ export function init(window,_fetch,_Response) {
       getResponseJSON: (p)=>{
         var r=getObject(p);
         if(r instanceof Response){
-          var textPromise = getObject(p).text();
+          var textPromise = JSON.stringify(getObject(p).json());
           return getPointer(textPromise);
         }
         else return -1;
