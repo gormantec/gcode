@@ -33,8 +33,9 @@ export class Contract {
 
         Window.window.console.log("new Contract");
         for( i=0;i<options.viewMethods.length;i++) {
+            const _methodName=options.viewMethods[i];
             this.methods.push({
-                methodName: options.viewMethods[i], exec: () => {
+                methodName: _methodName, exec: () => {
                     Window.window.console.log("fetch");
 
                     fetch("https://rpc.testnet.near.org","POST",'{"Content-Type":"application/json"}',
@@ -43,11 +44,13 @@ export class Contract {
                             "id": "dontcare",
                             "method": "query",
                             "params": {
-                                "request_type": "view_account",
-                                "finality": "final",
-                                "account_id": "nearkat.testnet"
+                              "request_type": "call_function",
+                              "finality": "final",
+                              "account_id": "`+this.contractId+`",
+                              "method_name": "`+_methodName+`",
+                              "args_base64": "e30="
                             }
-                        }`).then((r: Response) => {
+                          }`).then((r: Response) => {
                             Window.window.console.log("then");
                             return r.text();
                         },null).thenString((text: string) => {
@@ -61,7 +64,9 @@ export class Contract {
             });
         }
         for( i=0;i<options.changeMethods.length;i++) {
-            this.methods.push({methodName:options.changeMethods[i],exec:()=>{return "{}";}});
+            this.methods.push({methodName:options.changeMethods[i],exec:()=>{
+                return "{}";
+            }});
         };
     }
 
