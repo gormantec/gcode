@@ -77,31 +77,30 @@ export class Contract {
                 Window.window.console.log("then");
                 return r.text();
             }, null);
-            let p3:Promise=p2.thenString((text: string) => {
-                Window.window.console.log("thenString");
-                Window.window.console.log(text);
-                let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
-                let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
-                let resultValueObj: JSON.Arr = (<JSON.Arr>resultObj.getValue("result"));
-                let arr: JSON.Value[] = resultValueObj.valueOf();
-                let aUint8Array: Uint8Array = new Uint8Array(arr.length);
-                for (var i = 0; i < arr.length; i++) {
-                    if (arr[i].isNum) {
-                        aUint8Array[i] = <u32>(<JSON.Num>arr[i]).valueOf();
-                    }
-                    else if (arr[i].isInteger) {
 
-                        let v: i64 = (<JSON.Integer>arr[i]).valueOf();
-                        aUint8Array[i] = <u32>v;
-                    }
-                }
-                Window.window.console.log(String.UTF8.decode(aUint8Array.buffer));
-                //Window.window.console.log(String.UTF8.decode(decode(String.UTF8.decode(aUint8Array.buffer)).buffer));
-                p3.alertResponseText(String.UTF8.decode(aUint8Array.buffer));
-                return null;
-            });
 
-            return p3;
+            return p2;
+    }
+    
+    public static decodeResult(text:string):string
+    {
+
+        let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
+        let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
+        let resultValueObj: JSON.Arr = (<JSON.Arr>resultObj.getValue("result"));
+        let arr: JSON.Value[] = resultValueObj.valueOf();
+        let aUint8Array: Uint8Array = new Uint8Array(arr.length);
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].isNum) {
+                aUint8Array[i] = <u32>(<JSON.Num>arr[i]).valueOf();
+            }
+            else if (arr[i].isInteger) {
+
+                let v: i64 = (<JSON.Integer>arr[i]).valueOf();
+                aUint8Array[i] = <u32>v;
+            }
+        }
+        return String.UTF8.decode(aUint8Array.buffer);
     }
 
 }

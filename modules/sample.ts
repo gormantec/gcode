@@ -63,7 +63,11 @@ export function run(w: Window, d: Document, c: Console): i32 {
         const near = new Near(config);
         const account = new Account(near.connection, "hello.gormantec.testnet");
         const mycontract = new Contract(account, "hello.gormantec.testnet", { viewMethods: ["getGreeting"] });
-        mycontract.exec({ methodName: "getGreeting", paramaters: '{"accountId":"hello.gormantec.testnet"}' });
+        mycontract.exec({ methodName: "getGreeting", paramaters: '{"accountId":"hello.gormantec.testnet"}' }).thenString((text:string)=>{
+            Debug.log(">>NEAR: result:"+text);
+            Debug.log(">>NEAR: text:"+Contract.decodeResult(text));
+
+        });
         Debug.log(">>NEAR: Contract");
     }, 5000);
 
