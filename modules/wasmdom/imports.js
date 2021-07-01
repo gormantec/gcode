@@ -16,7 +16,7 @@ var getObject = function (pointer) {
   var i = objects.findIndex(item => item.id == pointer);
   if(objects[i])return objects[i].object;
   else{
-    console.log("Could not find pointer="+pointer+ " at "+ i + " in "+objects);
+    //console.log("Could not find pointer="+pointer+ " at "+ i + " in "+objects);
     return null;
   }
 };
@@ -113,7 +113,7 @@ export function init(window,_fetch,_Response) {
         return ptr
       },
       consoleLog: message => {
-        console.log("%c[AS] "+_wasm.__getString(message),"color: #008800");
+        //console.log("%c[AS] "+_wasm.__getString(message),"color: #008800");
       }
       ,setInnerHTML: (e,st)=>{
         getObject(e).innerHTML = _wasm.__getString(st);
@@ -216,13 +216,13 @@ export function init(window,_fetch,_Response) {
         {
           var p= getPointer(fetch(u));
 
-          console.log("fetch Pointer="+p);
+          //console.log("fetch Pointer="+p);
           return p;
         }
         else {
           var p= getPointer(fetch(u,{method:m,headers:JSON.parse(h),body:b}));
 
-          console.log("fetch Pointer="+p);
+          //console.log("fetch Pointer="+p);
           return p;
         }
 
@@ -231,16 +231,16 @@ export function init(window,_fetch,_Response) {
       {
         var promise= getObject(p);
         promise.then((res)=>{
-          console.log("__alertPromise");
-          console.log(res);
+          //console.log("__alertPromise");
+          //console.log(res);
           if(res instanceof Response)
           {
             var r= getPointer(res);
-            console.log("fetch Pointer="+p+ " Response="+r);
+            //console.log("fetch Pointer="+p+ " Response="+r);
             _wasm.__alertPromise(p,r);
           }
           else {
-            console.log("fetch Pointer="+p+ " Response="+r);
+            //console.log("fetch Pointer="+p+ " Response="+r);
             _wasm.__alertPromiseText(p,_wasm.__pin(_wasm.__newString(res.toString())));
           }
         });
