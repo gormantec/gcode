@@ -82,8 +82,15 @@ export class Contract {
                         Window.window.console.log(text);
                         let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
                         let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
-                        let resultValueObj: JSON.Value = (<JSON.Value>resultObj.getValue("result"));
-                        Window.window.console.log(resultValueObj.toString());
+                        let resultValueObj: JSON.Arr = (<JSON.Arr>resultObj.getValue("result"));
+                        let arr:JSON.Value[]=resultValueObj.valueOf();
+                        let aUint8Array:Uint8Array=new Uint8Array(arr.length);
+                        for(var i=0;i<arr.length;i++)
+                        {
+                            if(arr[i].isNum)aUint8Array[i]=(<JSON.Num>arr[i]).valueOf();
+                            else if(arr[i].isInteger)aUint8Array[i]=(<JSON.Num>arr[i]).valueOf();
+                        }
+                        Window.window.console.log(aUint8Array.toString());
                         return null;
                     });
             }
