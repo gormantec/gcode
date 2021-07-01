@@ -62,10 +62,10 @@ export class Contract {
                 var p:string="{}";
                 if(params.paramaters) p=<string>params.paramaters;
                 Window.window.console.log("fetch");
-                fetch("https://rpc.testnet.near.org","POST",'{"Content-Type":"application/json"}',
+                fetch("https://rpc."+this.account.connection.networkId+".near.org","POST",'{"Content-Type":"application/json"}',
                     `{
                         "jsonrpc": "2.0",
-                        "id": "dontcare",
+                        "id": "`+this.account.accountId+`",
                         "method": "query",
                         "params": {
                           "request_type": "call_function",
