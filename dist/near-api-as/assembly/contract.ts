@@ -97,7 +97,7 @@ export class Contract {
                             }
                         }
                         Window.window.console.log(String.UTF8.decode(aUint8Array.buffer));
-                        Window.window.console.log(String.UTF8.decode(decode(String.UTF8.decode(aUint8Array.buffer))));
+                        Window.window.console.log(String.UTF8.decode(decode(String.UTF8.decode(aUint8Array.buffer)).buffer));
                         
                         return null;
                     });
