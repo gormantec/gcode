@@ -45,7 +45,7 @@ export class Promise{
     public toString():string{
         return "Promise[pointer="+this.pointer.toString()+"]";
     }
-    public then(func:ResponseType<string|Response> =null,funcText:ResponseType<Response> = null):Promise
+    public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
     {
         Debug.log("Promises="+_promises.toString());
         this.afterThen= new Promise();
