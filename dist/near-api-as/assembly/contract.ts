@@ -14,6 +14,7 @@ export class ContractMethods {
 class Method
 {
     methodName:string;
+    methodType:string;
     exec:(params:ExecParams) => string;
 }
 
@@ -36,38 +37,18 @@ export class Contract {
         for( i=0;i<options.viewMethods.length;i++) {
             const _methodName=options.viewMethods[i];
             this.methods.push({
-                methodName: _methodName, exec: () => {
-                    Window.window.console.log("fetch");
-
-                    fetch("https://rpc.testnet.near.org","POST",'{"Content-Type":"application/json"}',
-                        `{
-                            "jsonrpc": "2.0",
-                            "id": "dontcare",
-                            "method": "query",
-                            "params": {
-                              "request_type": "call_function",
-                              "finality": "final",
-                              "account_id": "`+this.contractId+`",
-                              "method_name": "`+_methodName+`",
-                              "args_base64": "`+encode(Uint8Array.wrap(String.UTF8.encode("{}")))+`"
-                            }
-                          }`).then((r: Response) => {
-                            Window.window.console.log("then");
-                            return r.text();
-                        },null).thenString((text: string) => {
-                            Window.window.console.log("thenString");
-                            Window.window.console.log(text);
-                            return null;
-                        });
-
+                methodName: _methodName, methodType:"view",exec: (parrams) => {
                     return "";
                 }
             });
         }
         for( i=0;i<options.changeMethods.length;i++) {
-            this.methods.push({methodName:options.changeMethods[i],exec:()=>{
-                return "{}";
-            }});
+            const _methodName=options.changeMethods[i];
+            this.methods.push({
+                methodName: _methodName, methodType:"change",exec: (parrams) => {
+                    return "";
+                }
+            });
         };
     }
 
@@ -78,6 +59,29 @@ export class Contract {
             if(this.methods[i].methodName==params.methodName)
             {
                 this.methods[i].exec(params);
+                var p:string="{}";
+                if(params.paramaters) p=<string>params.paramaters;
+                Window.window.console.log("fetch");
+                fetch("https://rpc.testnet.near.org","POST",'{"Content-Type":"application/json"}',
+                    `{
+                        "jsonrpc": "2.0",
+                        "id": "dontcare",
+                        "method": "query",
+                        "params": {
+                          "request_type": "call_function",
+                          "finality": "final",
+                          "account_id": "`+this.contractId+`",
+                          "method_name": "`+params.methodName+`",
+                          "args_base64": "`+encode(Uint8Array.wrap(String.UTF8.encode("{}")))+`"
+                        }
+                      }`).then((r: Response) => {
+                        Window.window.console.log("then");
+                        return r.text();
+                    },null).thenString((text: string) => {
+                        Window.window.console.log("thenString");
+                        Window.window.console.log(text);
+                        return null;
+                    });
             }
         }
     }
