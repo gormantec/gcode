@@ -72,7 +72,7 @@ export class Contract {
                           "finality": "final",
                           "account_id": "`+this.contractId+`",
                           "method_name": "`+params.methodName+`",
-                          "args_base64": "`+encode(Uint8Array.wrap(String.UTF8.encode("{}")))+`"
+                          "args_base64": "`+encode(Uint8Array.wrap(String.UTF8.encode(p)))+`"
                         }
                       }`).then((r: Response) => {
                         Window.window.console.log("then");
