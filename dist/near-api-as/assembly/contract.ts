@@ -2,6 +2,7 @@ import { Account } from "./account";
 import { Window , fetch } from "wasmdom";
 import {  Response } from "wasmdom-globals";
 //import { JSON } from "assemblyscript-json"; 
+import { encode, decode } from "as-base64";
 
 
 export class ContractMethods {
@@ -48,7 +49,7 @@ export class Contract {
                               "finality": "final",
                               "account_id": "`+this.contractId+`",
                               "method_name": "`+_methodName+`",
-                              "args_base64": "e30="
+                              "args_base64": "`+encode(Uint8Array.wrap(String.UTF8.encode("{}")))+`"
                             }
                           }`).then((r: Response) => {
                             Window.window.console.log("then");
