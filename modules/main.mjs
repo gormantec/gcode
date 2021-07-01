@@ -257,7 +257,7 @@ function _runCode() {
             var code = window.editor.getValue();
             run(
                 code,
-                "/node_modules/wasmdom/assembly/index.ts",
+                "/node_modules/wasmdom-jsdom/assembly/index.ts",
                 "wasmdom-jsdom/assembly/src/app.ts",
                 "optimized.wasm",
                 false,

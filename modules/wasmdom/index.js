@@ -3,9 +3,9 @@ import {init} from './imports.js'
 
 const importObject = init(window);
 var doFetch=true;
-var wasmdomFile="https://gcode.com.au/modules/wasmdom.wasm";
+var wasmdomFile="https://gcode.com.au/modules/wasmdom-jsdom.wasm";
 if(window.location.hostname.indexOf("localhost")>=0){
-  wasmdomFile="/wasmdom.wasm";
+  wasmdomFile="/wasmdom-jsdom.wasm";
   console.log("using local file");
 }
 else if(window.wasmdomUint8Array instanceof Uint8Array){
