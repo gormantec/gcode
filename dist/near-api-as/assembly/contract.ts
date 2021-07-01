@@ -96,7 +96,9 @@ export class Contract {
                                 aUint8Array[i]=<u32>v;
                             }
                         }
-                        Window.window.console.log(aUint8Array.toString());
+                        Window.window.console.log(String.UTF8.decode(aUint8Array));
+                        Window.window.console.log(String.UTF8.decode(decode(String.UTF8.decode(aUint8Array))));
+                        
                         return null;
                     });
             }
