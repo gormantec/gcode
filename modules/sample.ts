@@ -59,13 +59,14 @@ export function run(w: Window, d: Document, c: Console): i32 {
     window.setTimeout(function () {
         Debug.log(">>NEAR: ");
         var aKeyStore = new BrowserLocalStorageKeyStore();
-        const config = new NearConfig(aKeyStore, "testnet", "gcode-ec464352008.testnet");
+        const config = new NearConfig(aKeyStore, "testnet", "hello.gormantec.testnet");
         const near = new Near(config);
-        const account = new Account(near.connection, "gcode-ec464352008.testnet");
-        const mycontract = new Contract(account, "gcode-ec464352008.testnet", { changeMethods: ["setKey"], viewMethods: ["getKey"] });
-        mycontract.exec({ methodName: "getKey", paramaters: '{"a":"a"}}' });
+        const account = new Account(near.connection, "hello.gormantec.testnet");
+        const mycontract = new Contract(account, "hello.gormantec.testnet", { viewMethods: ["getGreeting"] });
+        mycontract.exec({ methodName: "getGreeting", paramaters: '{"accountId":"hello.gormantec.testnet"}' });
         Debug.log(">>NEAR: Contract");
     }, 5000);
+
 
 
     return 0;
