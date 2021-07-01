@@ -108,11 +108,11 @@ class PWA {
     }
 
     setHeader(): void {
-        Debug.log("[setHeader]");
+        //Debug.log("[setHeader]");
         if (this.pwaHeader) this.pwaRoot.removeChild(<Div>this.pwaHeader);
         this.navigateBackButton = new Div(<DivParams>{ id: "pwaheaderback", child: new Div(<DivParams>{ tagName: "i", "class": "material-icons", classNameOverride: true, innerText: "keyboard_arrow_left" }) });
         (<Div>this.navigateBackButton).onclick(() => {
-            Debug.log("click");
+            //Debug.log("click");
             if (_thisPWA) (<PWA>_thisPWA)._navigateBackButtonClicked();
         });
         this.pwaHeader = new Div(<DivParams>{
@@ -132,7 +132,7 @@ class PWA {
 
 
     setBody(): void {
-        Debug.log("[setBody]");
+        //Debug.log("[setBody]");
         if (this.pwaBody) this.pwaRoot.removeChild(<Div>this.pwaBody);
         this.pwaBody = new Div(<DivParams>{ id: "pwabody" });
         if (this.pwaFooter) this.pwaRoot.insertBefore(<Div>this.pwaBody, <Div>this.pwaFooter);
@@ -140,15 +140,15 @@ class PWA {
     }
 
     setPage(aPage: Page): void {
-        Debug.log("[setPage] " + aPage.element.toString());
+        //Debug.log("[setPage] " + aPage.element.toString());
         if (aPage.navigateBackPage) {
-            Debug.log("[setPage] navigateBackPage=" + (<Div>(aPage.navigateBackPage)).element.toString());
+            //Debug.log("[setPage] navigateBackPage=" + (<Div>(aPage.navigateBackPage)).element.toString());
             this.setNavigateBackPage(<Page>aPage.navigateBackPage);
         }
-        Debug.log("[setPage]");
+        //Debug.log("[setPage]");
         if (this.pwaBody) {
-            Debug.log("[setPage] pwaBody " + (<Div>this.pwaBody).toString());
-            Debug.log("[setPage] pwaBody " + (<Div>this.pwaBody).element.toString());
+            //Debug.log("[setPage] pwaBody " + (<Div>this.pwaBody).toString());
+            //Debug.log("[setPage] pwaBody " + (<Div>this.pwaBody).element.toString());
         }
 
         if (this.pwaBody) (<Div>this.pwaBody).setChild(aPage);
@@ -156,7 +156,7 @@ class PWA {
     }
 
     setFloatingActionButton(): void {
-        Debug.log("[setFloatingActionButton:start]");
+        //Debug.log("[setFloatingActionButton:start]");
         if (this.floatingActionButton) this.pwaOverlay.removeChild(<Div>this.floatingActionButton);
         this.floatingActionButton = new Div(<DivParams>{
             "class": "floatingActionButton",
@@ -170,10 +170,10 @@ class PWA {
         (<Div>this.floatingActionButton).style.backgroundColor = this.primaryColor;
         (<Div>this.floatingActionButton).style.color = this.primaryColorText;
         this.pwaOverlay.appendChild(<Div>this.floatingActionButton);
-        Debug.log("[setFloatingActionButton:end]");
+        //Debug.log("[setFloatingActionButton:end]");
     }
     setFooter(): void {
-        Debug.log("[setFooter]");
+        //Debug.log("[setFooter]");
         if (this.pwaFooter) this.pwaRoot.removeChild(<Div>this.pwaFooter);
         this.pwaFooter = new Div(<DivParams>{ id: "pwafooter", tagName: "footer", innerHTML: this.footer });
         (<Div>this.pwaFooter).style.backgroundColor = this.primaryColor;
@@ -182,7 +182,7 @@ class PWA {
     }
 
     addMeta(targetDocument: Document, name: string, content: string): void {
-        Debug.log("[addMeta]");
+        //Debug.log("[addMeta]");
         var _meta = targetDocument.createElement("meta");
         _meta.setAttribute("name", name);
         _meta.setAttribute("content", content);
@@ -194,7 +194,7 @@ class PWA {
         }
     }
     addLink(targetDocument: Document, rel: string, href: string): void {
-        Debug.log("[addLink]");
+        //Debug.log("[addLink]");
         var _meta = targetDocument.createElement("link");
         _meta.setAttribute("rel", rel);
         _meta.setAttribute("href", href);
@@ -203,7 +203,7 @@ class PWA {
         targetDocument.head.insertBefore(_meta, styleOrScript);
     }
     addStyle(targetDocument: Document, href: string, callback: () => void): void {
-        Debug.log("[addStyle]");
+        //Debug.log("[addStyle]");
         var _style = targetDocument.createElement("link");
         _style.setAttribute("rel", "stylesheet");
         _style.setAttribute("href", href);
@@ -221,7 +221,7 @@ class PWA {
 
 
     addStyleTag(targetDocument: Document, id: string, text: string): void {
-        Debug.log("[addStyleTag]");
+        //Debug.log("[addStyleTag]");
         var _style = targetDocument.createElement("style");
         _style.setAttribute("id", id);
         _style.innerText = text;
@@ -237,14 +237,14 @@ class PWA {
 
 
     show(win: Window): void {
-        Debug.log("[show]");
+        //Debug.log("[show]");
         Window.window = win;
         _rootWindow = win.document.body;
         _thisMSEC = <i32>Date.now();
         const urlParams = new URLSearchParams(win.location.search);
-        Debug.log("urlParams.mockFrame="+urlParams.get("mockFrame"));
-        if(win.location.search) Debug.log("win.location.search="+<String>win.location.search);
-        var mockFrame = urlParams.get("mockFrame");
+        //Debug.log("urlParams.mockFrame="+urlParams.get("mockFrame"));
+        //if(win.location.search) //Debug.log("win.location.search="+<String>win.location.search);
+        var mockFrame:string = urlParams.get("mockFrame");
         var aPWA = this;
         if (mockFrame && mockFrame.length>0) {
             _rootWindow=addMockFrame(win, aPWA, mockFrame);
@@ -268,26 +268,26 @@ class PWA {
         _thisPWA = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
 
-            Debug.log("[show:8]");
+            //Debug.log("[show:8]");
 
             (<PWA>_thisPWA).addStyle(Window.window.document, "https://gcode.com.au/css/pwa.css", function () {
 
-                Debug.log("[show:9]");
+                //Debug.log("[show:9]");
 
-                if (Window.window.PWA.globals.splashDuration) Debug.log("splashDuration:" + <string>Window.window.PWA.globals.splashDuration);
+                if (Window.window.PWA.globals.splashDuration) //Debug.log("splashDuration:" + <string>Window.window.PWA.globals.splashDuration);
                 if (Window.window.PWA.globals.splashDuration) (<PWA>_thisPWA).splashDuration = <i32>parseInt(<string>Window.window.PWA.globals.splashDuration);
                 else if (!(<PWA>_thisPWA).splashDuration) (<PWA>_thisPWA).splashDuration = 2000;
                 var timeoutMs: i32 = (<PWA>_thisPWA).splashDuration - <i32>(Date.now() - _thisMSEC);
-                Debug.log("timeoutMs:" + timeoutMs.toString());
+                //Debug.log("timeoutMs:" + timeoutMs.toString());
 
                 if (timeoutMs < 0) timeoutMs = 10;
-                Debug.log("SHOW in " + timeoutMs.toString());
+                //Debug.log("SHOW in " + timeoutMs.toString());
                 setTimeout(function () {
-                    Debug.log("[show:10]");
+                    //Debug.log("[show:10]");
                     while (_rootWindow.firstChild) _rootWindow.removeChild(_rootWindow.lastChild);
                     //Window.window.document.body.style.backgroundColor = (<PWA>_thisPWA).primaryColor;
                     //Window.window.document.body.style.color = (<PWA>_thisPWA).primaryColorText;
-                    Debug.log("SHOW");
+                    //Debug.log("SHOW");
                     _rootWindow.appendChild((<PWA>_thisPWA).pwaRoot.element);
                     _rootWindow.appendChild((<PWA>_thisPWA).pwaOverlay.element);
                     (<PWA>_thisPWA).fadeIn((<PWA>_thisPWA).pwaRoot.element, 500);
@@ -387,7 +387,7 @@ class Div {
         if (params && !params.classNameOverride) this.element.className = "pwadiv";
         if (params instanceof Div) this.element.appendChild(params.element);
         else if (params && params.innerText) {
-            Debug.log("innerText:" + <string>params.innerText);
+            //Debug.log("innerText:" + <string>params.innerText);
             this.element.innerText = <string>params.innerText;
         }
         else if (params && params.innerHTML && (<string>params.innerHTML).substring(0, 4).toLowerCase() == "url(") {
@@ -478,15 +478,15 @@ class Div {
     }
 
     setChild(child: Div): void {
-        Debug.log("setChild this = " + this.element.nodeName + " " + this.element.toString());
-        Debug.log("setChild child = " + child.element.nodeName + " " + child.element.toString());
+        //Debug.log("setChild this = " + this.element.nodeName + " " + this.element.toString());
+        //Debug.log("setChild child = " + child.element.nodeName + " " + child.element.toString());
         //if (!params && !params.child) return;
         this.element.innerHTML = "";
         this.appendChild(child);
     }
 
     appendChild(child: Div): void {
-        Debug.log("appendChild");
+        //Debug.log("appendChild");
         this.element.appendChild(child.element);
     }
 

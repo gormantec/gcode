@@ -63,11 +63,8 @@ export class Window {
     {        
         var p:i32 = jsdom.fetch(uri,method,headers,body);
 
-        Debug.log("fetch Promise====>"+p.toString());
         var pr:Promise = new Promise(p);
-        Debug.log("fetch Promise=====>"+Promise.getPromises().toString());
 
-        Promise.fromPointer(p);
 
         return pr;
     }
@@ -76,9 +73,7 @@ export class Window {
 class Location {
     public get search(): string
     {
-        Debug.log("------------------->Location.search");
         var s:string=jsdom.getWindowLocationSearch();
-        Debug.log("------------------->Location.search="+s);
         return s;
     }
 }

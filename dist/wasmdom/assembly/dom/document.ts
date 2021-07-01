@@ -12,14 +12,14 @@ class Document {
     documentElement: Element;
     debug: Debug;
     constructor() {
-        Debug.log("[Document:constructor] start");
+        //Debug.log("[Document:constructor] start");
         this.debug = new Debug();
         var apointer = jsdom.getDocument();
-        Debug.log("[Document:apointer] "+apointer.toString());
+        //Debug.log("[Document:apointer] "+apointer.toString());
         apointer=jsdom.getDocumentElement();
-        Debug.log("[DocumentElement:apointer] "+apointer.toString());
+        //Debug.log("[DocumentElement:apointer] "+apointer.toString());
         this.documentElement = Element.fromPointer(apointer);
-        Debug.log("[Document:constructor] end");  
+        //Debug.log("[Document:constructor] end");  
     }
 
     public get head():Element{
@@ -30,7 +30,7 @@ class Document {
     }
 
     public createElement(s: string): Element {
-        Debug.log("createElement");
+        //Debug.log("createElement");
         return new Element(s);
     }
     /**
@@ -53,7 +53,7 @@ class Document {
                 e.push(Element.fromPointer(rs[i]));
             }
         }
-        Debug.log("[Element::querySelectorAll] end");
+        //Debug.log("[Element::querySelectorAll] end");
         return e;
     }
 }
