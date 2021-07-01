@@ -109,5 +109,10 @@ export class Promise{
         Debug.log(MY_NAME);
         return _promises;
     }
+
+    public static newPromise(resolve:()=>void,reject:()=>void):Promise
+    {
+        return new Promise(jsdom.newPromise());
+    }
 }
  

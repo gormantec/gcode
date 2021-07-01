@@ -202,6 +202,10 @@ export function init(window,_fetch,_Response) {
         }
         else return -1;
       },
+      newPromise: ()=>{
+        var p=new Promise();
+        return getPointer(p);
+      },
       fetch: (uri,method,headers,body)=>
       {
         var m=_wasm.__getString(method);
