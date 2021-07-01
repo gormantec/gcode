@@ -17,6 +17,7 @@ else if(window.wasmdomURL && window.wasmdomURL.length>0){
   console.log("found wasmdomURL");
 }
 console.log("doFetch="+doFetch);
+console.log(importObject.imports);
 loader.instantiate(doFetch?fetch(wasmdomFile):wasmdomFile, importObject.imports).then(({module, instance, exports}) =>{
     if(exports["__newArray"] && exports["__newString"] && exports["show"])
     {
