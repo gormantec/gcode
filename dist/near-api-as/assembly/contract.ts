@@ -87,8 +87,8 @@ export class Contract {
                         let aUint8Array:Uint8Array=new Uint8Array(arr.length);
                         for(var i=0;i<arr.length;i++)
                         {
-                            if(arr[i].isNum)aUint8Array[i]=(<JSON.Num>arr[i]).valueOf();
-                            else if(arr[i].isInteger)aUint8Array[i]=(<JSON.Num>arr[i]).valueOf();
+                            if(arr[i].isNum)aUint8Array[i]=<u32>(<JSON.Num>arr[i]).valueOf();
+                            else if(arr[i].isInteger)aUint8Array[i]=<u32>(<JSON.Num>arr[i]).valueOf();
                         }
                         Window.window.console.log(aUint8Array.toString());
                         return null;
