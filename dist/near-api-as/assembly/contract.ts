@@ -60,7 +60,7 @@ export class Contract {
         var p: string = "{}";
         if (params.paramaters) p = <string>params.paramaters;
         Window.window.console.log("fetch");
-        fetch("https://rpc." + this.account.connection.networkId + ".near.org", "POST", '{"Content-Type":"application/json"}',
+        let p1:Promise=fetch("https://rpc." + this.account.connection.networkId + ".near.org", "POST", '{"Content-Type":"application/json"}',
             `{
             "jsonrpc": "2.0",
             "id": "`+ this.account.accountId + `",
@@ -72,10 +72,12 @@ export class Contract {
                 "method_name": "`+ params.methodName + `",
                 "args_base64": "`+ encode(Uint8Array.wrap(String.UTF8.encode(p))) + `"
             }
-            }`).then((r: Response) => {
+            }`);
+            let p2:Promise=p1.then((r: Response) => {
                 Window.window.console.log("then");
                 return r.text();
-            }, null).thenString((text: string) => {
+            }, null);
+            let p3:Promise=p2.thenString((text: string) => {
                 Window.window.console.log("thenString");
                 Window.window.console.log(text);
                 let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
@@ -95,10 +97,11 @@ export class Contract {
                 }
                 Window.window.console.log(String.UTF8.decode(aUint8Array.buffer));
                 //Window.window.console.log(String.UTF8.decode(decode(String.UTF8.decode(aUint8Array.buffer)).buffer));
+                p3.alertResponseText(String.UTF8.decode(aUint8Array.buffer));
                 return null;
             });
 
-            return Promise.newPromise(()=>{},()=>{});
+            return p3;
     }
 
 }
