@@ -113,7 +113,7 @@ export function init(window,_fetch,_Response) {
         return ptr
       },
       consoleLog: message => {
-        //console.log("%c[AS] "+_wasm.__getString(message),"color: #008800");
+        console.log("%c[AS] "+_wasm.__getString(message),"color: #008800");
       }
       ,setInnerHTML: (e,st)=>{
         getObject(e).innerHTML = _wasm.__getString(st);
