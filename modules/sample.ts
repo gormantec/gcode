@@ -66,6 +66,7 @@ export function run(w: Window, d: Document, c: Console): i32 {
         mycontract.exec({ methodName: "getGreeting", paramaters: '{"accountId":"hello.gormantec.testnet"}' }).thenString((text:string)=>{
             Debug.log(">>NEAR: result:"+text);
             Debug.log(">>NEAR: text:"+Contract.decodeResult(text));
+            return null;
 
         });
         Debug.log(">>NEAR: Contract");
