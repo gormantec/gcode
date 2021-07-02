@@ -17,26 +17,26 @@ function show(): i32 {
 }
 
 function __alertEventListener(p: i32, s: string): i32 {
-  Debug.log("---->" + typeof s);
-  Debug.log("---->" + s);
+  //Debug.log("---->" + typeof s);
+  //Debug.log("---->" + s);
   window.alertEventListener(p, s);
   return 0;
 }
 function __alertTimeout(guid: i32): i32 {
-  Debug.log("__alertTimeout" + guid.toString());
+  //Debug.log("__alertTimeout" + guid.toString());
   window.alertTimeout(guid);
   return 0;
 }
 
 function __alertPromise(p: i32,r: i32):i32{
-  Debug.log("__alertPromise::Promise="+p.toString());
-  Debug.log("Promises="+Promise.getPromises().toString());
+  //Debug.log("__alertPromise::Promise="+p.toString());
+  //Debug.log("Promises="+Promise.getPromises().toString());
   Promise.fromPointer(p).alertResponse(new Response(r));
   return 0;
 }
 function __alertPromiseText(p: i32,r: string):i32{
-  Debug.log("Promises="+Promise.getPromises().toString());
-  Debug.log("__alertPromiseText::Promise="+p.toString());
+  //Debug.log("Promises="+Promise.getPromises().toString());
+  //Debug.log("__alertPromiseText::Promise="+p.toString());
   Promise.fromPointer(p).alertResponseText(r);
   return 0;
 }
