@@ -1,6 +1,6 @@
-import { Window, Document, Console } from "wasmdom";
+
+import { Window, Document, Console, PWA, PWAParams, Page, PageParams, Div, DivParams } from 'wasmdom';
 import { Debug } from "wasmdom-globals";
-import { PWA, PWAParams, Page, PageParams, Div, DivParams } from 'wasmdom';
 import { Near, Account, NearConfig, Contract, BrowserLocalStorageKeyStore } from 'near-api-as';
 
 var homePage: Page;
@@ -35,11 +35,12 @@ export function run(w: Window, d: Document, c: Console): i32 {
     });
 
     aPWA.show(window);
+    console.log('PWA Loaded');
 
     if (aPWA.floatingActionButton) {
         var d1: Div = <Div>aPWA.floatingActionButton;
         d1.onclick(function () {
-            console.log("This will open a new page.");
+            console.log("Opening a new page");
             aPWA.setPage(secondPage);
         });
     }
@@ -49,15 +50,13 @@ export function run(w: Window, d: Document, c: Console): i32 {
         d2.style.backgroundColor = "black";
     }
 
-    Debug.log("****************** homepage1: " + homePage.toString());
     window.setTimeout(function () {
-        Debug.log("****************** homepage2: " + homePage.toString());
+        Debug.log("Homepage: loaded");
         aPWA.setPage(homePage);
     }, 1000);
-    console.log('new javascript file!');
 
     window.setTimeout(function () {
-        Debug.log(">>NEAR: ");
+        Debug.log(">>NEAR: contract executing");
         var aKeyStore = new BrowserLocalStorageKeyStore();
         const config = new NearConfig(aKeyStore, "testnet", "hello.gormantec.testnet");
         const near = new Near(config);
