@@ -130,7 +130,7 @@ export class Promise{
 
         return p;
     }
-    resolveFunc:((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null)|null;
-    globals:string[];
+    resolveFunc:((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null)|null=null;
+    globals:string[]=[];
 }
  
