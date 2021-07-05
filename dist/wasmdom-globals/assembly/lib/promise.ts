@@ -135,7 +135,7 @@ export class Promise{
 
     public static newPromise(func:(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null,g:string[]):Promise
     {
-        var p:Promise= new Promise(jsdom.newPromise());
+        var p:Promise= new Promise(-1);
 
         p.globals=g;
 
