@@ -60,9 +60,11 @@ export class Promise{
     {
         if(this.resolveFunc)
         {
+            Debug.log("-----------1");
             return <Promise>this.resolveFunc(func,()=>{return null;},<string[]>this.globals);
         }
         else{
+            Debug.log("-----------2");
             this.afterThen= new Promise();
             this.func=null;
             this.funcText=func;
