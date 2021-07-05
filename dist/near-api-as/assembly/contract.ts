@@ -77,9 +77,14 @@ export class Contract {
                 //Window.window.console.log("then");
                 return r.text();
             }, null);
+            let p3=p2.thenString((s:string)=>{
+                
+                return Promise.newPromise((resolve,reject,g)=>{
+                    resolve(Contract.decodeResult(g[0]));
+                },[s]);
+            });
 
-
-            return p2;
+            return p3;
     }
     
     public static decodeResult(text:string):string

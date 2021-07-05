@@ -41,6 +41,8 @@ export class Promise{
         //Debug.log("Added:"+pointer.toString());
         _promises.push(this);
         //Debug.log("Promises="+_promises.toString());
+        this.resolveFunc=null;
+        this.globals=[];
     }
     public toString():string{
         return "Promise[pointer="+this.pointer.toString()+"]";
@@ -58,11 +60,19 @@ export class Promise{
 
     public thenString(func:ResponseType<string> = null):Promise
     {
-        this.afterThen= new Promise();
-        this.func=null;
-        this.funcText=func;
-        if(this.pointer>=0)jsdom.then(this.pointer);
-        return <Promise>this.afterThen;
+        if(this.resolveFunc)
+        {
+            return <Promise>this.resolveFunc(func,()=>{return null;},<string[]>this.globals);
+        }
+        else{
+            this.afterThen= new Promise();
+            this.func=null;
+            this.funcText=func;
+            if(this.pointer>=0)jsdom.then(this.pointer);
+            return <Promise>this.afterThen;
+        }
+        
+
     }
     public alertResponse(r:Response):void{
         //Debug.log("got alertResponse");
@@ -110,9 +120,17 @@ export class Promise{
         return _promises;
     }
 
-    public static newPromise(resolve:()=>void,reject:()=>void):Promise
+    public static newPromise(func:(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null,g:string[]):Promise
     {
-        return new Promise(jsdom.newPromise());
+        var p:Promise= new Promise(jsdom.newPromise());
+
+        p.globals=g;
+
+        p.resolveFunc=func;
+
+        return p;
     }
+    resolveFunc:null|((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null);
+    globals:string[];
 }
  
