@@ -37,9 +37,11 @@ export class Promise{
     afterThen: Promise|null = null;
     resolveFunc:((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null)|null=null;
     globals:string[]=[];
+    name:string;
     
     constructor(pointer:i32=-1) {
         this.pointer=pointer;
+        this.name="Normal";
         _promises.push(this);
     }
     public toString():string{
@@ -138,6 +140,7 @@ export class Promise{
         p.globals=g;
 
         p.resolveFunc=func;
+        p.name="newPromise";
 
         return p;
     }
