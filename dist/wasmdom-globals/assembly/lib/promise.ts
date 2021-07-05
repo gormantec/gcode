@@ -71,20 +71,14 @@ export class Promise{
     public thenString(func:ResponseType<string> = null):Promise
     {
         Debug.log("-----------0:n="+this.name+" g="+this.globals.toString());
-        if(this.resolveFunc)
-        {
-            Debug.log("-----------1");
-            this.afterThen= <Promise>this.resolveFunc(func,()=>{return null;},<string[]>this.globals);
-            return <Promise>this.afterThen;
-        }
-        else{
+
             Debug.log("-----------2");
             this.afterThen= new Promise();
             this.func=null;
             this.funcText=func;
             if(this.pointer>=0)jsdom.then(this.pointer);
             return <Promise>this.afterThen;
-        }
+ 
         
 
     }
@@ -112,7 +106,13 @@ export class Promise{
         //Debug.log("got alertResponseText");
         if(this.funcText)
         {
+            Debug.log("----------- alertResponseText:"+r);
             this.funcText(r);
+        }
+        else if(this.resolveFunc)
+        {
+            Debug.log("----------- resolveFunc");
+            //this.resolveFunc(());
         }
 
     }
