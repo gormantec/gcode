@@ -66,7 +66,7 @@ export class Contract {
             "id": "`+ this.account.accountId + `",
             "method": "query",
             "params": {
-                "request_type": "call_function",
+                "request_type": "call_function", 
                 "finality": "final",
                 "account_id": "`+ this.contractId + `",
                 "method_name": "`+ params.methodName + `",
