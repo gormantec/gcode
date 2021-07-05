@@ -35,6 +35,8 @@ export class Promise{
     func:ResponseType<Response>;
     funcText:ResponseType<string>;
     afterThen: Promise|null = null;
+    resolveFunc:((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null)|null=null;
+    globals:string[]=[];
     
     constructor(pointer:i32=-1) {
         this.pointer=pointer;
@@ -130,7 +132,5 @@ export class Promise{
 
         return p;
     }
-    resolveFunc:((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null)|null=null;
-    globals:string[]=[];
 }
  
