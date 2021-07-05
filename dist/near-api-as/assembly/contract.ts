@@ -77,7 +77,8 @@ export class Contract {
                 Debug.log("then");
                 return r.text();
             }, null);
-            let p3=p2.thenString((s:string)=>{
+            Debug.log("p2="+p2.name);
+            let p3:Promise=p2.thenString((s:string)=>{
                 Debug.log("thenString");
                 return Promise.newPromise((resolve,reject,g)=>{
                     Debug.log("thenString newPromise");
@@ -85,7 +86,7 @@ export class Contract {
                     return null;
                 },[s]);
             });
-
+            Debug.log("p3="+p3.name);
             return p3;
     }
     
