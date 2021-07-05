@@ -78,7 +78,7 @@ export class Contract {
                 return r.text();
             }, null);
             let p3=p2.thenString((s:string)=>{
-                Debug.log("thenString");
+                Debug.log("thenString: "+s);
                 return Promise.newPromise((resolve,reject,g)=>{
                     Debug.log("thenString newPromise");
                     resolve(Contract.decodeResult(g[0]));
