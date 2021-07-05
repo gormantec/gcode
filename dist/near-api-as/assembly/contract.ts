@@ -81,6 +81,7 @@ export class Contract {
                 
                 return Promise.newPromise((resolve,reject,g)=>{
                     resolve(Contract.decodeResult(g[0]));
+                    return null;
                 },[s]);
             });
 
