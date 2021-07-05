@@ -74,7 +74,8 @@ export class Promise{
         if(this.resolveFunc)
         {
             Debug.log("-----------1");
-            return <Promise>this.resolveFunc(func,()=>{return null;},<string[]>this.globals);
+            this.afterThen= <Promise>this.resolveFunc(func,()=>{return null;},<string[]>this.globals);
+            return <Promise>this.afterThen;
         }
         else{
             Debug.log("-----------2");
