@@ -40,11 +40,7 @@ export class Promise{
     
     constructor(pointer:i32=-1) {
         this.pointer=pointer;
-        //Debug.log("Added:"+pointer.toString());
         _promises.push(this);
-        //Debug.log("Promises="+_promises.toString());
-        this.resolveFunc=null;
-        this.globals=[];
     }
     public toString():string{
         return "Promise[pointer="+this.pointer.toString()+"]";
