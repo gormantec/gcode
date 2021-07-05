@@ -55,9 +55,20 @@ export class Promise{
         if(this.pointer>=0)jsdom.then(this.pointer);
         return <Promise>this.afterThen;
     }
+    public thenOther<T>(func:ResponseType<T>):Promise
+    {
+        if(isString<T>())
+        {
+            return this.thenString(<ResponseType<string>>func);
+        }
+        else{
+            return this.then(<ResponseType<Response>>func);
+        }
+    }
 
     public thenString(func:ResponseType<string> = null):Promise
     {
+        Debug.log("-----------1");
         if(this.resolveFunc)
         {
             Debug.log("-----------1");
