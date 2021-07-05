@@ -1,6 +1,6 @@
 import { Account } from "./account";
 import { Window, fetch } from "wasmdom";
-import { Debug, Promise,Response } from "wasmdom-globals";
+import { Debug, Promise,Response,ResolveFuncType } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode, decode } from "as-base64";
 
@@ -85,7 +85,11 @@ export class Contract {
                     resolve(Contract.decodeResult(g[0]));
                     return null;
                 },[s]);
-                p4.alertResponseText(s);
+                var func:ResolveFuncType=<ResolveFuncType>p4.resolveFunc;
+                func((s:string)=>{ 
+                    console.log("Resolve");
+                    return null;
+                },(s:string)=>{return null;},[s]);
                 return null;
             });
             Debug.log("p3="+p3.name);

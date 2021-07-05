@@ -75,7 +75,7 @@ function callContract(delay: i32): void {
                 paramaters: '{"accountId":"' + accountId + '"}'
             })
             .thenString((text: string) => {
-                text = Contract.decodeResult(text);
+                //text = Contract.decodeResult(text);
                 setBlackPage("<p> Contract Response: " + text + "</p>");
                 return null;
             });

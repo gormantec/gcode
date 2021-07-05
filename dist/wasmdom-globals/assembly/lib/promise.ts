@@ -25,6 +25,7 @@ export class Response{
 }
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
+export type ResolveFuncType=((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null);
 // @ts-ignore
 @global @inline const MY_NAME="XXX";
 // @ts-ignore
@@ -35,7 +36,7 @@ export class Promise{
     func:ResponseType<Response>;
     funcText:ResponseType<string>;
     afterThen: Promise|null = null;
-    resolveFunc:((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null)|null=null;
+    resolveFunc:ResolveFuncType|null=null;
     globals:string[]=[];
     name:string;
     
@@ -108,11 +109,6 @@ export class Promise{
         {
             Debug.log("----------- alertResponseText:"+r);
             this.funcText(r);
-        }
-        else if(this.resolveFunc)
-        {
-            Debug.log("----------- resolveFunc");
-            //this.resolveFunc(());
         }
 
     }
