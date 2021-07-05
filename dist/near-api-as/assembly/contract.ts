@@ -74,7 +74,7 @@ export class Contract {
             }
             }`);
             let p2:Promise=p1.then((r: Response) => {
-                Debug.log("then");
+                Debug.log("then"); 
                 return r.text();
             }, null);
             let p3=p2.thenString((s:string)=>{
@@ -85,7 +85,7 @@ export class Contract {
                     return null;
                 },[s]);
             });
-            console.log(p.toString());
+            console.log(p3.toString());
             return p3;
     }
     
