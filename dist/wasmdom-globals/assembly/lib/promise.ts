@@ -45,7 +45,7 @@ export class Promise{
         _promises.push(this);
     }
     public toString():string{
-        return "Promise[pointer="+this.pointer.toString()+",name="+this.name+"]";
+        return "Promise[pointer="+this.pointer.toString()+"]";
     }
     public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
     {
@@ -135,8 +135,7 @@ export class Promise{
 
     public static newPromise(func:(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null,g:string[]):Promise
     {
-        Debug.log("newPromise 222");
-        var p:Promise= new Promise(-1);
+        var p:Promise= new Promise(jsdom.newPromise());
 
         p.globals=g;
 
