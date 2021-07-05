@@ -45,7 +45,7 @@ export class Promise{
         _promises.push(this);
     }
     public toString():string{
-        return "Promise[pointer="+this.pointer.toString()+"]";
+        return "Promise[pointer="+this.pointer.toString()+",name="+this.name+"]";
     }
     public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
     {

@@ -85,7 +85,7 @@ export class Contract {
                     return null;
                 },[s]);
             });
-
+            console.log(p.toString());
             return p3;
     }
     
