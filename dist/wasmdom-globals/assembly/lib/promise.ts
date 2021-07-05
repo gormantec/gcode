@@ -135,6 +135,7 @@ export class Promise{
 
     public static newPromise(func:(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null,g:string[]):Promise
     {
+        Debug.log("newPromise 222");
         var p:Promise= new Promise(-1);
 
         p.globals=g;
