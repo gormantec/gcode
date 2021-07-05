@@ -70,7 +70,7 @@ export class Promise{
 
     public thenString(func:ResponseType<string> = null):Promise
     {
-        Debug.log("-----------0:g="+this.globals.toString());
+        Debug.log("-----------0:n="+this.name+" g="+this.globals.toString());
         if(this.resolveFunc)
         {
             Debug.log("-----------1");
