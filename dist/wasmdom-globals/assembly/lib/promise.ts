@@ -25,7 +25,7 @@ export class Response{
 }
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
-export type ResolveFuncType=((resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null);
+export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise;
 // @ts-ignore
 @global @inline const MY_NAME="XXX";
 // @ts-ignore
@@ -130,7 +130,7 @@ export class Promise{
         return _promises;
     }
 
-    public static newPromise(func:(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise|null,g:string[]):Promise
+    public static newPromise(func:ResolveFuncType|null,g:string[]):Promise
     {
         var p:Promise= new Promise(jsdom.newPromise());
 
