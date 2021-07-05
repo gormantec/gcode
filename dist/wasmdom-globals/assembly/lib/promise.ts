@@ -68,7 +68,7 @@ export class Promise{
 
     public thenString(func:ResponseType<string> = null):Promise
     {
-        Debug.log("-----------1");
+        Debug.log("-----------0:g="+this.globals.toString());
         if(this.resolveFunc)
         {
             Debug.log("-----------1");
