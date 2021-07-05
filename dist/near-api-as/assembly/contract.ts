@@ -1,6 +1,6 @@
 import { Account } from "./account";
 import { Window, fetch } from "wasmdom";
-import { Promise,Response } from "wasmdom-globals";
+import { Debug, Promise,Response } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode, decode } from "as-base64";
 
@@ -74,12 +74,13 @@ export class Contract {
             }
             }`);
             let p2:Promise=p1.then((r: Response) => {
-                //Window.window.console.log("then");
+                Debug.log("then");
                 return r.text();
             }, null);
             let p3=p2.thenString((s:string)=>{
-                
+                Debug.log("thenString");
                 return Promise.newPromise((resolve,reject,g)=>{
+                    Debug.log("thenString newPromise");
                     resolve(Contract.decodeResult(g[0]));
                     return null;
                 },[s]);
