@@ -25,7 +25,7 @@ export class Response{
 }
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
-export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>Promise;
+export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>void;
 // @ts-ignore
 @global @inline const MY_NAME="XXX";
 // @ts-ignore
