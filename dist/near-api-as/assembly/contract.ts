@@ -82,7 +82,7 @@ export class Contract {
                 Debug.log("thenString");
                 var p4:Promise|null= Promise.newPromise((resolve,reject,g)=>{
                     Debug.log("thenString newPromise");
-                    resolve(Contract.decodeResult(g[0]));
+                    if(resolve!=null)resolve(Contract.decodeResult(g[0]));
                 },[s]);
                 var func:ResolveFuncType=<ResolveFuncType>p4.resolveFunc;
                 func((s:string)=>{ 
