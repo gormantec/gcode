@@ -96,7 +96,7 @@ export class Contract {
                     (s: string) => {
                         return null;
                     },
-                    [s]
+                    ["x"]
                 );
             }
 
