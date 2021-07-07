@@ -88,7 +88,8 @@ export class Contract {
             if (p4 != null) {
                 var func: ResolveFuncType = <ResolveFuncType>((<Promise>p4).resolveFunc);
                 Debug.log("p4.name:" + p4.name + " " + func.toString());
-                func(
+                func(null,null,["x"]);
+            /*    func(
                     (s: string) => {
                         console.log("Resolve"); 
                         return null;
@@ -97,7 +98,7 @@ export class Contract {
                         return null;
                     },
                     ["x"]
-                );
+                );*/
             }
 
             return p4;
