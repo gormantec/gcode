@@ -241,6 +241,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     });
 
                     */
+                    callback({error:"error"});
                 }).catch(callback);
 
             }
