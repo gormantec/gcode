@@ -1,6 +1,6 @@
 import { Account } from "./account";
 import { Window, fetch } from "wasmdom";
-import { Debug, Promise,Response,ResolveFuncType } from "wasmdom-globals";
+import { Debug, Promise, Response, ResolveFuncType } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode, decode } from "as-base64";
 
@@ -60,7 +60,7 @@ export class Contract {
         var p: string = "{}";
         if (params.paramaters) p = <string>params.paramaters;
         //Window.window.console.log("fetch");
-        let p1:Promise=fetch("https://rpc." + this.account.connection.networkId + ".near.org", "POST", '{"Content-Type":"application/json"}',
+        let p1: Promise = fetch("https://rpc." + this.account.connection.networkId + ".near.org", "POST", '{"Content-Type":"application/json"}',
             `{
             "jsonrpc": "2.0",
             "id": "`+ this.account.accountId + `",
@@ -73,36 +73,40 @@ export class Contract {
                 "args_base64": "`+ encode(Uint8Array.wrap(String.UTF8.encode(p))) + `"
             }
             }`);
-            let p2:Promise=p1.then((r: Response) => {
-                Debug.log("then");
-                return r.text();
-            }, null);
-            Debug.log("p2="+p2.name);
-            let p3:Promise=p2.thenString((s:string)=>{
-                Debug.log("thenString");
-                var p4:Promise|null= Promise.newPromise((resolve,reject,g)=>{
-                    Debug.log("thenString newPromise");
-                    if(resolve!=null)resolve(Contract.decodeResult(g[0]));
-                },[s]);
-                
-                if(p4!=null)
-                {
-                    var func:ResolveFuncType=<ResolveFuncType>((<Promise>p4).resolveFunc);
-                    Debug.log("p4.name:"+p4.name+" "+func.toString());
-                    //func((s:string)=>{ 
-                    //    console.log("Resolve");
-                    //    return null;
-                    //},(s:string)=>{return null;},[s]);
-                }
-                
-                return p4;
-            });
-            Debug.log("p3="+p3.name);
-            return p3;
+        let p2: Promise = p1.then((r: Response) => {
+            Debug.log("then");
+            return r.text();
+        }, null);
+        Debug.log("p2=" + p2.name);
+        let p3: Promise = p2.thenString((s: string) => {
+            Debug.log("thenString");
+            var p4: Promise | null = Promise.newPromise((resolve, reject, g) => {
+                Debug.log("thenString newPromise");
+                if (resolve != null) resolve(Contract.decodeResult(g[0]));
+            }, [s]);
+
+            if (p4 != null) {
+                var func: ResolveFuncType = <ResolveFuncType>((<Promise>p4).resolveFunc);
+                Debug.log("p4.name:" + p4.name + " " + func.toString());
+                func(
+                    (s: string) => {
+                        console.log("Resolve"); 
+                        return null;
+                    },
+                    (s: string) => {
+                        return null;
+                    },
+                    [s]
+                );
+            }
+
+            return p4;
+        });
+        Debug.log("p3=" + p3.name);
+        return p3;
     }
-    
-    public static decodeResult(text:string):string
-    {
+
+    public static decodeResult(text: string): string {
 
         let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
         let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
