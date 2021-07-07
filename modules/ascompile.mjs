@@ -76,6 +76,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 var downloading = 0;
                 ascWorker.postMessage(["test","test"]);
                 getRequire.then(({ require }) => {
+                    /*
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
                         const _allFIles = fetch("/dist/tsfiles.json").then(r => r.json()).then((dist_files) => {
@@ -238,6 +239,8 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                             }).catch(callback);                            
                         }).catch((error) => { window.debug.log("fetch error:" + error); callback(error);})
                     });
+
+                    */
                 }).catch(callback);
 
             }
