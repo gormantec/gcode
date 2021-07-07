@@ -8,6 +8,12 @@ import { md5 } from '/modules/htmlUtils.mjs';
 
 const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
+const ascWorker = new Worker('asc_worker.js');
+
+myWorker.onmessage = function(e) {
+    console.log('Message received from worker: '+e.data);
+}
+
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
     try {
@@ -68,6 +74,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             var _run = async function () {
                 var failed = false;
                 var downloading = 0;
+                ascWorker.postMessage(["test","test"]);
                 getRequire.then(({ require }) => {
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
