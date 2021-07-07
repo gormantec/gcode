@@ -84,11 +84,14 @@ export class Contract {
                     Debug.log("thenString newPromise");
                     if(resolve!=null)resolve(Contract.decodeResult(g[0]));
                 },[s]);
-                var func:ResolveFuncType=<ResolveFuncType>p4.resolveFunc;
-                func((s:string)=>{ 
-                    console.log("Resolve");
-                    return null;
-                },(s:string)=>{return null;},[s]);
+                if(p4!=null)
+                {
+                    var func:ResolveFuncType=<ResolveFuncType>((<Promise>p4).resolveFunc);
+                    func((s:string)=>{ 
+                        console.log("Resolve");
+                        return null;
+                    },(s:string)=>{return null;},[s]);
+                }
                 return null;
             });
             Debug.log("p3="+p3.name);
