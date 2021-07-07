@@ -11,8 +11,12 @@ onmessage = function (e) {
     console.log("worker 1: "+e.data);
     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
+        console.log("got asc");
+
         const _allFIles = fetch("/dist/tsfiles.json").then(r => r.json()).then((dist_files) => {
+            console.log("got tsfiles");
             asc.ready.then(() => {
+                console.log("got asc then");
                 const stdout = asc.createMemoryStream();
                 const stderr = asc.createMemoryStream();
                 const _errorHandle = console.error;
@@ -165,7 +169,7 @@ onmessage = function (e) {
                     });
                 }
                 catch (e) {
-                    //console.log("asc error: " + e);
+                    console.log("asc error: " + e);
                 }
                 console.error = _errorHandle;
             }).catch(callback);                            
