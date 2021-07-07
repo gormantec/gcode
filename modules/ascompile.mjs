@@ -10,7 +10,7 @@ const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/
 
 const ascWorker = new Worker('asc_worker.js');
 
-myWorker.onmessage = function(e) {
+ascWorker.onmessage = function(e) {
     console.log('Message received from worker: '+e.data);
 }
 
