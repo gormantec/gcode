@@ -279,3 +279,79 @@ function listNames() {
     }
     return files;
 }
+
+// Open (or create) the database
+var open = indexedDB.open("MyDatabase", 1);
+
+// Create the schema
+open.onupgradeneeded = function() {
+    var db = open.result;
+    db.createObjectStore("MyObjectStore", {keyPath: "name"});
+};
+
+open.onsuccess = function() {
+    // Start a new transaction
+    var db = open.result;
+    var tx = db.transaction("MyObjectStore", "readwrite");
+    var store = tx.objectStore("MyObjectStore");
+    var index = store.index("NameIndex");
+
+    // Close the db when the transaction is done
+    tx.oncomplete = function() {
+        db.close();
+    };
+}
+
+var localStorage = {
+    getItem:function(name)
+    {
+        return await this.getItemAsync(name);
+    },
+    getItemAsync:function(name){
+        
+        return new Promise((resolve, reject)=>{
+            var db = open.result;
+            var tx = db.transaction("MyObjectStore", "read");
+            var store = tx.objectStore("MyObjectStore");
+            var index = store.index("NameIndex");
+    
+            var getName=store.get(name);
+            getName.onsuccess = function() {
+                resolve(getName.result.value);   // => "Bob"
+            };
+        
+            // Close the db when the transaction is done
+            tx.oncomplete = function() {
+                db.close();
+            };
+        });
+    },
+    removeItem:function(name){
+
+
+        var db = open.result;
+        var tx = db.transaction("MyObjectStore", "read");
+        var store = tx.objectStore("MyObjectStore");
+        var index = store.index("NameIndex");
+
+        store.delete(name);
+
+        // Close the db when the transaction is done
+        tx.oncomplete = function() {
+            db.close();
+        };
+    },
+    setItem:function(name,value){
+
+        var db = open.result;
+        var tx = db.transaction("MyObjectStore", "readwrite");
+        var store = tx.objectStore("MyObjectStore");
+
+        store.put({name:name,value:value});
+
+        // Close the db when the transaction is done
+        tx.oncomplete = function() {
+            db.close();
+        };
+    },
+}
