@@ -2,11 +2,19 @@ import { save, load } from '/modules/gcodeStorage.mjs';
 
 import * as requireModule from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+import * as ascModule from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+import "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js";
 
 console.log(requireModule);
 console.log(requireModule.require);
 console.log(requireModule.exports);
 
+console.log(window);
+console.log(asc);
+console.log(ascModule);
+console.log(ascModule.require);
+console.log(ascModule.exports);
+   
 function callback(e,d)
 {
     console.log("e:"+e);
