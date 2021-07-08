@@ -1,6 +1,8 @@
 import { save, load } from '/modules/gcodeStorage.mjs';
 
-importScripts("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
+import * as requireModule from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+
+console.log(requireModule);
 
 function callback(e,d)
 {
