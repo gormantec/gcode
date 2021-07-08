@@ -255,10 +255,6 @@ function load(filename, asString = false, ageInSec = -1) {
         result = asString ? JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array.toString() : JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array;
     }
 
-    //window.debug.log("result="+result);
-    //window.debug.log("filename="+filename);
-    //window.debug.log("asString="+asString);
-    //window.debug.log(result);
     return result;
 
 }
