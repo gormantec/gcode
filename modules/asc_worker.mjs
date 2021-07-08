@@ -1,3 +1,5 @@
+import { save, load } from '/modules/gcodeStorage.mjs';
+
 importScripts("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
 
 function callback(e,d)
@@ -14,7 +16,7 @@ onmessage = function (e) {
     var dataBlob = null;
     var failed = false;
     var downloading = 0;
-    console.log("worker 1: "+e.data);
+    console.log("worker 1: ");
     const sourceCode=e.data[0],mainFilename=e.data[1],editorFilename=e.data[2],outputFilename=e.data[3];
     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
