@@ -9,7 +9,6 @@ console.log(requireModule);
 console.log(requireModule.require);
 console.log(requireModule.exports);
 
-console.log(window);
 console.log(asc);
 console.log(ascModule);
 console.log(ascModule.require);
