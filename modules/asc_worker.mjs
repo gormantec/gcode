@@ -8,7 +8,7 @@ function callback(e, d) {
 
 
 
-onmessage = function (e) {
+onmessage = async function (e) {
     var tryCount = 0;//test  
     var dataURL = null;
     var dataBlob = null;
@@ -39,7 +39,7 @@ onmessage = function (e) {
                         readFile(name, baseDir) {
 
 
-                            const _fileData = load(name, true);
+                            const _fileData = await load(name, true);
                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                 return _fileData;
                             }
@@ -58,7 +58,7 @@ onmessage = function (e) {
                             else if (name.startsWith("/node_modules/")) {
 
                                 const _name = "dist/" + name.substring(14);
-                                const _fileString = load(_name, true, 40000);
+                                const _fileString = await load(_name, true, 40000);
                                 if (_fileString && _fileString != "NA") {
                                     return _fileString;
                                 }
@@ -77,10 +77,10 @@ onmessage = function (e) {
                                             if (text) {
                                                 if (!failed) setTimeout(_run, 2000);
                                                 failed = true;
-                                                try { save(_name, text); } catch (e) { console.log("Save error: " + e); save(_name, "NA"); }
+                                                try { await save(_name, text); } catch (e) { console.log("Save error: " + e); await save(_name, "NA"); }
                                             }
                                             else {
-                                                save(_name, "NA");
+                                                await save(_name, "NA");
                                             }
                                         }).catch((error) => { console.log("fetch error:" + error); })
                                         .finally(() => {
@@ -107,7 +107,7 @@ onmessage = function (e) {
                                     dataURL = reader.result;
                                 }, false);
 
-                                //createDownload(name, new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
+                                //createDownawait load(name, new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
                                 dataBlob = new Blob([Uint8Array.from(data)]);
 
                                 reader.readAsDataURL(new Blob([Uint8Array.from(data)], { type: 'application/wasm' }));
@@ -122,11 +122,11 @@ onmessage = function (e) {
                             if (downloading == 0) thenDo();
                             else {
                                 setTimeout(() => {
-                                    waitForDownload(thenDo);
+                                    waitForDownawait load(thenDo);
                                 }, 500);
                             }
                         };
-                        waitForDownload(() => {
+                        waitForDownawait load(() => {
                             if (failed) {
                                 if (tryCount > 0) {
                                     console.log("\b..");
@@ -194,10 +194,10 @@ const DATE_PREFIX = "DateChange-";
 
 
 
-function save(filename, data, overwrite = true) {
+async function await save(filename, data, overwrite = true) {
     let saveData = null;
     let contentType = "[object String]";
-    if (!overwrite && localStorage.getItem(FILE_PREFIX + filename)) return;
+    if (!overwrite && await _localStorage.getItem(FILE_PREFIX + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
         saveData = window.btoa(unescape(encodeURIComponent(data)));
         contentType = "[object String]";
@@ -218,9 +218,9 @@ function save(filename, data, overwrite = true) {
     else {
         return;
     }
-    localStorage.setItem(FILE_PREFIX + filename, saveData);
-    localStorage.setItem(CONTENT_TYPE_PREFIX + filename, contentType);
-    localStorage.setItem(DATE_PREFIX + filename, (new Date()).getTime());
+    _localStorage.setItem(FILE_PREFIX + filename, saveData);
+    _localStorage.setItem(CONTENT_TYPE_PREFIX + filename, contentType);
+    _localStorage.setItem(DATE_PREFIX + filename, (new Date()).getTime());
 }
 
 function canJSON(value) {
@@ -234,10 +234,10 @@ function canJSON(value) {
 
 
 
-function load(filename, asString = false, ageInSec = -1) {
-    let b64 = localStorage.getItem(FILE_PREFIX + filename);
-    let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
-    let dateChange = localStorage.getItem(DATE_PREFIX + filename);
+async function await load(filename, asString = false, ageInSec = -1) {
+    let b64 =  await _localStorage.getItem(FILE_PREFIX + filename);
+    let contentType = await _localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
+    let dateChange = await _localStorage.getItem(DATE_PREFIX + filename);
     if (ageInSec != -1 && ((new Date().getTime()) - ageInSec) > parseInt(dateChange)) return null;
     //window.debug.log(contentType);
     var result = null;
@@ -260,12 +260,12 @@ function load(filename, asString = false, ageInSec = -1) {
 }
 
 function remove(filename) {
-    localStorage.removeItem(FILE_PREFIX + filename);
-    localStorage.removeItem(CONTENT_TYPE_PREFIX + filename);
+    _localStorage.removeItem(FILE_PREFIX + filename);
+    _localStorage.removeItem(CONTENT_TYPE_PREFIX + filename);
 }
 
 function listNames() {
-    var keys = Object.keys(localStorage);
+    var keys = Object.keys(_localStorage);
     var files = [];
     if (keys) {
         var i = keys.length;
@@ -302,29 +302,24 @@ open.onsuccess = function() {
     };
 }
 
-var localStorage = {
-    getItem:function(name)
-    {
-        return await this.getItemAsync(name);
-    },
-    getItemAsync:function(name){
+var _localStorage = {
+    getItem: async function(name){
+            return new Promise((resolve,reject)=>{
+                var db = open.result;
+                var tx = db.transaction("MyObjectStore", "read");
+                var store = tx.objectStore("MyObjectStore");
+                var index = store.index("NameIndex");
         
-        return new Promise((resolve, reject)=>{
-            var db = open.result;
-            var tx = db.transaction("MyObjectStore", "read");
-            var store = tx.objectStore("MyObjectStore");
-            var index = store.index("NameIndex");
-    
-            var getName=store.get(name);
-            getName.onsuccess = function() {
-                resolve(getName.result.value);   // => "Bob"
-            };
-        
-            // Close the db when the transaction is done
-            tx.oncomplete = function() {
-                db.close();
-            };
-        });
+                var getName=store.get(name);
+                getName.onsuccess = function() {
+                    resolve(getName.result.value);   // => "Bob"
+                };
+            
+                // Close the db when the transaction is done
+                tx.oncomplete = function() {
+                    db.close();
+                };
+            });
     },
     removeItem:function(name){
 
