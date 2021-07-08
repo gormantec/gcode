@@ -1,22 +1,9 @@
-import { save, load } from '/modules/gcodeStorage.mjs';
+importScripts("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
 
-import * as requireModule from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
-import * as ascModule from "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
-import "https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js";
 
-console.log(requireModule);
-console.log(requireModule.require);
-console.log(requireModule.exports);
-
-console.log(ascModule);
-console.log(ascModule.require);
-console.log(ascModule.exports);
-   
-function callback(e,d)
-{
-    console.log("e:"+e);
-    console.log("d:"+d);
+function callback(e, d) {
+    console.log("e:" + e);
+    console.log("d:" + d);
 }
 
 
@@ -28,7 +15,7 @@ onmessage = function (e) {
     var failed = false;
     var downloading = 0;
     console.log("worker 1: ");
-    const sourceCode=e.data[0],mainFilename=e.data[1],editorFilename=e.data[2],outputFilename=e.data[3];
+    const sourceCode = e.data[0], mainFilename = e.data[1], editorFilename = e.data[2], outputFilename = e.data[3];
     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
         console.log("got asc");
@@ -51,7 +38,7 @@ onmessage = function (e) {
                         stderr,
                         readFile(name, baseDir) {
 
-                            
+
                             const _fileData = load(name, true);
                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                 return _fileData;
@@ -59,7 +46,7 @@ onmessage = function (e) {
                             if (name == editorFilename || (name.indexOf("wasmdom-jsdom/") >= 0 && name.endsWith(editorFilename))) {
 
                                 console.log("Got App:" + name);
-                                console.log(baseDir+" / "+name); 
+                                console.log(baseDir + " / " + name);
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
@@ -78,12 +65,12 @@ onmessage = function (e) {
                                 else if (_fileString == "NA") {
                                     return null;
                                 }
-                                else if(_name.startsWith("dist/") && (_name.endsWith(".ts") || _name.endsWith("package.json")) && !(dist_files.files[md5("/"+_name)])){
+                                else if (_name.startsWith("dist/") && (_name.endsWith(".ts") || _name.endsWith("package.json")) && !(dist_files.files[md5("/" + _name)])) {
                                     return null;
                                 }
-                                else{
+                                else {
                                     downloading++;
-                                    console.log(baseDir+" / "+name); 
+                                    console.log(baseDir + " / " + name);
                                     fetch("/" + _name)
                                         .then(response => response.ok ? response.text() : null)
                                         .then(text => {
@@ -116,7 +103,7 @@ onmessage = function (e) {
                                 const reader = new FileReader();
                                 dataURL = "reading";
                                 reader.addEventListener("load", function () {
-                                    console.log("got dataURL: " + reader.result.substring(0,30));
+                                    console.log("got dataURL: " + reader.result.substring(0, 30));
                                     dataURL = reader.result;
                                 }, false);
 
@@ -192,11 +179,107 @@ onmessage = function (e) {
                     console.log("asc error: " + e);
                 }
                 console.error = _errorHandle;
-            }).catch(callback);                            
-        }).catch((error) => { console.log("fetch error:" + error); callback(error);})
+            }).catch(callback);
+        }).catch((error) => { console.log("fetch error:" + error); callback(error); })
     });
 
 }
 
 
 
+const FILE_PREFIX = "File-";
+const CONTENT_TYPE_PREFIX = "ContentType-";
+const DATE_PREFIX = "DateChange-";
+
+
+
+
+function save(filename, data, overwrite = true) {
+    let saveData = null;
+    let contentType = "[object String]";
+    if (!overwrite && localStorage.getItem(FILE_PREFIX + filename)) return;
+    if ({}.toString.call(data) == "[object String]") {
+        saveData = window.btoa(unescape(encodeURIComponent(data)));
+        contentType = "[object String]";
+    }
+    else if ({}.toString.call(data) == "[object Object]" && canJSON(data)) {
+        saveData = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+        contentType = "[object Object]";
+    }
+    else if ({}.toString.call(data) == "[object Uint8Array]") {
+        var decoder = new TextDecoder('utf8');
+        saveData = window.btoa(unescape(encodeURIComponent(decoder.decode(data))));
+        contentType = "[object Uint8Array]";
+    }
+    else if ({}.toString.call(data) == "[object Array]") {
+        saveData = window.btoa(unescape(encodeURIComponent(JSON.stringify({ array: data }))));
+        contentType = "[object Array]";
+    }
+    else {
+        return;
+    }
+    localStorage.setItem(FILE_PREFIX + filename, saveData);
+    localStorage.setItem(CONTENT_TYPE_PREFIX + filename, contentType);
+    localStorage.setItem(DATE_PREFIX + filename, (new Date()).getTime());
+}
+
+function canJSON(value) {
+    try {
+        JSON.stringify(value);
+        return true;
+    } catch (ex) {
+        return false;
+    }
+}
+
+
+
+function load(filename, asString = false, ageInSec = -1) {
+    let b64 = localStorage.getItem(FILE_PREFIX + filename);
+    let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
+    let dateChange = localStorage.getItem(DATE_PREFIX + filename);
+    if (ageInSec != -1 && ((new Date().getTime()) - ageInSec) > parseInt(dateChange)) return null;
+    //window.debug.log(contentType);
+    var result = null;
+    if (contentType == "[object String]") {
+        result = decodeURIComponent(escape(window.atob(b64)));
+    }
+    else if (contentType == "[object Object]") {
+        result = asString ? decodeURIComponent(escape(window.atob(b64))) : JSON.parse(decodeURIComponent(escape(window.atob(b64))));
+    }
+    else if (contentType == "[object Uint8Array]") {
+        var result1 = decodeURIComponent(escape(window.atob(str))).split('').map(function (c) { return c.charCodeAt(0); });
+        result = asString ? result1.toString() : result1;
+    }
+    else if (contentType == "[object Array]") {
+        result = asString ? JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array.toString() : JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array;
+    }
+
+    //window.debug.log("result="+result);
+    //window.debug.log("filename="+filename);
+    //window.debug.log("asString="+asString);
+    //window.debug.log(result);
+    return result;
+
+}
+
+function remove(filename) {
+    localStorage.removeItem(FILE_PREFIX + filename);
+    localStorage.removeItem(CONTENT_TYPE_PREFIX + filename);
+}
+
+function listNames() {
+    var keys = Object.keys(localStorage);
+    var files = [];
+    if (keys) {
+        var i = keys.length;
+        keys.sort();
+        keys.reverse();
+        while (i--) {
+            if (keys[i].startsWith(FILE_PREFIX) && !keys[i].startsWith(FILE_PREFIX + "dist/") && keys[i] != FILE_PREFIX) {
+                files.push(keys[i].substring(FILE_PREFIX.length));
+            }
+        }
+    }
+    return files;
+}
