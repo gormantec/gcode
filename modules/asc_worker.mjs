@@ -6,9 +6,16 @@ function callback(e,d)
     console.log("d:"+d);
 }
 
-onmessage = function (e) {
 
+
+onmessage = function (e) {
+    var tryCount = 0;//test  
+    var dataURL = null;
+    var dataBlob = null;
+    var failed = false;
+    var downloading = 0;
     console.log("worker 1: "+e.data);
+    const sourceCode=e.data[0],mainFilename=e.data[1],editorFilename=e.data[2],outputFilename=e.data[3];
     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
         console.log("got asc");

@@ -74,7 +74,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             var _run = async function () {
                 var failed = false;
                 var downloading = 0;
-                ascWorker.postMessage(["test","test"]);
+                ascWorker.postMessage([sourceCode,mainFilename,editorFilename,outputFilename]);
                 getRequire.then(({ require }) => {
                     /*
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
