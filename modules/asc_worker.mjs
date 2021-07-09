@@ -15,7 +15,7 @@ onmessage = async function (e) {
     var failed = false;
     var downloading = 0;
     console.log("worker 1: ");
-    const sourceCode = e.data[0], mainFilename = e.data[1], editorFilename = e.data[2], outputFilename = e.data[3];
+    const sourceCode = e.data[0], mainFilename = e.data[1], editorFilename = e.data[2], outputFilename = e.data[3], dapp=(true==e.data[4] || "true"==e.data[4] || "TRUE"==e.data[4]);
     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
         console.log("got asc");
@@ -50,6 +50,7 @@ onmessage = async function (e) {
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
+
                                 JSON.stringify({ "extends": "near-sdk-as/asconfig.json" });
                             }
                             else if (name == "asconfig.json" && dapp != true) {
