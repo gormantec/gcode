@@ -38,7 +38,7 @@ onmessage = async function (e) {
                         stderr,
                         readFile(name, baseDir) {
 
-
+                            console.log(baseDir+"  /  "+name);
                             const _fileData = load(name, true);
                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                 return _fileData;
@@ -50,10 +50,11 @@ onmessage = async function (e) {
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
-
+                                console.log("asconfig.json dapp="+dapp);
                                 JSON.stringify({ "extends": "near-sdk-as/asconfig.json" });
                             }
                             else if (name == "asconfig.json" && dapp != true) {
+                                console.log("asconfig.json dapp="+dapp);
                                 return JSON.stringify({ "targets": { "release": { "binaryFile": "'+outputFilename+'", "optimize": true }, "options": {} } });
                             }
                             else if (name.startsWith("/node_modules/")) {
