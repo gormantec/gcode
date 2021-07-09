@@ -39,7 +39,7 @@ onmessage = async function (e) {
                         readFile(name, baseDir) {
 
 
-                            const _fileData = await load(name, true);
+                            const _fileData = load(name, true);
                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                 return _fileData;
                             }
@@ -58,7 +58,7 @@ onmessage = async function (e) {
                             else if (name.startsWith("/node_modules/")) {
 
                                 const _name = "dist/" + name.substring(14);
-                                const _fileString = await load(_name, true, 40000);
+                                const _fileString = load(_name, true, 40000);
                                 if (_fileString && _fileString != "NA") {
                                     return _fileString;
                                 }
@@ -77,10 +77,10 @@ onmessage = async function (e) {
                                             if (text) {
                                                 if (!failed) setTimeout(_run, 2000);
                                                 failed = true;
-                                                try { await save(_name, text); } catch (e) { console.log("Save error: " + e); await save(_name, "NA"); }
+                                                try { save(_name, text); } catch (e) { console.log("Save error: " + e); save(_name, "NA"); }
                                             }
                                             else {
-                                                await save(_name, "NA");
+                                                save(_name, "NA");
                                             }
                                         }).catch((error) => { console.log("fetch error:" + error); })
                                         .finally(() => {
@@ -235,9 +235,9 @@ function canJSON(value) {
 
 
 async function load(filename, asString = false, ageInSec = -1) {
-    let b64 =  await _localStorage.getItem(FILE_PREFIX + filename);
-    let contentType = await _localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
-    let dateChange = await _localStorage.getItem(DATE_PREFIX + filename);
+    let b64 =  _localStorage.getItem(FILE_PREFIX + filename);
+    let contentType = _localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
+    let dateChange = _localStorage.getItem(DATE_PREFIX + filename);
     if (ageInSec != -1 && ((new Date().getTime()) - ageInSec) > parseInt(dateChange)) return null;
     //window.debug.log(contentType);
     var result = null;
