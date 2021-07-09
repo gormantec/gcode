@@ -121,18 +121,18 @@ onmessage = async function (e) {
                         var waitForDownload = function (thenDo) {
                             if (downloading == 0) thenDo();
                             else {
-                                setTimeout(() => {
-                                    waitForDownawait load(thenDo);
+                                window.setTimeout(() => {
+                                    waitForDownload(thenDo);
                                 }, 500);
                             }
                         };
-                        waitForDownawait load(() => {
+                        waitForDownload(() => {
                             if (failed) {
                                 if (tryCount > 0) {
-                                    console.log("\b..");
+                                    window.debug.log("\b..");
                                 }
                                 else {
-                                    console.log("downloading depenadnt files..");
+                                    window.debug.log("downloading depenadnt files..");
                                 }
                                 tryCount++;
 
@@ -194,10 +194,10 @@ const DATE_PREFIX = "DateChange-";
 
 
 
-async function await save(filename, data, overwrite = true) {
+async function save(filename, data, overwrite = true) {
     let saveData = null;
     let contentType = "[object String]";
-    if (!overwrite && await _localStorage.getItem(FILE_PREFIX + filename)) return;
+    if (!overwrite && _localStorage.getItem(FILE_PREFIX + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
         saveData = window.btoa(unescape(encodeURIComponent(data)));
         contentType = "[object String]";
@@ -234,7 +234,7 @@ function canJSON(value) {
 
 
 
-async function await load(filename, asString = false, ageInSec = -1) {
+async function load(filename, asString = false, ageInSec = -1) {
     let b64 =  await _localStorage.getItem(FILE_PREFIX + filename);
     let contentType = await _localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
     let dateChange = await _localStorage.getItem(DATE_PREFIX + filename);
@@ -280,73 +280,17 @@ function listNames() {
     return files;
 }
 
-// Open (or create) the database
-var open = indexedDB.open("MyDatabase", 1);
-
-// Create the schema
-open.onupgradeneeded = function() {
-    var db = open.result;
-    db.createObjectStore("MyObjectStore", {keyPath: "name"});
-};
-
-open.onsuccess = function() {
-    // Start a new transaction
-    var db = open.result;
-    var tx = db.transaction("MyObjectStore", "readwrite");
-    var store = tx.objectStore("MyObjectStore");
-    var index = store.index("NameIndex");
-
-    // Close the db when the transaction is done
-    tx.oncomplete = function() {
-        db.close();
-    };
-}
+const _items={};
 
 var _localStorage = {
-    getItem: async function(name){
-            return new Promise((resolve,reject)=>{
-                var db = open.result;
-                var tx = db.transaction("MyObjectStore", "read");
-                var store = tx.objectStore("MyObjectStore");
-                var index = store.index("NameIndex");
-        
-                var getName=store.get(name);
-                getName.onsuccess = function() {
-                    resolve(getName.result.value);   // => "Bob"
-                };
-            
-                // Close the db when the transaction is done
-                tx.oncomplete = function() {
-                    db.close();
-                };
-            });
+    getItem:  function(name){
+        return _items[name];
     },
     removeItem:function(name){
-
-
-        var db = open.result;
-        var tx = db.transaction("MyObjectStore", "read");
-        var store = tx.objectStore("MyObjectStore");
-        var index = store.index("NameIndex");
-
-        store.delete(name);
-
-        // Close the db when the transaction is done
-        tx.oncomplete = function() {
-            db.close();
-        };
+        _items[name]=null;
     },
     setItem:function(name,value){
 
-        var db = open.result;
-        var tx = db.transaction("MyObjectStore", "readwrite");
-        var store = tx.objectStore("MyObjectStore");
-
-        store.put({name:name,value:value});
-
-        // Close the db when the transaction is done
-        tx.oncomplete = function() {
-            db.close();
-        };
+        _items[name]=value;
     },
 }
