@@ -38,8 +38,9 @@ onmessage = async function (e) {
                         stderr,
                         readFile(name, baseDir) {
 
-                            console.log(baseDir+"  /  "+name);
+                            console.log(baseDir+"  /  "+name+ "  dapp="+dapp);
                             const _fileData = load(name, true);
+                            console.log(_fileData);
                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                 return _fileData;
                             }
