@@ -13,13 +13,13 @@ const ascWorker = new Worker('/modules/asc_worker.mjs');
 const callBacks={};
 
 ascWorker.onmessage = function(e) {
-    console.log('Message received from worker: '+e.data);
+    console.log('Message received from worker: '+JSON.stringify(e.data));
     if(e.data.cID && callBacks[e.data.cID]!=null && e.data.error)
     {
         callBacks[e.data.cID](e.data.error);
         callBacks[e.data.cID]=null;
     }
-    else if(e.data.cID && callBacks[e.data.cID]!=null && e.data.error)
+    else if(e.data.cID && callBacks[e.data.cID]!=null)
     {
         callBacks[e.data.cID](null,e.data.data);
         callBacks[e.data.cID]=null;
