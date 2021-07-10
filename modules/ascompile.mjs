@@ -33,6 +33,10 @@ ascWorker.onmessage = function(e) {
         callBacks[e.data.cID]=null;
         closeTimer();
     }
+    else if(e.data.timerValue)
+    {
+        document.querySelector("#nearDialogTimerValue").style.width = e.data.timerValue;
+    }
 }
 
 
