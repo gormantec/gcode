@@ -106,10 +106,17 @@ export class Promise{
         Debug.log("alertResponseText::::n="+this.name+" r=["+r.substring(0,20)+"..]");
         if(this.funcText)
         {
-            var rr:Promise|null=this.funcText(r);
-            if(rr!=null)
-            {
-                Debug.log(this.name+":::alertResponseText:"+(<Promise>rr).name);
+            var prom:Promise|null=this.funcText(r);
+            if(prom){
+                var i:i32=_promises.indexOf(prom);
+                //Debug.log("Promises="+_promises.toString());
+                //Debug.log("removed ["+i.toString()+"] count="+_promises[i].toString());
+                _promises.splice(i,1);
+                //Debug.log("Promises="+_promises.toString());
+                (<Promise>this.afterThen).pointer=prom.pointer;
+                (<Promise>this.afterThen).func=prom.func;
+                //Debug.log("Promises="+_promises.toString());
+                jsdom.then((<Promise>this.afterThen).pointer);
             }
         }
 
