@@ -28,7 +28,7 @@ onmessage = async function (e) {
                 const stdout = asc.createMemoryStream();
                 const stderr = asc.createMemoryStream();
                 const _errorHandle = console.error;
-                console.error = () => { console.log("."); };
+                console.error = () => { /*console.log(".");*/ };
                 try {
                     asc.main([
                         mainFilename,
