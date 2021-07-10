@@ -125,7 +125,7 @@ onmessage = async function (e) {
                             if (failed) {
                                 if (tryCount > 0) {
                                      console.log("\b..");
-                                     postMessage({timerValue:""+((tryCount/(tryCount+4))-10)+"%"});
+                                     postMessage({timerValue:""+Math.floor(((tryCount/(tryCount+4))-0.1)*100)+"%"});
                                 }
                                 else {
                                      console.log("downloading depenadnt files..");
