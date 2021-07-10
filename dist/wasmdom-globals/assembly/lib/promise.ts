@@ -103,10 +103,9 @@ export class Promise{
     }
     public alertResponseText(r:string):void{
         //Debug.log("got alertResponseText");
-        Debug.log("alertResponseText::::n="+this.name+" g="+this.globals.toString());
+        Debug.log("alertResponseText::::n="+this.name+" r=["+r.substring(0,20)+"..]");
         if(this.funcText)
         {
-            Debug.log("----------- alertResponseText:"+r);
             var rr:Promise|null=this.funcText(r);
             if(rr!=null)
             {
