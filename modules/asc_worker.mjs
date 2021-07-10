@@ -8,7 +8,7 @@ function callback(e, d) {
 
 
 
-onmessage = async function (e) {
+onmessage = async function (e) {  
     var tryCount = 0;//test  
     var dataURL = null;
     var dataBlob = null;
