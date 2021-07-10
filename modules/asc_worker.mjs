@@ -125,6 +125,7 @@ onmessage = async function (e) {
                             if (failed) {
                                 if (tryCount > 0) {
                                      console.log("\b..");
+                                     postMessage({timerValue:""+((tryCount/(tryCount+4))-10)+"%"});
                                 }
                                 else {
                                      console.log("downloading depenadnt files..");
@@ -133,6 +134,7 @@ onmessage = async function (e) {
 
                             }
                             else {
+                                postMessage({timerValue:"90%"});
                                 console.log("--compile done---");
                                 if (stdout && stdout.toString().trim() != "") console.log(`>>> STDOUT >>>\n${stdout.toString()}`);
                                 if (stderr && stderr.toString().trim() != "") console.log(`>>> STDERR >>>\n${stderr.toString()}`);
