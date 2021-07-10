@@ -204,7 +204,16 @@ export function init(window,_fetch,_Response) {
       },
       newPromise: (s)=>{
         const str=_wasm.__getString(s);
-        var p= async ()=>{ console.log("exec newPromise"); return str; };
+        console.log("exec1 newPromise"); 
+        var p= new Promise(resolve => {
+          console.log("exec2 newPromise"); 
+            setTimeout(() => {
+              console.log("exec3 newPromise"); 
+              return str; 
+            }, 2000);
+          });
+
+
         return getPointer(p);
       },
       fetch: (uri,method,headers,body)=>
