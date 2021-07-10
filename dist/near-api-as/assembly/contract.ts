@@ -81,7 +81,7 @@ export class Contract {
         let s3:Promise = p2.thenString((s: string) => {
             Debug.log("thenString");
             var dc=Contract.decodeResult(s);
-            Debug.log(dc);
+            Debug.log("exec:"+dc);
             return dc;
         });
         return s3;
