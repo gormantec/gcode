@@ -12,6 +12,7 @@ onmessage = async function (e) {
     var tryCount = 0;//test  
     var dataURL = null;
     var dataBlob = null;
+    var _run = async function () {
     var failed = false;
     var downloading = 0;
     console.log("worker 1: ");
@@ -185,6 +186,8 @@ onmessage = async function (e) {
             }).catch(callback);
         }).catch((error) => { console.log("fetch error:" + error); callback(error); })
     });
+}
+_run();
 
 }
 
