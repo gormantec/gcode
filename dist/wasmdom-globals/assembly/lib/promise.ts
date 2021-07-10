@@ -144,7 +144,12 @@ export class Promise{
         var p:Promise= new Promise(jsdom.newPromise(s));
         p.funcText=func;
         p.name="newPromise";
-
+        return p;
+    }
+    public static resolve(s:string):Promise
+    {
+        var p:Promise= new Promise(jsdom.newPromise(s));
+        p.name="newPromise";
         return p;
     }
 }

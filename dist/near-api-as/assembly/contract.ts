@@ -80,16 +80,9 @@ export class Contract {
             return r.text();
         }, null);
         p2.name="p2";
-        let p3:Promise = p2.thenString((s: string) => {
-            Debug.log("thenString");
+        let p3: Promise =p2.thenString((s: string)=>{
             var dc=Contract.decodeResult(s);
-            Debug.log("exec:"+dc);
-            let p4= Promise.newPromise((s: string) => {
-                Debug.log("thenString::44");
-                return null;
-            },dc);
-            p4.name="p4";
-            return p4;
+            return Promise.resolve(dc);
         });
         p3.name="p3";
         return p3;
