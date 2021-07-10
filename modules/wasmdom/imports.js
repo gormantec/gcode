@@ -243,7 +243,6 @@ export function init(window,_fetch,_Response) {
         promise.then((res)=>{
           //console.log("__alertPromise");
           //console.log(res);
-          console.log("exec then:"+res); 
           if(res instanceof Response)
           {
             var r= getPointer(res);
@@ -252,6 +251,8 @@ export function init(window,_fetch,_Response) {
           }
           else {
             //console.log("fetch Pointer="+p+ " Response="+r);
+
+            console.log("exec then=\""+res+"\""); 
             _wasm.__alertPromiseText(p,_wasm.__pin(_wasm.__newString(res.toString())));
           }
         });
