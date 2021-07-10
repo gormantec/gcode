@@ -20,7 +20,6 @@ const closeTimer = () => {
 };
 
 ascWorker.onmessage = function(e) {
-    console.log('Message received from worker: '+JSON.stringify(e.data));
     if(e.data.cID && callBacks[e.data.cID]!=null && e.data.error)
     {
         callBacks[e.data.cID](e.data.error);
