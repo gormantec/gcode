@@ -40,7 +40,7 @@ onmessage = async function (e) {
 
                             console.log(baseDir+"  /  "+name+ "  dapp="+dapp);
                             const _fileData = load(name, true);
-                            console.log(_fileData);
+                            console.log(_fileData);   
                             if (baseDir == "." && _fileData && name.indexOf("node_modules") < 0) {
                                 return _fileData;
                             }
@@ -197,7 +197,7 @@ const DATE_PREFIX = "DateChange-";
 
 
 
-async function save(filename, data, overwrite = true) {
+function save(filename, data, overwrite = true) {
     let saveData = null;
     let contentType = "[object String]";
     if (!overwrite && _localStorage.getItem(FILE_PREFIX + filename)) return;
@@ -237,7 +237,7 @@ function canJSON(value) {
 
 
 
-async function load(filename, asString = false, ageInSec = -1) {
+function load(filename, asString = false, ageInSec = -1) {
     let b64 =  _localStorage.getItem(FILE_PREFIX + filename);
     let contentType = _localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
     let dateChange = _localStorage.getItem(DATE_PREFIX + filename);
