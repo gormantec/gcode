@@ -78,33 +78,13 @@ export class Contract {
             return r.text();
         }, null);
         Debug.log("p2=" + p2.name);
-        let p3: Promise = p2.thenString((s: string) => {
+        let s3:Promise = p2.thenString((s: string) => {
             Debug.log("thenString");
-            var p4: Promise | null = Promise.newPromise((resolve, reject, g) => {
-                Debug.log("thenString newPromise");
-                if (resolve != null) resolve(Contract.decodeResult(g[0]));
-            }, [s]);
-
-            if (p4 != null) {
-                var func: ResolveFuncType = <ResolveFuncType>((<Promise>p4).resolveFunc);
-                Debug.log("p4.name:" + p4.name + " " + func.toString());
-                func(()=>{console.log(":)");return null;},null,["x"]);
-            /*    func(
-                    (s: string) => {
-                        console.log("Resolve"); 
-                        return null;
-                    },
-                    (s: string) => {
-                        return null;
-                    },
-                    ["x"]
-                );*/
-            }
-
-            return p4;
+            var dc=Contract.decodeResult(s);
+            Debug.log(dc);
+            return dc;
         });
-        Debug.log("p3=" + p3.name);
-        return p3;
+        return s3;
     }
 
     public static decodeResult(text: string): string {

@@ -25,6 +25,7 @@ export class Response{
 }
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
+type StringResponseType<T> = ((r:T)=>string|null)|null;
 export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>void;
 // @ts-ignore
 @global @inline const MY_NAME="XXX";
@@ -34,7 +35,7 @@ export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<st
 export class Promise{
     pointer:i32;
     func:ResponseType<Response>;
-    funcText:ResponseType<string>;
+    funcText:StringResponseType<string>;
     afterThen: Promise|null = null;
     resolveFunc:ResolveFuncType|null=null;
     globals:string[]=[];
@@ -48,7 +49,7 @@ export class Promise{
     public toString():string{
         return "Promise[pointer="+this.pointer.toString()+"]";
     }
-    public then(func:ResponseType<Response> =null,funcText:ResponseType<Response> = null):Promise
+    public then(func:ResponseType<Response> =null,funcText:StringResponseType<string> = null):Promise
     {
         //Debug.log("Promises="+_promises.toString());
         this.afterThen= new Promise();
@@ -62,14 +63,14 @@ export class Promise{
     {
         if(isString<T>())
         {
-            return this.thenString(<ResponseType<string>>func);
+            return this.thenString(<StringResponseType<string>>func);
         }
         else{
             return this.then(<ResponseType<Response>>func);
         }
     }
 
-    public thenString(func:ResponseType<string> = null):Promise
+    public thenString(func:StringResponseType<string> = null):Promise
     {
         Debug.log("-----------0:n="+this.name+" g="+this.globals.toString());
 
@@ -79,8 +80,6 @@ export class Promise{
             this.funcText=func;
             if(this.pointer>=0)jsdom.then(this.pointer);
             return <Promise>this.afterThen;
- 
-        
 
     }
     public alertResponse(r:Response):void{
@@ -103,13 +102,19 @@ export class Promise{
         }
 
     }
-    public alertResponseText(r:string):void{
+    public alertResponseText(r:string):string|null{
         //Debug.log("got alertResponseText");
         if(this.funcText)
         {
             Debug.log("----------- alertResponseText:"+r);
-            this.funcText(r);
+            var rr:string|null=this.funcText(r);
+            if(rr!=null)
+            {
+                Debug.log((<string>rr));
+                return rr;
+            }
         }
+        return null;
 
     }
     public static fromPointer(p:i32):Promise
