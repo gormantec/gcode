@@ -9,26 +9,22 @@ onmessage = async function (e) {
     var tryCount = 0;//test  
     var dataURL = null;
     var dataBlob = null;
+    console.log("worker run: ");
     var _run = async function () {
     var failed = false;
     var downloading = 0;
 
 
-    console.log("worker 1: ");
+    
     const sourceCode = e.data[0], mainFilename = e.data[1], editorFilename = e.data[2], outputFilename = e.data[3], cID=e.data[4],dapp=(true==e.data[5] || "true"==e.data[4] || "TRUE"==e.data[4]);
     var callback=function(e, d) {
-        console.log("e:" + e);
-        console.log("d:" + d);
         postMessage({cID:cID,error:e,data:d});
     }
     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
-        console.log("got asc");
 
         const _allFIles = fetch("/dist/tsfiles.json").then(r => r.json()).then((dist_files) => {
-            console.log("got tsfiles");
             asc.ready.then(() => {
-                console.log("got asc then");
                 const stdout = asc.createMemoryStream();
                 const stderr = asc.createMemoryStream();
                 const _errorHandle = console.error;
@@ -47,8 +43,6 @@ onmessage = async function (e) {
                                 return _fileData;
                             }
                             if (name == editorFilename || (name.indexOf("wasmdom-jsdom/") >= 0 && name.endsWith(editorFilename))) {
-
-                                console.log("Got App:" + name);
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
@@ -83,7 +77,7 @@ onmessage = async function (e) {
                                             else {
                                                 save(_name, "NA");
                                             }
-                                        }).catch((error) => { console.log("fetch error:" + error); })
+                                        }).catch((error) => { console.log("."); })
                                         .finally(() => {
                                             downloading--;
                                         });

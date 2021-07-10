@@ -83,15 +83,17 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
         }
         else {
 
-            var tryCount = 0;//test  
-            var dataURL = null;
-            var dataBlob = null;
+            //var tryCount = 0;//test  
+            //var dataURL = null;
+            //var dataBlob = null;
+            ascWorker.postMessage([sourceCode,mainFilename,editorFilename,outputFilename,cID]);
+            /*
             var _run = async function () {
                 var failed = false;
                 var downloading = 0;
-                ascWorker.postMessage([sourceCode,mainFilename,editorFilename,outputFilename,cID]);
+                
                 getRequire.then(({ require }) => {
-                    /*
+                    
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
 
                         const _allFIles = fetch("/dist/tsfiles.json").then(r => r.json()).then((dist_files) => {
@@ -255,12 +257,12 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         }).catch((error) => { window.debug.log("fetch error:" + error); callback(error);})
                     });
 
-                    */
+                    
                     callback({error:"error"});
                 }).catch(callback);
 
             }
-            _run();
+            _run();*/
         }
     }
     catch (e) { window.debug.log(e); callback(e); }
