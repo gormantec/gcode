@@ -110,7 +110,7 @@ export class Promise{
             var rr:string|null=this.funcText(r);
             if(rr!=null)
             {
-                Debug.log((<string>rr));
+                Debug.log("alertResponseText:"+(<string>rr));
                 return rr;
             }
         }
