@@ -173,7 +173,7 @@ onmessage = async function (e) {
                     });
                 }
                 catch (e) {
-                    console.log(".");
+                    //console.log(".");
                 }
                 console.error = _errorHandle;
             }).catch(callback);
