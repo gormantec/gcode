@@ -51,7 +51,7 @@ export class Promise{
     }
     public then(func:ResponseType<Response> =null,funcText:StringResponseType<string> = null):Promise
     {
-        //Debug.log("Promises="+_promises.toString());
+        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
         this.afterThen= new Promise();
         //Debug.log("Promises="+_promises.toString());
         this.func=func;
@@ -72,9 +72,8 @@ export class Promise{
 
     public thenString(func:StringResponseType<string> = null):Promise
     {
-        Debug.log("-----------0:n="+this.name+" g="+this.globals.toString());
+        Debug.log("thenString::::n="+this.name+" g="+this.globals.toString());
 
-            Debug.log("-----------2");
             this.afterThen= new Promise();
             this.func=null;
             this.funcText=func;
@@ -104,6 +103,7 @@ export class Promise{
     }
     public alertResponseText(r:string):string|null{
         //Debug.log("got alertResponseText");
+        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
         if(this.funcText)
         {
             Debug.log("----------- alertResponseText:"+r);

@@ -73,18 +73,22 @@ export class Contract {
                 "args_base64": "`+ encode(Uint8Array.wrap(String.UTF8.encode(p))) + `"
             }
             }`);
+
+        p1.name="s3";
         let p2: Promise = p1.then((r: Response) => {
             Debug.log("then");
             return r.text();
         }, null);
+        p2.name="s3";
         Debug.log("p2=" + p2.name);
-        let s3:Promise = p2.thenString((s: string) => {
+        let p3:Promise = p2.thenString((s: string) => {
             Debug.log("thenString");
             var dc=Contract.decodeResult(s);
             Debug.log("exec:"+dc);
             return dc;
         });
-        return s3;
+        p3.name="s3";
+        return p3;
     }
 
     public static decodeResult(text: string): string {
