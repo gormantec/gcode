@@ -83,7 +83,7 @@ export class Promise{
     }
     public alertResponse(r:Response):void{
         //Debug.log("got alertResponse");
-        Debug.log("alertResponse::::n="+this.name+" g="+this.globals.toString());
+        Debug.log("alertResponse::::n="+this.name+" g="+this.globals.toString());  
         if(this.func)
         {
             var prom:Promise|null =this.func(r);
