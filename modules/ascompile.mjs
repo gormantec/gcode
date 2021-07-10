@@ -10,12 +10,27 @@ const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/
 
 const ascWorker = new Worker('/modules/asc_worker.mjs');
 
+const callBacks={};
+
 ascWorker.onmessage = function(e) {
     console.log('Message received from worker: '+e.data);
+    if(e.data.cID && callBacks[e.data.cID]!=null && e.data.error)
+    {
+        callBacks[e.data.cID](e.data.error);
+        callBacks[e.data.cID]=null;
+    }
+    else if(e.data.cID && callBacks[e.data.cID]!=null && e.data.error)
+    {
+        callBacks[e.data.cID](null,e.data.data);
+        callBacks[e.data.cID]=null;
+    }
 }
+
 
 export function run(sourceCode, mainFilename, editorFilename, outputFilename, dapp, callback) {
     console.log("editorFilename:" + editorFilename);
+    var cID="CID"+Math.floor(Math.random()*10000000000000);
+    callBacks[cID]=callback;
     try {
         if (dapp) {
             var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
@@ -74,7 +89,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             var _run = async function () {
                 var failed = false;
                 var downloading = 0;
-                ascWorker.postMessage([sourceCode,mainFilename,editorFilename,outputFilename]);
+                ascWorker.postMessage([sourceCode,mainFilename,editorFilename,outputFilename,cID]);
                 getRequire.then(({ require }) => {
                     /*
                     require(["https://cdn.jsdelivr.net/npm/assemblyscript@latest/dist/sdk.js"], ({ asc }) => {
