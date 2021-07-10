@@ -30,6 +30,6 @@ export declare function getStyleProperty(p: i32,name:string):string;
 export declare function setTimeout(guid:i32,duration:i32):void;
 export declare function getResponseText(p:i32):i32;
 export declare function getResponseJSON(p:i32):i32;
-export declare function newPromise():i32;
+export declare function newPromise(s:string):i32;
 export declare function fetch(p:string,m:string,h:string,o:string):i32;
 export declare function then(p:i32):void;
