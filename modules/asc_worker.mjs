@@ -124,7 +124,7 @@ onmessage = async function (e) {
                         var waitForDownload = function (thenDo) {
                             if (downloading == 0) thenDo();
                             else {
-                                window.setTimeout(() => {
+                                setTimeout(() => {
                                     waitForDownload(thenDo);
                                 }, 500);
                             }
@@ -132,10 +132,10 @@ onmessage = async function (e) {
                         waitForDownload(() => {
                             if (failed) {
                                 if (tryCount > 0) {
-                                    window.debug.log("\b..");
+                                     console.log("\b..");
                                 }
                                 else {
-                                    window.debug.log("downloading depenadnt files..");
+                                     console.log("downloading depenadnt files..");
                                 }
                                 tryCount++;
 
@@ -202,20 +202,20 @@ function save(filename, data, overwrite = true) {
     let contentType = "[object String]";
     if (!overwrite && _localStorage.getItem(FILE_PREFIX + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
-        saveData = window.btoa(unescape(encodeURIComponent(data)));
+        saveData = btoa(unescape(encodeURIComponent(data)));
         contentType = "[object String]";
     }
     else if ({}.toString.call(data) == "[object Object]" && canJSON(data)) {
-        saveData = window.btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+        saveData = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
         contentType = "[object Object]";
     }
     else if ({}.toString.call(data) == "[object Uint8Array]") {
         var decoder = new TextDecoder('utf8');
-        saveData = window.btoa(unescape(encodeURIComponent(decoder.decode(data))));
+        saveData = btoa(unescape(encodeURIComponent(decoder.decode(data))));
         contentType = "[object Uint8Array]";
     }
     else if ({}.toString.call(data) == "[object Array]") {
-        saveData = window.btoa(unescape(encodeURIComponent(JSON.stringify({ array: data }))));
+        saveData = btoa(unescape(encodeURIComponent(JSON.stringify({ array: data }))));
         contentType = "[object Array]";
     }
     else {
@@ -242,20 +242,20 @@ function load(filename, asString = false, ageInSec = -1) {
     let contentType = _localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
     let dateChange = _localStorage.getItem(DATE_PREFIX + filename);
     if (ageInSec != -1 && ((new Date().getTime()) - ageInSec) > parseInt(dateChange)) return null;
-    //window.debug.log(contentType);
+    // console.log(contentType);
     var result = null;
     if (contentType == "[object String]") {
-        result = decodeURIComponent(escape(window.atob(b64)));
+        result = decodeURIComponent(escape(atob(b64)));
     }
     else if (contentType == "[object Object]") {
-        result = asString ? decodeURIComponent(escape(window.atob(b64))) : JSON.parse(decodeURIComponent(escape(window.atob(b64))));
+        result = asString ? decodeURIComponent(escape(atob(b64))) : JSON.parse(decodeURIComponent(escape(atob(b64))));
     }
     else if (contentType == "[object Uint8Array]") {
-        var result1 = decodeURIComponent(escape(window.atob(str))).split('').map(function (c) { return c.charCodeAt(0); });
+        var result1 = decodeURIComponent(escape(atob(str))).split('').map(function (c) { return c.charCodeAt(0); });
         result = asString ? result1.toString() : result1;
     }
     else if (contentType == "[object Array]") {
-        result = asString ? JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array.toString() : JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array;
+        result = asString ? JSON.parse(decodeURIComponent(escape(atob(b64)))).array.toString() : JSON.parse(decodeURIComponent(escape(atob(b64)))).array;
     }
 
     return result;
