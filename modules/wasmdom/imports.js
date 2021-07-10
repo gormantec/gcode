@@ -204,7 +204,7 @@ export function init(window,_fetch,_Response) {
       },
       newPromise: (s)=>{
         const str=_wasm.__getString(s);
-        var p= async ()=>{ return str; };
+        var p= async ()=>{ console.log("exec newPromise"); return str; };
         return getPointer(p);
       },
       fetch: (uri,method,headers,body)=>
@@ -234,6 +234,7 @@ export function init(window,_fetch,_Response) {
         promise.then((res)=>{
           //console.log("__alertPromise");
           //console.log(res);
+          console.log("exec then:"+res); 
           if(res instanceof Response)
           {
             var r= getPointer(res);
