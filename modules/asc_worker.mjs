@@ -124,7 +124,7 @@ onmessage = async function (e) {
                         waitForDownload(() => {
                             if (failed) {
                                 if (tryCount > 0) {
-                                     console.log("\b..");
+                                     console.log(".");
                                      postMessage({timerValue:""+Math.floor(((tryCount/(tryCount+4))-0.1)*100)+"%"});
                                 }
                                 else {

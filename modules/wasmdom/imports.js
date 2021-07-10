@@ -202,8 +202,9 @@ export function init(window,_fetch,_Response) {
         }
         else return -1;
       },
-      newPromise: ()=>{
-        var p=new Promise((resolve,reject)=>{});
+      newPromise: (s)=>{
+        const str=_wasm.__getString(s);
+        var p= async ()=>{ return str; };
         return getPointer(p);
       },
       fetch: (uri,method,headers,body)=>

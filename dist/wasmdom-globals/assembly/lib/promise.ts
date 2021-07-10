@@ -25,7 +25,7 @@ export class Response{
 }
 
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
-type StringResponseType<T> = ((r:T)=>string|null)|null;
+type StringResponseType<T> = ((r:T)=>Promise|null)|null;
 export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>void;
 // @ts-ignore
 @global @inline const MY_NAME="XXX";
@@ -101,20 +101,18 @@ export class Promise{
         }
 
     }
-    public alertResponseText(r:string):string|null{
+    public alertResponseText(r:string):void{
         //Debug.log("got alertResponseText");
         Debug.log("then::::n="+this.name+" g="+this.globals.toString());
         if(this.funcText)
         {
             Debug.log("----------- alertResponseText:"+r);
-            var rr:string|null=this.funcText(r);
+            var rr:Promise|null=this.funcText(r);
             if(rr!=null)
             {
-                Debug.log(this.name+":::alertResponseText:"+(<string>rr));
-                return rr;
+                Debug.log(this.name+":::alertResponseText:"+(<Promise>rr).name);
             }
         }
-        return null;
 
     }
     public static fromPointer(p:i32):Promise
@@ -135,13 +133,10 @@ export class Promise{
         return _promises;
     }
 
-    public static newPromise(func:ResolveFuncType|null,g:string[]):Promise
+    public static newPromise(func:StringResponseType<string>,s:string):Promise
     {
-        var p:Promise= new Promise(jsdom.newPromise());
-
-        p.globals=g;
-
-        p.resolveFunc=func;
+        var p:Promise= new Promise(jsdom.newPromise(s));
+        p.funcText=func;
         p.name="newPromise";
 
         return p;
