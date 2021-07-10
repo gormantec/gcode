@@ -11,6 +11,13 @@ const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/
 const ascWorker = new Worker('/modules/asc_worker.mjs');
 
 const callBacks={};
+const closeTimer = () => {
+    document.querySelector("#nearDialogTimerValue").style.width = "100%";
+    setTimeout(() => {
+        document.querySelector("#nearDialogTimer").close();
+        document.querySelector("#nearDialogTimerValue").style.width = "10%";
+    }, 1000);
+};
 
 ascWorker.onmessage = function(e) {
     console.log('Message received from worker: '+JSON.stringify(e.data));
@@ -18,11 +25,13 @@ ascWorker.onmessage = function(e) {
     {
         callBacks[e.data.cID](e.data.error);
         callBacks[e.data.cID]=null;
+        closeTimer();
     }
     else if(e.data.cID && callBacks[e.data.cID]!=null)
     {
         callBacks[e.data.cID](null,e.data.data);
         callBacks[e.data.cID]=null;
+        closeTimer();
     }
 }
 
@@ -31,6 +40,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
     console.log("editorFilename:" + editorFilename);
     var cID="CID"+Math.floor(Math.random()*10000000000000);
     callBacks[cID]=callback;
+
     try {
         if (dapp) {
             var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
@@ -42,14 +52,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             document.querySelector("#nearDialogTimerValue").style.width = "5%";
             setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "10%"; }, 4000);
             setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "15%"; }, 8000);
-            var closeTimer = () => {
-                document.querySelector("#nearDialogTimerValue").style.width = "100%";
-                callback(null, {});
-                setTimeout(() => {
-                    document.querySelector("#nearDialogTimer").close();
-                    document.querySelector("#nearDialogTimerValue").style.width = "10%";
-                }, 1000);
-            };
+
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "20%"; }, 10000);
@@ -77,11 +80,17 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
-                    test(x.response.testdata).then(closeTimer).catch(closeTimer);
-                }).catch(closeTimer);
-            }).catch(closeTimer);
+                    test(x.response.testdata).then(()=>{callback(null, {});closeTimer();}).catch((e)=>{callback(e);closeTimer();});
+                }).catch((e)=>{callback(e);closeTimer();});
+            }).catch((e)=>{callback(e);closeTimer();});
         }
         else {
+
+
+            document.querySelector("#nearDialogTimer").showModal();
+            document.querySelector("#nearDialogTimerValue").style.width = "5%";
+            setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "10%"; }, 4000);
+            setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "15%"; }, 8000);
 
             //var tryCount = 0;//test  
             //var dataURL = null;
