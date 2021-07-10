@@ -49,7 +49,6 @@ onmessage = async function (e) {
                             if (name == editorFilename || (name.indexOf("wasmdom-jsdom/") >= 0 && name.endsWith(editorFilename))) {
 
                                 console.log("Got App:" + name);
-                                console.log(baseDir + " / " + name);
                                 return sourceCode;
                             }
                             else if (name == "asconfig.json" && dapp == true) {
@@ -73,7 +72,6 @@ onmessage = async function (e) {
                                 }
                                 else {
                                     downloading++;
-                                    console.log(baseDir + " / " + name);
                                     fetch("/" + _name)
                                         .then(response => response.ok ? response.text() : null)
                                         .then(text => {
