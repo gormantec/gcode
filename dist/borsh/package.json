@@ -1,0 +1,25 @@
+{
+  "name": "borsh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@assemblyscript/loader": "^0.19.7",
+    "as-base58": "^0.1.1",
+    "as-bignum": "^0.2.18",
+    "text-encoding-utf-8": "^1.0.2"
+  },
+  "scripts": {
+    "test": "node tests",
+    "asbuild:untouched": "asc assembly/index.ts --target debug --traceResolution --path ../",
+    "asbuild:optimized": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/text-encoding-utf-8": "^1.0.2",
+    "assemblyscript": "^0.19.7"
+  }
+}

@@ -30,8 +30,13 @@
     },
     "dependencies": {
         "@assemblyscript/loader": "^0.19.3",
+        "@chainsafe/as-sha256": "^0.2.2",
+        "as-base58": "^0.1.1",
         "as-base64": "^0.2.0",
+        "as-bignum": "^0.2.18",
         "assemblyscript-json": "^1.0.0",
+        "borsh": "^0.4.0",
+        "tweetnacl-ts": "^1.0.3",
         "wasmdom": "file:../wasmdom",
         "wasmdom-globals": "file:../wasmdom-globals"
     }
