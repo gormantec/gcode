@@ -251,7 +251,24 @@ export function init(window,_fetch,_Response) {
             _wasm.__alertPromiseText(p,_wasm.__pin(_wasm.__newString(res.toString())));
           }
         });
-      }
+      },
+      near_login:(accountId, contractId)=>{
+        var _accountId=_wasm.__getString(accountId);
+        var _contractId=_wasm.__getString(contractId);
+
+          var p= getPointer(login({ accountId: _accountId, contractId: _contractId }));
+          return p;
+      },
+      near_contract:(accountId,contractId,methods)=>{
+
+        var _accountId=_wasm.__getString(accountId);
+        var _contractId=_wasm.__getString(contractId);
+        var arr = _wasm.__getArray(methods);
+        let _methods = arr.map(strPtr => _wasm.__getString(strPtr));
+        var p= getPointer(login(contract({_accountId,_contractId,_methods})));
+        return p;
+      },
+      
 
     }
   }

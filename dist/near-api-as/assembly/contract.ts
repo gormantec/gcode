@@ -4,6 +4,8 @@ import { Debug, Promise, Response, ResolveFuncType } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode, decode } from "as-base64";
 
+import * as nearjs from "./near-api-as";
+
 
 export class ContractMethods {
 
