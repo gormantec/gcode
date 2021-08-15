@@ -1,6 +1,20 @@
-const fs = require("fs");
-const loader = require("@assemblyscript/loader");
-const imports = {       
+import { readFileSync } from "fs";
+import { instantiateSync } from "@assemblyscript/loader";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+var _dp=1;
+var _ep=2;
+var getObject=()=>{return null}
+var _wasm={};
+
+const imports = { 
+    "wasi_snapshot_preview1":{
+        fd_write:()=>{console.log("y");},
+        proc_exit:()=>{console.log("x");}
+    },      
     "near-api-as": {
         consoleLog: message => {
             console.log("%c[AS] "+message,"color: #008800");
@@ -205,5 +219,6 @@ const imports = {
 
 }
 };
-const wasmModule = loader.instantiateSync(fs.readFileSync(__dirname + "/build/untouched.wasm"), imports);
-module.exports = wasmModule.exports;
+const wasmModule = instantiateSync(readFileSync(__dirname + "/build/untouched.wasm"), imports);
+_wasm=wasmModule.exports;
+export default wasmModule.exports;

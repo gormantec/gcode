@@ -2,6 +2,7 @@
   "name": "borsh",
   "version": "1.0.0",
   "description": "",
+  "types": "assembly/index.ts",
   "main": "index.js",
   "dependencies": {
     "@assemblyscript/loader": "^0.19.7",
@@ -20,6 +21,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/text-encoding-utf-8": "^1.0.2",
-    "assemblyscript": "^0.19.7"
+    "assemblyscript": "^0.19.7",
+    "near-api-as": "file:../near-api-as",
+    "wasmdom-globals": "file:../wasmdom-globals"
   }
 }

@@ -2,17 +2,19 @@ import { Action} from '../transaction';
 import { PublicKey} from './key_pair';
 
 import {i256Safe as BN } from "as-bignum";
+import { SchemaSerializable } from 'borsh-as';
 
 
 
 
 
 /** @hidden @module */
-export abstract class Enum {
+export abstract class Enum extends SchemaSerializable {
     enum: string;
 
     constructor(properties: string) {
-        this.enum="";
+        super();
+        this.enum=properties;
         /*
             if (Object.keys(properties).length !== 1) {
                 throw new Error('Enum can only take single value');

@@ -1,13 +1,15 @@
+
+
+
 //import SHA256 from "@chainsafe/as-sha256";
-
-import { Debug, Promise, Response, ResolveFuncType } from "wasmdom-globals";
-
 import { Enum, Assignable } from './utils/enums';
-import { serialize, deserialize } from 'borsh';
+import { serialize, deserialize, BinaryWriter, Buffer,SchemaItem,SchemaSerializable } from 'borsh-as';
 import { KeyType, PublicKey } from './utils/key_pair';
 import { Signer } from './signer';
 import {i256Safe as BN } from "as-bignum";
 import { JSON } from "assemblyscript-json";
+import { Debug } from "wasmdom-globals";
+
 
 
 export class FunctionCallPermission {
@@ -21,6 +23,10 @@ export class FullAccessPermission {}
 export class AccessKeyPermission extends Enum {
     functionCall: FunctionCallPermission;
     fullAccess: FullAccessPermission;
+     getUint8Array(a:string):Uint8Array|null{return null;}
+     getString(a:string):String|null{return null;}
+     getU32(a:string):u32{return -1;}
+     getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null{return null;}
 }
 
 export class AccessKey extends Assignable {
@@ -84,7 +90,7 @@ export function functionCall(methodName: string, args: Uint8Array, gas: BN, depo
         }
     }
     
-    const serializedArgs:Uint8Array = isUint8Array ? args : Buffer.from(o.toString());
+    const serializedArgs:Uint8Array = isUint8Array ? args : Buffer.from(o.toString()).toArray();
     return new Action({
         createAccount: null,
         deployContract: null,
@@ -102,34 +108,118 @@ export class Signature extends Assignable {
 class TransactionConfig {
     signerId: string;
     publicKey: PublicKey;
-    nonce: i32;
+    nonce: u32;
     receiverId: string;
     actions: Action[];
     blockHash: Uint8Array;
 }
 
-export class Transaction {
-    signerId: string|null;
-    publicKey: PublicKey|null;
-    nonce: string|null;
-    receiverId: string|null;
-    actions: Action[]|null;
-    blockHash: Uint8Array|null;
+
+export class Transaction extends SchemaSerializable {
+
+
+    signerId: String;
+    publicKey: PublicKey;
+    nonce: u32;
+    receiverId: String;
+    actions: Action[];
+    blockHash: Uint8Array;
 
     constructor(config:TransactionConfig)
     {
-
+        super();
+        this.signerId=config.signerId;
+        this.publicKey=config.publicKey;
+        this.nonce=config.nonce;
+        this.receiverId=config.receiverId;
+        this.actions=config.actions;
+        this.blockHash=config.blockHash;
     }
 
+    getString(a:string):String|null{
+     
+        if(a=="signerId"){
+            return this.signerId;
+        }
+        else return null;
+    }
+     getUint8Array(a:string):Uint8Array|null{
+     
 
+        if(a=="blockHash"){
+            return <Uint8Array>this.blockHash;
+        }
+        else return null;
+    }
+    
+    getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null
+    {
+        if(a=="actions"){
+            
+            let rt:SchemaSerializable[]=[];
+            for(let i:i32=0;i<this.actions.length;i++)
+            {
+                //@ts-ignore
+                rt.push(<SchemaSerializable>this.actions[i]);
+            }
+            return rt;
+            
+        }
+        else{
+            return null;
+        }
+    }
+    getU32(a:string):u32{
+        if(a=="nonce"){
+            return this.nonce;
+        }
+        else return -1;    
+    }
+    
 
-    encode(): Uint8Array {
-        return serialize(SCHEMA, this);
+    static encode(t:Transaction): Uint8Array {
+        return serialize<Transaction>(SCHEMA, t);
     }
 
     static decode(bytes: Buffer): Transaction {
-        return deserialize(SCHEMA, Transaction, bytes);
+        return <Transaction>deserialize<Transaction>(SCHEMA, "Transaction", bytes.toArray().buffer);
     }
+    static toString(t:Transaction):string
+    {
+        var x:Uint8Array=Transaction.encode(t);
+        var pos:i32=0;
+        var r:string="Transaction[";
+        var ar:string[][]=SCHEMA.get("Transaction").fields;
+        var field:i32 =0;
+        
+        while(pos<(x.length-4))
+        {
+    
+            if(pos!=0)r=r+",";
+            var lenArray=x.subarray(pos,pos+4);
+            var len:u32=( lenArray[0] << 0 )+( lenArray[1] << 8 )+( lenArray[1] << 16 )+( lenArray[1] << 24 );
+
+            Debug.log("---->"+lenArray.length.toString()+":"+len.toString());
+            Debug.log("-->"+ar[field][1]);
+            if(ar[field][1]=="u32")
+            {
+                r=r+ar[field][0]+"<"+ar[field][1]+">"+"="+len.toString();
+                pos=pos+4;
+            }
+            else{
+                var s:string=String.UTF8.decode( x.slice(pos+4,pos+len+4).buffer );
+                r=r+ar[field][0]+"<"+ar[field][1]+">"+"="+s;
+                pos=pos+len+4;
+            }
+
+            
+            field++;
+            
+        }
+        r=r+"]";
+        return r;
+    }
+
 }
 
 export class SignedTransaction extends Assignable {
@@ -140,8 +230,8 @@ export class SignedTransaction extends Assignable {
         return serialize(SCHEMA, this);
     }
 
-    static decode(bytes: Buffer): SignedTransaction {
-        return deserialize(SCHEMA, SignedTransaction, bytes);
+    static decode(bytes: Buffer): SignedTransaction | null {
+        return deserialize(SCHEMA, "SignedTransaction", bytes.toArray());
     }
 }
 class ActionConfig {
@@ -171,11 +261,45 @@ export class Action extends Enum {
         this.functionCall=config.functionCall;
         
     }
+
+    getUint8Array(a:string):Uint8Array|null{return null;}
+    getString(a:string):String|null{return null;}
+    getU32(a:string):u32{return -1;}
+    getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null{return null;}
 }
 
-export const SCHEMA = new Map<()=>void, string>();
-
+let a:Action=new Action({createAccount:new CreateAccount(),deployContract:null,functionCall:null});
+/*
+export const SCHEMA = new Map<(o:Transaction,w:BinaryWriter)=>void, string>();
+SCHEMA.set((o:Transaction,w:BinaryWriter)=>{
+    var x:string="";
+    if(o.publicKey!=null){
+        x=(<PublicKey>o.publicKey).toString();
+    }
+    var signerId:string="";
+    if(o.publicKey!=null){
+        signerId=<string>o.signerId;
+    }
+    x='{ "class":"Transaction",'+
+       ' "signerId":"'+signerId+'",'+
+       ' "publicKey":"'+x+'" }';
+    w.writeString(x);
+},"Transaction");
+*/
 export function createTransaction(signerId: string, publicKey: PublicKey, receiverId: string, nonce: i32, actions: Action[], blockHash: Uint8Array): Transaction {
     return new Transaction({ signerId, publicKey, nonce, receiverId, actions, blockHash });
 }
 
+export const SCHEMA:Map<string,SchemaItem> = new Map<string,SchemaItem>();
+SCHEMA.set("Transaction",{kind:'struct',fields:[
+    ['signerId', 'string'],
+    ['publicKey', 'PublicKey'],
+    ['nonce', 'u32'],
+    ['receiverId', 'string'],
+    ['actions', 'Action[]'],
+    ['blockHash', 'Uint8Array'],
+]});
+
+SCHEMA.set("Action",{kind:'struct',fields:[
+    ['createAccount', 'string']
+]});

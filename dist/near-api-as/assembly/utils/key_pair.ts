@@ -45,10 +45,9 @@ function str_to_key_type(keyType: string): KeyType {
     }
 
     static from(value: string ): PublicKey {
-        if (typeof value === 'string') {
+
             return PublicKey.fromString(value);
-        }
-        return value;
+
     }
 
     static fromString(encodedKey: string): PublicKey {

@@ -1,5 +1,6 @@
 {
     "name": "near-api-as",
+    "type": "module",
     "types": "assembly/index.ts",
     "version": "1.0.0",
     "description": "gormantec implementation of assembly script for Near API.",
@@ -34,10 +35,14 @@
         "as-base58": "^0.1.1",
         "as-base64": "^0.2.0",
         "as-bignum": "^0.2.18",
+        "as-wasi": "^0.4.6",
         "assemblyscript-json": "^1.0.0",
-        "borsh": "^0.4.0",
+        "borsh-as": "file:../borsh-as",
+        "near-api-as": "file:../near-api-as",
         "tweetnacl-ts": "^1.0.3",
+        "wasi": "^0.0.6",
         "wasmdom": "file:../wasmdom",
-        "wasmdom-globals": "file:../wasmdom-globals"
+        "wasmdom-globals": "file:../wasmdom-globals",
+        "wasmdom-jsdom": "file:../wasmdom-jsdom"
     }
 }

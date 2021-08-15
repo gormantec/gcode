@@ -1,3 +1,6 @@
+
+import { login, contract } from "https://gcode.com.au/modules/near/index.mjs";
+
 var objects = [];
 var getPointer = function (object) {
   if(!object) throw "undefined object!";

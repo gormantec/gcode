@@ -1,14 +1,6 @@
-const assert = require("assert");
-const myModule = require("../../near-api-as");
+import * as assert from "assert";
+import myModule from "near-api-as";
 
-console.log("-----------------------");
-
-var     sender,
-publicKey,
-receiver,
-nonce,
-actions,
-recentBlockHash;
 
 console.log(myModule.createTransaction());
 
