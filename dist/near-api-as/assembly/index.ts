@@ -3,9 +3,7 @@ export * from './common-index';
 export * from './connect';
 import { Debug } from "wasmdom-globals";
 
-
-
-import {Transaction,Action,createTransaction as _createTransaction} from "./transaction" 
+import {Transaction,Action,createTransaction as _createTransaction} from "./transaction";
 import { PublicKey } from './utils/key_pair';
 
 

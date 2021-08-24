@@ -398,7 +398,7 @@ function serializeStruct<T>(schema: Schema, obj: T,objType:string, writer: Binar
             }
             else if(fieldType.endsWith("[]"))
             {
-                let s4:SchemaSerializable[]|null=obj.getArray<SchemaSerializable>(fieldName);
+                let s4:SchemaSerializable[]|null=obj.getArray(fieldName);
                 if(s4==null)s4=[];
                 let arrayType:string=fieldType.substring(0,fieldType.length-2);
                 for(let i:i32=0;i<s4.length;i++)
@@ -434,7 +434,7 @@ export abstract class SchemaSerializable{
     abstract getUint8Array(a:string):Uint8Array|null;
     abstract getString(a:string):String|null;
     abstract getU32(a:string):u32;
-    abstract getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null;
+    abstract getArray(a:string ):SchemaSerializable[]|null;
 }
 
 export function serialize<T>(schema: Schema, obj: T): Uint8Array {

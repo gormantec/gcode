@@ -26,7 +26,7 @@ export class AccessKeyPermission extends Enum {
      getUint8Array(a:string):Uint8Array|null{return null;}
      getString(a:string):String|null{return null;}
      getU32(a:string):u32{return -1;}
-     getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null{return null;}
+     getArray(a:string ):SchemaSerializable[]|null{return null;}
 }
 
 export class AccessKey extends Assignable {
@@ -152,7 +152,7 @@ export class Transaction extends SchemaSerializable {
         else return null;
     }
     
-    getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null
+    getArray(a:string ):SchemaSerializable[]|null
     {
         if(a=="actions"){
             
@@ -265,7 +265,7 @@ export class Action extends Enum {
     getUint8Array(a:string):Uint8Array|null{return null;}
     getString(a:string):String|null{return null;}
     getU32(a:string):u32{return -1;}
-    getArray<SchemaSerializable>(a:string ):SchemaSerializable[]|null{return null;}
+    getArray(a:string ):SchemaSerializable[]|null{return null;}
 }
 
 let a:Action=new Action({createAccount:new CreateAccount(),deployContract:null,functionCall:null});
