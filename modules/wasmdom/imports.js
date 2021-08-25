@@ -265,7 +265,7 @@ export function init(window,_fetch,_Response) {
         var _contractId=_wasm.__getString(contractId);
         var arr = _wasm.__getArray(methods);
         let _methods = arr.map(strPtr => _wasm.__getString(strPtr));
-        var p= getPointer(login(contract({_accountId,_contractId,_methods})));
+        var p=getPointer(contract({_accountId,_contractId,_methods}));
         return p;
       },
       

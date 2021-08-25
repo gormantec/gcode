@@ -1,4 +1,5 @@
 import { Account } from "./account";
+import { near_contract } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
 import { Debug, Promise, Response, ResolveFuncType } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
@@ -16,7 +17,7 @@ export class ContractMethods {
 class Method {
     methodName: string;
     methodType: string;
-    exec: (params: ExecParams) => string;
+    exec: (params: ExecParams) => Promise;
 }
 
 export class Contract {
@@ -39,7 +40,7 @@ export class Contract {
             const _methodName = options.viewMethods[i];
             this.methods.push({
                 methodName: _methodName, methodType: "view", exec: (parrams) => {
-                    return "";
+                    return new Promise();
                 }
             });
         }
@@ -47,18 +48,18 @@ export class Contract {
             const _methodName = options.changeMethods[i];
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams) => {
-                    return "";
+                    return new Promise();
                 }
             });
         };
+
+        var p:Promise= new Promise(near_contract(account.accountId,contractId,options.changeMethods));
     }
 
-    exec(params: ExecParams): Promise {
-        for (var i = 0; i < this.methods.length; i++) {
-            if (this.methods[i].methodName == params.methodName) {
-                this.methods[i].exec(params);
-            }
-        }
+
+
+    view(params: ExecParams):Promise {
+
         var p: string = "{}";
         if (params.paramaters) p = <string>params.paramaters;
         //Window.window.console.log("fetch");
@@ -88,6 +89,20 @@ export class Contract {
         });
         p3.name="p3";
         return p3;
+    }
+
+    exec(params: ExecParams): Promise {
+
+        for (var i = 0; i < this.methods.length; i++) {
+            if (this.methods[i].methodName == params.methodName) {
+                if(this.methods[i].methodType=="change")
+                {
+                    return this.methods[i].exec(params);
+                } 
+            }
+        }
+        return this.view(params);
+
     }
 
     public static decodeResult(text: string): string {
