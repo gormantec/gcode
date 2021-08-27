@@ -54,7 +54,9 @@ export class Contract {
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
                     let ct:JSContract=globals_contracts.get(accountId+"_"+contractId);
-                    near_contract_exec(ct.pointer,parrams.methodName,parrams.paramaters?parrams.paramaters:"{}");
+                    let paramaters:string="{}";
+                    if(parrams.paramaters)paramaters=<string>parrams.paramaters;
+                    near_contract_exec(ct.pointer,parrams.methodName,paramaters);
                     consoleLog("Executed JSContract");
                     return new Promise();
                 }
