@@ -124,20 +124,26 @@ export class Contract {
 
         let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
         let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
-        let resultValueObj: JSON.Arr = (<JSON.Arr>resultObj.getValue("result"));
-        let arr: JSON.Value[] = resultValueObj.valueOf();
-        let aUint8Array: Uint8Array = new Uint8Array(arr.length);
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i].isNum) {
-                aUint8Array[i] = <u32>(<JSON.Num>arr[i]).valueOf();
+        if(resultObj)
+        {
+            let resultValueObj: JSON.Arr = (<JSON.Arr>resultObj.getValue("result"));
+            let arr: JSON.Value[] = resultValueObj.valueOf();
+            let aUint8Array: Uint8Array = new Uint8Array(arr.length);
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].isNum) {
+                    aUint8Array[i] = <u32>(<JSON.Num>arr[i]).valueOf();
+                }
+                else if (arr[i].isInteger) {
+    
+                    let v: i64 = (<JSON.Integer>arr[i]).valueOf();
+                    aUint8Array[i] = <u32>v;
+                }
             }
-            else if (arr[i].isInteger) {
-
-                let v: i64 = (<JSON.Integer>arr[i]).valueOf();
-                aUint8Array[i] = <u32>v;
-            }
+            return String.UTF8.decode(aUint8Array.buffer);
         }
-        return String.UTF8.decode(aUint8Array.buffer);
+        return text;
+
+        
     }
 
 }
