@@ -9,6 +9,8 @@ import * as nearjs from "./near-api-as";
 
 const globals_contracts=new Map<string,JSContract>();
 
+const contracts:Map<string,Contract>=new Map<string,Contract>();
+
 
 export class ContractMethods {
 
@@ -26,6 +28,8 @@ export class Contract {
     readonly account: Account;
     readonly contractId: string;
     methods: Method[] = [];
+    done:boolean=false;
+    thenFunc:(contract:Contract)=>void=(contract:Contract)=>{};
 
     /**
      * @param account NEAR account to sign change method transactions
@@ -67,10 +71,25 @@ export class Contract {
         p.thenJSContract((contract: JSContract) => {
             contract.promisePointer
             consoleLog("Got Contract");
-            globals_contracts.set(contract.accountId+"_"+contract.contractId,contract)
+            globals_contracts.set(contract.accountId+"_"+contract.contractId,contract);
+            contracts.get("CONTRACT:"+contract.promisePointer).done=true;
+            contracts.get("CONTRACT:"+contract.promisePointer).thenFunc(contracts.get("CONTRACT:"+contract.promisePointer));
             return null;
         }
         );
+
+    }
+
+
+    then(func:(account:Contract)=>void):void
+    {
+        if(this.done)
+        {
+            func(this);
+        }
+        else{
+            this.thenFunc=func;
+        }
     }
 
 
