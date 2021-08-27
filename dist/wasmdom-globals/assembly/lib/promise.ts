@@ -25,8 +25,10 @@ export class Response{
 }
 export class JSObject{
     pointer:i32;
-    constructor(pointer:i32=-1) {
+    promisePointer:i32;
+    constructor(pointer:i32=-1,promisePointer:i32=-1) {
         this.pointer=pointer;
+        this.promisePointer=promisePointer;
     }
 }
 export class JSContract extends JSObject{

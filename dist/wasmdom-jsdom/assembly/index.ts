@@ -42,7 +42,7 @@ function __alertPromiseJSContract(p: i32,r: i32,accountId:string,contractId:stri
 
 function __alertPromiseJSObject(p: i32,r: i32):i32{
   Debug.log("__alertPromiseJSObject::Promise="+p.toString());
-  Promise.fromPointer(p).alertJSObject(new JSObject(r));
+  Promise.fromPointer(p).alertJSObject(new JSObject(r,p));
   return 0;
 }
 

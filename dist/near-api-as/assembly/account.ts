@@ -5,9 +5,13 @@ import { near_login,consoleLog } from "./near-api-as";
 
 let waitFlag:i32=0;
 
+const accounts:Map<string,Account>=new Map<string,Account>();
+
 export class Account {
     readonly connection: Connection;
     readonly accountId: string;
+    done:boolean=false;
+    thenFunc:()=>void=()=>{};
     myPromise:Promise;
 
     constructor(connection: Connection, accountId: string) {
@@ -15,13 +19,24 @@ export class Account {
         this.accountId = accountId;
         this.myPromise=new Promise(near_login(accountId));
         //this.myPromise.
-        waitFlag=1;
+        accounts.set("ACCOUNT:"+this.myPromise.pointer.toString() ,this);
         this.myPromise.thenJSObject((o:JSObject)=>{
-            waitFlag=0;
+            accounts.get("ACCOUNT:"+o.promisePointer.toString()).done=true;
+            accounts.get("ACCOUNT:"+o.promisePointer.toString()).thenFunc();
             consoleLog("thenJSObject");
             return null;
         });
-        while(waitFlag==1){let r=Math.random()*Math.random()*Math.random()*Math.random();}
+        
+    }
+    then(func:()=>void)
+    {
+        if(this.done)
+        {
+            func();
+        }
+        else{
+            this.thenFunc=func;
+        }
     }
 
 }
