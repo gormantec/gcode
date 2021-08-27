@@ -18,7 +18,7 @@ export class ContractMethods {
 class Method {
     methodName: string;
     methodType: string;
-    exec: (params: ExecParams,accountId:string,contractId:string) => Promise;
+    exec: (params: ExecParams,jsCOntract:JSContract|null) => Promise;
 }
 
 export class Contract {
@@ -45,7 +45,7 @@ export class Contract {
             const _methodName = options.viewMethods[i];
             methods.push("*" + _methodName);
             this.methods.push({
-                methodName: _methodName, methodType: "view", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
+                methodName: _methodName, methodType: "view", exec: (parrams:ExecParams,jsCOntract:JSContract|null) => {
                     return new Promise();
                 }
             });
@@ -54,12 +54,12 @@ export class Contract {
             const _methodName = options.changeMethods[i];
             methods.push(_methodName);
             this.methods.push({
-                methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
-                    if(this.jsContract)
+                methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,jsContract:JSContract|null) => {
+                    if(jsContract)
                     {
                         let paramaters:string="{}";
                         if(parrams.paramaters)paramaters=<string>parrams.paramaters;
-                        near_contract_exec(this.jsContract.pointer,parrams.methodName,paramaters);
+                        near_contract_exec(jsContract.pointer,parrams.methodName,paramaters);
                         consoleLog("Executed JSContract");
                     }
                     return new Promise();
@@ -132,7 +132,7 @@ export class Contract {
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
                 if (this.methods[i].methodType == "change") {
-                    return this.methods[i].exec(params,this.account.accountId,this.contractId);
+                    return this.methods[i].exec(params,this.jsContract);
                 }
             }
         }
