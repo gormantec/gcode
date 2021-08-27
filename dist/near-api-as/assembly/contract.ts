@@ -7,9 +7,7 @@ import { encode, decode } from "as-base64";
 
 import * as nearjs from "./near-api-as";
 
-const globals={
-    contracts:new Map<string,JSContract>()
-}
+const globals_contracts=new Map<string,JSContract>();
 
 
 export class ContractMethods {
