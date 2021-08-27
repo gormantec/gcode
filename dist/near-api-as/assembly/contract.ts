@@ -124,7 +124,8 @@ export class Contract {
 
         let jsonObj: JSON.Obj = <JSON.Obj>(JSON.parse(text));
         let resultObj: JSON.Obj = (<JSON.Obj>jsonObj.getValue("result"));
-        if(resultObj)
+        let resultObjError:JSON.Str|null = resultObj.getString("error");
+        if(!resultObjError)
         {
             let resultValueObj: JSON.Arr = (<JSON.Arr>resultObj.getValue("result"));
             let arr: JSON.Value[] = resultValueObj.valueOf();
@@ -141,7 +142,11 @@ export class Contract {
             }
             return String.UTF8.decode(aUint8Array.buffer);
         }
-        return text;
+        else
+        {
+            return resultObjError.stringify();
+        }
+        
 
         
     }
