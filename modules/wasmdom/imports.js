@@ -75,6 +75,14 @@ export function init(window, _fetch, _Response) {
         },
         consoleLog: message => {
           console.log("%c[AS] " + _wasm.__getString(message), "color: #008800");
+        },
+        near_contract_exec:(contract,method,parrams) => {
+          var _method = _wasm.__getString(method);
+          var _parrams = JSON.parse(_wasm.__getString(parrams));
+          var ct = getObject(contract);
+          ct[_method](_parrams).then((response) => {
+            console.log("[JS] near_contract: accountId="+response);
+          }).catch((e)=>{console.log("EXEC Error:"+e);});
         }
       },
       "wasmdom-jsdom": {

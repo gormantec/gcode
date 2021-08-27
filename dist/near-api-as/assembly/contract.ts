@@ -1,5 +1,5 @@
 import { Account } from "./account";
-import { near_contract, consoleLog } from "./near-api-as";
+import { near_contract, consoleLog,near_contract_exec } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
 import { Debug, Promise, Response, ResolveFuncType, JSContract } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
@@ -54,6 +54,7 @@ export class Contract {
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
                     let ct:JSContract=globals_contracts.get(accountId+"_"+contractId);
+                    near_contract_exec(ct.pointer,parrams.methodName,parrams.paramaters?parrams.paramaters:"{}");
                     consoleLog("Executed JSContract");
                     return new Promise();
                 }
