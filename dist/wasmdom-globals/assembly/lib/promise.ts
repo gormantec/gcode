@@ -23,17 +23,26 @@ export class Response{
         }
     }
 }
-
-export class JSContract{
+export class JSObject{
     pointer:i32;
+    constructor(pointer:i32=-1) {
+        this.pointer=pointer;
+    }
+}
+export class JSContract extends JSObject{
     accountId:string;
     contractId:string;
     constructor(pointer:i32=-1,accountId:string="",contractId:string="") {
+        super(pointer)
         this.pointer=pointer;
         this.accountId=accountId;
         this.contractId=contractId;
     }
 }
+
+
+
+
 
 
 
@@ -51,6 +60,7 @@ export class Promise{
     func:ResponseType<Response>;
     funcText:StringResponseType<string>;
     funcJSContract:JSContractResponseType<JSContract>;
+    funcJSObject:ResponseType<JSObject>;
     afterThen: Promise|null = null;
     resolveFunc:ResolveFuncType|null=null;
     globals:string[]=[];
@@ -111,6 +121,39 @@ export class Promise{
             return <Promise>this.afterThen;
 
     }
+    public thenJSObject(func:ResponseType<JSObject> = null):Promise
+    {
+        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
+        Debug.log(typeof func);
+        if(func)Debug.log(func.toString());
+        if(func)Debug.log(nameof(func));
+
+            this.afterThen= new Promise();
+            this.func=null;
+            this.funcText=null;
+            this.funcJSContract=func;
+            if(this.pointer>=0)jsdom.then(this.pointer);
+            return <Promise>this.afterThen;
+
+    }
+
+    public alertJSObject(r:JSObject):void{
+        //Debug.log("got alertResponse");
+        Debug.log("alertJSObject:::n="+this.name+" g="+this.globals.toString());  
+        if(this.funcJSObject)
+        {
+            var prom:Promise|null =this.funcJSObject(r);
+            if(prom){
+                var i:i32=_promises.indexOf(prom);
+                _promises.splice(i,1);
+                (<Promise>this.afterThen).pointer=prom.pointer;
+                (<Promise>this.afterThen).func=prom.func;
+                jsdom.then((<Promise>this.afterThen).pointer);
+            }
+        }
+
+    }
+    
     public alertJSContract(r:JSContract):void{
         //Debug.log("got alertResponse");
         Debug.log("alertJSContract::::n="+this.name+" g="+this.globals.toString());  

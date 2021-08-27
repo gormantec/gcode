@@ -54,13 +54,10 @@ export function init(window, _fetch, _Response) {
     imports: {
       "near-api-as": {
 
-        near_login: (accountId, contractId) => {
+        near_login: (accountId) => {
           var _accountId = _wasm.__getString(accountId);
-          var _contractId = _wasm.__getString(contractId);
-
-          console.log("[JS] near_login: accountId="+_accountId+" contractId="+_contractId);
-
-          var p = getPointer(login({ accountId: _accountId, contractId: _contractId }));
+          console.log("[JS] near_login: accountId="+_accountId);
+          var p = getPointer(login({ accountId: _accountId}));
           return p;
         },
         near_contract: (accountId, contractId, methods) => {
@@ -284,6 +281,14 @@ export function init(window, _fetch, _Response) {
               console.log(res);
               var r = getPointer(res);
               _wasm.__alertPromiseJSContract(p, r,_wasm.__pin(_wasm.__newString(res.account.accountId.toString())),_wasm.__pin(_wasm.__newString(res.contractId.toString())));
+            }
+            else if(typeof res == "object")
+            {
+              console.log("exec then=\"JSObject\"");
+              console.log(res);
+              var r = getPointer(res);
+              _wasm.__alertPromiseJSObject(p, r);
+
             }
             else {
               //console.log("fetch Pointer="+p+ " Response="+r);
