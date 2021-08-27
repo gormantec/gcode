@@ -1,5 +1,10 @@
 
 import { login, contract } from "https://gcode.com.au/modules/near/index.mjs";
+import { getScript } from '/modules/getScript.mjs';
+
+const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
+
+
 
 var objects = [];
 var getPointer = function (object) {
@@ -59,7 +64,7 @@ export function init(window, _fetch, _Response) {
           return p;
         },
         near_contract: (accountId, contractId, methods) => {
-          console.log("[JS] near_contract: accountId="+accountId)+" contractId="+contractId;
+          console.log("[JS] near_contract: accountId="+accountId+" contractId="+contractId);
           var _accountId = _wasm.__getString(accountId);
           var _contractId = _wasm.__getString(contractId);
           var arr = _wasm.__getArray(methods);
@@ -257,6 +262,7 @@ export function init(window, _fetch, _Response) {
           promise.then((res) => {
             //console.log("__alertPromise");
             //console.log(res);
+            getNearApi.then(({ nearApi }) => {
             if (res instanceof Response) {
               var r = getPointer(res);
               //console.log("fetch Pointer="+p+ " Response="+r);
@@ -275,6 +281,8 @@ export function init(window, _fetch, _Response) {
               console.log("exec then=\"" + res + "\"");
               _wasm.__alertPromiseText(p, _wasm.__pin(_wasm.__newString(res.toString())));
             }
+          });
+            
           });
         },
         near_login: (accountId, contractId) => {
