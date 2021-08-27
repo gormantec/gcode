@@ -69,8 +69,8 @@ export function init(window, _fetch, _Response) {
           var arr = _wasm.__getArray(methods);
           let _methods = arr.map(strPtr => _wasm.__getString(strPtr));
 
-          console.log("[JS] near_contract: accountId="+_accountId+" contractId="+_contractId+" _methods="+_methods);
-          var p = getPointer(contract({ _accountId, _contractId, _methods }));
+          console.log("[JS] near_contract: accountId="+_accountId+" contractId="+_contractId+" _methods<"+typeof _methods+">="+_methods.toString());
+          var p = getPointer(contract({ "accountId":_accountId, "contractId":_contractId, "methods":_methods }));
           return p;
         },
         consoleLog: message => {
