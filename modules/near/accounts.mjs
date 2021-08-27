@@ -45,7 +45,7 @@ export function contract(config) {
 
                 });
             }
-            console.log({ account: account, contractId: config.contractId, ContractMethods: ct });
+            console.log({ account: account,accountId: config.accountId, contractId: config.contractId, ContractMethods: ct });
             const mycontract = new nearApi.Contract(account, config.contractId, ct);
             resolve(mycontract);
         }).catch(e => reject({ code: 500, error: "011:" + e }));
