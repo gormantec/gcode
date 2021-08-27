@@ -3,11 +3,8 @@ import { near_contract, consoleLog,near_contract_exec } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
 import { Debug, Promise, Response, ResolveFuncType, JSContract } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
-import { encode, decode } from "as-base64";
+import { encode } from "as-base64";
 
-import * as nearjs from "./near-api-as";
-
-const globals_contracts=new Map<string,JSContract>();
 
 const contracts:Map<string,Contract>=new Map<string,Contract>();
 
@@ -29,6 +26,7 @@ export class Contract {
     readonly contractId: string;
     methods: Method[] = [];
     done:boolean=false;
+    jsContract:JSContract|null;
     thenFunc:(contract:Contract)=>void=(contract:Contract)=>{};
 
     /**
@@ -57,23 +55,25 @@ export class Contract {
             methods.push(_methodName);
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
-                    let ct:JSContract=globals_contracts.get(accountId+"_"+contractId);
-                    let paramaters:string="{}";
-                    if(parrams.paramaters)paramaters=<string>parrams.paramaters;
-                    near_contract_exec(ct.pointer,parrams.methodName,paramaters);
-                    consoleLog("Executed JSContract");
+                    if(this.jsContract)
+                    {
+                        let paramaters:string="{}";
+                        if(parrams.paramaters)paramaters=<string>parrams.paramaters;
+                        near_contract_exec(this.jsContract.pointer,parrams.methodName,paramaters);
+                        consoleLog("Executed JSContract");
+                    }
                     return new Promise();
                 }
             });
         };
 
         var p: Promise = new Promise(near_contract(account.accountId, contractId, methods));
+        contracts.set("CONTRACT:"+p.pointer.toString(),this)
         p.thenJSContract((contract: JSContract) => {
-            contract.promisePointer
             consoleLog("Got Contract");
-            globals_contracts.set(contract.accountId+"_"+contract.contractId,contract);
-            contracts.get("CONTRACT:"+contract.promisePointer).done=true;
-            contracts.get("CONTRACT:"+contract.promisePointer).thenFunc(contracts.get("CONTRACT:"+contract.promisePointer));
+            contracts.get("CONTRACT:"+contract.promisePointer.toString()).jsContract=contract;
+            contracts.get("CONTRACT:"+contract.promisePointer.toString()).done=true;
+            contracts.get("CONTRACT:"+contract.promisePointer.toString()).thenFunc(contracts.get("CONTRACT:"+contract.promisePointer.toString()));
             return null;
         }
         );
