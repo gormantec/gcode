@@ -34,7 +34,7 @@ function __alertPromise(p: i32,r: i32):i32{
   Promise.fromPointer(p).alertResponse(new Response(r));
   return 0;
 }
-function __alertPromiseJSContract(p: i32,r: string):i32{
+function __alertPromiseJSContract(p: i32,r: i32):i32{
   Debug.log("__alertPromiseJSContract::Promise="+p.toString());
   Promise.fromPointer(p).alertResponse(new JSContract(r));
   return 0;
