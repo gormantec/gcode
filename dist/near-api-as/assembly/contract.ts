@@ -144,7 +144,7 @@ export class Contract {
         }
         else
         {
-            return resultObjError.stringify();
+            return resultObjError.toString();
         }
         
 
