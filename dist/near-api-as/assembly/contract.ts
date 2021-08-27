@@ -1,11 +1,15 @@
 import { Account } from "./account";
-import { near_contract,consoleLog } from "./near-api-as";
+import { near_contract, consoleLog } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
 import { Debug, Promise, Response, ResolveFuncType, JSContract } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode, decode } from "as-base64";
 
 import * as nearjs from "./near-api-as";
+
+const globals={
+    contracts:new Map<string,JSContract>()
+}
 
 
 export class ContractMethods {
@@ -36,10 +40,10 @@ export class Contract {
         var i: i32 = 0;
 
         //Window.window.console.log("new Contract");
-        let methods:string[]=[]
+        let methods: string[] = []
         for (i = 0; i < options.viewMethods.length; i++) {
             const _methodName = options.viewMethods[i];
-            methods.push("*"+_methodName);
+            methods.push("*" + _methodName);
             this.methods.push({
                 methodName: _methodName, methodType: "view", exec: (parrams) => {
                     return new Promise();
@@ -56,13 +60,17 @@ export class Contract {
             });
         };
 
-        var p:Promise= new Promise(near_contract(account.accountId,contractId,methods));
-        p.thenJSContract((contract:JSContract)=>{consoleLog("Got Conract");return null;});
+        var p: Promise = new Promise(near_contract(account.accountId, contractId, methods));
+        p.thenJSContract((contract: JSContract) => {
+            consoleLog("Got Conract");
+            return null;
+        }
+        );
     }
 
 
 
-    view(params: ExecParams):Promise {
+    view(params: ExecParams): Promise {
 
         var p: string = "{}";
         if (params.paramaters) p = <string>params.paramaters;
@@ -81,17 +89,17 @@ export class Contract {
             }
             }`);
 
-        p1.name="p1";
+        p1.name = "p1";
         let p2: Promise = p1.then((r: Response) => {
             Debug.log("then");
             return r.text();
         }, null);
-        p2.name="p2";
-        let p3: Promise =p2.thenString((s: string)=>{
-            var dc=Contract.decodeResult(s);
+        p2.name = "p2";
+        let p3: Promise = p2.thenString((s: string) => {
+            var dc = Contract.decodeResult(s);
             return Promise.resolve(dc);
         });
-        p3.name="p3";
+        p3.name = "p3";
         return p3;
     }
 
@@ -99,10 +107,9 @@ export class Contract {
 
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
-                if(this.methods[i].methodType=="change")
-                {
+                if (this.methods[i].methodType == "change") {
                     return this.methods[i].exec(params);
-                } 
+                }
             }
         }
         return this.view(params);
