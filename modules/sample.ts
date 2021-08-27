@@ -8,6 +8,7 @@ var secondPage: Page;
 var aPWA: PWA;
 var window: Window, document: Document, console: Console;
 var mycontract: Contract;
+var accountId:string = "hello.gormantec.testnet";
 
 export function run(w: Window, d: Document, c: Console): i32 {
     window = w;
@@ -63,7 +64,7 @@ export function run(w: Window, d: Document, c: Console): i32 {
 
 function initContract(delay: i32): void {
     window.setTimeout(function() {
-        var accountId = "hello.gormantec.testnet";
+        
         setBlackPage("<p> Contract Request: " + accountId + "</p>");
         var aKeyStore = new BrowserLocalStorageKeyStore();
         const config = new NearConfig(aKeyStore, "testnet", accountId);
