@@ -52,8 +52,8 @@ export class Contract {
             const _methodName = options.changeMethods[i];
             methods.push(_methodName);
             this.methods.push({
-                methodName: _methodName, methodType: "change", exec: (parrams) => {
-                    let ct:JSContract=globals_contracts.get(this.account.accountId+"_"+this.contractId);
+                methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
+                    let ct:JSContract=globals_contracts.get(accountId+"_"+contractId);
                     consoleLog("Executed JSContract");
                     return new Promise();
                 }
