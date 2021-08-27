@@ -269,10 +269,10 @@ export function init(window, _fetch, _Response) {
             }
             else if (nearApi && res instanceof nearApi.Contract) {
               //console.log("fetch Pointer="+p+ " Response="+r);
-
+              
               console.log("exec then=\"Contract\"");
               var r = getPointer(res);
-              _wasm.__alertPromiseJSContract(p, r);
+              _wasm.__alertPromiseJSContract(p, r,_wasm.__pin(_wasm.__newString(res.accountId.toString())),_wasm.__pin(_wasm.__newString(res.contractId.toString())));
             }
             else {
               //console.log("fetch Pointer="+p+ " Response="+r);

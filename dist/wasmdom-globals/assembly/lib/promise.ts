@@ -26,8 +26,12 @@ export class Response{
 
 export class JSContract{
     pointer:i32;
-    constructor(pointer:i32=-1) {
+    accountId:string;
+    contractId:string;
+    constructor(pointer:i32=-1,accountId:string,contractId:string) {
         this.pointer=pointer;
+        this.accountId=accountId;
+        this.contractId=contractId;
     }
 }
 
