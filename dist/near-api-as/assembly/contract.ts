@@ -53,6 +53,8 @@ export class Contract {
             methods.push(_methodName);
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams) => {
+                    let ct:JSContract=globals_contracts.get(this.account.accountId+"_"+this.contractId);
+                    consoleLog("Executed JSContract");
                     return new Promise();
                 }
             });
