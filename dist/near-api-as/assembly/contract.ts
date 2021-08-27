@@ -19,7 +19,7 @@ export class ContractMethods {
 class Method {
     methodName: string;
     methodType: string;
-    exec: (params: ExecParams) => Promise;
+    exec: (params: ExecParams,accountId:string,contractId:string) => Promise;
 }
 
 export class Contract {
@@ -43,7 +43,7 @@ export class Contract {
             const _methodName = options.viewMethods[i];
             methods.push("*" + _methodName);
             this.methods.push({
-                methodName: _methodName, methodType: "view", exec: (parrams) => {
+                methodName: _methodName, methodType: "view", exec: (parrams:ExecParams,accountId:string,contractId:string) => {
                     return new Promise();
                 }
             });
@@ -109,7 +109,7 @@ export class Contract {
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
                 if (this.methods[i].methodType == "change") {
-                    return this.methods[i].exec(params);
+                    return this.methods[i].exec(params,this.account.accountId,this.contractId);
                 }
             }
         }
