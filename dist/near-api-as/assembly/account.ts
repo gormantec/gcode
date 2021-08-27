@@ -28,7 +28,7 @@ export class Account {
         });
         
     }
-    then(func:()=>void)
+    then(func:()=>void):void
     {
         if(this.done)
         {
