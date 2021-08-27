@@ -131,7 +131,7 @@ export class Promise{
             this.afterThen= new Promise();
             this.func=null;
             this.funcText=null;
-            this.funcJSContract=func;
+            this.funcJSObject=func;
             if(this.pointer>=0)jsdom.then(this.pointer);
             return <Promise>this.afterThen;
 
