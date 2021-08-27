@@ -1,7 +1,6 @@
 
 import { login, contract } from "https://gcode.com.au/modules/near/index.mjs";
 import { getScript } from 'https://gcode.com.au/modules/getScript.mjs';
-
 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
 
 
