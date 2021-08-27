@@ -7,6 +7,7 @@ var homePage: Page;
 var secondPage: Page;
 var aPWA: PWA;
 var window: Window, document: Document, console: Console;
+var mycontract: Contract;
 
 export function run(w: Window, d: Document, c: Console): i32 {
     window = w;
@@ -54,12 +55,13 @@ export function run(w: Window, d: Document, c: Console): i32 {
         aPWA.setPage(homePage);
     }, 1000);
 
-    callContract(2000);
+    initContract(2000);
+    callContract(5000);
     return 0;
 
 }
 
-function callContract(delay: i32): void {
+function initContract(delay: i32): void {
     window.setTimeout(function() {
         var accountId = "hello.gormantec.testnet";
         setBlackPage("<p> Contract Request: " + accountId + "</p>");
@@ -67,18 +69,36 @@ function callContract(delay: i32): void {
         const config = new NearConfig(aKeyStore, "testnet", accountId);
         const near = new Near(config);
         const account = new Account(near.connection, accountId);
-        const mycontract = new Contract(account, accountId, {
-            viewMethods: ["getGreeting"]
+        mycontract = new Contract(account, accountId, {
+            viewMethods: ["getGreeting"],
+            changeMethods: ["setGreeting"]
         });
-        mycontract.exec({
-                methodName: "getGreeting",
-                paramaters: '{"accountId":"' + accountId + '"}'
-            })
-            .thenString((text: string) => {
-                //text = Contract.decodeResult(text);
-                setBlackPage("<p> Contract Response: " + text + "</p>");
-                return null;
-            });
+    }, delay)
+}
+
+
+function callContract(delay: i32): void {
+    window.setTimeout(function() {
+        if (mycontract) {
+            mycontract.exec({
+                    methodName: "getGreeting",
+                    paramaters: '{"accountId":"' + accountId + '"}'
+                })
+                .thenString((text: string) => {
+                    //text = Contract.decodeResult(text);
+                    setBlackPage("<p> Contract Response: " + text + "</p>");
+                    return null;
+                });
+            mycontract.exec({
+                    methodName: "setGreeting",
+                    paramaters: '{"message":"test message"}'
+                })
+                .thenString((text: string) => {
+                    //text = Contract.decodeResult(text);
+                    setBlackPage("<p> Contract Response: " + text + "</p>");
+                    return null;
+                });
+        }
     }, delay);
 }
 
