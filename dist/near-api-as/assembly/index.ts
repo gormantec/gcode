@@ -2,6 +2,7 @@ export * from './key_stores/index';
 export * from './common-index';
 export * from './connect';
 import { Debug } from "wasmdom-globals";
+import { Contract } from './contract';
 
 import {Transaction,Action,createTransaction as _createTransaction} from "./transaction";
 import { PublicKey } from './utils/key_pair';
@@ -13,4 +14,4 @@ export function createTransaction():i32{
     return 0;
 }
 
-export {Transaction,PublicKey,Action };
+export {Transaction,PublicKey,Action,Contract };
