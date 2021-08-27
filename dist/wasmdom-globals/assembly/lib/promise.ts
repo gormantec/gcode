@@ -92,7 +92,7 @@ export class Promise{
             return <Promise>this.afterThen;
 
     }
-    public thenJSContract<T>(func:JSContractResponseType<JSContract> = null):Promise
+    public thenJSContract(func:JSContractResponseType<JSContract> = null):Promise
     {
         Debug.log("then::::n="+this.name+" g="+this.globals.toString());
         Debug.log(typeof func);
