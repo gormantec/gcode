@@ -219,7 +219,6 @@ export function init(window, _fetch, _Response) {
         , getStyleProperty: (p, name) => {
           var pName = _wasm.__getString(name);
           var ptr = _wasm.__pin(_wasm.__newString(getObject(p).style.getPropertyValue(pName)));
-          //setTimeout(()=>{_wasm.__unpin(ptr);},10000);
           return ptr;
         },
         getResponseText: (p) => {
@@ -240,7 +239,6 @@ export function init(window, _fetch, _Response) {
         },
         newPromise: (s) => {
           const str = _wasm.__getString(s);
-          console.log("exec1 newPromise");
           var p = Promise.resolve(str);
           return getPointer(p);
         },
@@ -252,13 +250,11 @@ export function init(window, _fetch, _Response) {
           if (!b || b == "" || b.trim().substring(0, 1) != "{") {
             var p = getPointer(fetch(u));
 
-            //console.log("fetch Pointer="+p);
             return p;
           }
           else {
             var p = getPointer(fetch(u, { method: m, headers: JSON.parse(h), body: b }));
 
-            //console.log("fetch Pointer="+p);
             return p;
           }
 
@@ -266,34 +262,22 @@ export function init(window, _fetch, _Response) {
         then: (p) => {
           var promise = getObject(p);
           promise.then((res) => {
-            //console.log("__alertPromise");
-            //console.log(res);
             getNearApi.then(({ nearApi }) => {
             if (res instanceof Response) {
               var r = getPointer(res);
-              //console.log("fetch Pointer="+p+ " Response="+r);
               _wasm.__alertPromise(p, r);
             }
             else if (nearApi && res instanceof nearApi.Contract) {
-              //console.log("fetch Pointer="+p+ " Response="+r);
-              
-              console.log("exec then=\"Contract\"");
-              console.log(res);
               var r = getPointer(res);
               _wasm.__alertPromiseJSContract(p, r,_wasm.__pin(_wasm.__newString(res.account.accountId.toString())),_wasm.__pin(_wasm.__newString(res.contractId.toString())));
             }
             else if(typeof res == "object")
             {
-              console.log("exec then=\"JSObject\"");
-              console.log(res);
               var r = getPointer(res);
               _wasm.__alertPromiseJSObject(p, r);
 
             }
             else {
-              //console.log("fetch Pointer="+p+ " Response="+r);
-
-              console.log("exec then=\"" + res + "\"");
               _wasm.__alertPromiseText(p, _wasm.__pin(_wasm.__newString(res.toString())));
             }
           });
