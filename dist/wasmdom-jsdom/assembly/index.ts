@@ -17,31 +17,24 @@ function show(): i32 {
 }
 
 function __alertEventListener(p: i32, s: string): i32 {
-  //Debug.log("---->" + typeof s);
-  //Debug.log("---->" + s);
   window.alertEventListener(p, s);
   return 0;
 }
 function __alertTimeout(guid: i32): i32 {
-  //Debug.log("__alertTimeout" + guid.toString());
   window.alertTimeout(guid);
   return 0;
 }
 
 function __alertPromise(p: i32,r: i32):i32{
-  //Debug.log("__alertPromise::Promise="+p.toString());
-  //Debug.log("Promises="+Promise.getPromises().toString());
   Promise.fromPointer(p).alertResponse(new Response(r));
   return 0;
 }
 function __alertPromiseJSContract(p: i32,r: i32,accountId:string,contractId:string):i32{
-  Debug.log("__alertPromiseJSContract::Promise="+p.toString());
   Promise.fromPointer(p).alertJSContract(new JSContract(r,p,accountId,contractId));
   return 0;
 }
 
 function __alertPromiseJSObject(p: i32,r: i32):i32{
-  Debug.log("__alertPromiseJSObject::Promise="+p.toString());
   Promise.fromPointer(p).alertJSObject(new JSObject(r,p));
   return 0;
 }
@@ -49,8 +42,6 @@ function __alertPromiseJSObject(p: i32,r: i32):i32{
 
 
 function __alertPromiseText(p: i32,r: string):i32{
-  //Debug.log("Promises="+Promise.getPromises().toString());
-  //Debug.log("__alertPromiseText::Promise="+p.toString());
   Promise.fromPointer(p).alertResponseText(r);
   return 0;
 }

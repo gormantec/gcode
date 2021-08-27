@@ -78,9 +78,7 @@ export class Promise{
     }
     public then(func:ResponseType<Response> =null,funcText:StringResponseType<string> = null):Promise
     {
-        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
         this.afterThen= new Promise();
-        //Debug.log("Promises="+_promises.toString());
         this.func=func;
         this.funcText=null;
         if(this.pointer>=0)jsdom.then(this.pointer);
@@ -99,8 +97,6 @@ export class Promise{
 
     public thenString(func:StringResponseType<string> = null):Promise
     {
-        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
-
             this.afterThen= new Promise();
             this.func=null;
             this.funcText=func;
@@ -110,11 +106,6 @@ export class Promise{
     }
     public thenJSContract(func:JSContractResponseType<JSContract> = null):Promise
     {
-        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
-        Debug.log(typeof func);
-        if(func)Debug.log(func.toString());
-        if(func)Debug.log(nameof(func));
-
             this.afterThen= new Promise();
             this.func=null;
             this.funcText=null;
@@ -125,8 +116,6 @@ export class Promise{
     }
     public thenJSObject(func:ResponseType<JSObject> = null):Promise
     {
-        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
-        Debug.log(typeof func);
         if(func)Debug.log(func.toString());
         if(func)Debug.log(nameof(func));
 
@@ -140,8 +129,6 @@ export class Promise{
     }
 
     public alertJSObject(r:JSObject):void{
-        //Debug.log("got alertResponse");
-        Debug.log("alertJSObject:::n="+this.name+" g="+this.globals.toString());  
         if(this.funcJSObject)
         {
             var prom:Promise|null =this.funcJSObject(r);
@@ -157,60 +144,42 @@ export class Promise{
     }
     
     public alertJSContract(r:JSContract):void{
-        //Debug.log("got alertResponse");
-        Debug.log("alertJSContract::::n="+this.name+" g="+this.globals.toString());  
         if(this.funcJSContract)
         {
             var prom:Promise|null =this.funcJSContract(r);
             if(prom){
                 var i:i32=_promises.indexOf(prom);
-                //Debug.log("Promises="+_promises.toString());
-                //Debug.log("removed ["+i.toString()+"] count="+_promises[i].toString());
                 _promises.splice(i,1);
-                //Debug.log("Promises="+_promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
-                //Debug.log("Promises="+_promises.toString());
                 jsdom.then((<Promise>this.afterThen).pointer);
             }
         }
 
     }
     public alertResponse(r:Response):void{
-        //Debug.log("got alertResponse");
-        Debug.log("alertResponse::::n="+this.name+" g="+this.globals.toString());  
         if(this.func)
         {
             var prom:Promise|null =this.func(r);
             if(prom){
                 var i:i32=_promises.indexOf(prom);
-                //Debug.log("Promises="+_promises.toString());
-                //Debug.log("removed ["+i.toString()+"] count="+_promises[i].toString());
                 _promises.splice(i,1);
-                //Debug.log("Promises="+_promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
-                //Debug.log("Promises="+_promises.toString());
                 jsdom.then((<Promise>this.afterThen).pointer);
             }
         }
 
     }
     public alertResponseText(r:string):void{
-        //Debug.log("got alertResponseText");
-        Debug.log("alertResponseText::::n="+this.name+" r=["+r.substring(0,20)+"..]");
         if(this.funcText)
         {
             var prom:Promise|null=this.funcText(r);
             if(prom){
                 var i:i32=_promises.indexOf(prom);
-                //Debug.log("Promises="+_promises.toString());
-                //Debug.log("removed ["+i.toString()+"] count="+_promises[i].toString());
                 _promises.splice(i,1);
-                //Debug.log("Promises="+_promises.toString());
                 (<Promise>this.afterThen).pointer=prom.pointer;
                 (<Promise>this.afterThen).func=prom.func;
-                //Debug.log("Promises="+_promises.toString());
                 jsdom.then((<Promise>this.afterThen).pointer);
             }
         }
@@ -221,7 +190,6 @@ export class Promise{
         var prom:Promise|null = null;
         for(var i=0;i<_promises.length && !prom;i++)
         {
-            //Debug.log("find if p("+p.toString()+") == pointer("+_promises[i].pointer.toString()+")");
             if(_promises[i].pointer==p)
             {
                 prom=_promises[i];
@@ -230,7 +198,6 @@ export class Promise{
         return <Promise>prom;
     }
     public static getPromises():Promise[]{
-        //Debug.log(MY_NAME);
         return _promises;
     }
 
