@@ -51,6 +51,7 @@ export function init(window, _fetch, _Response) {
       "near-api-as": {
 
         near_login: (accountId, contractId) => {
+          console.log("[JS] near_login: accountId="+accountId)+" contractId="+contractId;
           var _accountId = _wasm.__getString(accountId);
           var _contractId = _wasm.__getString(contractId);
 
@@ -58,7 +59,7 @@ export function init(window, _fetch, _Response) {
           return p;
         },
         near_contract: (accountId, contractId, methods) => {
-
+          console.log("[JS] near_contract: accountId="+accountId)+" contractId="+contractId;
           var _accountId = _wasm.__getString(accountId);
           var _contractId = _wasm.__getString(contractId);
           var arr = _wasm.__getArray(methods);
