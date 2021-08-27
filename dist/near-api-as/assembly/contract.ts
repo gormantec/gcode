@@ -65,6 +65,7 @@ export class Contract {
 
         var p: Promise = new Promise(near_contract(account.accountId, contractId, methods));
         p.thenJSContract((contract: JSContract) => {
+            contract.promisePointer
             consoleLog("Got Contract");
             globals_contracts.set(contract.accountId+"_"+contract.contractId,contract)
             return null;

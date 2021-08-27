@@ -11,7 +11,7 @@ export class Account {
     readonly connection: Connection;
     readonly accountId: string;
     done:boolean=false;
-    thenFunc:()=>void=()=>{};
+    thenFunc:(account:Account)=>void=(account:Account)=>{};
     myPromise:Promise;
 
     constructor(connection: Connection, accountId: string) {
@@ -22,17 +22,17 @@ export class Account {
         accounts.set("ACCOUNT:"+this.myPromise.pointer.toString() ,this);
         this.myPromise.thenJSObject((o:JSObject)=>{
             accounts.get("ACCOUNT:"+o.promisePointer.toString()).done=true;
-            accounts.get("ACCOUNT:"+o.promisePointer.toString()).thenFunc();
+            accounts.get("ACCOUNT:"+o.promisePointer.toString()).thenFunc(accounts.get("ACCOUNT:"+o.promisePointer.toString()));
             consoleLog("thenJSObject");
             return null;
         });
         
     }
-    then(func:()=>void):void
+    then(func:(account:Account)=>void):void
     {
         if(this.done)
         {
-            func();
+            func(this);
         }
         else{
             this.thenFunc=func;
