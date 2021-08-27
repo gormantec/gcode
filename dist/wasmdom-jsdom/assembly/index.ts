@@ -1,6 +1,6 @@
 // The entry file of your WebAssembly module.
 import { Window, Document, Console } from "wasmdom"; 
-import { Debug,Promise,Response } from "wasmdom-globals";
+import { Debug,Promise,Response,JSContract } from "wasmdom-globals";
 import { run } from "./src/app";
 import * as jsdom from "./wasmdom-jsdom";
 
@@ -34,6 +34,12 @@ function __alertPromise(p: i32,r: i32):i32{
   Promise.fromPointer(p).alertResponse(new Response(r));
   return 0;
 }
+function __alertPromiseJSContract(p: i32,r: string):i32{
+  Debug.log("__alertPromiseJSContract::Promise="+p.toString());
+  Promise.fromPointer(p).alertResponse(new JSContract(r));
+  return 0;
+}
+
 function __alertPromiseText(p: i32,r: string):i32{
   //Debug.log("Promises="+Promise.getPromises().toString());
   //Debug.log("__alertPromiseText::Promise="+p.toString());
@@ -44,4 +50,4 @@ function __alertPromiseText(p: i32,r: string):i32{
 const Int32Array_ID = idof<Int32Array>()
 
 
-export {show,__alertEventListener,__alertTimeout,__alertPromise,__alertPromiseText,Int32Array_ID,jsdom};
+export {show,__alertEventListener,__alertTimeout,__alertPromise,__alertPromiseText,__alertPromiseJSContract,Int32Array_ID,jsdom};

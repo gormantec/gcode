@@ -24,8 +24,18 @@ export class Response{
     }
 }
 
+export class JSContract{
+    pointer:i32;
+    constructor(pointer:i32=-1) {
+        this.pointer=pointer;
+    }
+}
+
+
+
 type ResponseType<T> = ((r:T)=>Promise|null)|null;
 type StringResponseType<T> = ((r:T)=>Promise|null)|null;
+type JSContractResponseType<T> = ((r:T)=>Promise|null)|null;
 export type ResolveFuncType=(resolve:ResponseType<string>,reject:ResponseType<string>,g:string[])=>void;
 // @ts-ignore
 @global @inline const MY_NAME="XXX";
@@ -36,6 +46,7 @@ export class Promise{
     pointer:i32;
     func:ResponseType<Response>;
     funcText:StringResponseType<string>;
+    funcJSContract:JSContractResponseType<JSContract>;
     afterThen: Promise|null = null;
     resolveFunc:ResolveFuncType|null=null;
     globals:string[]=[];
@@ -79,6 +90,38 @@ export class Promise{
             this.funcText=func;
             if(this.pointer>=0)jsdom.then(this.pointer);
             return <Promise>this.afterThen;
+
+    }
+    public thenJSContract(func:JSContractResponseType<JSContract> = null):Promise
+    {
+        Debug.log("then::::n="+this.name+" g="+this.globals.toString());
+
+            this.afterThen= new Promise();
+            this.func=null;
+            this.funcText=null;
+            this.funcJSContract=func;
+            if(this.pointer>=0)jsdom.then(this.pointer);
+            return <Promise>this.afterThen;
+
+    }
+    public alertJSContract(r:JSContract):void{
+        //Debug.log("got alertResponse");
+        Debug.log("alertJSContract::::n="+this.name+" g="+this.globals.toString());  
+        if(this.funcJSContract)
+        {
+            var prom:Promise|null =this.funcJSContract(r);
+            if(prom){
+                var i:i32=_promises.indexOf(prom);
+                //Debug.log("Promises="+_promises.toString());
+                //Debug.log("removed ["+i.toString()+"] count="+_promises[i].toString());
+                _promises.splice(i,1);
+                //Debug.log("Promises="+_promises.toString());
+                (<Promise>this.afterThen).pointer=prom.pointer;
+                (<Promise>this.afterThen).func=prom.func;
+                //Debug.log("Promises="+_promises.toString());
+                jsdom.then((<Promise>this.afterThen).pointer);
+            }
+        }
 
     }
     public alertResponse(r:Response):void{

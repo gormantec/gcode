@@ -1,7 +1,7 @@
 import { Account } from "./account";
-import { near_contract } from "./near-api-as";
+import { near_contract,consoleLog } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
-import { Debug, Promise, Response, ResolveFuncType } from "wasmdom-globals";
+import { Debug, Promise, Response, ResolveFuncType, JSContract } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode, decode } from "as-base64";
 
@@ -54,6 +54,7 @@ export class Contract {
         };
 
         var p:Promise= new Promise(near_contract(account.accountId,contractId,options.changeMethods));
+        p.thenJSContract((contract:JSContract)=>{consoleLog("Got Conract");return null;});
     }
 
 
