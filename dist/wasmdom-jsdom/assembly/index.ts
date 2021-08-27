@@ -58,4 +58,4 @@ function __alertPromiseText(p: i32,r: string):i32{
 const Int32Array_ID = idof<Int32Array>()
 
 
-export {show,__alertEventListener,__alertTimeout,__alertPromise,__alertPromiseText,__alertPromiseJSContract,Int32Array_ID,jsdom};
+export {show,__alertEventListener,__alertTimeout,__alertPromise,__alertPromiseText,__alertPromiseJSContract,__alertPromiseJSObject,Int32Array_ID,jsdom};
