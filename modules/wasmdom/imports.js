@@ -273,6 +273,7 @@ export function init(window, _fetch, _Response) {
               //console.log("fetch Pointer="+p+ " Response="+r);
               
               console.log("exec then=\"Contract\"");
+              console.log(res);
               var r = getPointer(res);
               _wasm.__alertPromiseJSContract(p, r,_wasm.__pin(_wasm.__newString(res.accountId.toString())),_wasm.__pin(_wasm.__newString(res.contractId.toString())));
             }
