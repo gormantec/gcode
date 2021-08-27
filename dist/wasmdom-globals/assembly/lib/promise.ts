@@ -34,8 +34,8 @@ export class JSObject{
 export class JSContract extends JSObject{
     accountId:string;
     contractId:string;
-    constructor(pointer:i32=-1,accountId:string="",contractId:string="") {
-        super(pointer)
+    constructor(pointer:i32=-1,promisePointer:i32=-1,accountId:string="",contractId:string="") {
+        super(pointer,promisePointer)
         this.pointer=pointer;
         this.accountId=accountId;
         this.contractId=contractId;

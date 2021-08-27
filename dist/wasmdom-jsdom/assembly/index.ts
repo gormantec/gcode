@@ -36,7 +36,7 @@ function __alertPromise(p: i32,r: i32):i32{
 }
 function __alertPromiseJSContract(p: i32,r: i32,accountId:string,contractId:string):i32{
   Debug.log("__alertPromiseJSContract::Promise="+p.toString());
-  Promise.fromPointer(p).alertJSContract(new JSContract(r,accountId,contractId));
+  Promise.fromPointer(p).alertJSContract(new JSContract(r,p,accountId,contractId));
   return 0;
 }
 
