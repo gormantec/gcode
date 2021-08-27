@@ -36,8 +36,10 @@ export class Contract {
         var i: i32 = 0;
 
         //Window.window.console.log("new Contract");
+        let methods:string[]=[]
         for (i = 0; i < options.viewMethods.length; i++) {
             const _methodName = options.viewMethods[i];
+            methods.push("*"+_methodName);
             this.methods.push({
                 methodName: _methodName, methodType: "view", exec: (parrams) => {
                     return new Promise();
@@ -46,6 +48,7 @@ export class Contract {
         }
         for (i = 0; i < options.changeMethods.length; i++) {
             const _methodName = options.changeMethods[i];
+            methods.push(_methodName);
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams) => {
                     return new Promise();
@@ -53,7 +56,7 @@ export class Contract {
             });
         };
 
-        var p:Promise= new Promise(near_contract(account.accountId,contractId,options.changeMethods));
+        var p:Promise= new Promise(near_contract(account.accountId,contractId,methods));
         p.thenJSContract((contract:JSContract)=>{consoleLog("Got Conract");return null;});
     }
 

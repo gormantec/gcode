@@ -16,7 +16,7 @@ export function addkey(config) {
         }).catch(e => reject({ code: 500, error: "000:" + e }));
     });
 }
-    
+   
 
 export function contract(config) {
     return new Promise((resolve, reject) => {
@@ -25,24 +25,26 @@ export function contract(config) {
             const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);  /**/
             var ct = {};
-            config.methods.forEach(e => {
-                var m = {};
-                console.log(typeof e);
-                if (typeof e == "string") {
-                    m = {
-                        method: (e.substring(0, 1) == "*") ? e.substring(1) : e,
-                        type: (e.substring(0, 1) == "*") ? "viewMethods" : "changeMethods"
-                    };
-                }
-                else if (e.type && e.method) { m = { method: e.method, type: e.type }; }
-                else { m = e };
+            if (config.methods) {
+                config.methods.forEach(e => {
+                    var m = {};
+                    console.log(typeof e);
+                    if (typeof e == "string") {
+                        m = {
+                            method: (e.substring(0, 1) == "*") ? e.substring(1) : e,
+                            type: (e.substring(0, 1) == "*") ? "viewMethods" : "changeMethods"
+                        };
+                    }
+                    else if (e.type && e.method) { m = { method: e.method, type: e.type }; }
+                    else { m = e };
 
-                if (m.type && m.method) {
-                    ct[m.type] = ct[m.type] || [];
-                    ct[m.type].push(m.method);
-                }
+                    if (m.type && m.method) {
+                        ct[m.type] = ct[m.type] || [];
+                        ct[m.type].push(m.method);
+                    }
 
-            });
+                });
+            }
             console.log({ account: account, contractId: config.contractId, ContractMethods: ct });
             const mycontract = new nearApi.Contract(account, config.contractId, ct);
             resolve(mycontract);
@@ -94,15 +96,15 @@ export async function login(config) {
                             resolve(config);
                         }
 
-                        const errors=(e)=>{console.log(e)};
+                        const errors = (e) => { console.log(e) };
                         window.setTimeout(function () {
-                            const cfg={ accountId: config.accountId, contractId: "gcode-ec464352008.testnet",methods : ["*getKey", "setKey"]};
-                              contract(cfg).then((ct) => {
-                                ct.setKey({ "key": kp.toString(),"email":"craig@gormantec.com" }).then((response) => {
-                                    console.log("setKey:"+response);
+                            const cfg = { accountId: config.accountId, contractId: "gcode-ec464352008.testnet", methods: ["*getKey", "setKey"] };
+                            contract(cfg).then((ct) => {
+                                ct.setKey({ "key": kp.toString(), "email": "craig@gormantec.com" }).then((response) => {
+                                    console.log("setKey:" + response);
                                 }).catch(errors);
-                              }).catch(errors);
-                          }, 2000);
+                            }).catch(errors);
+                        }, 2000);
                     }
                     else if (keys.length == 0) {
                         //contract doe not exist, create new

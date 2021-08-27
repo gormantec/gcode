@@ -17,7 +17,7 @@ var getPointer = function (object) {
     index = objects.length - 1;
   }
   return objects[index].id;
-};
+};   
 
 var getObject = function (pointer) {
   var i = objects.findIndex(item => item.id == pointer);
