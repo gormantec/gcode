@@ -68,9 +68,10 @@ export class Contract {
         };
 
         var p: Promise = new Promise(near_contract(account.accountId, contractId, methods));
-        contracts.set("CONTRACT:"+p.pointer.toString(),this)
+        contracts.set("CONTRACT:"+p.pointer.toString(),this);
+        consoleLog("CONTRACT:"+p.pointer.toString());
         p.thenJSContract((contract: JSContract) => {
-            consoleLog("Got Contract");
+            consoleLog("CONTRACT:"+contract.promisePointer.toString());
             contracts.get("CONTRACT:"+contract.promisePointer.toString()).jsContract=contract;
             contracts.get("CONTRACT:"+contract.promisePointer.toString()).done=true;
             contracts.get("CONTRACT:"+contract.promisePointer.toString()).thenFunc(contracts.get("CONTRACT:"+contract.promisePointer.toString()));
