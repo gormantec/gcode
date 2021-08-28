@@ -18,7 +18,7 @@ export class ContractMethods {
 class Method {
     methodName: string;
     methodType: string;
-    exec: (params: ExecParams,jsCOntract:JSContract|null) => Promise;
+    exec: (params: ExecParams,contract:Contract) => Promise;
 }
 
 export class Contract {
@@ -45,7 +45,7 @@ export class Contract {
             const _methodName = options.viewMethods[i];
             methods.push("*" + _methodName);
             this.methods.push({
-                methodName: _methodName, methodType: "view", exec: (parrams:ExecParams,jsCOntract:JSContract|null) => {
+                methodName: _methodName, methodType: "view", exec: (parrams:ExecParams,contract:Contract) => {
                     return new Promise();
                 }
             });
@@ -54,12 +54,12 @@ export class Contract {
             const _methodName = options.changeMethods[i];
             methods.push(_methodName);
             this.methods.push({
-                methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,jsContract:JSContract|null) => {
-                    if(jsContract)
+                methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,contract:Contract) => {
+                    if(contract.jsContract)
                     {
                         let paramaters:string="{}";
                         if(parrams.paramaters)paramaters=<string>parrams.paramaters;
-                        near_contract_exec(jsContract.pointer,parrams.methodName,paramaters);
+                        near_contract_exec(contract.jsContract.pointer,parrams.methodName,paramaters);
                         consoleLog("Executed JSContract");
                     }
                     return new Promise();
@@ -70,11 +70,11 @@ export class Contract {
         var p: Promise = new Promise(near_contract(account.accountId, contractId, methods));
         contracts.set("CONTRACT:"+p.pointer.toString(),this);
         consoleLog("CONTRACT:"+p.pointer.toString());
-        p.thenJSContract((contract: JSContract) => {
-            consoleLog("CONTRACT:"+contract.promisePointer.toString());
-            contracts.get("CONTRACT:"+contract.promisePointer.toString()).jsContract=contract;
-            contracts.get("CONTRACT:"+contract.promisePointer.toString()).done=true;
-            contracts.get("CONTRACT:"+contract.promisePointer.toString()).thenFunc(contracts.get("CONTRACT:"+contract.promisePointer.toString()));
+        p.thenJSContract((jscontract: JSContract) => {
+            consoleLog("CONTRACT:"+jscontract.promisePointer.toString());
+            contracts.get("CONTRACT:"+jscontract.promisePointer.toString()).jsContract=jscontract;
+            contracts.get("CONTRACT:"+jscontract.promisePointer.toString()).done=true;
+            contracts.get("CONTRACT:"+jscontract.promisePointer.toString()).thenFunc(contracts.get("CONTRACT:"+jscontract.promisePointer.toString()));
             return null;
         }
         );
@@ -133,13 +133,14 @@ export class Contract {
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
                 if (this.methods[i].methodType == "change") {
-                    return this.methods[i].exec(params,this.jsContract);
+                    return this.methods[i].exec(params,this);
                 }
             }
         }
         return this.view(params);
 
     }
+
 
     public static decodeResult(text: string): string {
 
