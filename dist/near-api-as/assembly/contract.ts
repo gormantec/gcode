@@ -60,7 +60,7 @@ export class Contract {
                     
                     if(contract.jsContract)
                     {
-                        let x:JSContract=contract.jsContract;
+                        let x:JSContract=<JSContract>contract.jsContract;
                         let paramaters:string="{}";
                         if(parrams.paramaters)paramaters=<string>parrams.paramaters;
                         near_contract_exec(x.pointer,parrams.methodName,paramaters);
