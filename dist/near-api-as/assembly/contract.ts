@@ -1,7 +1,7 @@
 import { Account } from "./account";
 import { near_contract, consoleLog,near_contract_exec } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
-import { Debug, Promise, Response, ResolveFuncType, JSContract } from "wasmdom-globals";
+import { Debug, Promise, Response, ResolveFuncType, JSContract, JSObject } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
 import { encode } from "as-base64";
 
@@ -60,9 +60,10 @@ export class Contract {
                     
                     if(contract.jsContract)
                     {
+                        let x:JSContract=contract.jsContract;
                         let paramaters:string="{}";
                         if(parrams.paramaters)paramaters=<string>parrams.paramaters;
-                        near_contract_exec(contract.jsContract.pointer,parrams.methodName,paramaters);
+                        near_contract_exec(x.pointer,parrams.methodName,paramaters);
                         consoleLog("Executed JSContract");
                     }
                     return new Promise();
