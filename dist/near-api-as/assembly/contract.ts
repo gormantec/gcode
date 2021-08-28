@@ -57,6 +57,7 @@ export class Contract {
             methods.push(_methodName);
             this.methods.push({
                 methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,contract:Contract) => {
+                    
                     if(contract.jsContract)
                     {
                         let paramaters:string="{}";
@@ -151,6 +152,7 @@ export class Contract {
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
                 if (this.methods[i].methodType == "change") {
+                    consoleLog("function "+params.methodName+" index:"+this.methods[i].exec.index.toString());
                     return this.methods[i].exec(params,this);
                 }
             }
