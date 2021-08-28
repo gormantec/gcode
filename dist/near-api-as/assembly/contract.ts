@@ -16,9 +16,11 @@ export class ContractMethods {
 }
 
 class Method {
+    
     methodName: string;
     methodType: string;
     exec: (params: ExecParams,contract:Contract) => Promise;
+
 }
 
 export class Contract {
@@ -128,7 +130,23 @@ export class Contract {
         return p3;
     }
 
+    method(methodName:string):(params: ExecParams,contract:Contract) => Promise{
+
+        for (var i = 0; i < this.methods.length; i++) {
+            if (this.methods[i].methodName == methodName) {
+                consoleLog("function "+methodName+" index:"+this.methods[i].exec.index.toString());
+                    return this.methods[i].exec;
+            }
+        }
+        return ()=>{return new Promise();};
+        
+    }
+
+    
+
     exec(params: ExecParams): Promise {
+
+        
 
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
