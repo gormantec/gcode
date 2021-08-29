@@ -77,9 +77,8 @@ export function init(window, _fetch, _Response) {
           var _method = _wasm.__getString(method);
           var _parrams = JSON.parse(_wasm.__getString(parrams));
           var ct = getObject(contract);
-          ct[_method](_parrams).then((response) => {
-            console.log("[JS] near_contract: accountId="+response);
-          }).catch((e)=>{console.log("EXEC Error:"+e);});
+          var p = getPointer(ct[_method](_parrams));
+          return p;
         }
       },
       "wasmdom-jsdom": {
@@ -273,6 +272,7 @@ export function init(window, _fetch, _Response) {
             }
             else if(typeof res == "object")
             {
+              console.log("typeof JSObject="+ res.constructor.name);
               var r = getPointer(res);
               _wasm.__alertPromiseJSObject(p, r);
 

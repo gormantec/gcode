@@ -60,7 +60,9 @@ export class Contract {
         for (i = 0; i < options.viewMethods.length; i++) {
             const _methodName = options.viewMethods[i];
             methods.push("*" + _methodName);
-            this.methods.push(new Method(_methodName, "view", this,(parrams:ExecParams,contract:Contract) => { return new Promise();}));
+            this.methods.push(new Method(_methodName, "view", this,(parrams:ExecParams,contract:Contract) => { 
+                return contract.view(parrams);
+            }));
         }
         for (i = 0; i < options.changeMethods.length; i++) {
             const _methodName = options.changeMethods[i];
