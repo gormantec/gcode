@@ -156,7 +156,6 @@ export class Contract {
                     return this.methods[i];
             }
         }
-
         return new Method(methodName,"veiw",this,()=>{return new Promise();});
         
     }

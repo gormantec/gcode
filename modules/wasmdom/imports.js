@@ -82,12 +82,10 @@ export function init(window, _fetch, _Response) {
         },
         sleep:(ms)=>
         {
-          let x=true;
-          (async ()=>{
-            await new Promise(resolve => setTimeout(resolve, ms));
-            x=false;
-          })();
-          while(x){}
+          var date = new Date();
+          var curDate = null;
+          do { curDate = new Date(); }
+          while(curDate-date < ms);
           return 0;
         }
       },
