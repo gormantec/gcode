@@ -147,16 +147,16 @@ export class Contract {
     }
 
     method(methodName:string): Method{
-
+        consoleLog("sleep start");
+        sleep(2000);
+        consoleLog("sleep stop");
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == methodName) {
                 consoleLog("function "+methodName+" index:"+this.methods[i].exec.index.toString());
                     return this.methods[i];
             }
         }
-        consoleLog("sleep start");
-        sleep(2000);
-        consoleLog("sleep stop");
+
         return new Method(methodName,"veiw",this,()=>{return new Promise();});
         
     }
