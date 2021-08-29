@@ -141,7 +141,7 @@ export class Contract {
         return p3;
     }
 
-    method(methodName:string):(paramaters:string) => Promise{
+    method(methodName:string):(this:Method,paramaters:string) => Promise{
 
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == methodName) {
