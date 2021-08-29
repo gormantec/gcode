@@ -26,9 +26,14 @@ export class Response{
 export class JSObject{
     pointer:i32;
     promisePointer:i32;
-    constructor(pointer:i32=-1,promisePointer:i32=-1) {
+    stringValue:string;
+    constructor(pointer:i32=-1,promisePointer:i32=-1,stringValue:string="[JSObject]") {
         this.pointer=pointer;
         this.promisePointer=promisePointer;
+        this.stringValue=stringValue;
+    }
+    toString():string{
+        return this.stringValue;
     }
 }
 export class JSContract extends JSObject{

@@ -34,8 +34,8 @@ function __alertPromiseJSContract(p: i32,r: i32,accountId:string,contractId:stri
   return 0;
 }
 
-function __alertPromiseJSObject(p: i32,r: i32):i32{
-  Promise.fromPointer(p).alertJSObject(new JSObject(r,p));
+function __alertPromiseJSObject(p: i32,r: i32,s:string):i32{
+  Promise.fromPointer(p).alertJSObject(new JSObject(r,p,s));
   return 0;
 }
 

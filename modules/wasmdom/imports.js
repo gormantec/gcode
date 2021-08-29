@@ -274,7 +274,7 @@ export function init(window, _fetch, _Response) {
             {
               console.log("typeof JSObject="+ res.constructor.name);
               var r = getPointer(res);
-              _wasm.__alertPromiseJSObject(p, r);
+              _wasm.__alertPromiseJSObject(p, r,res.toString());
 
             }
             else {
