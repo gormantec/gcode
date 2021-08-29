@@ -19,7 +19,21 @@ class Method {
     
     methodName: string;
     methodType: string;
-    exec: (params: ExecParams,contract:Contract) => Promise;
+    contract:Contract;
+    execImp:(parrams:ExecParams,contract:Contract) => Promise;
+
+    constructor(methodName:string,methodType:string,contract:Contract,execImp:(parrams:ExecParams,contract:Contract) => Promise)
+    {
+        this.methodName=methodName;
+        this.methodType=methodType;
+        this.contract=contract;
+        this.execImp=execImp;
+
+    }
+
+    exec(paramaters:string):Promise {
+        return this.execImp({methodName:this.methodName,paramaters:paramaters},this.contract);
+    }
 
 }
 
@@ -46,17 +60,12 @@ export class Contract {
         for (i = 0; i < options.viewMethods.length; i++) {
             const _methodName = options.viewMethods[i];
             methods.push("*" + _methodName);
-            this.methods.push({
-                methodName: _methodName, methodType: "view", exec: (parrams:ExecParams,contract:Contract) => {
-                    return new Promise();
-                }
-            });
+            this.methods.push(new Method(_methodName, "view", this,(parrams:ExecParams,contract:Contract) => { return new Promise();}));
         }
         for (i = 0; i < options.changeMethods.length; i++) {
             const _methodName = options.changeMethods[i];
             methods.push(_methodName);
-            this.methods.push({
-                methodName: _methodName, methodType: "change", exec: (parrams:ExecParams,contract:Contract) => {
+            this.methods.push(new Method(_methodName,"change",this, (parrams:ExecParams,contract:Contract) => {
                     
                     if(contract.jsContract)
                     {
@@ -67,8 +76,8 @@ export class Contract {
                         consoleLog("Executed JSContract");
                     }
                     return new Promise();
-                }
-            });
+                })
+            );
         };
 
         var p: Promise = new Promise(near_contract(account.accountId, contractId, methods));
@@ -132,7 +141,7 @@ export class Contract {
         return p3;
     }
 
-    method(methodName:string):(params: ExecParams,contract:Contract) => Promise{
+    method(methodName:string):(paramaters:string) => Promise{
 
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == methodName) {
@@ -153,8 +162,8 @@ export class Contract {
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == params.methodName) {
                 if (this.methods[i].methodType == "change") {
-                    consoleLog("function "+params.methodName+" index:"+this.methods[i].exec.index.toString());
-                    return this.methods[i].exec(params,this);
+                    consoleLog("function "+params.methodName+" index:"+this.methods[i].execImp.index.toString());
+                    return this.methods[i].execImp(params,this);
                 }
             }
         }
