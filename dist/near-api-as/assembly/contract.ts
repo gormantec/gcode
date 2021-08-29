@@ -141,15 +141,15 @@ export class Contract {
         return p3;
     }
 
-    method(methodName:string):(this:Method,paramaters:string) => Promise{
+    method(methodName:string): Method{
 
         for (var i = 0; i < this.methods.length; i++) {
             if (this.methods[i].methodName == methodName) {
                 consoleLog("function "+methodName+" index:"+this.methods[i].exec.index.toString());
-                    return this.methods[i].exec;
+                    return this.methods[i];
             }
         }
-        return ()=>{return new Promise();};
+        return new Method(methodName,"vew",this,()=>{return new Promise();});
         
     }
 
