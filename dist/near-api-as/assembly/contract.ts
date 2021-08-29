@@ -6,7 +6,7 @@ import { JSON } from "assemblyscript-json";
 import { encode } from "as-base64";
 
 
-const contracts:Map<string,Contract>=new Map<string,Contract>();
+const contracts:Map<string,Contract>=new Map<string,Contract>();    
 
 
 export class ContractMethods {
@@ -14,7 +14,7 @@ export class ContractMethods {
     changeMethods: string[] = [];
     viewMethods: string[] = [];
 }
-
+   
 class Method {
     
     methodName: string;
