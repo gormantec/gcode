@@ -74,10 +74,13 @@ export class Contract {
                         let x:JSContract=<JSContract>contract.jsContract;
                         let paramaters:string="{}";
                         if(parrams.paramaters)paramaters=<string>parrams.paramaters;
-                        near_contract_exec(x.pointer,parrams.methodName,paramaters);
                         consoleLog("Executed JSContract");
+                        return new Promise(near_contract_exec(x.pointer,parrams.methodName,paramaters));
                     }
-                    return new Promise();
+                    else{
+                        return new Promise();
+                    }
+                    
                 })
             );
         };
