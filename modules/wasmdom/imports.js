@@ -79,6 +79,16 @@ export function init(window, _fetch, _Response) {
           var ct = getObject(contract);
           var p = getPointer(ct[_method](_parrams));
           return p;
+        },
+        sleep:(ms)=>
+        {
+          let x=true;
+          (async ()=>{
+            await new Promise(resolve => setTimeout(resolve, ms));
+            x=false;
+          })();
+          while(x){}
+          return 0;
         }
       },
       "wasmdom-jsdom": {

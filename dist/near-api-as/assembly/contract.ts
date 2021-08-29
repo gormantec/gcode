@@ -1,5 +1,5 @@
 import { Account } from "./account";
-import { near_contract, consoleLog,near_contract_exec } from "./near-api-as";
+import { near_contract, consoleLog,near_contract_exec, sleep } from "./near-api-as";
 import { Window, fetch } from "wasmdom";
 import { Debug, Promise, Response, ResolveFuncType, JSContract, JSObject } from "wasmdom-globals";
 import { JSON } from "assemblyscript-json";
@@ -154,7 +154,10 @@ export class Contract {
                     return this.methods[i];
             }
         }
-        return new Method(methodName,"vew",this,()=>{return new Promise();});
+        consoleLog("sleep start");
+        sleep(2000);
+        consoleLog("sleep stop");
+        return new Method(methodName,"veiw",this,()=>{return new Promise();});
         
     }
 
