@@ -37,7 +37,7 @@ class Method {
         this.myPromise=this.execImp({methodName:this.methodName,paramaters:paramaters},this.contract);
         return this.myPromise;
     }
-    wait()
+    wait():void
     {
         let count:i32=0;
         while((this.myPromise==null || !this.myPromise.done) && count<100)
