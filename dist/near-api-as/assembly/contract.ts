@@ -35,7 +35,7 @@ class Method {
 
     exec(paramaters:string):Promise {
         this.myPromise=this.execImp({methodName:this.methodName,paramaters:paramaters},this.contract);
-        return this.myPromise;
+        return <Promise>this.myPromise;
     }
     wait():void
     {
