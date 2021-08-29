@@ -72,10 +72,12 @@ export class Promise{
     resolveFunc:ResolveFuncType|null=null;
     globals:string[]=[];
     name:string;
+    done:boolean;
     
     constructor(pointer:i32=-1) {
         this.pointer=pointer;
         this.name="Normal";
+        this.done=false;
         _promises.push(this);
     }
     public toString():string{
@@ -134,6 +136,7 @@ export class Promise{
     }
 
     public alertJSObject(r:JSObject):void{
+        this.done=true;
         if(this.funcJSObject)
         {
             var prom:Promise|null =this.funcJSObject(r);
@@ -149,6 +152,7 @@ export class Promise{
     }
     
     public alertJSContract(r:JSContract):void{
+        this.done=true;
         if(this.funcJSContract)
         {
             var prom:Promise|null =this.funcJSContract(r);
@@ -163,6 +167,7 @@ export class Promise{
 
     }
     public alertResponse(r:Response):void{
+        this.done=true;
         if(this.func)
         {
             var prom:Promise|null =this.func(r);
@@ -177,6 +182,7 @@ export class Promise{
 
     }
     public alertResponseText(r:string):void{
+        this.done=true;
         if(this.funcText)
         {
             var prom:Promise|null=this.funcText(r);

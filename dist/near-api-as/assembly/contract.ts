@@ -20,6 +20,7 @@ class Method {
     methodName: string;
     methodType: string;
     contract:Contract;
+    myPromise:Promise|null;
     execImp:(parrams:ExecParams,contract:Contract) => Promise;
 
     constructor(methodName:string,methodType:string,contract:Contract,execImp:(parrams:ExecParams,contract:Contract) => Promise)
@@ -28,11 +29,22 @@ class Method {
         this.methodType=methodType;
         this.contract=contract;
         this.execImp=execImp;
+        this.myPromise=null;
 
     }
 
     exec(paramaters:string):Promise {
-        return this.execImp({methodName:this.methodName,paramaters:paramaters},this.contract);
+        this.myPromise=this.execImp({methodName:this.methodName,paramaters:paramaters},this.contract);
+        return this.myPromise;
+    }
+    wait()
+    {
+        let count:i32=0;
+        while((this.myPromise==null || !this.myPromise.done) && count<100)
+        {
+            count++;
+            sleep(500);
+        }
     }
 
 }

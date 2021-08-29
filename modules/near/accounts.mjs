@@ -28,7 +28,6 @@ export function contract(config) {
             if (config.methods) {
                 config.methods.forEach(e => {
                     var m = {};
-                    console.log(typeof e);
                     if (typeof e == "string") {
                         m = {
                             method: (e.substring(0, 1) == "*") ? e.substring(1) : e,
