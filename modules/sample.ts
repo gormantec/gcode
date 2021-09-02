@@ -1,6 +1,5 @@
-
 import { Window, Document, Console, PWA, PWAParams, Page, PageParams, Div, DivParams } from 'wasmdom';
-import { Debug } from "wasmdom-globals";
+import { Debug,JSObject } from "wasmdom-globals";
 import { Near, Account, NearConfig, Contract, BrowserLocalStorageKeyStore } from 'near-api-as';
 
 var homePage: Page;
@@ -8,29 +7,31 @@ var secondPage: Page;
 var aPWA: PWA;
 var window: Window, document: Document, console: Console;
 var mycontract: Contract;
-var accountId:string = "hello.gormantec.testnet";
+var accountId: string = "gcode-ed342d45a5f.testnet";
 
 export function run(w: Window, d: Document, c: Console): i32 {
     window = w;
     document = d;
     console = c;
-    homePage = new Page(<PageParams>{
+    homePage = new Page( < PageParams > {
         color: "white",
         backgroundColor: "black",
         backgroundPosition: "center",
         backgroundSize: "75%",
         backgroundRepeat: "no-repeat",
         backgroundImage: "url(https://c7.uihere.com/files/614/185/190/sun-solar-flare-uv-uv-light.jpg)"
-    }); 
+    });
 
-    secondPage = new Page(<PageParams>{
+    secondPage = new Page( < PageParams > {
         color: "black",
         backgroundColor: "white",
         navigateBackPage: homePage,
-        child: new Div(<DivParams>{ innerHTML: "url(https://gcode.com.au/html/test.html)" })
+        child: new Div( < DivParams > {
+            innerHTML: "url(https://gcode.com.au/html/test.html)"
+        })
     });
 
-    aPWA = new PWA(<PWAParams>{
+    aPWA = new PWA( < PWAParams > {
         title: "Gorman Technology Pty Ltd",
         footer: "https://www.gormantec.com",
         primaryColor: "#005040",
@@ -56,51 +57,9 @@ export function run(w: Window, d: Document, c: Console): i32 {
         aPWA.setPage(homePage);
     }, 1000);
 
-    initContract(2000);
-    callContract(5000);
+    initContract(5000);
     return 0;
 
-}
-
-function initContract(delay: i32): void {
-    window.setTimeout(function() {
-        
-        setBlackPage("<p> Contract Request: " + accountId + "</p>");
-        var aKeyStore = new BrowserLocalStorageKeyStore();
-        const config = new NearConfig(aKeyStore, "testnet", accountId);
-        const near = new Near(config);
-        const account = new Account(near.connection, accountId);
-        mycontract = new Contract(account, accountId, {
-            viewMethods: ["getGreeting"],
-            changeMethods: ["setGreeting"]
-        });
-    }, delay)
-}
-
-
-function callContract(delay: i32): void {
-    window.setTimeout(function() {
-        if (mycontract) {
-            mycontract.exec({
-                    methodName: "getGreeting",
-                    paramaters: '{"accountId":"' + accountId + '"}'
-                })
-                .thenString((text: string) => {
-                    //text = Contract.decodeResult(text);
-                    setBlackPage("<p> Contract Response: " + text + "</p>");
-                    return null;
-                });
-            mycontract.exec({
-                    methodName: "setGreeting",
-                    paramaters: '{"message":"test message"}'
-                })
-                .thenString((text: string) => {
-                    //text = Contract.decodeResult(text);
-                    setBlackPage("<p> Contract Response: " + text + "</p>");
-                    return null;
-                });
-        }
-    }, delay);
 }
 
 function setBlackPage(html: string): void {
@@ -110,4 +69,40 @@ function setBlackPage(html: string): void {
             innerHTML: html
         })
     }));
+}
+
+function initContract(delay: i32): void {
+    window.setTimeout(function() {
+        setBlackPage("<p> Contract Request: " + accountId + "</p>");
+        var aKeyStore = new BrowserLocalStorageKeyStore();
+        const config = new NearConfig(aKeyStore, "testnet", accountId);
+        const near = new Near(config);
+        const newAccount = new Account(near.connection, accountId);
+        newAccount.then((account) => {
+            mycontract = new Contract(account, "hello.gormantec.testnet", {
+                viewMethods: ["getGreeting"],
+                changeMethods: ["setGreeting"]
+            });
+            mycontract.then((contract) => {
+                let getGreeting = contract.method("getGreeting");
+                console.log("getGreeting:call");
+                getGreeting.exec('{"accountId":"' + contract.account.accountId + '"}')
+                    .thenString((text: string) => {
+                        console.log("getGreeting:response");
+                        setBlackPage("<p> Contract Response: " + text + "</p>");
+                        return null;
+                    });
+                getGreeting.wait();
+                let setGreeting = contract.method("setGreeting");
+                console.log("setGreeting:call");
+                setGreeting.exec('{"message":"test message two"}')
+                    .thenString((text: string) => {
+                        console.log("setGreeting:response");
+                        setBlackPage("<p> setGreeting response: " + text + "</p>");
+                        return null;
+                    });
+                setGreeting.wait();
+            });
+        });
+    }, delay)
 }
