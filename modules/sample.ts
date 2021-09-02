@@ -92,7 +92,6 @@ function initContract(delay: i32): void {
                         setBlackPage("<p> Contract Response: " + text + "</p>");
                         return null;
                     });
-                getGreeting.wait();
                 let setGreeting = contract.method("setGreeting");
                 console.log("setGreeting:call");
                 setGreeting.exec('{"message":"test message two"}')
@@ -101,7 +100,6 @@ function initContract(delay: i32): void {
                         setBlackPage("<p> setGreeting response: " + text + "</p>");
                         return null;
                     });
-                setGreeting.wait();
             });
         });
     }, delay)
