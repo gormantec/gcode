@@ -40,7 +40,7 @@ class Method {
     wait():void
     {
         let count:i32=0;
-        while((this.myPromise==null || !(<Promise>this.myPromise).done) && count<10)
+        while((this.myPromise==null || !(<Promise>this.myPromise).done) && count<30)
         {
             count++;
             consoleLog("promise done="+(<Promise>this.myPromise).done.toString());
