@@ -450,7 +450,7 @@ window.setEditorMode = function () {
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode","text/typescript");
-        window.editor.setOption('lint', true);
+        window.editor.setOption('lint', { options: { esversion: 6 } });
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
