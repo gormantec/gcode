@@ -3,6 +3,35 @@ import { getImage, createHtml } from '/modules/htmlUtils.mjs';
 
 export const menuMetadata = { "id": "uiMenu", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
 
+function refreshScreen (mockFrameIframe,structure,block) {
+    for (var param in block.class.constructor.super) {
+        var e = document.getElementById("pageMiddle").querySelector("#input-param-" + param);
+        block.class.constructor.super[param] = e.value.trim();
+    }
+    //document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
+    //pageDiv.remove();
+    var sCode=structureToCode(structure);
+    window.editor.setValue(sCode);
+    let thisURL=window.location.href;
+    console.log(sCode);
+    sCode=sCode.replaceAll("https:\/\/gcode\.com\.au\/",thisURL);
+    console.log(sCode);
+    var result = createHtml(sCode);
+    var splashBackgroundColor = result.splashBackgroundColor;
+    var splash = result.splash;
+    var mockFrame = result.mockFrame;
+    var rootHTML = result.rootHTML;
+    var _module = window.document.createElement("script");
+    _module.setAttribute("type", "module");
+    _module.text = "\n" + window.editor.getValue() + "\n";
+    rootHTML.querySelector("head").appendChild(_module);
+    var doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
+    rootHTML.getElementsByTagName("body")[0].innerHTML="";
+    doc.open();
+    doc.writeln(rootHTML.outerHTML);
+    doc.close();
+}
+
 function structureToCode(structure) {
 
     let resp = "";
@@ -134,34 +163,7 @@ export function menuAction() {
                 button.innerText = "save";
                 button.style.marginTop = "20px";
                 button.style.marginLeft = "180px";
-                button.addEventListener("click", function () {
-                    for (var param in block.class.constructor.super) {
-                        var e = document.getElementById("pageMiddle").querySelector("#input-param-" + param);
-                        block.class.constructor.super[param] = e.value.trim();
-                    }
-                    //document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
-                    //pageDiv.remove();
-                    var sCode=structureToCode(structure);
-                    window.editor.setValue(sCode);
-                    let thisURL=window.location.href;
-                    console.log(sCode);
-                    sCode=sCode.replaceAll("https:\/\/gcode\.com\.au\/",thisURL);
-                    console.log(sCode);
-                    var result = createHtml(sCode);
-                    var splashBackgroundColor = result.splashBackgroundColor;
-                    var splash = result.splash;
-                    var mockFrame = result.mockFrame;
-                    var rootHTML = result.rootHTML;
-                    var _module = window.document.createElement("script");
-                    _module.setAttribute("type", "module");
-                    _module.text = "\n" + window.editor.getValue() + "\n";
-                    rootHTML.querySelector("head").appendChild(_module);
-                    var doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
-                    rootHTML.getElementsByTagName("body")[0].innerHTML="";
-                    doc.open();
-                    doc.writeln(rootHTML.outerHTML);
-                    doc.close();
-                });
+                button.addEventListener("click", ()=>{refreshScreen(mockFrameIframe,structure,block);});
                 pageDiv.append(button);
                 pageDiv.append(mockFrameDiv);
                 document.getElementById("pageMiddle").append(pageDiv);

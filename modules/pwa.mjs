@@ -263,7 +263,6 @@ class PWA {
         var mockFrame = urlParams.get("mockFrame") || this.inIframe()?window.PWA.globals.mockFrame:null;
         var rootWindow = win.document.body;
         var aPWA = this;
-        alert(mockFrame);
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
             aPWA.buildScreen(msec,win,rootWindow);
