@@ -232,7 +232,8 @@ class PWA {
                     if (timeoutMs < 0) timeoutMs = 10;
                     setTimeout(function () {
                         while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
-                        rootWindow.style.backgroundColor = _this.primaryColor;
+                        document.body.style.backgroundColor="rgb(33, 33, 33)";
+                        rootWindow.style.backgroundColor = "black";
                         rootWindow.style.color = _this.primaryColorText;
                         _this.pwaRoot.element.style.opacity = 0.0;
                         rootWindow.appendChild(_this.pwaRoot.element);
@@ -262,6 +263,7 @@ class PWA {
         var mockFrame = urlParams.get("mockFrame") || this.inIframe()?window.PWA.globals.mockFrame:null;
         var rootWindow = win.document.body;
         var aPWA = this;
+        alert(mockFrame);
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
             aPWA.buildScreen(msec,win,rootWindow);

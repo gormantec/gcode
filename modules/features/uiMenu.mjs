@@ -29,14 +29,8 @@ function structureToCode(structure) {
 }
 
 export function menuAction() {
-
-    
-
-
     var source = window.editor.getValue();
-    console.log(source.split("\n").length);
     var structure = [];
-
     var pushCode = (data) => {
         if (data.code.trim().startsWith("class")) {
 
@@ -89,7 +83,6 @@ export function menuAction() {
 
         structure.forEach((block) => {
             if (block.class && block.class.extends == "Page") {
-                console.log(block);
                 document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "none";
                 var pageDiv = document.getElementById("pageMiddle-"+menuMetadata.id);
                 if(pageDiv) pageDiv.remove();
@@ -113,7 +106,6 @@ export function menuAction() {
                 pageDiv.className = "pageDiv CodeMirror cm-s-material-darker2";
                 pageDiv.id="pageMiddle-"+menuMetadata.id;
                 for (var param in block.class.constructor.super) {
-                    console.log(param + "=" + block.class.constructor.super[param]);
                     var pageDivRow = document.createElement("div");
                     pageDivRow.style.width = "420px";
                     var pageDivC1 = document.createElement("div");
@@ -130,8 +122,6 @@ export function menuAction() {
                     input.size = 30;
                     input.value = block.class.constructor.super[param];
                     input.addEventListener('input', function (evt) {
-                        console.log(this.value);
-                        console.log(this.id);
                         block.class.constructor.super[this.id.substring(12)] = this.value;
                     });
                     pageDivC2.append(input);
@@ -147,7 +137,6 @@ export function menuAction() {
                 button.addEventListener("click", function () {
                     for (var param in block.class.constructor.super) {
                         var e = document.getElementById("pageMiddle").querySelector("#input-param-" + param);
-                        console.log(e.value);
                         block.class.constructor.super[param] = e.value.trim();
                     }
                     //document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
@@ -155,7 +144,9 @@ export function menuAction() {
                     var sCode=structureToCode(structure);
                     window.editor.setValue(sCode);
                     let thisURL=window.location.href;
-                    sCode=sCode.replaceAll("https\:\/\/gcode\.com\.au\/",thisURL);
+                    console.log(sCode);
+                    sCode=sCode.replaceAll("https:\/\/gcode\.com\.au\/",thisURL);
+                    console.log(sCode);
                     var result = createHtml(sCode);
                     var splashBackgroundColor = result.splashBackgroundColor;
                     var splash = result.splash;
@@ -167,13 +158,9 @@ export function menuAction() {
                     rootHTML.querySelector("head").appendChild(_module);
                     var doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
                     rootHTML.getElementsByTagName("body")[0].innerHTML="";
-                    console.log(rootHTML.outerHTML);
                     doc.open();
                     doc.writeln(rootHTML.outerHTML);
                     doc.close();
-
-
-
                 });
                 pageDiv.append(button);
                 pageDiv.append(mockFrameDiv);
