@@ -151,6 +151,7 @@ export function createHtml(code) {
     if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
     if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
     if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
+    if (mockFrame) _script.text += "  window.PWA.globals.mockFrame=\"" + mockFrame + "\";\n";
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
     rootHead.appendChild(_script);

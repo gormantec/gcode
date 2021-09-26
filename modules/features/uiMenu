@@ -1,0 +1,7 @@
+/* Feature Name: Help Menu */
+
+export const menuMetadata =  {"id":"uiMenu","class":"pageLeftToolbarButton","materialIcon":"wysiwyg"};
+
+export function menuAction(){
+    console.log("Help");
+}

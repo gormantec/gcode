@@ -5,7 +5,6 @@ import { getScript } from '/modules/getScript.mjs';
 import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
 import { md5 } from '/modules/htmlUtils.mjs';
 
-
 const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
 const ascWorker = new Worker('/modules/asc_worker.mjs');

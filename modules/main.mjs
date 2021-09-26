@@ -130,6 +130,7 @@ function _toggleSideBar() {
 
 function _runCode() {
 
+
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.debug.log(myLogin + "$ nodejs " + filename + "\n");
@@ -536,7 +537,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //get last filename
 
     var lastFileName = localStorage.getItem("lastFileName");
-    if (lastFileName) {
+    var lastFileData;
+    if(lastFileName)lastFileData=load(lastFileName, true);
+    if (lastFileData ) {
+
         document.getElementById("filename").innerText = lastFileName;
         try {
 
@@ -664,10 +668,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, false);
 
-
-    setTimeout(function () {
+    if(window.location.href!="http://127.0.0.1:8080/")
+    {
+        console.log(window.location.href);  
+        setTimeout(function () {
+            document.getElementById("splashScreen").hidden = true; 
+        }, 2000);
+    }
+    else{
         document.getElementById("splashScreen").hidden = true;
-    }, 2000);
+    }
+
 
 
 

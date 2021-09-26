@@ -2,6 +2,11 @@
 //import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js';
 //import 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js';
 
+import { getScript } from '/modules/getScript.mjs';
+const getBeautify = getScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js', ["js_beautify"]);
+const getCssBeautify = getScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js', ["css_beautify"]);
+const getHtmlBeautify = getScript('https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js', ["html_beautify"]);
+
 
 
 var the={};
@@ -13,6 +18,7 @@ export function beautify(theEditor,options) {
     }
 
     var language=theEditor.getOption("mode");
+    console.log(language);
   
     the.beautify_in_progress = true;
   
@@ -22,8 +28,9 @@ export function beautify(theEditor,options) {
 
     the.lastInput = source;
 
+
     if (language === 'html') {
-      var html_beautify = require(["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.js"],({html_beautify})=>{
+      getHtmlBeautify.then(({html_beautify})=>{
         output=html_beautify(source, opts);
           theEditor.setValue(output);
           the.lastOutput = output;
@@ -33,7 +40,7 @@ export function beautify(theEditor,options) {
       output = html_beautify(source, opts);
     } else if (language === 'css') {
 
-      var css_beautify = require(["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-css.js"],({css_beautify})=>{
+      getCssBeautify.then(({css_beautify})=>{
         output=css_beautify(source, opts);
         theEditor.setValue(output);
         the.lastOutput = output;
@@ -41,7 +48,7 @@ export function beautify(theEditor,options) {
         the.beautify_in_progress = false;
       });
     } else {
-      var js_beautify = require(["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify.js"],({js_beautify})=>{
+      getBeautify.then(({js_beautify})=>{
         output=js_beautify(source, opts);
         theEditor.setValue(output);
         the.lastOutput = output;
@@ -49,4 +56,5 @@ export function beautify(theEditor,options) {
         the.beautify_in_progress = false;
       });
     }
+
   }

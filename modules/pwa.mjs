@@ -1,3 +1,5 @@
+import { addFrame } from '/modules/iphoneX.mjs';
+
 window.PWA = window.PWA || {};
 window.PWA.globals = window.PWA.globals || {};
 
@@ -189,19 +191,18 @@ class PWA {
                 }, duration / 20);
             }
         })();
-    };
+    }
 
-    show(win) {
-
-        var msec = (new Date()).getTime();
-        win = win || window;
-        const urlParams = new URLSearchParams(win.location.search);
-        var mockFrame = urlParams.get("mockFrame");
-        var rootWindow = win.document.body;
-        var aPWA = this;
-        if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
-            (async () => { try { rootWindow = (await import('/modules/' + mockFrame + '.mjs')).addFrame(win, aPWA, mockFrame); } catch (e) { debug.log(e); } })();
+    inIframe () {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
         }
+    }
+
+    buildScreen(msec,win,rootWindow)
+    {
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.insertBefore(_title, win.document.head.firstChild);
@@ -221,23 +222,54 @@ class PWA {
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://gcode.com.au/css/pwa.css", function () {
-                debug.log("splashDuration:" + window.PWA.globals.splashDuration);
-                if (window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
-                else if (!_this.splashDuration) _this.splashDuration = 2000;
-                var timeoutMs = _this.splashDuration - ((new Date()).getTime() - msec);
-                debug.log("timeoutMs:" + timeoutMs);
-                if (timeoutMs < 0) timeoutMs = 10;
-                setTimeout(function () {
+                if(!_this.inIframe())
+                {
+                    debug.log("splashDuration:" + window.PWA.globals.splashDuration);
+                    if (window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
+                    else if (!_this.splashDuration) _this.splashDuration = 2000;
+                    var timeoutMs = _this.splashDuration - ((new Date()).getTime() - msec);
+                    debug.log("timeoutMs:" + timeoutMs);
+                    if (timeoutMs < 0) timeoutMs = 10;
+                    setTimeout(function () {
+                        while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
+                        rootWindow.style.backgroundColor = _this.primaryColor;
+                        rootWindow.style.color = _this.primaryColorText;
+                        _this.pwaRoot.element.style.opacity = 0.0;
+                        rootWindow.appendChild(_this.pwaRoot.element);
+                        rootWindow.appendChild(_this.pwaOverlay.element);
+                        _this.fadeIn(_this.pwaRoot.element, 500);
+                    }, timeoutMs);
+                }
+                else{
                     while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
-                    rootWindow.style.backgroundColor = this.primaryColor;
-                    rootWindow.style.color = this.primaryColorText;
-                    _this.pwaRoot.element.style.opacity = 0.0;
+                    document.body.style.backgroundColor="rgb(33, 33, 33)";
+                    rootWindow.style.backgroundColor = "black";
+                    rootWindow.style.color = _this.primaryColorText;
                     rootWindow.appendChild(_this.pwaRoot.element);
                     rootWindow.appendChild(_this.pwaOverlay.element);
-                    _this.fadeIn(_this.pwaRoot.element, 500);
-                }, timeoutMs);
+                }
+
             });
         });
+    }
+
+    show(win) {
+
+        var msec = (new Date()).getTime();
+        win = win || window;
+        console.log(win.location);
+        const urlParams = new URLSearchParams(win.location.search);
+        var mockFrame = urlParams.get("mockFrame") || this.inIframe()?window.PWA.globals.mockFrame:null;
+        var rootWindow = win.document.body;
+        var aPWA = this;
+        if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+            rootWindow = addFrame(win, aPWA, mockFrame);
+            aPWA.buildScreen(msec,win,rootWindow);
+        }
+        else{
+            this.buildScreen(msec,win,rootWindow);
+        }
+        
 
     }
     showFloatingActionButton() {
