@@ -3,9 +3,9 @@ import { addFrame } from '/modules/iphoneX.mjs';
 window.PWA = window.PWA || {};
 window.PWA.globals = window.PWA.globals || {};
 
-var debug = debug || { log: function (v) { console.log(v); } };
+var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 
-class PWA {
+class PWA { 
     constructor(params) {
         if (!params) params = {};
         this.title = params.title || "Code";
@@ -24,7 +24,8 @@ class PWA {
         this.setAlert();
         this.setFooter();
         this.setFloatingActionButton();
-        var _this = this;
+        window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
+        window.PWA.globals.pwaInstances.push(this);
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
@@ -92,6 +93,10 @@ class PWA {
             if (_this.navigateBackPage) {
                 if (_this.navigateBackPage.navigateBackPage) _this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
                 else _this.hideNavigateBackButton();
+                if(typeof _this.navigateBackPage=="string")
+                {
+                    _this.navigateBackPage=Page.getPage(_this.navigateBackPage);
+                }
                 _this.setPage(_this.navigateBackPage);
             }
         });
@@ -116,13 +121,30 @@ class PWA {
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
     setPage(aPage) {
-        debug.log("setpage");
+        //debug.log("setpage");
         if (aPage.navigateBackPage) {
             debug.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
         }
         this.pwaBody.setChild({ child: aPage });
+        this.alertPageChangeListener(aPage.pageId);
 
+    }
+    alertPageChangeListener(pageId)
+    {
+        for(var listener in this.pageChangeListeners)
+        {
+            this.pageChangeListeners[listener](pageId);
+        }
+    }
+
+    addPageChangeListener(listener)
+    {
+        if(typeof listener=="function")
+        {
+            this.pageChangeListeners=this.pageChangeListeners || [];
+            this.pageChangeListeners.push(listener);
+        }
     }
 
     setFloatingActionButton() {
@@ -426,7 +448,7 @@ class Div {
     }
 
     appendChild(params) {
-        debug.log("appendChild");
+        //debug.log("appendChild");
         if (!params) return;
         else if (params instanceof Div && params.element instanceof Node) {
             this.element.appendChild(params.element);
@@ -476,13 +498,45 @@ class Div {
     }
 }
 
+var pages={};
 class Page extends Div {
     constructor(params) {
         super(params);
+        this.pages=this.pages || {};
+        var id=0;
+        this.pageId=this.constructor.name;
+        while(pages[this.pageId]){
+            id++;
+            this.pageId=this.constructor.name+""+id;
+        }
+        pages[this.pageId]=this;
+        this.element.id=this.pageId;
         this.element.className = (this.element.className + " pwapage").trim();
         if (params.navigateBackPage instanceof Page) {
             this.navigateBackPage = params.navigateBackPage;
         }
+        else if (typeof params.navigateBackPage=="string" && params.navigateBackPage.trim().substring(0,5)=="page(") {
+            
+            this.navigateBackPage = params.navigateBackPage;
+        }
+        else if(!params.navigateBackPage){}
+        else{
+            console.log("Error:"+params.navigateBackPage);
+        }
+    }
+
+    static getPage(id)
+    {
+        if(id.trim().substring(0,5)=="page(" && id.trim().slice(-1)==")")
+        {
+            id=id.trim().slice(5,-1);
+        }
+        console.log("getPage="+id+" "+pages[id]);
+        return pages[id];
+    }
+    static clearPages()
+    {
+        pages={};
     }
 }
 
