@@ -76,13 +76,15 @@ function structureToCode(structure) {
         }
         else if (block.class) {
             var params = block.class.constructor.super;
-            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?)\);[\s\S]*?\}([\s\S]*$)/g;
+            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}\s*?)\)\s*?;[\s\S]*?\}([\s\S]*$)/g;
             var paramString = block.class.code.replaceAll(regex,
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("\n    ", "\n            ").slice(0, -1) +
                 '        });\n    }$3');
             var regex22 = /\"widget\((\S+?)\)\"/g;
             paramString = paramString.replaceAll(regex22,"$1");
+            var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
+            paramString = paramString.replaceAll(regex22,"$1$2");
             resp = resp + paramString + "\n";
         }
     });
@@ -99,13 +101,18 @@ function pushCode(structure, data) {
         rx = /class .*?extends (.*?)[ \{][\s\S]*$/g
         arr = rx.exec(data.code);
         var extendsname = arr[1];
-        rx = /class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\(([\s\S]*?)\);[\s\S]*$/g;
+        rx = /class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\(([\s\S]*?\}\s*?)\)\s*?;[\s\S]*$/g;
         arr = rx.exec(data.code);
+        var paramString=arr[1];
+        const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})/g;
+        console.log(paramString);
+        paramString = paramString.replaceAll(regex6, '$1\"$2\"');
+        console.log(paramString);
         const regex = /(\s*?)\"?([\S]*?)\"?(\s*?:[\s\"])/ig;
-        var paramString = arr[1].replaceAll(regex, '$1\"$2\"$3');
-        const regex6 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
-        paramString = paramString.replaceAll(regex6, '$1\"widget($2)\"$3');
-
+        paramString = paramString.replaceAll(regex, '$1\"$2\"$3');
+        
+        const regex7 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
+        paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
         var supername = JSON.parse(paramString.trim());
         let classCode = data.code;
         let count = 1;
@@ -154,9 +161,68 @@ function splitComments(structure, _source) {
     }
 }
 
+function dropDownInput(input,name)
+{
+    //center
+    var input2 = document.createElement("select");
+    input2.id=input.id;
+    var items={backgroundRepeat:["","repeat","repeat-x","repeat-y","no-repeat","initial","inherit"],
+        backgroundPosition:["","center","top","left","bottom","right", "left top","left center","left bottom","right top","right center","right bottom","center top","center center","center bottom"],
+        textAlign:["","left","right","center","justify","initial","inherit"]
+    };
+    items[name].forEach((item)=>{
+        var option2 = document.createElement("option");
+        option2.value = item;
+        option2.innerHTML = item;
+        if(item==input.value)option2.selected="true"
+        input2.append(option2);
+    });
+
+    input2.style.width = "220px";
+    input2.style.paddingTop = "2px";
+    input2.style.paddingBottom = "2px";
+    input2.style.paddingRight = "0px";
+    return input2;
+}
+
+function colorInput(input)
+{
+    input.type="color";
+    var input2 = document.createElement("input");
+    input2.style.border="none";
+    input2.size = 10;
+    input2.value=input.value;
+    var pageDivC1 = document.createElement("div");
+    pageDivC1.style.display = "inline-block";
+    pageDivC1.style.backgroundColor = "white";
+    pageDivC1.style.borderRadius="2px";
+    pageDivC1.style.width = "220px";
+    pageDivC1.style.margin = "1px";
+    var pageDivC11 = document.createElement("div");
+    pageDivC11.style.display = "inline-block";
+    pageDivC11.style.marginTop="3px";
+    pageDivC11.style.marginLeft="3px";
+    pageDivC11.style.backgroundColor="white";
+    pageDivC11.append(input2);
+    
+    var pageDivC2 = document.createElement("div");
+    pageDivC2.style.display = "inline-block";
+    pageDivC2.style.float = "right";
+    pageDivC2.style.margin="-2px";
+    pageDivC2.append(input);
+    pageDivC1.append(pageDivC11);
+    pageDivC1.append(pageDivC2);
+    input.addEventListener('change', function (evt) {
+        input2.value=this.value;
+    });
+    input=pageDivC1;
+    return input;
+}
+
 function createInput(param, value, eventListener) {
     var input = document.createElement("input");
     input.id = "input-param-" + param;
+    input.type="text";
     input.size = 30;
     input.value = value;
     input.addEventListener('change', function (evt) {
@@ -168,6 +234,17 @@ function createInput(param, value, eventListener) {
             eventListener(this.value);
         }
     });
+    if(param=="color" || param=="backgroundColor")
+    {
+        input=colorInput(input);
+    }
+    else if(param=="backgroundPosition" || param=="backgroundRepeat" || param=="textAlign")
+    {
+        input=dropDownInput(input,param);
+        input.addEventListener('change', function (evt) {
+            eventListener(this.value);
+        });
+    }
     return input;
 }
 
