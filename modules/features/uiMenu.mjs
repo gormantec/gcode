@@ -44,7 +44,12 @@ function refreshScreen(mockFrameIframe, structure, block) {
     _module = window.document.createElement("script");
     _module.setAttribute("type", "module");
     _module.text = "\n" + "window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{\"event\":\"pageChange\",\"data\":{\"pageId\":\"'+pageId+'\"}}', '*');});" + "\n";
+    
+    
+    
     rootHTML.querySelector("head").appendChild(_module);
+    var izoom=mockFrameIframe.getAttribute("data-zoom");
+    rootHTML.querySelector("body").style.zoom=izoom;
     _module = window.document.createElement("script");
     _module.setAttribute("type", "module");
     _module.text = "\n" +
@@ -76,7 +81,7 @@ function structureToCode(structure) {
         }
         else if (block.class) {
             var params = block.class.constructor.super;
-            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}\s*?)\)\s*?;[\s\S]*?\}([\s\S]*$)/g;
+            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\S\s]*?)\)\s*?;[\s\S]*?\}([\s\S]*$)/g;
             var paramString = block.class.code.replaceAll(regex,
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("\n    ", "\n            ").slice(0, -1) +
@@ -103,31 +108,48 @@ function pushCode(structure, data) {
         var extendsname = arr[1];
         rx = /class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\(([\s\S]*?\}\s*?)\)\s*?;[\s\S]*$/g;
         arr = rx.exec(data.code);
-        var paramString=arr[1];
-        const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})/g;
-        console.log(paramString);
-        paramString = paramString.replaceAll(regex6, '$1\"$2\"');
-        console.log(paramString);
-        const regex = /(\s*?)\"?([\S]*?)\"?(\s*?:[\s\"])/ig;
-        paramString = paramString.replaceAll(regex, '$1\"$2\"$3');
-        
-        const regex7 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
-        paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
-        var supername = JSON.parse(paramString.trim());
-        let classCode = data.code;
-        let count = 1;
-        for (var i = data.code.indexOf("{") + 1; i < data.code.length && i > 0 && count > 0; i++) {
-            let c = data.code.charAt(i);
-            //if(c=="/" && data.code.charAt(i+1)=="/")i=data.code.indexOf("\n")+1;  
-            //else if(c=="/" && data.code.charAt(i+1)=="*")i=data.code.indexOf("*/")+2;  
-            if (c == "{") count++;
-            else if (c == "}") count--;
-            classCode = data.code.substring(0, i + 1);
+        if(arr!=null)
+        {
+            var paramString=arr[1];
+            const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})/g;
+    
+            paramString = paramString.replaceAll(regex6, '$1\"$2\"');
+    
+            const regex = /(\s*?)\"?([\S]*?)\"?(\s*?:[\s\"])/ig;
+            paramString = paramString.replaceAll(regex, '$1\"$2\"$3');
+            
+            const regex7 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
+            paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
+
+            const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
+            paramString = paramString.replaceAll(regex8, '}');
+
+            const regex9 = /\}[\s\S]*?$/ig;
+            paramString = paramString.replaceAll(regex9, '}');
+
+            console.log(paramString);
+            var supername = JSON.parse(paramString.trim());
+            let classCode = data.code;
+            let count = 1;
+            for (var i = data.code.indexOf("{") + 1; i < data.code.length && i > 0 && count > 0; i++) {
+                let c = data.code.charAt(i);
+                //if(c=="/" && data.code.charAt(i+1)=="/")i=data.code.indexOf("\n")+1;  
+                //else if(c=="/" && data.code.charAt(i+1)=="*")i=data.code.indexOf("*/")+2;  
+                if (c == "{") count++;
+                else if (c == "}") count--;
+                classCode = data.code.substring(0, i + 1);
+            }
+            var aClass={ class: { name: classname, extends: extendsname, constructor: { super: supername }, code: classCode } };
+            console.log(aClass);
+            structure.push(aClass);
+            if (data.code.trim().length > classCode.trim().length) {
+                pushCode(structure, { code: data.code.substring(classCode.length).trim() });
+            }
         }
-        structure.push({ class: { name: classname, extends: extendsname, constructor: { super: supername }, code: classCode } });
-        if (data.code.trim().length > classCode.trim().length) {
-            pushCode(structure, { code: data.code.substring(classCode.length).trim() });
+        else {
+            structure.push({ code: data.code });
         }
+
     }
     else {
         structure.push({ code: data.code });
@@ -260,13 +282,25 @@ function showUiEditor() {
     var mockFrameDiv = document.createElement("div");
     var mockFrameIframe = document.createElement("iframe");
     mockFrameIframe.setAttribute("frameBorder", "0");
-    mockFrameIframe.setAttribute("width", "414px");
-    mockFrameIframe.setAttribute("height", "896px");
+    var izoom=1.0;
+    if ((window.innerHeight-200) <= 896) {
+        izoom=(window.innerHeight-200)/896;
+    }
+    if ((window.innerWidth/4) <= 414*izoom && (window.innerWidth/4)<414) {
+        izoom=(window.innerWidth/4)/414;
+    }
+    if(izoom<0.3)izoom=0.3;
+    var iWidth=414*izoom;
+    var iHeight=896*izoom;
+    
+    mockFrameIframe.setAttribute("width", iWidth+"px");
+    mockFrameIframe.setAttribute("height", iHeight+"px");
+    mockFrameIframe.setAttribute("data-zoom", izoom);
     mockFrameDiv.append(mockFrameIframe);
     mockFrameDiv.style.position = "absolute";
-    mockFrameDiv.style.top = "20px";
+    mockFrameDiv.style.top = Math.round(2+(20*izoom))+"px";
     mockFrameDiv.style.right = "25px";
-    mockFrameDiv.style.width = "420px";
+    mockFrameDiv.style.width = (iWidth+8)+"px";
     mockFrameDiv.style.height = "900px";
     mockFrameDiv.style.margin = "0px";
     mockFrameDiv.style.padding = "0px";
