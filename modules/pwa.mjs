@@ -40,6 +40,9 @@ class PWA {
         this.alertDialog.onclick(function () {
             _thisAlertDialog.close();
         });
+        this.alertDialog.onpointerup(function () {
+            _thisAlertDialog.close();
+        });
     }
     alert(message) {
         this.alertDialogContent.innerHTML = "<p>" + message + "</p>";
@@ -377,6 +380,7 @@ class Div {
         else if (params && params.child instanceof String) this.element.innerHTML = params.child;
         else if (params instanceof HTMLElement) this.element.appendChild(params);
         else if (params instanceof String) this.element.innerHTML = params;
+
         if (params && params.id) this.element.id = params.id;
         if (params && params.class) this.element.className = (this.element.className + " " + params.class).trim();
         if (params && params.color) this.element.style.color = params.color;
@@ -390,12 +394,37 @@ class Div {
         if (params && params.borderWidth) this.element.style.borderWidth = params.borderWidth;
         if (params && params.padding) this.element.style.padding = params.padding;
         if (params && params.paddingTop) this.element.style.paddingTop = params.paddingTop;
+        if (params && params.margin) this.element.style.margin = params.margin
+        if (params && params.marginTop) this.element.style.marginTop = params.marginTop;
+        if (params && params.marginBottom) this.element.style.marginBottom = params.marginBottom;
+        if (params && params.marginLeft) this.element.style.marginLeft = params.marginLeft;
+        if (params && params.marginRight) this.element.style.marginTop = params.marginRight;
         if (params && params.textAlign) this.element.style.textAlign = params.textAlign;
         if (params && params.lineHeight) this.element.style.lineHeight = params.lineHeight;
+        if (params && params.position) this.element.style.position = params.position;
+        if (params && params.display) this.element.style.display = params.display;
         if (params && params.onclick) {
             this.onclick(params.onclick);
             this.element.style.cursor = "pointer";
         }
+        if (params && params.onpointerdown) {
+            this.onPointerDown(params.onpointerdown);
+            this.element.style.cursor = "pointer";
+        }
+
+        if (params && params.onpointerup) {
+            this.onPointerUp(params.onpointerup);
+            this.element.style.cursor = "pointer";
+        }
+        if (params && params.onpointerenter) {
+            this.onPointerEnter(params.onpointerenter);
+            this.element.style.cursor = "pointer";
+        }
+        if (params && params.onpointerleave) {
+            this.onPointerLeave(params.onpointerleave);
+            this.element.style.cursor = "pointer";
+        }
+        
         if (params && params.width) {
             this.element.style.width = params.width;
             if (!params.right) this.element.style.right="unset";
@@ -421,6 +450,18 @@ class Div {
             this.element.onclick = afunc;
         }
 
+    }
+    onPointerDown(handleDown){
+        this.element.addEventListener("pointerdown", handleDown, false);
+    }
+    onPointerUp(handleUp){
+        this.element.addEventListener("pointerup", handleUp, false);
+    }
+    onPointerEnter(handleEnter){
+        this.element.addEventListener("pointerenter", handleEnter, false);
+    }
+    onPointerLeave(handleLeave){
+        this.element.addEventListener("pointerleave", handleLeave, false);
     }
     showModal() {
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {

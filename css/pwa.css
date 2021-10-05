@@ -119,8 +119,8 @@ div.pwapage div.pwadiv{
 
 .floatingActionButton{
     position: absolute;
-    height: 30px;
-    width: 30px;
+    height: 29px;
+    width: 29px;
     padding: 5px;
     margin:0px;
     background-color: var(--primaryColor);

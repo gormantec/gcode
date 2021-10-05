@@ -31,7 +31,12 @@
             "enabled": true,
           	"uri":"/modules/features/nearMenu.mjs"
 
-        }
+        }, {
+          "name": "uiMenu",
+          "navPosition": 6,
+          "enabled": true,
+          "uri": "/modules/features/uiMenu.mjs"
+      }
     ],
     "options": [{
             "name": "defaultAppSettings",

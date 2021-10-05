@@ -21,6 +21,10 @@ const paramOptions = ["navigateBackPage", "innerHTML",
     "textAlign",
     "lineHeight",
     "onclick",
+    "onpointerdown",
+    "onpointerup",
+    "onpointerenter",
+    "onpointerleave",
     "width",
     "height",
     "backgroundColor",
@@ -115,19 +119,16 @@ function structureToCode() {
             paramString = paramString.replaceAll(regex22, "$1");
             var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
+            var regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
+            paramString = paramString.replaceAll(regex23, "$1$2");
             resp = resp + paramString + "\n";
-
-            console.log("#WIDGET PWA");
         }
         else if (block.widget) {
             resp = resp + block.widget.code + "\n";
-            console.log("#WIDGET CODE");
-            console.log(block.widget.code);
-            console.log("#WIDGET CODE");
         }
         else if (block.class) {
             var params = block.class.constructor.super;
-            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\S\s]*?)\)\s*?;[\s\S]*?\}([\s\S]*$)/g;
+            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\n\r\s]*?)\)[\s\r\n]*?;[\s\S]*?\}([\s\S]*$)/g;
             var paramString = block.class.code.replaceAll(regex,
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("\n    ", "\n            ").slice(0, -1) +
@@ -136,6 +137,8 @@ function structureToCode() {
             paramString = paramString.replaceAll(regex22, "$1");
             var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
+            var regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
+            paramString = paramString.replaceAll(regex23, "$1$2");
             resp = resp + paramString + "\n";
         }
     });
@@ -144,16 +147,16 @@ function structureToCode() {
 }
 
 function cleanParams(paramString) {
-    const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})/g;
-    paramString = paramString.replaceAll(regex6, '$1\"$2\"');
+    const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})(\s*?[,}])/g;
+    paramString = paramString.replaceAll(regex6, '$1\"$2\"$3');
+    const regex61 = /(:\s*?)(this\.\S*?\s*?)([,}])/g;
+    paramString = paramString.replaceAll(regex61, '$1\"$2\"$3');
     const regex = /(\s*?)\"?([\S]*?)\"?(\s*?:[\s\"])/ig;
     paramString = paramString.replaceAll(regex, '$1\"$2\"$3');
     const regex7 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
     paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
     const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
     paramString = paramString.replaceAll(regex8, '}');
-    const regex9 = /\}[\s\S]*?$/ig;
-    paramString = paramString.replaceAll(regex9, '}');
     return paramString;
 }
 
@@ -171,8 +174,6 @@ function pushCode(data) {
         if (arr != null) {
             var paramString = arr[1];
             paramString = cleanParams(paramString);
-
-            console.log(paramString);
             var supername = JSON.parse(paramString.trim());
             let classCode = data.code;
             let count = 1;
