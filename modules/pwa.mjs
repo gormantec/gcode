@@ -30,7 +30,7 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
     setAlert(message) {
-        this.alertDialog = new Div({ id: "alertDialog",display:"block",background:"none",border:"none",position:"fixed",top:"0px",bottom:"0px",left:"0px",right:"0px","z-index":100});
+        this.alertDialog = new Div({ id: "alertDialog"});
         this.alertDialogBody = new Div({ id: "alertDialogBody",backgroundColor:this.primaryColorText,borderColor:this.primaryColor,borderWidth:"2px"  });
         this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "",backgroundColor:this.primaryColorText,color:"black" });
         this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"20px",color:this.primaryColor,backgroundColor:this.primaryColorText,fontWeight: "bold"});
