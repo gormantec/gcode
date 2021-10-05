@@ -450,23 +450,29 @@ class Div {
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
+        let _this=this.element;
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
             //this.element.onclick = afunc;
-            this.element.addEventListener("click", afunc, false);
+            
+            this.element.addEventListener("click", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();afunc(e);});
         }
 
     }
     onPointerDown(handleDown){
-        this.element.addEventListener("pointerdown", handleDown, false);
+        let _this=this.element;
+        this.element.addEventListener("pointerdown", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleDown(e);});
     }
-    onPointerUp(handleUp){
-        this.element.addEventListener("pointerup", handleUp, false);
+    onPointerUp(handleUp){  
+        let _this=this.element;
+        this.element.addEventListener("pointerup", (e)=>{console.log(e);e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleUp(e);});
     }
     onPointerEnter(handleEnter){
-        this.element.addEventListener("pointerenter", handleEnter, false);
+        let _this=this.element;
+        this.element.addEventListener("pointerenter", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleEnter(e);});
     }
     onPointerLeave(handleLeave){
-        this.element.addEventListener("pointerleave", handleLeave, false);
+        let _this=this.element;
+        this.element.addEventListener("pointerleave", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);});
     }
     showModal() {
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
