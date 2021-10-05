@@ -109,7 +109,7 @@ div.pwapage div.pwadiv{
     right:0px;
     z-index: 2000;
     overflow: hidden;
-    display:"block";
+    display:"none";
     background:"none";
     border:"none";
     pointer-events: auto;
