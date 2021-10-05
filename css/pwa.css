@@ -112,6 +112,7 @@ div.pwapage div.pwadiv{
     display:"block";
     background:"none";
     border:"none";
+    pointer-events: auto;
     
 }
 #alertDialogBody{
@@ -127,6 +128,7 @@ div.pwapage div.pwadiv{
     overflow: hidden;
     border-radius: 10px;
     color: #00000099;
+    pointer-events: auto
     
 }
 
