@@ -30,7 +30,7 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
     setAlert(message) {
-        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog",display:"none",backgroundColor:this.primaryColorText,borderColor:this.primaryColor,borderWidth:"2px"  });
+        this.alertDialog = new Div({ id: "alertDialog", tagName: "dialog",backgroundColor:this.primaryColorText,borderColor:this.primaryColor,borderWidth:"2px"  });
         this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "",backgroundColor:this.primaryColorText,color:"black" });
         this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"20px",color:this.primaryColor,backgroundColor:this.primaryColorText,fontWeight: "bold"});
         this.alertDialog.appendChild(this.alertDialogContent);
@@ -40,11 +40,12 @@ class PWA {
         this.alertDialog.onclick(function () {
             _thisAlertDialog.close();
         });
-        this.alertDialog.onpointerup(function () {
+        this.alertDialog.onPointerUp(function () {
             _thisAlertDialog.close();
         });
     }
     alert(message) {
+        console.log(message);
         this.alertDialogContent.innerHTML = "<p>" + message + "</p>";
         this.alertDialog.close();
         this.alertDialog.showModal();
