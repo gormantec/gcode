@@ -41,11 +41,13 @@ class PWA {
         const _thisAlertDialog = this.alertDialog;
       
         this.alertDialog.onclick(function (event) {
+            console.log("xxxxxxxxxx1");
             _thisAlertDialog.close();
             event.stopPropagation();
             return false;
         });
         this.alertDialog.onPointerUp(function (event) {
+            console.log("xxxxxxxxxx2");
             _thisAlertDialog.close();
             event.stopPropagation();
             return false;
@@ -455,7 +457,8 @@ class Div {
     }
     onclick(afunc) {
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
-            this.element.onclick = afunc;
+            //this.element.onclick = afunc;
+            this.element.addEventListener("click", afunc, false);
         }
 
     }

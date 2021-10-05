@@ -109,7 +109,6 @@ div.pwapage div.pwadiv{
     right:0px;
     z-index: 2000;
     overflow: hidden;
-    pointer-events: none;
     display:"block";
     background:"none";
     border:"none";
@@ -126,7 +125,6 @@ div.pwapage div.pwadiv{
     width:300px;
     z-index: 2001;
     overflow: hidden;
-    pointer-events: none;
     border-radius: 10px;
     color: #00000099;
     
