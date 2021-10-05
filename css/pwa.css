@@ -107,7 +107,7 @@ div.pwapage div.pwadiv{
     bottom: 0px;
     left:0px;
     right:0px;
-    z-index: 1000;
+    z-index: 2000;
     overflow: hidden;
     pointer-events: none;
     display:"block";
@@ -124,7 +124,7 @@ div.pwapage div.pwadiv{
     text-align: center;
     height: 280px;
     width:300px;
-    z-index: 200;
+    z-index: 2001;
     overflow: hidden;
     pointer-events: none;
     border-radius: 10px;

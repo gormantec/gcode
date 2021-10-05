@@ -37,14 +37,18 @@ class PWA {
         this.alertDialogBody.appendChild(this.alertDialogContent);
         this.alertDialogBody.appendChild(this.alertDialogOK);
         this.alertDialog.appendChild(this.alertDialogBody);
-        this.pwaRoot.appendChild(this.alertDialog);
+        this.pwaOverlay.appendChild(this.alertDialog);
         const _thisAlertDialog = this.alertDialog;
       
-        this.alertDialog.onclick(function () {
+        this.alertDialog.onclick(function (event) {
             _thisAlertDialog.close();
+            event.stopPropagation();
+            return false;
         });
-        this.alertDialog.onPointerUp(function () {
+        this.alertDialog.onPointerUp(function (event) {
             _thisAlertDialog.close();
+            event.stopPropagation();
+            return false;
         });
     }
     alert(message) {
