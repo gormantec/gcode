@@ -52,6 +52,12 @@ class PWA {
             event.stopPropagation();
             return false;
         });
+        this.alertDialogBody.onclick(function (event) {
+            console.log("xxxxxxxxxx3");
+        });
+        this.alertDialogBody.onPointerUp(function (event) {
+            console.log("xxxxxxxxxx4");
+        });
     }
     alert(message) {
         console.log(message);
