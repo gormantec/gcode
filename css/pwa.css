@@ -102,6 +102,18 @@ div.pwapage div.pwadiv{
 
 #alertDialog{
     position: fixed;
+    margin-top:0px;
+    text-align: center;
+    bottom: 0px;
+    left:0px;
+    right:0px;
+    z-index: 200;
+    overflow: hidden;
+    pointer-events: none;
+    
+}
+#alertDialogBody{
+    position: fixed;
     margin-top:150px;
     padding:2px;
     text-align: center;
