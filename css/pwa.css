@@ -118,6 +118,8 @@ div.pwapage div.pwadiv{
 #alertDialogBody{
     position: fixed;
     margin-top:150px;
+    margin-left:auto;
+    margin-right:auto;
     padding:2px;
     text-align: center;
     height: 280px;
