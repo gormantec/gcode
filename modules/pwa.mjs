@@ -37,6 +37,7 @@ class PWA {
         this.alertDialog.appendChild(this.alertDialogOK);
         this.pwaRoot.appendChild(this.alertDialog);
         const _thisAlertDialog = this.alertDialog;
+        _thisAlertDialog.close();
         this.alertDialog.onclick(function () {
             _thisAlertDialog.close();
         });
