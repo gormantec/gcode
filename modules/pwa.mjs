@@ -428,6 +428,11 @@ class Div {
             this.onPointerLeave(params.onpointerleave);
             this.element.style.cursor = "pointer";
         }
+
+        if (params && params.pointerout) {
+            this.onPointerOut(params.pointerout);
+            this.element.style.cursor = "pointer";
+        }
         
         if (params && params.width) {
             this.element.style.width = params.width;
@@ -460,20 +465,26 @@ class Div {
     }
     onPointerDown(handleDown){
         let _this=this.element;
-        this.element.addEventListener("pointerdown", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleDown(e);});
+        
+        this.element.addEventListener("pointerdown", (e)=>{_this.isPointerDown=true;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleDown(e);});
     }
     onPointerUp(handleUp){  
         let _this=this.element;
-        this.element.addEventListener("pointerup", (e)=>{console.log(e);e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleUp(e);});
+        this.element.addEventListener("pointerup", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;console.log(e);e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleUp(e);}});
     }
     onPointerEnter(handleEnter){
         let _this=this.element;
-        this.element.addEventListener("pointerenter", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleEnter(e);});
+        this.element.addEventListener("pointerenter", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleEnter(e);}});
     }
     onPointerLeave(handleLeave){
         let _this=this.element;
-        this.element.addEventListener("pointerleave", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);});
+        this.element.addEventListener("pointerleave", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);}});
     }
+    onPointerOut(handleLeave){
+        let _this=this.element;
+        this.element.addEventListener("pointerout", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);}});
+    }
+    
     showModal() {
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
             this.element.showModal();
