@@ -117,16 +117,14 @@ export function createHtml(code) {
     _link = window.document.createElement("link");
     _link.setAttribute("rel", "apple-touch-icon");
     _link.setAttribute("href", "###ICONURI###");
+    rootHead.appendChild(_link);
     _link = window.document.createElement("link");
     _link.setAttribute("rel", "apple-touch-icon-precomposed");
     _link.setAttribute("href", "###ICONURI###");
+    rootHead.appendChild(_link);
     _link = window.document.createElement("link");
     _link.setAttribute("rel", "icon");
     _link.setAttribute("href", "###ICONURI###");
-
-
-
-
     rootHead.appendChild(_link);
     if (splash && splash.substring(0, 4) == "http" && splash.substring(splash.length - 3) == "png") {
         var _style = window.document.createElement("style");
