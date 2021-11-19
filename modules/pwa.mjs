@@ -7,7 +7,8 @@ var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 
 class PWA { 
     constructor(params) {
-        if (!params) params = {};
+        if (!params) params = [];
+        this.pwaAuth= params.pwaAuth || {};
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 80;
@@ -277,6 +278,11 @@ class PWA {
                     rootWindow.style.color = _this.primaryColorText;
                     rootWindow.appendChild(_this.pwaRoot.element);
                     rootWindow.appendChild(_this.pwaOverlay.element);
+                }
+
+                if(this.pwaAuth && this.pwaAuth.length>0)
+                {
+                    _this.addModule(win.document,"https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js");
                 }
 
             });
