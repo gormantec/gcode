@@ -8,7 +8,7 @@ var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 class PWA { 
     constructor(params) {
         if (!params) params = [];
-        this.pwaAuth= params.pwaAuth || {};
+        this.pwaAuth= params.pwaAuth || "false";
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 80;
@@ -280,8 +280,9 @@ class PWA {
                     rootWindow.appendChild(_this.pwaOverlay.element);
                 }
 
-                if(this.pwaAuth && this.pwaAuth.length>0)
+                if(this.pwaAuth && this.pwaAuth.toString().toLowerCase()=="true")
                 {
+                    console.log("ADD PWAAUTH");
                     _this.addModule(win.document,"https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js");
                 }
 
