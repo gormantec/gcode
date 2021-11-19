@@ -57,6 +57,7 @@ export function createHtml(code) {
     var splashBackgroundColor = null;
     var splash = null;
     var mockFrame = null;
+    var splashSize =null;
     var rootHTML = window.document.createElement("html");
     var rootHead = window.document.createElement("head");
     var rootBody = window.document.createElement("body");
