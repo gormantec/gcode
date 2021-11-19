@@ -408,6 +408,7 @@ class Div {
         if (params && params.paddingTop) this.element.style.paddingTop = params.paddingTop;
         if (params && params.margin) this.element.style.margin = params.margin
         if (params && params.marginTop) this.element.style.marginTop = params.marginTop;
+        if(params && params.facebookkey ) this.element.setAttribute("facebookkey",params.facebookkey);
         if (params && params.marginBottom) this.element.style.marginBottom = params.marginBottom;
         if (params && params.marginLeft) this.element.style.marginLeft = params.marginLeft;
         if (params && params.marginRight) this.element.style.marginTop = params.marginRight;
