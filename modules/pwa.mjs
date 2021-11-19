@@ -280,7 +280,7 @@ class PWA {
                     rootWindow.appendChild(_this.pwaOverlay.element);
                 }
 
-                if(this.pwaAuth && this.pwaAuth.toString().toLowerCase()=="true")
+                if(_this.pwaAuth && _this.pwaAuth.toString().toLowerCase()=="true")
                 {
                     console.log("ADD PWAAUTH");
                     _this.addModule(win.document,"https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js");
