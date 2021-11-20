@@ -1,0 +1,346 @@
+<html style="--primaryColor:#0000FF; --primaryColorText:#F0F0F0;">
+
+<head>
+    <title>Boat Crew</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="fpwa:template"
+        content="pwa=true,name=gcode,short_name=gcode,theme_color=#1818ca,background_color=#1818ca,display=standalone,orientation=any">
+    <meta ref="manifest" href="xxxxx_manifest.json">
+    <link rel="apple-touch-icon" href="###ICONURI###">
+    <link rel="apple-touch-icon-precomposed" href="###ICONURI###">
+    <link rel="icon" href="###ICONURI###">
+    <style>
+        .splash {
+            position: absolute;
+            background-size: 200px;
+            background-image: url(https://gcode.com.au/images/boatcrew/boat-logo.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            color: #F0F0F0;
+            background-color: #1818ca;
+        }
+
+        .loader {
+            font-size: 50px;
+            text-indent: -9999em;
+            overflow: hidden;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            margin: 72px auto;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 0;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+            animation: load6 1.7s infinite ease, round 1.7s infinite ease
+        }
+
+        @-webkit-keyframes load6 {
+            0% {
+                box-shadow: 0 -.83em 0 -.4em, 0 -.83em 0 -.42em, 0 -.83em 0 -.44em, 0 -.83em 0 -.46em, 0 -.83em 0 -.477em
+            }
+
+            5%,
+            95% {
+                box-shadow: 0 -.83em 0 -.4em, 0 -.83em 0 -.42em, 0 -.83em 0 -.44em, 0 -.83em 0 -.46em, 0 -.83em 0 -.477em
+            }
+
+            10%,
+            59% {
+                box-shadow: 0 -.83em 0 -.4em, -.087em -.825em 0 -.42em, -.173em -.812em 0 -.44em, -.256em -.789em 0 -.46em, -.297em -.775em 0 -.477em
+            }
+
+            20% {
+                box-shadow: 0 -.83em 0 -.4em, -.338em -.758em 0 -.42em, -.555em -.617em 0 -.44em, -.671em -.488em 0 -.46em, -.749em -.34em 0 -.477em
+            }
+
+            38% {
+                box-shadow: 0 -.83em 0 -.4em, -.377em -.74em 0 -.42em, -.645em -.522em 0 -.44em, -.775em -.297em 0 -.46em, -.82em -.09em 0 -.477em
+            }
+
+            100% {
+                box-shadow: 0 -.83em 0 -.4em, 0 -.83em 0 -.42em, 0 -.83em 0 -.44em, 0 -.83em 0 -.46em, 0 -.83em 0 -.477em
+            }
+        }
+
+        @keyframes load6 {
+            0% {
+                box-shadow: 0 -.83em 0 -.4em, 0 -.83em 0 -.42em, 0 -.83em 0 -.44em, 0 -.83em 0 -.46em, 0 -.83em 0 -.477em
+            }
+
+            5%,
+            95% {
+                box-shadow: 0 -.83em 0 -.4em, 0 -.83em 0 -.42em, 0 -.83em 0 -.44em, 0 -.83em 0 -.46em, 0 -.83em 0 -.477em
+            }
+
+            10%,
+            59% {
+                box-shadow: 0 -.83em 0 -.4em, -.087em -.825em 0 -.42em, -.173em -.812em 0 -.44em, -.256em -.789em 0 -.46em, -.297em -.775em 0 -.477em
+            }
+
+            20% {
+                box-shadow: 0 -.83em 0 -.4em, -.338em -.758em 0 -.42em, -.555em -.617em 0 -.44em, -.671em -.488em 0 -.46em, -.749em -.34em 0 -.477em
+            }
+
+            38% {
+                box-shadow: 0 -.83em 0 -.4em, -.377em -.74em 0 -.42em, -.645em -.522em 0 -.44em, -.775em -.297em 0 -.46em, -.82em -.09em 0 -.477em
+            }
+
+            100% {
+                box-shadow: 0 -.83em 0 -.4em, 0 -.83em 0 -.42em, 0 -.83em 0 -.44em, 0 -.83em 0 -.46em, 0 -.83em 0 -.477em
+            }
+        }
+
+        @-webkit-keyframes round {
+            0% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0)
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes round {
+            0% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0)
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+    <meta name="apple-mobile-web-app-title" content="Boat Crew">
+    <meta name="viewport"
+        content="viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="msapplication-TileColor" content="#0000FF">
+    <meta name="theme-color" content="#0000FF">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
+    <link rel="stylesheet" href="https://gcode.com.au/css/pwa.css">
+    <script>
+        window.PWA = { globals: {} };
+        window.PWA.globals.appName = "gcode";
+        window.PWA.globals.orientation = "any";
+        window.PWA.globals.icon = "https://gcode.com.au/images/boatcrew/boat-logo-blue.png";
+        window.PWA.globals.icon180x180 = "https://gcode.com.au/images/boatcrew/boat-logo-blue.png";
+        window.PWA.globals.splash = "https://gcode.com.au/images/boatcrew/boat-logo.png";
+        window.PWA.globals.splashColor = "#F0F0F0";
+        window.PWA.globals.mockFrame = "iphoneX";
+        window.PWA.globals.splashBackgroundColor = "#1818ca";
+        window.PWA.globals.splashDuration = 2000;
+    </script>
+    <script type="module">
+        /*
+        
+          filename:gcode-ee051e8d604.mjs
+          created: 2021-9-0T17:17:14
+          appName: gcode
+          splash: https://gcode.com.au/images/boatcrew/boat-logo.png
+          icon: https://gcode.com.au/images/boatcrew/boat-logo-blue.png
+          icon180x180: https://gcode.com.au/images/boatcrew/boat-logo-blue.png
+          mockFrame: iphoneX
+          splashBackgroundColor: #1818ca
+          splashDuration: 2000
+          splashSize: 200px
+        
+        */
+        /*---------------------------------------------------------------------------*/
+        import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+        try {
+            Page.clearPages();
+        } catch (e) { }
+        /*---------------------------------------------------------------------------*/
+        class HomePage extends Page {
+            constructor() {
+                super({
+                    "color": "#000000",
+                    "backgroundColor": "#000000",
+                    "backgroundPosition": "center",
+                    "backgroundSize": "cover",
+                    "backgroundRepeat": "no-repeat",
+                    "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
+                    "child": myList
+                });
+            }
+
+        }
+        class SecondPage extends Page {
+            constructor() {
+                super({
+                    "color": "#000000",
+                    "backgroundColor": "#000000",
+                    "navigateBackPage": aHomePage,
+                    "child": myDiv
+                });
+            }
+        }
+        /*---------------------------------------------------------------------------*/
+        var myDiv = new Div({ innerHTML: "url(https://gcode.com.au/html/test.html)" });
+        var myList = new Div({
+            children: [
+                new Div({
+                    backgroundColor: "rgba(255, 255, 255, 0.7)", position: "relative", height: "auto", borderRadius: "10px", padding: "10px", margin: "10px", children: [
+                        new Div({ position: "relative", fontWeight: "bold", innerHTML: "Craig Gorman" }),
+                        new Div({ position: "relative", fontSize: "small", fontStyle: "italic", marginTop: "10px", innerHTML: "hello" }),
+                    ]
+                }),
+                new Div({
+                    backgroundColor: "rgba(255, 255, 255, 0.7)", position: "relative", height: "auto", borderRadius: "10px", padding: "10px", margin: "10px", children: [
+                        new Div({ position: "relative", fontWeight: "bold", innerHTML: "Craig Gorman" }),
+                        new Div({ position: "relative", fontSize: "small", fontStyle: "italic", marginTop: "10px", innerHTML: "hello,dsfg sd fgsdkfdfg ddfg dsfg sdfg sd f g sdfgsdf sdfgsd fgsd fgsdf gsdfg sfk g dsfgksdfgsdf. dsfg. dsfg .sdfg dsfggsdfhg sdfgh .dfgh dfghdfgh dfgh.dfg hdfg.hdfgh" }),
+                    ]
+                }),
+                new Div({
+                    backgroundColor: "rgba(255, 255, 255, 0.7)", position: "relative", height: "auto", borderRadius: "10px", padding: "10px", margin: "10px", children: [
+                        new Div({ position: "relative", fontWeight: "bold", innerHTML: "Craig Gorman" }),
+                        new Div({ position: "relative", fontSize: "small", fontStyle: "italic", marginTop: "10px", innerHTML: "hello" }),
+                    ]
+                }),
+                new Div({
+                    backgroundColor: "rgba(255, 255, 255, 0.7)", position: "relative", height: "auto", borderRadius: "10px", padding: "10px", margin: "10px", children: [
+                        new Div({ position: "relative", fontWeight: "bold", innerHTML: "Craig Gorman" }),
+                        new Div({ position: "relative", fontSize: "small", fontStyle: "italic", marginTop: "10px", innerHTML: "hello" }),
+                    ]
+                }),
+                new Div({ tagName: "pwa-auth", backgroundColor: "rgba(255, 255, 255, 0.7)", position: "relative", height: "auto", borderRadius: "10px", margin: "10px", facebookkey: "1212913799236084", innerHTML: "login" })
+            ]
+        });
+        var aHomePage = new HomePage();
+        var aSecondPage = new SecondPage();
+        var aPWA = new PWA({
+            "title": "Boat Crew",
+            "footer": "https://www.gormantec.com",
+            "primaryColor": "#0000FF",
+            "pwaAuth": "true"
+        });
+        aPWA.floatingActionButton.onclick(function () {
+            aPWA.setPage(aSecondPage);
+        });
+        aPWA.setPage(aHomePage);
+        aPWA.show();//changed
+    /*---------------------------------------------------------------------------*/
+
+    </script>
+    <script type="module">
+        window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId) => { window.top.postMessage('{"event":"pageChange","data":{"pageId":"' + pageId + '"}}', '*'); });
+    </script>
+    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js"></script>
+</head>
+
+<body style="zoom: 0.884058; background-color: rgb(33, 33, 33);">
+    <div class="pwadiv mockFrame iphoneX" style="color: rgb(240, 240, 240); background-color: black;">
+        <div class="pwadiv" id="pwaroot" style="inset: 20px;">
+            <header class="pwadiv" id="pwaheader"
+                style="background-color: rgb(0, 0, 255); color: rgb(240, 240, 240); height: 80px; font-size: 24px;">
+                <div class="pwadiv" id="pwaheaderback" style="display: none;"><i
+                        class="material-icons">keyboard_arrow_left</i></div>
+                <div class="pwadiv" id="pwaheadertitle">Boat Crew</div>
+            </header>
+            <div class="pwadiv" id="pwabody">
+                <div class="pwadiv pwapage" id="HomePage"
+                    style="color: rgb(0, 0, 0); background-color: rgb(0, 0, 0); background-position: center center; background-repeat: no-repeat; background-image: url(&quot;https://gcode.com.au/images/boatcrew/bg2664x.png&quot;); background-size: cover;">
+                    <div class="pwadiv">
+                        <div class="pwadiv"
+                            style="border-radius: 10px; padding: 10px; margin: 10px; position: relative; height: auto; top: unset; bottom: unset; background-color: rgba(255, 255, 255, 0.7);">
+                            <div class="pwadiv" style="font-weight: bold; position: relative;">Craig Gorman</div>
+                            <div class="pwadiv"
+                                style="font-size: small; font-style: italic; margin-top: 10px; position: relative;">
+                                hello</div>
+                        </div>
+                        <div class="pwadiv"
+                            style="border-radius: 10px; padding: 10px; margin: 10px; position: relative; height: auto; top: unset; bottom: unset; background-color: rgba(255, 255, 255, 0.7);">
+                            <div class="pwadiv" style="font-weight: bold; position: relative;">Craig Gorman</div>
+                            <div class="pwadiv"
+                                style="font-size: small; font-style: italic; margin-top: 10px; position: relative;">
+                                hello,dsfg sd fgsdkfdfg ddfg dsfg sdfg sd f g sdfgsdf sdfgsd fgsd fgsdf gsdfg sfk g
+                                dsfgksdfgsdf. dsfg. dsfg .sdfg dsfggsdfhg sdfgh .dfgh dfghdfgh dfgh.dfg hdfg.hdfgh</div>
+                        </div>
+                        <div class="pwadiv"
+                            style="border-radius: 10px; padding: 10px; margin: 10px; position: relative; height: auto; top: unset; bottom: unset; background-color: rgba(255, 255, 255, 0.7);">
+                            <div class="pwadiv" style="font-weight: bold; position: relative;">Craig Gorman</div>
+                            <div class="pwadiv"
+                                style="font-size: small; font-style: italic; margin-top: 10px; position: relative;">
+                                hello</div>
+                        </div>
+                        <div class="pwadiv"
+                            style="border-radius: 10px; padding: 10px; margin: 10px; position: relative; height: auto; top: unset; bottom: unset; background-color: rgba(255, 255, 255, 0.7);">
+                            <div class="pwadiv" style="font-weight: bold; position: relative;">Craig Gorman</div>
+                            <div class="pwadiv"
+                                style="font-size: small; font-style: italic; margin-top: 10px; position: relative;">
+                                hello</div>
+                        </div>
+                        <pwa-auth class="pwadiv" facebookkey="1212913799236084" appearance="button"
+                            menuplacement="start"
+                            style="border-radius: 10px; margin: 10px; position: relative; height: auto; top: unset; bottom: unset; background-color: rgba(255, 255, 255, 0.7);">
+                            login</pwa-auth>
+                    </div>
+                </div>
+            </div>
+            <footer class="pwadiv" id="pwafooter" style="background-color: rgb(0, 0, 255); color: rgb(240, 240, 240);">
+                https://www.gormantec.com</footer>
+        </div>
+        <div class="pwadiv" id="pwaoverlay" style="inset: 20px;">
+            <div class="pwadiv" id="alertDialog" style="display: none;">
+                <div class="pwadiv" id="alertDialogBody"
+                    style="border-width: 2px; background-color: rgb(240, 240, 240);">
+                    <div class="pwadiv" id="alertDialogContent"
+                        style="color: black; background-color: rgb(240, 240, 240);"></div>
+                    <div class="pwadiv" id="alertDialogOK"
+                        style="color: rgb(0, 0, 255); bottom: 5px; right: 5px; font-weight: bold; width: 30px; left: unset; height: 20px; top: unset; background-color: rgb(240, 240, 240);">
+                        OK</div>
+                </div>
+            </div>
+            <div class="pwadiv floatingActionButton"
+                style="background-color: rgb(0, 0, 255); color: rgb(240, 240, 240);"><i class="material-icons">add</i>
+            </div>
+            <div
+                style="position:fixed;top:14px;margin-left:-95px;width:190px;left:50%;height:30px;background-color:black;border-bottom-left-radius:20px;border-bottom-right-radius:20px;">
+            </div>
+            <div
+                style="position:fixed;top:22px;margin-left:-30px;width:60px;left:50%;height:5px;background-color:#323232;border-radius:2.5px;">
+            </div>
+            <div
+                style="position:fixed;top:16px;margin-left:-107px;left:50%;width:12px;height:5px;background:none;border-style:solid;border-color:black;border-top-right-radius:12px;height:8px;border-bottom-width:0px;border-left-width:0px;border-right-width:4px;border-top-width:4px">
+            </div>
+            <div
+                style="position:fixed;top:16px;margin-left:91px;left:50%;width:12px;height:5px;background:none;border-style:solid;border-color:black;border-top-left-radius:12px;height:8px;border-bottom-width:0px;border-right-width:0px;border-left-width:4px;border-top-width:4px">
+            </div>
+            <div
+                style="position:fixed;top:20px;margin-left:40px;width:8px;left:50%;height:8px;background-color:#323232;border-radius:4px;">
+            </div>
+            <div id="pwaStatusBarTime"
+                style="position:fixed;top:25px;background-color:none;color:white;width: 50px;left: 10%;height: 20px;text-align: right;font-weight: 900;">
+                11:45</div>
+            <div class="material-icons"
+                style="position:fixed;top:23px;background-color:none;color:white;width:20px;right: 20%;font-size:20px;">
+                signal_cellular_alt</div>
+            <div class="material-icons"
+                style="position:fixed;top:23px;background-color:none;color:white;width:20px;right: 20%;margin-right:-25px;font-size:20px;">
+                wifi</div>
+            <div class="material-icons"
+                style="position:fixed;top:16px;background-color:none;color:white;width:20px;margin-right:-50px;right: 20%;font-size:28px;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg)">
+                battery_charging_full</div>
+        </div>
+    </div>
+</body>
+
+</html>
