@@ -282,7 +282,7 @@ class PWA {
 
                 if(_this.pwaAuth && _this.pwaAuth.toString().toLowerCase()=="true")
                 {
-                    console.log("ADD PWAAUTH");
+                    console.log("ADD PWAAUTH 2");
                     _this.addModule(win.document,"https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js");
                 }
 
