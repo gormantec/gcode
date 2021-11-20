@@ -650,6 +650,8 @@ class AuthButtons extends Div {
         if (params && params.applekey) authButtons.element.setAttribute("applekey", params.applekey);
         if (params && params.appearance) authButtons.element.setAttribute("appearance", params.appearance);
         this.element.style.marginLeft = "50%";
+        let _nextPage=null;
+        if(params && params.nextPage) _nextPage=params.nextPage;
         authButtons.element.addEventListener("signin-completed", ev => {
             const signIn = ev.detail;
             if (signIn.error) {
@@ -657,7 +659,7 @@ class AuthButtons extends Div {
             } else {
                 console.log("logged in");
                 window.PWA.globals.pwaInstances[0].setCredentials(signIn);
-                if(params && params.nextPage)window.PWA.globals.pwaInstances[0].setPage(params.nextPage);
+                if(_nextPage)window.PWA.globals.pwaInstances[0].setPage(_nextPage);
             }
         });
         this.appendChild(authButtons);
