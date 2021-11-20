@@ -5,6 +5,8 @@ window.PWA.globals = window.PWA.globals || {};
 
 var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 
+const myglobals={PWA:null};
+
 class PWA { 
     constructor(params) {
         if (!params) params = [];
@@ -27,6 +29,7 @@ class PWA {
         this.setFloatingActionButton();
         window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
         window.PWA.globals.pwaInstances.push(this);
+        myglobals.PWA=this;
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
@@ -351,6 +354,7 @@ class PWA {
         script.src = url;  // set its src to the provided URL
         document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
     }
+
 }
 
 
@@ -657,8 +661,8 @@ class AuthButtons extends Div {
                 console.error("Sign in failed", signIn.error);
             } else {
                 console.log("logged in");
-                window.PWA.globals.pwaInstances[0].setCredentials(signIn);
-                if(_nextPage)window.PWA.globals.pwaInstances[0].setPage(_nextPage);
+                myglobals.PWA.setCredentials(signIn);
+                if(_nextPage)myglobals.PWA.setPage(_nextPage);
             }
         });
         this.appendChild(authButtons);
