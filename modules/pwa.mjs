@@ -650,16 +650,17 @@ class AuthButtons extends Div {
         if (params && params.applekey) authButtons.element.setAttribute("applekey", params.applekey);
         if (params && params.appearance) authButtons.element.setAttribute("appearance", params.appearance);
         this.element.style.marginLeft = "50%";
-        this.appendChild(authButtons);
-        authButtons.addEventListener("signin-completed", ev => {
+        authButtons.element.addEventListener("signin-completed", ev => {
             const signIn = ev.detail;
             if (signIn.error) {
                 console.error("Sign in failed", signIn.error);
             } else {
+                console.log("logged in");
                 window.PWA.globals.pwaInstances[0].setCredentials(signIn);
                 if(params && params.nextPage)window.PWA.globals.pwaInstances[0].setPage(params.nextPage);
             }
         });
+        this.appendChild(authButtons);
     }
 }
 
