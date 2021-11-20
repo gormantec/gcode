@@ -2,7 +2,6 @@ import { addFrame } from '/modules/iphoneX.mjs';
 
 window.PWA = window.PWA || {};
 window.PWA.globals = window.PWA.globals || {};
-window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
 
 var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 
@@ -26,7 +25,7 @@ class PWA {
         this.setAlert();
         this.setFooter();
         this.setFloatingActionButton();
-        
+        window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
         window.PWA.globals.pwaInstances.push(this);
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
