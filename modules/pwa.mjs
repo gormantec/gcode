@@ -502,6 +502,11 @@ class Div {
         let _this=this.element;
         this.element.addEventListener("pointerout", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);}});
     }
+
+    addEventListener(eventName,eventHandler)
+    {
+        return this.element.addEventListener(eventName,eventHandler);
+    }
     
     showModal() {
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
