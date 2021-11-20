@@ -258,7 +258,7 @@ div.pwapage div.pwadiv{
     background-color: transparent;
     text-decoration: underline;
   }
-
+/*
   @media all and (display-mode: standalone),
          only screen and (orientation: portrait) and (max-height: 667px ) and (min-height: 647px ),
          only screen and (orientation: portrait) and (max-height: 736px ) and (min-height: 716px ),
@@ -273,6 +273,7 @@ div.pwapage div.pwadiv{
         top: 20px;
     }
  }
+ */
 
  @media only screen and (max-height: 768px) {
     body {
