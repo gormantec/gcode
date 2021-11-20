@@ -2,6 +2,7 @@ import { addFrame } from '/modules/iphoneX.mjs';
 
 window.PWA = window.PWA || {};
 window.PWA.globals = window.PWA.globals || {};
+window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
 
 var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 
@@ -25,7 +26,7 @@ class PWA {
         this.setAlert();
         this.setFooter();
         this.setFloatingActionButton();
-        window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
+        
         window.PWA.globals.pwaInstances.push(this);
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
@@ -632,8 +633,8 @@ class Page extends Div {
         pages={};
     }
 }
-
 class AuthButtons extends Div {
+    /** @param {{facebookkey string, googlekey string,microsoftkey string,applekey string,appearance string,nextPage Div}} params */
     constructor(params) {
         super(params);
         var authButtons = new Div({
@@ -656,7 +657,7 @@ class AuthButtons extends Div {
                 console.error("Sign in failed", signIn.error);
             } else {
                 window.PWA.globals.pwaInstances[0].setCredentials(signIn);
-                window.PWA.globals.pwaInstances[0].setPage(aChatPage);
+                if(params && params.nextPage)window.PWA.globals.pwaInstances[0].setPage(params.nextPage);
             }
         });
     }
