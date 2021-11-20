@@ -662,7 +662,10 @@ class AuthButtons extends Div {
             } else {
                 console.log("logged in");
                 myglobals.PWA.setCredentials(signIn);
-                if(_nextPage)myglobals.PWA.setPage(_nextPage);
+                if(_nextPage){
+                    console.log(_nextPage);
+                    myglobals.PWA.setPage(_nextPage);
+                }
             }
         });
         this.appendChild(authButtons);
