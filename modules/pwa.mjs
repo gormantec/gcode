@@ -139,7 +139,9 @@ class PWA {
             this.setNavigateBackPage(aPage.navigateBackPage);
         }
         if(aPage.hideFloatingActionButtonFlag=="true")this.hideFloatingActionButton();
+        else this.showFloatingActionButton();
         if(aPage.hideFooterFlag=="true")this.hideFooter();
+        else this.showFooter();
         
  
         this.pwaBody.setChild({ child: aPage });
