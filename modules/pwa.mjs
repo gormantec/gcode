@@ -411,7 +411,8 @@ class Div {
         if(params && params.facebookkey ) this.element.setAttribute("facebookkey",params.facebookkey);   
         if(params && params.googlekey ) this.element.setAttribute("googlekey",params.googlekey);   
         if(params && params.microsoftkey ) this.element.setAttribute("microsoftkey",params.microsoftkey);   
-        if(params && params.applekey ) this.element.setAttribute("applekey",params.applekey);   
+        if(params && params.applekey ) this.element.setAttribute("applekey",params.applekey);  
+        if(params && params.appearance ) this.element.setAttribute("appearance",params.appearance);   
         if (params && params.marginBottom) this.element.style.marginBottom = params.marginBottom;
         if (params && params.marginLeft) this.element.style.marginLeft = params.marginLeft;
         if (params && params.marginRight) this.element.style.marginTop = params.marginRight;
