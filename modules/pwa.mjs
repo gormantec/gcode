@@ -505,6 +505,7 @@ class Div {
 
     addEventListener(eventName,eventHandler)
     {
+        console.log("addEventListener("+eventName+")");
         return this.element.addEventListener(eventName,eventHandler);
     }
     
