@@ -668,4 +668,4 @@ class AuthButtons extends Div {
 
 
 
-export { PWA, Page, Div };
+export { PWA, Page, Div,AuthButtons };
