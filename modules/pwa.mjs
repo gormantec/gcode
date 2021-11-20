@@ -9,6 +9,7 @@ const myglobals={PWA:null};
 
 class PWA { 
     constructor(params) {
+        console.log("new PWA");
         if (!params) params = [];
         this.pwaAuth= params.pwaAuth || "false";
         this.title = params.title || "Code";
