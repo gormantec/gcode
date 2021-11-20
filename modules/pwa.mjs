@@ -142,6 +142,9 @@ class PWA {
         this.alertPageChangeListener(aPage.pageId);
 
     }
+    setCredentials(credentials){
+        this.credentials=credentials;
+    }
     alertPageChangeListener(pageId)
     {
         for(var listener in this.pageChangeListeners)
@@ -413,11 +416,6 @@ class Div {
         if (params && params.paddingTop) this.element.style.paddingTop = params.paddingTop;
         if (params && params.margin) this.element.style.margin = params.margin
         if (params && params.marginTop) this.element.style.marginTop = params.marginTop;
-        if(params && params.facebookkey ) this.element.setAttribute("facebookkey",params.facebookkey);   
-        if(params && params.googlekey ) this.element.setAttribute("googlekey",params.googlekey);   
-        if(params && params.microsoftkey ) this.element.setAttribute("microsoftkey",params.microsoftkey);   
-        if(params && params.applekey ) this.element.setAttribute("applekey",params.applekey);  
-        if(params && params.appearance ) this.element.setAttribute("appearance",params.appearance);   
         if (params && params.marginBottom) this.element.style.marginBottom = params.marginBottom;
         if (params && params.marginLeft) this.element.style.marginLeft = params.marginLeft;
         if (params && params.marginRight) this.element.style.marginTop = params.marginRight;
@@ -634,6 +632,40 @@ class Page extends Div {
         pages={};
     }
 }
+
+class AuthButtons extends Div {
+    constructor(params) {
+        super(params);
+        var authButtons = new Div({
+            marginLeft: "-100px",
+            bottom: "50px",
+            height: "auto",
+            width: "200px",
+            tagName: "pwa-auth"
+        });
+        if (params && params.facebookkey) authButtons.element.setAttribute("facebookkey", params.facebookkey);
+        if (params && params.googlekey) authButtons.element.setAttribute("googlekey", params.googlekey);
+        if (params && params.microsoftkey) authButtons.element.setAttribute("microsoftkey", params.microsoftkey);
+        if (params && params.applekey) authButtons.element.setAttribute("applekey", params.applekey);
+        if (params && params.appearance) authButtons.element.setAttribute("appearance", params.appearance);
+        this.element.style.marginLeft = "50%";
+        this.appendChild(authButtons);
+        authButtons.addEventListener("signin-completed", ev => {
+            const signIn = ev.detail;
+            if (signIn.error) {
+                console.error("Sign in failed", signIn.error);
+            } else {
+                window.PWA.globals.pwaInstances[0].setCredentials(signIn);
+                window.PWA.globals.pwaInstances[0].setPage(aChatPage);
+            }
+        });
+    }
+}
+
+
+
+
+
 
 
 export { PWA, Page, Div };
