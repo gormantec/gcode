@@ -335,12 +335,12 @@ class PWA {
         this.pwaFooter.style.padding = this.footerPadding + "px";
         this.pwaFooter.style.footerHeight = (this.footerHeight - (2 * this.footerPadding)) + "px";
         //this.pwaBody.style.bottom = 30 + "px";
-        this.pwaBody.style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px"
+        this.pwaBody.style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px";
     }
 
     showHeader() {
         this.pwaHeader.style.display = "";
-        this.pwaBody.style.top = headerHeight + "px";
+        this.pwaBody.style.top = this.headerHeight + "px";
     }
     hideFooter() {
         this.pwaFooter.style.display = "none";
