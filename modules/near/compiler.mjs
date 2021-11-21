@@ -39,7 +39,7 @@ export async function compile(config) {
                     getNearApi.then(({ nearApi }) => {
                         const nearCfg = nearConfig(nearApi);
                         nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
-
+                            /*
                             fetch("https://near.gcode.com.au/", {
                                 method: 'post',
                                 body: JSON.stringify({
@@ -54,7 +54,7 @@ export async function compile(config) {
                                 console.log(data);
                                 resolve({ content: content, response: data.data.data });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
-                            /*
+                            */
                             getAWS.then(({ AWS }) => {
                                 AWS.config.update(awsConfig());
                                 console.log("lambda");
@@ -85,7 +85,7 @@ export async function compile(config) {
                                 });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
 
-                            */
+                            /**/
                         }).catch(e => reject({ code: 500, error: "002:" + e }));
 
                     }).catch(e => reject({ code: 500, error: "003:" + e }));
