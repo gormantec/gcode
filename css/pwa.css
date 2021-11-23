@@ -175,10 +175,10 @@ div.pwapage div.pwadiv{
 }
 #pwaheaderback{
     position: absolute;
-    left: 0px;
+    left: 2px;
     width: 30px;
     right: unset;
-    bottom: 10px;
+    bottom: 5px;
     top: unset;
     height:38px;
     font-weight: 900;
