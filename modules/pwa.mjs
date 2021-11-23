@@ -14,7 +14,7 @@ class PWA {
         this.pwaAuth= params.pwaAuth || "false";
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
-        this.headerHeight = params.headerHeight || 80;
+        this.headerHeight = params.headerHeight || 60;
         this.footerHeight = params.footerHeight || 40;
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
         this.headerFontSize = params.headerFontSize || 24;
