@@ -333,9 +333,9 @@ class PWA {
     showFooter() {
         this.pwaFooter.style.display = "";
         this.pwaFooter.style.padding = this.footerPadding + "px";
-        this.pwaFooter.style.footerHeight = (this.footerHeight - (2 * this.footerPadding)) + "px";
+        this.pwaFooter.style.height = (this.footerHeight - (2 * this.footerPadding)) + "px";
         //this.pwaBody.style.bottom = 30 + "px";
-        this.pwaBody.style.bottom = (this.footerPadding * 2 + this.footerHeight) + "px";
+        this.pwaBody.style.bottom = this.footerHeight + "px";
     }
 
     showHeader() {
