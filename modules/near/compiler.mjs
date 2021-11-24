@@ -70,15 +70,15 @@ export async function compile(config) {
                                     })
                                 }, function (err, data) {
                                     if(err)console.log(err);
-                                    if (data && data.StatusCode == 200) {
+                                    if (data && data.FunctionError!="Unhandled" && data.StatusCode == 200) {
                                         try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
                                         catch(e){console.log("data:"+data);console.log("err:"+err);}
                                         if (err) console.log(err, err.stack); // an error occurred
                                         else console.log(data);           // successful response
                                         resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
                                     }
-                                    else if (data && data.StatusCode!=null) {
-                                        reject({ code: data.StatusCode, error: "000:" + data.Payload });
+                                    else if (data && data.StatusCode!=null ) {
+                                        reject({ code: 502, error: "000:" + data.Payload });
                                     }
                                     else {
                                         reject({ code: 500, error: "000:" +err});
