@@ -77,7 +77,7 @@ export async function compile(config) {
                                         else console.log(data);           // successful response
                                         resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
                                     }
-                                    else if (data && data.StatusCode!=null ) {
+                                    else if (data && data.Payload!=null ) {
                                         reject({ code: 502, error: "000:" + data.Payload });
                                     }
                                     else {
