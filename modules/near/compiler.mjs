@@ -71,7 +71,8 @@ export async function compile(config) {
                                 }, function (err, data) {
                                     if(err)console.log(err);
                                     if (data && data.StatusCode == 200) {
-                                        console.log(JSON.parse(JSON.parse(data.Payload).body).data);
+                                        try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
+                                        catch(e){console.log("data:"+data);console.log("err:"+err);}
                                         if (err) console.log(err, err.stack); // an error occurred
                                         else console.log(data);           // successful response
                                         resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
