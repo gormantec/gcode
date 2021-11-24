@@ -111,12 +111,13 @@ async function doNear(nearApi, config) {
             if (window.wconsole) window.wconsole.log("on network: " + near.connection.networkId);
             if (window.wconsole) window.wconsole.log("using account: " + config.accountId);
             var ct = {};
-            config.methods.forEach(e => {
-                ct[e.type] = ct[e.type] || [];
-                ct[e.type].push(e.method);
-            });
-
-
+            if(config.methods)
+            {
+                config.methods.forEach(e => {
+                    ct[e.type] = ct[e.type] || [];
+                    ct[e.type].push(e.method);
+                });
+            }
             const mycontract = new nearApi.Contract(account, config.contractId, ct);
             if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract.contractId);
             console.log(mycontract.contractId);
