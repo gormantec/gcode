@@ -69,7 +69,8 @@ export async function compile(config) {
                                         assembly: content
                                     })
                                 }, function (err, data) {
-                                    if(err)console.log(err);
+                                    if(err)console.log("Error:"+err);
+                                    console.log(data);
                                     if (data && data.FunctionError!="Unhandled" && data.StatusCode == 200) {
                                         try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
                                         catch(e){console.log("data:"+data);console.log("err:"+err);}
