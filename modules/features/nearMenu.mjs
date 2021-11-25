@@ -61,11 +61,9 @@ export function dialogAction(event) {
         else if (event.value == "test") {
             var data=window.editor.getValue();
             //console.log(data);
-            parsejs(data,(AnnotationReader)=>{
+            parsejs(data,(testcases)=>{
                 console.log("x");
-                console.log(AnnotationReader);
-                console.log("x");
-                console.log(AnnotationReader.getClassAnnotations("Near"));
+                console.log(testcases);
             });
             test({ accountId: accountId, contractId: contractId ,methods:[{method:"setGreeting",type:"changeMethods",parameters:{"message":"hello"},result:""}]});
         }
