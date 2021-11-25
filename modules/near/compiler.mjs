@@ -121,6 +121,7 @@ async function doNear(nearApi, config) {
             const mycontract = new nearApi.Contract(account, config.contractId, ct);
             if (window.wconsole) window.wconsole.log("using mycontract: " + mycontract.contractId);
             console.log(mycontract.contractId);
+            console.log(mycontract);
             const list = config.methods;
             let success = true;
             var doLoop = (i) => {
