@@ -152,6 +152,8 @@ export function parsejs(data,callback)
 {
     var annotationParser = new AnnotationParser();
     annotationParser.parse(data, function(comments) {
+        console.log("comments");
+        console.log(comments);
         callback(new AnnotationReader(comments));
     });
 }
