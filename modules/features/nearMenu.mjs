@@ -58,7 +58,7 @@ export function dialogAction(event) {
             });
         }
         else if (event.value == "test") {
-            test({ accountId: accountId, contractId: contractId ,methods:[{method:"setGreeting",type:"changeMethods",parameters:{"message":"hello"}}]});
+            test({ accountId: accountId, contractId: contractId ,methods:[{method:"setGreeting",type:"changeMethods",parameters:{"message":"hello"},result:""}]});
         }
     }
     else if (event.type == "select" && event.id == "nearDialogSelect") {
