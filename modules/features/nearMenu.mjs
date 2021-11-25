@@ -59,7 +59,9 @@ export function dialogAction(event) {
             });
         }
         else if (event.value == "test") {
-            parsejs(window.editor.getValue(),(AnnotationReader)=>{
+            var data=window.editor.getValue();
+            console.log(data);
+            parsejs(data,(AnnotationReader)=>{
                 console.log("x");
                 console.log(AnnotationReader);
                 console.log("x");
