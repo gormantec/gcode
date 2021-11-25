@@ -61,11 +61,10 @@ export function dialogAction(event) {
         else if (event.value == "test") {
             var data=window.editor.getValue();
             //console.log(data);
-            parsejs(data,(testcases)=>{
-                console.log("x");
-                console.log(testcases);
+            parsejs(data,(testdata)=>{
+                test(testdata);
             });
-            test({ accountId: accountId, contractId: contractId ,methods:[{method:"setGreeting",type:"changeMethods",parameters:{"message":"hello"},result:""}]});
+            
         }
     }
     else if (event.type == "select" && event.id == "nearDialogSelect") {
