@@ -2,6 +2,7 @@
 
 import { login, remove, compile, test } from '/modules/near/index.mjs';
 import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
+import { parsejs } from '../parsejs.mjs';
 
 export const menuMetadata = { "id": "removeNear", "class": "pageLeftToolbarButton", "materialIcon": "https://grants.near.org/Public/Custom/22766/near_icon_wht.png" };
 
@@ -58,6 +59,10 @@ export function dialogAction(event) {
             });
         }
         else if (event.value == "test") {
+            parsejs(window.editor.getValue(),(x)=>{
+                console.log("x");
+                console.log(x);
+            });
             test({ accountId: accountId, contractId: contractId ,methods:[{method:"setGreeting",type:"changeMethods",parameters:{"message":"hello"},result:""}]});
         }
     }
