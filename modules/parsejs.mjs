@@ -98,9 +98,9 @@ AnnotationParser.prototype.parse = function(dataString, callback) {
 AnnotationParser.prototype.matchComments = function(dataString) {
     var regex   = /\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g;
     var matches = [];
-    var match = [];
+    var match = false;
     while (match = this.getMatches(regex, dataString)) {
-        if (match && match.lrngth>0) {
+        if (match) {
             matches.push(match[0].replace(/(\*|[\r\n])/g, ''));
         }
     }
@@ -127,7 +127,7 @@ AnnotationParser.prototype.parseComments = function(comments) {
         var subComments = comments[i].split(';');
         for (var j in subComments) {
             var regex = /@(.*)\((.*)\)/g;
-
+            var match=false;
             while (match = this.getMatches(regex, subComments[j])) {
                 if (match) {
                     var value = (match[2]) ? match[2] : false;

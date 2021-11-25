@@ -60,7 +60,7 @@ export function dialogAction(event) {
         }
         else if (event.value == "test") {
             var data=window.editor.getValue();
-            console.log(data);
+            //console.log(data);
             parsejs(data,(AnnotationReader)=>{
                 console.log("x");
                 console.log(AnnotationReader);
