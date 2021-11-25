@@ -139,7 +139,14 @@ async function doNear(nearApi, config) {
                 mycontract[list[i].method](modP).then((r) => {
                     console.log("loop: " + i);
                     if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
-                    if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
+                    var rgx=list[i].result.replaceAll("{","\\{");
+                    rgx=rgx.replaceAll("}","\\}");
+                    rgx=rgx.replaceAll("(","\\(");
+                    rgx=rgx.replaceAll(")","\\)");
+                    rgx=rgx.replaceAll("[","\\[");
+                    rgx=rgx.replaceAll("]","\\]");
+                    if(r.match(new RegExp(rgx, 'gi'))) window.wconsole.log( "[PASSED]")
+                    else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                     else { window.wconsole.log( "[FAILED]"); success = false; }
                     if ((i + 1) < list.length) doLoop(i + 1);
                     else resolve(success);
