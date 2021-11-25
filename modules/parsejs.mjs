@@ -182,7 +182,8 @@ export function parsejs(data,callback)
             var mKeys=anAnnotationReader.getMethodNames();
             for(var j=0;j<mKeys.length;j++)
             {
-                try { anot = anAnnotationReader.getMethodAnnotations(mKeys[j]); } catch (e) { }
+                var key=mKeys[j];
+                try { anot = anAnnotationReader.getMethodAnnotations(key); } catch (e) { }
                 var parameters = {};
                 var name = "can" + key.toLowerCase;
                 var result = "null";
