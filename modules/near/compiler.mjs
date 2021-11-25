@@ -145,6 +145,8 @@ async function doNear(nearApi, config) {
                     rgx=rgx.replaceAll(")","\\)");
                     rgx=rgx.replaceAll("[","\\[");
                     rgx=rgx.replaceAll("]","\\]");
+                    console.log(rgx);
+                    console.log(r);
                     if(r.match(new RegExp(rgx, 'gi'))) window.wconsole.log( "[PASSED]")
                     else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                     else { window.wconsole.log( "[FAILED]"); success = false; }
