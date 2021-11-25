@@ -142,7 +142,9 @@ async function doNear(nearApi, config) {
                     var rgx=list[i].result;
                     console.log(rgx);
                     console.log(r);
-                    if(rgx.values) window.wconsole.log( "[PASSED*]")
+                    var rrr=null;
+                    try{rrr=JSON.parse(r);}catch(e){}
+                    if(rgx.values && rrr && rrr.values) window.wconsole.log( "[PASSED*]")
                     else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                     else { window.wconsole.log( "[FAILED]"); success = false; }
                     if ((i + 1) < list.length) doLoop(i + 1);
