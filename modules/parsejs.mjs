@@ -172,7 +172,7 @@ export function parsejs(data,callback)
           }
     
           try {
-            var near = anAnnotationReader.getClassAnnotations();
+            var near = anAnnotationReader.getClassAnnotations("Near");
             if (near && near[0].value && near[0].value.accountId) testdata.accountId = near[0].value.accountId;
             if (near && near[0].value && near[0].value.contractId) testdata.contractId = near[0].value.contractId;
           } catch (e) { console.log(e); }
