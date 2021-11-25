@@ -98,9 +98,9 @@ AnnotationParser.prototype.parse = function(dataString, callback) {
 AnnotationParser.prototype.matchComments = function(dataString) {
     var regex   = /\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/g;
     var matches = [];
-
+    var match = [];
     while (match = this.getMatches(regex, dataString)) {
-        if (match) {
+        if (match && match.lrngth>0) {
             matches.push(match[0].replace(/(\*|[\r\n])/g, ''));
         }
     }
