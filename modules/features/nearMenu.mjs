@@ -59,9 +59,11 @@ export function dialogAction(event) {
             });
         }
         else if (event.value == "test") {
-            parsejs(window.editor.getValue(),(x)=>{
+            parsejs(window.editor.getValue(),(AnnotationReader)=>{
                 console.log("x");
-                console.log(x);
+                console.log(AnnotationReader);
+                console.log("x");
+                console.log(AnnotationReader.getClassAnnotations("Near"));
             });
             test({ accountId: accountId, contractId: contractId ,methods:[{method:"setGreeting",type:"changeMethods",parameters:{"message":"hello"},result:""}]});
         }
