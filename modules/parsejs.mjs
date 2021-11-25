@@ -85,6 +85,14 @@ AnnotationReader.prototype.getMethodAnnotations = function(name) {
     return [].concat(this.comments.methods[name]);
 }
 
+AnnotationReader.prototype.getMethodNames = function() {
+    if (!this.comments.methods) {
+        throw new Error('No methods found between the comments');
+    }
+
+    return Object.keys(this.comments.methods);
+}
+
 var AnnotationParser = function() {
 
 }
@@ -169,27 +177,30 @@ export function parsejs(data,callback)
             if (near && near[0].value && near[0].value.contractId) testdata.contractId = near[0].value.contractId;
           } catch (e) { console.log(e); }
     
-          for (const [key, value] of Object.entries(res.instance.exports)) {
+          
             var anot = null;
-    
-            try { anot = anAnnotationReader.getMethodAnnotations(key); } catch (e) { }
-            var parameters = {};
-            var name = "can" + key.toLowerCase;
-            var result = "null";
-            var type = key.substring(0, 3) == "set" ? "changeMethods" : "viewMethods";
-            for (var i = 0; anot && i < anot.length; i++) {
-              if (anot && anot[i].key == "testing" && anot[i].value) {
-                if (anot[i].value.test) parameters = anot[0].value.test;
-                if (anot[i].value.name) name = anot[0].value.name;
-                if (anot[i].value.result) result = anot[0].value.result;
-                if (anot[i].value.type && (anot[0].value.type=="changeMethod" || anot[0].value.type=="changeMethods")) type = "changeMethods";
-                else if (anot[i].value.type && (anot[0].value.type=="viewMethod" || anot[0].value.type=="viewMethods")) type = "viewMethods";
-              }
+            var mKeys=anAnnotationReader.getMethodNames();
+            for(var j=0;j<mKeys.length;j++)
+            {
+                try { anot = anAnnotationReader.getMethodAnnotations(mKeys[j]); } catch (e) { }
+                var parameters = {};
+                var name = "can" + key.toLowerCase;
+                var result = "null";
+                var type = key.substring(0, 3) == "set" ? "changeMethods" : "viewMethods";
+                for (var i = 0; anot && i < anot.length; i++) {
+                if (anot && anot[i].key == "testing" && anot[i].value) {
+                    if (anot[i].value.test) parameters = anot[0].value.test;
+                    if (anot[i].value.name) name = anot[0].value.name;
+                    if (anot[i].value.result) result = anot[0].value.result;
+                    if (anot[i].value.type && (anot[0].value.type=="changeMethod" || anot[0].value.type=="changeMethods")) type = "changeMethods";
+                    else if (anot[i].value.type && (anot[0].value.type=="viewMethod" || anot[0].value.type=="viewMethods")) type = "viewMethods";
+                }
+                }
+                if(anot!=null && key!=null && parameters!=null){
+                testdata.methods.push({ name: name, method: key, type: type, parameters: parameters, result: result });
+                }
             }
-            if(anot!=null && key!=null && parameters!=null){
-              testdata.methods.push({ name: name, method: key, type: type, parameters: parameters, result: result });
-            }
-          }
+          
 
 
         callback(testdata);
