@@ -72,17 +72,26 @@ export async function compile(config) {
                                     if(err)console.log("Error:"+err);
                                     console.log(data);
                                     if (data && data.FunctionError!="Unhandled" && data.StatusCode == 200) {
-                                        try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
-                                        catch(e){console.log("data:"+data);console.log("err:"+err);}
-                                        if (err) console.log(err, err.stack); // an error occurred
-                                        else console.log(data);           // successful response
-                                        resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
+                                        var status="failed";
+                                        try{status=JSON.parse(JSON.parse(data.Payload).body).success}catch(e){}
+                                        if(status!="failed")
+                                        {
+                                            try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
+                                            catch(e){console.log("data:"+data);console.log("err:"+err);}
+                                            if (err) console.log(err, err.stack); // an error occurred
+                                            else console.log(data);           // successful response
+                                            resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
+                                        }
+                                        else{
+                                            reject({ code: 503, error: "001:" + data.Payload });
+                                        }
+
                                     }
                                     else if (data && data.Payload!=null ) {
-                                        reject({ code: 502, error: "000:" + data.Payload });
+                                        reject({ code: 502, error: "002:" + data.Payload });
                                     }
                                     else {
-                                        reject({ code: 500, error: "000:" +err});
+                                        reject({ code: 500, error: "003:" +err});
                                     }
                                 });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
