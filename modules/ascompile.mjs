@@ -1,9 +1,8 @@
 
-import { save, load } from '/modules/gcodeStorage.mjs';
 import { compile, login, test } from '/modules/near/index.mjs';
 import { getScript } from '/modules/getScript.mjs';
 import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
-import { md5 } from '/modules/htmlUtils.mjs';
+import { parsejs } from './parsejs.mjs';
 
 const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
@@ -82,7 +81,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     b64toBlob(x.content, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
-                    test(x.response.testdata).then(()=>{callback(null, {});closeTimer();}).catch((e)=>{callback(e);closeTimer();});
+                    parsejs(data,(testdata)=>{
+                        test(testdata).then(()=>{callback(null, {});closeTimer();}).catch((e)=>{callback(e);closeTimer();});
+                    });
+                    
                 }).catch((e)=>{callback(e);closeTimer();});
             }).catch((e)=>{callback(e);closeTimer();});
         }
