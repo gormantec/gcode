@@ -147,18 +147,27 @@ async function doNear(nearApi, config) {
                 console.log(mycontract[list[i].method]);
                 console.log(typeof mycontract[list[i].method]);
                 mycontract[list[i].method](modP).then((r) => {
-                    console.log("loop: " + i);
-                    if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
-                    var rgx=list[i].result;
-                    console.log(rgx);
-                    console.log(r);
-                    var rrr=null;
-                    try{rrr=JSON.parse(r);}catch(e){}
-                    if(rgx.values && rrr && rrr.values) window.wconsole.log( "[PASSED*]")
-                    else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
-                    else { window.wconsole.log( "[FAILED]"); success = false; }
-                    if ((i + 1) < list.length) doLoop(i + 1);
-                    else resolve(success);
+                    try{
+                        console.log("loop: " + i);
+                        if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
+                        var rgx=list[i].result;
+                        console.log(rgx);
+                        console.log(r);
+                        var rrr=null;
+                        try{rrr=JSON.parse(r);}catch(e){}
+                        if(rgx.values && rrr && rrr.values) window.wconsole.log( "[PASSED*]")
+                        else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
+                        else { window.wconsole.log( "[FAILED]"); success = false; }
+                        if ((i + 1) < list.length) doLoop(i + 1);
+                        else resolve(success);
+                    }
+                    catch(e)
+                    {
+                        console.log(e);
+                        resolve(false);
+                    }
+                }).catch((e)=>{
+                    console.log(e);
                 });
             };
             doLoop(0);
