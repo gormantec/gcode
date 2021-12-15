@@ -143,10 +143,14 @@ async function doNear(nearApi, config) {
                     }
                 }
                 if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(modP) + ')');
-                console.log("mycontract:"+JSON.stringify(mycontract));
+            
                 console.log("mycontract method:"+mycontract[list[i].method]);
                 console.log("mycontract typeof:"+typeof mycontract[list[i].method]);
+
+                console.log("------------");
                 mycontract[list[i].method](modP).then((r) => {
+
+                console.log("------------");
                     try{
                         console.log("loop: " + i);
                         if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
@@ -169,6 +173,7 @@ async function doNear(nearApi, config) {
                 }).catch((e)=>{
                     console.log(e);
                 });
+                console.log("------------");
             };
             doLoop(0);
         });
