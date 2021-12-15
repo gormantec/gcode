@@ -143,9 +143,9 @@ async function doNear(nearApi, config) {
                     }
                 }
                 if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(modP) + ')');
-                console.log(mycontract);
-                console.log(mycontract[list[i].method]);
-                console.log(typeof mycontract[list[i].method]);
+                console.log("mycontract:"+mycontract);
+                console.log("mycontract method:"+mycontract[list[i].method]);
+                console.log("mycontract typeof:"+typeof mycontract[list[i].method]);
                 mycontract[list[i].method](modP).then((r) => {
                     try{
                         console.log("loop: " + i);
