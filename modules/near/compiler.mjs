@@ -73,7 +73,7 @@ export async function compile(config) {
                                     console.log(data);
                                     if (data && data.FunctionError!="Unhandled" && data.StatusCode == 200) {
                                         var status="failed";
-                                        try{status=JSON.parse(JSON.parse(data.Payload).body).success}catch(e){}
+                                        try{status=JSON.parse(JSON.parse(data.Payload).body).status}catch(e){}
                                         if(status!="failed")
                                         {
                                             try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
