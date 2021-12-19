@@ -141,6 +141,7 @@ async function doNear(nearApi, config) {
                     if (modP.hasOwnProperty(key)) {
                         if (typeof modP[key]=="string" && modP[key].startsWith("@Near.") && config[modP[key].substring(6)]) modP[key] = config[modP[key].substring(6)];
                     }
+                    console.log("param:"+key+":"+modP[key]+" ("+(typeof modP[key])+")");
                 }
                 if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(modP) + ')');
             
