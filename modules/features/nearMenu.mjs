@@ -22,11 +22,11 @@ export const dialogMetadata = [
                     { "value": "test", "text": "Test", "selected": true  },
                     { "value": "login", "text": "Login" },
                     { "value": "compile", "text": "Compile" },
-                    { "value": "remove", "text": "Remove"},
+                    { "value": "remove", "text": "Remove"}
                 ]
             },
         ],
-        "ok": { "value": "remove" }
+        "ok": { "value": "test" }
     },
     {
         "id": "nearDialogTimer",
@@ -42,7 +42,11 @@ export function dialogAction(event) {
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
 
         if (event.value == "remove") {
-            remove({ accountId: accountId, contractId: contractId }).catch(e => console.log(e));
+            if(confirm("Remove Account?"))
+            {
+                remove({ accountId: accountId, contractId: contractId }).catch(e => console.log(e));
+            }
+            
         }
         else if (event.value == "login") {
 
