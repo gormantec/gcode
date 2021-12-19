@@ -143,6 +143,7 @@ async function doNear(nearApi, config) {
                     }
                     console.log("param:"+key+":"+modP[key]+" ("+(typeof modP[key])+")");
                 }
+                console.log(list[i].method + '(' + JSON.stringify(modP) + ')');
                 if (window.wconsole) window.wconsole.log(list[i].method + '(' + JSON.stringify(modP) + ')');
             
                 console.log("mycontract method:"+mycontract[list[i].method]);
