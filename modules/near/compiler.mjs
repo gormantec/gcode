@@ -163,6 +163,7 @@ async function doNear(nearApi, config) {
                         console.log(r);
                         var rrr=null;
                         try{rrr=JSON.parse(r);}catch(e){}
+                        console.log(rrr);
                         if(rgx.data && rrr && rrr.data) window.wconsole.log( "[PASSED*]")
                         else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                         else { window.wconsole.log( "[FAILED]"); success = false; }
