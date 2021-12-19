@@ -158,13 +158,13 @@ async function doNear(nearApi, config) {
                         console.log("loop: " + i);
                         if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
                         var rgx=list[i].result;
-                        console.log(rgx);
+                        console.log(JSON.stringify(rgx).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,""));
                         //console.log(rgx.data[0].message);
                         console.log(r);
                         var rrr=null;
                         try{rrr=JSON.parse(r);}catch(e){}
                         console.log(rrr);
-                        if(rgx.data && rrr && rrr.data) window.wconsole.log( "[PASSED*]")
+                        if(rgx.data && rrr && rrr.data && JSON.stringify(rgx).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,"")==JSON.stringify(rrr).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,"")) window.wconsole.log( "[PASSED*]")
                         else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                         else { window.wconsole.log( "[FAILED]"); success = false; }
                         if ((i + 1) < list.length) doLoop(i + 1);
