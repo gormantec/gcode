@@ -159,10 +159,11 @@ async function doNear(nearApi, config) {
                         if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
                         var rgx=list[i].result;
                         console.log(rgx);
+                        console.log(rgx.data.message.toString());
                         console.log(r);
                         var rrr=null;
                         try{rrr=JSON.parse(r);}catch(e){}
-                        if(rgx.values && rrr && rrr.values) window.wconsole.log( "[PASSED*]")
+                        if(rgx.data && rrr && rrr.data && rrr.data.message==rgx.data.message) window.wconsole.log( "[PASSED*]")
                         else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                         else { window.wconsole.log( "[FAILED]"); success = false; }
                         if ((i + 1) < list.length) doLoop(i + 1);
