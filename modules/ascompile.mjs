@@ -3,6 +3,7 @@ import { compile, login, test } from '/modules/near/index.mjs';
 import { getScript } from '/modules/getScript.mjs';
 import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
 import { parsejs } from './parsejs.mjs';
+import { load } from '/modules/gcodeStorage.mjs';
 
 const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
