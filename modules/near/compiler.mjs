@@ -84,7 +84,7 @@ export async function compile(config) {
                                             resolve({ content: content, response: JSON.parse(data.Payload).body.data });
                                         }
                                         else{
-                                            console.log("Failed");
+                                            console.log("Failed:001");
                                             var errorJson="???";
                                             try{errorJson=JSON.parse(data.Payload).success}catch(e){}
                                             reject({ code: 503, error: "001:" + errorJson });
@@ -92,13 +92,16 @@ export async function compile(config) {
 
                                     }
                                     else if (data && data.Payload!=null ) {
+                                        console.log("Failed:002");
                                         reject({ code: 502, error: "002:" + data.Payload });
                                     }
                                     else if (data && data.Payload!=null ) {
-                                        reject({ code: 502, error: "002:" + data.Payload });
+                                        console.log("Failed:003");
+                                        reject({ code: 502, error: "0023" + data.Payload });
                                     }
                                     else {
-                                        reject({ code: 500, error: "003:" +err});
+                                        console.log("Failed:004");
+                                        reject({ code: 500, error: "004:" +err});
                                     }
                                 });
                             }).catch(e => reject({ code: 500, error: "001:" + e }));
