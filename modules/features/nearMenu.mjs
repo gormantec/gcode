@@ -4,6 +4,8 @@ import { login, remove, compile, test } from '/modules/near/index.mjs';
 import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
 import { parsejs } from '../parsejs.mjs';
 
+import { save, load } from '/modules/gcodeStorage.mjs';
+
 export const menuMetadata = { "id": "removeNear", "class": "pageLeftToolbarButton", "materialIcon": "https://grants.near.org/Public/Custom/22766/near_icon_wht.png" };
 
 export function menuAction() {
@@ -40,6 +42,7 @@ export function dialogAction(event) {
         var sourceCode = window.editor.getValue();
         var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
+        let slib=load("nearDate.lib.ts");
 
         if (event.value == "remove") {
             if(confirm("Remove Account?"))
@@ -55,7 +58,7 @@ export function dialogAction(event) {
         else if (event.value == "compile") {
             login({ accountId: accountId, contractId: contractId }).then(() => {
 
-                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" }]).then((x) => {
+                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },{ name: "assembly/lib/nearDate.lib.ts", data: slib, type: "string" }]).then((x) => {
                     b64toBlob(x, 'application/zip').then(blob => {
                         createDownload("assembly.zip", blob, { type: 'application/zip' });
                     });
