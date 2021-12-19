@@ -83,9 +83,14 @@ export async function compile(config) {
                                             resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
                                         }
                                         else{
-                                            reject({ code: 503, error: "001:" + data.Payload });
+                                            var errorJson="???";
+                                            try{errorJson=JSON.parse(data.Payload).success}catch(e){}
+                                            reject({ code: 503, error: "001:" + errorJson });
                                         }
 
+                                    }
+                                    else if (data && data.Payload!=null ) {
+                                        reject({ code: 502, error: "002:" + data.Payload });
                                     }
                                     else if (data && data.Payload!=null ) {
                                         reject({ code: 502, error: "002:" + data.Payload });
