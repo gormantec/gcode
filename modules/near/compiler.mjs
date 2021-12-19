@@ -73,16 +73,18 @@ export async function compile(config) {
                                     console.log(data);
                                     if (data && data.FunctionError!="Unhandled" && data.StatusCode == 200) {
                                         var status="failed";
-                                        try{status=JSON.parse(JSON.parse(data.Payload).body).status}catch(e){}
+                                        try{status=JSON.parse(data.Payload).body.status}catch(e){}
                                         if(status!="failed")
                                         {
-                                            try{console.log(JSON.parse(JSON.parse(data.Payload).body).data);}
+                                            console.log("Success");
+                                            try{console.log(JSON.parse(data.Payload).body.data);}
                                             catch(e){console.log("data:"+data);console.log("err:"+err);}
                                             if (err) console.log(err, err.stack); // an error occurred
                                             else console.log(data);           // successful response
-                                            resolve({ content: content, response: JSON.parse(JSON.parse(data.Payload).body).data });
+                                            resolve({ content: content, response: JSON.parse(data.Payload).body.data });
                                         }
                                         else{
+                                            console.log("Failed");
                                             var errorJson="???";
                                             try{errorJson=JSON.parse(data.Payload).success}catch(e){}
                                             reject({ code: 503, error: "001:" + errorJson });
