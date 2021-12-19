@@ -159,7 +159,7 @@ async function doNear(nearApi, config) {
                         if (window.wconsole) window.wconsole.log(list[i].method + "( result = " + r + " )");
                         var rgx=list[i].result;
                         console.log(rgx);
-                        console.log(rgx.data.message);
+                        console.log(rgx.data[0].message);
                         console.log(r);
                         var rrr=null;
                         try{rrr=JSON.parse(r);}catch(e){}
