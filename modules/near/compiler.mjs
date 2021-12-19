@@ -112,7 +112,7 @@ export async function compile(config) {
 
                     }).catch(e => reject({ code: 500, error: "003:" + e }));
                 });
-        }).catch(e => reject({ code: 500, error: "004:" + e }));
+        }).catch(e => reject({ code: 500, error: "005:" + e }));
     });
 }
 

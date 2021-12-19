@@ -71,10 +71,11 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "80%"; }, 70000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "85%"; }, 75000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "90%"; }, 80000);
+                let slib=load("nearDate.lib.ts");
                 compile({
                     accountId: accountId,
                     contractId: contractId,
-                    filesArray: [{ name: "assembly/index.ts", data: sourceCode, type: "string" }]
+                    filesArray: [{ name: "assembly/index.ts", data: sourceCode, type: "string" },{ name: "assembly/lib/nearDate.lib.ts", data: slib, type: "string" }]
                 }).then((x) => {
 
                     document.querySelector("#nearDialogTimerValue").style.width = "95%";
