@@ -364,10 +364,10 @@ function _runCode() {
                     window.debug.log("open window");
                     win.location.href = uri + frame;
 
-                    var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\".*?\.testnet\"/gi);
+                    var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi);
                     if(accountIdList && accountIdList.length>0)
                     {
-                        var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"(.*?\.testnet)\"/gi,"$1");
+                        var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi,"$1");
                         import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
                             const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
                             getNearApi.then(({ nearApi }) => {
