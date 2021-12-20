@@ -369,13 +369,13 @@ function _runCode() {
                     if(accountIdList && accountIdList.length>0)
                     {
                         var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi,"$1");
-                        import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
-                            const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
-                            getNearApi.then(({ nearApi }) => {
-                                const nearCfg = nearConfig(nearApi);
-                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
-                                    const lll = function (e) {
-                                        console.log("Received Post: " + e.origin);
+                        import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {errorline=372;
+                            const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);errorline=373;
+                            getNearApi.then(({ nearApi }) => {errorline=374;
+                                const nearCfg = nearConfig(nearApi);errorline=375;
+                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;
+                                    const lll = function (e) {errorline=377;
+                                        console.log("Received Post: " + e.origin);errorline=378;
                                         if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
                                         console.log("Send Post to: " + uri);
                                         win.postMessage({ accountId: accountId, key: key.toString() }, uri);
