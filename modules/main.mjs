@@ -374,15 +374,18 @@ function _runCode() {
                             getNearApi.then(({ nearApi }) => {errorline=374;
                                 const nearCfg = nearConfig(nearApi);errorline=375;console.log("get key:"+accountId);
                                 nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;console.log("key="+key);
-                                    const lll = function (e) {errorline=377;
-                                        console.log("Received Post: " + e.origin);errorline=378;
-                                        if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
-                                        console.log("Send Post to: " + uri);
-                                        win.postMessage({ accountId: accountId, key: key.toString() }, uri);
-                                        window.removeEventListener("message", lll);
-                                        console.log("Send Post");
-                                    };
-                                    window.addEventListener("message", lll, false);
+                                    if(key)
+                                    {
+                                        const lll = function (e) {errorline=377;
+                                            console.log("Received Post: " + e.origin);errorline=378;
+                                            if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
+                                            console.log("Send Post to: " + uri);
+                                            win.postMessage({ accountId: accountId, key: key.toString() }, uri);
+                                            window.removeEventListener("message", lll);
+                                            console.log("Send Post");
+                                        };
+                                        window.addEventListener("message", lll, false);
+                                    }
                                 })
                             })
                         });
