@@ -87,6 +87,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     }
                     
                 }
+                console.log(filesArray);
                 
                 compile({
                     accountId: accountId,
