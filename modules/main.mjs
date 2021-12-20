@@ -363,6 +363,30 @@ function _runCode() {
                 else {
                     window.debug.log("open window");
                     win.location.href = uri + frame;
+
+                    var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\".*?\.testnet\"/gi);
+                    if(accountIdList && accountIdList.length>0)
+                    {
+                        var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"(.*?\.testnet)\"/gi,"$1");
+                        import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
+                            const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
+                            getNearApi.then(({ nearApi }) => {
+                                const nearCfg = nearConfig(nearApi);
+                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
+                                    const lll = function (e) {
+                                        console.log("Received Post: " + e.origin);
+                                        if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
+                                        console.log("Send Post to: " + uri);
+                                        win.postMessage({ accountId: accountId, key: key.toString() }, uri);
+                                        window.removeEventListener("message", lll);
+                                        console.log("Send Post");
+                                    };
+                                    window.addEventListener("message", lll, false);
+                                })
+                            })
+                        });
+                    }
+
                 }
 
             });
