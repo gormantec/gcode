@@ -171,8 +171,8 @@ async function doNear(nearApi, config) {
                         var rgx=list[i].result;
                         var rrr=null;
                         try{rrr=JSON.parse(r);}catch(e){}
-                        console.log(JSON.stringify(rgx).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,""));
-                        console.log(JSON.stringify(rrr).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,""));
+                        console.log("rgx:"+JSON.stringify(rgx).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,""));
+                        console.log("rrr:"+JSON.stringify(rrr).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,""));
                         if(rgx.data && rrr && rrr.data && JSON.stringify(rgx).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,"")==JSON.stringify(rrr).replace(/\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/g,"")) window.wconsole.log( "[PASSED*]")
                         else if (list[i].result == r || list[i].result == ("" + r + "") || (list[i].result == "null" && r == "") || list[i].result == r.trim()) window.wconsole.log( "[PASSED]")
                         else { window.wconsole.log( "[FAILED]"); success = false; }
