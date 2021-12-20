@@ -157,6 +157,17 @@ export function createHtml(code) {
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
     rootHead.appendChild(_script);
 
+    const accountId = d.testdata.accountId;
+    var jApp =  'import { addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
+                'if (window.opener && window.opener !== window) {\n'+
+                '    window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
+                '    window.addEventListener("load", (event) => {window.opener.postMessage("loaded","https://gcode.com.au");});\n'+
+                '}\n';
+    var _module = window.document.createElement("script");
+    _module.setAttribute("type", "module");
+    _module.text = "\n" + jApp + "\n";
+    rootHead.appendChild(_module);
+
     return {"rootHTML":rootHTML,"splashBackgroundColor":splashBackgroundColor,"splash":splash,"mockFrame":mockFrame};
 }
 
