@@ -1,7 +1,7 @@
 /* Feature Name: Help Menu */
 
 import { login, remove, compile, test } from '/modules/near/index.mjs';
-import { createDownload,b64toBlob } from '/modules/createDownload.mjs';
+import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
 import { parsejs } from '../parsejs.mjs';
 
 import { save, load } from '/modules/gcodeStorage.mjs';
@@ -21,10 +21,10 @@ export const dialogMetadata = [
             { "id": "nearDialogName", "type": "input/text", "label": "Account:", value: "xxxxxx", readonly: "readonly" },
             {
                 "id": "nearDialogSelect", "type": "select", "label": "Action:", "options": [
-                    { "value": "test", "text": "Test", "selected": true  },
+                    { "value": "test", "text": "Test", "selected": true },
                     { "value": "login", "text": "Login" },
                     { "value": "compile", "text": "Compile" },
-                    { "value": "remove", "text": "Remove"}
+                    { "value": "remove", "text": "Remove" }
                 ]
             },
         ],
@@ -42,36 +42,46 @@ export function dialogAction(event) {
         var sourceCode = window.editor.getValue();
         var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-        let slib=load("nearDate.lib.ts");
+        let slib = load("nearDate.lib.ts");
 
         if (event.value == "remove") {
-            if(confirm("Remove Account?"))
-            {
+            if (confirm("Remove Account?")) {
                 remove({ accountId: accountId, contractId: contractId }).catch(e => console.log(e));
             }
-            
+
         }
         else if (event.value == "login") {
 
             login({ accountId: accountId, contractId: contractId }).catch(e => console.log(e));
         }
         else if (event.value == "compile") {
-            login({ accountId: accountId, contractId: contractId }).then(() => {
 
-                compile([{ name: "assembly/index.ts", data: sourceCode, type: "string" },{ name: "assembly/lib/nearDate.lib.ts", data: slib, type: "string" }]).then((x) => {
-                    b64toBlob(x, 'application/zip').then(blob => {
-                        createDownload("assembly.zip", blob, { type: 'application/zip' });
-                    });
+            var filename = document.getElementById("filename").innerText;
+
+            if (filename.endsWith(".dapp.ts")) {
+                import('/modules/ascompile.mjs').then(({ run }) => {
+                    run(
+                        window.editor.getValue(),
+                        filename,
+                        filename,
+                        "optimized.wasm",
+                        true,
+                        (e, d) => {
+                            if(e)console.log("error:"+e);
+                            if(d)console.log("data:"+d);
+                        });
                 });
-            });
+            }
+
+
         }
         else if (event.value == "test") {
-            var data=window.editor.getValue();
+            var data = window.editor.getValue();
             //console.log(data);
-            parsejs(data,(testdata)=>{
+            parsejs(data, (testdata) => {
                 test(testdata);
             });
-            
+
         }
     }
     else if (event.type == "select" && event.id == "nearDialogSelect") {
@@ -79,10 +89,9 @@ export function dialogAction(event) {
     }
 }
 
-export function afterLoad()
-{
+export function afterLoad() {
     var sourceCode = window.editor.getValue();
     var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
     var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-    document.getElementById("nearDialogName").value=accountId;
+    document.getElementById("nearDialogName").value = accountId;
 }
