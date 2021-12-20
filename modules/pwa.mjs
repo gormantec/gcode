@@ -430,6 +430,7 @@ class Div {
         if (params && params.lineHeight) this.element.style.lineHeight = params.lineHeight;
         if (params && params.position) this.element.style.position = params.position;
         if (params && params.display) this.element.style.display = params.display;
+        if (params && params.contentEditable) this.element.setAttribute("contentEditable",""+(params.contentEditable=="true"));
         if (params && params.onclick) {
             this.onclick(params.onclick);
             this.element.style.cursor = "pointer";
