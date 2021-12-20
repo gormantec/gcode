@@ -85,7 +85,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     {
                         filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
                     }
-                    
+                        
                 }
                 console.log(filesArray);
                 
