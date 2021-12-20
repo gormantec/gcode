@@ -323,19 +323,20 @@ function _runCode() {
     }
     else if (filename.endsWith(".mjs")) {
         window.debug.log(myLogin + "$ launch webApp " + filename + "\n");
+        var errorline=0;
         try {
-            var code = window.editor.getValue();
+            var code = window.editor.getValue(); errorline=328;
             var result = createHtml(code);
             var splashBackgroundColor = result.splashBackgroundColor;
             var splash = result.splash;
             var mockFrame = result.mockFrame;
-            var rootHTML = result.rootHTML;
+            var rootHTML = result.rootHTML; errorline=333;
 
             var _module = window.document.createElement("script");
             _module.setAttribute("type", "module");
             _module.text = "\n" + window.editor.getValue() + "\n";
             rootHTML.querySelector("head").appendChild(_module);
-            var wpos = "top=50,left=50";
+            var wpos = "top=50,left=50";errorline=339;
             var w = 375;
             var h = 896 * 375 / 414; //iphoneX=896/414
             var mockPadding = 40;
@@ -345,26 +346,26 @@ function _runCode() {
                 mockPadding = Math.floor(mockPadding * 0.75);
                 wpos = "top=0,left=0";
             }
-            var wh = "width=" + parseInt(w) + ",height=" + parseInt(h);
+            var wh = "width=" + parseInt(w) + ",height=" + parseInt(h); errorline=349;
             var frame = "";
             if (mockFrame) {
                 wh = "width=" + (w + mockPadding) + ",height=" + (h + mockPadding);
-                frame = "?mockFrame=" + mockFrame;
+                frame = "?mockFrame=" + mockFrame;errorline=353;
             }
             if (!win || win.closed) {
                 win = window.open("", "_blank", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no," + wh + "," + wpos);
                 if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
-                else win.document.body.style.backgroundColor = "black";
+                else win.document.body.style.backgroundColor = "black";errorline=358;
             }
             _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
-                if (error) {
-                    window.debug.log(error);
+                if (error) { errorline=361;
+                    window.debug.log(error); errorline=362;
                 }
                 else {
-                    window.debug.log("open window");
-                    win.location.href = uri + frame;
+                    window.debug.log("open window"); errorline=365;
+                    win.location.href = uri + frame; errorline=366;
 
-                    var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi);
+                    var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi);errorline=368;
                     if(accountIdList && accountIdList.length>0)
                     {
                         var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi,"$1");
@@ -392,7 +393,7 @@ function _runCode() {
             });
         }
         catch (e) {
-            console.error("error:" + e);
+            console.error("error:" + e + "atline="+errorline);
         }
         window.debug.log("\n");
     }
