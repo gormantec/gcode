@@ -415,6 +415,7 @@ class Div {
         if (params && params.left) this.element.style.left = params.left;
         if (params && params.right) this.element.style.right = params.right;
         if (params && params.borderRadius) this.element.style.borderRadius = params.borderRadius;
+        if (params && params.borderColor) this.element.style.borderColor = params.borderColor;
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
         if (params && params.fontStyle) this.element.style.fontStyle = params.fontStyle;
         if (params && params.fontWeight) this.element.style.fontWeight = params.fontWeight;
