@@ -368,7 +368,7 @@ function _runCode() {
                     var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi);errorline=368;
                     if(accountIdList && accountIdList.length>0)
                     {
-                        var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi,"$1");
+                        var accountId=accountIdList[0].replace(/\"*accountId\"*\s*?:\s*?\"([a-zA-Z0-9_-]*?\.)(testnet|mainnet)\"/gi,"$1$2");
                         import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {errorline=372;
                             const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);errorline=373;
                             getNearApi.then(({ nearApi }) => {errorline=374;
