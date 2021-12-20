@@ -74,6 +74,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "90%"; }, 80000);
                 var importsList=sourceCode.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
                 var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
+                console.log(importsList[0]);
                 importsList.foreach(im=>{
                     var fileName=im.replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
                     let slib=load(fileName+".ts");
