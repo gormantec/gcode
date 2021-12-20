@@ -72,11 +72,22 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "80%"; }, 70000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "85%"; }, 75000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "90%"; }, 80000);
-                let slib=load("nearDate.lib.ts");
+                var importsList=sourceCode.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
+                var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
+                importsList.foreach(im=>{
+                    var fileName=im.replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
+                    let slib=load(fileName+".ts");
+                    if(slib && typeof slib=="string" && slib.length()>0)
+                    {
+                        filesArray.push({ name: "assembly/lib"+fileName+".ts", data: slib, type: "string" });
+                    }
+                    
+                })
+                
                 compile({
                     accountId: accountId,
                     contractId: contractId,
-                    filesArray: [{ name: "assembly/index.ts", data: sourceCode, type: "string" },{ name: "assembly/lib/nearDate.lib.ts", data: slib, type: "string" }]
+                    filesArray: filesArray
                 }).then((x) => {
 
                     document.querySelector("#nearDialogTimerValue").style.width = "95%";
