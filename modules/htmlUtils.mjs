@@ -157,7 +157,6 @@ export function createHtml(code) {
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
     rootHead.appendChild(_script);
 
-    const accountId = d.testdata.accountId;
     var jApp =  'import { addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
                 'if (window.opener && window.opener !== window) {\n'+
                 '    window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
