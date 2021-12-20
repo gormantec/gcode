@@ -372,8 +372,8 @@ function _runCode() {
                         import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {errorline=372;
                             const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);errorline=373;
                             getNearApi.then(({ nearApi }) => {errorline=374;
-                                const nearCfg = nearConfig(nearApi);errorline=375;
-                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;
+                                const nearCfg = nearConfig(nearApi);errorline=375;console.log("get key:"+accountId);
+                                nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;console.log("key="+key);
                                     const lll = function (e) {errorline=377;
                                         console.log("Received Post: " + e.origin);errorline=378;
                                         if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
