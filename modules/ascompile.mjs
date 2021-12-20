@@ -83,7 +83,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     let slib=load(fileName+".ts");
                     if(slib && typeof slib=="string" && slib.length>0)
                     {
-                        filesArray.push({ name: "assembly/lib"+fileName+".ts", data: slib, type: "string" });
+                        filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
                     }
                     
                 }
