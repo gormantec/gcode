@@ -82,6 +82,7 @@ export async function login(config) {
 
     return new Promise((resolve, reject) => {
         checkkey(config).then(()=>{
+            console.log("Key exists");
             getNearApi.then(({ nearApi }) => {
                 const nearCfg = nearConfig(nearApi);
                 const near = new nearApi.Near(nearCfg);
