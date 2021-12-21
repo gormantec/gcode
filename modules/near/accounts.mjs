@@ -23,24 +23,22 @@ async function checkkey(config) {
             const nearCfg = nearConfig(nearApi);
             nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
                 console.log("key="+key);
-
-                if(!key && config.userhash )
-                {
-                    const contract = new nearAPI.Contract(config.accountId,"gcode-eea3047988c.testnet",{viewMethods: ["getKey"]});
-                    const response = await contract.getKey({ userhash: config.userhash });
-                    console.log(response);
-                }
-                else if(config.userhash)
-                {
-                    console.log("Storing Key");
-                    const contract = new nearAPI.Contract(config.accountId,"gcode-eea3047988c.testnet",{changeMethods: ["storeKey"]});
-                    const response = await contract.storeKey({ userhash: config.userhash,key:key });
-                    console.log(response);
-                }
-
-
-
-                resolve({ code: 201, message: "valid" });
+                (async () => {
+                    if(!key && config.userhash )
+                    {
+                        const contract = new nearAPI.Contract(config.accountId,"gcode-eea3047988c.testnet",{viewMethods: ["getKey"]});
+                        const response = await contract.getKey({ userhash: config.userhash });
+                        console.log(response);
+                    }
+                    else if(config.userhash)
+                    {
+                        console.log("Storing Key");
+                        const contract = new nearAPI.Contract(config.accountId,"gcode-eea3047988c.testnet",{changeMethods: ["storeKey"]});
+                        const response = await contract.storeKey({ userhash: config.userhash,key:key });
+                        console.log(response);
+                    }
+                    resolve({ code: 201, message: "valid" });
+                })();
             }).catch(e => reject({ code: 500, error: "010:" + e }));
         }).catch(e => reject({ code: 500, error: "011:" + e }));
     });
