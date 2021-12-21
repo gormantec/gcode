@@ -688,7 +688,7 @@ class ActionButton extends Div{
     constructor(params) {
         super(params);
         this.element.className = (this.element.className + " floatingActionButton").trim();
-        this.setChild(new Div({tagName:"span",float:"left",marginLeft:"20px",child:new Div({
+        this.setChild(new Div({tagName:"span",float:"left",position:"relative",child:new Div({
             tagName: "i",
             class: "material-icons",
             classNameOverride: true,
