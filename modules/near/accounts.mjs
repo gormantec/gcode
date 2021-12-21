@@ -26,14 +26,14 @@ async function checkkey(config) {
                 (async () => {
                     if(!key && config.userhash )
                     {
-                        const contract = new nearAPI.Contract(config.accountId,"gcode-eea3047988c.testnet",{viewMethods: ["getKey"]});
+                        const contract = new nearApi.Contract(config.accountId,"gcode-eea3047988c.testnet",{viewMethods: ["getKey"]});
                         const response = await contract.getKey({ userhash: config.userhash });
                         console.log(response);
                     }
                     else if(config.userhash)
                     {
                         console.log("Storing Key");
-                        const contract = new nearAPI.Contract(config.accountId,"gcode-eea3047988c.testnet",{changeMethods: ["storeKey"]});
+                        const contract = new nearApi.Contract(config.accountId,"gcode-eea3047988c.testnet",{changeMethods: ["storeKey"]});
                         const response = await contract.storeKey({ userhash: config.userhash,key:key });
                         console.log(response);
                     }
