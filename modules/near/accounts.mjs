@@ -159,10 +159,7 @@ export async function login(config) {
                     }
                     else {
                         console.log("Contract exists we dont have the key");
-  
-
                         const provider = new nearApi.providers.JsonRpcProvider("https://rpc.testnet.near.org");
-                        
                         (async () => {
                           const rawResult = await provider.query({
                             request_type: "call_function",
@@ -177,12 +174,22 @@ export async function login(config) {
                           console.log("---------");
                           console.log(res);
                           addkey({accountId:config.accountId,key:res});
+                          let valid=await verifySignature(nearCfg);
+                          if(valid)
+                          {
+                            config.code = 201;
+                            config.message = "re-synced";
+                            resolve(config);
+                          }
+                          else{
+                            reject({ code: 409 });
+                          }
                         })();
 
 
 
 
-                        reject({ code: 409 });
+                        
                     }
                 }).catch(e => reject({ code: 500, error: "006:" + e }));
 
