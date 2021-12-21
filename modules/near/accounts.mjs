@@ -127,6 +127,7 @@ export async function login(config) {
                                 config.message = "created";
                                 resolve(config);
 
+                                const errors = (e) => { console.log(e) };
                                 window.setTimeout(function () {
                                     const cfg = { accountId: config.accountId, contractId: "gcode-eea3047988c.testnet", methods: ["setKey"] };
                                     contract(cfg).then((ct) => {
