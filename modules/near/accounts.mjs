@@ -1,6 +1,8 @@
 import { getScript } from '/modules/getScript.mjs';
 import { nearConfig } from './nearConfig.mjs';
 
+
+
 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
 
 var masterKey = "ed25519:Eamzv5vWF3ZA6cFmX9kwLDf6u9UNQz837G5x2798zBi8";
@@ -141,15 +143,27 @@ export async function login(config) {
                     }
                     else {
                         console.log("Contract exists we dont have the key");
-                        const errors = (e) => { console.log(e) };
+  
 
-                        const cfg = { accountId: config.accountId, contractId: "gcode-eea3047988c.testnet", methods: ["getKey"] };
-                        contract(cfg).then((ct) => {
-                            ct.getKey({ accountId: config.accountId }).then((response) => {
-                                console.log("got Key:" + response);
-                                addkey({accountId :config.accountId ,key:response});
-                            }).catch(errors);
-                        }).catch(errors);
+                        const provider = new nearApi.providers.JsonRpcProvider("https://rpc.testnet.near.org");
+                        
+                        (async () => {
+                          const rawResult = await provider.query({
+                            request_type: "call_function",
+                            account_id: "gcode-eea3047988c.testnet",
+                            method_name: "getKey",
+                            args_base64: btoa(JSON.stringify({ accountId: config.accountId })),
+                            finality: "optimistic",
+                          });
+                        
+                          // format result
+                          const res = JSON.parse(Buffer.from(rawResult.result).toString());
+                          console.log("---------");
+                          console.log(res);
+                        })();
+
+
+
 
                         reject({ code: 409 });
                     }
