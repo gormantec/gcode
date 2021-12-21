@@ -126,6 +126,15 @@ export async function login(config) {
                                 config.code = 201;
                                 config.message = "created";
                                 resolve(config);
+
+                                window.setTimeout(function () {
+                                    const cfg = { accountId: config.accountId, contractId: "gcode-eea3047988c.testnet", methods: ["setKey"] };
+                                    contract(cfg).then((ct) => {
+                                        ct.storeKey({ accountId: config.accountId,"key": kp.toString()}).then((response) => {
+                                            console.log("setKey:" + response);
+                                        }).catch(errors);
+                                    }).catch(errors);
+                                }, 2000);
     
                             }).catch(e => reject({ code: 500, error: "005:" + e }));
                         }
