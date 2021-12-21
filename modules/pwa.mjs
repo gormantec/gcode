@@ -436,6 +436,7 @@ class Div {
         if (params && params.inputStep) this.element.setAttribute("step",params.inputStep);
         if (params && params.inputMin) this.element.setAttribute("min",params.inputMin);
         if (params && params.inputMax) this.element.setAttribute("max",params.inputMax);
+        if (params && params.inputValue) this.element.setAttribute("value",params.inputValue);
         if (params && params.contentEditable) this.element.setAttribute("contentEditable",""+(params.contentEditable=="true"));
         if (params && params.onclick) {
             this.onclick(params.onclick);
