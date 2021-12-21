@@ -693,6 +693,10 @@ class ActionButton extends Div{
             classNameOverride: true,
             innerText: "add"
         }));
+        if(params.innerText)
+        {
+            this.appendChild(new Div({innerText:params.innerText}));
+        }
         this.style.backgroundColor = this.primaryColor;
         this.style.color = this.primaryColorText;
     }
