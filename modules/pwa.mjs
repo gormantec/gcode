@@ -680,6 +680,7 @@ class AuthButtons extends Div {
                 console.error("Sign in failed", signIn.error);
             } else {
                 console.log("logged in");
+                console.log(ev);
                 myglobals.PWA.setCredentials(signIn);
                 if(_nextPage){
                     console.log(_nextPage);
