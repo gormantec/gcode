@@ -414,6 +414,7 @@ class Div {
         if (params && params.bottom) this.element.style.bottom = params.bottom;
         if (params && params.left) this.element.style.left = params.left;
         if (params && params.right) this.element.style.right = params.right;
+        if (params && params.float) this.element.style.float = params.float;
         if (params && params.borderRadius) this.element.style.borderRadius = params.borderRadius;
         if (params && params.borderColor) this.element.style.borderColor = params.borderColor;
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
@@ -687,15 +688,15 @@ class ActionButton extends Div{
     constructor(params) {
         super(params);
         this.element.className = (this.element.className + " floatingActionButton").trim();
-        this.setChild(new Div({
+        this.setChild(new Div({tagName:"span",float:"left",marginLeft:"20px",child:new Div({
             tagName: "i",
             class: "material-icons",
             classNameOverride: true,
             innerText: "add"
-        }));
+        })}));
         if(params.innerText)
         {
-            this.appendChild(new Div({innerText:params.innerText}));
+            this.appendChild(new Div({tagName:"span",fontSize:"24px",paddingRight:"50px",float:"right",innerText:params.innerText}));
         }
         this.style.backgroundColor = this.primaryColor;
         this.style.color = this.primaryColorText;
