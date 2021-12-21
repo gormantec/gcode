@@ -587,6 +587,9 @@ class Div {
         if (n1 instanceof Div) n1 = n1.element;
         this.element.removeChild(n1);
     }
+    removeChildren() {
+        this.element.innerHTML='';
+    }
     querySelector(q)
     {
         return this.element.querySelector(q);
