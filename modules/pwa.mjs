@@ -682,7 +682,7 @@ class AuthButtons extends Div {
         this.appendChild(authButtons);
     }
 }
-class FLoatingButton extends Div{
+class ActionButton extends Div{
  
     constructor(params) {
         super(params);
@@ -707,4 +707,4 @@ class FLoatingButton extends Div{
 
 
 
-export { PWA, Page, Div,AuthButtons,FLoatingButton };
+export { PWA, Page, Div,AuthButtons,ActionButton };
