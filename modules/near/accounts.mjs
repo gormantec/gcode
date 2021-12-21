@@ -12,13 +12,15 @@ verifySignature();
 export async function verifySignature(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
-            const keyPair = await nearCfg.keyStore.getKey("testnet", config.accountId);
-            const msg = Buffer.from("hi");
-            const { signature } = keyPair.sign(msg);
-            const isValid = keyPair.verify(msg, signature);
-            console.log("Signature Valid?:", isValid);
-            resolve(isValid);
+            (async () => {
+                const nearCfg = nearConfig(nearApi);
+                const keyPair = await nearCfg.keyStore.getKey("testnet", config.accountId);
+                const msg = Buffer.from("hi");
+                const { signature } = keyPair.sign(msg);
+                const isValid = keyPair.verify(msg, signature);
+                console.log("Signature Valid?:", isValid);
+                resolve(isValid);
+            })();
         }).catch(e=>{reject(e);});
     });
 
