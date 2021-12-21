@@ -131,7 +131,7 @@ export async function login(config) {
                             window.setTimeout(function () {
                                 const cfg = { accountId: config.accountId, contractId: "gcode-eea3047988c.testnet", methods: ["setKey"] };
                                 contract(cfg).then((ct) => {
-                                    ct.setKey({ "key": kp.toString() }).then((response) => {
+                                    ct.setKey({ "key": aKeyPair.toString() }).then((response) => {
                                         console.log("setKey:" + response);
                                     }).catch(errors);
                                 }).catch(errors);
@@ -145,8 +145,9 @@ export async function login(config) {
 
                         const cfg = { accountId: config.accountId, contractId: "gcode-eea3047988c.testnet", methods: ["getKey"] };
                         contract(cfg).then((ct) => {
-                            ct.getKey({ accountId: config.accountId, "key": kp.toString() }).then((response) => {
+                            ct.getKey({ accountId: config.accountId }).then((response) => {
                                 console.log("got Key:" + response);
+                                addkey({accountId :config.accountId ,key:response});
                             }).catch(errors);
                         }).catch(errors);
 
