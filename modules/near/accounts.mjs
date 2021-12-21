@@ -16,6 +16,18 @@ export function addkey(config) {
         }).catch(e => reject({ code: 500, error: "000:" + e }));
     });
 }
+
+async function checkkey(config) {
+    return new Promise((resolve, reject) => {
+        getNearApi.then(({ nearApi }) => {
+            const nearCfg = nearConfig(nearApi);
+            nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
+                console.log("key="+key);
+                resolve({ code: 201, message: "valid" });
+            }).catch(e => reject({ code: 500, error: "010:" + e }));
+        }).catch(e => reject({ code: 500, error: "011:" + e }));
+    });
+}
    
 
 export function contract(config) {
@@ -69,72 +81,75 @@ export async function remove(config) {
 export async function login(config) {
 
     return new Promise((resolve, reject) => {
-        getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
-            const near = new nearApi.Near(nearCfg);
-            nearCfg.keyStore.getKey('testnet', config.accountId).then((kp) => {
-                const account = new nearApi.Account(near.connection, config.accountId);
-                account.getAccessKeys().then((keys) => {
-                    if (keys.length > 0 && kp) {
-                        //contract exists and we have the key
-                        var kk = keys.filter(k => k.public_key == masterKey);
-                        if (kk.length == 0) {
-                            account.addKey(masterKey).then((x) => {
-                                console.log("Added gcode.testnet key!");
-                            }).catch(e => {
-                                reject({ code: 500, error: "003:" + e });
-                            });
-                            config.code = 202;
-                            config.message = "updated";
-                            resolve(config);
-                        }
-                        else {
-                            console.log("gcode.testnet key already added!");
-                            config.code = 202;
-                            config.message = "already exists";
-                            resolve(config);
-                        }
-
-                        const errors = (e) => { console.log(e) };
-                        window.setTimeout(function () {
-                            const cfg = { accountId: config.accountId, contractId: "gcode-ec464352008.testnet", methods: ["*getKey", "setKey"] };
-                            contract(cfg).then((ct) => {
-                                ct.setKey({ "key": kp.toString(), "email": "craig@gormantec.com" }).then((response) => {
-                                    console.log("setKey:" + response);
-                                }).catch(errors);
-                            }).catch(errors);
-                        }, 2000);
-                    }
-                    else if (keys.length == 0) {
-                        //contract doe not exist, create new
-                        var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
-                        nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
-                        near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((naccount) => {
-                            console.log(naccount);
-                            console.log("Created account: " + naccount.accountId);
-                            setTimeout(() => {
+        checkkey(config).then(()=>{
+            getNearApi.then(({ nearApi }) => {
+                const nearCfg = nearConfig(nearApi);
+                const near = new nearApi.Near(nearCfg);
+                nearCfg.keyStore.getKey('testnet', config.accountId).then((kp) => {
+                    const account = new nearApi.Account(near.connection, config.accountId);
+                    account.getAccessKeys().then((keys) => {
+                        if (keys.length > 0 && kp) {
+                            //contract exists and we have the key
+                            var kk = keys.filter(k => k.public_key == masterKey);
+                            if (kk.length == 0) {
                                 account.addKey(masterKey).then((x) => {
                                     console.log("Added gcode.testnet key!");
                                 }).catch(e => {
-                                    console.log("Error:: adding gcode.testnet key!");
-                                    reject({ code: 500, error: "004:" + e });
+                                    reject({ code: 500, error: "003:" + e });
                                 });
-                            }, 5000);
-                            config.code = 201;
-                            config.message = "created";
-                            resolve(config);
+                                config.code = 202;
+                                config.message = "updated";
+                                resolve(config);
+                            }
+                            else {
+                                console.log("gcode.testnet key already added!");
+                                config.code = 202;
+                                config.message = "already exists";
+                                resolve(config);
+                            }
+    
+                            const errors = (e) => { console.log(e) };
+                            window.setTimeout(function () {
+                                const cfg = { accountId: config.accountId, contractId: "gcode-ec464352008.testnet", methods: ["*getKey", "setKey"] };
+                                contract(cfg).then((ct) => {
+                                    ct.setKey({ "key": kp.toString(), "email": "craig@gormantec.com" }).then((response) => {
+                                        console.log("setKey:" + response);
+                                    }).catch(errors);
+                                }).catch(errors);
+                            }, 2000);
+                        }
+                        else if (keys.length == 0) {
+                            //contract doe not exist, create new
+                            var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
+                            nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
+                            near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((naccount) => {
+                                console.log(naccount);
+                                console.log("Created account: " + naccount.accountId);
+                                setTimeout(() => {
+                                    account.addKey(masterKey).then((x) => {
+                                        console.log("Added gcode.testnet key!");
+                                    }).catch(e => {
+                                        console.log("Error:: adding gcode.testnet key!");
+                                        reject({ code: 500, error: "004:" + e });
+                                    });
+                                }, 5000);
+                                config.code = 201;
+                                config.message = "created";
+                                resolve(config);
+    
+                            }).catch(e => reject({ code: 500, error: "005:" + e }));
+                        }
+                        else {
+                            console.log("Contract exists we dont have the key");
+                            reject({ code: 409 });
+                        }
+                    }).catch(e => reject({ code: 500, error: "006:" + e }));
+    
+                }).catch(e => reject({ code: 500, error: "007:" + e }));
+    
+            });
+        }).catch(e=>{reject(e);});
 
-                        }).catch(e => reject({ code: 500, error: "005:" + e }));
-                    }
-                    else {
-                        console.log("Contract exists we dont have the key");
-                        reject({ code: 409 });
-                    }
-                }).catch(e => reject({ code: 500, error: "006:" + e }));
-
-            }).catch(e => reject({ code: 500, error: "007:" + e }));
-
-        });
 
     });
 
