@@ -682,11 +682,29 @@ class AuthButtons extends Div {
         this.appendChild(authButtons);
     }
 }
+class FLoatingButton extends Div{
+ 
+    constructor(params) {
+        super(params);
+        this.element.className = (this.element.className + " floatingActionButton").trim();
+        this.setChild(new Div({
+            tagName: "i",
+            class: "material-icons",
+            classNameOverride: true,
+            innerText: "add"
+        }));
+        this.style.backgroundColor = this.primaryColor;
+        this.style.color = this.primaryColorText;
+    }
+
+
+
+
+}
 
 
 
 
 
 
-
-export { PWA, Page, Div,AuthButtons };
+export { PWA, Page, Div,AuthButtons,FLoatingButton };
