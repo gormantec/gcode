@@ -160,6 +160,7 @@ export async function login(config) {
                           const res = JSON.parse(Buffer.from(rawResult.result).toString());
                           console.log("---------");
                           console.log(res);
+                          addkey({accountId:config.accountId,key:res});
                         })();
 
 
