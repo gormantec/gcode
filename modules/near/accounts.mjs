@@ -9,6 +9,7 @@ var masterKey = "ed25519:Eamzv5vWF3ZA6cFmX9kwLDf6u9UNQz837G5x2798zBi8";
 
 
 export async function verifySignature(config) {
+    console.log(config);
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
             (async () => {
