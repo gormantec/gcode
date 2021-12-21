@@ -696,10 +696,6 @@ class ActionButton extends Div{
         this.style.backgroundColor = this.primaryColor;
         this.style.color = this.primaryColorText;
     }
-
-
-
-
 }
 
 
