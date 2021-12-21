@@ -157,7 +157,13 @@ class PWA {
     {
         for(var listener in this.pageChangeListeners)
         {
-            this.pageChangeListeners[listener](pageId);
+            try{
+                this.pageChangeListeners[listener](pageId);
+            }
+            catch(e)
+            {
+                console.log(e);
+            }
         }
     }
 
