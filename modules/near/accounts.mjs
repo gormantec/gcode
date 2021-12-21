@@ -17,32 +17,7 @@ export function addkey(config) {
     });
 }
 
-async function checkkey(config) {
-    return new Promise((resolve, reject) => {
-        getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
-            nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
-                console.log("key="+key);
-                (async () => {
-                    if(!key && config.userhash )
-                    {
-                        const contract = new nearApi.Contract(config.accountId,"gcode-eea3047988c.testnet",{viewMethods: ["getKey"]});
-                        const response = await contract.getKey({ userhash: config.userhash });
-                        console.log(response);
-                    }
-                    else if(config.userhash)
-                    {
-                        console.log("Storing Key");
-                        const contract = new nearApi.Contract(config.accountId,"gcode-eea3047988c.testnet",{changeMethods: ["storeKey"]});
-                        const response = await contract.storeKey({ userhash: config.userhash,key:key });
-                        console.log(response);
-                    }
-                    resolve({ code: 201, message: "valid" });
-                })();
-            }).catch(e => reject({ code: 500, error: "010:" + e }));
-        }).catch(e => reject({ code: 500, error: "011:" + e }));
-    });
-}
+
    
 
 export function contract(config) {
@@ -96,8 +71,7 @@ export async function remove(config) {
 export async function login(config) {
 
     return new Promise((resolve, reject) => {
-        checkkey(config).then(()=>{
-            console.log("Key exists");
+
             getNearApi.then(({ nearApi }) => {
                 const nearCfg = nearConfig(nearApi);
                 const near = new nearApi.Near(nearCfg);
@@ -164,8 +138,6 @@ export async function login(config) {
                 }).catch(e => reject({ code: 500, error: "007:" + e }));
     
             });
-        }).catch(e=>{reject(e);});
-
 
     });
 
