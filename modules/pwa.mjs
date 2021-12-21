@@ -150,6 +150,8 @@ class PWA {
     }
     setCredentials(credentials){
         this.credentials=credentials;
+        this.userhash=credentials.provider+":"+credentials.providerData.user.id;
+        this.setAlert(this.userhash);
     }
     alertPageChangeListener(pageId)
     {
