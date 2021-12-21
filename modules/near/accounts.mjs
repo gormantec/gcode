@@ -13,8 +13,7 @@ export async function verifySignature(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
             (async () => {
-                const nearCfg = nearConfig(nearApi);
-                const keyPair = await nearCfg.keyStore.getKey("testnet", config.accountId);
+                const keyPair = await config.keyStore.getKey("testnet", config.accountId);
                 const msg = Buffer.from("hi");
                 const { signature } = keyPair.sign(msg);
                 const isValid = keyPair.verify(msg, signature);
@@ -176,7 +175,7 @@ export async function login(config) {
                           console.log("---------");
                           console.log(res);
                           await addkey({accountId:config.accountId,key:res});
-                          let valid=await verifySignature(nearCfg);
+                          let valid=await verifySignature({accountId:config.accountId,key:res,keyStore:nearCfg.keyStore});
                           if(valid)
                           {
                             config.code = 201;
