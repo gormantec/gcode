@@ -433,6 +433,9 @@ class Div {
         if (params && params.position) this.element.style.position = params.position;
         if (params && params.display) this.element.style.display = params.display;
         if (params && params.inputType) this.element.setAttribute("type",params.inputType);
+        if (params && params.inputStep) this.element.setAttribute("step",params.inputStep);
+        if (params && params.inputMin) this.element.setAttribute("min",params.inputMin);
+        if (params && params.inputMax) this.element.setAttribute("max",params.inputMax);
         if (params && params.contentEditable) this.element.setAttribute("contentEditable",""+(params.contentEditable=="true"));
         if (params && params.onclick) {
             this.onclick(params.onclick);
