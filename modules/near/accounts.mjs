@@ -20,7 +20,7 @@ export async function verifySignature(config) {
                 const isValid = keyPair.verify(msg, signature);
                 console.log("Signature Valid?:", isValid);
                 resolve(isValid);
-            })();
+            })().catch(e=>{reject(e);});
         }).catch(e=>{reject(e);});
     });
 
