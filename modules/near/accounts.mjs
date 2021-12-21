@@ -23,6 +23,16 @@ async function checkkey(config) {
             const nearCfg = nearConfig(nearApi);
             nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
                 console.log("key="+key);
+
+                if(!key && config.userhash )
+                {
+                    const contract = new nearAPI.Contract("gcode-eea3047988c.testnet",{viewMethods: ["getKey"]});
+                    const response = await contract.getKey({ userhash: config.userhash });
+                    console.log(response);
+                }
+
+
+
                 resolve({ code: 201, message: "valid" });
             }).catch(e => reject({ code: 500, error: "010:" + e }));
         }).catch(e => reject({ code: 500, error: "011:" + e }));
