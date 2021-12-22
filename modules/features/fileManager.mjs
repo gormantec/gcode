@@ -418,6 +418,7 @@ function _new(aFilename) {
                         appStuff +
                         "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
                     window.setEditorMode();
+                    var toDiv = document.getElementById("pageLeftBody");
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),
                         function () {
                             var gitParts = githubtree.getGitParts(selectedFileWidget);
