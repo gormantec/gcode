@@ -53,6 +53,7 @@ export function parent(filename)
 
 export function load(filename,asString = false,ageInSec=-1) {
     var result=null;
+    console.log("load:"+filename);
     if(filename.startsWith("git://"))
     {
         var firstColon = element.dataset.name.indexOf(":", 6);
