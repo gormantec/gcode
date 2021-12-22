@@ -149,7 +149,7 @@ export function afterLoad() {
                 document.querySelector("#userIcon").style.backgroundImage = "url('" + resp.data.avatar_url + "')";
                 console.log(resp.data.avatar_url);
                 document.querySelector("#userLoginMaterialIcon").style.display = "none";
-                githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
+                githubtree.cacheRepo({ username: window.myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
         });
     }
@@ -202,8 +202,8 @@ export function toolbarAction(e) {
             githubtree.getAuthenticated().then((resp) => {
                 console.log("gotAuthenticated:");
                 console.log(resp)
-                myLogin = resp.data.login;
-                console.log("myLogin:" + myLogin);
+                window.myLogin = resp.data.login;
+                console.log("myLogin:" + window.myLogin);
                 console.log(resp.data);
                 if (resp.data.login) {
 

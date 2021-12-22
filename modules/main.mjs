@@ -17,7 +17,7 @@ var screenWidth = window.outerWidth || document.documentElement.clientWidth || 0
 if (screenWidth <= 1024) window.leftPageWidth = 300;
 var pageBottomHeight = 150;
 
-var myLogin = "";
+window.myLogin = "";
 var win;
 var xx = "";
 
@@ -133,7 +133,7 @@ function _runCode() {
 
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
-        window.debug.log(myLogin + "$ nodejs " + filename + "\n");
+        window.debug.log(window.myLogin + "$ nodejs " + filename + "\n");
         try {
             var _run = function () {
                 eval(window.editor.getValue());
@@ -143,11 +143,11 @@ function _runCode() {
         catch (e) {
             console.error(e);
         }
-        window.debug.log(myLogin + "$");
+        window.debug.log(window.myLogin + "$");
     }
     else if (filename.endsWith(".dapp.ts")) {
-        window.debug.log(myLogin + "$ echo 'Create dApp'\n");
-        window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
+        window.debug.log(window.myLogin + "$ echo 'Create dApp'\n");
+        window.debug.log(window.myLogin + "$ asc " + filename + " --target release\n");
         import('/modules/ascompile.mjs').then(({ run }) => {
             var code = window.editor.getValue();
             run(
@@ -253,7 +253,7 @@ function _runCode() {
         });
     }
     else if (filename.endsWith(".ts")) {
-        window.debug.log(myLogin + "$ asc " + filename + " --target release\n");
+        window.debug.log(window.myLogin + "$ asc " + filename + " --target release\n");
         import('/modules/ascompile.mjs').then(({ run }) => {
             var code = window.editor.getValue();
             run(
@@ -322,7 +322,7 @@ function _runCode() {
         window.debug.log("\n");
     }
     else if (filename.endsWith(".mjs")) {
-        window.debug.log(myLogin + "$ launch webApp " + filename + "\n");
+        window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
         try {
             var code = window.editor.getValue(); errorline=328;
@@ -402,7 +402,7 @@ function _runCode() {
     }
     else if (filename.endsWith(".py")) {
         try {
-            window.debug.log(myLogin + "$ python " + filename)
+            window.debug.log(window.myLogin + "$ python " + filename)
             Sk.pre = "output";
             Sk.configure({
                 output: consolelog, read: builtinRead
