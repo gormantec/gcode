@@ -241,17 +241,25 @@ export function toolbarAction(e) {
         };
 
         if (githubtree.getToken()) {
+            console.log("doSomething");
             doSomething();
         }
         else {
+            console.log("getCode");
             githubtree.getCode(guid, (e, code) => {
+                console.log("gotCode");
                 if (!e) {
+
+                    console.log("fetch:"+code);
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
                     ).then((json) => {
                         githubtree.setToken(json.data.access_token);
                         doSomething();
                     });
+                }
+                else{
+                    console.log("error:"+e);
                 }
             });
         }
