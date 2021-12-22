@@ -738,7 +738,7 @@ class DivForm extends Div{
                     color: "black"
                 };
                 let inputDiv={
-                    id: "form"+params.formInputs[i].name.substring(0,1).toUpperCase+params.formInputs[i].name.substring(1),
+                    id: "form"+params.formInputs[i].name.substring(0,1).toUpperCase()+params.formInputs[i].name.substring(1),
                     position: "static",
                     display: "inline-block",
                     tagName: params.formInputs[i].type && params.formInputs[i].type!="text"?params.formInputs[i].type:"div",
