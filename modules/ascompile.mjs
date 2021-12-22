@@ -88,7 +88,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         
                         var fileName=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
                         console.log("fileName: "+fileName);
-                        let slib=load(fileName+".ts");
+                        let dir="";
+                        if(editorFilename.lastIndexOf("/")>0)dir=editorFilename.substring(0,editorFilename.lastIndexOf("/")+1);
+                        console.log(dir+fileName+".ts");
+                        let slib=load(dir+fileName+".ts");
                         if(slib && typeof slib=="string" && slib.length>0)
                         {
                             filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
