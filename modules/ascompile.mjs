@@ -80,18 +80,21 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
 
                 console.log("logged in 3");
-                console.log(importsList[0]);
-                for(var i=0;i<importsList.length;i++)
+                if(importsList && importsList.length>0)
                 {
-                    
-                    var fileName=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
-                    console.log("fileName: "+fileName);
-                    let slib=load(fileName+".ts");
-                    if(slib && typeof slib=="string" && slib.length>0)
+                    console.log(importsList[0]);
+                    for(var i=0;i<importsList.length;i++)
                     {
-                        filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
-                    }   
                         
+                        var fileName=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
+                        console.log("fileName: "+fileName);
+                        let slib=load(fileName+".ts");
+                        if(slib && typeof slib=="string" && slib.length>0)
+                        {
+                            filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
+                        }   
+                            
+                    }
                 }
                 console.log(filesArray);
                 
