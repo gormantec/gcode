@@ -561,12 +561,17 @@ class Div {
         this.element.innerHTML = "";
         this.appendChild(params);
     }
+    setParent(parentDiv)
+    {
+        this.parentDiv=parentDiv;
+    }
 
     appendChild(params) {
         //debug.log("appendChild");
         if (!params) return;
         else if (params instanceof Div && params.element instanceof Node) {
             this.element.appendChild(params.element);
+            params.setParent(this);
         }
         else if (params && params.child && params.child.element instanceof HTMLElement) {
             debug.log("appendChildDiv");
