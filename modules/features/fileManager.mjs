@@ -3,7 +3,7 @@
 
 import { htmlToElement, uuidv4 } from '/modules/htmlUtils.mjs';
 import * as githubtree from '/modules/githubtree.mjs';
-import { save,load,remove,listNames } from '/modules/gcodeStorage.mjs';
+import { save, load, remove, listNames } from '/modules/gcodeStorage.mjs';
 
 
 var dirIconOpened = "keyboard_arrow_down";
@@ -38,7 +38,7 @@ export const dialogMetadata = [
                 ]
             },
         ],
-        "ok": {  "value": ".js" }
+        "ok": { "value": ".js" }
     }
 ];
 
@@ -48,13 +48,12 @@ export function menuAction(p) {
 }
 
 export function dialogAction(event) {
-    if ( event.type=="dialog" && event.id=="newFileDialog" && event.value != "cancel") {
+    if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
         _new(event.value);
     }
-    else if(event.type=="select" && event.id=="newFileDialogSelect")
-    {
+    else if (event.type == "select" && event.id == "newFileDialogSelect") {
         var name = "";
-        var nameValue=event.getInputValue("newFileDialogName");
+        var nameValue = event.getInputValue("newFileDialogName");
         if (nameValue.indexOf(".dapp.ts") > 0) {
             name = nameValue.substring(0, nameValue.lastIndexOf(".dapp.ts"));
         }
@@ -64,9 +63,9 @@ export function dialogAction(event) {
         else {
             name = nameValue;
         }
-        name=(name + event.value);
-        event.setInputValue("newFileDialogName",name);
-        event.setInputValue("confirmButton",name);
+        name = (name + event.value);
+        event.setInputValue("newFileDialogName", name);
+        event.setInputValue("confirmButton", name);
     }
 }
 
@@ -77,11 +76,11 @@ export function refresh() {
 export function afterLoad() {
 
     var guid = uuidv4();
-    var doSomething=function(){
-        githubtree.waitForOctokit(()=>{
+    var doSomething = function () {
+        githubtree.waitForOctokit(() => {
             console.log(githubtree.getAuthenticated());
         });
-        
+
     };
 
     if (githubtree.getToken()) {
@@ -147,9 +146,9 @@ export function afterLoad() {
                 window.myLogin = resp.data.login;
                 console.log(resp.data.login);
                 console.log(resp.data);
-                document.querySelector("#userIcon").style.backgroundImage = "url('"+resp.data.avatar_url+"')";
+                document.querySelector("#userIcon").style.backgroundImage = "url('" + resp.data.avatar_url + "')";
                 console.log(resp.data.avatar_url);
-                document.querySelector("#userLoginMaterialIcon").style.display="none";
+                document.querySelector("#userLoginMaterialIcon").style.display = "none";
                 githubtree.cacheRepo({ username: myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });
             });
         });
@@ -186,8 +185,8 @@ export function toolbarAction(e) {
 
     var button = e.currentTarget;
     if (button.dataset.action == "addFile") {
-        const randName="gcode-" + (Math.round(Date.now()/1000)*10000+Math.round(Math.random()*9999)).toString(16) ;
-        document.getElementById("newFileDialogName").value = randName+ document.getElementById("newFileDialogSelect").value;
+        const randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
+        document.getElementById("newFileDialogName").value = randName + document.getElementById("newFileDialogSelect").value;
         document.getElementById('confirmButton').value = document.getElementById("newFileDialogName").value;
         document.getElementById("newFileDialog").showModal();
 
@@ -204,11 +203,11 @@ export function toolbarAction(e) {
                 console.log("gotAuthenticated:");
                 console.log(resp)
                 myLogin = resp.data.login;
-                console.log("myLogin:"+myLogin);
+                console.log("myLogin:" + myLogin);
                 console.log(resp.data);
                 if (resp.data.login) {
 
-                    console.log("prompt:"+resp.data.login);
+                    console.log("prompt:" + resp.data.login);
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
                     if (gitRepoName) {
                         var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
@@ -244,10 +243,14 @@ export function toolbarAction(e) {
                         }
                     }
                 }
-                else{
+                else {
                     console.log("no login?");
                 }
-            }).catch(() => githubtree.setToken(null));
+            }).catch((e) => {
+                githubtree.setToken(null);
+                console.log(e);
+            });
+            console.log("did something!");
         };
 
         if (githubtree.getToken()) {
@@ -260,19 +263,20 @@ export function toolbarAction(e) {
                 console.log("gotCode");
                 if (!e) {
 
-                    console.log("fetch:"+code);
+                    console.log("fetch:" + code);
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
                     ).then((json) => {
                         console.log("json");
                         console.log(json);
                         githubtree.setToken(json.data.access_token);
-                        console.log("doSomething2:"+json.data.access_token);
+                        console.log("doSomething2:" + json.data.access_token);
                         doSomething();
+                        console.log("doSomething?");
                     });
                 }
-                else{
-                    console.log("error:"+e);
+                else {
+                    console.log("error:" + e);
                 }
             });
         }
@@ -338,16 +342,16 @@ function _refresh(params) {
     var pageLeft = htmlToElement("<div class='dirWidget' data-name='default'><i class='material-icons'>" + dirIconOpened + "</i>default</div>");
     pageLeft.addEventListener("click", function () { _openDir(this); });
     defaultParent.appendChild(pageLeft);
-    var filenames=listNames();
-    var i=filenames.length;
+    var filenames = listNames();
+    var i = filenames.length;
     while (i--) {
-            var nextname = "";
-            var selectedClass = "";
-            if (i > 0) nextname = "data-nextname='" + filenames[i - 1] + "'";
-            if (selectedFileWidget == filenames[i]) selectedClass = " fileWidgetSelected";
-            var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + filenames[i] + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + filenames[i] + "</div>");
-            defaultParent.appendChild(_child);
-            _child.addEventListener("click", function () { _openFile(this); });
+        var nextname = "";
+        var selectedClass = "";
+        if (i > 0) nextname = "data-nextname='" + filenames[i - 1] + "'";
+        if (selectedFileWidget == filenames[i]) selectedClass = " fileWidgetSelected";
+        var _child = htmlToElement("<div class='fileWidget" + selectedClass + "' data-name='" + filenames[i] + "' " + nextname + " data-dirname='default'><div class='fileIndent'></div><i class='material-icons'>format_align_justify</i>" + filenames[i] + "</div>");
+        defaultParent.appendChild(_child);
+        _child.addEventListener("click", function () { _openFile(this); });
     }
     var pageLeftBody = document.getElementById("pageLeftBody");
     var oldDefaultParent = pageLeftBody.querySelector("div#defaultParent");
@@ -390,9 +394,9 @@ function _new(aFilename) {
             ).then(
                 text => {
                     var _samplecode = text;
-                    var randName="gcode-" + (Math.round(Date.now()/1000)*10000+Math.round(Math.random()*9999)).toString(16) ;
-                    if(aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts"))randName=aFilename.substring(0,aFilename.indexOf(".dapp.ts"))
-                    _samplecode=_samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g,"\""+randName+".testnet\"");
+                    var randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
+                    if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
+                    _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");
 
 
                     var appStuff = "";
@@ -444,7 +448,7 @@ function _openFile(element) {
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
 
-            window.editor.setValue(load(element.dataset.name,true));
+            window.editor.setValue(load(element.dataset.name, true));
             window.setEditorMode();
         }
         else {
