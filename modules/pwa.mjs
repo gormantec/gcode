@@ -495,11 +495,11 @@ class Div {
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
-        let _this=this.element;
+        let _this=this;
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
             //this.element.onclick = afunc;
             
-            this.element.addEventListener("click", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e.pwaDiv=_this;afunc(e);});
+            this.element.addEventListener("click", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e.thisDiv=_this;e.parentDiv=_this.parentDiv;afunc(e);});
         }
 
     }
