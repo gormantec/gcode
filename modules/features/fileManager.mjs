@@ -267,7 +267,7 @@ export function toolbarAction(e) {
                         console.log("json");
                         console.log(json);
                         githubtree.setToken(json.data.access_token);
-                        console.log("doSomething2");
+                        console.log("doSomething2:"+json.data.access_token);
                         doSomething();
                     });
                 }
