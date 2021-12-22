@@ -783,7 +783,7 @@ class DivForm extends Div{
         });
         let _this=this;
         sendButton.onclick(params.sendButton.onclick);
-        myDiv.appendChild(sendButton);
+        this.appendChild(sendButton);
     }
 }
 
