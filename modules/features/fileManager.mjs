@@ -448,8 +448,8 @@ function _openFile(element) {
             selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
-
-            window.editor.setValue(load(element.dataset.name, true));
+            var fileData=load(element.dataset.name, true);
+            window.editor.setValue(fileData);
             window.setEditorMode();
         }
         else {
