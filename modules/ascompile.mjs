@@ -54,9 +54,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             document.querySelector("#nearDialogTimerValue").style.width = "5%";
             setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "10%"; }, 4000);
             setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "15%"; }, 8000);
-
+            console.log("login");
             login({ accountId: accountId, contractId: contractId }).then(() => {
-
+                console.log("logged in");
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "20%"; }, 10000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "25%"; }, 15000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "30%"; }, 20000);
@@ -72,8 +72,14 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "80%"; }, 70000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "85%"; }, 75000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "90%"; }, 80000);
+
+                console.log("logged in 1");
                 var importsList=sourceCode.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
+
+                console.log("logged in 2");
                 var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
+
+                console.log("logged in 3");
                 console.log(importsList[0]);
                 for(var i=0;i<importsList.length;i++)
                 {
