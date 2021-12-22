@@ -254,7 +254,9 @@ export function toolbarAction(e) {
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
                     ).then((json) => {
+                        console.log("doSomething");
                         githubtree.setToken(json.data.access_token);
+                        console.log("doSomething2");
                         doSomething();
                     });
                 }
