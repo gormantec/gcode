@@ -198,10 +198,17 @@ export function toolbarAction(e) {
         var guid = uuidv4();
 
         var doSomething = function () {
+
+            console.log("getAuthenticated")
             githubtree.getAuthenticated().then((resp) => {
+                console.log("gotAuthenticated:");
+                console.log(resp)
                 myLogin = resp.data.login;
+                console.log("myLogin:"+myLogin);
                 console.log(resp.data);
                 if (resp.data.login) {
+
+                    console.log("prompt:"+resp.data.login);
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
                     if (gitRepoName) {
                         var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
@@ -236,6 +243,9 @@ export function toolbarAction(e) {
                             });
                         }
                     }
+                }
+                else{
+                    console.log("no login?");
                 }
             }).catch(() => githubtree.setToken(null));
         };
