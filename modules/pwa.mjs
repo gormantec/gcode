@@ -725,7 +725,7 @@ class DivForm extends Div{
         super(params)
         if(params.formInputs && params.formInputs.length>0)
         {
-            for(let i=0;i<params.formInputs.left;i++)
+            for(let i=0;i<params.formInputs.length;i++)
             {
                 let labelDiv={
                     position: "static",
@@ -781,7 +781,6 @@ class DivForm extends Div{
             width: "unset",
             innerText: "send"
         });
-        let _this=this;
         sendButton.onclick(params.sendButton.onclick);
         this.appendChild(sendButton);
     }
