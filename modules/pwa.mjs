@@ -727,6 +727,12 @@ class DivForm extends Div{
         {
             for(let i=0;i<params.formInputs.length;i++)
             {
+                var inputId="formInput"+i;
+                if(params.formInputs.id)inputId=params.formInputs.id;
+                else if(params.formInputs[i].name){
+                    inputId=params.formInputs[i].name.replace(/[/\\?%*:|"<> ]/g, '');
+                    inputId="form"+inputId.substring(0,1).toUpperCase()+inputId.substring(1);
+                }
                 let labelDiv={
                     position: "static",
                     display: "inline-block",
@@ -738,7 +744,7 @@ class DivForm extends Div{
                     color: "black"
                 };
                 let inputDiv={
-                    id: "form"+params.formInputs[i].name.substring(0,1).toUpperCase()+params.formInputs[i].name.substring(1).replace(/[/\\?%*:|"<> ]/g, ''),
+                    id: inputId,
                     position: "static",
                     display: "inline-block",
                     tagName: params.formInputs[i].type && params.formInputs[i].type!="text"?params.formInputs[i].type:"div",
