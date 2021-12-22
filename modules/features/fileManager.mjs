@@ -35,6 +35,7 @@ export const dialogMetadata = [
                     { "value": ".mjs", "text": "Mobile App - JavaScript", "selected": false },
                     { "value": ".ts", "text": "Mobile App - AssemblyScript", "selected": false },
                     { "value": ".dapp.ts", "text": "dApp - AssemblyScript", "selected": false },
+                    { "value": ".lib.ts", "text": "Library - AssemblyScript", "selected": false },
                 ]
             },
         ],
@@ -56,6 +57,9 @@ export function dialogAction(event) {
         var nameValue = event.getInputValue("newFileDialogName");
         if (nameValue.indexOf(".dapp.ts") > 0) {
             name = nameValue.substring(0, nameValue.lastIndexOf(".dapp.ts"));
+        }
+        else if (nameValue.indexOf(".lib.ts") > 0) {
+            name = nameValue.substring(0, nameValue.lastIndexOf(".lib.ts"));
         }
         else if (nameValue.indexOf(".") > 0) {
             name = nameValue.substring(0, nameValue.lastIndexOf("."));

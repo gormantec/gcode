@@ -499,7 +499,7 @@ class Div {
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
             //this.element.onclick = afunc;
             
-            this.element.addEventListener("click", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();afunc(e);});
+            this.element.addEventListener("click", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e.pwaDiv=_this;afunc(e);});
         }
 
     }
@@ -716,6 +716,74 @@ class ActionButton extends Div{
         }
         this.style.backgroundColor = this.primaryColor;
         this.style.color = this.primaryColorText;
+    }
+}
+
+class DivForm extends Div{
+    constructor(params)
+    {
+        super(params)
+        if(params.formInputs && params.formInputs.length>0)
+        {
+            for(let i=0;i<params.formInputs.left;i++)
+            {
+                let labelDiv={
+                    position: "static",
+                    display: "inline-block",
+                    tagName: "span",
+                    marginLeft: "30px",
+                    width: "60px",
+                    verticalAlign: "top",
+                    innerText: params.formInputs[i].name,
+                    color: "black"
+                };
+                let inputDiv={
+                    id: "form"+params.formInputs[i].name.substring(0,1).toUpperCase+params.formInputs[i].name.substring(1),
+                    position: "static",
+                    display: "inline-block",
+                    tagName: params.formInputs[i].type && params.formInputs[i].type!="text"?params.formInputs[i].type:"div",
+                    innerText: "",
+                    contentEditable: "true",
+                    borderColor: "#AAAAAA",
+                    borderWidth: "1px",
+                    borderStyle: "solid",
+                    marginLeft: "10px",
+                    width: "200px",
+                    padding: "10px"
+                };
+                if(params.formInputs[i].height)inputDiv.height=params.formInputs[i].height;
+                if(params.formInputs[i].type && params.formInputs[i].type!="text")
+                {
+                    inputDiv.tagName="input";
+                    inputDiv.inputType=params.formInputs[i].type;
+                    if(params.formInputs[i].min)inputDiv.inputMin=params.formInputs[i].min;
+                    if(params.formInputs[i].max)inputDiv.inputMax=params.formInputs[i].max;
+                    if(params.formInputs[i].value)inputDiv.inputValue=params.formInputs[i].value;
+                }
+
+                this.appendChild(new Div({
+                    position: "relative",
+                    fontSize: "large",
+                    marginTop: "10px",
+                    children: [
+                        new Div(labelDiv),
+                        new Div(inputDiv)
+                    ]
+                }));
+            }
+            
+        }
+
+
+        let sendButton = new ActionButton({
+            left: "80px",
+            right: "80px",
+            width: "unset",
+            innerText: "send"
+        });
+        let _this=this;
+        sendButton.onclick(params.sendButton.onclick);
+        myDiv.appendChild(sendButton);
     }
 }
 
