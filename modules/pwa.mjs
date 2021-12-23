@@ -1,4 +1,5 @@
 import { addFrame } from '/modules/iphoneX.mjs';
+import { getScript } from '/modules/getScript.mjs';
 
 window.PWA = window.PWA || {};
 window.PWA.globals = window.PWA.globals || {};
