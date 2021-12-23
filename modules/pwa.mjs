@@ -812,10 +812,14 @@ class DivForm extends Div{
 
 
         let sendButton = new ActionButton({
-            left: "80px",
-            right: "80px",
-            width: "unset",
-            innerText: "send"
+            left: "unset",
+            right: "unset",
+            width: "60%",
+            innerText: "send",
+            position: "relative",
+            margin:"auto",
+            bottom:"unset",
+            top:"20px"
         });
         sendButton.onclick(params.sendButton.onclick);
         this.appendChild(sendButton);
