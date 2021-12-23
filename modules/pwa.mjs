@@ -779,7 +779,6 @@ class DivForm extends Div{
                     inputDiv.element.setAttribute("required","true");
                     inputDiv.element.setAttribute("autocomplete","off");
                     inputDiv.element.setAttribute("size",size);
-                    
                     var googleAPI=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
                     googleAPI.then(({google})=>{
                         let autocomplete;
