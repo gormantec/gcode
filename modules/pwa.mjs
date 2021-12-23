@@ -778,16 +778,21 @@ class DivForm extends Div{
                     let country=["au"];
                     if(params.formInputs[i].country)country=params.formInputs[i].country;
                     inputDiv.tagName="input";
-                    inputDiv.element.setAttribute("required","true");
-                    inputDiv.element.setAttribute("autocomplete","off");
-                    inputDiv.element.setAttribute("size",size);
+                    
+                }
+                let inputDivDiv=new Div(inputDiv)
+                if(params.formInputs[i].type=="location")
+                {
+                    inputDivDiv.element.setAttribute("required","true");
+                    inputDivDiv.element.setAttribute("autocomplete","off");
+                    inputDivDiv.element.setAttribute("size",size);
                     var googleAPI=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
                     googleAPI.then(({google})=>{
                         let autocomplete;
                         let address1Field;
                         console.log(google);
                         address1Field = document.querySelector("#ship-address");
-                        autocomplete = new google.maps.places.Autocomplete(inputDiv.element, {
+                        autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
                             componentRestrictions: { country: country },
                             fields: ["address_components", "geometry"],
                             types: ["geocode"],
@@ -801,7 +806,7 @@ class DivForm extends Div{
                     marginTop: "10px",
                     children: [
                         new Div(labelDiv),
-                        new Div(inputDiv)
+                        inputDivDiv
                     ]
                 }));
             }
