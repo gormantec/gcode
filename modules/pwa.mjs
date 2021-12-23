@@ -763,13 +763,33 @@ class DivForm extends Div{
                     padding: "10px"
                 };
                 if(params.formInputs[i].height)inputDiv.height=params.formInputs[i].height;
-                if(params.formInputs[i].type && params.formInputs[i].type!="text")
+                if(params.formInputs[i].type && params.formInputs[i].type!="text" && params.formInputs[i].type!="location")
                 {
                     inputDiv.tagName="input";
                     inputDiv.inputType=params.formInputs[i].type;
                     if(params.formInputs[i].min)inputDiv.inputMin=params.formInputs[i].min;
                     if(params.formInputs[i].max)inputDiv.inputMax=params.formInputs[i].max;
                     if(params.formInputs[i].value)inputDiv.inputValue=params.formInputs[i].value;
+                }
+                else if(params.formInputs[i].type=="location")
+                {
+                    inputDiv.tagName="input";
+                    inputDiv.element.setAttribute("required","true");
+                    inputDiv.element.setAttribute("autocomplete","off");
+                    inputDiv.element.setAttribute("size","30");
+                    
+                    var googleAPI=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
+                    googleAPI.then(({google})=>{
+                        let autocomplete;
+                        let address1Field;
+                        console.log(google);
+                        address1Field = document.querySelector("#ship-address");
+                        autocomplete = new google.maps.places.Autocomplete(inputDiv.element, {
+                            componentRestrictions: { country: ["au"] },
+                            fields: ["address_components", "geometry"],
+                            types: ["geocode"],
+                        });
+                    });
                 }
 
                 this.appendChild(new Div({
