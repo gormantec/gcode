@@ -14,14 +14,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
   
 
   console.log('DOM fully loaded and parsed');
-  console.log(window.google);
   console.log(google);
-  address1Field = document.querySelector("#ship-address");
-  autocomplete = new window.google.maps.places.Autocomplete(address1Field, {
-    componentRestrictions: { country: ["au"] },
-    fields: ["address_components", "geometry"],
-    types: ["geocode"],
+  google.then((g)=>{
+    console.log(g);
+    address1Field = document.querySelector("#ship-address");
+    autocomplete = new g.maps.places.Autocomplete(address1Field, {
+      componentRestrictions: { country: ["au"] },
+      fields: ["address_components", "geometry"],
+      types: ["geocode"],
+    });
   });
+
   
 });
 
