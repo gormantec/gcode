@@ -743,8 +743,8 @@ class DivForm extends Div{
                     position: "static",
                     display: "inline-block",
                     tagName: "span",
-                    marginLeft: "30px",
-                    width: "15%",
+                    marginLeft: "10px",
+                    width: "20%",
                     verticalAlign: "top",
                     innerText: params.formInputs[i].name,
                     color: "black"
@@ -760,7 +760,7 @@ class DivForm extends Div{
                     borderWidth: "1px",
                     borderStyle: "solid",
                     marginLeft: "10px",
-                    width: "60%",
+                    width: "65%",
                     padding: "10px"
                 };
                 if(params.formInputs[i].height)inputDiv.height=params.formInputs[i].height;
