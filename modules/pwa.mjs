@@ -773,10 +773,12 @@ class DivForm extends Div{
                 }
                 else if(params.formInputs[i].type=="location")
                 {
+                    let size="30";
+                    if(params.formInputs[i].size)size=""+params.formInputs[i].size;
                     inputDiv.tagName="input";
                     inputDiv.element.setAttribute("required","true");
                     inputDiv.element.setAttribute("autocomplete","off");
-                    inputDiv.element.setAttribute("size","30");
+                    inputDiv.element.setAttribute("size",size);
                     
                     var googleAPI=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
                     googleAPI.then(({google})=>{
