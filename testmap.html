@@ -1,0 +1,37 @@
+<html>
+    <head>
+<script type="module">
+let autocomplete;
+let address1Field;
+
+import * as google from "https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly";
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    
+  console.log('DOM fully loaded and parsed');
+  address1Field = document.querySelector("#ship-address");
+  autocomplete = new google.maps.places.Autocomplete(address1Field, {
+    componentRestrictions: { country: ["au"] },
+    fields: ["address_components", "geometry"],
+    types: ["geocode"],
+  });
+  
+});
+
+</script>
+    </head>
+    <body>
+        <input
+id="ship-address"
+name="ship-address"
+required
+autocomplete="off"
+size=40
+/>
+    </body>
+</html>
+
+
+
+
+
