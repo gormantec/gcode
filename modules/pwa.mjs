@@ -775,6 +775,8 @@ class DivForm extends Div{
                 {
                     let size="30";
                     if(params.formInputs[i].size)size=""+params.formInputs[i].size;
+                    let country=["au"];
+                    if(params.formInputs[i].country)country=params.formInputs[i].country;
                     inputDiv.tagName="input";
                     inputDiv.element.setAttribute("required","true");
                     inputDiv.element.setAttribute("autocomplete","off");
@@ -786,7 +788,7 @@ class DivForm extends Div{
                         console.log(google);
                         address1Field = document.querySelector("#ship-address");
                         autocomplete = new google.maps.places.Autocomplete(inputDiv.element, {
-                            componentRestrictions: { country: ["au"] },
+                            componentRestrictions: { country: country },
                             fields: ["address_components", "geometry"],
                             types: ["geocode"],
                         });
