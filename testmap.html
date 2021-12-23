@@ -4,10 +4,13 @@
 let autocomplete;
 let address1Field;
 
-import * as google from "https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly";
+import { getScript } from '/modules/getScript.mjs';
+
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    
+
+  const google = getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly', ["google"]);
+
   console.log('DOM fully loaded and parsed');
   address1Field = document.querySelector("#ship-address");
   autocomplete = new google.maps.places.Autocomplete(address1Field, {
