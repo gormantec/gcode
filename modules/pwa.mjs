@@ -774,16 +774,16 @@ class DivForm extends Div{
                 }
                 else if(params.formInputs[i].type=="location")
                 {
-                    let size="30";
-                    if(params.formInputs[i].size)size=""+params.formInputs[i].size;
-                    let country=["au"];
-                    if(params.formInputs[i].country)country=params.formInputs[i].country;
-                    inputDiv.tagName="input";
-                    
+                    inputDiv.tagName="input";   
                 }
                 let inputDivDiv=new Div(inputDiv)
                 if(params.formInputs[i].type=="location")
                 {
+                    let size="30";
+                    if(params.formInputs[i].size) size=""+params.formInputs[i].size;
+                    let country=["au"];
+                    if(params.formInputs[i].country) country=params.formInputs[i].country;
+                    
                     inputDivDiv.element.setAttribute("required","true");
                     inputDivDiv.element.setAttribute("autocomplete","off");
                     inputDivDiv.element.setAttribute("size",size);
