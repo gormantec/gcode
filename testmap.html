@@ -6,12 +6,16 @@ let address1Field;
 
 import { getScript } from '/modules/getScript.mjs';
 
+var google=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
+
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
-  getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly');
+  
 
   console.log('DOM fully loaded and parsed');
+  console.log(window.google);
+  console.log(google);
   address1Field = document.querySelector("#ship-address");
   autocomplete = new window.google.maps.places.Autocomplete(address1Field, {
     componentRestrictions: { country: ["au"] },
