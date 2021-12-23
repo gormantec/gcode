@@ -783,17 +783,13 @@ class DivForm extends Div{
                     if(params.formInputs[i].size) size=""+params.formInputs[i].size;
                     let country=["au"];
                     if(params.formInputs[i].country) country=params.formInputs[i].country;
-                    
+
                     inputDivDiv.element.setAttribute("required","true");
                     inputDivDiv.element.setAttribute("autocomplete","off");
                     inputDivDiv.element.setAttribute("size",size);
                     var googleAPI=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
                     googleAPI.then(({google})=>{
-                        let autocomplete;
-                        let address1Field;
-                        console.log(google);
-                        address1Field = document.querySelector("#ship-address");
-                        autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
+                        let autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
                             componentRestrictions: { country: country },
                             fields: ["address_components", "geometry"],
                             types: ["geocode"],
