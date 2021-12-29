@@ -166,7 +166,7 @@ async function doNear(nearApi, config) {
                 console.log("mycontract typeof:"+typeof mycontract[list[i].method]);
 
                 console.log("------------X");
-                mycontract[list[i].method](modP).then((r) => {
+                mycontract[list[i].method](modP,900000000000000,1000000000000000000000000).then((r) => {
 
                 console.log("------------X");
                     try{
