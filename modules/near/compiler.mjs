@@ -151,6 +151,10 @@ async function doNear(nearApi, config) {
                 for (const key in modP) {
                     if (modP.hasOwnProperty(key)) {
                         if (typeof modP[key]=="string" && modP[key].startsWith("@Near.") && config[modP[key].substring(6)]) modP[key] = config[modP[key].substring(6)];
+                        else if(typeof modP[key]=="array" )
+                        {
+                            console.log(modP[key]);
+                        }
                     }
                     console.log("param:"+key+":"+modP[key]+" ("+(typeof modP[key])+")");
                     if(typeof modP[key]=="object")modP[key]=JSON.stringify(modP[key]);
