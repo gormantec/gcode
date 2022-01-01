@@ -106,7 +106,8 @@ export function load(filename, asString = false, ageInSec = -1) {
     var result = null;
     console.log("load:" + filename);
     if (filename.startsWith("git://")) {
-        result = localStorage.getItem("gitfile-" + filename);
+        let b64 = localStorage.getItem("gitfile-" + filename);
+        result = decodeURIComponent(escape(window.atob(b64)));
         console.log(result);
     }
     else {

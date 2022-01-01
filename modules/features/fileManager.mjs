@@ -128,7 +128,7 @@ export function afterLoad() {
                     if (d != editor.getValue()) {
                         fileWidget.style.fontStyle = "italic";
                         fileWidget.style.color = "#cce6ff";
-                        localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
+                        localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(editor.getValue()))));
                     }
                     else {
                         localStorage.removeItem("gitfile-" + filename);
@@ -138,7 +138,8 @@ export function afterLoad() {
                 });
             }
             else {
-                localStorage.setItem("gitfile-" + filename, btoa(editor.getValue()));
+                localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(editor.getValue()))));
+                    
             }
 
         }
@@ -477,8 +478,8 @@ function _openFile(element) {
             githubtree.getGitFile(username, repo, path, function (e, d) {
                 var cached = localStorage.getItem("gitfile-" + filename);
                 if (cached) {
-                    if (atob(cached) != d) {
-                        d = atob(cached);
+                    if (decodeURIComponent(escape(window.atob(cached))) != d) {
+                        d = decodeURIComponent(escape(window.atob(cached)));
                         element.style.fontStyle = "italic";
                         element.style.color = "#cce6ff";
                     }
