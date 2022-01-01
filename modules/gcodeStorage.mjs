@@ -106,7 +106,7 @@ export function load(filename, asString = false, ageInSec = -1) {
     var result = null;
     console.log("load:" + filename);
     if (filename.startsWith("git://")) {
-        result = window.atob(localStorage.getItem("gitfile-" + filename));
+        result = localStorage.getItem("gitfile-" + filename);
         console.log(result);
     }
     else {
