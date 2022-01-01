@@ -155,6 +155,10 @@ div.pwapage div.pwadiv{
     border-color: #00000099;
     pointer-events: auto;
 }
+.clickableDiv{
+    cursor: pointer;
+    pointer-events: auto;
+}
 .floatingActionButton i{
     font-size: 30px;
     font-weight: 900;
