@@ -13,7 +13,7 @@ export function save(filename, data, overwrite = true) {
     let contentType = "[object String]";
     if (!overwrite && localStorage.getItem(FILE_PREFIX + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
-        saveData = window.btoa(unescape(encodeURIComponent(data)));
+        saveData = window.btoa(window.unescape(encodeURIComponent(data)));
         contentType = "[object String]";
     }
     else if ({}.toString.call(data) == "[object Object]" && canJSON(data)) {
@@ -74,7 +74,7 @@ export async function preload(files) {
                     githubtree.getGitFile(username, repo, path, function (e, d) {
                         var cached = localStorage.getItem("gitfile-" + filename);
                         if (!cached && !e && d) {
-                            localStorage.setItem("gitfile-" + filename, btoa(d));
+                            localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
                         }
                         count++;
                         if (count == files.length) {
@@ -106,7 +106,8 @@ export function load(filename, asString = false, ageInSec = -1) {
     var result = null;
     console.log("load:" + filename);
     if (filename.startsWith("git://")) {
-        result = localStorage.getItem("gitfile-" + filename);
+        result = window.atob(localStorage.getItem("gitfile-" + filename));
+        console.log(result);
     }
     else {
         let b64 = localStorage.getItem(FILE_PREFIX + filename);
