@@ -59,26 +59,38 @@ export async function preload(files) {
             if (typeof files == "string") files = [files];
             let count = 0;
             for (var i = 0; i < files.length; i++) {
-                var filename = files[i];
-                if (filename.name) filename = filename.name;
-                if (filename.dir) filename = filename.dir + filename.name;
-                console.log(filename);
-                var firstColon = filename.indexOf(":", 6);
-                var secondColon = filename.indexOf("/", firstColon + 1);
-                var username = filename.substring(6, firstColon);
-                var repo = filename.substring(firstColon + 1, secondColon);
-                var path = filename.substring(secondColon + 1);
-                githubtree.getGitFile(username, repo, path, function (e, d) {
-                    var cached = localStorage.getItem("gitfile-" + filename);
-                    if (!cached && !e && d) {
-                        localStorage.setItem("gitfile-" + filename, btoa(d));
-                    }
+                var filename;
+                if( typeof files[i] == "string" )filename=files[i];
+                else if (files[i].dir && files[i].name ) filename = files[i].dir+files[i].name;
+                else if (files[i].name) filename = files[i].name;
+                console.log("preload:"+filename);
+                if(filename)
+                {
+                    var firstColon = filename.indexOf(":", 6);
+                    var secondColon = filename.indexOf("/", firstColon + 1);
+                    var username = filename.substring(6, firstColon);
+                    var repo = filename.substring(firstColon + 1, secondColon);
+                    var path = filename.substring(secondColon + 1);
+                    githubtree.getGitFile(username, repo, path, function (e, d) {
+                        var cached = localStorage.getItem("gitfile-" + filename);
+                        if (!cached && !e && d) {
+                            localStorage.setItem("gitfile-" + filename, btoa(d));
+                        }
+                        count++;
+                        if (count == files.length) {
+                            console.log("preloaded");
+                            resolve();
+                        }
+                    });
+                }
+                else{
                     count++;
                     if (count == files.length) {
                         console.log("preloaded");
                         resolve();
                     }
-                });
+                }
+
 
 
             }
