@@ -11,7 +11,7 @@ const DATE_PREFIX = "DateChange-";
 export function save(filename, data, overwrite = true) {
     let saveData = null;
     let contentType = "[object String]";
-    if (!overwrite && localStorage.getItem(FILE_PREFIX  + filename)) return;
+    if (!overwrite && localStorage.getItem(FILE_PREFIX + filename)) return;
     if ({}.toString.call(data) == "[object String]") {
         saveData = window.btoa(unescape(encodeURIComponent(data)));
         contentType = "[object String]";
@@ -32,9 +32,9 @@ export function save(filename, data, overwrite = true) {
     else {
         return;
     }
-    localStorage.setItem(FILE_PREFIX  + filename, saveData);
-    localStorage.setItem(CONTENT_TYPE_PREFIX  + filename, contentType);
-    localStorage.setItem(DATE_PREFIX  + filename, (new Date()).getTime());
+    localStorage.setItem(FILE_PREFIX + filename, saveData);
+    localStorage.setItem(CONTENT_TYPE_PREFIX + filename, contentType);
+    localStorage.setItem(DATE_PREFIX + filename, (new Date()).getTime());
 }
 
 function canJSON(value) {
@@ -46,66 +46,75 @@ function canJSON(value) {
     }
 }
 
-export function parent(filename)
-{
+export function parent(filename) {
     return null;
 }
 
-export function load(filename,asString = false,ageInSec=-1) {
-    var result=null;
-    console.log("load:"+filename);
-    if(filename.startsWith("git://"))
-    {
-        var firstColon = element.dataset.name.indexOf(":", 6);
-        var secondColon = element.dataset.name.indexOf("/", firstColon + 1);
-        var username = element.dataset.name.substring(6, firstColon);
-        var repo = element.dataset.name.substring(firstColon + 1, secondColon);
-        var path = element.dataset.name.substring(secondColon + 1);
-        //githubtree.getGitFile(username, repo, path, function (e, d) {
+export async function preload(files) {
+    return new Promise((resolve, reject) => {
+        console.log("preloading");
+        if (typeof files == "string") files = [files];
+        let count = 0;
+        for (var i = 0; i < files.length; i++) {
+            var filename = files[i];
+            if(filename.name)filename=filename.name;
+            if(filename.dir)filename=filename.dir+filename.name;
+            var firstColon = filename.indexOf(":", 6);
+            var secondColon = filename.indexOf("/", firstColon + 1);
+            var username = filename.substring(6, firstColon);
+            var repo = filename.substring(firstColon + 1, secondColon);
+            var path = filename.substring(secondColon + 1);
             result = localStorage.getItem("gitfile-" + filename);
-            /*if (cached) {
-                if (atob(cached) != d) {
-                    d = atob(cached);
-                    element.style.fontStyle = "italic";
-                    element.style.color = "#cce6ff";
+            count++;
+            githubtree.getGitFile(username, repo, path, function (e, d) {
+                var cached = localStorage.getItem("gitfile-" + filename);
+                if (!cached && !e && d) {
+                    localStorage.setItem("gitfile-" + filename, btoa(d));
                 }
-                else {
+                count++;
+                if (count == files.length) {
+                    console.log("preloaded");
+                    resolve();
+                }
+            });
 
-                    localStorage.removeItem("gitfile-" + filename);
-                    element.style.fontStyle = "";
-                    element.style.color = "";
-                }
-            }
-            window.editor.setValue(d);
-            */
-        //});
+
+        }
+    });
+}
+
+export function load(filename, asString = false, ageInSec = -1) {
+    var result = null;
+    console.log("load:" + filename);
+    if (filename.startsWith("git://")) {
+        result = localStorage.getItem("gitfile-" + filename);
     }
-    else{
+    else {
         let b64 = localStorage.getItem(FILE_PREFIX + filename);
         let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
         let dateChange = localStorage.getItem(DATE_PREFIX + filename);
-        if(ageInSec!=-1 && ((new Date().getTime())-ageInSec)>parseInt(dateChange)) return null;
+        if (ageInSec != -1 && ((new Date().getTime()) - ageInSec) > parseInt(dateChange)) return null;
         //window.debug.log(contentType);
-        
+
         if (contentType == "[object String]") {
-            result= decodeURIComponent(escape(window.atob(b64)));
+            result = decodeURIComponent(escape(window.atob(b64)));
         }
         else if (contentType == "[object Object]") {
-            result= asString?decodeURIComponent(escape(window.atob(b64))):JSON.parse(decodeURIComponent(escape(window.atob(b64))));
+            result = asString ? decodeURIComponent(escape(window.atob(b64))) : JSON.parse(decodeURIComponent(escape(window.atob(b64))));
         }
         else if (contentType == "[object Uint8Array]") {
-            var result1=decodeURIComponent(escape(window.atob(str))).split('').map(function (c) { return c.charCodeAt(0); });
-            result= asString?result1.toString():result1;
+            var result1 = decodeURIComponent(escape(window.atob(str))).split('').map(function (c) { return c.charCodeAt(0); });
+            result = asString ? result1.toString() : result1;
         }
         else if (contentType == "[object Array]") {
-            result= asString?JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array.toString():JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array;
+            result = asString ? JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array.toString() : JSON.parse(decodeURIComponent(escape(window.atob(b64)))).array;
         }
     }
 
 
-    window.debug.log("result="+result);
-    window.debug.log("filename="+filename);
-    window.debug.log("asString="+asString);
+    window.debug.log("result=" + result);
+    window.debug.log("filename=" + filename);
+    window.debug.log("asString=" + asString);
     window.debug.log(result);
     return result;
 
@@ -118,14 +127,13 @@ export function remove(filename) {
 
 export function listNames() {
     var keys = Object.keys(localStorage);
-    var files=[];
-    if(keys)
-    {
+    var files = [];
+    if (keys) {
         var i = keys.length;
         keys.sort();
         keys.reverse();
         while (i--) {
-            if (keys[i].startsWith(FILE_PREFIX) && !keys[i].startsWith(FILE_PREFIX+"dist/") && keys[i] != FILE_PREFIX) {
+            if (keys[i].startsWith(FILE_PREFIX) && !keys[i].startsWith(FILE_PREFIX + "dist/") && keys[i] != FILE_PREFIX) {
                 files.push(keys[i].substring(FILE_PREFIX.length));
             }
         }

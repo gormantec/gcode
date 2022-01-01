@@ -3,7 +3,7 @@ import { compile, login, test } from '/modules/near/index.mjs';
 import { getScript } from '/modules/getScript.mjs';
 import { createDownload, b64toBlob } from '/modules/createDownload.mjs';
 import { parsejs } from './parsejs.mjs';
-import { load } from '/modules/gcodeStorage.mjs';
+import { load, preload} from '/modules/gcodeStorage.mjs';
 
 const getRequire = getScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js', ["require"]);
 
@@ -77,45 +77,51 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 var importsList=sourceCode.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
 
                 console.log("logged in 2");
-                var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
+                
 
-                console.log("logged in 3");
+                
+                var importFiles=[];
                 if(importsList && importsList.length>0)
                 {
-                    console.log(importsList[0]);
                     for(var i=0;i<importsList.length;i++)
                     {
-                        
                         var fileName=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
                         console.log("fileName: "+fileName);
                         let dir="";
                         if(editorFilename.lastIndexOf("/")>0)dir=editorFilename.substring(0,editorFilename.lastIndexOf("/")+1);
                         console.log(dir+fileName+".ts");
-                        let slib=load(dir+fileName+".ts");
+                        importFiles.push({name:fileName+".ts",dir:dir});
+                    }
+                }
+                console.log("logged in 3");
+                console.log(importFiles);
+                preload(importFiles).then(()=>{
+                    var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
+                    for(var i=0;i<importFiles.length;i++)
+                    {
+                        let slib=load(importFiles[i].dir+importFiles[i].fileName+".ts");
                         if(slib && typeof slib=="string" && slib.length>0)
                         {
                             filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
-                        }   
-                            
+                        }       
                     }
-                }
-                console.log(filesArray);
-                
-                compile({
-                    accountId: accountId,
-                    contractId: contractId,
-                    filesArray: filesArray
-                }).then((x) => {
-
-                    document.querySelector("#nearDialogTimerValue").style.width = "95%";
-                    b64toBlob(x.content, 'application/zip').then(blob => {
-                        createDownload("assembly.zip", blob, { type: 'application/zip' });
-                    });
-                    parsejs(data,(testdata)=>{
-                        test(testdata).then(()=>{callback(null, {});closeTimer();}).catch((e)=>{callback(e);closeTimer();});
-                    });
-                    
+                    compile({
+                        accountId: accountId,
+                        contractId: contractId,
+                        filesArray: filesArray
+                    }).then((x) => {
+    
+                        document.querySelector("#nearDialogTimerValue").style.width = "95%";
+                        b64toBlob(x.content, 'application/zip').then(blob => {
+                            createDownload("assembly.zip", blob, { type: 'application/zip' });
+                        });
+                        parsejs(data,(testdata)=>{
+                            test(testdata).then(()=>{callback(null, {});closeTimer();}).catch((e)=>{callback(e);closeTimer();});
+                        });
+                        
+                    }).catch((e)=>{callback(e);closeTimer();});
                 }).catch((e)=>{callback(e);closeTimer();});
+
             }).catch((e)=>{callback(e);closeTimer();});
         }
         else {
