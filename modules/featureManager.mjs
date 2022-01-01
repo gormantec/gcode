@@ -45,7 +45,7 @@ export async function loadFeatures() {
                         i.innerText = meta.materialIcon;
                         if(meta.materialIcon.startsWith("https://"))
                         {
-                            console.log(meta.materialIcon);
+                    
                             d.style.backgroundImage="url('"+meta.materialIcon+"')";
                             d.style.height="50px";
                             d.style.backgroundSize="cover";
