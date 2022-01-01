@@ -113,7 +113,6 @@ export function load(filename, asString = false, ageInSec = -1) {
         let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
         let dateChange = localStorage.getItem(DATE_PREFIX + filename);
         if (ageInSec != -1 && ((new Date().getTime()) - ageInSec) > parseInt(dateChange)) return null;
-        //window.debug.log(contentType);
 
         if (contentType == "[object String]") {
             result = decodeURIComponent(escape(window.atob(b64)));
@@ -130,11 +129,6 @@ export function load(filename, asString = false, ageInSec = -1) {
         }
     }
 
-
-    window.debug.log("result=" + result);
-    window.debug.log("filename=" + filename);
-    window.debug.log("asString=" + asString);
-    window.debug.log(result);
     return result;
 
 }

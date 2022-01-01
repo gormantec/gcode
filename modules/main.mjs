@@ -158,7 +158,6 @@ function _runCode() {
                 true,
                 (e, d) => {
                     if (!e) {
-                        window.debug.log(d);
                         try {
                             const accountId = d.testdata.accountId;
                             var jApp = 'import { PWA, Page, Div } from "https://gcode.com.au/modules/pwa.mjs";\n' +

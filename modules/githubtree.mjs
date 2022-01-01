@@ -99,10 +99,7 @@ export async function saveFile(name, content, encode, callback) {
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
 
     var sha = null;
-    window.debug.log(repo);
-    window.debug.log(dirpath);
-    window.debug.log(filename);
-    window.debug.log(repos[repo]);
+
     if(repos[repo][dirpath])
     {
         var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
@@ -117,8 +114,6 @@ export async function saveFile(name, content, encode, callback) {
             if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
         }
     }
-
-    window.debug.log("sha="+sha);
     var f = {
         owner: username,
         repo: repo,
