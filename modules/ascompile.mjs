@@ -99,7 +99,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                     var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
                     for(var i=0;i<importFiles.length;i++)
                     {
-                        let slib=load(importFiles[i].dir+importFiles[i].fileName+".ts");
+                        let slib=load(importFiles[i].dir+importFiles[i].name+".ts");
                         if(slib && typeof slib=="string" && slib.length>0)
                         {
                             filesArray.push({ name: "assembly/lib/"+fileName+".ts", data: slib, type: "string" });
