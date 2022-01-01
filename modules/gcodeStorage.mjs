@@ -62,13 +62,13 @@ export async function preload(files) {
                 var filename = files[i];
                 if (filename.name) filename = filename.name;
                 if (filename.dir) filename = filename.dir + filename.name;
+                console.log(filename);
                 var firstColon = filename.indexOf(":", 6);
                 var secondColon = filename.indexOf("/", firstColon + 1);
                 var username = filename.substring(6, firstColon);
                 var repo = filename.substring(firstColon + 1, secondColon);
                 var path = filename.substring(secondColon + 1);
                 result = localStorage.getItem("gitfile-" + filename);
-                count++;
                 githubtree.getGitFile(username, repo, path, function (e, d) {
                     var cached = localStorage.getItem("gitfile-" + filename);
                     if (!cached && !e && d) {
