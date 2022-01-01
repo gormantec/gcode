@@ -63,7 +63,7 @@ export async function preload(files) {
                 if( typeof files[i] == "string" )filename=files[i];
                 else if (files[i].dir && files[i].name ) filename = files[i].dir+files[i].name;
                 else if (files[i].name) filename = files[i].name;
-                if(filename)
+                if(filename && filename.substring(0, 6) == "git://")
                 {
                     var firstColon = filename.indexOf(":", 6);
                     var secondColon = filename.indexOf("/", firstColon + 1);
