@@ -212,7 +212,7 @@ export function toolbarAction(e) {
                 if (resp.data.login) {
 
                     console.log("prompt:" + resp.data.login);
-                    var gitRepoName = prompt("Git repo name to add", resp.data.login + "/<reponame>");
+                    var gitRepoName = prompt("Git repo name to add", resp.data.login + "/gcode_repo");
                     if (gitRepoName) {
                         var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
                         var repo = gitRepoName.substring(gitRepoName.indexOf("/") + 1);
