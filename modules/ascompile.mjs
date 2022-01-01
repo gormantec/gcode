@@ -73,13 +73,9 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "85%"; }, 75000);
                 setTimeout(() => { document.querySelector("#nearDialogTimerValue").style.width = "90%"; }, 80000);
 
-                console.log("logged in 1");
+   
                 var importsList=sourceCode.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
 
-                console.log("logged in 2");
-                
-
-                
                 var importFiles=[];
                 if(importsList && importsList.length>0)
                 {
@@ -93,7 +89,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                         importFiles.push({name:fileName+".ts",dir:dir});
                     }
                 }
-                console.log("logged in 3");
                 console.log(importFiles);
                 preload(importFiles).then(()=>{
                     var filesArray=[{ name: "assembly/index.ts", data: sourceCode, type: "string" }];
@@ -105,8 +100,6 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                             filesArray.push({ name: "assembly/lib/"+importFiles[i].name, data: slib, type: "string" });
                         }       
                     }
-                    console.log("filesArray");
-                    console.log(filesArray);
                     compile({
                         accountId: accountId,
                         contractId: contractId,

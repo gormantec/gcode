@@ -63,7 +63,6 @@ export async function preload(files) {
                 if( typeof files[i] == "string" )filename=files[i];
                 else if (files[i].dir && files[i].name ) filename = files[i].dir+files[i].name;
                 else if (files[i].name) filename = files[i].name;
-                console.log("preload:"+filename);
                 if(filename)
                 {
                     var firstColon = filename.indexOf(":", 6);
@@ -108,7 +107,6 @@ export function load(filename, asString = false, ageInSec = -1) {
     if (filename.startsWith("git://")) {
         let b64 = localStorage.getItem("gitfile-" + filename);
         result = decodeURIComponent(escape(window.atob(b64)));
-        console.log(result);
     }
     else {
         let b64 = localStorage.getItem(FILE_PREFIX + filename);
