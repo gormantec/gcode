@@ -764,7 +764,7 @@ class DivForm extends Div{
                     padding: "10px"
                 };
                 if(params.formInputs[i].height)inputDiv.height=params.formInputs[i].height;
-                if(params.formInputs[i].type && params.formInputs[i].type!="text" && params.formInputs[i].type!="location")
+                if(params.formInputs[i].type && params.formInputs[i].type!="text" && params.formInputs[i].type!="location" && params.formInputs[i].type!="select")
                 {
                     inputDiv.tagName="input";
                     inputDiv.inputType=params.formInputs[i].type;
@@ -775,6 +775,10 @@ class DivForm extends Div{
                 else if(params.formInputs[i].type=="location")
                 {
                     inputDiv.tagName="input";   
+                }
+                else if(params.formInputs[i].type=="select")
+                {
+                    inputDiv.tagName="select";   
                 }
                 let inputDivDiv=new Div(inputDiv)
                 if(params.formInputs[i].type=="select")
