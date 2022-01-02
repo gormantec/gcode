@@ -350,6 +350,7 @@ export function pullGitRepository(params, callbackrefresh) {
                     var directories = [];
                     sha.data.forEach(function (file) {
                         if (file.name.substring(0, 1) != ".") {
+                            console.log(file.name+": "+file.sha);
                             addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
                             if (_callback) _callback("running", repo, _path);
                             if (file.type == "dir" && file.name.substring(0, 1) != ".") {
