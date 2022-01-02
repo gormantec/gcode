@@ -783,10 +783,12 @@ class DivForm extends Div{
                 let inputDivDiv=new Div(inputDiv)
                 if(params.formInputs[i].type=="select")
                 {
-                    if(params.formInputs[i].options && typeof params.formInputs[i].options=="array")
+                    if(params.formInputs[i].options)
                     {
+                        console.log("options");
                         for(var j=0;j<params.formInputs[i].options.length;j++)
                         {
+                            console.log("options:"+(i+1));
                             var aDiv=new Div({tagName:"option",innerText:params.formInputs[i].options[j]});
                             aDiv.element.value=params.formInputs[i].options[j];
                             aDiv.element.setAttribute("value",params.formInputs[i].options[j]);
