@@ -101,14 +101,14 @@ export async function saveFile(name, content, encode, callback) {
 
     var sha = null;
 
-    if(repos[repo][dirpath])
-    {
+    //if(repos[repo][dirpath])
+    //{
 
-    console.log("git:save::2");
-        var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
-        if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
-    }
-    else{
+    //console.log("git:save::2");
+    //    var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
+    //    if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
+    //}
+    //else{
 
         console.log("git:save::3");
         var result=await pullGitRepository({ username: username, repo: repo, path:dirpath });
@@ -126,7 +126,7 @@ export async function saveFile(name, content, encode, callback) {
         }
 
     console.log("git:save::7");
-    }
+    //}
     var f = {
         owner: username,
         repo: repo,
