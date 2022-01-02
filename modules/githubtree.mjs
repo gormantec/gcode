@@ -380,6 +380,7 @@ export function pullGitRepository(params, callbackrefresh) {
             theFunction(function(status,repo,path){
                 if(status=="done")
                 {
+                    console.log("done");
                     resolve({status:status,repo:repo,path:path});
                 }
             });
