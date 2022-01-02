@@ -779,7 +779,6 @@ class DivForm extends Div{
                 let inputDivDiv=new Div(inputDiv)
                 if(params.formInputs[i].type=="select")
                 {
-                    <option value="volvo">Volvo</option>
                     if(params.formInputs[i].options && typeof params.formInputs[i].options=="array")
                     {
                         for(var j=0;j<params.formInputs[i].options.length;j++)
