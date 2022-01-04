@@ -34,7 +34,12 @@ export function dialogAction(event) {
         if (event.value == "publish") {
             if (githubtree.getToken()) {
 
-                publishToGit(window.editor.getValue());
+                githubtree.waitForOctokit(() => {
+                    githubtree.getAuthenticated().then((resp) => {
+                        window.myLogin = resp.data.login;
+                        publishToGit(window.editor.getValue(),resp.data);
+                    });
+                });
             }
             else{
                 confirm("Please login to GIT");
@@ -53,5 +58,5 @@ export function afterLoad() {
 
 function publishToGit(code, user)
 {
-
+    console.log(user);
 }
