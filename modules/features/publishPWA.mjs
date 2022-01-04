@@ -1,3 +1,6 @@
+
+import * as githubtree from '/modules/githubtree.mjs';
+
 export const menuMetadata = { "id": "publishPWA", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
 
 
@@ -29,7 +32,12 @@ export function dialogAction(event) {
 
     if (event.type == "dialog" && event.id == "publishPwaDialog") {
         if (event.value == "publish") {
-            if (confirm("Publish?")) {
+            if (githubtree.getToken()) {
+
+                publishToGit(window.editor.getValue());
+            }
+            else{
+                confirm("Please login to GIT");
             }
 
         }
@@ -40,5 +48,10 @@ export function dialogAction(event) {
 }
 
 export function afterLoad() {
+
+}
+
+function publishToGit(code, user)
+{
 
 }
