@@ -1,3 +1,6 @@
+export const menuMetadata = { "id": "publishPWA", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
+
+
 export function menuAction() {
 
     document.getElementById("publishPwaDialog").showModal();
