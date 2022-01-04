@@ -26,14 +26,21 @@
 
         },
         {
-            "name": "nearMenu",
+            "name": "publishPWA",
             "navPosition": 5,
+            "enabled": true,
+          	"uri":"/modules/features/publishPWA.mjs"
+
+        },
+        {
+            "name": "nearMenu",
+            "navPosition": 6,
             "enabled": true,
           	"uri":"/modules/features/nearMenu.mjs"
 
         }, {
           "name": "uiMenu",
-          "navPosition": 6,
+          "navPosition": 7,
           "enabled": true,
           "uri": "/modules/features/uiMenu.mjs"
       }
