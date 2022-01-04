@@ -42,7 +42,6 @@ export function dialogAction(event) {
         var sourceCode = window.editor.getValue();
         var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
         var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
-        let slib = load("nearDate.lib.ts");
 
         if (event.value == "remove") {
             if (confirm("Remove Account?")) {

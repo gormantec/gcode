@@ -25,6 +25,11 @@ export const dialogMetadata = [
 export function dialogAction(event) {
 
     if (event.type == "dialog" && event.id == "publishPwaDialog") {
+        if (event.value == "publish") {
+            if (confirm("Publish?")) {
+            }
+
+        }
     }
     else if (event.type == "select" && event.id == "publishPwaDialogSelect") {
         event.setInputValue("confirmButton", event.value);
