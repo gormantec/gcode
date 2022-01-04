@@ -13,7 +13,7 @@ export const dialogMetadata = [
         "content": [
             {
                 "id": "publishPwaDialogSelect", "type": "select", "label": "Action:", "options": [
-                    { "value": "publish", "text": "Test", "selected": true }
+                    { "value": "publish", "text": "Publish to GIT", "selected": true }
                 ]
             },
         ],
