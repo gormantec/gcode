@@ -40,9 +40,10 @@ export function dialogAction(event) {
         if (event.value == "publish") {
             let token=githubtree.getToken();
             if (token) {
-
                 githubtree.waitForOctokit(() => {
+                    console.log("getAuthenticated");
                     githubtree.getAuthenticated().then((resp) => {
+                        console.log("getAuthenticated");
                         window.myLogin = resp.data.login;
                         publishToGit(window.editor.getValue(),resp.data.id,token);
                     });
