@@ -107,8 +107,6 @@ function publishToGit(code, user,token)
                 else win.document.body.style.backgroundColor = "black";errorline=358;
             }
 
-            var ;
-            var ;
             _uploadFile({ gituser:user,gittoken:token, html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                 if (error) { errorline=361;
                     window.debug.log(error); errorline=362;
