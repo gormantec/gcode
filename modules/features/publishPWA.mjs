@@ -36,12 +36,13 @@ export function dialogAction(event) {
 
     if (event.type == "dialog" && event.id == "publishPwaDialog") {
         if (event.value == "publish") {
-            if (githubtree.getToken()) {
+            let token=githubtree.getToken();
+            if (token) {
 
                 githubtree.waitForOctokit(() => {
                     githubtree.getAuthenticated().then((resp) => {
                         window.myLogin = resp.data.login;
-                        publishToGit(window.editor.getValue(),resp.data);
+                        publishToGit(window.editor.getValue(),resp.data.id,token);
                     });
                 });
             }
@@ -60,10 +61,15 @@ export function afterLoad() {
 
 }
 
-function publishToGit(code, user)
+function publishToGit(code, user,token)
 {
     console.log(user);
     var filename = document.getElementById("filename").innerText;
+    var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
+    if (!appName || appName == code) appName = "gcode App";
+    appName = appName.trim();
+
+
     if (filename.endsWith(".mjs")) {
         window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
@@ -100,7 +106,10 @@ function publishToGit(code, user)
                 if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                 else win.document.body.style.backgroundColor = "black";errorline=358;
             }
-            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+
+            var ;
+            var ;
+            _uploadFile({ gituser:user,gittoken:token, html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                 if (error) { errorline=361;
                     window.debug.log(error); errorline=362;
                 }
@@ -157,6 +166,9 @@ function _uploadFile(params, callback) {
 
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
+
+        if(params.gituser)body.gituser=params.gituser;
+        if(params.gittoken)body.gittoken=params.gittoken;
 
         fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
             method: 'post',
