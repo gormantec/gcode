@@ -20,7 +20,8 @@ export const dialogMetadata = [
         "content": [
             {
                 "id": "publishPwaDialogSelect", "type": "select", "label": "Action:", "options": [
-                    { "value": "publish", "text": "Publish to GIT", "selected": true }
+                    { "value": "publish", "text": "Publish to GIT", "selected": true },
+                    { "value": "sms", "text": "Send via SMS", "selected": false }
                 ]
             },
         ],
@@ -50,7 +51,10 @@ export function dialogAction(event) {
             else{
                 confirm("Please login to GIT");
             }
-
+        }
+        else 
+        if (event.value == "sms") {
+            
         }
     }
     else if (event.type == "select" && event.id == "publishPwaDialogSelect") {
