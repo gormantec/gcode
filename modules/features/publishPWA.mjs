@@ -35,6 +35,8 @@ export const dialogMetadata = [
 export function dialogAction(event) {
 
     if (event.type == "dialog" && event.id == "publishPwaDialog") {
+        console.log("publishPwaDialog");
+        console.log(event);
         if (event.value == "publish") {
             let token=githubtree.getToken();
             if (token) {
