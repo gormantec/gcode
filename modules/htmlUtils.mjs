@@ -171,7 +171,7 @@ export function createHtml(code) {
     if (orientation) _script.text += "  window.PWA.globals.orientation=\"" + orientation + "\";\n";
     if (icon) _script.text += "  window.PWA.globals.icon=\"" + icon + "\";\n";
     if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
-    if (icon192x192) _script.text += "  window.PWA.globals.icon180x180=\"" + icon192x192 + "\";\n";
+    if (icon192x192) _script.text += "  window.PWA.globals.icon192x192=\"" + icon192x192 + "\";\n";
     if (icon512x512) _script.text += "  window.PWA.globals.icon512x512=\"" + icon512x512 + "\";\n";
     if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
     if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
