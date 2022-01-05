@@ -195,7 +195,7 @@ export function createHtml(code) {
     _module.text = "\n" + jApp + "\n";
     rootHead.appendChild(_module);
 
-    return {"rootHTML":rootHTML,"splashBackgroundColor":splashBackgroundColor,"splash":splash,"mockFrame":mockFrame};
+    return {"rootHTML":rootHTML,"splashBackgroundColor":splashBackgroundColor,"splash":splash,"mockFrame":mockFrame,icon180x180:icon180x180,icon192x192:icon192x192,icon512x512:icon512x512};
 }
 
 export function sleep(delay) {
