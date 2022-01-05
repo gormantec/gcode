@@ -168,13 +168,18 @@ function _uploadFile(params, callback) {
     (async ()=>{
 
         var iconBase64=await getImageAsync(icon);
+        console.log(iconBase64);
         var iconBase64_192;
         if(params.icon192) iconBase64_192=await getImageAsync(params.icon192);
+        console.log(iconBase64_192);
         var iconBase64_512;
         if(params.icon512) iconBase64_512=await getImageAsync(params.icon512);
+        console.log(iconBase64_512);
 
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
+        if (iconBase64_192) body.encodedicon192 = iconBase64_192;
+        if (iconBase64_512) body.encodedicon512 = iconBase64_512;
 
         if(params.gituser)body.gituser=params.gituser;
         if(params.gittoken)body.gittoken=params.gittoken;
