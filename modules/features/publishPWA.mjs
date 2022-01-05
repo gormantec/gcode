@@ -201,7 +201,7 @@ function _uploadFile(params, callback) {
             },
             body: JSON.stringify(body),
         }).then(response => response.json()).then(data => {
-            callback(null, "https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/" + data.uri);
+            callback(null, "https://d3ur3sg2ph0u4a.cloudfront.net/" + data.uri);
         }).catch((error) => {
             callback(error);
         });
