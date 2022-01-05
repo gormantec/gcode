@@ -68,7 +68,7 @@ export async function getImageAsync(url) {
         console.log("3 fetch");
         var response=await fetch(url, { mode: 'cors' });
         console.log("4 arrayBuffer:"+response);
-        var buffer=response.arrayBuffer();
+        var buffer=await response.arrayBuffer();
         console.log("5 arrayBufferToBase64");
         var imageStr = arrayBufferToBase64(buffer);
         console.log("6 buffer:"+buffer);
