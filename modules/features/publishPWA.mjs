@@ -1,7 +1,7 @@
 
 import * as githubtree from '/modules/githubtree.mjs';
 
-import { getImage, createHtml } from '/modules/htmlUtils.mjs';
+import { getImage, createHtml,getImageAsync } from '/modules/htmlUtils.mjs';
 
 var win;
 
@@ -107,7 +107,7 @@ function publishToGit(code, user,token)
                 else win.document.body.style.backgroundColor = "black";errorline=358;
             }
 
-            _uploadFile({ gituser:user+"-"+appName,gittoken:token, html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+            _uploadFile({ gituser:user+"-"+appName,gittoken:token, html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash , icon192: splash , icon512: splash }, function (error, uri) {
                 if (error) { errorline=361;
                     window.debug.log(error); errorline=362;
                 }
@@ -160,7 +160,13 @@ function _uploadFile(params, callback) {
     var html = params.html;
     var icon = params.icon;
 
-    getImage(icon, function (e, iconBase64) {
+    (async ()=>{
+
+        var iconBase64=await getImageAsync(icon);
+        var iconBase64_192;
+        if(params.icon192) iconBase64_192=await getImageAsync(params.icon192);
+        var iconBase64_512;
+        if(params.icon512) iconBase64_512=await getImageAsync(params.icon512);
 
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
@@ -182,7 +188,10 @@ function _uploadFile(params, callback) {
         }).catch((error) => {
             callback(error);
         });
-    });
+
+    })()
+
+
 
     //encodedicon ###ICONURI###
     //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html

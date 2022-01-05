@@ -51,6 +51,24 @@ export function getImage(url, callback) {
     }
 
 }
+export async function getImageAsync(url) {
+    if (!url || url.substring(url.length - 4) != ".png") {
+        return null;
+    }
+    else {
+        var arrayBufferToBase64 = function (buffer) {
+            var binary = '';
+            var bytes = [].slice.call(new Uint8Array(buffer));
+            bytes.forEach((b) => binary += String.fromCharCode(b));
+            return window.btoa(binary);
+        };
+        var response=await fetch(url, { mode: 'cors' });
+        var buffer=response.arrayBuffer();
+        var imageStr = arrayBufferToBase64(buffer);
+        return imageStr;
+    }
+
+}
 
 
 export function createHtml(code) {
@@ -71,6 +89,10 @@ export function createHtml(code) {
     if (!icon || icon == code) icon = splash;
     var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
     if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
+    var icon192x192 = code.replace(/\/\*.*?icon192x192:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
+    if (!icon192x192 || icon192x192 == code) icon192x192 = icon;
+    var icon512x512 = code.replace(/\/\*.*?icon512x512:.*?(http.*?png)[\n].*?\*\/.*/s, '$1');
+    if (!icon512x512 || icon512x512 == code) icon512x512 = icon;
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
     mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
@@ -149,6 +171,8 @@ export function createHtml(code) {
     if (orientation) _script.text += "  window.PWA.globals.orientation=\"" + orientation + "\";\n";
     if (icon) _script.text += "  window.PWA.globals.icon=\"" + icon + "\";\n";
     if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
+    if (icon192x192) _script.text += "  window.PWA.globals.icon180x180=\"" + icon192x192 + "\";\n";
+    if (icon512x512) _script.text += "  window.PWA.globals.icon512x512=\"" + icon512x512 + "\";\n";
     if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
     if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
     if (mockFrame) _script.text += "  window.PWA.globals.mockFrame=\"" + mockFrame + "\";\n";
