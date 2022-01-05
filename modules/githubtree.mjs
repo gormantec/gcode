@@ -73,12 +73,15 @@ function getGitHub(params) {
 
 export function waitForOctokit(callback) {
     if (Octokit) callback();
-    var i = window.setInterval(() => {
-        if (Octokit) {
-            clearInterval(i);
-            callback();
-        }
-    }, 500)
+    else{
+        var i = window.setInterval(() => {
+            if (Octokit) {
+                clearInterval(i);
+                callback();
+            }
+        }, 500)
+    }
+
 }
 
 export async function saveFile(name, content, encode, callback) {
