@@ -54,7 +54,7 @@ export function dialogAction(event) {
         }
         else 
         if (event.value == "sms") {
-            
+
         }
     }
     else if (event.type == "select" && event.id == "publishPwaDialogSelect") {
@@ -187,6 +187,8 @@ function _uploadFile(params, callback) {
         if(params.gituser)body.gituser=params.gituser;
         if(params.gittoken)body.gittoken=params.gittoken;
 
+        body.phonenumber="+61447680379";
+        
         console.log(body);
 
         fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
