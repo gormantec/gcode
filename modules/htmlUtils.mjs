@@ -52,19 +52,26 @@ export function getImage(url, callback) {
 
 }
 export async function getImageAsync(url) {
+    console.log("getImageAsync:"+url);
     if (!url || url.substring(url.length - 4) != ".png") {
+        console.log("error");
         return null;
     }
     else {
+        console.log("arrayBufferToBase64");
         var arrayBufferToBase64 = function (buffer) {
             var binary = '';
             var bytes = [].slice.call(new Uint8Array(buffer));
             bytes.forEach((b) => binary += String.fromCharCode(b));
             return window.btoa(binary);
         };
+        console.log("fetch");
         var response=await fetch(url, { mode: 'cors' });
+        console.log("arrayBuffer:"+response);
         var buffer=response.arrayBuffer();
+        console.log("arrayBufferToBase64");
         var imageStr = arrayBufferToBase64(buffer);
+        console.log("buffer:"+buffer);
         return imageStr;
     }
 
