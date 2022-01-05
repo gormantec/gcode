@@ -200,11 +200,6 @@ function _uploadFile(params, callback) {
         });
 
     })()
-
-
-
-    //encodedicon ###ICONURI###
-    //https://s3-ap-southeast-2.amazonaws.com/fpwa.web.gormantec.com/apps/5ojnj1pknl.html
 }
 
 
