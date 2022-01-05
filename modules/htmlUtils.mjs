@@ -154,6 +154,11 @@ export function createHtml(code) {
     if (mockFrame) _script.text += "  window.PWA.globals.mockFrame=\"" + mockFrame + "\";\n";
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
+
+    _script.text+="\n  if('serviceWorker' in navigator) {\n"+
+                  "    navigator.serviceWorker.register('https://gcode.com.au/js/sw.js');\n"+
+                  "};\n\n"
+
     rootHead.appendChild(_script);
 
     var jApp =  'import { addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
