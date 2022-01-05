@@ -39,13 +39,9 @@ export function dialogAction(event) {
         console.log(event);
         if (event.value == "publish") {
             let token=githubtree.getToken();
-            console.log("getAuthenticated0");
             if (token) {
-                console.log("getAuthenticated1");
                 githubtree.waitForOctokit(() => {
-                    console.log("getAuthenticated2");
                     githubtree.getAuthenticated().then((resp) => {
-                        console.log("getAuthenticated3");
                         window.myLogin = resp.data.login;
                         publishToGit(window.editor.getValue(),resp.data.id,token);
                     });
@@ -186,6 +182,8 @@ function _uploadFile(params, callback) {
 
         if(params.gituser)body.gituser=params.gituser;
         if(params.gittoken)body.gittoken=params.gittoken;
+
+        console.log(body);
 
         fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
             method: 'post',
