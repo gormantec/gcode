@@ -112,8 +112,7 @@ export function createHtml(code) {
     _link.setAttribute("property", "fpwa:template");
     _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
     rootHead.appendChild(_link);
-    _link = window.document.createElement("meta");
-    window.document.createElement("link");
+    _link = window.document.createElement("link");
     _link.setAttribute("ref", "manifest");
     _link.setAttribute("href", manifest);
     rootHead.appendChild(_link);
