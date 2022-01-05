@@ -121,7 +121,11 @@ export function createHtml(code) {
     var longName = appName;
     var shortName = appName;
     var display = "standalone";
-    var _link = window.document.createElement("meta");
+    var _link = window.document.createElement("link");
+    _link.setAttribute("ref", "manifest");
+    _link.setAttribute("href", manifest);
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
     _link.setAttribute("name", "mobile-web-app-capable");
     _link.setAttribute("content", "yes");
     rootHead.appendChild(_link);
@@ -141,10 +145,7 @@ export function createHtml(code) {
     _link.setAttribute("property", "fpwa:template");
     _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
     rootHead.appendChild(_link);
-    _link = window.document.createElement("link");
-    _link.setAttribute("ref", "manifest");
-    _link.setAttribute("href", manifest);
-    rootHead.appendChild(_link);
+
     _link = window.document.createElement("link");
     _link.setAttribute("rel", "apple-touch-icon");
     _link.setAttribute("href", "###ICONURI###");
