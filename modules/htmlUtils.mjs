@@ -156,7 +156,7 @@ export function createHtml(code) {
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
 
     _script.text+="\n  if('serviceWorker' in navigator) {\n"+
-                  "    navigator.serviceWorker.register('https://gcode.com.au/js/sw.js');\n"+
+                  "    navigator.serviceWorker.register('sw.js');\n"+
                   "};\n\n"
 
     rootHead.appendChild(_script);
