@@ -345,6 +345,7 @@ function showUiEditor() {
     while(structure.length>0)structure.pop();
     //  try {
     splitComments(source);
+    console.log(structure);
     document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "none";
     let rootMiddlePage = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (rootMiddlePage) rootMiddlePage.remove();
