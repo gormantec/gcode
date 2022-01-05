@@ -5,7 +5,7 @@ import { getImage, createHtml } from '/modules/htmlUtils.mjs';
 
 var win;
 
-export const menuMetadata = { "id": "publishPWA", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
+export const menuMetadata = { "id": "publishPWA", "class": "pageLeftToolbarButton", "materialIcon": "publish" };
 
 
 export function menuAction() {
