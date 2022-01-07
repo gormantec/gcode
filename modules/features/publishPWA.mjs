@@ -111,7 +111,7 @@ function publishToGit(code, user,token)
                 if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                 else win.document.body.style.backgroundColor = "black";errorline=358;
             }
-            var uploadConfig={ gituser:user+"-"+appName,gittoken:token, html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash  };
+            var uploadConfig={ gituser:user+"-"+appName,gittoken:token, html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash  };
             if(result.icon192x192)uploadConfig.icon192=result.icon192x192;
             if(result.icon512x512)uploadConfig.icon512=result.icon512x512;
             console.log(uploadConfig);

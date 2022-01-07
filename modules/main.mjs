@@ -210,7 +210,7 @@ function _runCode() {
                                 if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                                 else win.document.body.style.backgroundColor = "black";
                             }
-                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                            _uploadFile({ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                                 if (error) {
                                     window.debug.log(error);
                                 }
@@ -298,7 +298,7 @@ function _runCode() {
                                 if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                                 else win.document.body.style.backgroundColor = "black";
                             }
-                            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+                            _uploadFile({ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                                 if (error) {
                                     window.debug.log(error);
                                 }
@@ -356,7 +356,7 @@ function _runCode() {
                 if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                 else win.document.body.style.backgroundColor = "black";errorline=358;
             }
-            _uploadFile({ html: "<!doctype html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
+            _uploadFile({ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                 if (error) { errorline=361;
                     window.debug.log(error); errorline=362;
                 }
