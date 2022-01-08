@@ -205,15 +205,15 @@ export function createHtml(code) {
                   "  iosPrompt.addEventListener(\"click\", () => {\n"+
                   "    iosPrompt.style.display = \"none\";\n"+
                   "  });\n"+
+                  "}\n\n"+
+                  "const isIos = () => {\n"+
+                  "  const userAgent = window.navigator.userAgent.toLowerCase();\n"+
+                  "  return /iphone|ipad|ipod/.test( userAgent );\n"+
                   "}\n"+
-                  "const isIos = () => {"+
-                  "  const userAgent = window.navigator.userAgent.toLowerCase();"+
-                  "  return /iphone|ipad|ipod/.test( userAgent );"+
-                  "}"+
-                  "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);"+
-                  "if (true || (isIos() && !isInStandaloneMode())) {"+
-                  "  showIosInstall();"+
-                  "}";
+                  "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);\n"+
+                  "if (true || (isIos() && !isInStandaloneMode())) {\n"+
+                  "  showIosInstall();\n"+
+                  "}\n\n";
 
 
 
