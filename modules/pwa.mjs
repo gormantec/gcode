@@ -323,8 +323,8 @@ class PWA {
         var aPWA = this;
         var iosPrompt=new Div({class: "ios-prompt",classNameOverride: true,children:[
             new Div({tagName:"span",classNameOverride: true,color: "rgb(187, 187, 187)", float: "right", marginTop: "-14px", marginRight: "-11px"}),
-            new Div({tagName:"img",classNameOverride: true,src:"add2home.svg",float: "left", height: "80px", width: "auto", marginTop: "-8px", marginRight: "1rem"}),
-            new Div({tagName:"p",classNameOverride: true,marginTop: "-3px", lineHeight: "1.3rem", innerHTML:"To install this Web App in your iPhone/iPad press <img src=\"assets/imgs/share.svg\" style=\"display: inline-block; margin-top: 4px; margin-bottom: -4px; height: 20px; width: auto;\"> and then Add to Home Screen."}),
+            new Div({tagName:"img",classNameOverride: true,src:"https://gcode.com.au/images/add2home.svg",float: "left", height: "80px", width: "auto", marginTop: "-8px", marginRight: "1rem"}),
+            new Div({tagName:"p",classNameOverride: true,marginTop: "-3px", lineHeight: "1.3rem", innerHTML:"To install this Web App in your iPhone/iPad press <img src=\"https://gcode.com.au/images/share.svg\" style=\"display: inline-block; margin-top: 4px; margin-bottom: -4px; height: 20px; width: auto;\"> and then Add to Home Screen."}),
         ]});
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
