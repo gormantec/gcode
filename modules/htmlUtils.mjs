@@ -122,7 +122,7 @@ export function createHtml(code) {
     var shortName = appName;
     var display = "standalone";
     var _link = window.document.createElement("link");
-    _link.setAttribute("ref", "manifest");
+    _link.setAttribute("rel", "manifest");
     _link.setAttribute("href", manifest);
     rootHead.appendChild(_link);
     _link = window.document.createElement("meta");
