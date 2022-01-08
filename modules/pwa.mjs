@@ -337,7 +337,7 @@ class PWA {
             var frame = new Div({});
             frame.appendChild(splashdiv);
             win.document.body.appendChild(frame.element);
-            win.document.body.appendChild(iosPrompt);
+            win.document.body.appendChild(iosPrompt.element);
             rootWindow=frame.element;
             this.buildScreen(msec,win,rootWindow);
         }
