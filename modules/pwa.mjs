@@ -328,7 +328,7 @@ class PWA {
         ]});
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
-            win.document.body.appendChild(iosPrompt);
+            win.document.body.appendChild(iosPrompt.element);
             aPWA.buildScreen(msec,win,rootWindow);
         }
         else{
