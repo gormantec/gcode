@@ -27,7 +27,17 @@ function showIosInstall() {
     iosPrompt.style.display = "none";
   });
 }
-const isIos = () => {  const userAgent = window.navigator.userAgent.toLowerCase();  return /iphone|ipad|ipod/.test( userAgent );}const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);if (true || (isIos() && !isInStandaloneMode())) {  showIosInstall();}</script><script type="module">
+
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+if (true || (isIos() && !isInStandaloneMode())) {
+  showIosInstall();
+}
+
+</script><script type="module">
 import { addkey } from "https://gcode.com.au/modules/near/index.mjs";
 
 if (window.opener && window.opener !== window) {
