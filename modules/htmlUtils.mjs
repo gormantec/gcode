@@ -88,6 +88,11 @@ export function createHtml(code) {
     var rootBody = window.document.createElement("body");
     rootHTML.appendChild(rootHead);
     rootHTML.appendChild(rootBody);
+
+
+
+
+
     splash = code.replace(/\/\*.*?splash:.*?(http.*?[png|gif])[\n].*?\*\/.*/s, '$1');
     if (splash == code) splash = null;
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
@@ -173,6 +178,9 @@ export function createHtml(code) {
     _loader.innerText = "Loading...";
     rootBody.appendChild(_loader);
 
+
+
+
     var _script = window.document.createElement("script");
     _script.text = "\n  window.PWA={globals:{}};\n";
     if (appName) _script.text += "  window.PWA.globals.appName=\"" + appName + "\";\n";
@@ -189,7 +197,26 @@ export function createHtml(code) {
 
     _script.text+="\n  if('serviceWorker' in navigator) {\n"+
                   "    navigator.serviceWorker.register('sw.js');\n"+
-                  "};\n\n"
+                  "};\n\n"+
+
+                  "function showIosInstall() {\n"+
+                  "  let iosPrompt = document.querySelector(\".ios-prompt\");\n"+
+                  "  iosPrompt.style.display = \"block\";\n"+
+                  "  iosPrompt.addEventListener(\"click\", () => {\n"+
+                  "    iosPrompt.style.display = \"none\";\n"+
+                  "  });\n"+
+                  "}\n"+
+                  "const isIos = () => {"+
+                  "  const userAgent = window.navigator.userAgent.toLowerCase();"+
+                  "  return /iphone|ipad|ipod/.test( userAgent );"+
+                  "}"+
+                  "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);"+
+                  "if (true || (isIos() && !isInStandaloneMode())) {"+
+                  "  showIosInstall();"+
+                  "}";
+
+
+
 
     rootHead.appendChild(_script);
 
