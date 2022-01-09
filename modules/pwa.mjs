@@ -450,7 +450,7 @@ class Div {
         if (params && params.marginTop) this.element.style.marginTop = params.marginTop;
         if (params && params.marginBottom) this.element.style.marginBottom = params.marginBottom;
         if (params && params.marginLeft) this.element.style.marginLeft = params.marginLeft;
-        if (params && params.marginRight) this.element.style.marginTop = params.marginRight;
+        if (params && params.marginRight) this.element.style.marginRight = params.marginRight;
         if (params && params.textAlign) this.element.style.textAlign = params.textAlign;
         if (params && params.lineHeight) this.element.style.lineHeight = params.lineHeight;
         if (params && params.position) this.element.style.position = params.position;
