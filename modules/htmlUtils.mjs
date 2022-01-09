@@ -213,7 +213,7 @@ export function createHtml(code) {
         "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);\n" +
         "document.addEventListener(\"DOMContentLoaded\", ()=>{\n" +
             "   console.log(\"DOMContentLoaded\");\n" +
-            "   if (true || (isIos() && !isInStandaloneMode())) {\n" +
+            "   if (isIos() && !isInStandaloneMode()) {\n" +
             "  showIosInstall();\n" +
             "   console.log(\"showIosInstall\");\n" +
             "  }\n" +
