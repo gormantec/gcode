@@ -12,6 +12,7 @@
   window.PWA.globals.icon512x512="https://gcode.com.au/images/boatcrew/boat-logo-blue-icon512x512.png";
   window.PWA.globals.splash="https://gcode.com.au/images/boatcrew/boat-logo.png";
   window.PWA.globals.splashColor="#AAAAAA";
+  window.PWA.globals.mockFrame="iphoneX";
   window.PWA.globals.splashBackgroundColor="#222222";
   window.PWA.globals.splashDuration=2000;
 
@@ -34,7 +35,7 @@ const isIos = () => {
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 document.addEventListener("DOMContentLoaded", ()=>{
    console.log("DOMContentLoaded");
-   if (true || (isIos() && !isInStandaloneMode())) {
+   if (isIos() && !isInStandaloneMode()) {
   showIosInstall();
    console.log("showIosInstall");
   }
@@ -59,6 +60,7 @@ if (window.opener && window.opener !== window) {
   icon180x180: https://gcode.com.au/images/boatcrew/boat-logo-blue.png
   icon192x192: https://gcode.com.au/images/boatcrew/boat-logo-blue-icon192x192.png
   icon512x512: https://gcode.com.au/images/boatcrew/boat-logo-blue-icon512x512.png
+  mockFrame: iphoneX
   splashBackgroundColor: #222222
   splashColor: #AAAAAA
   splashDuration: 2000
@@ -372,6 +374,7 @@ aPWA.addPageChangeListener((id) => {
                                                       borderStyle: "solid",
                                                       innerHTML: html
                                                      }));
+                          aCrewPage.appendChild(new ActionButton({innerText:"Ask to join"}));
                           aPWA.setPage(aCrewPage);
                         },
                         children: [
