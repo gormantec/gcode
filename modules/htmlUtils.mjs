@@ -211,9 +211,11 @@ export function createHtml(code) {
         "  return /iphone|ipad|ipod/.test( userAgent );\n" +
         "}\n" +
         "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);\n" +
-        "document.addEventListener(\"load\", ()=>{\n" +
+        "document.addEventListener(\"DOMContentLoaded\", ()=>{\n" +
+            "   console.log(\"DOMContentLoaded\");\n" +
             "   if (true || (isIos() && !isInStandaloneMode())) {\n" +
             "  showIosInstall();\n" +
+            "   console.log(\"showIosInstall\");\n" +
             "  }\n" +
             "});\n\n";
 
