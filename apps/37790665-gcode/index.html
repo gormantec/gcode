@@ -124,6 +124,7 @@ class CrewPage extends Page {
             "backgroundPosition": "center",
             "backgroundSize": "cover",
             "backgroundRepeat": "no-repeat",
+            "hideFloatingActionButton": "true",
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
             "navigateBackPage": aChatPage
         });
@@ -374,7 +375,16 @@ aPWA.addPageChangeListener((id) => {
                                                       borderStyle: "solid",
                                                       innerHTML: html
                                                      }));
-                          aCrewPage.appendChild(new ActionButton({innerText:"Ask to join"}));
+                          aCrewPage.appendChild(new ActionButton({
+            left: "unset",
+            right: "unset",
+            width: "60%",
+            innerText: "Ask to join",
+            position: "relative",
+            margin:"auto",
+            bottom:"unset",
+            top:"20px"
+        }));
                           aPWA.setPage(aCrewPage);
                         },
                         children: [
