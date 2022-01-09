@@ -1,0 +1,25 @@
+{
+  "name": "gcode63z",
+  "short_name": "gcode63z",
+  "theme_color": "#222222",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/002fe2auyt/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/002fe2auyt/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/002fe2auyt/index.html",
+  "description": "gcode63z",
+  "prefer_related_applications": false
+}
