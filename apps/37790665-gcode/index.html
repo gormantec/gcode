@@ -33,9 +33,13 @@ const isIos = () => {
   return /iphone|ipad|ipod/.test( userAgent );
 }
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-if (true || (isIos() && !isInStandaloneMode())) {
+document.addEventListener("DOMContentLoaded", ()=>{
+   console.log("DOMContentLoaded");
+   if (true || (isIos() && !isInStandaloneMode())) {
   showIosInstall();
-}
+   console.log("showIosInstall");
+  }
+});
 
 </script><script type="module">
 import { addkey } from "https://gcode.com.au/modules/near/index.mjs";

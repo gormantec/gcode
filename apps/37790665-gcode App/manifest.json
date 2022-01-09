@@ -1,0 +1,25 @@
+{
+  "name": "gcode App",
+  "short_name": "gcode App",
+  "theme_color": "black",
+  "background_color": "black",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/37790665-gcode App/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-gcode App/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-gcode App/index.html",
+  "description": "gcode App",
+  "prefer_related_applications": false
+}
