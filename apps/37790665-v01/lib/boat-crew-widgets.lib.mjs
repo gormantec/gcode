@@ -1,4 +1,4 @@
-export aPageChangheListener(id) {
+export function aPageChangheListener(id) {
     if (id == "ChatPage") {
         console.log("page=" + id);
         accountId = "gcode-4" + aPWA.userhash.toLowerCase() + ".testnet";
