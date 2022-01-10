@@ -185,7 +185,7 @@ export function createCrewDivForm({nextPage:nextPage1,nextPage:nextPage2})
                 "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
             };
             console.log(message);
-            aPWA.setPage(nextPage1);
+            PWA.getPWA().setPage(nextPage1);
             if (messages) await messages.addMessage({
                 "message": JSON.stringify(message)
             });
