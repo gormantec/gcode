@@ -1,0 +1,25 @@
+{
+  "name": "boatcrew15",
+  "short_name": "boatcrew15",
+  "theme_color": "#222222",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/37790665-boatcrew15/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-boatcrew15/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-boatcrew15/index.html",
+  "description": "boatcrew15",
+  "prefer_related_applications": false
+}
