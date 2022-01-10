@@ -60,7 +60,7 @@ export async function preload(files) {
             let count = 0;
             for (var i = 0; i < files.length; i++) {
                 console.log("count:"+count);
-                console.log("files:"+iles.length);
+                console.log("files:"+files.length);
                 var filename;
                 if( typeof files[i] == "string" )filename=files[i];
                 else if (files[i].dir && files[i].name ) filename = files[i].dir+files[i].name;
