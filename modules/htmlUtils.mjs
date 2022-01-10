@@ -212,7 +212,7 @@ export function createHtml(code) {
         "   a2hsBtn.style.display =\"block\";\n" +
         "   a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
         " }\n" +
-        "let deferredPrompt;\n" +
+        "let deferredPrompt;\n" +   
         " window.addEventListener('beforeinstallprompt', function (e) {\n" +
         "   e.preventDefault();\n" +
         "   deferredPrompt = e;\n" +
