@@ -38,6 +38,7 @@ let deferredPrompt;
    e.preventDefault();
    deferredPrompt = e;
    showAddToHomeScreen();
+   setTimeout(()=>{document.querySelector(".ad2hs-prompt").style.display ="none";},10000);
  });
 function showIosInstall() {
   let iosPrompt = document.querySelector(".ios-prompt");
