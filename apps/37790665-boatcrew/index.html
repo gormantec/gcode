@@ -181,7 +181,7 @@ class FormPage extends Page {
             "color": "#000000",
             "backgroundColor": "#ffffff",
             "navigateBackPage": aChatPage,
-            "child": myDiv,
+            "child": aCrewForm,
             "hideFloatingActionButton": "true",
         });
     }
@@ -291,7 +291,7 @@ var sendButtonAction = function(e) {
         })();
     }
 };
-var myDiv = new DivForm({
+var aCrewForm = new DivForm({
     paddingTop: "30px",
     formInputs: [{
             name: "subject",
@@ -347,21 +347,8 @@ var myDiv = new DivForm({
         onclick: sendButtonAction
     }
 });
-var aLoginPage = new LoginPage();
-var aFormPage = new FormPage();
-var aAsktoJoin = new AsktoJoin();
-var aPWA = new PWA({
-    "title": "Boat Crew",
-    "footer": "https://www.gormantec.com",
-    "primaryColor": "#2122d3",
-    "pwaAuth": "true"
-});
-aPWA.floatingActionButton.onclick(function() {
-    aPWA.setPage(aFormPage);
-});
-aPWA.setPage(aLoginPage);
-aPWA.show();
-aPWA.addPageChangeListener((id) => {
+
+var aChangeListener=(id) => {
     if (id == "ChatPage") {
         console.log("page=" + id);
         accountId = "gcode-4" + aPWA.userhash.toLowerCase() + ".testnet";
@@ -496,6 +483,26 @@ aPWA.addPageChangeListener((id) => {
 
         })();
     }
+};
+var aLoginPage = new LoginPage();
+var aFormPage = new FormPage();
+var aAsktoJoin = new AsktoJoin();
+
+
+
+var aPWA = new PWA({
+    "title": "Boat Crew",
+    "footer": "https://www.gormantec.com",
+    "primaryColor": "#2122d3",
+    "pwaAuth": "true"
 });
+aPWA.floatingActionButton.onclick(function() {
+    aPWA.setPage(aFormPage);
+});
+
+aPWA.addPageChangeListener(aChangeListener);
+
+aPWA.setPage(aLoginPage);
+aPWA.show();
 /*---------------------------------------------------------------------------*/
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
