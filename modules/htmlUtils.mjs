@@ -217,6 +217,7 @@ export function createHtml(code) {
         "   e.preventDefault();\n" +
         "   deferredPrompt = e;\n" +
         "   showAddToHomeScreen();\n" +
+        "   setTimeout(()=>{document.querySelector(\".ad2hs-prompt\").style.display =\"none\";},10000);\n" +
         " });\n" +
         "function showIosInstall() {\n" +
         "  let iosPrompt = document.querySelector(\".ios-prompt\");\n" +
