@@ -75,11 +75,52 @@ function publishToGit(code, user,token)
     appName = appName.trim();
 
 
+
+
+
+
+
+
+
     if (filename.endsWith(".mjs")) {
         window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
         try {
             var code = window.editor.getValue(); errorline=328;
+
+
+            var importsList=code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
+
+            var importFiles=[];
+            if(importsList && importsList.length>0)
+            {
+                for(var i=0;i<importsList.length;i++)
+                {
+                    var fileNameLib=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
+                    console.log("fileName: "+fileNameLib);
+                    let dir="";
+                    if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
+                    console.log(dir+fileNameLib+".mjs");
+                    importFiles.push({name:fileNameLib+".mjs",dir:dir});
+                }
+            }
+            console.log(importFiles);
+            preload(importFiles).then(()=>{
+                var filesArray=[];
+                for(var i=0;i<importFiles.length;i++)
+                {
+                    let slib=load(importFiles[i].dir+importFiles[i].name);
+                    if(slib && typeof slib=="string" && slib.length>0)
+                    {
+                        filesArray.push({ name: "/lib/"+importFiles[i].name, data: slib, type: "string" });
+                    }       
+                }
+                console.log(filesArray);
+            });
+
+
+
+
             var result = createHtml(code);
             var splashBackgroundColor = result.splashBackgroundColor;
             var splash = result.splash;
@@ -152,6 +193,8 @@ function publishToGit(code, user,token)
                 }
 
             });
+
+
         }
         catch (e) {
             console.error("error:" + e + "atline="+errorline);
