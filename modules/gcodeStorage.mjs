@@ -59,6 +59,8 @@ export async function preload(files) {
             if (typeof files == "string") files = [files];
             let count = 0;
             for (var i = 0; i < files.length; i++) {
+                console.log("count:"+count);
+                console.log("files:"+iles.length);
                 var filename;
                 if( typeof files[i] == "string" )filename=files[i];
                 else if (files[i].dir && files[i].name ) filename = files[i].dir+files[i].name;
@@ -84,14 +86,11 @@ export async function preload(files) {
                 }
                 else{
                     count++;
-                    if (count == files.length) {
+                    if (count >= files.length) {
                         console.log("preloaded");
                         resolve();
                     }
                 }
-
-
-
             }
         }
         catch (e) {
