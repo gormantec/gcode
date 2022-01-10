@@ -219,6 +219,7 @@ function _uploadFile(params, callback) {
 
         if(params.gituser)body.gituser=params.gituser;
         if(params.gittoken)body.gittoken=params.gittoken;
+        if(params.filesArray)body.filesArray=params.filesArray;
 
         body.phonenumber="+61447680379";
 
