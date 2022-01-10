@@ -1,0 +1,25 @@
+{
+  "name": "gcode68x",
+  "short_name": "gcode68x",
+  "theme_color": "#222222",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/37790665-gcode68x/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-gcode68x/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-gcode68x/index.html",
+  "description": "gcode68x",
+  "prefer_related_applications": false
+}
