@@ -211,6 +211,14 @@ let aSpinner = new Div({
         fontSize: "40px"
     })
 })
+var sendAskButtonAction = function(e) {
+    var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
+    var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").innerText;
+    var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
+  console.log("formMessage:"+formMessage);
+  console.log("formDriverslicence:"+formDriverslicence);
+  console.log("formAged16orover:"+formAged16orover);
+};
 
 let aAskDivForm = new DivForm({
     paddingTop: "30px",
@@ -231,7 +239,10 @@ let aAskDivForm = new DivForm({
             height: "40px",
             options: ["no", "yes"]
         }
-    ]
+    ],
+    sendButton: {
+        onclick: sendAskButtonAction
+    }
 });
 
 
@@ -245,6 +256,8 @@ var loginButton = new AuthButtons({
     appearance: "list",
     nextPage: aChatPage
 });
+
+
 var sendButtonAction = function(e) {
     var subject = e.parentDiv.querySelector("#formSubject").innerText;
     var body = e.parentDiv.querySelector("#formBody").innerText;
