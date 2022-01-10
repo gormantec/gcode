@@ -849,19 +849,25 @@ class DivForm extends Div{
             
         }
 
+        if(params.sendButton)
+        {
+            let sendButton = new ActionButton({
+                left: "unset",
+                right: "unset",
+                width: "60%",
+                innerText: "send",
+                position: "relative",
+                margin:"auto",
+                bottom:"unset",
+                top:"20px"
+            });
+            if(params.sendButton.onclick)
+            {
+                sendButton.onclick(params.sendButton.onclick);
+                this.appendChild(sendButton);
+            }
+        }
 
-        let sendButton = new ActionButton({
-            left: "unset",
-            right: "unset",
-            width: "60%",
-            innerText: "send",
-            position: "relative",
-            margin:"auto",
-            bottom:"unset",
-            top:"20px"
-        });
-        sendButton.onclick(params.sendButton.onclick);
-        this.appendChild(sendButton);
     }
 }
 
