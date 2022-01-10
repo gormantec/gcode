@@ -101,7 +101,7 @@ import {
     contract
 } from 'https://gcode.com.au/modules/near/index.mjs';
 
-import { aCrewDivForm,aPageChangheListener } from './lib/boat-crew-widgets.lib';
+import { createCrewDivForm,aPageChangheListener,aSpinner,createAskDivForm,createLoginButton } from './lib/boat-crew-widgets.lib.mjs';
 
 try {
     Page.clearPages();
@@ -118,7 +118,7 @@ class LoginPage extends Page {
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
-            "child": loginButton,
+            "child": createLoginButton({nextPage:ChatPage}),
             "bottom": ""
         });
     }
@@ -159,7 +159,7 @@ class AsktoJoin extends Page {
             "backgroundColor": "#ffffff",
             "hideFloatingActionButton": "true",
             "navigateBackPage": aChatPage,
-            "child": aAskDivForm
+            "child": createAskDivForm({nextPage:ChatPage})
         });
     }
 }
@@ -184,81 +184,17 @@ class FormPage extends Page {
             "color": "#000000",
             "backgroundColor": "#ffffff",
             "navigateBackPage": aChatPage,
-            "child": aCrewDivForm,
+            "child": createCrewDivForm(aSubmitPage,aChatPage),
             "hideFloatingActionButton": "true",
         });
     }
 }
 /*---------------------------------------------------------------------------*/
-let accountId = "";
-let myList = new Div();
-let messages = null;
-let aSpinner = new Div({
-    marginLeft: "50%",
-    child: new Div({
-        classNameOverride: "true",
-        class: "loader",
-        innerText: "...",
-        "margin": "0px",
-        "bottom": "40px",
-        "right": "auto",
-        "height": "40px",
-        "width": "40px",
-        "marginLeft": "-20px",
-        "left": "auto",
-        fontSize: "40px"
-    })
-})
-var sendAskButtonAction = function(e) {
-    var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
-    var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
-    var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
-    console.log("formMessage:" + formMessage);
-    console.log("formDriverslicence:" + formDriverslicence);
-    console.log("formAged16orover:" + formAged16orover);
-    aPWA.setPage(aSubmitPage);
-    setTimeout(()=>{aPWA.setPage(aChatPage);},2000);
-    
-};
-
-let aAskDivForm = new DivForm({
-    paddingTop: "30px",
-    formInputs: [{
-            name: "message",
-            type: "text",
-            height: "150px"
-        },
-        {
-            name: "drivers licence",
-            type: "select",
-            height: "40px",
-            options: ["No", "Yes"]
-        },
-        {
-            name: "aged 16 or over",
-            type: "select",
-            height: "40px",
-            options: ["No", "Yes"]
-        }
-    ],
-    sendButton: {
-        onclick: sendAskButtonAction
-    }
-});
-
-
 
 
 var aChatPage = new ChatPage();
 var aCrewPage = new CrewPage();
 var aSubmitPage = new SubmitPage();
-var loginButton = new AuthButtons({
-    facebookkey: "1240916769304778",
-    appearance: "list",
-    nextPage: aChatPage
-});
-
-
 
 var aLoginPage = new LoginPage();
 var aFormPage = new FormPage();
@@ -272,10 +208,7 @@ var aPWA = new PWA({
 aPWA.floatingActionButton.onclick(function() {
     aPWA.setPage(aFormPage);
 });
-
-
 aPWA.addPageChangeListener(aPageChangheListener);
-
 aPWA.setPage(aLoginPage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
