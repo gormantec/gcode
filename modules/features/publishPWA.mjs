@@ -3,6 +3,9 @@ import * as githubtree from '/modules/githubtree.mjs';
 
 import { getImage, createHtml,getImageAsync } from '/modules/htmlUtils.mjs';
 
+
+import { load, preload} from '/modules/gcodeStorage.mjs';
+
 var win;
 
 export const menuMetadata = { "id": "publishPWA", "class": "pageLeftToolbarButton", "materialIcon": "publish" };
