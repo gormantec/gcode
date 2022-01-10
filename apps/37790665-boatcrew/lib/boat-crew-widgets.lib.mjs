@@ -10,7 +10,7 @@ import {
 
 let messages = null;
 let accountId = "";
-let myList = new Div();
+export var myList = new Div();
 
 export function aPageChangheListener(id) {
     if (id == "ChatPage") {
