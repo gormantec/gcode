@@ -694,7 +694,7 @@ class AuthButtons extends Div {
         super(params);
         var authButtons = new Div({
             marginLeft: "-100px",
-            bottom: "50px",
+            bottom: "70px",
             height: "auto",
             width: "200px",
             tagName: "pwa-auth"
