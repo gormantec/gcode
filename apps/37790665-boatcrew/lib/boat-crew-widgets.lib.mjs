@@ -1,7 +1,21 @@
-export aPageChangheListener(id) {
+import {
+    PWA,
+    Page,
+    Div,
+    AuthButtons,
+    ActionButton,
+    DivForm
+} from 'https://gcode.com.au/modules/pwa.mjs';
+
+
+let messages = null;
+let accountId = "";
+let myList = new Div();
+
+export function aPageChangheListener(id) {
     if (id == "ChatPage") {
         console.log("page=" + id);
-        accountId = "gcode-4" + aPWA.userhash.toLowerCase() + ".testnet";
+        accountId = "gcode-4" + PWA.getPWA().userhash.toLowerCase() + ".testnet";
         //10160347981689434
         console.log(accountId);
         //lost contract = gcode-eea3047988c.testnet
@@ -96,11 +110,11 @@ export aPageChangheListener(id) {
                                 bottom: "20px",
                                 top: "unset",
                                 onclick: () => {
-                                    aPWA.setPage(aAsktoJoin);
+                                    PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
                                 }
                             }));
                             aCrewPage.setChild(pageForm);
-                            aPWA.setPage(aCrewPage);
+                            PWA.getPWA().setPage(aCrewPage);
                         },
                         children: [
                             new Div({
@@ -135,7 +149,11 @@ export aPageChangheListener(id) {
     }
 }
 
-var sendButtonAction = function(e) {
+
+export function createCrewDivForm({nextPage:nextPage1,nextPage:nextPage2})
+{
+  
+  var sendButtonAction = function(e) {
     var subject = e.parentDiv.querySelector("#formSubject").innerText;
     var body = e.parentDiv.querySelector("#formBody").innerText;
     var driver = e.parentDiv.querySelector("#formDriver").value;
@@ -162,15 +180,15 @@ var sendButtonAction = function(e) {
                 "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
             };
             console.log(message);
-            aPWA.setPage(aSubmitPage);
+            aPWA.setPage(nextPage1);
             if (messages) await messages.addMessage({
                 "message": JSON.stringify(message)
             });
-            aPWA.setPage(aChatPage);
+            PWA.getPWA().setPage(nextPage2);
         })();
     }
 };
-export var aCrewDivForm = new DivForm({
+return new DivForm({
     paddingTop: "30px",
     formInputs: [{
             name: "subject",
@@ -226,3 +244,71 @@ export var aCrewDivForm = new DivForm({
         onclick: sendButtonAction
     }
 });
+}
+
+export var aSpinner = new Div({
+    marginLeft: "50%",
+    child: new Div({
+        classNameOverride: "true",
+        class: "loader",
+        innerText: "...",
+        "margin": "0px",
+        "bottom": "40px",
+        "right": "auto",
+        "height": "40px",
+        "width": "40px",
+        "marginLeft": "-20px",
+        "left": "auto",
+        fontSize: "40px"
+    })
+});
+
+export function createAskDivForm({nextPage:nextPage})
+{
+    var sendAskButtonAction = function(e) {
+        var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
+        var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
+        var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
+        console.log("formMessage:" + formMessage);
+        console.log("formDriverslicence:" + formDriverslicence);
+        console.log("formAged16orover:" + formAged16orover);
+        aPWA.setPage(aSubmitPage);
+        setTimeout(()=>{PWA.getPWA().setPage(nextPage);},2000);
+
+    };
+
+   return new DivForm({
+      paddingTop: "30px",
+      formInputs: [{
+              name: "message",
+              type: "text",
+              height: "150px"
+          },
+          {
+              name: "drivers licence",
+              type: "select",
+              height: "40px",
+              options: ["No", "Yes"]
+          },
+          {
+              name: "aged 16 or over",
+              type: "select",
+              height: "40px",
+              options: ["No", "Yes"]
+          }
+      ],
+      sendButton: {
+          onclick: sendAskButtonAction
+      }
+  });
+  
+}
+
+export function createLoginButton({nextPage:nextPage})
+{
+  return new AuthButtons({
+      facebookkey: "1240916769304778",
+      appearance: "list",
+      nextPage: nextPage
+  });
+}
