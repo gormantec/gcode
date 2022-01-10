@@ -93,7 +93,7 @@ function publishToGit(code, user,token)
 
 
             var importsList=code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
-
+            console.log(importsList);
             var importFiles=[];
             if(importsList && importsList.length>0)
             {
@@ -109,6 +109,7 @@ function publishToGit(code, user,token)
             }
             console.log(importFiles);
             preload(importFiles).then(()=>{
+                console.log("xxxxxx");
                 var filesArray=[];
                 for(var i=0;i<importFiles.length;i++)
                 {
