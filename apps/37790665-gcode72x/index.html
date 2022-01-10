@@ -409,7 +409,7 @@ aPWA.addPageChangeListener((id) => {
                 accounts.push(accountId);
                 let messageList = JSON.parse(await messages.listMessages({
                     accountIds: JSON.stringify(accounts),
-                    max: 20
+                    max: 1
                 }, 300000000000000));
                 console.log(messageList);
                 myList.removeChildren();
