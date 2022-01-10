@@ -1,0 +1,25 @@
+{
+  "name": "gcode76x",
+  "short_name": "gcode76x",
+  "theme_color": "#222222",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/37790665-gcode76x/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-gcode76x/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-gcode76x/index.html",
+  "description": "gcode76x",
+  "prefer_related_applications": false
+}
