@@ -321,6 +321,8 @@ class PWA {
         var mockFrame = urlParams.get("mockFrame") || this.inIframe()?window.PWA.globals.mockFrame:null;
         var rootWindow = win.document.body;
         var aPWA = this;
+        var ad2hsPrompt=new Div({tagName:"button",classNameOverride: true,class:"ad2hs-prompt",innerText:"Install Web App"});
+
         var iosPrompt=new Div({class: "ios-prompt",classNameOverride: true,children:[
             new Div({tagName:"span",classNameOverride: true,color: "rgb(187, 187, 187)", float: "right", marginTop: "-14px", marginRight: "-11px"}),
             new Div({tagName:"img",classNameOverride: true,src:"https://gcode.com.au/images/add2home.svg",float: "left", height: "80px", width: "auto", marginTop: "-8px", marginRight: "1rem"}),
@@ -328,6 +330,8 @@ class PWA {
         ]});
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
+            
+            win.document.body.appendChild(ad2hsPrompt.element);
             win.document.body.appendChild(iosPrompt.element);
             aPWA.buildScreen(msec,win,rootWindow);
         }
@@ -337,6 +341,7 @@ class PWA {
             var frame = new Div({});
             frame.appendChild(splashdiv);
             win.document.body.appendChild(frame.element);
+            win.document.body.appendChild(ad2hsPrompt.element);
             win.document.body.appendChild(iosPrompt.element);
             rootWindow=frame.element;
             this.buildScreen(msec,win,rootWindow);
