@@ -40,7 +40,6 @@ export function dialogAction(event) {
 
     if (event.type == "dialog" && event.id == "publishPwaDialog") {
         console.log("publishPwaDialog");
-        console.log(event);
         if (event.value == "publish") {
             let token=githubtree.getToken();
             if (token) {
@@ -93,23 +92,19 @@ function publishToGit(code, user,token)
 
 
             var importsList=code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib['"]/g);
-            console.log(importsList);
+  
             var importFiles=[];
             if(importsList && importsList.length>0)
             {
                 for(var i=0;i<importsList.length;i++)
                 {
                     var fileNameLib=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib)(['"])/g,"$2");
-                    console.log("fileName: "+fileNameLib);
                     let dir="";
                     if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
-                    console.log(dir+fileNameLib+".mjs");
                     importFiles.push({name:fileNameLib+".mjs",dir:dir});
                 }
             }
-            console.log(importFiles);
             preload(importFiles).then(()=>{
-                console.log("xxxxxx");
                 var filesArray=[];
                 for(var i=0;i<importFiles.length;i++)
                 {
@@ -119,7 +114,6 @@ function publishToGit(code, user,token)
                         filesArray.push({ name: "/lib/"+importFiles[i].name, data: window.btoa(slib), type: "base64" });
                     }       
                 }
-                console.log(filesArray);
                 var result = createHtml(code);
                 var splashBackgroundColor = result.splashBackgroundColor;
                 var splash = result.splash;
@@ -155,7 +149,6 @@ function publishToGit(code, user,token)
                 if(result.icon192x192)uploadConfig.icon192=result.icon192x192;
                 if(result.icon512x512)uploadConfig.icon512=result.icon512x512;
                 if(filesArray && filesArray.length>0)uploadConfig.filesArray=filesArray;
-                console.log(uploadConfig);
                 _uploadFile(uploadConfig, function (error, uri) {
                     if (error) { errorline=361;
                         window.debug.log(error); errorline=362;
@@ -171,17 +164,14 @@ function publishToGit(code, user,token)
                             import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {errorline=372;
                                 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);errorline=373;
                                 getNearApi.then(({ nearApi }) => {errorline=374;
-                                    const nearCfg = nearConfig(nearApi);errorline=375;console.log("get key:"+accountId);
-                                    nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;console.log("key="+key);
+                                    const nearCfg = nearConfig(nearApi);errorline=375;
+                                    nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;
                                         if(key)
                                         {
                                             const lll = function (e) {errorline=377;
-                                                console.log("Received Post: " + e.origin);errorline=378;
                                                 if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
-                                                console.log("Send Post to: " + uri);
                                                 win.postMessage({ accountId: accountId, key: key.toString() }, uri);
                                                 window.removeEventListener("message", lll);
-                                                console.log("Send Post");
                                             };
                                             window.addEventListener("message", lll, false);
                                         }
@@ -217,13 +207,10 @@ function _uploadFile(params, callback) {
     (async ()=>{
 
         var iconBase64=await getImageAsync(icon);
-        console.log(iconBase64);
         var iconBase64_192;
         if(params.icon192) iconBase64_192=await getImageAsync(params.icon192);
-        console.log(iconBase64_192);
         var iconBase64_512;
         if(params.icon512) iconBase64_512=await getImageAsync(params.icon512);
-        console.log(iconBase64_512);
 
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
@@ -234,8 +221,6 @@ function _uploadFile(params, callback) {
         if(params.gittoken)body.gittoken=params.gittoken;
 
         body.phonenumber="+61447680379";
-        
-        console.log(body);
 
         fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
             method: 'post',
