@@ -7,6 +7,11 @@ import {
     DivForm
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
+import {
+    login,
+    contract
+} from 'https://gcode.com.au/modules/near/index.mjs';
+
 
 let messages = null;
 let accountId = "";
