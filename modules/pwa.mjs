@@ -858,6 +858,7 @@ class DivForm extends Div{
                 innerText: "send",
                 position: "relative",
                 margin:"auto",
+                marginBottom:"50px",
                 bottom:"unset",
                 top:"20px"
             });
