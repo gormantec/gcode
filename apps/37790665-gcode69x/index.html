@@ -259,7 +259,7 @@ var sendButtonAction = function(e) {
     console.log(time);
     if (subject && subject.trim() != "" && body && body.trim() != "") {
         (async () => {
-            var message = {
+            let message = {
                 "from": aPWA.credentials.name,
                 "accountId": accountId,
                 "subject": subject,
