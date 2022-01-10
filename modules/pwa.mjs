@@ -35,6 +35,12 @@ class PWA {
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
+
+    static getPWA()
+    {
+        return myglobals.PWA;
+    }
+
     setAlert(message) {
         this.alertDialog = new Div({ id: "alertDialog",display:"none"});
         this.alertDialogBody = new Div({ id: "alertDialogBody",backgroundColor:this.primaryColorText,borderColor:this.primaryColor,borderWidth:"2px"  });
