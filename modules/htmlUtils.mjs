@@ -198,7 +198,26 @@ export function createHtml(code) {
     _script.text += "\n  if('serviceWorker' in navigator) {\n" +
         "    navigator.serviceWorker.register('sw.js');\n" +
         "};\n\n" +
-
+        "function addToHomeScreen() {\n" +
+        "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
+        "   a2hsBtn.style.display = 'none'; \n" +
+        "   deferredPrompt.prompt();\n" +
+        "   deferredPrompt.userChoice.then(function(choiceResult){\n" +
+        "   if (choiceResult.outcome === 'accepted') console.log('User accepted the A2HS prompt');\n" +
+        "   else console.log('User dismissed the A2HS prompt');\n" +
+        "   deferredPrompt = null;\n" +
+        " });}\n" +
+        "function showAddToHomeScreen() {\n" +
+        "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
+        "   a2hsBtn.style.display =\"block\";\n" +
+        "   a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
+        " }\n" +
+        "let deferredPrompt;\n" +
+        " window.addEventListener('beforeinstallprompt', function (e) {\n" +
+        "   e.preventDefault();\n" +
+        "   deferredPrompt = e;\n" +
+        "   showAddToHomeScreen();\n" +
+        " });\n" +
         "function showIosInstall() {\n" +
         "  let iosPrompt = document.querySelector(\".ios-prompt\");\n" +
         "  iosPrompt.style.display = \"block\";\n" +
