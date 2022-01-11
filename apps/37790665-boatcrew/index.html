@@ -96,10 +96,7 @@ import {
     ActionButton,
     DivForm
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {
-    login,
-    contract
-} from 'https://gcode.com.au/modules/near/index.mjs';
+
 
 import { myList,createCrewDivForm,aPageChangheListener,aSpinner,createAskDivForm,createLoginButton } from './lib/boat-crew-widgets.lib.mjs';
 
@@ -118,7 +115,7 @@ class LoginPage extends Page {
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
-            "child": createLoginButton({nextPage:ChatPage}),
+            "child": aLoginButton,
             "bottom": ""
         });
     }
@@ -133,7 +130,6 @@ class ChatPage extends Page {
             "backgroundSize": "cover",
             "backgroundRepeat": "no-repeat",
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
-            "navigateBackPage": aLoginPage,
             "child": myList
         });
     }
@@ -148,7 +144,8 @@ class CrewPage extends Page {
             "backgroundRepeat": "no-repeat",
             "hideFloatingActionButton": "true",
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
-            "navigateBackPage": aChatPage
+            "navigateBackPage": aChatPage,
+            "child": aCrewDivForm
         });
     }
 }
@@ -159,7 +156,7 @@ class AsktoJoin extends Page {
             "backgroundColor": "#ffffff",
             "hideFloatingActionButton": "true",
             "navigateBackPage": aChatPage,
-            "child": createAskDivForm({nextPage:ChatPage})
+            "child": aAskDivForm
         });
     }
 }
@@ -184,7 +181,7 @@ class FormPage extends Page {
             "color": "#000000",
             "backgroundColor": "#ffffff",
             "navigateBackPage": aChatPage,
-            "child": createCrewDivForm(aSubmitPage,aChatPage),
+            "child": aCrewDivForm,
             "hideFloatingActionButton": "true",
         });
     }
@@ -192,13 +189,18 @@ class FormPage extends Page {
 /*---------------------------------------------------------------------------*/
 
 
-var aChatPage = new ChatPage();
-var aCrewPage = new CrewPage();
-var aSubmitPage = new SubmitPage();
 
+var aChatPage = new ChatPage();
+var aSubmitPage = new SubmitPage();
+var aCrewDivForm=createCrewDivForm({nextPage1:aSubmitPage,nextPage2:aChatPage});
+var aCrewPage = new CrewPage();
+
+var aLoginButton=createLoginButton({nextPage:aChatPage});
 var aLoginPage = new LoginPage();
 var aFormPage = new FormPage();
+var aAskDivForm=createAskDivForm({nextPage:aChatPage});
 var aAsktoJoin = new AsktoJoin();
+
 var aPWA = new PWA({
     "title": "Boat Crew",
     "footer": "https://www.gormantec.com",
