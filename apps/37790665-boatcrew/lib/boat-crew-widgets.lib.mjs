@@ -7,6 +7,11 @@ import {
     DivForm
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
+import {
+    login,
+    contract
+} from 'https://gcode.com.au/modules/near/index.mjs';
+
 
 let messages = null;
 let accountId = "";
@@ -24,7 +29,7 @@ export function aPageChangheListener(id) {
                 if (!messages) {
                     var config = await login({
                         accountId: accountId,
-                        contractId: "gcode-eeabe089d97.testnet"
+                        contractId: "gcode-eeabe089d972.testnet"
                     });
                     config.methods = ["addMessage", "listMessages"];
                     messages = await contract(config);
@@ -113,8 +118,8 @@ export function aPageChangheListener(id) {
                                     PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
                                 }
                             }));
-                            aCrewPage.setChild(pageForm);
-                            PWA.getPWA().setPage(aCrewPage);
+                            Page.getPage("CrewPage").setChild(pageForm);
+                            PWA.getPWA().setPage(Page.getPage("CrewPage"));
                         },
                         children: [
                             new Div({
@@ -150,7 +155,7 @@ export function aPageChangheListener(id) {
 }
 
 
-export function createCrewDivForm({nextPage:nextPage1,nextPage:nextPage2})
+export function createCrewDivForm({nextPage1,nextPage2})
 {
   
   var sendButtonAction = function(e) {
@@ -168,7 +173,7 @@ export function createCrewDivForm({nextPage:nextPage1,nextPage:nextPage2})
     if (subject && subject.trim() != "" && body && body.trim() != "") {
         (async () => {
             let message = {
-                "from": aPWA.credentials.name,
+                "from": PWA.getPWA().credentials.name,
                 "accountId": accountId,
                 "subject": subject,
                 "body": body,
@@ -180,7 +185,7 @@ export function createCrewDivForm({nextPage:nextPage1,nextPage:nextPage2})
                 "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
             };
             console.log(message);
-            aPWA.setPage(nextPage1);
+            PWA.getPWA().setPage(nextPage1);
             if (messages) await messages.addMessage({
                 "message": JSON.stringify(message)
             });
@@ -263,7 +268,7 @@ export var aSpinner = new Div({
     })
 });
 
-export function createAskDivForm({nextPage:nextPage})
+export function createAskDivForm({nextPage})
 {
     var sendAskButtonAction = function(e) {
         var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
@@ -304,7 +309,7 @@ export function createAskDivForm({nextPage:nextPage})
   
 }
 
-export function createLoginButton({nextPage:nextPage})
+export function createLoginButton({nextPage})
 {
   return new AuthButtons({
       facebookkey: "1240916769304778",
