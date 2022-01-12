@@ -101,7 +101,8 @@ function refreshScreen() {
 function structureToCode() {
 
     let resp = "";
-
+    console.log("structureToCode");
+    console.log(structure);
     structure.forEach((block) => {
         if (block.comment) {
             resp = resp + block.comment + "\n";
