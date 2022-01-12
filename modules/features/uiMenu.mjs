@@ -94,11 +94,11 @@ function refreshScreen() {
     if (!exists) {
         _module.setAttribute("type", "module");
         _module.text = "\n" +
-            "window.onmessage = function(e) {if (JSON.parse(e.data).event == 'pageChange') {" +
-            "console.log(JSON.parse(e.data).data.pageId);" +
-            "var pageSelect=document.querySelector(\"#pageMiddle-" + menuMetadata.id + "-pageselect\");" +
-            "pageSelect.value=JSON.parse(e.data).data.pageId;" +
-            "pageSelect.dispatchEvent(new Event(\"change\"));" +
+            "window.onmessage = function(e) {let data=null;\ntry{data=JSON.parse(e.data);}catch(e){}\nif (data && data.event == 'pageChange') {\n" +
+            "console.log(JSON.parse(e.data).data.pageId);\n" +
+            "var pageSelect=document.querySelector(\"#pageMiddle-" + menuMetadata.id + "-pageselect\");\n" +
+            "pageSelect.value=JSON.parse(e.data).data.pageId;\n" +
+            "pageSelect.dispatchEvent(new Event(\"change\"))\n;" +
             "}};" + "\n";
         document.querySelector("head").appendChild(_module);
     }
