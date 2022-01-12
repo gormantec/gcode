@@ -62,7 +62,7 @@ function refreshScreen() {
     sCode = sCode.replaceAll(regex3, ".setPage(a" + block.class.name + ");\naPWA.show();//changed");
 
 
-    var result = createHtml(sCode);
+    var result = createHtml(sCode,{noInstallCode:true,noServiceWorker:true});
     var splashBackgroundColor = result.splashBackgroundColor;
     var splash = result.splash;
     var mockFrame = result.mockFrame;

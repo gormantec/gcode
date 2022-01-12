@@ -78,7 +78,9 @@ export async function getImageAsync(url) {
 }
 
 
-export function createHtml(code) {
+export function createHtml(code,options) {
+
+    if(!options)option={};
     var splashBackgroundColor = null;
     var splash = null;
     var mockFrame = null;
@@ -148,7 +150,7 @@ export function createHtml(code) {
     rootHead.appendChild(_link);
     _link = window.document.createElement("meta");
     _link.setAttribute("property", "fpwa:template");
-    _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
+    _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation) );
     rootHead.appendChild(_link);
 
     _link = window.document.createElement("link");
@@ -195,11 +197,16 @@ export function createHtml(code) {
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
 
+    if(!options.noServiceWorker)
+    {
     _script.text += "\nlet deferredPrompt;\n" +  
         "if('serviceWorker' in navigator) {\n" +
         "    navigator.serviceWorker.register('sw.js');\n" +
-        "};\n\n" +
-        "function addToHomeScreen() {\n" +
+        "};\n\n";
+    }
+    if(!options.noInstallCode)
+    {
+    _script.text += "function addToHomeScreen() {\n" +
         "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
         "   a2hsBtn.style.display = 'none'; \n" +
         "   deferredPrompt.prompt();\n" +
@@ -238,18 +245,21 @@ export function createHtml(code) {
             "   console.log(\"showIosInstall\");\n" +
             "  }\n" +
             "});\n\n";
+    }
 
     rootHead.appendChild(_script);
-
-    var jApp = 'import { addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
-        'if (window.opener && window.opener !== window) {\n' +
-        '    window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
-        '    window.addEventListener("load", (event) => {window.opener.postMessage("loaded","https://gcode.com.au");});\n' +
-        '}\n';
-    var _module = window.document.createElement("script");
-    _module.setAttribute("type", "module");
-    _module.text = "\n" + jApp + "\n";
-    rootHead.appendChild(_module);
+    if(!options.noWindowMessages)
+    {
+        var jApp = 'import { addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
+            'if (window.opener && window.opener !== window) {\n' +
+            '    window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
+            '    window.addEventListener("load", (event) => {window.opener.postMessage("loaded","https://gcode.com.au");});\n' +
+            '}\n';
+        var _module = window.document.createElement("script");
+        _module.setAttribute("type", "module");
+        _module.text = "\n" + jApp + "\n";
+        rootHead.appendChild(_module);
+    }
 
     return { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
 }
