@@ -80,7 +80,7 @@ export async function getImageAsync(url) {
 
 export function createHtml(code,options) {
 
-    if(!options)option={};
+    if(!options)options={};
     var splashBackgroundColor = null;
     var splash = null;
     var mockFrame = null;
