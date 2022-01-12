@@ -72,7 +72,7 @@ function refreshScreen() {
     var rootHTML = result.rootHTML;
     var _module = window.document.createElement("script");
     _module.id = cyrb53("mainSourceCode");
-    var exists = document.getElementById(_module.id);
+    var exists = rootHTML.querySelector("head").getElementById(_module.id);
     if (exists)  exists.remove();
     _module.setAttribute("type", "module");
     _module.text = "\n" + sCode + "\n";
@@ -80,7 +80,7 @@ function refreshScreen() {
     
     _module = window.document.createElement("script");
     _module.id = cyrb53("window.PWA.globals.pwaInstances[0].addPageChangeListener()");
-    var exists = document.getElementById(_module.id);
+    var exists = rootHTML.querySelector("head").getElementById(_module.id);
     if (!exists) {
         _module.setAttribute("type", "module");
         _module.text = "\n" + "window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{\"event\":\"pageChange\",\"data\":{\"pageId\":\"'+pageId+'\"}}', '*');});" + "\n";
