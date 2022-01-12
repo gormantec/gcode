@@ -1,12 +1,12 @@
-const PRECACHE = 'precache-v1-37790665-boatcrew';
-const RUNTIME = 'runtime-37790665-boatcrew';
+const PRECACHE = 'precache-v1-37790665-boatcrew72x';
+const RUNTIME = 'runtime-37790665-boatcrew72x';
 const PRECACHE_URLS = [
-  '/apps/37790665-boatcrew/index.html',
-  '/apps/37790665-boatcrew/index.html?mockFrame=iphoneX',
-  '/apps/37790665-boatcrew/icon.png',
-  '/apps/37790665-boatcrew/192x192.icon.png',
-  '/apps/37790665-boatcrew/512x512.icon.png',
-  '/apps/37790665-boatcrew/manifest.json',
+  '/apps/37790665-boatcrew72x/index.html',
+  '/apps/37790665-boatcrew72x/index.html?mockFrame=iphoneX',
+  '/apps/37790665-boatcrew72x/icon.png',
+  '/apps/37790665-boatcrew72x/192x192.icon.png',
+  '/apps/37790665-boatcrew72x/512x512.icon.png',
+  '/apps/37790665-boatcrew72x/manifest.json',
   'https://gcode.com.au/css/pwa.css'
 ];
 self.addEventListener('install', event => {event.waitUntil(caches.open(PRECACHE).then(cache => cache.addAll(PRECACHE_URLS)).then(self.skipWaiting()));});
