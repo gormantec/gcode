@@ -130,7 +130,7 @@ function newRow(data) {
 }
 
 export function aPageChangheListener(id) {
-    if (id == "ChatPage") {
+    if (id == "ChatPage" && PWA.getPWA().userhash) {
         console.log("page=" + id);
         accountId = "gcode-4" + PWA.getPWA().userhash.toLowerCase() + ".testnet";
         //10160347981689434
