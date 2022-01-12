@@ -1,5 +1,6 @@
 /* Feature Name: UI Menu */
 import { getImage, createHtml } from '/modules/htmlUtils.mjs';
+import { cyrb53 } from './cyrb53.mjs';
 
 export const menuMetadata = { "id": "uiMenu", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
 
@@ -70,28 +71,37 @@ function refreshScreen() {
     var mockFrame = result.mockFrame;
     var rootHTML = result.rootHTML;
     var _module = window.document.createElement("script");
+    _module.id = cyrb53("mainSourceCode");
+    var exists = document.getElementById(script.id);
+    if (exists)  exists.remove();
     _module.setAttribute("type", "module");
     _module.text = "\n" + sCode + "\n";
     rootHTML.querySelector("head").appendChild(_module);
+    
     _module = window.document.createElement("script");
-    _module.setAttribute("type", "module");
-    _module.text = "\n" + "window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{\"event\":\"pageChange\",\"data\":{\"pageId\":\"'+pageId+'\"}}', '*');});" + "\n";
-
-
-
-    rootHTML.querySelector("head").appendChild(_module);
+    _module.id = cyrb53("window.PWA.globals.pwaInstances[0].addPageChangeListener()");
+    var exists = document.getElementById(script.id);
+    if (!exists) {
+        _module.setAttribute("type", "module");
+        _module.text = "\n" + "window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{\"event\":\"pageChange\",\"data\":{\"pageId\":\"'+pageId+'\"}}', '*');});" + "\n";
+        rootHTML.querySelector("head").appendChild(_module);
+    }
     var izoom = mockFrameIframe.getAttribute("data-zoom");
     rootHTML.querySelector("body").style.zoom = izoom;
     _module = window.document.createElement("script");
-    _module.setAttribute("type", "module");
-    _module.text = "\n" +
-        "window.onmessage = function(e) {if (JSON.parse(e.data).event == 'pageChange') {" +
-        "console.log(JSON.parse(e.data).data.pageId);" +
-        "var pageSelect=document.querySelector(\"#pageMiddle-" + menuMetadata.id + "-pageselect\");" +
-        "pageSelect.value=JSON.parse(e.data).data.pageId;" +
-        "pageSelect.dispatchEvent(new Event(\"change\"));" +
-        "}};" + "\n";
-    document.querySelector("head").appendChild(_module);
+    _module.id = cyrb53("window.onmessage = function(e) {if (JSON.parse(e.data).event == 'pageChange') {}");
+    exists = document.getElementById(script.id);
+    if (!exists) {
+        _module.setAttribute("type", "module");
+        _module.text = "\n" +
+            "window.onmessage = function(e) {if (JSON.parse(e.data).event == 'pageChange') {" +
+            "console.log(JSON.parse(e.data).data.pageId);" +
+            "var pageSelect=document.querySelector(\"#pageMiddle-" + menuMetadata.id + "-pageselect\");" +
+            "pageSelect.value=JSON.parse(e.data).data.pageId;" +
+            "pageSelect.dispatchEvent(new Event(\"change\"));" +
+            "}};" + "\n";
+        document.querySelector("head").appendChild(_module);
+    }
 
     var doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
     rootHTML.getElementsByTagName("body")[0].innerHTML = "";
