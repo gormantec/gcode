@@ -195,7 +195,8 @@ export function createHtml(code) {
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
 
-    _script.text += "\n  if('serviceWorker' in navigator) {\n" +
+    _script.text += "\nlet deferredPrompt;\n" +  
+        "if('serviceWorker' in navigator) {\n" +
         "    navigator.serviceWorker.register('sw.js');\n" +
         "};\n\n" +
         "function addToHomeScreen() {\n" +
@@ -211,8 +212,7 @@ export function createHtml(code) {
         "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
         "   a2hsBtn.style.display =\"block\";\n" +
         "   a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
-        " }\n" +
-        "let deferredPrompt;\n" +   
+        " }\n" + 
         " window.addEventListener('beforeinstallprompt', function (e) {\n" +
         "   e.preventDefault();\n" +
         "   deferredPrompt = e;\n" +
