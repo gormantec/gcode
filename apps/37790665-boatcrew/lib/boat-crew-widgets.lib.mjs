@@ -107,7 +107,7 @@ function newRow(data) {
             new Div({
                 position: "relative",
                 fontWeight: "bold",
-                innerHTML: messageList.data[i].message.subject
+                innerHTML: _message.subject
             }),
             new Div({
                 textAlign: "right",
@@ -123,7 +123,7 @@ function newRow(data) {
                 fontSize: "small",
                 fontStyle: "italic",
                 marginTop: "10px",
-                innerHTML: "<p style=\"word-wrap: break-word;\">" + messageList.data[i].message.body + "</p>"
+                innerHTML: "<p style=\"word-wrap: break-word;\">" + _message.body + "</p>"
             }),
         ]
     })
