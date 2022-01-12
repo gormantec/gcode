@@ -15,7 +15,8 @@
   window.PWA.globals.splashBackgroundColor="#222222";
   window.PWA.globals.splashDuration=2000;
 
-  if('serviceWorker' in navigator) {
+let deferredPrompt;
+if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/apps/37790665-boatcrew/sw.js');
 };
 
@@ -33,7 +34,6 @@ function showAddToHomeScreen() {
    a2hsBtn.style.display ="block";
    a2hsBtn.addEventListener("click", addToHomeScreen);
  }
-let deferredPrompt;
  window.addEventListener('beforeinstallprompt', function (e) {
    e.preventDefault();
    deferredPrompt = e;
@@ -96,10 +96,7 @@ import {
     ActionButton,
     DivForm
 } from 'https://gcode.com.au/modules/pwa.mjs';
-
-
 import { myList,createCrewDivForm,aPageChangheListener,aSpinner,createAskDivForm,createLoginButton } from './lib/boat-crew-widgets.lib.mjs';
-
 try {
     Page.clearPages();
 } catch (e) {}
@@ -182,25 +179,20 @@ class FormPage extends Page {
             "backgroundColor": "#ffffff",
             "navigateBackPage": aChatPage,
             "child": aCrewDivForm,
-            "hideFloatingActionButton": "true",
+            "hideFloatingActionButton": "true"
         });
     }
 }
 /*---------------------------------------------------------------------------*/
-
-
-
 var aChatPage = new ChatPage();
 var aSubmitPage = new SubmitPage();
 var aCrewDivForm=createCrewDivForm({nextPage1:aSubmitPage,nextPage2:aChatPage});
 var aCrewPage = new CrewPage();
-
 var aLoginButton=createLoginButton({nextPage:aChatPage});
 var aLoginPage = new LoginPage();
 var aFormPage = new FormPage();
 var aAskDivForm=createAskDivForm({nextPage:aChatPage});
 var aAsktoJoin = new AsktoJoin();
-
 var aPWA = new PWA({
     "title": "Boat Crew X3",
     "footer": "https://www.gormantec.com",
@@ -214,4 +206,5 @@ aPWA.addPageChangeListener(aPageChangheListener);
 aPWA.setPage(aLoginPage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
+
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
