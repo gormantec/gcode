@@ -17,7 +17,7 @@ let messages = null;
 let accountId = "";
 export var myList = new Div();
 
-function nearConnect() {
+async function nearConnect() {
     if (!messages) {
         var config = await login({
             accountId: accountId,
@@ -137,7 +137,7 @@ export function aPageChangheListener(id) {
         //lost contract = gcode-eea3047988c.testnet
         (async () => {
             try {
-                nearConnect();
+                await nearConnect();
                 if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
                     myList.insertBefore(newSpinnerRow(), myList.firstChild);
                 }
