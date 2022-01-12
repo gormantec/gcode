@@ -366,7 +366,7 @@ function showUiEditor() {
             appendClassParams( pagePropsDiv, block.class.constructor.super);
             appendBlankParams( pagePropsDiv, block.class.constructor.super);
             pagesBody.append(pagePropsDiv);
-            refreshScreen();
+            //refreshScreen();
 
         }
     }
