@@ -61,7 +61,7 @@ function refreshScreen() {
 
     sCode = sCode.replaceAll(regex3, ".setPage(a" + block.class.name + ");\naPWA.show();//changed");
 
-    sCode = sCode.replaceAll(/(import.*?\sfrom\s['"])(\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs['"])/g, "$1/apps/37790665-gcode/lib/$3");
+    sCode = sCode.replaceAll(/(import.*?\sfrom\s['"])(\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs['"])/g, "$1/apps/37790665-boatcrew/lib/$3");
 
 
     var result = createHtml(sCode,{noInstallCode:true,noServiceWorker:true});
