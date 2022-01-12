@@ -51,8 +51,9 @@ function newSpinnerRow() {
     });
 }
 
-function newRow(_message) {
-    var dt = new Date(Date.parse(messageList.data[i].date));
+function newRow(data) {
+  	let _message=data.message;
+    var dt = new Date(Date.parse(data.data));
     let localTime = dt.getHours() + ":" + dt.getMinutes().toString().padStart(2, "0");
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let localDay = weekdays[dt.getDay()];
@@ -151,7 +152,7 @@ export function aPageChangheListener(id) {
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
                     let _message = messageList.data[i].message;
-                    myList.appendChild(newRow(_message));
+                    myList.appendChild(newRow(messageList.data[i]));
                 }
             } catch (e) {
                 console.log(e);
