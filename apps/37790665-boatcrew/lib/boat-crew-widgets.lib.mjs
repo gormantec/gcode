@@ -17,7 +17,7 @@ let messages = null;
 let accountId = "";
 export var myList = new Div();
 
-function nearConnect() {
+async function nearConnect() {
     if (!messages) {
         var config = await login({
             accountId: accountId,
@@ -51,8 +51,9 @@ function newSpinnerRow() {
     });
 }
 
-function newRow(_message) {
-    var dt = new Date(Date.parse(messageList.data[i].date));
+function newRow(data) {
+  	let _message=data.message;
+    var dt = new Date(Date.parse(data.data));
     let localTime = dt.getHours() + ":" + dt.getMinutes().toString().padStart(2, "0");
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let localDay = weekdays[dt.getDay()];
@@ -106,7 +107,7 @@ function newRow(_message) {
             new Div({
                 position: "relative",
                 fontWeight: "bold",
-                innerHTML: messageList.data[i].message.subject
+                innerHTML: _message.subject
             }),
             new Div({
                 textAlign: "right",
@@ -122,7 +123,7 @@ function newRow(_message) {
                 fontSize: "small",
                 fontStyle: "italic",
                 marginTop: "10px",
-                innerHTML: "<p style=\"word-wrap: break-word;\">" + messageList.data[i].message.body + "</p>"
+                innerHTML: "<p style=\"word-wrap: break-word;\">" + _message.body + "</p>"
             }),
         ]
     })
@@ -137,7 +138,7 @@ export function aPageChangheListener(id) {
         //lost contract = gcode-eea3047988c.testnet
         (async () => {
             try {
-                nearConnect();
+                await nearConnect();
                 if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
                     myList.insertBefore(newSpinnerRow(), myList.firstChild);
                 }
@@ -151,7 +152,7 @@ export function aPageChangheListener(id) {
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
                     let _message = messageList.data[i].message;
-                    myList.appendChild(newRow(_message));
+                    myList.appendChild(newRow(messageList.data[i]));
                 }
             } catch (e) {
                 console.log(e);
