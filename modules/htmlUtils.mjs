@@ -150,7 +150,7 @@ export function createHtml(code,options) {
     rootHead.appendChild(_link);
     _link = window.document.createElement("meta");
     _link.setAttribute("property", "fpwa:template");
-    _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation) );
+    _link.setAttribute("content", "pwa=true,name=" + longName + ",short_name=" + shortName + ",theme_color=" + splashBackgroundColor + ",background_color=" + splashBackgroundColor + ",display=" + display + ",orientation=" + orientation);
     rootHead.appendChild(_link);
 
     _link = window.document.createElement("link");
