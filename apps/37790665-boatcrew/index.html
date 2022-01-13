@@ -87,7 +87,7 @@ if (window.opener && window.opener !== window) {
 
 */
 /*---------------------------------------------------------------------------*/
-//#1818ca
+//#1818ca   
 import {
     PWA,
     Page,
@@ -96,7 +96,8 @@ import {
     ActionButton,
     DivForm
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import { myList,createCrewDivForm,aPageChangheListener,aSpinner,createAskDivForm,createLoginButton } from './lib/boat-crew-widgets.lib.mjs';
+import { myList,createCrewDivForm,aPageChangheListener,aSpinner,createLoginButton } from './lib/boat-crew-widgets.lib.mjs';
+import { createAskDivForm } from './lib/boat-crew-widget-askform.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
