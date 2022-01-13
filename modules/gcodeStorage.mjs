@@ -59,8 +59,6 @@ export async function preload(files) {
             if (typeof files == "string") files = [files];
             let count = 0;
             for (let i = 0; i < files.length; i++) {
-                console.log("count:"+count);
-                console.log("files:"+files.length);
                 let filename=null;
                 if( typeof files[i] == "string" )filename=files[i];
                 else if (files[i].dir && files[i].name ) filename = files[i].dir+files[i].name;
@@ -73,16 +71,11 @@ export async function preload(files) {
                     let username = filename.substring(6, firstColon);
                     let repo = filename.substring(firstColon + 1, secondColon);
                     let path = filename.substring(secondColon + 1);
-                    console.log("try to cache:"+path);
                     githubtree.getGitFile(username, repo, path, function (e, d) {
                         
                         let cached = localStorage.getItem("gitfile-" + filename);
-                        console.log(filename+" not yet cached = "+(cached==null));
-                        console.log(filename+" no error? = "+(e==null));
-                        console.log(filename+" data exists? = "+(d!=null));
                         if (!cached && !e && d) {
                             localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
-                            console.log("localStorage.setItem(\"gitfile-" + filename);
                         }
                         count++;
                         if (count == files.length) {
@@ -112,7 +105,6 @@ export function load(filename, asString = false, ageInSec = -1) {
     console.log("load:" + filename);
     if (filename.startsWith("git://")) {
         let b64 = localStorage.getItem("gitfile-" + filename);
-        console.log("b64:"+b64);
         if(b64)
         {
             result = decodeURIComponent(escape(window.atob(b64)));
