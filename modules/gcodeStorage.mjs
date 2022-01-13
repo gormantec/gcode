@@ -67,6 +67,7 @@ export async function preload(files) {
                 else if (files[i].name) filename = files[i].name;
                 if(filename && filename.substring(0, 6) == "git://")
                 {
+
                     var firstColon = filename.indexOf(":", 6);
                     var secondColon = filename.indexOf("/", firstColon + 1);
                     var username = filename.substring(6, firstColon);
@@ -76,6 +77,7 @@ export async function preload(files) {
                         var cached = localStorage.getItem("gitfile-" + filename);
                         if (!cached && !e && d) {
                             localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
+                            console.log("localStorage.setItem(\"gitfile-" + filename);
                         }
                         count++;
                         if (count == files.length) {
