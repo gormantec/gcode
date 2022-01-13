@@ -79,7 +79,7 @@ export async function preload(files) {
                         var cached = localStorage.getItem("gitfile-" + filename);
                         console.log("cached="+(cached==null));
                         console.log("e="+(e==null));
-                        console.log("d="+(e!=null));
+                        console.log("d="+(d!=null));
                         if (!cached && !e && d) {
                             localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
                             console.log("localStorage.setItem(\"gitfile-" + filename);
