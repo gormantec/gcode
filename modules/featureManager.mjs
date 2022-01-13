@@ -31,8 +31,19 @@ export async function loadFeatures() {
             let res2 = await fetch(f.uri, { "method": "HEAD" });
             if (res2.ok) {
                 let dialogs = [];
-                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, toolbarAction, dialogMetadata, dialogAction } = await import(f.uri);
-
+                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, toolbarAction, dialogMetadata, dialogAction,runButtonFileSufix,runButtonAction } = await import(f.uri);
+                if(runButtonFileSufix && runButtonFileSufix.length()>1 && runButtonFileSufix.indexOf(".")>=0 && runButtonAction)
+                {
+                    if (isFunction(runButtonAction)) {
+                        document.getElementById("runHeaderButton").addEventListener("click", (e) =>{
+                            var filename = document.getElementById("filename").innerText;
+                            if (filename.endsWith(runButtonFileSufix)) {
+                                return runButtonAction({ event: e });
+                            }
+                        }
+                        );
+                    }
+                }
                 if (menuMetadata) {
                     let meta = menuMetadata;
                     if (isArray(menuMetadata) && menuMetadata.length > 0) meta = menuMetadata[0];

@@ -10,6 +10,13 @@ var win;
 
 export const menuMetadata = { "id": "publishPWA", "class": "pageLeftToolbarButton", "materialIcon": "publish" };
 
+export const runButtonFileSufix=".mjs";
+
+export function runButtonAction(e)
+{
+    publishToGit(window.editor.getValue());
+}
+
 
 export function menuAction() {
 
@@ -66,6 +73,8 @@ export function dialogAction(event) {
 
 export function afterLoad() {
 
+
+
 }
 
 function publishToGit(code, user,token)
@@ -77,14 +86,7 @@ function publishToGit(code, user,token)
     appName = appName.trim();
 
 
-
-
-
-
-
-
-
-    if (filename.endsWith(".mjs")) {
+    if (filename.endsWith(".mjs") && !filename.endsWith(".lib.mjs")) {
         window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
         try {
@@ -147,7 +149,12 @@ function publishToGit(code, user,token)
                     if (splashBackgroundColor) win.document.body.style.backgroundColor = splashBackgroundColor;
                     else win.document.body.style.backgroundColor = "black";errorline=358;
                 }
-                var uploadConfig={ gituser:user+"-"+appName,gittoken:token, html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash  };
+                var uploadConfig={ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash  };
+                if(user && token)
+                {
+                    uploadConfig.gituser=user+"-"+appName;
+                    uploadConfig.gittoken=token;
+                }
                 if(result.icon192x192)uploadConfig.icon192=result.icon192x192;
                 if(result.icon512x512)uploadConfig.icon512=result.icon512x512;
                 if(filesArray && filesArray.length>0)uploadConfig.filesArray=filesArray;

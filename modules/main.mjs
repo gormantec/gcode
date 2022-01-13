@@ -321,6 +321,7 @@ function _runCode() {
         window.debug.log("\n");
     }
     else if (filename.endsWith(".mjs")) {
+        /*
         window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
         try {
@@ -398,6 +399,7 @@ function _runCode() {
             console.error("error:" + e + "atline="+errorline);
         }
         window.debug.log("\n");
+        */
     }
     else if (filename.endsWith(".py")) {
         try {
