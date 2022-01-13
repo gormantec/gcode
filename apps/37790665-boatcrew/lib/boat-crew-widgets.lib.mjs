@@ -98,6 +98,7 @@ function newRow(data) {
                 top: "unset",
                 onclick: () => {
                     PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
+                  	Page.getPage("AsktoJoin").querySelector("#formCrewAccountId").value=_message.
                 }
             }));
             Page.getPage("CrewPage").setChild(pageForm);
@@ -278,49 +279,7 @@ export var aSpinner = new Div({
     })
 });
 
-export function createAskDivForm({
-    nextPage
-}) {
-    var sendAskButtonAction = function(e) {
-        var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
-        var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
-        var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
-        console.log("formMessage:" + formMessage);
-        console.log("formDriverslicence:" + formDriverslicence);
-        console.log("formAged16orover:" + formAged16orover);
-        aPWA.setPage(aSubmitPage);
-        setTimeout(() => {
-            PWA.getPWA().setPage(nextPage);
-        }, 2000);
 
-    };
-
-    return new DivForm({
-        paddingTop: "30px",
-        formInputs: [{
-                name: "message",
-                type: "text",
-                height: "150px"
-            },
-            {
-                name: "drivers licence",
-                type: "select",
-                height: "40px",
-                options: ["No", "Yes"]
-            },
-            {
-                name: "aged 16 or over",
-                type: "select",
-                height: "40px",
-                options: ["No", "Yes"]
-            }
-        ],
-        sendButton: {
-            onclick: sendAskButtonAction
-        }
-    });
-
-}
 
 export function createLoginButton({
     nextPage
