@@ -32,7 +32,7 @@ export async function loadFeatures() {
             if (res2.ok) {
                 let dialogs = [];
                 let { afterLoad, menuMetadata, menuAction, toolbarMetadata, toolbarAction, dialogMetadata, dialogAction,runButtonFileSufix,runButtonAction } = await import(f.uri);
-                if(runButtonFileSufix && runButtonFileSufix.length()>1 && runButtonFileSufix.indexOf(".")>=0 && runButtonAction)
+                if(runButtonFileSufix && runButtonFileSufix.length>1 && runButtonFileSufix.indexOf(".")>=0 && runButtonAction)
                 {
                     if (isFunction(runButtonAction)) {
                         document.getElementById("runHeaderButton").addEventListener("click", (e) =>{
