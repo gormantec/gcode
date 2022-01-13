@@ -73,8 +73,13 @@ export async function preload(files) {
                     var username = filename.substring(6, firstColon);
                     var repo = filename.substring(firstColon + 1, secondColon);
                     var path = filename.substring(secondColon + 1);
+                    console.log("try to cache:"+path);
                     githubtree.getGitFile(username, repo, path, function (e, d) {
+                        
                         var cached = localStorage.getItem("gitfile-" + filename);
+                        console.log("cached="+(cached==null));
+                        console.log("e="+(e==null));
+                        console.log("d="+(e!=null));
                         if (!cached && !e && d) {
                             localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
                             console.log("localStorage.setItem(\"gitfile-" + filename);
