@@ -279,8 +279,7 @@ export class Spinner extends Div {
                 "left": "auto",
                 fontSize: "40px"
             })
-        })
-        '
+        });
     }
 }
 
