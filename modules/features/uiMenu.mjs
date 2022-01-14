@@ -65,18 +65,23 @@ async function refreshScreen() {
 
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
+
+    console.log("----------------");
+    console.log(sCode);
+    console.log("----------------");
     for(var i=0;i<importFiles.length;i++)
     {
         let slib=load(importFiles[i].dir+importFiles[i].name);
         if(slib && typeof slib=="string" && slib.length>0)
         {
             console.log("replace:"+importFiles[i].dir+importFiles[i].name);
-            sCode = sCode.replace("./lib/"+importFiles[i].name,"data:application/javascript;base64,"+window.btoa(slib));
+            sCode = sCode.replace("./lib/"+importFiles[i].name,"data:text/javascript;base64,"+window.btoa(slib));
         }
     }
 
+    console.log("----------------");
     console.log(sCode);
-
+    console.log("----------------");
     
 
 
