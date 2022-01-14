@@ -47,7 +47,7 @@ export async function listCrewRequest(accountId) {
     let requests=[];
   	try {
         let crewrequests = await nearConnect();
-        requests = await crewrequests.submitRequest({
+        requests = await crewrequests.listRequests({
             accountIds: [accountId],
             max: 20
         }, 300000000000000);
