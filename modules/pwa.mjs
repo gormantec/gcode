@@ -853,8 +853,11 @@ class DivForm extends Div{
                         });
                     });
                 }
-
-                this.appendChild(new Div({
+                else if(params.formInputs[i].type=="hidden")
+                {
+                    labelDiv.display="none";
+                }
+                let _row=new Div({
                     position: "relative",
                     fontSize: "large",
                     marginTop: "10px",
@@ -862,7 +865,13 @@ class DivForm extends Div{
                         new Div(labelDiv),
                         inputDivDiv
                     ]
-                }));
+                });
+
+                if(params.formInputs[i].type=="hidden")
+                {
+                    _row.setAttribute("display","none");
+                }
+                this.appendChild(_row);
             }
             
         }
