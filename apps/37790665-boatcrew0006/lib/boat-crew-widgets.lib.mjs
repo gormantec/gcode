@@ -220,7 +220,7 @@ export class CrewDivForm extends DivForm {
                 }
             ],
             sendButton: {
-                onclick: sendButtonAction
+                onclick: this.sendButtonAction
             }
         });
     }
