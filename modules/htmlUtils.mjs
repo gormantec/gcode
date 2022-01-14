@@ -7,6 +7,7 @@ export function htmlToElement(html) {
 }
 
 export function getImportLibFileList(code) {
+    var filename = document.getElementById("filename").innerText;
     var importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
     var importFiles = [];
     if (importsList && importsList.length > 0) {
