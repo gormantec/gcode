@@ -53,7 +53,7 @@ function newSpinnerRow() {
 
 function newRow(data) {
     let _message = data.message;
-    let _crewAccountId = data.crewAccountId;
+    let _crewAccountId = data.accountId;
     var dt = new Date(Date.parse(data.date));
     let localTime = dt.getHours() + ":" + dt.getMinutes().toString().padStart(2, "0");
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
