@@ -290,7 +290,7 @@ export class LoginButton extends AuthButtons {
         super({
             facebookkey: "1240916769304778",
             appearance: "list",
-            nextPage: Page.getPage("ChatPage");
+            nextPage: "ChatPage"
         });
     }
 }
