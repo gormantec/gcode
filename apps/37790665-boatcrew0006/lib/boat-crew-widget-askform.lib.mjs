@@ -70,7 +70,7 @@ export class AskDivForm extends DivForm {
                 }
             ],
             sendButton: {
-                onclick: sendAskButtonAction
+                onclick: this.sendAskButtonAction
             }
         });
     }
