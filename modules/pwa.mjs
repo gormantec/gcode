@@ -143,9 +143,16 @@ class PWA {
         //debug.log("setpage");
         if(aPage instanceof String)
         {
+            console.log(aPage+" is a string");
             aPage=Page.getPage(aPage);
+            console.log(aPage);
+            console.log("----");
         }
-        if(!aPage || !(aPage instanceof Page)) return;
+        if(!aPage || !(aPage instanceof Page)){
+            console.log(aPage);
+            console.log(aPage instanceof Page);
+            return;
+        }
         if (aPage.navigateBackPage) {
             debug.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
