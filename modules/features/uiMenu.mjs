@@ -72,7 +72,7 @@ function refreshScreen() {
     var rootHTML = result.rootHTML;
     var _module = window.document.createElement("script");
     _module.id = cyrb53("mainSourceCode");
-    var exists = rootHTML.querySelector("head").querySelector("#"+_module.id);
+    var exists = rootHTML.querySelector("head #"+_module.id);
     if (exists)  exists.remove();
     _module.setAttribute("type", "module");
     _module.text = "\n" + sCode + "\n";
