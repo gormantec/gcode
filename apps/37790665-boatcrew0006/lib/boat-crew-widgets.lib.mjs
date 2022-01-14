@@ -164,6 +164,42 @@ export function aPageChangheListener(id) {
     }
 }
 
+function sendButtonAction(e) {
+    var subject = e.parentDiv.querySelector("#formSubject").innerText;
+    var body = e.parentDiv.querySelector("#formBody").innerText;
+    var driver = e.parentDiv.querySelector("#formDriver").value;
+    var observer = e.parentDiv.querySelector("#formObserver").value;
+    var date = e.parentDiv.querySelector("#formDate").value;
+    var time = e.parentDiv.querySelector("#formTime").value;
+    var seats = e.parentDiv.querySelector("#formSeats").value;
+    var boat = e.parentDiv.querySelector("#formBoat").innerText;
+    var location = e.parentDiv.querySelector("#formLocation").value;
+    console.log(date);
+    console.log(time);
+    if (subject && subject.trim() != "" && body && body.trim() != "") {
+        (async () => {
+            let message = {
+                "from": PWA.getPWA().credentials.name,
+                "accountId": accountId,
+                "subject": subject,
+                "body": body,
+                "driver": driver,
+                "observer": observer,
+                "boat": boat,
+                "seats": seats,
+                "location": location,
+                "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
+            };
+            console.log(message);
+
+            PWA.getPWA().setPage("SubmitPage");
+            if (messages) await messages.addMessage({
+                "message": JSON.stringify(message)
+            });
+            PWA.getPWA().setPage("ChatPage");
+        })();
+    }
+}
 
 export class CrewDivForm extends DivForm {
     constructor() {
@@ -220,46 +256,10 @@ export class CrewDivForm extends DivForm {
                 }
             ],
             sendButton: {
-                onclick: this.sendButtonAction
+                onclick: sendButtonAction
             }
         });
     }
-    sendButtonAction(e) {
-        var subject = e.parentDiv.querySelector("#formSubject").innerText;
-        var body = e.parentDiv.querySelector("#formBody").innerText;
-        var driver = e.parentDiv.querySelector("#formDriver").value;
-        var observer = e.parentDiv.querySelector("#formObserver").value;
-        var date = e.parentDiv.querySelector("#formDate").value;
-        var time = e.parentDiv.querySelector("#formTime").value;
-        var seats = e.parentDiv.querySelector("#formSeats").value;
-        var boat = e.parentDiv.querySelector("#formBoat").innerText;
-        var location = e.parentDiv.querySelector("#formLocation").value;
-        console.log(date);
-        console.log(time);
-        if (subject && subject.trim() != "" && body && body.trim() != "") {
-            (async () => {
-                let message = {
-                    "from": PWA.getPWA().credentials.name,
-                    "accountId": accountId,
-                    "subject": subject,
-                    "body": body,
-                    "driver": driver,
-                    "observer": observer,
-                    "boat": boat,
-                    "seats": seats,
-                    "location": location,
-                    "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
-                };
-                console.log(message);
-
-                PWA.getPWA().setPage("SubmitPage");
-                if (messages) await messages.addMessage({
-                    "message": JSON.stringify(message)
-                });
-                PWA.getPWA().setPage("ChatPage");
-            })();
-        }
-    };
 }
 
 export class Spinner extends Div {
