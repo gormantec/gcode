@@ -1,0 +1,25 @@
+{
+  "name": "boatcrew",
+  "short_name": "boatcrew",
+  "theme_color": "#222222",
+  "background_color": "#222222",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/03oy616beh/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/03oy616beh/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/03oy616beh/index.html",
+  "description": "boatcrew",
+  "prefer_related_applications": false
+}
