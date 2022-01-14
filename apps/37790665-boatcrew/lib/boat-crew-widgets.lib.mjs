@@ -77,7 +77,7 @@ function newRow(data) {
                 "<p><b>boat:</b> " + _message.boat + "</p>" +
                 "<p><b>location:</b> " + _message.location + "</p>" +
                 "<p><b>seats:</b> " + _message.seats + "</p>" +
-                "<p><b>going:</b> <span id=\"goingcount\">0</span></p>" +
+                "<p><b>going:</b> <span id=\"goingcount\"></span></p>" +
                 "<p><b>datetime:</b> " + new Date(Date.parse(_message.datetime)).toLocaleString().substring(0, 17) + "</p>";
           	
 
@@ -91,8 +91,8 @@ function newRow(data) {
                 borderStyle: "solid",
                 innerHTML: html
             });
-          	let iii1=setInterval(function () {pageForm.querySelector("#goingcount").innerText=pageForm.querySelector("#goingcount").innerText+".";}, 1000);
-          	let iii2=setInterval(function () {pageForm.querySelector("#goingcount").innerText="";}, 3500);
+          	let iii1=setInterval(function () {pageForm.querySelector("#goingcount").innerText=pageForm.querySelector("#goingcount").innerText+".";}, 500);
+          	let iii2=setInterval(function () {pageForm.querySelector("#goingcount").innerText="";}, 1550);
          	listCrewRequest().then(_requests=>{
               console.log("_requests.length="+_requests.length);
               clearInterval(iii1);
