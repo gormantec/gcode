@@ -141,7 +141,7 @@ class PWA {
     }
     setPage(aPage) {
         //debug.log("setpage");
-        if(aPage instanceof String)
+        if(typeof aPage === 'string' || aPage instanceof String)
         {
             console.log(aPage+" is a string");
             aPage=Page.getPage(aPage);
