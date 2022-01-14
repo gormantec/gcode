@@ -100,7 +100,7 @@ export async function saveFile(name, content, encode, callback) {
     var fullpath = name.substring(secondColon + 1);
     var filename = fullpath.substring(fullpath.lastIndexOf("/") + 1);
     var dirpath = fullpath.substring(0, fullpath.lastIndexOf("/"));
-    console.log("git:save::1");
+
 
     var sha = null;
 
@@ -113,22 +113,22 @@ export async function saveFile(name, content, encode, callback) {
     //}
     //else{
 
-        console.log("git:save::3");
+
         var result=await pullGitRepository({ username: username, repo: repo, path:dirpath });
 
-    console.log("git:save::4");
+
         window.debug.log(result);
 
-    console.log("git:save::5");
+
         if(repos[repo][dirpath])
         {
 
-    console.log("git:save::6");
+
             var repoFileInfo = repos[repo][dirpath].files.find(obj => { return obj.name === filename });
             if (repoFileInfo && repoFileInfo != "undefined") sha = repoFileInfo.sha;
         }
 
-    console.log("git:save::7");
+
     //}
     var f = {
         owner: username,
@@ -137,23 +137,16 @@ export async function saveFile(name, content, encode, callback) {
         message: "commit",
         content: encode?btoa(content):content,
     };
-    console.log("git:save::8");
 
-    console.log("git:save::sha:"+sha);
-    console.log("git:save::sha:"+f.sha);
     if (sha) f.sha = sha;
-    console.log("git:save::9");
-    console.log("git:save::sha:"+f.sha);
+
 
     var octokit = getGitHub({ auth: getToken() });
     octokit.repos.createOrUpdateFileContents(f).then((d) => {
 
-        console.log("git:save::10");
-        console.log("git:save::sha:"+sha);
-        console.log("git:save::d-sha:"+d.data.content.sha);
+
         if (!sha) addRepoFile(repo, dirpath, { name: filename, filepath: fullpath, dirpath: dirpath, sha: d.data.content.sha, type: "file" });
-        console.log("git:save::11");
-        console.log(d);
+
         callback(null, d);
     }).catch((e) => { console.log(e); callback(e); });;
 }
@@ -353,7 +346,6 @@ export function pullGitRepository(params, callbackrefresh) {
                     var directories = [];
                     sha.data.forEach(function (file) {
                         if (file.name.substring(0, 1) != ".") {
-                            console.log(file.name+": "+file.sha);
                             addRepoFile(repo, _path, { name: file.name, filepath: file.path, dirpath: _path, sha: file.sha, type: file.type });
                             if (_callback) _callback("running", repo, _path);
                             if (file.type == "dir" && file.name.substring(0, 1) != ".") {
