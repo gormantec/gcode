@@ -1,6 +1,7 @@
 /* Feature Name: UI Menu */
-import { getImage, createHtml } from '/modules/htmlUtils.mjs';
+import { getImage, createHtml,getImportLibFileList } from '/modules/htmlUtils.mjs';
 import { cyrb53 } from '/modules/cyrb53.mjs';
+import { load, preload} from '/modules/gcodeStorage.mjs';
 
 export const menuMetadata = { "id": "uiMenu", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
 
@@ -34,7 +35,7 @@ const paramOptions = ["navigateBackPage", "innerHTML",
     "backgroundImage",
     "backgroundSize"];
 
-function refreshScreen() {
+async function refreshScreen() {
 
     let mockFrameIframe = document.getElementById("pageMiddle").querySelector("#pageMiddle-" + menuMetadata.id + "iframe");
 
@@ -62,7 +63,19 @@ function refreshScreen() {
 
     sCode = sCode.replaceAll(regex3, ".setPage(a" + block.class.name + ");\naPWA.show();//changed");
 
-    sCode = sCode.replaceAll(/(import.*?\sfrom\s['"])(\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs['"])/g, "$1/apps/37790665-boatcrew/lib/$3");
+    let importFiles= getImportLibFileList(sCode);
+    await preload(importFiles);
+    for(var i=0;i<importFiles.length;i++)
+    {
+        let slib=load(importFiles[i].dir+importFiles[i].name);
+        if(slib && typeof slib=="string" && slib.length>0)
+        {
+            console.log("replace:"+importFiles[i].dir+importFiles[i].name);
+            sCode = sCode.replaceAll(importFiles[i].dir+importFiles[i].name,"text/javascript;base64,"+window.btoa(slib));
+        }
+    }
+
+    
 
 
     var result = createHtml(sCode,{noInstallCode:true,noServiceWorker:true});

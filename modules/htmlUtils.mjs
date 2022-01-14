@@ -6,6 +6,20 @@ export function htmlToElement(html) {
     return template.content.firstChild;
 }
 
+export function getImportLibFileList(code) {
+    var importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+    var importFiles = [];
+    if (importsList && importsList.length > 0) {
+        for (var i = 0; i < importsList.length; i++) {
+            var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
+            let dir = "";
+            if (filename.lastIndexOf("/") > 0) dir = filename.substring(0, filename.lastIndexOf("/") + 1);
+            importFiles.push({ name: fileNameLib, dir: dir });
+        }
+    }
+    return importFiles;
+}
+
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -72,9 +86,9 @@ export async function getImageAsync(url) {
 }
 
 
-export function createHtml(code,options) {
+export function createHtml(code, options) {
 
-    if(!options)options={};
+    if (!options) options = {};
     var splashBackgroundColor = null;
     var splash = null;
     var mockFrame = null;
@@ -191,48 +205,46 @@ export function createHtml(code,options) {
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
     if (splashDuration) _script.text += "  window.PWA.globals.splashDuration=" + parseInt(splashDuration) + ";\n";
 
-    if(!options.noServiceWorker)
-    {
-    _script.text += "\nlet deferredPrompt;\n" +  
-        "if('serviceWorker' in navigator) {\n" +
-        "    navigator.serviceWorker.register('sw.js');\n" +
-        "};\n\n";
+    if (!options.noServiceWorker) {
+        _script.text += "\nlet deferredPrompt;\n" +
+            "if('serviceWorker' in navigator) {\n" +
+            "    navigator.serviceWorker.register('sw.js');\n" +
+            "};\n\n";
     }
-    if(!options.noInstallCode)
-    {
-    _script.text += "function addToHomeScreen() {\n" +
-        "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
-        "   a2hsBtn.style.display = 'none'; \n" +
-        "   deferredPrompt.prompt();\n" +
-        "   deferredPrompt.userChoice.then(function(choiceResult){\n" +
-        "   if (choiceResult.outcome === 'accepted') console.log('User accepted the A2HS prompt');\n" +
-        "   else console.log('User dismissed the A2HS prompt');\n" +
-        "   deferredPrompt = null;\n" +
-        " });}\n" +
-        "function showAddToHomeScreen() {\n" +
-        "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
-        "   a2hsBtn.style.display =\"block\";\n" +
-        "   a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
-        " }\n" + 
-        " window.addEventListener('beforeinstallprompt', function (e) {\n" +
-        "   e.preventDefault();\n" +
-        "   deferredPrompt = e;\n" +
-        "   showAddToHomeScreen();\n" +
-        "   setTimeout(()=>{document.querySelector(\".ad2hs-prompt\").style.display =\"none\";},10000);\n" +
-        " });\n" +
-        "function showIosInstall() {\n" +
-        "  let iosPrompt = document.querySelector(\".ios-prompt\");\n" +
-        "  iosPrompt.style.display = \"block\";\n" +
-        "  iosPrompt.addEventListener(\"click\", () => {\n" +
-        "    iosPrompt.style.display = \"none\";\n" +
-        "  });\n" +
-        "}\n\n" +
-        "const isIos = () => {\n" +
-        "  const userAgent = window.navigator.userAgent.toLowerCase();\n" +
-        "  return /iphone|ipad|ipod/.test( userAgent );\n" +
-        "}\n" +
-        "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);\n" +
-        "document.addEventListener(\"DOMContentLoaded\", ()=>{\n" +
+    if (!options.noInstallCode) {
+        _script.text += "function addToHomeScreen() {\n" +
+            "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
+            "   a2hsBtn.style.display = 'none'; \n" +
+            "   deferredPrompt.prompt();\n" +
+            "   deferredPrompt.userChoice.then(function(choiceResult){\n" +
+            "   if (choiceResult.outcome === 'accepted') console.log('User accepted the A2HS prompt');\n" +
+            "   else console.log('User dismissed the A2HS prompt');\n" +
+            "   deferredPrompt = null;\n" +
+            " });}\n" +
+            "function showAddToHomeScreen() {\n" +
+            "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
+            "   a2hsBtn.style.display =\"block\";\n" +
+            "   a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
+            " }\n" +
+            " window.addEventListener('beforeinstallprompt', function (e) {\n" +
+            "   e.preventDefault();\n" +
+            "   deferredPrompt = e;\n" +
+            "   showAddToHomeScreen();\n" +
+            "   setTimeout(()=>{document.querySelector(\".ad2hs-prompt\").style.display =\"none\";},10000);\n" +
+            " });\n" +
+            "function showIosInstall() {\n" +
+            "  let iosPrompt = document.querySelector(\".ios-prompt\");\n" +
+            "  iosPrompt.style.display = \"block\";\n" +
+            "  iosPrompt.addEventListener(\"click\", () => {\n" +
+            "    iosPrompt.style.display = \"none\";\n" +
+            "  });\n" +
+            "}\n\n" +
+            "const isIos = () => {\n" +
+            "  const userAgent = window.navigator.userAgent.toLowerCase();\n" +
+            "  return /iphone|ipad|ipod/.test( userAgent );\n" +
+            "}\n" +
+            "const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);\n" +
+            "document.addEventListener(\"DOMContentLoaded\", ()=>{\n" +
             "   console.log(\"DOMContentLoaded\");\n" +
             "   if (isIos() && !isInStandaloneMode()) {\n" +
             "  showIosInstall();\n" +
@@ -242,8 +254,7 @@ export function createHtml(code,options) {
     }
 
     rootHead.appendChild(_script);
-    if(!options.noWindowMessages)
-    {
+    if (!options.noWindowMessages) {
         var jApp = 'import { addkey } from "https://gcode.com.au/modules/near/index.mjs";\n\n' +
             'if (window.opener && window.opener !== window) {\n' +
             '    window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);\n' +
