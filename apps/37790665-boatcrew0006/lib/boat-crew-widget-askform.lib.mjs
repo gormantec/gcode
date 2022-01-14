@@ -48,7 +48,7 @@ export async function listCrewRequest(accountId) {
   	try {
         let crewrequests = await nearConnect();
         requests = await crewrequests.listRequests({
-            accountIds: [accountId],
+            accountIds: JSON.stringify([accountId]),
             max: 20
         }, 300000000000000);
         console.log("retrived:" + requests);
