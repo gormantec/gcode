@@ -141,7 +141,7 @@ class PWA {
     }
     setPage(aPage) {
         //debug.log("setpage");
-        if(aPage instanceof string)
+        if(aPage instanceof String)
         {
             aPage=Page.getPage(aPage);
         }
