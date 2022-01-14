@@ -1,4 +1,5 @@
 import {
+    Page,
     PWA,
     DivForm
 } from 'https://gcode.com.au/modules/pwa.mjs';
@@ -26,10 +27,10 @@ async function nearConnect() {
 
 
 async function submitCrewRequest(data) {
-    if (!_crewrequests && PWA.getPWA().userhash) {
+    if (PWA.getPWA().userhash) {
         try {
             let crewrequests = await nearConnect();
-            await crewrequests.submitRequest({
+            await crewrequests.listRequests({
                 fromAccountId: "gcode-4" + PWA.getPWA().userhash.toLowerCase() + ".testnet",
                 toAccountId: data.crewAccountId,
                 data: JSON.stringify(data)
@@ -41,63 +42,84 @@ async function submitCrewRequest(data) {
     }
 }
 
-export function createAskDivForm({
-    nextPage
-}) {
-    var sendAskButtonAction = function(e) {
+export async function listCrewRequest(accountId) {
 
-        var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
-        var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
-        var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
-        var formCrewAccountId = e.parentDiv.querySelector("#formCrewAccountId").value;
-        console.log("formMessage:" + formMessage);
-        console.log("formDriverslicence:" + formDriverslicence);
-        console.log("formAged16orover:" + formAged16orover);
-        console.log("formCrewAccountId:" + formCrewAccountId);
-        aPWA.setPage(aSubmitPage);
-        if (PWA.getPWA().credentials) {
-            submitCrewRequest({
-                from: PWA.getPWA().credentials.name,
-                message: formMessage,
-                driverslicence: formDriverslicence,
-                aged16orover: formAged16orover,
-              	crewAccountId: formCrewAccountId
-            });
-        }
-        setTimeout(() => {
-            PWA.getPWA().setPage(nextPage);
-        }, 2000);
+    let requests=[];
+  	try {
+        let crewrequests = await nearConnect();
+        let requestsStr = await crewrequests.listRequests({
+            accountIds: JSON.stringify([accountId]),
+            max: 20
+        }, 300000000000000);
+      requests=JSON.parse(requestsStr);
+        console.log("retrived:" + requests);
+    } catch (e) {
+        console.log(e);
+    }
+    return requests;
+}
 
-    };
+function sendAskButtonAction(e) {
 
-    return new DivForm({
-        paddingTop: "30px",
-        formInputs: [{
-                name: "message",
-                type: "text",
-                height: "150px"
-            },
-            {
-                name: "drivers licence",
-                type: "select",
-                height: "40px",
-                options: ["No", "Yes"]
-            },
-            {
-                name: "aged 16 or over",
-                type: "select",
-                height: "40px",
-                options: ["No", "Yes"]
-            },
-            {
-                name: "crewAccountId",
-                type: "hidden",
-              	value: crewAccountId
+    var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
+    var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
+    var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
+    var formCrewAccountId = e.parentDiv.querySelector("#formCrewAccountId").value;
+    console.log("formMessage:" + formMessage);
+    console.log("formDriverslicence:" + formDriverslicence);
+    console.log("formAged16orover:" + formAged16orover);
+    console.log("formCrewAccountId:" + formCrewAccountId);
+    PWA.getPWA().setPage(Page.getPage("SubmitPage"));
+    if (PWA.getPWA().credentials) {
+        submitCrewRequest({
+            from: PWA.getPWA().credentials.name,
+            message: formMessage,
+            driverslicence: formDriverslicence,
+            aged16orover: formAged16orover,
+            crewAccountId: formCrewAccountId
+        });
+    }
+    setTimeout(() => {
+        PWA.getPWA().setPage(Page.getPage("ChatPage"));
+    }, 2000);
+
+}
+
+
+
+export class AskDivForm extends DivForm {
+
+    constructor() {
+        super({
+            paddingTop: "30px",
+            formInputs: [{
+                    name: "message",
+                    type: "text",
+                    height: "150px"
+                },
+                {
+                    name: "drivers licence",
+                    type: "select",
+                    height: "40px",
+                    options: ["No", "Yes"]
+                },
+                {
+                    name: "aged 16 or over",
+                    type: "select",
+                    height: "40px",
+                    options: ["No", "Yes"]
+                },
+                {
+                    name: "crewAccountId",
+                    type: "hidden"
+                }
+            ],
+            sendButton: {
+                onclick: sendAskButtonAction
             }
-        ],
-        sendButton: {
-            onclick: sendAskButtonAction
-        }
-    });
+        });
+    }
+
+
 
 }
