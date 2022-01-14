@@ -77,7 +77,7 @@ function newRow(data) {
                 "<p><b>boat:</b> " + _message.boat + "</p>" +
                 "<p><b>location:</b> " + _message.location + "</p>" +
                 "<p><b>seats:</b> " + _message.seats + "</p>" +
-                "<p><b>going:</b><span id=\"goingcount\">0</span></p>" +
+                "<p><b>going:</b> <span id=\"goingcount\"></span></p>" +
                 "<p><b>datetime:</b> " + new Date(Date.parse(_message.datetime)).toLocaleString().substring(0, 17) + "</p>";
           	
 
@@ -91,9 +91,13 @@ function newRow(data) {
                 borderStyle: "solid",
                 innerHTML: html
             });
+          	let iii1=setInterval(function () {pageForm.querySelector("#goingcount").innerText=pageForm.querySelector("#goingcount").innerText+".";}, 500);
+          	let iii2=setInterval(function () {pageForm.querySelector("#goingcount").innerText="";}, 2500);
          	listCrewRequest().then(_requests=>{
               console.log("_requests.length="+_requests.length);
-              pageForm.querySelector("#goingcount").innerText=_requests.length;
+              clearInterval(iii1);
+              clearInterval(iii2);
+              pageForm.querySelector("#goingcount").innerText=_requests.count;
             })
 
             pageForm.appendChild(new ActionButton({
@@ -108,7 +112,7 @@ function newRow(data) {
                 onclick: () => {
                     PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
                     Page.getPage("AsktoJoin").querySelector("#formCrewAccountId").value = _crewAccountId;
-                  	console.log("_crewAccountId="+_crewAccountId);
+                 
                 }
             }));
             Page.getPage("CrewPage").setChild(pageForm);

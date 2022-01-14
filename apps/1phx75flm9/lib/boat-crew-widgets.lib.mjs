@@ -11,7 +11,6 @@ import {
     login,
     contract
 } from 'https://gcode.com.au/modules/near/index.mjs';
-import {listCrewRequest} from "./boat-crew-widget-askform.lib.mjs";
 
 
 let messages = null;
@@ -54,7 +53,7 @@ function newSpinnerRow() {
 
 function newRow(data) {
     let _message = data.message;
-    let _crewAccountId = data.accountId;
+    let _crewAccountId = data.crewAccountId;
     var dt = new Date(Date.parse(data.date));
     let localTime = dt.getHours() + ":" + dt.getMinutes().toString().padStart(2, "0");
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -68,7 +67,6 @@ function newRow(data) {
         padding: "10px",
         margin: "10px",
         onclick: function() {
-          
             var html = "<h3>boat captain:" + _message.from + "</h3>" +
                 "<p><b>subject:</b> " + _message.subject + "</p>" +
                 "<p><b>body:</b> " + _message.body + "</p>" +
@@ -77,9 +75,7 @@ function newRow(data) {
                 "<p><b>boat:</b> " + _message.boat + "</p>" +
                 "<p><b>location:</b> " + _message.location + "</p>" +
                 "<p><b>seats:</b> " + _message.seats + "</p>" +
-                "<p><b>going:</b><span id=\"goingcount\">0</span></p>" +
                 "<p><b>datetime:</b> " + new Date(Date.parse(_message.datetime)).toLocaleString().substring(0, 17) + "</p>";
-          	
 
             let pageForm = new Div({
                 margin: "40px",
@@ -91,10 +87,6 @@ function newRow(data) {
                 borderStyle: "solid",
                 innerHTML: html
             });
-         	listCrewRequest().then(_requests=>{
-              console.log("_requests.length="+_requests.length);
-              pageForm.querySelector("#goingcount").innerText=_requests.length;
-            })
 
             pageForm.appendChild(new ActionButton({
                 left: "10%",
@@ -108,7 +100,6 @@ function newRow(data) {
                 onclick: () => {
                     PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
                     Page.getPage("AsktoJoin").querySelector("#formCrewAccountId").value = _crewAccountId;
-                  	console.log("_crewAccountId="+_crewAccountId);
                 }
             }));
             Page.getPage("CrewPage").setChild(pageForm);

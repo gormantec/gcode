@@ -27,10 +27,10 @@ async function nearConnect() {
 
 
 async function submitCrewRequest(data) {
-    if (PWA.getPWA().userhash) {
+    if (!_crewrequests && PWA.getPWA().userhash) {
         try {
             let crewrequests = await nearConnect();
-            await crewrequests.listRequests({
+            await crewrequests.submitRequest({
                 fromAccountId: "gcode-4" + PWA.getPWA().userhash.toLowerCase() + ".testnet",
                 toAccountId: data.crewAccountId,
                 data: JSON.stringify(data)
@@ -40,23 +40,6 @@ async function submitCrewRequest(data) {
             console.log(e);
         }
     }
-}
-
-export async function listCrewRequest(accountId) {
-
-    let requests=[];
-  	try {
-        let crewrequests = await nearConnect();
-        let requestsStr = await crewrequests.listRequests({
-            accountIds: JSON.stringify([accountId]),
-            max: 20
-        }, 300000000000000);
-      requests=JSON.parse(requestsStr);
-        console.log("retrived:" + requests);
-    } catch (e) {
-        console.log(e);
-    }
-    return requests;
 }
 
 function sendAskButtonAction(e) {
@@ -84,8 +67,6 @@ function sendAskButtonAction(e) {
     }, 2000);
 
 }
-
-
 
 export class AskDivForm extends DivForm {
 

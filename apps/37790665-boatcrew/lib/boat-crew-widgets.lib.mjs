@@ -11,6 +11,7 @@ import {
     login,
     contract
 } from 'https://gcode.com.au/modules/near/index.mjs';
+import {listCrewRequest} from "./boat-crew-widget-askform.lib.mjs";
 
 
 let messages = null;
@@ -52,9 +53,9 @@ function newSpinnerRow() {
 }
 
 function newRow(data) {
-  	let _message=data.message;
-  	let _crewAccountId=data.crewAccountId;
-    var dt = new Date(Date.parse(data.data));
+    let _message = data.message;
+    let _crewAccountId = data.accountId;
+    var dt = new Date(Date.parse(data.date));
     let localTime = dt.getHours() + ":" + dt.getMinutes().toString().padStart(2, "0");
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let localDay = weekdays[dt.getDay()];
@@ -67,6 +68,7 @@ function newRow(data) {
         padding: "10px",
         margin: "10px",
         onclick: function() {
+          
             var html = "<h3>boat captain:" + _message.from + "</h3>" +
                 "<p><b>subject:</b> " + _message.subject + "</p>" +
                 "<p><b>body:</b> " + _message.body + "</p>" +
@@ -75,7 +77,9 @@ function newRow(data) {
                 "<p><b>boat:</b> " + _message.boat + "</p>" +
                 "<p><b>location:</b> " + _message.location + "</p>" +
                 "<p><b>seats:</b> " + _message.seats + "</p>" +
+                "<p><b>going:</b> <span id=\"goingcount\"></span></p>" +
                 "<p><b>datetime:</b> " + new Date(Date.parse(_message.datetime)).toLocaleString().substring(0, 17) + "</p>";
+          	
 
             let pageForm = new Div({
                 margin: "40px",
@@ -87,6 +91,14 @@ function newRow(data) {
                 borderStyle: "solid",
                 innerHTML: html
             });
+          	let iii1=setInterval(function () {pageForm.querySelector("#goingcount").innerText=pageForm.querySelector("#goingcount").innerText+".";}, 500);
+          	let iii2=setInterval(function () {pageForm.querySelector("#goingcount").innerText="";}, 1550);
+         	listCrewRequest().then(_requests=>{
+              console.log("_requests.length="+_requests.length);
+              clearInterval(iii1);
+              clearInterval(iii2);
+              pageForm.querySelector("#goingcount").innerText=_requests.count;
+            })
 
             pageForm.appendChild(new ActionButton({
                 left: "10%",
@@ -99,7 +111,8 @@ function newRow(data) {
                 top: "unset",
                 onclick: () => {
                     PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
-                  	Page.getPage("AsktoJoin").querySelector("#formCrewAccountId").value=_crewAccountId;
+                    Page.getPage("AsktoJoin").querySelector("#formCrewAccountId").value = _crewAccountId;
+                 
                 }
             }));
             Page.getPage("CrewPage").setChild(pageForm);
@@ -164,130 +177,133 @@ export function aPageChangheListener(id) {
     }
 }
 
+function sendButtonAction(e) {
+    var subject = e.parentDiv.querySelector("#formSubject").innerText;
+    var body = e.parentDiv.querySelector("#formBody").innerText;
+    var driver = e.parentDiv.querySelector("#formDriver").value;
+    var observer = e.parentDiv.querySelector("#formObserver").value;
+    var date = e.parentDiv.querySelector("#formDate").value;
+    var time = e.parentDiv.querySelector("#formTime").value;
+    var seats = e.parentDiv.querySelector("#formSeats").value;
+    var boat = e.parentDiv.querySelector("#formBoat").innerText;
+    var location = e.parentDiv.querySelector("#formLocation").value;
+    console.log(date);
+    console.log(time);
+    if (subject && subject.trim() != "" && body && body.trim() != "") {
+        (async () => {
+            let message = {
+                "from": PWA.getPWA().credentials.name,
+                "accountId": accountId,
+                "subject": subject,
+                "body": body,
+                "driver": driver,
+                "observer": observer,
+                "boat": boat,
+                "seats": seats,
+                "location": location,
+                "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
+            };
+            console.log(message);
 
-export function createCrewDivForm({
-    nextPage1,
-    nextPage2
-}) {
-
-    var sendButtonAction = function(e) {
-        var subject = e.parentDiv.querySelector("#formSubject").innerText;
-        var body = e.parentDiv.querySelector("#formBody").innerText;
-        var driver = e.parentDiv.querySelector("#formDriver").value;
-        var observer = e.parentDiv.querySelector("#formObserver").value;
-        var date = e.parentDiv.querySelector("#formDate").value;
-        var time = e.parentDiv.querySelector("#formTime").value;
-        var seats = e.parentDiv.querySelector("#formSeats").value;
-        var boat = e.parentDiv.querySelector("#formBoat").innerText;
-        var location = e.parentDiv.querySelector("#formLocation").value;
-        console.log(date);
-        console.log(time);
-        if (subject && subject.trim() != "" && body && body.trim() != "") {
-            (async () => {
-                let message = {
-                    "from": PWA.getPWA().credentials.name,
-                    "accountId": accountId,
-                    "subject": subject,
-                    "body": body,
-                    "driver": driver,
-                    "observer": observer,
-                    "boat": boat,
-                    "seats": seats,
-                    "location": location,
-                    "datetime": new Date(Date.parse(date + "T" + time + ":00")).toISOString()
-                };
-                console.log(message);
-                PWA.getPWA().setPage(nextPage1);
-                if (messages) await messages.addMessage({
-                    "message": JSON.stringify(message)
-                });
-                PWA.getPWA().setPage(nextPage2);
-            })();
-        }
-    };
-    return new DivForm({
-        paddingTop: "30px",
-        formInputs: [{
-                name: "subject",
-                type: "text"
-            },
-            {
-                name: "body",
-                type: "text",
-                height: "150px"
-            },
-            {
-                name: "driver",
-                type: "select",
-                height: "40px",
-                options: ["extra not needed", "extra required"]
-            },
-            {
-                name: "observer",
-                type: "select",
-                height: "40px",
-                options: ["extra not needed", "extra required"]
-            },
-            {
-                name: "boat",
-                type: "text"
-            },
-            {
-                name: "location",
-                type: "location",
-                size: "40",
-                country: ["au"]
-            },
-            {
-                name: "seats",
-                type: "number",
-                min: "1",
-                max: "14",
-                value: "1"
-            },
-            {
-                name: "date",
-                type: "date"
-            },
-            {
-                name: "time",
-                type: "time",
-                min: "5:00",
-                max: "18:00",
-                step: "900"
-            }
-        ],
-        sendButton: {
-            onclick: sendButtonAction
-        }
-    });
+            PWA.getPWA().setPage("SubmitPage");
+            if (messages) await messages.addMessage({
+                "message": JSON.stringify(message)
+            });
+            PWA.getPWA().setPage("ChatPage");
+        })();
+    }
 }
 
-export var aSpinner = new Div({
-    marginLeft: "50%",
-    child: new Div({
-        classNameOverride: "true",
-        class: "loader",
-        innerText: "...",
-        "margin": "0px",
-        "bottom": "40px",
-        "right": "auto",
-        "height": "40px",
-        "width": "40px",
-        "marginLeft": "-20px",
-        "left": "auto",
-        fontSize: "40px"
-    })
-});
+export class CrewDivForm extends DivForm {
+    constructor() {
+        super({
+            paddingTop: "30px",
+            formInputs: [{
+                    name: "subject",
+                    type: "text"
+                },
+                {
+                    name: "body",
+                    type: "text",
+                    height: "150px"
+                },
+                {
+                    name: "driver",
+                    type: "select",
+                    height: "40px",
+                    options: ["extra not needed", "extra required"]
+                },
+                {
+                    name: "observer",
+                    type: "select",
+                    height: "40px",
+                    options: ["extra not needed", "extra required"]
+                },
+                {
+                    name: "boat",
+                    type: "text"
+                },
+                {
+                    name: "location",
+                    type: "location",
+                    size: "40",
+                    country: ["au"]
+                },
+                {
+                    name: "seats",
+                    type: "number",
+                    min: "1",
+                    max: "14",
+                    value: "1"
+                },
+                {
+                    name: "date",
+                    type: "date"
+                },
+                {
+                    name: "time",
+                    type: "time",
+                    min: "5:00",
+                    max: "18:00",
+                    step: "900"
+                }
+            ],
+            sendButton: {
+                onclick: sendButtonAction
+            }
+        });
+    }
+}
+
+export class Spinner extends Div {
+    constructor() {
+        super({
+            marginLeft: "50%",
+            child: new Div({
+                classNameOverride: "true",
+                class: "loader",
+                innerText: "...",
+                "margin": "0px",
+                "bottom": "40px",
+                "right": "auto",
+                "height": "40px",
+                "width": "40px",
+                "marginLeft": "-20px",
+                "left": "auto",
+                fontSize: "40px"
+            })
+        });
+    }
+}
 
 
 
-export function createLoginButton({
-    nextPage
-}) {
-    return new AuthButtons({
-        facebookkey: "1240916769304778",
-        appearance: "list",
-        nextPage: nextPage
-    });
+export class LoginButton extends AuthButtons {
+    constructor() {
+        super({
+            facebookkey: "1240916769304778",
+            appearance: "list",
+            nextPage: "ChatPage"
+        });
+    }
 }

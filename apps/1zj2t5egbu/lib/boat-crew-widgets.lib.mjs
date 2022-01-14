@@ -93,7 +93,7 @@ function newRow(data) {
             });
          	listCrewRequest().then(_requests=>{
               console.log("_requests.length="+_requests.length);
-              pageForm.querySelector("#goingcount").innerText=_requests.length;
+              pageForm.querySelector("#goingcount").innerText=_requests.count;
             })
 
             pageForm.appendChild(new ActionButton({
