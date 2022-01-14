@@ -42,6 +42,32 @@ async function submitCrewRequest(data) {
     }
 }
 
+function sendAskButtonAction(e) {
+
+    var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
+    var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
+    var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
+    var formCrewAccountId = e.parentDiv.querySelector("#formCrewAccountId").value;
+    console.log("formMessage:" + formMessage);
+    console.log("formDriverslicence:" + formDriverslicence);
+    console.log("formAged16orover:" + formAged16orover);
+    console.log("formCrewAccountId:" + formCrewAccountId);
+    PWA.getPWA().setPage(Page.getPage("SubmitPage"));
+    if (PWA.getPWA().credentials) {
+        submitCrewRequest({
+            from: PWA.getPWA().credentials.name,
+            message: formMessage,
+            driverslicence: formDriverslicence,
+            aged16orover: formAged16orover,
+            crewAccountId: formCrewAccountId
+        });
+    }
+    setTimeout(() => {
+        PWA.getPWA().setPage(Page.getPage("ChatPage"));
+    }, 2000);
+
+}
+
 export class AskDivForm extends DivForm {
 
     constructor() {
@@ -70,35 +96,11 @@ export class AskDivForm extends DivForm {
                 }
             ],
             sendButton: {
-                onclick: this.sendAskButtonAction
+                onclick: sendAskButtonAction
             }
         });
     }
-    sendAskButtonAction(e) {
 
-        var formMessage = e.parentDiv.querySelector("#formMessage").innerText;
-        var formDriverslicence = e.parentDiv.querySelector("#formDriverslicence").value;
-        var formAged16orover = e.parentDiv.querySelector("#formAged16orover").value;
-        var formCrewAccountId = e.parentDiv.querySelector("#formCrewAccountId").value;
-        console.log("formMessage:" + formMessage);
-        console.log("formDriverslicence:" + formDriverslicence);
-        console.log("formAged16orover:" + formAged16orover);
-        console.log("formCrewAccountId:" + formCrewAccountId);
-        PWA.getPWA().setPage(Page.getPage("SubmitPage"));
-        if (PWA.getPWA().credentials) {
-            submitCrewRequest({
-                from: PWA.getPWA().credentials.name,
-                message: formMessage,
-                driverslicence: formDriverslicence,
-                aged16orover: formAged16orover,
-                crewAccountId: formCrewAccountId
-            });
-        }
-        setTimeout(() => {
-            PWA.getPWA().setPage(Page.getPage("ChatPage"));
-        }, 2000);
-
-    }
 
 
 }
