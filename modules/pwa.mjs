@@ -628,6 +628,10 @@ class Div {
             this.element.appendChild(this.htmlToElement(params));
         }
     }
+    setAttribute(aname,value)
+    {
+        this.element.setAttribute(aname,value);
+    }
 
     insertBefore(n1, n2) {
         if (n1 instanceof Div) n1 = n1.element;
