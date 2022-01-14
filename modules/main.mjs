@@ -1,7 +1,7 @@
 import { beautify } from '/modules/beutify.mjs';
 import { loadFeatures, refreshFeatures } from '/modules/featureManager.mjs';
 import { getImage, createHtml } from '/modules/htmlUtils.mjs';
-import { save, load, remove } from '/modules/gcodeStorage.mjs';
+import { save, load, remove,preload } from '/modules/gcodeStorage.mjs';
 import { getScript } from '/modules/getScript.mjs';
 
 
@@ -566,6 +566,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //get last filename
 
     var lastFileName = localStorage.getItem("lastFileName");
+    
     var lastFileData;
     if(lastFileName)lastFileData=load(lastFileName, true);
     if (lastFileData ) {
@@ -582,7 +583,22 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(e);
         }
     }
-    else {
+    else if(lastFileName && lastFileName.startsWith("git://")){
+        (async ()=>{
+            await preload(lastFileName);
+            document.getElementById("filename").innerText = lastFileName;
+            try {
+                window.editor.setValue(load(lastFileName, true));
+                window.setEditorMode();
+            }
+            catch (e) {
+                console.log(lastFileName);
+                console.log(load(lastFileName, true));
+                console.log(e);
+            }
+        })()
+    }
+    else{
         document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
     }
 
