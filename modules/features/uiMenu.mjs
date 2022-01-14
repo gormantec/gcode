@@ -71,7 +71,7 @@ async function refreshScreen() {
         if(slib && typeof slib=="string" && slib.length>0)
         {
             console.log("replace:"+importFiles[i].dir+importFiles[i].name);
-            sCode = sCode.replace("./lib/"+importFiles[i].name,"text/javascript;base64,"+window.btoa(slib));
+            sCode = sCode.replace("./lib/"+importFiles[i].name,"application/javascript;base64,"+window.btoa(slib));
         }
     }
 
