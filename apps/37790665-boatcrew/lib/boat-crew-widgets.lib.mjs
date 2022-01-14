@@ -55,6 +55,7 @@ function newSpinnerRow() {
 function newRow(data) {
     let _message = data.message;
     let _crewAccountId = data.accountId;
+    let _crewTimestamp = data.timestamp;
     var dt = new Date(Date.parse(data.date));
     let localTime = dt.getHours() + ":" + dt.getMinutes().toString().padStart(2, "0");
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -92,7 +93,7 @@ function newRow(data) {
                 innerHTML: html
             });
           	let iii1=setInterval(function () {pageForm.querySelector("#goingcount").innerText=pageForm.querySelector("#goingcount").innerText+".";}, 500);
-          	let iii2=setInterval(function () {pageForm.querySelector("#goingcount").innerText="";}, 1550);
+          	let iii2=setInterval(function () {pageForm.querySelector("#goingcount").innerText="";}, 2500);
          	listCrewRequest().then(_requests=>{
               console.log("_requests.length="+_requests.length);
               clearInterval(iii1);
@@ -112,6 +113,7 @@ function newRow(data) {
                 onclick: () => {
                     PWA.getPWA().setPage(Page.getPage("AsktoJoin"));
                     Page.getPage("AsktoJoin").querySelector("#formCrewAccountId").value = _crewAccountId;
+                    Page.getPage("AsktoJoin").querySelector("#formCrewTimestamp").value = _crewTimestamp;
                  
                 }
             }));
