@@ -189,11 +189,6 @@ export async function login(config) {
                             reject({ code: 409 });
                           }
                         })();
-
-
-
-
-                        
                     }
                     else{
                         reject({ code: 500, error: "005:" + "User not exist" });
