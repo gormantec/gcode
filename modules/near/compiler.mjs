@@ -66,6 +66,7 @@ export async function compile(config) {
                                         "code": "dGhpcyBpcyBzb21lIHRleHQ=",
                                         "key": key.toString(),
                                         "accountId": config.accountId,
+                                        "contractId": config.contractId,
                                         assembly: content
                                     })
                                 }, function (err, data) {
