@@ -221,8 +221,8 @@ function _runCode() {
                                     import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
                                         const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
                                         getNearApi.then(({ nearApi }) => {
-                                            const nearCfg = nearConfig(nearApi);
-                                            nearCfg.keyStore.getKey("testnet", accountId).then((key) => {
+                                            const nearCfg = nearConfig(nearApi,accountId.endsWith(".near")?"mainnet":"testnet");
+                                            nearCfg.keyStore.getKey(accountId.endsWith(".near")?"mainnet":"testnet", accountId).then((key) => {
                                                 const lll = function (e) {
                                                     console.log("Received Post: " + e.origin);
                                                     if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;

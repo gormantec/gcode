@@ -172,8 +172,8 @@ function publishToGit(code, user,token)
                             import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {errorline=372;
                                 const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);errorline=373;
                                 getNearApi.then(({ nearApi }) => {errorline=374;
-                                    const nearCfg = nearConfig(nearApi,"testnet");errorline=375;
-                                    nearCfg.keyStore.getKey("testnet", accountId).then((key) => {errorline=376;
+                                    const nearCfg = nearConfig(nearApi,accountId.endsWith(".near")?"mainnet":"testnet");errorline=375;
+                                    nearCfg.keyStore.getKey(accountId.endsWith(".near")?"mainnet":"testnet", accountId).then((key) => {errorline=376;
                                         if(key)
                                         {
                                             const lll = function (e) {errorline=377;

@@ -13,7 +13,7 @@ export async function verifySignature(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
             (async () => {
-                const keyPair = await config.keyStore.getKey("testnet", config.accountId);
+                const keyPair = await config.keyStore.getKey(config.accountId.endsWith(".near")?"mainnet":"testnet", config.accountId);
                 const msg = Buffer.from("hi");
                 const { signature } = keyPair.sign(msg);
                 const isValid = keyPair.verify(msg, signature);
@@ -28,9 +28,9 @@ export async function verifySignature(config) {
 export async function addkey(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi,"testnet");
+            const nearCfg = nearConfig(nearApi,config.accountId.endsWith(".near")?"mainnet":"testnet");
             var aKeyPair = nearApi.KeyPair.fromString(config.key);
-            nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
+            nearCfg.keyStore.setKey(config.accountId.endsWith(".near")?"mainnet":"testnet", config.accountId, aKeyPair);
             resolve({ code: 201, message: "added" });
         }).catch(e => reject({ code: 500, error: "000:" + e }));
     });
@@ -42,7 +42,7 @@ export async function addkey(config) {
 export function contract(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi,"testnet");
+            const nearCfg = nearConfig(nearApi,config.accountId.endsWith(".near")?"mainnet":"testnet");
             const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);  /**/
             var ct = {};
@@ -75,7 +75,7 @@ export function contract(config) {
 export async function remove(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi,"testnet");
+            const nearCfg = nearConfig(nearApi,config.accountId.endsWith(".near")?"mainnet":"testnet");
             const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);
             console.log("Key already added!");
@@ -92,7 +92,7 @@ export async function login(config) {
     return new Promise((resolve, reject) => {
 
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi,"testnet");
+            const nearCfg = nearConfig(nearApi,config.accountId.endsWith(".near")?"mainnet":"testnet");
             const near = new nearApi.Near(nearCfg);
             nearCfg.keyStore.getKey('testnet', config.accountId).then((kp) => {
                 const account = new nearApi.Account(near.connection, config.accountId);
@@ -130,7 +130,7 @@ export async function login(config) {
                     else if (keys.length == 0) {
                         //contract doe not exist, create new
                         var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
-                        nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
+                        nearCfg.keyStore.setKey(config.accountId.endsWith(".near")?"mainnet":"testnet", config.accountId, aKeyPair);
                         near.createAccount(config.accountId, aKeyPair.getPublicKey(), 10000000).then((naccount) => {
                             console.log(naccount);
                             console.log("Created account: " + naccount.accountId);
