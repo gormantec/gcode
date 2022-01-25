@@ -6,6 +6,25 @@ export function htmlToElement(html) {
     return template.content.firstChild;
 }
 
+export function addSubImportLibFile(importFiles) {
+  
+    let newimportFiles = [];
+    for(let j=0;j<importFiles.length;j++)
+    {
+        let code=load(importsList[j]);
+        let importsList = code.match(/import.*?\sfrom\s['"]\.\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+        if (importsList && importsList.length > 0) {
+            for (var i = 0; i < importsList.length; i++) {
+                var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
+                let dir = "";
+                if (importsList[j].lastIndexOf("/") > 0) dir = importsList[j].substring(0, importsList[j].lastIndexOf("/") + 1);
+                newimportFiles.push({ name: fileNameLib, dir: dir });
+            }
+        }
+    }
+    return newimportFiles;
+}
+
 export function getImportLibFileList(code) {
     var filename = document.getElementById("filename").innerText;
     var importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
