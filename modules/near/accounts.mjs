@@ -100,7 +100,7 @@ export async function login(config) {
                     if (keys.length > 0 && kp) {
                         //contract exists and we have the key
                         var kk = keys.filter(k => k.public_key == masterKey);
-                        if (kk.length == 0) {
+                        if (kk.length == 0 && !config.accountId.endsWith(".near")) {
                             account.addKey(masterKey).then((x) => {
                                 console.log("Added gcode.testnet key!");
                             }).catch(e => {
@@ -110,24 +110,27 @@ export async function login(config) {
                             config.message = "updated";
                             resolve(config);
                         }
-                        else {
+                        else if(!config.accountId.endsWith(".near")){
                             console.log("gcode.testnet key already added!");
                             config.code = 202;
                             config.message = "already exists";
                             resolve(config);
                         }
-
-                        const errors = (e) => { console.log(e) };
-                        window.setTimeout(function () {
-                            const cfg = { accountId: config.accountId, contractId: "gcode-ec464352008.testnet", methods: ["*getKey", "setKey"] };
-                            contract(cfg).then((ct) => {
-                                ct.setKey({ "key": kp.toString(), "email": "craig@gormantec.com" }).then((response) => {
-                                    console.log("setKey:" + response);
+                        if(!config.accountId.endsWith(".near"))
+                        {
+                            const errors = (e) => { console.log(e) };
+                            window.setTimeout(function () {
+                                const cfg = { accountId: config.accountId, contractId: "gcode-ec464352008.testnet", methods: ["*getKey", "setKey"] };
+                                contract(cfg).then((ct) => {
+                                    ct.setKey({ "key": kp.toString(), "email": "craig@gormantec.com" }).then((response) => {
+                                        console.log("setKey:" + response);
+                                    }).catch(errors);
                                 }).catch(errors);
-                            }).catch(errors);
-                        }, 2000);
+                            }, 2000);
+                        }
+
                     }
-                    else if (keys.length == 0) {
+                    else if (keys.length == 0 && !config.accountId.endsWith(".near")) {
                         //contract doe not exist, create new
                         var aKeyPair = nearApi.KeyPair.fromRandom("ED25519");
                         nearCfg.keyStore.setKey(config.accountId.endsWith(".near")?"mainnet":"testnet", config.accountId, aKeyPair);
@@ -158,7 +161,7 @@ export async function login(config) {
 
                         }).catch(e => reject({ code: 500, error: "005:" + e }));
                     }
-                    else {
+                    else if(!config.accountId.endsWith(".near")){
                         console.log("Contract exists we dont have the key");
                         const provider = new nearApi.providers.JsonRpcProvider("https://rpc.testnet.near.org");
                         (async () => {
@@ -191,6 +194,9 @@ export async function login(config) {
 
 
                         
+                    }
+                    else{
+                        reject({ code: 500, error: "005:" + "User not exist" });
                     }
                 }).catch(e => reject({ code: 500, error: "006:" + e }));
 
