@@ -37,7 +37,7 @@ export async function compile(config) {
             zip.generateAsync({ type: "base64" })
                 .then(function (content) {
                     getNearApi.then(({ nearApi }) => {
-                        const nearCfg = nearConfig(nearApi);
+                        const nearCfg = nearConfig(nearApi,"testnet");
                         nearCfg.keyStore.getKey("testnet", config.accountId).then((key) => {
                             /*
                             fetch("https://near.gcode.com.au/", {
@@ -124,7 +124,7 @@ async function doNear(nearApi, config) {
     return new Promise((resolve, reject) => {
 
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
+            const nearCfg = nearConfig(nearApi,"testnet");
             const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);
             console.log("testing");

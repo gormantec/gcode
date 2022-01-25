@@ -28,7 +28,7 @@ export async function verifySignature(config) {
 export async function addkey(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
+            const nearCfg = nearConfig(nearApi,"testnet");
             var aKeyPair = nearApi.KeyPair.fromString(config.key);
             nearCfg.keyStore.setKey("testnet", config.accountId, aKeyPair);
             resolve({ code: 201, message: "added" });
@@ -42,7 +42,7 @@ export async function addkey(config) {
 export function contract(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
+            const nearCfg = nearConfig(nearApi,"testnet");
             const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);  /**/
             var ct = {};
@@ -75,7 +75,7 @@ export function contract(config) {
 export async function remove(config) {
     return new Promise((resolve, reject) => {
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
+            const nearCfg = nearConfig(nearApi,"testnet");
             const near = new nearApi.Near(nearCfg);
             const account = new nearApi.Account(near.connection, config.accountId);
             console.log("Key already added!");
@@ -92,7 +92,7 @@ export async function login(config) {
     return new Promise((resolve, reject) => {
 
         getNearApi.then(({ nearApi }) => {
-            const nearCfg = nearConfig(nearApi);
+            const nearCfg = nearConfig(nearApi,"testnet");
             const near = new nearApi.Near(nearCfg);
             nearCfg.keyStore.getKey('testnet', config.accountId).then((kp) => {
                 const account = new nearApi.Account(near.connection, config.accountId);
