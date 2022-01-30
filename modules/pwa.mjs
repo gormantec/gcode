@@ -744,7 +744,7 @@ class AuthButtons extends Div {
             }
         });
         this.appendChild(authButtons);
-        if (params && (params.skip=="true" || params.skip==true)) this.appendChild(new Div({class:"floatingActionButton",innerText:"SKIP",onclick:()=>{myglobals.PWA.setPage(_nextPage);}}));
+        if (params && (params.skip=="true" || params.skip==true)) this.appendChild(new ActionButton({innerText:"SKIP",onclick:()=>{myglobals.PWA.setPage(_nextPage);}}));
     }
 }
 class ActionButton extends Div{
