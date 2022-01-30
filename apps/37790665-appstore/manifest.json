@@ -1,8 +1,8 @@
 {
   "name": "appstore",
   "short_name": "appstore",
-  "theme_color": "#222222",
-  "background_color": "#222222",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
   "display": "standalone",
   "orientation": "any",
   "icons": [
