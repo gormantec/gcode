@@ -30,7 +30,7 @@ async function submitCrewRequest(data) {
     if (PWA.getPWA().userhash) {
         try {
             let crewrequests = await nearConnect();
-            await crewrequests.listRequests({
+            await crewrequests.submitRequest({
                 fromAccountId: "gcode-4" + PWA.getPWA().userhash.toLowerCase() + ".testnet",
                 toAccountId: data.crewAccountId,
                 data: JSON.stringify(data)
@@ -111,6 +111,10 @@ export class AskDivForm extends DivForm {
                 },
                 {
                     name: "crewAccountId",
+                    type: "hidden"
+                },
+                {
+                    name: "crewTimestamp",
                     type: "hidden"
                 }
             ],
