@@ -747,11 +747,13 @@ class AuthButtons extends Div {
         if (params && (params.skip=="true" || params.skip==true)) {
             this.appendChild(new Div({
                 child:new ActionButton({
+                    margin:"0px",
                     marginLeft:"-100px",
                     right:"unset",
                     fontSize:"14px",
-                    width:"185px",
+                    width:"188px",
                     borderRadius:"2px",
+                    padding:"2px",
                     backgroundColor:"#999999",
                     innerText:"Skip Login",
                     onclick:()=>{myglobals.PWA.setPage(_nextPage);}
