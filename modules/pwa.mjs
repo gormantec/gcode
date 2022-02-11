@@ -747,7 +747,7 @@ class AuthButtons extends Div {
         if (params && (params.skip=="true" || params.skip==true)) {
             this.appendChild(new Div({
                 child:new ActionButton({
-                    marginLeft:"-98px",
+                    marginLeft:"-100px",
                     right:"unset",
                     fontSize:"14px",
                     width:"185px",
