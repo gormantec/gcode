@@ -751,7 +751,7 @@ class AuthButtons extends Div {
                     marginLeft:"-100px",
                     right:"unset",
                     fontSize:"14px",
-                    width:"188px",
+                    width:"194px",
                     borderRadius:"2px",
                     padding:"2px",
                     backgroundColor:"#999999",
