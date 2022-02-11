@@ -744,7 +744,20 @@ class AuthButtons extends Div {
             }
         });
         this.appendChild(authButtons);
-        if (params && (params.skip=="true" || params.skip==true)) this.appendChild(new Div({child:new ActionButton({marginLeft:"-98px",right:"unset",fontSize:"18px",width:"185px",borderRadius:"2px",backgroundColor:"#999999",innerText:"SKIP",onclick:()=>{myglobals.PWA.setPage(_nextPage);}})}));
+        if (params && (params.skip=="true" || params.skip==true)) {
+            this.appendChild(new Div({
+                child:new ActionButton({
+                    marginLeft:"-98px",
+                    right:"unset",
+                    fontSize:"14px",
+                    width:"185px",
+                    borderRadius:"2px",
+                    backgroundColor:"#999999",
+                    innerText:"Skip Login",
+                    onclick:()=>{myglobals.PWA.setPage(_nextPage);}
+                })
+            }));
+        }
     }
 }
 class ActionButton extends Div{
