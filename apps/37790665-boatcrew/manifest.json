@@ -1,9 +1,10 @@
 {
-  "name": "boatcrew",
-  "short_name": "boatcrew",
+  "name": "boat crew",
+  "short_name": "boat crew",
   "theme_color": "#222222",
   "background_color": "#222222",
   "display": "standalone",
+  "description":"Invite or meet new freinds. Pubich a trip and find a boat crew. Or search for a trip that needs a crew in your area.",
   "orientation": "any",
   "icons": [
     {
@@ -20,6 +21,5 @@
     }
   ],
   "start_url": "/apps/37790665-boatcrew/index.html",
-  "description": "boatcrew",
   "prefer_related_applications": false
 }
