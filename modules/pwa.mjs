@@ -776,7 +776,7 @@ class ActionButton extends Div{
         if(params.innerText)
         {
             
-            this.appendChild(new Div({tagName:"span",fontSize:params.fontSize?(params.fontSize+"px"):"24px",position:"absolute",top:params.fontSize?(((34-(parseInt(params.fontSize)-2))/2)+"px"):"5px",bottom:"0px",left:"0px",right:"0px",width:"unset",height:"unset",innerText:params.innerText}));
+            this.appendChild(new Div({tagName:"span",fontSize:params.fontSize?(params.fontSize+"px"):"24px",position:"absolute",top:params.fontSize?(((32-(parseInt(params.fontSize)-2))/2)+"px"):"5px",bottom:"0px",left:"0px",right:"0px",width:"unset",height:"unset",innerText:params.innerText}));
         }
         this.style.backgroundColor = this.primaryColor;
         this.style.color = this.primaryColorText;
