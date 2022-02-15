@@ -69,7 +69,7 @@ var _GitHub;
 function getGitHub(params) {
     if (_GitHub) return _GitHub;
     else{
-        console.log("Octokit");
+        console.log("Octokit="+Octokit);
         console.log("Octokit params="+params);
         return new Octokit(params);
     }
