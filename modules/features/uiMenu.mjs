@@ -66,6 +66,8 @@ async function refreshScreen() {
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
 
+    console.log("uimenu");
+
     console.log("----------------");
     console.log(sCode);
     console.log("----------------");

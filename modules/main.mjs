@@ -586,6 +586,7 @@ document.addEventListener("DOMContentLoaded", function () {
     else if(lastFileName && lastFileName.startsWith("git://")){
         (async ()=>{
             await preload(lastFileName);
+            console.log("main");
             document.getElementById("filename").innerText = lastFileName;
             try {
                 window.editor.setValue(load(lastFileName, true));

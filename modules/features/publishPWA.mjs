@@ -118,6 +118,8 @@ function publishToGit(code, user,token)
                 }
             }
             preload(importFiles).then(()=>{
+
+                console.log("publish");
                 var filesArray=[];
                 for(var i=0;i<importFiles.length;i++)
                 {
