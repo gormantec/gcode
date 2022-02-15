@@ -758,7 +758,7 @@ class AuthButtons extends Div {
                         myglobals.PWA.setPage(_nextPage);
                       }
                     });
-                  });
+                  },{root: window.document.documentElement});
                   observer.observe(this.element);
             }
         }
