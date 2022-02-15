@@ -14,7 +14,18 @@ export const runButtonFileSufix=".mjs";
 
 export function runButtonAction(e)
 {
-    publishToGit(window.editor.getValue());
+    let token=githubtree.getToken();
+    if (token) {
+        githubtree.waitForOctokit(() => {
+            githubtree.getAuthenticated().then((resp) => {
+                window.myLogin = resp.data.login;
+                publishToGit(window.editor.getValue(),resp.data.id,token);
+            });
+        });
+    }
+    else{
+        publishToGit(window.editor.getValue());
+    }
 }
 
 
