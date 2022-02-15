@@ -71,18 +71,21 @@ export async function preload(files) {
                     let username = filename.substring(6, firstColon);
                     let repo = filename.substring(firstColon + 1, secondColon);
                     let path = filename.substring(secondColon + 1);
-                    githubtree.getGitFile(username, repo, path, function (e, d) {
+                    githubtree.waitForOctokit(()=>{
+                        githubtree.getGitFile(username, repo, path, function (e, d) {
                         
-                        let cached = localStorage.getItem("gitfile-" + filename);
-                        if (!cached && !e && d) {
-                            localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
-                        }
-                        count++;
-                        if (count == files.length) {
-                            console.log("preloaded");
-                            resolve();
-                        }
+                            let cached = localStorage.getItem("gitfile-" + filename);
+                            if (!cached && !e && d) {
+                                localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(d))));
+                            }
+                            count++;
+                            if (count == files.length) {
+                                console.log("preloaded");
+                                resolve();
+                            }
+                        });
                     });
+
                 }
                 else{
                     count++;
