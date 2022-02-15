@@ -163,7 +163,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             }
                                             if (name == editorFilename || (name.indexOf("wasmdom-jsdom/") >= 0 && name.endsWith(editorFilename))) {
 
-                                                window.debug.log("Got App:" + name);
+                                                console.log("Got App:" + name);
                                                 console.log(baseDir+" / "+name); 
                                                 return sourceCode;
                                             }
@@ -200,7 +200,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                             else {
                                                                 save(_name, "NA");
                                                             }
-                                                        }).catch((error) => { window.debug.log("fetch error:" + error); })
+                                                        }).catch((error) => { console.log("fetch error:" + error); })
                                                         .finally(() => {
                                                             downloading--;
                                                         });
@@ -232,7 +232,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                             }
                                         },
                                         listFiles(dirname, baseDir) {
-                                            window.debug.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
+                                            console.log(`>>> listFiles: baseDir=${baseDir} dirname = ${dirname} `);
                                             return [];
                                         }
                                     }, err => {
@@ -247,10 +247,10 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                         waitForDownload(() => {
                                             if (failed) {
                                                 if (tryCount > 0) {
-                                                    window.debug.log("\b..");
+                                                    console.log("\b..");
                                                 }
                                                 else {
-                                                    window.debug.log("downloading depenadnt files..");
+                                                    console.log("downloading depenadnt files..");
                                                 }
                                                 tryCount++;
 
@@ -263,24 +263,24 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                                 if (err) {
                                                     console.log("------ERROR------");
                                                     console.log(err);
-                                                    window.debug.log(">>> ERROR THROWN >>>");
-                                                    window.debug.log(err);
+                                                    console.log(">>> ERROR THROWN >>>");
+                                                    console.log(err);
                                                     callback(err);
                                                 }
                                                 else {
-                                                    window.debug.log("Compiled Ok");
+                                                    console.log("Compiled Ok");
                                                     var readTryCount = 0;
                                                     var waitRead = () => {
                                                         if (dataURL == "reading" || (dataURL == null && readTryCount < 100)) {
-                                                            window.debug.log("reading..");
-                                                            if (readTryCount == 0) window.debug.log("reading file..");
-                                                            else window.debug.log("\b..");
+                                                            console.log("reading..");
+                                                            if (readTryCount == 0) console.log("reading file..");
+                                                            else console.log("\b..");
                                                             readTryCount++;
                                                             setTimeout(waitRead, 500);
                                                         }
                                                         else {
 
-                                                            window.debug.log("reading done");
+                                                            console.log("reading done");
                                                             var b64data = dataURL.substring(dataURL.indexOf(";base64,") + 8);
                                                             var accountId = sourceCode.replace(/^[\s\S]*?@Near.*?"accountId".*?"(.*?)"[\s\S]*$/, "$1");
                                                             var contractId = sourceCode.replace(/^[\s\S]*?@Near.*?"contractId".*?"(.*?)"[\s\S]*$/, "$1");
@@ -298,7 +298,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
                                 }
                                 console.error = _errorHandle;
                             }).catch(callback);                            
-                        }).catch((error) => { window.debug.log("fetch error:" + error); callback(error);})
+                        }).catch((error) => { console.log("fetch error:" + error); callback(error);})
                     });
 
                     
@@ -309,7 +309,7 @@ export function run(sourceCode, mainFilename, editorFilename, outputFilename, da
             _run();*/
         }
     }
-    catch (e) { window.debug.log(e); callback(e); }
+    catch (e) { console.log(e); callback(e); }
 }
 
 

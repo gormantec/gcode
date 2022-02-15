@@ -98,7 +98,7 @@ function publishToGit(code, user,token)
 
 
     if (filename.endsWith(".mjs") && !filename.endsWith(".lib.mjs")) {
-        window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
+        console.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
         try {
             var code = window.editor.getValue(); errorline=328;
@@ -172,10 +172,10 @@ function publishToGit(code, user,token)
                 if(filesArray && filesArray.length>0)uploadConfig.filesArray=filesArray;
                 _uploadFile(uploadConfig, function (error, uri) {
                     if (error) { errorline=361;
-                        window.debug.log(error); errorline=362;
+                        console.log(error); errorline=362;
                     }
                     else {
-                        window.debug.log("open window"); errorline=365;
+                        console.log("open window"); errorline=365;
                         win.location.href = uri + frame; errorline=366;
     
                         var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi);errorline=368;
@@ -213,7 +213,7 @@ function publishToGit(code, user,token)
         catch (e) {
             console.error("error:" + e + "atline="+errorline);
         }
-        window.debug.log("\n");
+        console.log("\n");
     }
 
 

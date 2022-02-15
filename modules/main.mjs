@@ -133,7 +133,7 @@ function _runCode() {
 
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
-        window.debug.log(window.myLogin + "$ nodejs " + filename + "\n");
+        console.log(window.myLogin + "$ nodejs " + filename + "\n");
         try {
             var _run = function () {
                 eval(window.editor.getValue());
@@ -143,11 +143,11 @@ function _runCode() {
         catch (e) {
             console.error(e);
         }
-        window.debug.log(window.myLogin + "$");
+        console.log(window.myLogin + "$");
     }
     else if (filename.endsWith(".dapp.ts")) {
-        window.debug.log(window.myLogin + "$ echo 'Create dApp'\n");
-        window.debug.log(window.myLogin + "$ asc " + filename + " --target release\n");
+        console.log(window.myLogin + "$ echo 'Create dApp'\n");
+        console.log(window.myLogin + "$ asc " + filename + " --target release\n");
         import('/modules/ascompile.mjs').then(({ run }) => {
             var code = window.editor.getValue();
             run(
@@ -212,10 +212,10 @@ function _runCode() {
                             }
                             _uploadFile({ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                                 if (error) {
-                                    window.debug.log(error);
+                                    console.log(error);
                                 }
                                 else {
-                                    window.debug.log("open window");
+                                    console.log("open window");
                                     win.location.href = uri + frame;
 
                                     import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
@@ -252,7 +252,7 @@ function _runCode() {
         });
     }
     else if (filename.endsWith(".ts")) {
-        window.debug.log(window.myLogin + "$ asc " + filename + " --target release\n");
+        console.log(window.myLogin + "$ asc " + filename + " --target release\n");
         import('/modules/ascompile.mjs').then(({ run }) => {
             var code = window.editor.getValue();
             run(
@@ -300,10 +300,10 @@ function _runCode() {
                             }
                             _uploadFile({ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                                 if (error) {
-                                    window.debug.log(error);
+                                    console.log(error);
                                 }
                                 else {
-                                    window.debug.log("open window");
+                                    console.log("open window");
                                     win.location.href = uri + frame;
                                 }
 
@@ -318,11 +318,11 @@ function _runCode() {
             );
         });
 
-        window.debug.log("\n");
+        console.log("\n");
     }
     else if (filename.endsWith(".mjs")) {
         /*
-        window.debug.log(window.myLogin + "$ launch webApp " + filename + "\n");
+        console.log(window.myLogin + "$ launch webApp " + filename + "\n");
         var errorline=0;
         try {
             var code = window.editor.getValue(); errorline=328;
@@ -359,10 +359,10 @@ function _runCode() {
             }
             _uploadFile({ html: "<!DOCTYPE html>\n" + rootHTML.outerHTML, icon: splash }, function (error, uri) {
                 if (error) { errorline=361;
-                    window.debug.log(error); errorline=362;
+                    console.log(error); errorline=362;
                 }
                 else {
-                    window.debug.log("open window"); errorline=365;
+                    console.log("open window"); errorline=365;
                     win.location.href = uri + frame; errorline=366;
 
                     var accountIdList=code.match(/\"*accountId\"*\s*?:\s*?\"[a-zA-Z0-9_-]*?\.(testnet|mainnet)\"/gi);errorline=368;
@@ -398,12 +398,12 @@ function _runCode() {
         catch (e) {
             console.error("error:" + e + "atline="+errorline);
         }
-        window.debug.log("\n");
+        console.log("\n");
         */
     }
     else if (filename.endsWith(".py")) {
         try {
-            window.debug.log(window.myLogin + "$ python " + filename)
+            console.log(window.myLogin + "$ python " + filename)
             Sk.pre = "output";
             Sk.configure({
                 output: consolelog, read: builtinRead
@@ -411,7 +411,7 @@ function _runCode() {
             var myPromise = Sk.misceval.asyncToPromise(function () {
                 return Sk.importMainWithBody("<stdin>", false, window.editor.getValue(), true);
             });
-            window.debug.log("$");
+            console.log("$");
         }
         catch (e) {
             console.error(e);
@@ -458,7 +458,7 @@ function builtinRead(x) {
 function consolelog(x) {
 
     if (x == "\n") {
-        window.debug.log(xx);
+        console.log(xx);
         xx = "";
     }
     else {
@@ -498,8 +498,8 @@ window.setEditorMode = function () {
         window.editor.setOption("mode", "htmlmixed");
     }
 
-    window.debug.log(window.editor.getOption("mode"));
-    window.debug.log(window.editor.options);
+    console.log(window.editor.getOption("mode"));
+    console.log(window.editor.options);
     //window.editor
 }
 
@@ -630,11 +630,11 @@ document.addEventListener("DOMContentLoaded", function () {
     /*
 
 (function () {
-        var old = window.debug.log;
+        var old = console.log;
         var olde = console.error;
         var logger = document.getElementById('log');
         var pageBottom = document.getElementById('pageBottom');
-        window.debug.log = function (message) {
+        console.log = function (message) {
             if (typeof message == 'object') {
                 logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
                 pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
@@ -693,7 +693,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     panel.addEventListener("mousedown", function (e) {
-        window.debug.log(window.editor.getOption("mode"));
+        console.log(window.editor.getOption("mode"));
         if (e.offsetX > (panel.clientWidth - BORDER_SIZE)) {
             m_posx = e.x;
             document.addEventListener("mousemove", resizex, false);

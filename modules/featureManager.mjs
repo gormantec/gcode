@@ -153,7 +153,7 @@ export async function loadFeatures() {
                                         }
                                     }
                                     else if (widget.type.startsWith("select")) {
-                                        window.debug.log("found select");
+                                        console.log("found select");
                                         let select = window.document.createElement("select");
                                         let p = window.document.createElement("p");
                                         let label = window.document.createElement("label");
@@ -208,7 +208,7 @@ export async function loadFeatures() {
                 }
             }
             else {
-                window.debug.log("Error: " + f.uri + " does not exist.");
+                console.log("Error: " + f.uri + " does not exist.");
             }
         }
     }
