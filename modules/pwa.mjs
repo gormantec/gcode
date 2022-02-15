@@ -6,13 +6,13 @@ window.PWA.globals = window.PWA.globals || {};
 
 var debug = debug || { log: function (v) { /*console.log(v);*/ } };
 
-const myglobals={PWA:null};
+const myglobals = { PWA: null };
 
-class PWA { 
+class PWA {
     constructor(params) {
         console.log("new PWA");
         if (!params) params = [];
-        this.pwaAuth= params.pwaAuth || "false";
+        this.pwaAuth = params.pwaAuth || "false";
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 60;
@@ -29,23 +29,22 @@ class PWA {
         this.setAlert();
         this.setFooter();
         this.setFloatingActionButton();
-        window.PWA.globals.pwaInstances=window.PWA.globals.pwaInstances || [];
+        window.PWA.globals.pwaInstances = window.PWA.globals.pwaInstances || [];
         window.PWA.globals.pwaInstances.push(this);
-        myglobals.PWA=this;
+        myglobals.PWA = this;
         window.document.documentElement.style.setProperty('--primaryColor', this.primaryColor);
         window.document.documentElement.style.setProperty('--primaryColorText', this.primaryColorText);
     }
 
-    static getPWA()
-    {
+    static getPWA() {
         return myglobals.PWA;
     }
 
     setAlert(message) {
-        this.alertDialog = new Div({ id: "alertDialog",display:"none"});
-        this.alertDialogBody = new Div({ id: "alertDialogBody",backgroundColor:this.primaryColorText,borderColor:this.primaryColor,borderWidth:"2px"  });
-        this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "",backgroundColor:this.primaryColorText,color:"black" });
-        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK",right:"5px","bottom":"5px",width:"30px",height:"20px",color:this.primaryColor,backgroundColor:this.primaryColorText,fontWeight: "bold"});
+        this.alertDialog = new Div({ id: "alertDialog", display: "none" });
+        this.alertDialogBody = new Div({ id: "alertDialogBody", backgroundColor: this.primaryColorText, borderColor: this.primaryColor, borderWidth: "2px" });
+        this.alertDialogContent = new Div({ id: "alertDialogContent", innerHTML: "", backgroundColor: this.primaryColorText, color: "black" });
+        this.alertDialogOK = new Div({ id: "alertDialogOK", innerHTML: "OK", right: "5px", "bottom": "5px", width: "30px", height: "20px", color: this.primaryColor, backgroundColor: this.primaryColorText, fontWeight: "bold" });
         this.alertDialogBody.appendChild(this.alertDialogContent);
         this.alertDialogBody.appendChild(this.alertDialogOK);
         this.alertDialog.appendChild(this.alertDialogBody);
@@ -112,9 +111,8 @@ class PWA {
             if (_this.navigateBackPage) {
                 if (_this.navigateBackPage.navigateBackPage) _this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
                 else _this.hideNavigateBackButton();
-                if(typeof _this.navigateBackPage=="string")
-                {
-                    _this.navigateBackPage=Page.getPage(_this.navigateBackPage);
+                if (typeof _this.navigateBackPage == "string") {
+                    _this.navigateBackPage = Page.getPage(_this.navigateBackPage);
                 }
                 _this.setPage(_this.navigateBackPage);
             }
@@ -141,14 +139,13 @@ class PWA {
     }
     setPage(aPage) {
         //debug.log("setpage");
-        if(typeof aPage === 'string' || aPage instanceof String)
-        {
-            console.log(aPage+" is a string");
-            aPage=Page.getPage(aPage);
+        if (typeof aPage === 'string' || aPage instanceof String) {
+            console.log(aPage + " is a string");
+            aPage = Page.getPage(aPage);
             console.log(aPage);
             console.log("----");
         }
-        if(!aPage || !(aPage instanceof Page)){
+        if (!aPage || !(aPage instanceof Page)) {
             console.log(aPage);
             console.log(aPage instanceof Page);
             return;
@@ -157,40 +154,35 @@ class PWA {
             debug.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
         }
-        if(aPage.hideFloatingActionButtonFlag=="true")this.hideFloatingActionButton();
+        if (aPage.hideFloatingActionButtonFlag == "true") this.hideFloatingActionButton();
         else this.showFloatingActionButton();
-        if(aPage.hideFooterFlag=="true")this.hideFooter();
+        if (aPage.hideFooterFlag == "true") this.hideFooter();
         else this.showFooter();
-        
- 
+
+
         this.pwaBody.setChild({ child: aPage });
         this.alertPageChangeListener(aPage.pageId);
 
     }
-    setCredentials(credentials){
-        this.credentials=credentials;
-        this.userhash=credentials.provider+"-"+credentials.providerData.user.id;
+    setCredentials(credentials) {
+        this.credentials = credentials;
+        this.userhash = credentials.provider + "-" + credentials.providerData.user.id;
         this.setAlert(this.userhash);
     }
-    alertPageChangeListener(pageId)
-    {
-        for(var listener in this.pageChangeListeners)
-        {
-            try{
+    alertPageChangeListener(pageId) {
+        for (var listener in this.pageChangeListeners) {
+            try {
                 this.pageChangeListeners[listener](pageId);
             }
-            catch(e)
-            {
+            catch (e) {
                 console.log(e);
             }
         }
     }
 
-    addPageChangeListener(listener)
-    {
-        if(typeof listener=="function")
-        {
-            this.pageChangeListeners=this.pageChangeListeners || [];
+    addPageChangeListener(listener) {
+        if (typeof listener == "function") {
+            this.pageChangeListeners = this.pageChangeListeners || [];
             this.pageChangeListeners.push(listener);
         }
     }
@@ -263,7 +255,7 @@ class PWA {
         })();
     }
 
-    inIframe () {
+    inIframe() {
         try {
             return window.self !== window.top;
         } catch (e) {
@@ -271,8 +263,7 @@ class PWA {
         }
     }
 
-    buildScreen(msec,win,rootWindow)
-    {
+    buildScreen(msec, win, rootWindow) {
         var _title = win.document.createElement("title");
         _title.innerText = this.title;
         win.document.head.insertBefore(_title, win.document.head.firstChild);
@@ -292,8 +283,7 @@ class PWA {
         var _this = this;
         this.addStyle(win.document, "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", function () {
             _this.addStyle(win.document, "https://gcode.com.au/css/pwa.css", function () {
-                if(!_this.inIframe())
-                {
+                if (!_this.inIframe()) {
                     debug.log("splashDuration:" + window.PWA.globals.splashDuration);
                     if (window.PWA.globals.splashDuration) _this.splashDuration = window.PWA.globals.splashDuration
                     else if (!_this.splashDuration) _this.splashDuration = 2000;
@@ -302,7 +292,7 @@ class PWA {
                     if (timeoutMs < 0) timeoutMs = 10;
                     setTimeout(function () {
                         while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
-                        document.body.style.backgroundColor="rgb(33, 33, 33)";
+                        document.body.style.backgroundColor = "rgb(33, 33, 33)";
                         rootWindow.style.backgroundColor = "black";
                         rootWindow.style.color = _this.primaryColorText;
                         _this.pwaRoot.element.style.opacity = 0.0;
@@ -311,19 +301,18 @@ class PWA {
                         _this.fadeIn(_this.pwaRoot.element, 500);
                     }, timeoutMs);
                 }
-                else{
+                else {
                     while (rootWindow.firstChild) rootWindow.removeChild(rootWindow.lastChild);
-                    document.body.style.backgroundColor="rgb(33, 33, 33)";
+                    document.body.style.backgroundColor = "rgb(33, 33, 33)";
                     rootWindow.style.backgroundColor = "black";
                     rootWindow.style.color = _this.primaryColorText;
                     rootWindow.appendChild(_this.pwaRoot.element);
                     rootWindow.appendChild(_this.pwaOverlay.element);
                 }
 
-                if(_this.pwaAuth && _this.pwaAuth.toString().toLowerCase()=="true")
-                {
+                if (_this.pwaAuth && _this.pwaAuth.toString().toLowerCase() == "true") {
                     console.log("ADD PWAAUTH 2");
-                    _this.addModule(win.document,"https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js");
+                    _this.addModule(win.document, "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaauth@latest/dist/pwa-auth.min.js");
                 }
 
             });
@@ -336,33 +325,35 @@ class PWA {
         win = win || window;
         console.log(win.location);
         const urlParams = new URLSearchParams(win.location.search);
-        var mockFrame = urlParams.get("mockFrame") || this.inIframe()?window.PWA.globals.mockFrame:null;
+        var mockFrame = urlParams.get("mockFrame") || this.inIframe() ? window.PWA.globals.mockFrame : null;
         var rootWindow = win.document.body;
         var aPWA = this;
-        var ad2hsPrompt=new Div({tagName:"button",classNameOverride: true,class:"ad2hs-prompt",innerText:"Install Web App"});
+        var ad2hsPrompt = new Div({ tagName: "button", classNameOverride: true, class: "ad2hs-prompt", innerText: "Install Web App" });
 
-        var iosPrompt=new Div({class: "ios-prompt",classNameOverride: true,children:[
-            new Div({tagName:"span",classNameOverride: true,color: "rgb(187, 187, 187)", float: "right", marginTop: "-14px", marginRight: "-11px"}),
-            new Div({tagName:"img",classNameOverride: true,src:"https://gcode.com.au/images/add2home.svg",float: "left", height: "80px", width: "auto", marginTop: "-8px", marginRight: "1rem"}),
-            new Div({tagName:"p",classNameOverride: true,marginTop: "-3px", lineHeight: "1.3rem", innerHTML:"To install this Web App in your iPhone/iPad press <img src=\"https://gcode.com.au/images/share.svg\" style=\"display: inline-block; margin-top: 4px; margin-bottom: -4px; height: 20px; width: auto;\"> and then Add to Home Screen."}),
-        ]});
+        var iosPrompt = new Div({
+            class: "ios-prompt", classNameOverride: true, children: [
+                new Div({ tagName: "span", classNameOverride: true, color: "rgb(187, 187, 187)", float: "right", marginTop: "-14px", marginRight: "-11px" }),
+                new Div({ tagName: "img", classNameOverride: true, src: "https://gcode.com.au/images/add2home.svg", float: "left", height: "80px", width: "auto", marginTop: "-8px", marginRight: "1rem" }),
+                new Div({ tagName: "p", classNameOverride: true, marginTop: "-3px", lineHeight: "1.3rem", innerHTML: "To install this Web App in your iPhone/iPad press <img src=\"https://gcode.com.au/images/share.svg\" style=\"display: inline-block; margin-top: 4px; margin-bottom: -4px; height: 20px; width: auto;\"> and then Add to Home Screen." }),
+            ]
+        });
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
-            
+
             win.document.body.appendChild(ad2hsPrompt.element);
             win.document.body.appendChild(iosPrompt.element);
-            aPWA.buildScreen(msec,win,rootWindow);
+            aPWA.buildScreen(msec, win, rootWindow);
         }
-        else{
-            var splashdiv = new Div({innerHTML:win.document.body.innerHTML});
+        else {
+            var splashdiv = new Div({ innerHTML: win.document.body.innerHTML });
             while (win.document.body.firstChild) win.document.body.removeChild(win.document.body.lastChild);
             var frame = new Div({});
             frame.appendChild(splashdiv);
             win.document.body.appendChild(frame.element);
             win.document.body.appendChild(ad2hsPrompt.element);
             win.document.body.appendChild(iosPrompt.element);
-            rootWindow=frame.element;
-            this.buildScreen(msec,win,rootWindow);
+            rootWindow = frame.element;
+            this.buildScreen(msec, win, rootWindow);
         }
 
 
@@ -478,13 +469,13 @@ class Div {
         if (params && params.lineHeight) this.element.style.lineHeight = params.lineHeight;
         if (params && params.position) this.element.style.position = params.position;
         if (params && params.display) this.element.style.display = params.display;
-        if (params && params.src) this.element.setAttribute("src",params.src);
-        if (params && params.inputType) this.element.setAttribute("type",params.inputType);
-        if (params && params.inputStep) this.element.setAttribute("step",params.inputStep);
-        if (params && params.inputMin) this.element.setAttribute("min",params.inputMin);
-        if (params && params.inputMax) this.element.setAttribute("max",params.inputMax);
-        if (params && params.inputValue) this.element.setAttribute("value",params.inputValue);
-        if (params && params.contentEditable) this.element.setAttribute("contentEditable",""+(params.contentEditable=="true"));
+        if (params && params.src) this.element.setAttribute("src", params.src);
+        if (params && params.inputType) this.element.setAttribute("type", params.inputType);
+        if (params && params.inputStep) this.element.setAttribute("step", params.inputStep);
+        if (params && params.inputMin) this.element.setAttribute("min", params.inputMin);
+        if (params && params.inputMax) this.element.setAttribute("max", params.inputMax);
+        if (params && params.inputValue) this.element.setAttribute("value", params.inputValue);
+        if (params && params.contentEditable) this.element.setAttribute("contentEditable", "" + (params.contentEditable == "true"));
         if (params && params.onclick) {
             this.onclick(params.onclick);
             this.element.style.cursor = "pointer";
@@ -511,16 +502,16 @@ class Div {
             this.onPointerOut(params.pointerout);
             this.element.style.cursor = "pointer";
         }
-        
+
         if (params && params.width) {
             this.element.style.width = params.width;
-            if (!params.right) this.element.style.right="unset";
-            if (!params.left) this.element.style.left="unset";
+            if (!params.right) this.element.style.right = "unset";
+            if (!params.left) this.element.style.left = "unset";
         }
         if (params && params.height) {
             this.element.style.height = params.height;
-            if (!params.top) this.element.style.top="unset";
-            if (!params.bottom) this.element.style.bottom="unset";
+            if (!params.top) this.element.style.top = "unset";
+            if (!params.bottom) this.element.style.bottom = "unset";
         }
         if (params && params.backgroundColor) this.element.style.backgroundColor = params.backgroundColor;
         if (params && params.backgroundPosition) this.element.style.backgroundPosition = params.backgroundPosition;
@@ -533,56 +524,55 @@ class Div {
         //if (params.style) this.element.setAttribute("style",params.style);
     }
     onclick(afunc) {
-        let _this=this;
+        let _this = this;
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
             //this.element.onclick = afunc;
-            
-            this.element.addEventListener("click", (e)=>{e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e.thisDiv=_this;e.parentDiv=_this.parentDiv;afunc(e);});
+
+            this.element.addEventListener("click", (e) => { e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e.thisDiv = _this; e.parentDiv = _this.parentDiv; afunc(e); });
         }
 
     }
-    onPointerDown(handleDown){
-        let _this=this.element;
-        
-        this.element.addEventListener("pointerdown", (e)=>{_this.isPointerDown=true;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleDown(e);});
+    onPointerDown(handleDown) {
+        let _this = this.element;
+
+        this.element.addEventListener("pointerdown", (e) => { _this.isPointerDown = true; e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e._this = _this; handleDown(e); });
     }
-    onPointerUp(handleUp){  
-        let _this=this.element;
-        this.element.addEventListener("pointerup", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;console.log(e);e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleUp(e);}});
+    onPointerUp(handleUp) {
+        let _this = this.element;
+        this.element.addEventListener("pointerup", (e) => { if (_this.isPointerDown == true) { _this.isPointerDown = false; console.log(e); e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e._this = _this; handleUp(e); } });
     }
-    onPointerEnter(handleEnter){
-        let _this=this.element;
-        this.element.addEventListener("pointerenter", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleEnter(e);}});
+    onPointerEnter(handleEnter) {
+        let _this = this.element;
+        this.element.addEventListener("pointerenter", (e) => { if (_this.isPointerDown == true) { _this.isPointerDown = false; e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e._this = _this; handleEnter(e); } });
     }
-    onPointerLeave(handleLeave){
-        let _this=this.element;
-        this.element.addEventListener("pointerleave", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);}});
+    onPointerLeave(handleLeave) {
+        let _this = this.element;
+        this.element.addEventListener("pointerleave", (e) => { if (_this.isPointerDown == true) { _this.isPointerDown = false; e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e._this = _this; handleLeave(e); } });
     }
-    onPointerOut(handleLeave){
-        let _this=this.element;
-        this.element.addEventListener("pointerout", (e)=>{if(_this.isPointerDown==true){_this.isPointerDown=false;e.stopImmediatePropagation();e.preventDefault();e.stopPropagation();e._this=_this;handleLeave(e);}});
+    onPointerOut(handleLeave) {
+        let _this = this.element;
+        this.element.addEventListener("pointerout", (e) => { if (_this.isPointerDown == true) { _this.isPointerDown = false; e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e._this = _this; handleLeave(e); } });
     }
 
-    addEventListener(eventName,eventHandler)
-    {
-        console.log("addEventListener("+eventName+")");
-        return this.element.addEventListener(eventName,eventHandler);
+    addEventListener(eventName, eventHandler) {
+        console.log("addEventListener(" + eventName + ")");
+        return this.element.addEventListener(eventName, eventHandler);
     }
-    
+
     showModal() {
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
             this.element.showModal();
         }
-        else{
-            this.element.style.display="block";
+        else {
+            this.element.style.display = "block";
         }
     }
     close() {
         if (this.element.tagName.toUpperCase().trim() == "DIALOG") {
             this.element.close();
         }
-        else{
-            this.element.style.display="none";
+        else {
+            this.element.style.display = "none";
         }
     }
 
@@ -599,9 +589,8 @@ class Div {
         this.element.innerHTML = "";
         this.appendChild(params);
     }
-    setParent(parentDiv)
-    {
-        this.parentDiv=parentDiv;
+    setParent(parentDiv) {
+        this.parentDiv = parentDiv;
     }
 
     appendChild(params) {
@@ -628,9 +617,8 @@ class Div {
             this.element.appendChild(this.htmlToElement(params));
         }
     }
-    setAttribute(aname,value)
-    {
-        this.element.setAttribute(aname,value);
+    setAttribute(aname, value) {
+        this.element.setAttribute(aname, value);
     }
 
     insertBefore(n1, n2) {
@@ -643,10 +631,9 @@ class Div {
         this.element.removeChild(n1);
     }
     removeChildren() {
-        this.element.innerHTML='';
+        this.element.innerHTML = '';
     }
-    querySelector(q)
-    {
+    querySelector(q) {
         return this.element.querySelector(q);
     }
 
@@ -667,47 +654,44 @@ class Div {
     }
 }
 
-var pages={};
+var pages = {};
 class Page extends Div {
     constructor(params) {
         super(params);
-        this.pages=this.pages || {};
-        var id=0;
-        this.pageId=this.constructor.name;
-        while(pages[this.pageId]){
+        this.pages = this.pages || {};
+        var id = 0;
+        this.pageId = this.constructor.name;
+        while (pages[this.pageId]) {
             id++;
-            this.pageId=this.constructor.name+""+id;
+            this.pageId = this.constructor.name + "" + id;
         }
-        pages[this.pageId]=this;
-        this.element.id=this.pageId;
+        pages[this.pageId] = this;
+        this.element.id = this.pageId;
         this.element.className = (this.element.className + " pwapage").trim();
         if (params.navigateBackPage instanceof Page) {
             this.navigateBackPage = params.navigateBackPage;
         }
-        else if (typeof params.navigateBackPage=="string" && params.navigateBackPage.trim().substring(0,5)=="page(") {
-            
+        else if (typeof params.navigateBackPage == "string" && params.navigateBackPage.trim().substring(0, 5) == "page(") {
+
             this.navigateBackPage = params.navigateBackPage;
         }
-        else if(!params.navigateBackPage){}
-        else{
-            console.log("Error:"+params.navigateBackPage);
+        else if (!params.navigateBackPage) { }
+        else {
+            console.log("Error:" + params.navigateBackPage);
         }
-        if(params && params.hideFloatingActionButton && params.hideFloatingActionButton=="true")this.hideFloatingActionButtonFlag="true";
-        if(params && params.hideFooter && params.hideFooter=="true")this.hideFooterFlag="true";
+        if (params && params.hideFloatingActionButton && params.hideFloatingActionButton == "true") this.hideFloatingActionButtonFlag = "true";
+        if (params && params.hideFooter && params.hideFooter == "true") this.hideFooterFlag = "true";
     }
 
-    static getPage(id)
-    {
-        if(id.trim().substring(0,5)=="page(" && id.trim().slice(-1)==")")
-        {
-            id=id.trim().slice(5,-1);
+    static getPage(id) {
+        if (id.trim().substring(0, 5) == "page(" && id.trim().slice(-1) == ")") {
+            id = id.trim().slice(5, -1);
         }
-        console.log("getPage="+id+" "+pages[id]);
+        console.log("getPage=" + id + " " + pages[id]);
         return pages[id];
     }
-    static clearPages()
-    {
-        pages={};
+    static clearPages() {
+        pages = {};
     }
 }
 class AuthButtons extends Div {
@@ -716,7 +700,7 @@ class AuthButtons extends Div {
         super(params);
         var authButtons = new Div({
             marginLeft: "-100px",
-            bottom: params.bottom?params.bottom:"70px",
+            bottom: params.bottom ? params.bottom : "70px",
             height: "auto",
             width: "200px",
             tagName: "pwa-auth"
@@ -727,8 +711,8 @@ class AuthButtons extends Div {
         if (params && params.applekey) authButtons.element.setAttribute("applekey", params.applekey);
         if (params && params.appearance) authButtons.element.setAttribute("appearance", params.appearance);
         this.element.style.marginLeft = "50%";
-        let _nextPage=null;
-        if(params && params.nextPage) _nextPage=params.nextPage;
+        let _nextPage = null;
+        if (params && params.nextPage) _nextPage = params.nextPage;
         authButtons.element.addEventListener("signin-completed", ev => {
             const signIn = ev.detail;
             if (signIn.error) {
@@ -737,67 +721,83 @@ class AuthButtons extends Div {
                 console.log("logged in");
                 console.log(signIn.providerData.user.id);
                 myglobals.PWA.setCredentials(signIn);
-                if(_nextPage){
+                if (_nextPage) {
                     console.log(_nextPage);
                     myglobals.PWA.setPage(_nextPage);
                 }
             }
         });
         this.appendChild(authButtons);
-        if (params && (params.skip=="true" || params.skip==true)) {
+        if (params && (params.skip == "true" || params.skip == true)) {
             this.appendChild(new Div({
-                child:new ActionButton({
-                    margin:"0px",
-                    marginLeft:"-100px",
-                    right:"unset",
-                    fontSize:"14px",
-                    width:"194px",
-                    borderRadius:"2px",
-                    padding:"2px",
-                    backgroundColor:"#999999",
-                    innerText:"Skip Login",
-                    onclick:()=>{myglobals.PWA.setPage(_nextPage);}
+                child: new ActionButton({
+                    margin: "0px",
+                    marginLeft: "-100px",
+                    right: "unset",
+                    fontSize: "14px",
+                    width: "194px",
+                    borderRadius: "2px",
+                    padding: "2px",
+                    backgroundColor: "#999999",
+                    innerText: "Skip Login",
+                    onclick: () => {
+                        myglobals.PWA.setPage(_nextPage);
+                        window.localStorage.setItem("authSkip", "true");
+                        if (params && (params.skip == "true" || params.skip == true)) {
+                            window.localStorage.setItem("authSkip", "true");
+                        }
+                    }
                 })
             }));
+            if (params && (params.skip == "true" || params.skip == true)) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                      console.log(entry.intersectionRatio > 0 ? 'visible' : 'invisible');
+                      if(entry.intersectionRatio>0)
+                      {
+                        myglobals.PWA.setPage(_nextPage);
+                      }
+                    });
+                  });
+                  observer.observe(this.element);
+            }
         }
     }
 }
-class ActionButton extends Div{
- 
+class ActionButton extends Div {
+
     constructor(params) {
         super(params);
         this.element.className = (this.element.className + " floatingActionButton").trim();
-        this.setChild(new Div({tagName:"span",float:"left",position:"relative",child:new Div({
-            tagName: "i",
-            class: "material-icons",
-            classNameOverride: true,
-            innerText: "add"
-        })}));
-        if(params.innerText)
-        {
-            
-            this.appendChild(new Div({tagName:"span",fontSize:params.fontSize?(params.fontSize+"px"):"24px",position:"absolute",top:params.fontSize?(((32-(parseInt(params.fontSize)-2))/2)+"px"):"5px",bottom:"0px",left:"0px",right:"0px",width:"unset",height:"unset",innerText:params.innerText}));
+        this.setChild(new Div({
+            tagName: "span", float: "left", position: "relative", child: new Div({
+                tagName: "i",
+                class: "material-icons",
+                classNameOverride: true,
+                innerText: "add"
+            })
+        }));
+        if (params.innerText) {
+
+            this.appendChild(new Div({ tagName: "span", fontSize: params.fontSize ? (params.fontSize + "px") : "24px", position: "absolute", top: params.fontSize ? (((32 - (parseInt(params.fontSize) - 2)) / 2) + "px") : "5px", bottom: "0px", left: "0px", right: "0px", width: "unset", height: "unset", innerText: params.innerText }));
         }
         this.style.backgroundColor = this.primaryColor;
         this.style.color = this.primaryColorText;
     }
 }
 
-class DivForm extends Div{
-    constructor(params)
-    {
+class DivForm extends Div {
+    constructor(params) {
         super(params)
-        if(params.formInputs && params.formInputs.length>0)
-        {
-            for(let i=0;i<params.formInputs.length;i++)
-            {
-                var inputId="formInput"+i;
-                if(params.formInputs.id)inputId=params.formInputs.id;
-                else if(params.formInputs[i].name){
-                    inputId=params.formInputs[i].name.replace(/[/\\?%*:|"<> ]/g, '');
-                    inputId="form"+inputId.substring(0,1).toUpperCase()+inputId.substring(1);
+        if (params.formInputs && params.formInputs.length > 0) {
+            for (let i = 0; i < params.formInputs.length; i++) {
+                var inputId = "formInput" + i;
+                if (params.formInputs.id) inputId = params.formInputs.id;
+                else if (params.formInputs[i].name) {
+                    inputId = params.formInputs[i].name.replace(/[/\\?%*:|"<> ]/g, '');
+                    inputId = "form" + inputId.substring(0, 1).toUpperCase() + inputId.substring(1);
                 }
-                let labelDiv={
+                let labelDiv = {
                     position: "static",
                     display: "inline-block",
                     tagName: "span",
@@ -807,11 +807,11 @@ class DivForm extends Div{
                     innerText: params.formInputs[i].name,
                     color: "black"
                 };
-                let inputDiv={
+                let inputDiv = {
                     id: inputId,
                     position: "static",
                     display: "inline-block",
-                    tagName: params.formInputs[i].type && params.formInputs[i].type!="text"?params.formInputs[i].type:"div",
+                    tagName: params.formInputs[i].type && params.formInputs[i].type != "text" ? params.formInputs[i].type : "div",
                     innerText: "",
                     contentEditable: "true",
                     borderColor: "#AAAAAA",
@@ -821,52 +821,45 @@ class DivForm extends Div{
                     width: "65%",
                     padding: "10px"
                 };
-                if(params.formInputs[i].height)inputDiv.height=params.formInputs[i].height;
-                if(params.formInputs[i].type && params.formInputs[i].type!="text" && params.formInputs[i].type!="location" && params.formInputs[i].type!="select")
-                {
-                    inputDiv.tagName="input";
-                    inputDiv.inputType=params.formInputs[i].type;
-                    if(params.formInputs[i].min)inputDiv.inputMin=params.formInputs[i].min;
-                    if(params.formInputs[i].max)inputDiv.inputMax=params.formInputs[i].max;
-                    if(params.formInputs[i].value)inputDiv.inputValue=params.formInputs[i].value;
+                if (params.formInputs[i].height) inputDiv.height = params.formInputs[i].height;
+                if (params.formInputs[i].type && params.formInputs[i].type != "text" && params.formInputs[i].type != "location" && params.formInputs[i].type != "select") {
+                    inputDiv.tagName = "input";
+                    inputDiv.inputType = params.formInputs[i].type;
+                    if (params.formInputs[i].min) inputDiv.inputMin = params.formInputs[i].min;
+                    if (params.formInputs[i].max) inputDiv.inputMax = params.formInputs[i].max;
+                    if (params.formInputs[i].value) inputDiv.inputValue = params.formInputs[i].value;
                 }
-                else if(params.formInputs[i].type=="location")
-                {
-                    inputDiv.tagName="input";   
+                else if (params.formInputs[i].type == "location") {
+                    inputDiv.tagName = "input";
                 }
-                else if(params.formInputs[i].type=="select")
-                {
-                    inputDiv.tagName="select";   
+                else if (params.formInputs[i].type == "select") {
+                    inputDiv.tagName = "select";
                 }
-                let inputDivDiv=new Div(inputDiv)
-                if(params.formInputs[i].type=="select")
-                {
-                    if(params.formInputs[i].options)
-                    {
+                let inputDivDiv = new Div(inputDiv)
+                if (params.formInputs[i].type == "select") {
+                    if (params.formInputs[i].options) {
                         console.log("options");
-                        for(var j=0;j<params.formInputs[i].options.length;j++)
-                        {
-                            console.log("options:"+(i+1));
-                            var aDiv=new Div({tagName:"option",innerText:params.formInputs[i].options[j]});
-                            aDiv.element.value=params.formInputs[i].options[j];
-                            aDiv.element.setAttribute("value",params.formInputs[i].options[j]);
-                            if(j==0)aDiv.element.setAttribute("selected","true");
+                        for (var j = 0; j < params.formInputs[i].options.length; j++) {
+                            console.log("options:" + (i + 1));
+                            var aDiv = new Div({ tagName: "option", innerText: params.formInputs[i].options[j] });
+                            aDiv.element.value = params.formInputs[i].options[j];
+                            aDiv.element.setAttribute("value", params.formInputs[i].options[j]);
+                            if (j == 0) aDiv.element.setAttribute("selected", "true");
                             inputDivDiv.appendChild(aDiv);
                         }
                     }
                 }
-                else if(params.formInputs[i].type=="location")
-                {
-                    let size="30";
-                    if(params.formInputs[i].size) size=""+params.formInputs[i].size;
-                    let country=["au"];
-                    if(params.formInputs[i].country) country=params.formInputs[i].country;
+                else if (params.formInputs[i].type == "location") {
+                    let size = "30";
+                    if (params.formInputs[i].size) size = "" + params.formInputs[i].size;
+                    let country = ["au"];
+                    if (params.formInputs[i].country) country = params.formInputs[i].country;
 
-                    inputDivDiv.element.setAttribute("required","true");
-                    inputDivDiv.element.setAttribute("autocomplete","off");
-                    inputDivDiv.element.setAttribute("size",size);
-                    var googleAPI=getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly',["google"]);
-                    googleAPI.then(({google})=>{
+                    inputDivDiv.element.setAttribute("required", "true");
+                    inputDivDiv.element.setAttribute("autocomplete", "off");
+                    inputDivDiv.element.setAttribute("size", size);
+                    var googleAPI = getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly', ["google"]);
+                    googleAPI.then(({ google }) => {
                         let autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
                             componentRestrictions: { country: country },
                             fields: ["address_components", "geometry"],
@@ -874,11 +867,10 @@ class DivForm extends Div{
                         });
                     });
                 }
-                else if(params.formInputs[i].type=="hidden")
-                {
-                    labelDiv.display="none";
+                else if (params.formInputs[i].type == "hidden") {
+                    labelDiv.display = "none";
                 }
-                let _row=new Div({
+                let _row = new Div({
                     position: "relative",
                     fontSize: "large",
                     marginTop: "10px",
@@ -888,30 +880,27 @@ class DivForm extends Div{
                     ]
                 });
 
-                if(params.formInputs[i].type=="hidden")
-                {
-                    _row.setAttribute("display","none");
+                if (params.formInputs[i].type == "hidden") {
+                    _row.setAttribute("display", "none");
                 }
                 this.appendChild(_row);
             }
-            
+
         }
 
-        if(params.sendButton)
-        {
+        if (params.sendButton) {
             let sendButton = new ActionButton({
                 left: "unset",
                 right: "unset",
                 width: "60%",
                 innerText: "send",
                 position: "relative",
-                margin:"auto",
-                marginBottom:"50px",
-                bottom:"unset",
-                top:"20px"
+                margin: "auto",
+                marginBottom: "50px",
+                bottom: "unset",
+                top: "20px"
             });
-            if(params.sendButton.onclick)
-            {
+            if (params.sendButton.onclick) {
                 sendButton.onclick(params.sendButton.onclick);
                 this.appendChild(sendButton);
             }
@@ -925,4 +914,4 @@ class DivForm extends Div{
 
 
 
-export { PWA, Page, Div,AuthButtons,ActionButton,DivForm };
+export { PWA, Page, Div, AuthButtons, ActionButton, DivForm };
