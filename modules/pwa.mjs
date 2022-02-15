@@ -760,6 +760,29 @@ class AuthButtons extends Div {
                         });
                     }, { root: window.document.documentElement });
                     observer.observe(this.element);
+
+
+                    const config = { attributes: true, childList: true, subtree: true };
+
+            
+                    const mobserver = new MutationObserver(function(mutationsList, observer) {
+                        // Use traditional 'for loops' for IE 11
+                        for(const mutation of mutationsList) {
+                            if (mutation.type === 'childList') {
+                                console.log('A child node has been added or removed.');
+                            }
+                            else if (mutation.type === 'attributes') {
+                                console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                            }
+                            else
+                            {
+                                console.log("mutation.type:"+mutation.type);
+                            }
+                        }
+                    });
+
+                    // Start observing the target node for configured mutations
+                    mobserver.observe(targetNode, { attributes: true, childList: true, subtree: true });
                 }
             }
         }
