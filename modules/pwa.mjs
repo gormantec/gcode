@@ -750,38 +750,17 @@ class AuthButtons extends Div {
                 })
             }));
             if (params && (params.rememberSkip == "true" || params.rememberSkip == true)) {
-                if (window.localStorage.getItem("authSkip") == "true") {
-                    const observer = new IntersectionObserver((entries, observer) => {
-                        entries.forEach(entry => {
-                            console.log(entry.intersectionRatio > 0 ? 'visible' : 'invisible');
-                            if (entry.intersectionRatio > 0) {
-                                myglobals.PWA.setPage(_nextPage);
-                            }
-                        });
-                    }, { root: window.document.documentElement });
-                    observer.observe(this.element);
-
-
-                    const config = { attributes: true, childList: true, subtree: true };
-
-            
+                if (window.localStorage.getItem("authSkip") == "true") {            
                     const mobserver = new MutationObserver(function(mutationsList, observer) {
-                        // Use traditional 'for loops' for IE 11
                         for(const mutation of mutationsList) {
-                            if (mutation.type === 'childList') {
-                                console.log('A child node has been added or removed.');
-                            }
-                            else if (mutation.type === 'attributes') {
-                                console.log('The ' + mutation.attributeName + ' attribute was modified.');
-                            }
-                            else
-                            {
-                                console.log("mutation.type:"+mutation.type);
+                            if (mutation.type === 'attributes') {
+                                console.log('The ' + mutation.attributeName + ' attribute was modified.'+JSON.stringify(mutation));
+                                if (window.localStorage.getItem("authSkip") == "true") {
+                                    myglobals.PWA.setPage(_nextPage);
+                                }
                             }
                         }
                     });
-
-                    // Start observing the target node for configured mutations
                     mobserver.observe(this.element, { attributes: true, childList: true, subtree: true });
                 }
             }
