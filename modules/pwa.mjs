@@ -743,23 +743,24 @@ class AuthButtons extends Div {
                     onclick: () => {
                         myglobals.PWA.setPage(_nextPage);
                         window.localStorage.setItem("authSkip", "true");
-                        if (params && (params.skip == "true" || params.skip == true)) {
+                        if (params && (params.rememberSkip == "true" || params.rememberSkip == true)) {
                             window.localStorage.setItem("authSkip", "true");
                         }
                     }
                 })
             }));
-            if (params && (params.skip == "true" || params.skip == true)) {
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                      console.log(entry.intersectionRatio > 0 ? 'visible' : 'invisible');
-                      if(entry.intersectionRatio>0)
-                      {
-                        myglobals.PWA.setPage(_nextPage);
-                      }
-                    });
-                  },{root: window.document.documentElement});
-                  observer.observe(this.element);
+            if (params && (params.rememberSkip == "true" || params.rememberSkip == true)) {
+                if (window.localStorage.getItem("authSkip") == "true") {
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            console.log(entry.intersectionRatio > 0 ? 'visible' : 'invisible');
+                            if (entry.intersectionRatio > 0) {
+                                myglobals.PWA.setPage(_nextPage);
+                            }
+                        });
+                    }, { root: window.document.documentElement });
+                    observer.observe(this.element);
+                }
             }
         }
     }
