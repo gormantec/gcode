@@ -782,7 +782,7 @@ class AuthButtons extends Div {
                     });
 
                     // Start observing the target node for configured mutations
-                    mobserver.observe(targetNode, { attributes: true, childList: true, subtree: true });
+                    mobserver.observe(this.element, { attributes: true, childList: true, subtree: true });
                 }
             }
         }
