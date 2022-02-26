@@ -5,12 +5,16 @@ export class Row extends Div
 {
       constructor(params) {
         super(params);
+        this.style.position = "relative";
+        this.style.display = "table-row";
       }
 }
 export class Column extends Div
 {
       constructor(params) {
         super(params);
+        this.style.position = "relative";
+        this.style.display = "table-cell";
       }
 }
 export class OutlinedButton extends Div
