@@ -28,7 +28,6 @@ export class OutlinedButton extends Div
         super(params);
 		this.style.height = "50px";
         this.style.width = "50px";
-        this.style.paddingTop ="50%";
         this.style.backgroundColor="grey";
       }
 }
