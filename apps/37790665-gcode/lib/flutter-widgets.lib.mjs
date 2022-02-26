@@ -4,9 +4,7 @@ import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 export class Row extends Div
 {
       constructor(params) {
-        super(params);
-        this.style.position = "relative";
-        this.style.display = "table-row";
+        super({"position":"relative","bottom":"unset","height":"20px","children":params.children});
       }
 }
 export class Column extends Div
