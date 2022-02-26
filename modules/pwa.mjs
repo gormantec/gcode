@@ -641,6 +641,10 @@ class Div {
         return this.element.firstChild;
     }
 
+    get childrenCount() {
+        return this.element.children.length;
+    }
+
     get style() {
         return this.element.style;
     }
