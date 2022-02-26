@@ -10,7 +10,7 @@ export class Row extends Div
 export class Column extends Div
 {
       constructor(params) {
-        super({"position":"relative","display":"inline-block","bottom":"unset","left":"unset","right":"unset","height":"30px","width":"30px"});
+        super({"position":"relative","display":"inline-block","top":"unset","bottom":"unset","left":"unset","right":"unset","width":"33%"});
         if(params instanceof Div) this.setChild(params);
         else if(params.child) this.setChild(params.child);
         
