@@ -1,8 +1,8 @@
 {
   "name": "gcode",
   "short_name": "gcode",
-  "theme_color": "#222222",
-  "background_color": "#222222",
+  "theme_color": "#005040",
+  "background_color": "#005040",
   "display": "standalone",
   "orientation": "any",
   "icons": [
