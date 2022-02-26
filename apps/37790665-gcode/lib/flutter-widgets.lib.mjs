@@ -19,6 +19,7 @@ export class Column extends Div
         super({"position":"relative","display":"inline-block","top":"unset","bottom":"unset","left":"unset","right":"unset"});
         if(params instanceof Div) this.setChild(params);
         else if(params.child) this.setChild(params.child);
+		this.style.height = this.firstChild.style.height;
       }
 }
 export class OutlinedButton extends Div
@@ -32,6 +33,6 @@ export class OutlinedButton extends Div
 export class Text extends Div
 {
       constructor(_text) {
-        super({"innerText":_text});
+        super({textAlign:"center","innerText":_text});
       }
 }
