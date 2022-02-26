@@ -3,20 +3,20 @@ import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 /*---------------------------------------------------------------------------*/
 export class Row extends Div
 {
-      constructor() {
-        super({});
+      constructor(params) {
+        super(params);
       }
 }
 export class Column extends Div
 {
-      constructor() {
-        super({});
+      constructor(params) {
+        super(params);
       }
 }
 export class OutlinedButton extends Div
 {
-      constructor() {
-        super({});
+      constructor(params) {
+        super(params);
       }
 }
 export class Text extends Div
