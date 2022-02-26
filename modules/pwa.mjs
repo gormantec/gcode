@@ -460,6 +460,9 @@ class Div {
         if (params && params.borderStyle) this.element.style.borderStyle = params.borderStyle;
         if (params && params.padding) this.element.style.padding = params.padding;
         if (params && params.paddingTop) this.element.style.paddingTop = params.paddingTop;
+        if (params && params.paddingRight) this.element.style.paddingRight = params.paddingRight;
+        if (params && params.paddingLeft) this.element.style.paddingLeft = params.paddingLeft;
+        if (params && params.paddingBottom) this.element.style.paddingBottom = params.paddingBottom;
         if (params && params.margin) this.element.style.margin = params.margin
         if (params && params.marginTop) this.element.style.marginTop = params.marginTop;
         if (params && params.marginBottom) this.element.style.marginBottom = params.marginBottom;
