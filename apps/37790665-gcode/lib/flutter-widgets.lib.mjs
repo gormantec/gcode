@@ -25,8 +25,8 @@ export class OutlinedButton extends Div
 {
       constructor(params) {
         super(params);
-		this.style.height = "30px";
-        this.style.width = "30px";
+		this.style.height = "50px";
+        this.style.width = "50px";
       }
 }
 export class Text extends Div
