@@ -4,16 +4,21 @@ import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 export class Row extends Div
 {
       constructor(params) {
-        super({"position":"relative","bottom":"unset","height":"30px","children":params.children});
+        super({"position":"relative","top":"unset","bottom":"unset","left":"unset","right":"unset","children":params.children});
+        for(var i=0;i<this.childrenCount;i++)
+        {
+          this.element.children[i].style.width = (Math.floor(1000/this.childrenCount)/10)+"%";
+        }
+        
+
       }
 }
 export class Column extends Div
 {
       constructor(params) {
-        super({"position":"relative","display":"inline-block","top":"unset","bottom":"unset","left":"unset","right":"unset","width":"33%"});
+        super({"position":"relative","display":"inline-block","top":"unset","bottom":"unset","left":"unset","right":"unset"});
         if(params instanceof Div) this.setChild(params);
         else if(params.child) this.setChild(params.child);
-        
       }
 }
 export class OutlinedButton extends Div
