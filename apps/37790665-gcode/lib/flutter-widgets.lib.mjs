@@ -4,15 +4,13 @@ import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 export class Row extends Div
 {
       constructor(params) {
-        super({"position":"relative","bottom":"unset","height":"20px","children":params.children});
+        super({"position":"relative","bottom":"unset","height":"auto","children":params.children});
       }
 }
 export class Column extends Div
 {
       constructor(params) {
-        super(params);
-        this.style.position = "relative";
-        this.style.display = "table-cell";
+        super({"position":"relative","display":"inline","bottom":"unset","height":"auto","children":params.children});
       }
 }
 export class OutlinedButton extends Div
