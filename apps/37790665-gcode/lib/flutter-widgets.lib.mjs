@@ -26,8 +26,7 @@ export class OutlinedButton extends Div
 {
       constructor(params) {
         super(params);
-		this.style.height = "40px";
-		this.style.marginTop = "10px";
+		this.style.height = "50px";
 		this.style.height = "50px";
         this.style.width = "50px";
         this.style.backgroundColor="grey";
@@ -36,6 +35,6 @@ export class OutlinedButton extends Div
 export class Text extends Div
 {
       constructor(_text) {
-        super({textAlign:"center","innerText":_text});
+        super({"marginTop":"50%","child":new Div({"marginTop":"-10px",textAlign:"center","innerText":_text})});
       }
 }
