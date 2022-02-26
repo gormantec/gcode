@@ -105,20 +105,45 @@ class HomePage extends Page {
                 "backgroundColor": "black",
 
                 "children": [
-                    new Div({"paddingTop":"30px","position":"relative","width":"180px","marginLeft":"auto","marginRight":"auto","children": [
-                            new Row({
+                    new Div({"paddingTop":"40px","position":"relative","width":"220px","marginLeft":"auto","marginRight":"auto","children": [
+                            
+                      		new Row({
                                 "children": [
                                     new Column(new OutlinedButton({
                                         color: "white",
-                                        "child": new Text("1")
+                                        "child": new Text("AC")
                                     })),
                                     new Column(new OutlinedButton({
                                         color: "white",
-                                        "child": new Text("2")
+                                        "child": new Text("+/-")
                                     })),
                                     new Column(new OutlinedButton({
                                         color: "white",
-                                        "child": new Text("3")
+                                        "child": new Text("%")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("/")
+                                    }))
+                                ]
+                            }),
+                      		new Row({
+                                "children": [
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("7")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("8")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("9")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("x")
                                     }))
                                 ]
                             }),
@@ -136,21 +161,47 @@ class HomePage extends Page {
                                         color: "white",
                                         "child": new Text("6")
                                     })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("-")
+                                    })),
                                 ]
                             }),
                             new Row({
                                 "children": [
                                     new Column(new OutlinedButton({
                                         color: "white",
-                                        "child": new Text("7")
+                                        "child": new Text("1")
                                     })),
                                     new Column(new OutlinedButton({
                                         color: "white",
-                                        "child": new Text("8")
+                                        "child": new Text("2")
                                     })),
                                     new Column(new OutlinedButton({
                                         color: "white",
-                                        "child": new Text("9")
+                                        "child": new Text("3")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("+")
+                                    })),
+                                ]
+                            }),
+                            new Row({
+                                "children": [
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("0")
+                                    })),
+                                    new Column(new Div({
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text(".")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("=")
                                     })),
                                 ]
                             }),
