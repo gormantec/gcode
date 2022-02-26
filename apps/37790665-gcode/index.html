@@ -92,7 +92,7 @@ import {
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
-import { Row, Column, OutlinedButton, Text } from './lib/flutter-widgets.lib.mjs';
+import {  Row, Column,  OutlinedButton,  Text} from './lib/flutter-widgets.lib.mjs';
 
 try {
     Page.clearPages();
@@ -101,54 +101,64 @@ try {
 class HomePage extends Page {
     constructor() {
         super({
-            "color": "black",
-            "backgroundColor": "black",
-            "backgroundPosition": "center",
-            "backgroundSize": "60%",
-            "backgroundRepeat": "no-repeat",
-            "children": [
-                new Row({
-                    "children": [
-                        new Column(new OutlinedButton({ color:"white",
-                            "child": new Text("1")
-                        })),
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("2")
-                        })),
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("3")
-                        }))
-                    ]
-                }),
-                new Row({
-                    "children": [
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("4")
-                        })),
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("5")
-                        })),
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("6")
-                        })),
-                    ]
-                }),
-                new Row({
-                    "children": [
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("7")
-                        })),
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("8")
-                        })),
-                        new Column(new OutlinedButton({color:"white",
-                            "child": new Text("9")
-                        })),
-                    ]
-                }),
+                "color": "black",
+                "backgroundColor": "black",
+
+                "children": [
+                    new Div({"width":"200px","children": [
+                            new Row({
+                                "children": [
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("1")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("2")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("3")
+                                    }))
+                                ]
+                            }),
+                            new Row({
+                                "children": [
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("4")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("5")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("6")
+                                    })),
+                                ]
+                            }),
+                            new Row({
+                                "children": [
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("7")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("8")
+                                    })),
+                                    new Column(new OutlinedButton({
+                                        color: "white",
+                                        "child": new Text("9")
+                                    })),
+                                ]
+                            }),
+                        ]
+                    })
             ]
         });
-    }
+}
 
 }
 
