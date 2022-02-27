@@ -50,17 +50,17 @@ class CalcClass {
           console.log("equalsValue==true");
           this.calcDiv.actionValue=this.oldActionValue;
           this.calcDiv.action=this.oldAction;
-          console.log("try eval "+""+this.calcDiv.actionValue+""+this.calcDiv.action+""+this.calcDiv.value);
         }
       	if(this.calcDiv.actionValue!=null && this.calcDiv.action!=null)
         {
           console.log("eval "+""+this.calcDiv.actionValue+""+this.calcDiv.action+""+this.calcDiv.value);
           this.calcDiv.value=eval(""+this.calcDiv.actionValue+""+this.calcDiv.action+""+this.calcDiv.value);
-          this.calcDiv.action=null;
+          
           this.secondValue=false;
           this.equalsValue=true;
           this.oldActionValue=this.calcDiv.actionValue;
           this.oldAction=this.calcDiv.action;
+          this.calcDiv.action=null;
         }
     }
     Num(v) {
