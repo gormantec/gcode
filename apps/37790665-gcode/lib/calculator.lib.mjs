@@ -10,11 +10,28 @@ class CalcClass {
 
     Invert() {
       
-
         this.calcDiv.value=eval("-"+this.calcDiv.value);
     }
 
     Perc() {
+		this.calcDiv.value=this.calcDiv.value/100;
+    }
+    Divide() {
+        this.calcDiv.action="/";
+    }
+  	Times() {
+        this.calcDiv.action="*";
+    }
+  	Minus() {
+        this.calcDiv.action="-";
+    }
+  	Plus() {
+        this.calcDiv.action="+";
+    }
+  	Decimal() {
+		this.calcDiv.value=this.calcDiv.value+".";
+    }
+  	Equals() {
 		this.calcDiv.value=this.calcDiv.value/100;
     }
     Num(v) {
@@ -37,9 +54,7 @@ class CalcClass {
 		
     }
 
-    Divide() {
-        this.calcDiv.action="/";
-    }
+
   	newDiv(params){
       this.calcDiv=new CalcDiv(params);
       return this.calcDiv;
