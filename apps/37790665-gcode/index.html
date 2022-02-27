@@ -102,6 +102,7 @@ try {
 class HomePage extends Page {
     constructor() {
         super({
+          	"hideFloatingActionButton":"true",
             "color": "black",
             "backgroundColor": "black",
 
@@ -277,7 +278,7 @@ class HomePage extends Page {
 
 var aHomePage = new HomePage();
 var aPWA = new PWA({
-    title: "Gorman Technology Pty Ltd",
+    title: "gcode calculator",
     footer: "https://www.gormantec.com",
     primaryColor: "#212121",
 });
