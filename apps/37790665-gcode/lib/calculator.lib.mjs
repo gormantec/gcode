@@ -18,21 +18,25 @@ class CalcClass {
     }
     Divide() {
       	if(this.calcDiv.actionValue!=null) this.Equals();
+		this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="/";
     }
   	Times() {
       	if(this.calcDiv.actionValue!=null) this.Equals();
+		this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="*";
     }
   	Minus() {
       	if(this.calcDiv.actionValue!=null) this.Equals();
+		this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="-";
     }
   	Plus() {
       	if(this.calcDiv.actionValue!=null) this.Equals();
+		this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="+";
     }
