@@ -1,47 +1,40 @@
 import {Div} from 'https://gcode.com.au/modules/pwa.mjs';
 
 class CalcClass {
-    constructor() {
-        this.listeners = [];
-    }
-
 
     AC() {
-        this.updateListener("ACxxx");
+		this.calcDiv
     }
 
     Invert() {
 
-        console.log("Invert");
+        this.calcDiv.value=eval("-"+this.calcDiv.value);
     }
 
     Perc() {
-
-        console.log("Perc");
+		this.calcDiv.value=this.calcDiv.value/100;
+    }
+    Num(v) {
+		this.calcDiv.value=eval(this.calcDiv.value+this.calcDiv.action+v);
     }
 
     Divide() {
+        this.calcDiv.action="/";
+    }
+  	newDiv(params){
+      this.calcDiv=new CalcDiv(params);
+    }
 
-        console.log("Divide");
-    }
-    addChangeListener(aDiv) {
-        this.listeners.push(aDiv);
-    }
-    updateListener(value) {
-        for (var i = 0; i < this.listeners.length; i++) {
-          	console.log(i);
-            this.listeners[i].element.innerText = value;
-        }
-    }
 }
 
-export class CalcDiv extends Div {
+class CalcDiv extends Div {
     constructor(params) {
         super(params);
-        if (params.calc) {
-            params.calc.addChangeListener(this);
-        }
+      	this.action="";
     }
+  	get value(){ return Number(this.element.innerText);}
+    set value(v){ this.element.innerText=v;}
+  	
 }
 
 
