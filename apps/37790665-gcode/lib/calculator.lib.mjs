@@ -3,7 +3,9 @@ import {Div} from 'https://gcode.com.au/modules/pwa.mjs';
 class CalcClass {
 
     AC() {
-		this.calcDiv
+		this.calcDiv.value=0;
+      this.calcDiv.action=null
+      
     }
 
     Invert() {
@@ -15,17 +17,20 @@ class CalcClass {
 		this.calcDiv.value=this.calcDiv.value/100;
     }
     Num(v) {
-      	if(!this.calcDiv.action && this.calcDiv.value==0)
+      	if(this.calcDiv.action==null && this.calcDiv.value==0)
         {
+          console.log("set to "+v);
           this.calcDiv.action=v;
         }
-      	else if(!this.calcDiv.action)
+      	else if(this.calcDiv.action==null)
         {
-          this.calcDiv.value=this.calcDiv.value+""+v;
+          console.log("append "+v);
+          this.calcDiv.value=""+this.calcDiv.value+""+v;
         }
-      	else if(this.calcDiv.action)
+      	else if(this.calcDiv.action!=null)
         {
-          this.calcDiv.value=eval(this.calcDiv.value+this.calcDiv.action+v);
+          console.log("eval "+""+this.calcDiv.value+""+this.calcDiv.action+""+v);
+          this.calcDiv.value=eval(""+this.calcDiv.value+""+this.calcDiv.action+""+v);
           this.calcDiv.action=null;
         }
 		
