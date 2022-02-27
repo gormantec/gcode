@@ -28,6 +28,9 @@ export class OutlinedButton extends Div
         super(params);
 		this.style.height = "70px";
         this.style.width = "70px";
+        this.style.cursor ="pointer";
+    	this.style.pointerEvents="auto";
+        this.onclick(()=>console.log("click:"+this.firstChild.firstChild.innerText));
       }
 }
 export class Text extends Div
