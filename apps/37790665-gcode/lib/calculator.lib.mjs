@@ -19,6 +19,10 @@ class CalcClass {
         {
           this.calcDiv.action=v;
         }
+      	else if(!this.calcDiv.action)
+        {
+          this.calcDiv.value=this.calcDiv.value+""+v;
+        }
       	else if(this.calcDiv.action)
         {
           this.calcDiv.value=eval(this.calcDiv.value+this.calcDiv.action+v);
@@ -40,7 +44,7 @@ class CalcClass {
 class CalcDiv extends Div {
     constructor(params) {
         super(params);
-      	this.action="";
+      	this.action=null;
     }
   	get value(){ return Number(this.element.innerText);}
     set value(v){ this.element.innerText=v;}
