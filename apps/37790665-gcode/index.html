@@ -93,7 +93,7 @@ import {
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
 import {  Row, Column, OutlinedButton, Text } from './lib/flutter-widgets.lib.mjs';
-import { calc, CalcDiv } from './lib/calculator.lib.mjs';
+import { calc } from './lib/calculator.lib.mjs';
 
 try {
     Page.clearPages();
@@ -106,8 +106,7 @@ class HomePage extends Page {
             "backgroundColor": "black",
 
             "children": [
-                new CalcDiv({
-                    "calc":calc,
+                 calc.newDiv({
                     textAlign: "right",
                     paddingRight: "5px",
                     fontSize: "40px",
@@ -162,17 +161,20 @@ class HomePage extends Page {
                                 new Column(new OutlinedButton({
                                     color: "white",
                                     backgroundColor: "#323232",
-                                    "child": new Text("7")
+                                    "child": new Text("7"),
+                                    "onclick": (e) => calc.Num(7)
                                 })),
                                 new Column(new OutlinedButton({
                                     color: "white",
                                     backgroundColor: "#323232",
-                                    "child": new Text("8")
+                                    "child": new Text("8"),
+                                    "onclick": (e) => calc.Num(8)
                                 })),
                                 new Column(new OutlinedButton({
                                     color: "white",
                                     backgroundColor: "#323232",
-                                    "child": new Text("9")
+                                    "child": new Text("9"),
+                                    "onclick": (e) => calc.Num(9)
                                 })),
                                 new Column(new OutlinedButton({
                                     color: "white",
