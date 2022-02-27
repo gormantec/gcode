@@ -47,8 +47,10 @@ class CalcClass {
   	Equals() {
       	if(this.equalsValue==true)
         {
+          console.log("equalsValue==true");
           this.calcDiv.actionValue=this.oldActionValue;
           this.calcDiv.action=this.oldAction;
+          console.log("try eval "+""+this.calcDiv.actionValue+""+this.calcDiv.action+""+this.calcDiv.value);
         }
       	if(this.calcDiv.actionValue!=null && this.calcDiv.action!=null)
         {
