@@ -23,6 +23,7 @@ class CalcClass {
     }
   	newDiv(params){
       this.calcDiv=new CalcDiv(params);
+      return this.calcDiv;
     }
 
 }
