@@ -3,47 +3,53 @@ import {Div} from 'https://gcode.com.au/modules/pwa.mjs';
 class CalcClass {
 
     AC() {
+      
+      	this.equalsValue=false;
 		this.calcDiv.value=0;
         this.calcDiv.action=null;
       
     }
 
     Invert() {
-      
+      	this.equalsValue=false;
         this.calcDiv.value=eval("-"+this.calcDiv.value);
     }
 
     Perc() {
+      	this.equalsValue=false;
 		this.calcDiv.value=this.calcDiv.value/100;
     }
     Divide() {
-      	if(this.calcDiv.actionValue!=null) this.Equals();
-		this.equalsValue=false;
+      	this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="/";
     }
   	Times() {
-      	if(this.calcDiv.actionValue!=null) this.Equals();
-		this.equalsValue=false;
+      	this.equalsValue=false;
+      	this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="*";
     }
   	Minus() {
-      	if(this.calcDiv.actionValue!=null) this.Equals();
-		this.equalsValue=false;
+      	this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="-";
     }
   	Plus() {
-      	if(this.calcDiv.actionValue!=null) this.Equals();
-		this.equalsValue=false;
+      	this.equalsValue=false;
         this.calcDiv.actionValue=this.calcDiv.value;
         this.calcDiv.action="+";
     }
   	Decimal() {
+      	this.equalsValue=false;
 		this.calcDiv.value=this.calcDiv.value+".";
     }
   	Equals() {
+      	if(this.equalsValue==true)
+        {
+          this.calcDiv.actionValue=this.oldActionValue;
+          this.calcDiv.action=this.oldAction;
+        }
       	if(this.calcDiv.actionValue!=null && this.calcDiv.action!=null)
         {
           console.log("eval "+""+this.calcDiv.actionValue+""+this.calcDiv.action+""+this.calcDiv.value);
@@ -51,6 +57,8 @@ class CalcClass {
           this.calcDiv.action=null;
           this.secondValue=false;
           this.equalsValue=true;
+          this.oldActionValue=this.calcDiv.actionValue;
+          this.oldAction=this.calcDiv.action;
         }
     }
     Num(v) {
@@ -79,6 +87,7 @@ class CalcClass {
               this.secondValue=true;
             }
         }
+      	this.equalsValue=false;
 		
     }
 
