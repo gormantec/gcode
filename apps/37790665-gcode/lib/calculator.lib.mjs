@@ -15,7 +15,16 @@ class CalcClass {
 		this.calcDiv.value=this.calcDiv.value/100;
     }
     Num(v) {
-		this.calcDiv.value=eval(this.calcDiv.value+this.calcDiv.action+v);
+      	if(!this.calcDiv.action && this.calcDiv.value==0)
+        {
+          this.calcDiv.action=v;
+        }
+      	else if(this.calcDiv.action)
+        {
+          this.calcDiv.value=eval(this.calcDiv.value+this.calcDiv.action+v);
+          this.calcDiv.action=null;
+        }
+		
     }
 
     Divide() {
