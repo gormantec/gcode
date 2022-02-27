@@ -30,7 +30,7 @@ class CalcClass {
     updateListener(value) {
         for (var i = 0; i < this.listeners.length; i++) {
           	console.log(i);
-            this.listeners[i].innerText = value;
+            this.listeners[i].element.innerText = value;
         }
     }
 }
