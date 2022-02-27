@@ -4,11 +4,12 @@ class CalcClass {
 
     AC() {
 		this.calcDiv.value=0;
-      this.calcDiv.action=null
+        this.calcDiv.action=null;
       
     }
 
     Invert() {
+      
 
         this.calcDiv.value=eval("-"+this.calcDiv.value);
     }
@@ -20,7 +21,7 @@ class CalcClass {
       	if(this.calcDiv.action==null && this.calcDiv.value==0)
         {
           console.log("set to "+v);
-          this.calcDiv.action=v;
+          this.calcDiv.value=v;
         }
       	else if(this.calcDiv.action==null)
         {
