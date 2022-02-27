@@ -41,7 +41,7 @@ class CalcClass {
         this.calcDiv.action="+";
     }
   	Decimal() {
-      	if(this.calcDiv.value.inxedOf(".")<0)
+      	if(this.calcDiv.value.indexOf(".")<0)
         {
           this.equalsValue=false;
           this.calcDiv.value=this.calcDiv.value+".";
