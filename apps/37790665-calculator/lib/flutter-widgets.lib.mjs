@@ -26,8 +26,8 @@ export class OutlinedButton extends Div
 {
       constructor(params) {
         super(params);
-		this.style.height = "70px";
-        this.style.width = "70px";
+		this.style.height = "90px";
+        this.style.width = "90px";
         this.style.cursor ="pointer";
     	this.style.pointerEvents="auto";
       }
