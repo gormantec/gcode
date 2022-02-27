@@ -67,7 +67,7 @@ class CalcClass {
         }
     }
     Num(v) {
-      	if(this.calcDiv.action==null && this.calcDiv.value==0 || this.equalsValue==true)
+      	if(this.calcDiv.action==null && this.calcDiv.value=="0" || this.equalsValue==true)
         {
           console.log("set to "+v);
           this.calcDiv.value=v;
