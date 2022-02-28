@@ -22,7 +22,7 @@ class GpsClass {
                       var width = _this.imageDiv.element.offsetWidth;
                       var height = _this.imageDiv.element.offsetHeight;
                         _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            lat + ',' + lng + '&zoom=14&markers=color:blue&size='+width+'x'+height+'&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                            lat + ',' + lng + '&zoom=14&markers=color:blue%7Clabel:S%7C'+lat + ',' + lng+'&size='+width+'x'+height+'&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
                         platlmg = latlmg;
                     }
 
