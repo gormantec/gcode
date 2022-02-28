@@ -20,11 +20,30 @@ class GpsClass {
 
                     _this.coordDiv.innerHTML = roughtlatlmg;
                     if (_this.imageDiv && latlmg != platlmg) {
-                      var width = _this.imageDiv.element.offsetWidth;
-                      var height = _this.imageDiv.element.offsetHeight;
-                        _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            roughtlatlmg + '&zoom=17&markers=color:red%7Clabel:S%7C'+latlmg+'&size='+width+'x'+height+'&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
-                        platlmg = latlmg;
+                        var width = _this.imageDiv.element.offsetWidth;
+                        var height = _this.imageDiv.element.offsetHeight;
+
+                        let imageLoaded = () => {
+                          console.log("imageLoaded");
+                            _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
+                                roughtlatlmg + '&zoom=17&markers=color:red%7Clabel:S%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                            platlmg = latlmg;
+                        };
+
+                        var img = new Image();
+                        img.src = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
+                            roughtlatlmg + '&zoom=17&markers=color:red%7Clabel:S%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                        if (img.complete) {
+                          
+                          console.log("complete");
+                            imageLoaded()
+                        } else {
+                          console.log("complete");
+                            img.addEventListener('load', imageLoaded)
+                            img.addEventListener('error', function() {
+                                alert('error')
+                            })
+                        }
                     }
 
                 });
