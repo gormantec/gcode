@@ -4,6 +4,7 @@ export class GpsDiv extends Div {
     constructor(p) {
         super(p);
 		window.setInterval(this.updateLocation,5000);
+        this.updateLocation();
     }
 
     updateLocation() {
