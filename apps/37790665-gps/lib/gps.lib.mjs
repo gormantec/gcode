@@ -5,16 +5,18 @@ let count=0;
 export class GpsDiv extends Div {
     constructor(p) {
         super(p);
-		window.setInterval(this.updateLocation,5000);
+      	let _this=this;
+		window.setInterval(()=>_this.updateLocation(_this),5000);
         this.updateLocation();
     }
 
-    updateLocation() {
-        let _this=this;
+    updateLocation(_this) {
+        
       
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                   count=count+1;
+                  console.log(count);
                     _this.innerHTML = count+":" + Math.floor(position.coords.latitude*10000)/10000 + " : " + Math.floor(position.coords.longitude*10000)/10000;
                 });
             } else {
