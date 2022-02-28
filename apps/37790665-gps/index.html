@@ -96,7 +96,7 @@ import {
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
 import {  Row, Column, OutlinedButton, Text } from './lib/flutter-widgets.lib.mjs';
-import { GpsDiv } from './lib/gps.lib.mjs';
+import { gps } from './lib/gps.lib.mjs';
 
 try {
     Page.clearPages();
@@ -110,7 +110,7 @@ class HomePage extends Page {
             "backgroundColor": "black",
 
             "children": [
-                 new GpsDiv({
+                 gps.newCoordDiv({
                     textAlign: "right",
                     paddingRight: "2px",
                     fontSize: "30px",
@@ -124,6 +124,7 @@ class HomePage extends Page {
                     color: "white",
                     innerText: "0"
                 }),
+              	gps.newImageDiv({})
                
             ]
         });
