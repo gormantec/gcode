@@ -1,5 +1,6 @@
 import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 
+let platlmg = "";
 
 class GpsClass {
     constructor() {
@@ -12,15 +13,25 @@ class GpsClass {
         if (_this.coordDiv) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    _this.coordDiv.innerHTML = Math.floor(position.coords.latitude * 100000) / 100000 + "  " + Math.floor(position.coords.longitude * 100000) / 100000;
-                  	if(_this.imageDiv)_this.imageDiv.style.backgroundImage='url("https://maps.googleapis.com/maps/api/staticmap?center='+position.coords.latitude+','+position.coords.longitude+'&zoom=14&size=400x400&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
-        
+                    let lat = position.coords.latitude;
+                    let lng = position.coords.longitude;
+                    let latlmg = lat + " " + lng;
+
+                    _this.coordDiv.innerHTML = Math.floor(lat * 100000) / 100000 + "  " + Math.floor(lng * 100000) / 100000;
+                    if (_this.imageDiv && latlmg != platlmg) {
+                      var width = _this.imageDiv.element.offsetWidth;
+                      var height = _this.imageDiv.element.offsetHeight;
+                        _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
+                            lat + ',' + lng + '&zoom=14&size='+width+'x'+height+'&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                        platlmg = latlmg;
+                    }
+
                 });
             } else {
                 _this.coordDiv.innerHTML = "Geolocation not supported";
             }
         }
-      //https://maps.googleapis.com/maps/api/staticmap?center=51.477222,0&zoom=14&size=400x400&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=ciftxSv4681tGSAnes7ktLrVI3g=
+        //https://maps.googleapis.com/maps/api/staticmap?center=51.477222,0&zoom=14&size=400x400&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=ciftxSv4681tGSAnes7ktLrVI3g=
     }
 
     newCoordDiv(p) {
@@ -29,7 +40,7 @@ class GpsClass {
     }
     newImageDiv(p) {
         if (!this.imageDiv) this.imageDiv = new Div(p);
-      	return this.imageDiv;
+        return this.imageDiv;
     }
 }
 
