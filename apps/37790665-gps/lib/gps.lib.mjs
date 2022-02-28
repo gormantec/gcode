@@ -7,13 +7,13 @@ export class GpsDiv extends Div {
     }
 
     updateLocation() {
-        var x = this.element;
+        let _this=this;
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    x.innerHTML = "Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
+                    _this.innerHTML = "Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
                 });
             } else {
-                x.innerHTML = "Geolocation not supported";
+                _this.innerHTML = "Geolocation not supported";
             }
         
 
