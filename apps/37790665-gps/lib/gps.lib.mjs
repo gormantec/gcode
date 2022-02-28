@@ -15,14 +15,15 @@ class GpsClass {
                 navigator.geolocation.getCurrentPosition((position) => {
                     let lat = position.coords.latitude;
                     let lng = position.coords.longitude;
-                    let latlmg = lat + " " + lng;
+                    let latlmg = lat + "," + lng;
+                    let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
 
-                    _this.coordDiv.innerHTML = Math.floor(lat * 100000) / 100000 + "  " + Math.floor(lng * 100000) / 100000;
+                    _this.coordDiv.innerHTML = roughtlatlmg;
                     if (_this.imageDiv && latlmg != platlmg) {
                       var width = _this.imageDiv.element.offsetWidth;
                       var height = _this.imageDiv.element.offsetHeight;
                         _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            lat + ',' + lng + '&zoom=14&markers=color:red%7Clabel:S%7C'+lat + ',' + lng+'&size='+width+'x'+height+'&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                            roughtlatlmg + '&zoom=17&markers=color:red%7Clabel:S%7C'+latlmg+'&size='+width+'x'+height+'&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
                         platlmg = latlmg;
                     }
 
