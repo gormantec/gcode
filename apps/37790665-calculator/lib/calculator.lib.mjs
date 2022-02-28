@@ -41,8 +41,11 @@ class CalcClass {
         this.calcDiv.action="+";
     }
   	Decimal() {
-      	this.equalsValue=false;
-		this.calcDiv.value=this.calcDiv.value+".";
+      	if(this.calcDiv.value.indexOf(".")<0)
+        {
+          this.equalsValue=false;
+          this.calcDiv.value=this.calcDiv.value+".";
+        }
     }
   	Equals() {
       	if(this.equalsValue==true)
@@ -64,7 +67,7 @@ class CalcClass {
         }
     }
     Num(v) {
-      	if(this.calcDiv.action==null && this.calcDiv.value==0 || this.equalsValue==true)
+      	if(this.calcDiv.action==null && this.calcDiv.value=="0" || this.equalsValue==true)
         {
           console.log("set to "+v);
           this.calcDiv.value=v;
