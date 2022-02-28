@@ -1,6 +1,6 @@
 import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 
-export class GpsClass extends Div {
+export class GpsDiv extends Div {
     constructor(p) {
         super(p);
 		window.setInterval(updateLocation,5000);
@@ -18,4 +18,4 @@ export class GpsClass extends Div {
         
 
     }
-}
+} 
