@@ -36,6 +36,6 @@ export class OutlinedButton extends Div
 export class Text extends Div
 {
       constructor(_text) {
-        super({"marginTop":"50%","child":new Div({"marginTop":"-10px",textAlign:"center","innerText":_text})});
+        super({"paddingTop":"50%","child":new Div({"marginTop":"-10px",textAlign:"center","innerText":_text})});
       }
 }
