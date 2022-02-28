@@ -20,7 +20,7 @@ class GpsClass {
         }
     }
 
-    newCoordDiv() {
+    newCoordDiv(p) {
         if (!this.coordDiv) this.coordDiv = new Div(p);
         return this.coordDiv;
     }
