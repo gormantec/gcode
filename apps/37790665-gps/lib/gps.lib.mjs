@@ -10,14 +10,10 @@ export class GpsDiv extends Div {
     updateLocation() {
         let _this=this;
             if (navigator.geolocation) {
-      			console.log("updateLocation +");
                 navigator.geolocation.getCurrentPosition((position) => {
-                  
-      			console.log("updateLocation ++");
-                    _this.innerHTML = "Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
+                    _this.innerHTML = "" + Math.floor(position.coords.latitude*10000)/10000 + " : " + Math.floor(position.coords.longitude*10000)/10000;
                 });
             } else {
-      			console.log("updateLocation -");
                 _this.innerHTML = "Geolocation not supported";
             }
         
