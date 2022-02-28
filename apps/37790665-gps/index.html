@@ -134,10 +134,20 @@ class HomePage extends Page {
                     "marginRight": "auto",
                     backgroundColor: "#444444",
                 }),
-              	new OutlinedButton({width:"140px",
+              	new OutlinedButton({"position": "relative",
+                                    marginTop:"30px",
+                                    width:"140px",
+                                    height:"40px",
                                     backgroundColor: "#138a72",
                                   	fontSize:"20px",
-                                    "child": new Text("x"),})
+                                    "child": new Text("+"),}),
+              	new OutlinedButton({"position": "relative",
+                                    marginTop:"30px",
+                                    width:"140px",
+                                    height:"40px",
+                                    backgroundColor: "#138a72",
+                                  	fontSize:"20px",
+                                    "child": new Text("-"),})
                
             ]
         });
