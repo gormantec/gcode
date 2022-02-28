@@ -3,7 +3,7 @@ import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 export class GpsDiv extends Div {
     constructor(p) {
         super(p);
-		window.setInterval(updateLocation,5000);
+		window.setInterval(this.updateLocation,5000);
     }
 
     updateLocation() {
