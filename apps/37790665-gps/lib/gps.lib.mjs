@@ -1,24 +1,33 @@
 import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 
-export class GpsDiv extends Div {
-    constructor(p) {
-        super(p);
-      	let _this=this;
-		window.setInterval(()=>_this.updateLocation(_this),5000);
+
+class GpsClass {
+    constructor() {
+        let _this = this;
+        window.setInterval(() => _this.updateLocation(_this), 5000);
         _this.updateLocation(_this);
     }
 
     updateLocation(_this) {
-        
-      
+        if (_this.coordDiv) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    _this.innerHTML = Math.floor(position.coords.latitude*1000000)/1000000 + " : " + Math.floor(position.coords.longitude*1000000)/1000000;
+                    _this.coordDiv.innerHTML = Math.floor(position.coords.latitude * 100000) / 100000 + "  " + Math.floor(position.coords.longitude * 100000) / 100000;
                 });
             } else {
-                _this.innerHTML = "Geolocation not supported";
+                _this.coordDiv.innerHTML = "Geolocation not supported";
             }
-        
-
+        }
     }
-} 
+
+    newCoordDiv() {
+        if (!this.coordDiv) this.coordDiv = new Div(p);
+        return this.coordDiv;
+    }
+    newImageDiv(p) {
+        if (!this.imageDiv) this.imageDiv = new Div(p);
+        return this.imageDiv;
+    }
+}
+
+export var gps = new GpsClass();
