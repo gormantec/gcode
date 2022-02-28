@@ -7,7 +7,7 @@ export class GpsDiv extends Div {
         super(p);
       	let _this=this;
 		window.setInterval(()=>_this.updateLocation(_this),5000);
-        this.updateLocation();
+        _this.updateLocation(_this);
     }
 
     updateLocation(_this) {
