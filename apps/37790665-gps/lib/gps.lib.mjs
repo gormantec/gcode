@@ -13,7 +13,7 @@ export class GpsDiv extends Div {
       
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    _this.innerHTML = Math.floor(position.coords.latitude*10000)/10000 + " : " + Math.floor(position.coords.longitude*10000)/10000;
+                    _this.innerHTML = Math.floor(position.coords.latitude*1000000)/1000000 + " : " + Math.floor(position.coords.longitude*1000000)/1000000;
                 });
             } else {
                 _this.innerHTML = "Geolocation not supported";
