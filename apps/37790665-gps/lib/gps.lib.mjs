@@ -86,14 +86,7 @@ class GpsClass {
         if (!this.imageDiv) this.imageDiv = new Div(p);
         return this.imageDiv;
     }
-  	zoomOut()
-    {
-      this.zoom=this.zoom+1;
-    }
-  	zoomIn()
-    {
-      this.zoom=this.zoom-1;
-    }
+
 }
 
 export var gps = new GpsClass();
