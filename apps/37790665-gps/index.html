@@ -132,7 +132,7 @@ class HomePage extends Page {
                     "height": "370px",
                     "marginLeft": "auto",
                     "marginRight": "auto",
-                    backgroundColor: "#444444",
+                    backgroundColor: "#555555",
                 }),
                 new Div({
                     "position": "relative",
@@ -154,6 +154,7 @@ class HomePage extends Page {
                             fontSize: "40px",
                             margin: "10px",
                             "child": new Text("+"),
+                          	onclick:gps.ZoomIn
                         }),
                         new OutlinedButton({
                             "position": "relative",
@@ -164,6 +165,7 @@ class HomePage extends Page {
                             backgroundColor: "#555555",
                             fontSize: "40px",
                             "child": new Text("-"),
+                          	onclick:gps.ZoomOut
                         })
                     ]
                 }),
