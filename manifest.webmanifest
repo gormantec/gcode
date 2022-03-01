@@ -4,7 +4,7 @@
     "display": "standalone",
     "start_url": "https://gcode.com.au/index.html",
     "short_name": "gcode",
-    "description": "An implementation of \"codemirror.net\" designed for easy access to coding for kids and schools.",
+    "description": "Easy coding for kids and schools. PWA apps, dApps, mobile apps, javacript, typescript, assembly script and python.",
     "orientation": "any",
     "background_color": "#FFFFFF",
     "theme_color": "#005040",
