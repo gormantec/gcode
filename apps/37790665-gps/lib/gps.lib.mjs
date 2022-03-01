@@ -26,15 +26,17 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
 class GpsClass {
     constructor() {
         let _this = this;
-        window.setInterval(() => _this.updateLocation(_this), 5000);
-        _this.updateLocation(_this);
+        window.setInterval(() => {
+          _this.updateLocation();
+        }, 5000);
+        _this.updateLocation();
       	_this.zoom=17;
     }
 
 
 
-    updateLocation(_this) {
-      console.log(_this.constructor.name +" "+this.constructor.name);
+    updateLocation() {
+      let _this=this;
         if (_this.coordDiv) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -91,8 +93,13 @@ class GpsClass {
   	zoomout()
     {
       this.zoom=this.zoom-1;
-      this.updateLocation(this);
+      this.updateLocation();
     }
+  	zoomin()
+  	{
+      this.zoom=this.zoom+1;
+      this.updateLocation();
+  	}
 
 }
 
