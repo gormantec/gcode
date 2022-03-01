@@ -154,7 +154,7 @@ class HomePage extends Page {
                             fontSize: "40px",
                             margin: "10px",
                             "child": new Text("+"),
-                          	onclick:()=>gps.zoom=gps.zoom-1
+                          	onclick:()=>gps.zoom=gps.zoom+1
                         }),
                         new OutlinedButton({
                             "position": "relative",
@@ -165,7 +165,7 @@ class HomePage extends Page {
                             backgroundColor: "#555555",
                             fontSize: "40px",
                             "child": new Text("-"),
-                          	onclick:()=>gps.zoom=gps.zoom+1
+                          	onclick:()=>gps.zoom=gps.zoom-1
                         })
                     ]
                 }),
