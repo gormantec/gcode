@@ -44,7 +44,7 @@ class GpsClass {
                     let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
 
                     _this.coordDiv.innerHTML = roughtlatlmg;
-                    if (_this.imageDiv && (latlmg != platlmg || _this.zoom !=_this.zoom)) {
+                    if (_this.imageDiv && (latlmg != platlmg || _this.zoom !=_this.pzoom)) {
                       	_this.pzoom=_this.zoom;
                         var width = _this.imageDiv.element.offsetWidth;
                         var height = _this.imageDiv.element.offsetHeight;
