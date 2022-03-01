@@ -68,8 +68,8 @@ class GpsClass {
                         } else {
                             console.log("complete");
                             img.addEventListener('load', imageLoaded)
-                            img.addEventListener('error', function() {
-                                alert('error')
+                            img.addEventListener('error', function(e) {
+                                console.log("error:"+error);
                             })
                         }
                     }
