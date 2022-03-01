@@ -89,14 +89,14 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import {   
+import {
     PWA,
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
-import {  Row, Column, OutlinedButton, Text } from './lib/flutter-widgets.lib.mjs';
-import { gps } from './lib/gps.lib.mjs';
+import {Row,Column, OutlinedButton,Text} from './lib/flutter-widgets.lib.mjs';
+import {gps} from './lib/gps.lib.mjs';
 
 try {
     Page.clearPages();
@@ -105,12 +105,12 @@ try {
 class HomePage extends Page {
     constructor() {
         super({
-          	"hideFloatingActionButton":"true",
+            "hideFloatingActionButton": "true",
             "color": "black",
             "backgroundColor": "black",
 
             "children": [
-                 gps.newCoordDiv({
+                gps.newCoordDiv({
                     textAlign: "center",
                     paddingRight: "2px",
                     fontSize: "30px",
@@ -124,7 +124,7 @@ class HomePage extends Page {
                     color: "white",
                     innerText: "0"
                 }),
-              	gps.newImageDiv({
+                gps.newImageDiv({
                     fontSize: "30px",
                     "marginTop": "50px",
                     "position": "relative",
@@ -134,24 +134,41 @@ class HomePage extends Page {
                     "marginRight": "auto",
                     backgroundColor: "#444444",
                 }),
-              	new Div({"position": "relative","height":"30px"}),
-              	new OutlinedButton({"position": "relative",
-                                    "display":"inline-block",
-                                    width:"100px",
-                                    height:"50px",
-                                    backgroundColor: "#138a72",
-                                  	fontSize:"40px",
-                                    margin:"10px",
-                                    "child": new Text("+"),}),
-              	new OutlinedButton({"position": "relative",
-                                    "display":"inline-block",
-                                    width:"100px",
-                                    height:"50px",
-                                    margin:"10px",
-                                    backgroundColor: "#138a72",
-                                  	fontSize:"40px",
-                                    "child": new Text("-"),})
-               
+                new Div({
+                    "position": "relative",
+                    "height": "30px"
+                }),
+                new Div({
+                    "position": "relative",
+                    "height": "30px",
+                  	"width":"240px",
+                  	"marginLeft":"auto",
+                  	"marginRight":"auto",
+                    children: [
+                        new OutlinedButton({
+                            "position": "relative",
+                            "display": "inline-block",
+                            width: "100px",
+                            height: "50px",
+                            backgroundColor: "#555555",
+                            fontSize: "40px",
+                            margin: "10px",
+                            "child": new Text("+"),
+                        }),
+                        new OutlinedButton({
+                            "position": "relative",
+                            "display": "inline-block",
+                            width: "100px",
+                            height: "50px",
+                            margin: "10px",
+                            backgroundColor: "#555555",
+                            fontSize: "40px",
+                            "child": new Text("-"),
+                        })
+                    ]
+                }),
+
+
             ]
         });
     }
