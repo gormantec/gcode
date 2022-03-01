@@ -2,7 +2,7 @@
     "dir": "ltr",
     "name": "gcode",
     "display": "standalone",
-    "start_url": "https://gcode.com.au/index.html",
+    "start_url": "/index.html",
     "short_name": "gcode",
     "description": "Easy coding for kids and schools. PWA apps, dApps, mobile apps, javacript, typescript, assembly script and python.",
     "orientation": "any",
