@@ -14,7 +14,7 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
     var dLat = degreesToRadians(lat2 - lat1);
     var dLon = degreesToRadians(lon2 - lon1);
 
-    lat1 = degreesToRadians(lat1);
+    lat1 = degreesToRadians(lat1);   
     lat2 = degreesToRadians(lat2);
 
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -42,8 +42,6 @@ class GpsClass {
                 navigator.geolocation.getCurrentPosition((position) => {
                     let lat = position.coords.latitude;
                     let lng = position.coords.longitude;
-                  	lat=lat+0.1;
-                  	lng=lng+0.1;
                     let latlmg = lat + "," + lng;
                     let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
 
