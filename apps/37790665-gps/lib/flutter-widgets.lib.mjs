@@ -36,6 +36,6 @@ export class OutlinedButton extends Div
 export class Text extends Div
 {
       constructor(_text) {
-        super({"position":"relative",height:"100%","verticalAlign": "middle","child":new Div({"position":"relative","verticalAlign": "middle","height":"100%",paddingTop:"20px",textAlign:"center","innerText":_text})});
+        super({"position":"relative",height:"100%","verticalAlign": "middle","child":new Div({"position":"relative","verticalAlign": "middle","height":"100%",textAlign:"center","innerText":_text})});
       }
 }
