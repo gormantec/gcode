@@ -23,8 +23,8 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
     return earthRadiusKm * c;
 }
 
-class GpsClass {
-    constructor() {
+class GpsClass {     
+    constructor() {  
         let _this = this;
         window.setInterval(() => {
           _this.updateLocation();
