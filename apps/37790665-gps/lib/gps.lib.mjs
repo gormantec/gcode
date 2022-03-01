@@ -64,12 +64,12 @@ class GpsClass {
                         if (img.complete) {
 
                             console.log("complete");
-                            imageLoaded()
+                            imageLoaded();
                         } else {
                             console.log("complete");
                             img.addEventListener('load', imageLoaded)
                             img.addEventListener('error', function(e) {
-                                console.log("error:"+error);
+                                console.log("error:"+e);
                             })
                         }
                     }
