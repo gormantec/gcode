@@ -88,6 +88,11 @@ class GpsClass {
         if (!this.imageDiv) this.imageDiv = new Div(p);
         return this.imageDiv;
     }
+  	zoomout()
+    {
+      this.zoom=this.zoom-1;
+      this.updateLocation(this);
+    }
 
 }
 
