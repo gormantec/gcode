@@ -42,8 +42,8 @@ class GpsClass {
                 navigator.geolocation.getCurrentPosition((position) => {
                     let lat = position.coords.latitude;
                     let lng = position.coords.longitude;
-                  	lat=lat+10;
-                  	lng=lng+10;
+                  	lat=lat+0.1;
+                  	lng=lng+0.1;
                     let latlmg = lat + "," + lng;
                     let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
 
