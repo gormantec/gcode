@@ -154,7 +154,7 @@ class HomePage extends Page {
                             fontSize: "40px",
                             margin: "10px",
                             "child": new Text("+"),
-                          	onclick:()=>{gps.zoom=gps.zoom+1;gps.updateLocation(gps);}
+                          	onclick:()=>{gps.zoomin();}
                         }),
                         new OutlinedButton({
                             "position": "relative",
