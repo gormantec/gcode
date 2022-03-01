@@ -34,7 +34,7 @@ class GpsClass {
 
 
     updateLocation(_this) {
-      console.log(_this +" "+this);
+      console.log(_this.constructor.name +" "+this.constructor.name);
         if (_this.coordDiv) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
