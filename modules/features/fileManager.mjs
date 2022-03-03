@@ -61,6 +61,9 @@ export function dialogAction(event) {
     if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
         _new(event.value);
     }
+    else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
+        alert("xxxxxx");
+    }
     else if (event.type == "select" && event.id == "newFileDialogSelect") {
         var name = "";
         var nameValue = event.getInputValue("newFileDialogName");
