@@ -86,9 +86,7 @@ export function dialogAction(event) {
                 reader.readAsDataURL(file);
             }
         };
-        
-        const inputElement = window.document.getElementById("uploadFileDialogName");
-        inputElement.addEventListener("change", handleFiles, false);
+        handleFiles(event.files);
 
     }
     else if (event.type == "select" && event.id == "newFileDialogSelect") {
