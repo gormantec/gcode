@@ -83,7 +83,7 @@ export function dialogAction(event) {
                 reader.onload = (e)=>{
                     console.log(e.target.result);
                     let current=event.getInputValue("uploadFileDialogData");
-                    if(!current || current!="")current="{files:[]}";
+                    if(!current || current.tim()=="")current="{files:[]}";
                     let currentJson=JSON.parse(current);
                     current.file.push({name:file.name,type:file.type,base64:e.target.result});
                     event.setInputValue("uploadFileDialogData", JSON.stringify(current));
