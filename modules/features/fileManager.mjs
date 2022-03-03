@@ -73,7 +73,9 @@ export function dialogAction(event) {
                 img.file = file;
                 preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
                 const reader = new FileReader();
-                reader.onload = (e)=>{console.log(e.target.result);};
+                reader.onload = (e)=>{
+                    console.log(e.target.result);
+                };
                 reader.readAsDataURL(file);
             }
         };
