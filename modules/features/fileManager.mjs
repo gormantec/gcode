@@ -62,7 +62,27 @@ export function dialogAction(event) {
         _new(event.value);
     }
     else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
-        alert("xxxxxx");
+
+        var handleFiles = function (files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                console.log(file.type);
+                if (!file.type.startsWith('image/')) { continue }
+                const img = document.createElement("img");
+                img.classList.add("obj");
+                img.file = file;
+                preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+                const reader = new FileReader();
+                reader.onload = (e)=>{console.log(e.target.result);};
+                reader.readAsDataURL(file);
+            }
+        };
+        
+        const inputElement = window.document.getElementById("uploadFileDialogName");
+        inputElement.addEventListener("change", handleFiles, false);
+
+
+
     }
     else if (event.type == "select" && event.id == "newFileDialogSelect") {
         var name = "";
@@ -150,7 +170,7 @@ export function afterLoad() {
             }
             else {
                 localStorage.setItem("gitfile-" + filename, window.btoa(window.unescape(encodeURIComponent(editor.getValue()))));
-                    
+
             }
 
         }
@@ -206,7 +226,7 @@ export function toolbarAction(e) {
     } else if (button.dataset.action == "uploadFile") {
         document.getElementById('confirmButton').value = null;
         document.getElementById("uploadFileDialog").showModal();
-    }else if (button.dataset.action == "saveFile") {
+    } else if (button.dataset.action == "saveFile") {
         _save();
     }
     else if (button.dataset.action == "addGitRepo") {
@@ -464,7 +484,7 @@ function _openFile(element) {
             selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
-            var fileData=load(element.dataset.name, true);
+            var fileData = load(element.dataset.name, true);
             window.editor.setValue(fileData);
             window.setEditorMode();
         }
