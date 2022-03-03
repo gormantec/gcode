@@ -82,7 +82,7 @@ export function dialogAction(event) {
         
         const inputElement = window.document.getElementById("uploadFileDialogName");
         inputElement.addEventListener("change", handleFiles, false);
-        window.document.getElementById("uploadFileDialogForm").click();
+        window.document.getElementById("uploadFileDialogForm").submit();
 
     }
     else if (event.type == "select" && event.id == "newFileDialogSelect") {
