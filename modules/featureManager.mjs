@@ -117,6 +117,7 @@ export async function loadFeatures() {
                         {
                             let form = window.document.createElement("form");
                             form.setAttribute("method", "dialog");
+                            form.setAttribute("id", dialog.id+"Form");
                             let menu = window.document.createElement("menu");
                             let b_cancel = window.document.createElement("button");
                             b_cancel.setAttribute("class", "cancelButton");
