@@ -148,6 +148,7 @@ export async function loadFeatures() {
                                         form.appendChild(p);
                                         if (isFunction(dialogAction)) {
                                             input.addEventListener('change', (e) => {
+                                                console.log("--------------");
                                                 console.log(e);
                                                 var r = { "id": input.id, files:e, "type": "input", "action": "change", "value": input.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
                                                 dialogAction(r);
