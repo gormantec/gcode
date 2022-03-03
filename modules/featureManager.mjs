@@ -139,12 +139,13 @@ export async function loadFeatures() {
                                         let p = window.document.createElement("p");
                                         let label = window.document.createElement("label");
                                         label.setAttribute("for", widget.id);
-                                        label.innerText = widget.label;
+                                        if(widget.label)label.innerText = widget.label;
                                         input.setAttribute("id", widget.id);
                                         input.setAttribute("type", type);
                                         if(widget.readonly)input.setAttribute("readonly",widget.readonly);
                                         p.appendChild(label);
                                         p.appendChild(input);
+                                        if(type=="hidden")p.style.display="none";
                                         form.appendChild(p);
                                         if (isFunction(dialogAction)) {
                                             console.log("--------------");

@@ -47,6 +47,7 @@ export const dialogMetadata = [
         "id": "uploadFileDialog",
         "content": [
             { "id": "uploadFileDialogName", "type": "input/file", "label": "Filename:" },
+            { "id": "uploadFileDialogData", "type": "input/hidden"},
         ],
         "ok": { "value": null }
     }
@@ -81,6 +82,7 @@ export function dialogAction(event) {
                 const reader = new FileReader();
                 reader.onload = (e)=>{
                     console.log(e.target.result);
+                    event.setInputValue("newFileDialogData", e.target.result);
                 };
                 reader.readAsDataURL(file);
             }
