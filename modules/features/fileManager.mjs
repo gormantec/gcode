@@ -62,9 +62,12 @@ export function dialogAction(event) {
     if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
         _new(event.value);
     }
+    else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
+        _new(event.value);
+    }
     else if (event.id == "uploadFileDialogName") {
 
-        console.log("uploadFileDialog");
+        console.log(event);
 
         var handleFiles = function (files) {
             console.log("change handleFiles");
@@ -86,7 +89,6 @@ export function dialogAction(event) {
         
         const inputElement = window.document.getElementById("uploadFileDialogName");
         inputElement.addEventListener("change", handleFiles, false);
-        window.document.getElementById("uploadFileDialogForm").submit();
 
     }
     else if (event.type == "select" && event.id == "newFileDialogSelect") {
