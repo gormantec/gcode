@@ -18,6 +18,7 @@ export const menuMetadata = { "id": "openButton", "class": "pageLeftToolbarButto
 export const toolbarMetadata = [
     { "dataAction": "saveFile", "materialIcon": "save" },
     { "dataAction": "addFile", "materialIcon": "post_add" },
+    { "dataAction": "uploadFile", "materialIcon": "upload_file" },
     { "dataAction": "addGitRepo", "imageIcon": "/images/git.png" },
     { "dataAction": "addDirectory", "materialIcon": "create_new_folder" },
     { "dataAction": "deleteFile", "materialIcon": "delete_forever" },
@@ -41,6 +42,13 @@ export const dialogMetadata = [
             },
         ],
         "ok": { "value": ".js" }
+    },
+    {
+        "id": "uploadFileDialog",
+        "content": [
+            { "id": "uploadFileDialogName", "type": "input/file", "label": "Filename:" },
+        ],
+        "ok": { "value": null }
     }
 ];
 
@@ -192,7 +200,10 @@ export function toolbarAction(e) {
         document.getElementById('confirmButton').value = document.getElementById("newFileDialogName").value;
         document.getElementById("newFileDialog").showModal();
 
-    } else if (button.dataset.action == "saveFile") {
+    } else if (button.dataset.action == "uploadFile") {
+        document.getElementById('confirmButton').value = null;
+        document.getElementById("newFileDialog").showModal();
+    }else if (button.dataset.action == "saveFile") {
         _save();
     }
     else if (button.dataset.action == "addGitRepo") {
