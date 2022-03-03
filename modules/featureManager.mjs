@@ -151,7 +151,8 @@ export async function loadFeatures() {
                                             input.addEventListener('change', (e) => {
                                                 console.log("--------------");
                                                 console.log(e);
-                                                var r = { "id": input.id, files:e, "type": "input", "action": "change", "value": input.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
+                                                var r = { "id": input.id,  "type": "input", "action": "change", "value": input.value, "setInputValue": (id, v) => d.querySelector("#" + id) ? d.querySelector("#" + id).value = v : null, "getInputValue": (id) => d.querySelector("#" + id) ? d.querySelector("#" + id).value : null };
+                                                if(input.files!=null && input.files.length>0)r.files=input.files;
                                                 dialogAction(r);
                                             });
                                         }
