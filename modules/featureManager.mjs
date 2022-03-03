@@ -147,6 +147,7 @@ export async function loadFeatures() {
                                         p.appendChild(input);
                                         form.appendChild(p);
                                         if (isFunction(dialogAction)) {
+                                            console.log("--------------");
                                             input.addEventListener('change', (e) => {
                                                 console.log("--------------");
                                                 console.log(e);
