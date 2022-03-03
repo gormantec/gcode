@@ -74,11 +74,10 @@ export function dialogAction(event) {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 console.log(file.type);
-                if (!file.type.startsWith('image/')) { continue }
+                if (!file.type.startsWith('image/png')) { continue }
                 const img = document.createElement("img");
                 img.classList.add("obj");
                 img.file = file;
-                preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
                 const reader = new FileReader();
                 reader.onload = (e)=>{
                     console.log(e.target.result);
