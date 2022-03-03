@@ -110,7 +110,7 @@ class HomePage extends Page {
             "backgroundColor": "black",
 
             "children": [
-                gps.newCoordDiv({
+                new Div({
                     textAlign: "center",
                     paddingRight: "2px",
                     fontSize: "30px",
@@ -122,52 +122,7 @@ class HomePage extends Page {
                     "marginRight": "auto",
                     backgroundColor: "#111111",
                     color: "white",
-                    innerText: "0"
-                }),
-                gps.newImageDiv({
-                    fontSize: "30px",
-                    "marginTop": "50px",
-                    "position": "relative",
-                    "width": "370px",
-                    "height": "370px",
-                    "marginLeft": "auto",
-                    "marginRight": "auto",
-                    backgroundColor: "#555555",
-                }),
-                new Div({
-                    "position": "relative",
-                    "height": "30px"
-                }),
-                new Div({
-                    "position": "relative",
-                    "height": "30px",
-                  	"width":"240px",
-                  	"marginLeft":"auto",
-                  	"marginRight":"auto",
-                    children: [
-                        new OutlinedButton({
-                            "position": "relative",
-                            "display": "inline-block",
-                            width: "100px",
-                            height: "50px",
-                            backgroundColor: "#555555",
-                            fontSize: "40px",
-                            margin: "10px",
-                            "child": new Text("+"),
-                          	onclick:()=>{gps.zoomin();}
-                        }),
-                        new OutlinedButton({
-                            "position": "relative",
-                            "display": "inline-block",
-                            width: "100px",
-                            height: "50px",
-                            margin: "10px",
-                            backgroundColor: "#555555",
-                            fontSize: "40px",
-                            "child": new Text("-"),
-                          	onclick:()=>{gps.zoomout()}
-                        })
-                    ]
+                    innerText: "Jack"
                 }),
 
 
@@ -183,7 +138,7 @@ class HomePage extends Page {
 
 var aHomePage = new HomePage();
 var aPWA = new PWA({
-    title: "gcode GPS",
+    title: "gcode screen time",
     footer: "https://www.gormantec.com",
     primaryColor: "#212121",
 });
