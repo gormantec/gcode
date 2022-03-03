@@ -58,12 +58,16 @@ export function menuAction(p) {
 }
 
 export function dialogAction(event) {
+    console.log(event.id);
     if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
         _new(event.value);
     }
     else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
 
+        console.log("uploadFileDialog");
+
         var handleFiles = function (files) {
+            console.log("change handleFiles");
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 console.log(file.type);
