@@ -205,7 +205,7 @@ export function toolbarAction(e) {
 
     } else if (button.dataset.action == "uploadFile") {
         document.getElementById('confirmButton').value = null;
-        document.getElementById("newFileDialog").showModal();
+        document.getElementById("uploadFileDialog").showModal();
     }else if (button.dataset.action == "saveFile") {
         _save();
     }
