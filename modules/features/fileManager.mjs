@@ -64,7 +64,7 @@ export function dialogAction(event) {
         _new(event.value);
     }
     else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
-        console.log(event.getInputValue("newFileDialogData"));
+        console.log(event.getInputValue("uploadFileDialogData"));
     }
     else if (event.id == "uploadFileDialogName") {
 
@@ -74,7 +74,7 @@ export function dialogAction(event) {
             console.log("change handleFiles");
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                console.log(file.type);
+                console.log(file);
                 if (!file.type.startsWith('image/png')) { continue }
                 const img = document.createElement("img");
                 img.classList.add("obj");
@@ -82,7 +82,11 @@ export function dialogAction(event) {
                 const reader = new FileReader();
                 reader.onload = (e)=>{
                     console.log(e.target.result);
-                    event.setInputValue("newFileDialogData", e.target.result);
+                    let current=event.getInputValue("uploadFileDialogData");
+                    if(!current || current!="")current="{files:[]}";
+                    let currentJson=JSON.parse(current);
+                    current.file.push({name:file.name,type:file.type,base64:e.target.result});
+                    event.setInputValue("uploadFileDialogData", JSON.stringify(current));
                 };
                 reader.readAsDataURL(file);
             }
