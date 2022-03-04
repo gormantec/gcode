@@ -68,7 +68,7 @@ export function dialogAction(event) {
         if(jsonString && jsonString.trim()!="")
         {
             var json=JSON.parse(jsonString);
-            _new(json.name,json.base64);
+            _new(json.name+"x",json.base64);
         }
     }
     else if (event.id == "uploadFileDialogName") {
