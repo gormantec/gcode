@@ -432,6 +432,8 @@ function _refresh(params) {
 
 async function  _new(aFilename,data) {
 
+    let _data=data;
+
     return new Promise((resolve,reject)=>{
         if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
             aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
@@ -468,8 +470,9 @@ async function  _new(aFilename,data) {
     
                         document.getElementById("filename").innerText = aFilename;
                         selectedFileWidget = aFilename;
-                        if(data)
+                        if(_data!=null)
                         {
+                            console.log("!!!!!!");
                             window.editor.setValue(data);
                         }
                         else{
