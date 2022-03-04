@@ -46,7 +46,7 @@ export const dialogMetadata = [
     {
         "id": "uploadFileDialog",
         "content": [
-            { "id": "uploadFileDialogName", "type": "input/file", "label": "Filename:" },
+            { "id": "uploadFileDialogName", "type": "input/file", "label": "Filename:","accept":"image/png, image/jpeg" },
             { "id": "uploadFileDialogData", "type": "input/hidden"},
         ],
         "ok": { "value": null }
@@ -64,7 +64,12 @@ export function dialogAction(event) {
         _new(event.value);
     }
     else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
-        console.log(event.getInputValue("uploadFileDialogData"));
+        let jsonString=event.getInputValue("uploadFileDialogData");
+        if(jsonString && jsonString.trim()!="")
+        {
+            var json=JSON.parse(jsonString);
+            json
+        }
     }
     else if (event.id == "uploadFileDialogName") {
 
@@ -420,7 +425,7 @@ function _refresh(params) {
     }
 }
 
-function _new(aFilename) {
+function _new(aFilename,data) {
 
     if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
         aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
@@ -444,6 +449,11 @@ function _new(aFilename) {
                     if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
                     _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");
 
+                    if(data)
+                    {
+                        _samplecode=data;
+                    }
+                    
 
                     var appStuff = "";
                     if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
@@ -458,11 +468,18 @@ function _new(aFilename) {
 
                     document.getElementById("filename").innerText = aFilename;
                     selectedFileWidget = aFilename;
-                    window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
+                    if(data)
+                    {
+                        window.editor.setValue(data);
+                    }
+                    else{
+                        window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
                         "filename:" + aFilename + "\n" + pyChar + "  " +
                         "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
                         appStuff +
                         "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
+                    }
+
                     window.setEditorMode();
                     var toDiv = document.getElementById("pageLeftBody");
                     if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),

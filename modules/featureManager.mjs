@@ -142,10 +142,12 @@ export async function loadFeatures() {
                                         if(widget.label)label.innerText = widget.label;
                                         input.setAttribute("id", widget.id);
                                         input.setAttribute("type", type);
+                                        if(type=="file" && widget.accept) input.setAttribute("accept", widget.accept);
                                         if(widget.readonly)input.setAttribute("readonly",widget.readonly);
                                         p.appendChild(label);
                                         p.appendChild(input);
                                         if(type=="hidden")p.style.display="none";
+                                        
                                         form.appendChild(p);
                                         if (isFunction(dialogAction)) {
                                             console.log("--------------");
