@@ -61,14 +61,19 @@ export function menuAction(p) {
 export function dialogAction(event) {
     console.log(event.id);
     if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
-        _new(event.value);
+        _new(event.value).then(()=>{});
     }
     else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
         let jsonString=event.getInputValue("uploadFileDialogData");
         if(jsonString && jsonString.trim()!="")
         {
             var json=JSON.parse(jsonString);
-            _new(json.name+"x",json.base64);
+            (async ()=>{
+                for(var i=0;i<json.files.length;i++)
+                {
+                    await _new(json.files[i].name+"x",json.base64); 
+                }
+            })()            
         }
     }
     else if (event.id == "uploadFileDialogName") {
@@ -425,71 +430,77 @@ function _refresh(params) {
     }
 }
 
-function _new(aFilename,data) {
+async function  _new(aFilename,data) {
 
-    if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
-        aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
-    }
-    if (aFilename != null) {
-        var sampleName = "";
-        if (aFilename.endsWith(".mjs")) sampleName = "modules/sample.mjs";
-        else if (aFilename.endsWith(".dapp.ts")) sampleName = "modules/sample.dapp.ts";
-        else if (aFilename.endsWith(".ts")) sampleName = "modules/sample.ts";
-        else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
-        else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
-        else sampleName = "modules/sample.txt";
-
-        fetch(sampleName)
-            .then(
-                response => response.text()
-            ).then(
-                text => {
-                    var _samplecode = text;
-                    var randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
-                    if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
-                    _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");                    
-
-                    var appStuff = "";
-                    if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
-                        "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
-                        "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                        "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                        "mockFrame: iphoneX" + "\n  " +
-                        "splashBackgroundColor: #005040" + "\n  " +
-                        "splashDuration: 2000";
-                    var pyChar = "";
-                    if (aFilename.endsWith(".py")) pyChar = "#";
-
-                    document.getElementById("filename").innerText = aFilename;
-                    selectedFileWidget = aFilename;
-                    if(data)
-                    {
-                        window.editor.setValue(data);
-                    }
-                    else{
-                        window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
-                        "filename:" + aFilename + "\n" + pyChar + "  " +
-                        "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
-                        appStuff +
-                        "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
-                    }
-
-                    window.setEditorMode();
-                    var toDiv = document.getElementById("pageLeftBody");
-                    if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),
-                        function () {
-                            var gitParts = githubtree.getGitParts(selectedFileWidget);
-                            githubtree.refreshGitTree(gitParts.username, gitParts.repo, toDiv, selectedFileWidget, _openDir, _openFile);
-
+    return new Promise((resolve,reject)=>{
+        if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
+            aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
+        }
+        if (aFilename != null) {
+            var sampleName = "";
+            if (aFilename.endsWith(".mjs")) sampleName = "modules/sample.mjs";
+            else if (aFilename.endsWith(".dapp.ts")) sampleName = "modules/sample.dapp.ts";
+            else if (aFilename.endsWith(".ts")) sampleName = "modules/sample.ts";
+            else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
+            else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
+            else sampleName = "modules/sample.txt";
+    
+            fetch(sampleName)
+                .then(
+                    response => response.text()
+                ).then(
+                    text => {
+                        var _samplecode = text;
+                        var randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
+                        if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
+                        _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");                    
+    
+                        var appStuff = "";
+                        if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
+                            "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
+                            "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                            "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                            "mockFrame: iphoneX" + "\n  " +
+                            "splashBackgroundColor: #005040" + "\n  " +
+                            "splashDuration: 2000";
+                        var pyChar = "";
+                        if (aFilename.endsWith(".py")) pyChar = "#";
+    
+                        document.getElementById("filename").innerText = aFilename;
+                        selectedFileWidget = aFilename;
+                        if(data)
+                        {
+                            window.editor.setValue(data);
                         }
-                    );
-                    else {
-                        _save();
-                        _refresh();
+                        else{
+                            window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
+                            "filename:" + aFilename + "\n" + pyChar + "  " +
+                            "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
+                            appStuff +
+                            "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
+                        }
+    
+                        window.setEditorMode();
+                        var toDiv = document.getElementById("pageLeftBody");
+                        if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),
+                            function () {
+                                var gitParts = githubtree.getGitParts(selectedFileWidget);
+                                githubtree.refreshGitTree(gitParts.username, gitParts.repo, toDiv, selectedFileWidget, _openDir, _openFile);
+                                resolve();
+    
+                            }
+                        );
+                        else {
+                            _save();
+                            _refresh();
+                            resolve();
+                        }
                     }
-                }
-            );
-    }
+                );
+        }
+    });
+
+  
 }
 
 function _openFile(element) {
