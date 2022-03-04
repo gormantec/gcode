@@ -133,7 +133,8 @@ class HomePage extends Page {
                     "marginRight": "auto",
                 }),
               new OutlinedButton({
-                    				"position": "relative",
+                    			    "id":"lockB1",
+                					"position": "relative",
                                     color: "red",
                     				paddingTop: "5px",
                                     backgroundColor: "#323232",
@@ -143,10 +144,11 @@ class HomePage extends Page {
                                     "marginLeft": "auto",
                                     "marginRight": "auto",
                                     "marginTop": "20px",
-                                    "child": new Text("Lock"),
+                                    "child": new Text("Locked"),
                                     "onclick": (e) => calc.Num("Lock")
                                 }),
               new OutlinedButton({
+                    			    "id":"lockB2",
                     				"position": "relative",
                                     color: "green",
                     				paddingTop: "5px",
