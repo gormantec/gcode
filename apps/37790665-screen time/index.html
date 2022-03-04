@@ -120,9 +120,8 @@ class HomePage extends Page {
                     "height": "50px",
                     "marginLeft": "auto",
                     "marginRight": "auto",
-                    backgroundColor: "#111111",
                     color: "white",
-                    innerText: "Jack"
+                    innerText: "Kids WIFI"
                 }),
               new Div({
                     "marginTop": "50px",
@@ -133,17 +132,61 @@ class HomePage extends Page {
                     "marginRight": "auto",
                 }),
               new OutlinedButton({
-                    				"position": "relative",
+                    			    "id":"lockB1",
+                					"position": "relative",
                                     color: "red",
-                    				paddingTop: "5px",
+                    				paddingTop: "15px",
                                     backgroundColor: "#323232",
-                                  	fontSize:"40px",
-                                    "width": "370px",
-                                    "height": "50px",
+                                  	fontSize:"50px",
+                                    "width": "350px",
+                					"borderRadius":"10px",
+                                    "height": "70px",
                                     "marginLeft": "auto",
                                     "marginRight": "auto",
-                                    "child": new Text("Lock"),
-                                    "onclick": (e) => calc.Num("Lock")
+                                    "marginTop": "30px",
+                					"fontWeight":"900",
+                                    "child": new Text("LOCKED"),
+                                    "onclick": (e) => {
+                                      let lockB1=document.getElementById("lockB1");
+                                      let lockB2=document.getElementById("lockB2");
+                                      if(lockB1.style.backgroundColor!="#323232")
+                                      { 
+                                      	lockB1.style.backgroundColor="#323232";
+                                      	lockB2.style.backgroundColor="#111111";
+                                        lockB1.firstChild.firstChild.innerText="LOCKED";
+                                        lockB2.firstChild.firstChild.innerText="UNLOCK";
+                                        lockB1.style.fontWeight="900";
+                                        lockB2.style.fontWeight="normal";
+                                      }
+                                    }
+                                }),
+              new OutlinedButton({
+                    			    "id":"lockB2",
+                    				"position": "relative",
+                                    color: "green",
+                    				paddingTop: "15px",
+                                    backgroundColor: "#111111",
+                                  	fontSize:"50px",
+                                    "width": "350px",
+                					"borderRadius":"10px",
+                                    "height": "70px",
+                                    "marginLeft": "auto",
+                                    "marginRight": "auto",
+                                    "marginTop": "30px",
+                                    "child": new Text("UNLOCK"),
+                                    "onclick": (e) => {
+                                      let lockB1=document.getElementById("lockB1");
+                                      let lockB2=document.getElementById("lockB2");
+                                      if(lockB1.style.backgroundColor!="#323232")
+                                      {
+                                      	lockB1.style.backgroundColor="#111111";
+                                      	lockB2.style.backgroundColor="#323232";
+                                        lockB1.firstChild.firstChild.innerText="LOCK";
+                                        lockB2.firstChild.firstChild.innerText="UNLOCKED";
+                                        lockB1.style.fontWeight="normal";
+                                        lockB2.style.fontWeight="900";
+                                      }
+                                    }
                                 })
 
 
