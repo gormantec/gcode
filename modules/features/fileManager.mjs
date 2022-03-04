@@ -68,7 +68,6 @@ export function dialogAction(event) {
         if(jsonString && jsonString.trim()!="")
         {
             var json=JSON.parse(jsonString);
-            json
             _new(json.name,json.base64);
         }
     }
