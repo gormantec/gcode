@@ -46,8 +46,8 @@ export const dialogMetadata = [
     {
         "id": "uploadFileDialog",
         "content": [
-            { "id": "uploadFileDialogName", "type": "input/file", "label": "Filename:","accept":"image/png, image/jpeg" },
-            { "id": "uploadFileDialogData", "type": "input/hidden"},
+            { "id": "uploadFileDialogName", "type": "input/file", "label": "Filename:", "accept": "image/png, image/jpeg" },
+            { "id": "uploadFileDialogData", "type": "input/hidden" },
         ],
         "ok": { "value": null }
     }
@@ -61,19 +61,17 @@ export function menuAction(p) {
 export function dialogAction(event) {
     console.log(event.id);
     if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
-        _new(event.value).then(()=>{});
+        _new(event.value).then(() => { });
     }
     else if (event.type == "dialog" && event.id == "uploadFileDialog" && event.value != "cancel") {
-        let jsonString=event.getInputValue("uploadFileDialogData");
-        if(jsonString && jsonString.trim()!="")
-        {
-            var json=JSON.parse(jsonString);
-            (async ()=>{
-                for(var i=0;i<json.files.length;i++)
-                {
-                    await _new(json.files[i].name+"x",json.base64); 
+        let jsonString = event.getInputValue("uploadFileDialogData");
+        if (jsonString && jsonString.trim() != "") {
+            var json = JSON.parse(jsonString);
+            (async () => {
+                for (var i = 0; i < json.files.length; i++) {
+                    await _new(json.files[i].name + "x", json.base64);
                 }
-            })()            
+            })()
         }
     }
     else if (event.id == "uploadFileDialogName") {
@@ -90,12 +88,12 @@ export function dialogAction(event) {
                 img.classList.add("obj");
                 img.file = file;
                 const reader = new FileReader();
-                reader.onload = (e)=>{
+                reader.onload = (e) => {
                     console.log(e.target.result);
-                    let current=event.getInputValue("uploadFileDialogData");
-                    if(!current || current.tim()=="")current="{\"files\":[]}";
-                    let currentJson=JSON.parse(current);
-                    currentJson.files.push({name:file.name,lastModified:file.lastModified,size:file.lastModified,type:file.type,base64:e.target.result});
+                    let current = event.getInputValue("uploadFileDialogData");
+                    if (!current || current.tim() == "") current = "{\"files\":[]}";
+                    let currentJson = JSON.parse(current);
+                    currentJson.files.push({ name: file.name, lastModified: file.lastModified, size: file.lastModified, type: file.type, base64: e.target.result });
                     event.setInputValue("uploadFileDialogData", JSON.stringify(currentJson));
                 };
                 reader.readAsDataURL(file);
@@ -430,11 +428,11 @@ function _refresh(params) {
     }
 }
 
-async function  _new(aFilename,data) {
+async function _new(aFilename, data) {
 
-    let _data=data;
+    let _data = data;
 
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
         if (selectedFileWidget && selectedFileWidget.substring(0, 6) == "git://") {
             aFilename = selectedFileWidget.substring(0, selectedFileWidget.lastIndexOf("/")) + "/" + aFilename;
         }
@@ -446,43 +444,43 @@ async function  _new(aFilename,data) {
             else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
             else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
             else sampleName = "modules/sample.txt";
-    
+
             fetch(sampleName)
                 .then(
                     response => response.text()
                 ).then(
                     text => {
-                        var _samplecode = text;
-                        var randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
-                        if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
-                        _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");                    
-    
-                        var appStuff = "";
-                        if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
-                            "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
-                            "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                            "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
-                            "mockFrame: iphoneX" + "\n  " +
-                            "splashBackgroundColor: #005040" + "\n  " +
-                            "splashDuration: 2000";
-                        var pyChar = "";
-                        if (aFilename.endsWith(".py")) pyChar = "#";
-    
-                        document.getElementById("filename").innerText = aFilename;
-                        selectedFileWidget = aFilename;
-                        if(_data!=null)
-                        {
+
+                        if (_data != null) {
                             console.log("!!!!!!");
                             window.editor.setValue(data);
                         }
-                        else{
+                        else {
+                            var _samplecode = text;
+                            var randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
+                            if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
+                            _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");
+
+                            var appStuff = "";
+                            if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
+                                "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
+                                "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                                "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
+                                "mockFrame: iphoneX" + "\n  " +
+                                "splashBackgroundColor: #005040" + "\n  " +
+                                "splashDuration: 2000";
+                            var pyChar = "";
+                            if (aFilename.endsWith(".py")) pyChar = "#";
+
+                            document.getElementById("filename").innerText = aFilename;
+                            selectedFileWidget = aFilename;
                             window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
-                            "filename:" + aFilename + "\n" + pyChar + "  " +
-                            "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
-                            appStuff +
-                            "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
+                                "filename:" + aFilename + "\n" + pyChar + "  " +
+                                "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
+                                appStuff +
+                                "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
                         }
-    
+
                         window.setEditorMode();
                         var toDiv = document.getElementById("pageLeftBody");
                         if (selectedFileWidget.substring(0, 6) == "git://") githubtree.saveFile(selectedFileWidget, window.editor.getValue(),
@@ -490,7 +488,7 @@ async function  _new(aFilename,data) {
                                 var gitParts = githubtree.getGitParts(selectedFileWidget);
                                 githubtree.refreshGitTree(gitParts.username, gitParts.repo, toDiv, selectedFileWidget, _openDir, _openFile);
                                 resolve();
-    
+
                             }
                         );
                         else {
@@ -503,7 +501,7 @@ async function  _new(aFilename,data) {
         }
     });
 
-  
+
 }
 
 function _openFile(element) {
