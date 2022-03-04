@@ -69,7 +69,7 @@ export function dialogAction(event) {
             var json = JSON.parse(jsonString);
             (async () => {
                 for (var i = 0; i < json.files.length; i++) {
-                    await _new(json.files[i].name + "x", json.files[i].base64);
+                    await _new(json.files[i].name + ".svg", json.files[i].svgdata);
                 }
             })()
         }
@@ -84,17 +84,18 @@ export function dialogAction(event) {
                 const file = files[i];
                 console.log(file);
                 if (!file.type.startsWith('image/png')) { continue }
-                const img = document.createElement("img");
-                img.classList.add("obj");
-                img.file = file;
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    console.log(e.target.result);
-                    let current = event.getInputValue("uploadFileDialogData");
-                    if (!current || current.tim() == "") current = "{\"files\":[]}";
-                    let currentJson = JSON.parse(current);
-                    currentJson.files.push({ name: file.name, lastModified: file.lastModified, size: file.lastModified, type: file.type, base64: e.target.result });
-                    event.setInputValue("uploadFileDialogData", JSON.stringify(currentJson));
+                    var i = new Image(); 
+                    i.onload = function(){
+                        console.log(e.target.result);
+                        let current = event.getInputValue("uploadFileDialogData");
+                        if (!current || current.tim() == "") current = "{\"files\":[]}";
+                        let currentJson = JSON.parse(current);
+                        currentJson.files.push({ name: file.name, lastModified: file.lastModified, size: file.lastModified, type: file.type, svgdata:"<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><image width=\""+i.width+"\" height=\""+i.height+"\" xlink:href=\""+e.target.result+"\" /></svg>", base64: e.target.result });
+                        event.setInputValue("uploadFileDialogData", JSON.stringify(currentJson));
+                    };
+                    i.src = e.target.result; 
                 };
                 reader.readAsDataURL(file);
             }
