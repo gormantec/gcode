@@ -144,7 +144,7 @@ class HomePage extends Page {
                                     "marginLeft": "auto",
                                     "marginRight": "auto",
                                     "marginTop": "20px",
-                                    "child": new Text("Locked"),
+                                    "child": new Text("LOCKED"),
                                     "onclick": (e) => {
                                       let lockB1=document.getElementById("lockB1");
                                       let lockB2=document.getElementById("lockB2");
@@ -152,8 +152,8 @@ class HomePage extends Page {
                                       { 
                                       	lockB1.style.backgroundColor="#323232";
                                       	lockB2.style.backgroundColor="#212121";
-                                        lockB1.firstChild.firstChild.innerText="Locked";
-                                        lockB2.firstChild.firstChild.innerText="Unlock";
+                                        lockB1.firstChild.firstChild.innerText="LOCKED";
+                                        lockB2.firstChild.firstChild.innerText="UNLOCK";
                                       }
                                     }
                                 }),
@@ -169,7 +169,7 @@ class HomePage extends Page {
                                     "marginLeft": "auto",
                                     "marginRight": "auto",
                                     "marginTop": "20px",
-                                    "child": new Text("Unlock"),
+                                    "child": new Text("UNLOCK"),
                                     "onclick": (e) => {
                                       let lockB1=document.getElementById("lockB1");
                                       let lockB2=document.getElementById("lockB2");
@@ -177,8 +177,8 @@ class HomePage extends Page {
                                       {
                                       	lockB1.style.backgroundColor="#212121";
                                       	lockB2.style.backgroundColor="#323232";
-                                        lockB1.firstChild.firstChild.innerText="Lock";
-                                        lockB2.firstChild.firstChild.innerText="Unlocked";
+                                        lockB1.firstChild.firstChild.innerText="LOCK";
+                                        lockB2.firstChild.firstChild.innerText="UNLOCKED";
                                       }
                                     }
                                 })
