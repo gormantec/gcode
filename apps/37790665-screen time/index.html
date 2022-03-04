@@ -145,7 +145,15 @@ class HomePage extends Page {
                                     "marginRight": "auto",
                                     "marginTop": "20px",
                                     "child": new Text("Locked"),
-                                    "onclick": (e) => {document.getElementById("lockB1").style.backgroundColor="#323232";document.getElementById("lockB2").style.backgroundColor="#323232"}
+                                    "onclick": (e) => {
+                                      let lockB1=document.getElementById("lockB1");
+                                      let lockB2=document.getElementById("lockB2");
+                                      if(lockB1.style.backgroundColor!="#212121")
+                                      { 
+                                      	lockB1.style.backgroundColor="#212121";
+                                      	lockB2.style.backgroundColor="#323232";
+                                      }
+                                    }
                                 }),
               new OutlinedButton({
                     			    "id":"lockB2",
@@ -160,7 +168,15 @@ class HomePage extends Page {
                                     "marginRight": "auto",
                                     "marginTop": "20px",
                                     "child": new Text("Unlock"),
-                                    "onclick": (e) => {document.getElementById("lockB1").style.backgroundColor="#323232";document.getElementById("lockB2").style.backgroundColor="#323232"}
+                                    "onclick": (e) => {
+                                      let lockB1=document.getElementById("lockB1");
+                                      let lockB2=document.getElementById("lockB2");
+                                      if(lockB1.style.backgroundColor!="#212121")
+                                      {
+                                      	lockB1.style.backgroundColor="#323232";
+                                      	lockB2.style.backgroundColor="#212121";
+                                      }
+                                    }
                                 })
 
 
