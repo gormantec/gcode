@@ -69,7 +69,7 @@ export function dialogAction(event) {
             var json = JSON.parse(jsonString);
             (async () => {
                 for (var i = 0; i < json.files.length; i++) {
-                    await _new(json.files[i].name + "x", json.base64);
+                    await _new(json.files[i].name + "x", json.files[i].base64);
                 }
             })()
         }
