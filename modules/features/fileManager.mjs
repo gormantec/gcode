@@ -38,6 +38,7 @@ export const dialogMetadata = [
                     { "value": ".ts", "text": "Mobile App - AssemblyScript", "selected": false },
                     { "value": ".dapp.ts", "text": "dApp - AssemblyScript", "selected": false },
                     { "value": ".lib.ts", "text": "Library - AssemblyScript", "selected": false },
+                    { "value": ".svg", "text": "App Icon", "selected": false },
                 ]
             },
         ],
@@ -444,7 +445,8 @@ async function _new(aFilename, data) {
             else if (aFilename.endsWith(".ts")) sampleName = "modules/sample.ts";
             else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
             else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
-            else sampleName = "modules/sample.txt";
+            else if (aFilename.endsWith(".svg")) sampleName = "modules/sample.py";
+            else sampleName = "https://raw.githubusercontent.com/google/material-design-icons/master/src/action/shopping_bag/materialiconsoutlined/24px.svg";
 
             fetch(sampleName)
                 .then(
@@ -454,6 +456,8 @@ async function _new(aFilename, data) {
 
                         if (_data != null) {
                             console.log("!!!!!!");
+                            document.getElementById("filename").innerText = aFilename;
+                            selectedFileWidget = aFilename;
                             window.editor.setValue(data);
                         }
                         else {
