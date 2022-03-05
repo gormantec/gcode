@@ -497,6 +497,9 @@ window.setEditorMode = function () {
     else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
         window.editor.setOption("mode", "htmlmixed");
     }
+    else if (filename.endsWith(".svg") || filename.endsWith(".xml")) {
+        window.editor.setOption("mode", "xml");
+    }
 
     console.log(window.editor.getOption("mode"));
     console.log(window.editor.options);
