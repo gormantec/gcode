@@ -27,6 +27,7 @@ function showSvgEditor() {
     let pageImg = document.createElement("img");
     pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
     rootMiddlePage.append(pageImg);
+    document.getElementById("pageMiddle").append(rootMiddlePage);
 }
 
 function hideSvgEditor() {
