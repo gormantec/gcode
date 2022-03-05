@@ -461,7 +461,17 @@ async function _new(aFilename, data) {
                             window.editor.setValue(data);
                         }
                         else {
+                            if(aFilename.endsWith(".svg"))
+                            {
+                                text=text.replace(/height="24" width="24"/g,"height=\"30\" width=\"30\" rx=\"5\"");
+                                text=text.replace(/viewBox="0 0 24 24"/g,"viewBox=\"0 0 30 30\"");
+                                text=text.replace(/\<path /g,"<path transform=\"translate(3 3)\" ");
+                                text=text.replace(/\<rect fill="none"/g,"<rect fill=\"%23323232\") rx=\"3\"");
+                                
+                                //<path transform="translate(3 3)"
+                            }
                             var _samplecode = text;
+                            
                             var randName = "gcode-" + (Math.round(Date.now() / 1000) * 10000 + Math.round(Math.random() * 9999)).toString(16);
                             if (aFilename.startsWith("gcode-") && aFilename.endsWith(".dapp.ts")) randName = aFilename.substring(0, aFilename.indexOf(".dapp.ts"))
                             _samplecode = _samplecode.replace(/"gcode-[0-9a-gA-G]*?\.testnet"/g, "\"" + randName + ".testnet\"");
