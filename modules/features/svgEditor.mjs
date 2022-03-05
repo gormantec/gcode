@@ -37,7 +37,7 @@ function hideSvgEditor() {
 }
 
 export function menuAction() {
-    if (!uiEditorVisible) {
+    if (!svgEditorVisible) {
         showSvgEditor();
         svgEditorVisible = true;
     }
