@@ -6,24 +6,24 @@ export const menuMetadata =  {"id":"svgEditor","class":"pageLeftToolbarButton","
 let svgEditorVisible = false;
 
 function createSvgMenu(svgParams) {
-    var pwaPanel = document.createElement("div");
-    var pwaHeader = document.createElement("div");
-    var pwaBody = document.createElement("div");
-    pwaHeader.innerHTML = "[+] svg";
-    pwaHeader.style.borderColor = "#AAAAAA";
-    pwaHeader.style.borderWidth = "1px";
-    pwaHeader.style.borderStyle = "solid";
-    pwaHeader.style.padding = "5px";
-    pwaBody.style.borderColor = "#AAAAAA";
-    pwaBody.style.borderWidth = "1px";
-    pwaBody.style.borderStyle = "solid";
-    pwaBody.style.borderTopWidth = "0px";
-    pwaBody.style.padding = "5px";
-    pwaPanel.style.width = "420px";
-    appendPWAParams(pwaBody, svgParams)
-    pwaPanel.append(pwaHeader);
-    pwaPanel.append(pwaBody);
-    return { pwaPanel, pwaBody };
+    var svgPanel = document.createElement("div");
+    var svgHeader = document.createElement("div");
+    var svgBody = document.createElement("div");
+    svgHeader.innerHTML = "[+] svg";
+    svgHeader.style.borderColor = "#AAAAAA";
+    svgHeader.style.borderWidth = "1px";
+    svgHeader.style.borderStyle = "solid";
+    svgHeader.style.padding = "5px";
+    svgBody.style.borderColor = "#AAAAAA";
+    svgBody.style.borderWidth = "1px";
+    svgBody.style.borderStyle = "solid";
+    svgBody.style.borderTopWidth = "0px";
+    svgBody.style.padding = "5px";
+    svgPanel.style.width = "420px";
+    appendSvgParams(svgBody, svgParams)
+    svgPanel.append(svgHeader);
+    svgPanel.append(svgBody);
+    return { svgPanel, svgBody };
 }
 
 function createInput(param, value, eventListener) {
@@ -53,8 +53,8 @@ function createInput(param, value, eventListener) {
     return input;
 }
 
-function appendSvgParams(pwaBody, svgParams) {
-    if (pwaWidget && pwaBody) {
+function appendSvgParams(svgBody, svgParams) {
+    if (svgWidget && svgBody) {
         for (var param in svgParams) {
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
@@ -67,13 +67,13 @@ function appendSvgParams(pwaBody, svgParams) {
             pageDivRow.append(pageDivC1);
             pageDivRow.append(pageDivC2);
             pageDivC1.innerHTML = param;
-            let _pwaWidget=pwaWidget;
+            let _svgWidget=svgWidget;
             let _param=param;
             pageDivC2.append(createInput(param, svgParams[param], (v) => {
-                _pwaWidget.params[_param] = v;
+                _svgWidget.params[_param] = v;
                 refreshScreen();
             }));
-            pwaBody.append(pageDivRow);
+            svgBody.append(pageDivRow);
         }
     }
 }
