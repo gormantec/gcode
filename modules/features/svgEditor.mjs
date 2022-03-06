@@ -57,7 +57,10 @@ function createInput(param, value, eventListener) {
 
 function appendSvgParams(svgBody, svgParams) {
     if (svgParams && svgBody) {
+        console.log(svgParams);
         for (var param in svgParams) {
+
+            console.log(param);
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
             let pageDivC1 = document.createElement("div");
