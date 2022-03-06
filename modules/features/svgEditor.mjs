@@ -132,8 +132,8 @@ function showSvgEditor() {
     let pageImg = document.createElement("img");
     pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
     rootMiddlePage.append(pageImg);
-    let svgMenu = createSvgMenu({"color":"red"},{"backgroundColor":"black"});
-    rootMiddlePage.append(svgMenu);
+    let { svgPanel, svgBody } = createSvgMenu({"color":"red"},{"backgroundColor":"black"});
+    rootMiddlePage.append(svgPanel);
     document.getElementById("pageMiddle").append(rootMiddlePage);
 }
 
