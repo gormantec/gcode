@@ -99,6 +99,11 @@ function appendSvgParams(svgBody, svgParams) {
                     source=source.replace(/(\<rect fill=").*?(" height=".*?" width=".*?")/g,"$1"+v+"$2");
                     window.editor.setValue(source);
                 }
+                else if(_param=="borderRadius")
+                {
+                    source=source.replace(/(\<rect [.\s\S]*?rx=").*?("[.\s\S]*?>)/g,"$1"+v+"$2");
+                    window.editor.setValue(source);
+                }
                 pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
                 //text=text.replace(/\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=".*?">/g,"<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\"192\" viewBox=\"0 0 30 30\" width=\"192\">");
                 //text=text.replace(/\<path /g,"<path transform=\"translate(3 3)\" ");
