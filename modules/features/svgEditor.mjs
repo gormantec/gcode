@@ -54,7 +54,7 @@ function createInput(param, value, eventListener) {
 }
 
 function appendSvgParams(svgBody, svgParams) {
-    if (svgWidget && svgBody) {
+    if (svgParams && svgBody) {
         for (var param in svgParams) {
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
@@ -67,11 +67,11 @@ function appendSvgParams(svgBody, svgParams) {
             pageDivRow.append(pageDivC1);
             pageDivRow.append(pageDivC2);
             pageDivC1.innerHTML = param;
-            let _svgWidget=svgWidget;
+            let _svgParams=svgParams;
             let _param=param;
             pageDivC2.append(createInput(param, svgParams[param], (v) => {
-                _svgWidget.params[_param] = v;
-                refreshScreen();
+                _svgParams[_param] = v;
+                //refreshScreen();
             }));
             svgBody.append(pageDivRow);
         }
