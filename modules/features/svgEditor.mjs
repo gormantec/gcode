@@ -188,7 +188,7 @@ function showSvgEditor() {
 
     let br=source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g)[0];
     if(!br)br="3";
-    else br=br.replace(/(\<rect[.\s\S]*?rx=").*?("[.\s\S]*?\>)/g,"$2");
+    else br=br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g,"$2");
 
     let { svgPanel, svgBody } = createSvgMenu({"color":c,"backgroundColor":bc,"height":""+h,"width":""+w,"borderRadius":""+br});
     rootMiddlePage.append(svgPanel);
