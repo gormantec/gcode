@@ -464,7 +464,7 @@ async function _new(aFilename, data) {
                             if(aFilename.endsWith(".svg"))
                             {
                                 text=text.replace(/\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=".*?">/g,"<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\"192\" viewBox=\"0 0 30 30\" width=\"192\">");
-                                text=text.replace(/\<path /g,"<path transform=\"translate(3 3)\" ");
+                                text=text.replace(/\<path /g,"<path fill=\"black\" transform=\"translate(3 3)\" ");
                                 text=text.replace(/\<rect fill="none" height=".*?" width=".*?"/g,"<rect fill=\"%23323232\" rx=\"3\" height=\"30\" width=\"30\"");
                                 
                                 //<path transform="translate(3 3)"
