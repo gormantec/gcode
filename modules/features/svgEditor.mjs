@@ -4,6 +4,7 @@ export const menuMetadata =  {"id":"svgEditor","class":"pageLeftToolbarButton","
 
 
 let svgEditorVisible = false;
+let pageImg=null;
 
 function createSvgMenu(svgParams) {
     var svgPanel = document.createElement("div");
@@ -75,32 +76,30 @@ function appendSvgParams(svgBody, svgParams) {
             let _svgParams=svgParams;
             let _param=param;
             pageDivC2.append(createInput(param, svgParams[param], (v) => {
+                var source = window.editor.getValue();
                 if(_param=="height")
                 {
-                    var source = window.editor.getValue();
                     source=source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=").*?(" viewBox=".*?" width=".*?">)/g,"$1"+v+"$2");
                     window.editor.setValue(source);
                 }
                 else if(_param=="width")
                 {
-                    var source = window.editor.getValue();
                     source=source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=").*?(">)/g,"$1"+v+"$2");
                     window.editor.setValue(source);
                 }
                 else if(_param=="color")
                 {
                     if(v.startsWith("#"))v="%23"+v.substring(1);
-                    var source = window.editor.getValue();
                     source=source.replace(/\<path .*?d=/g,"<path  fill=\""+v+"\" transform=\"translate(3 3)\" d=");
                     window.editor.setValue(source);
                 }
                 else if(_param=="backgroundColor")
                 {
                     if(v.startsWith("#"))v="%23"+v.substring(1);
-                    var source = window.editor.getValue();
                     source=source.replace(/(\<rect fill=").*?(" height=".*?" width=".*?")/g,"$1"+v+"$2");
                     window.editor.setValue(source);
                 }
+                pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
                 //text=text.replace(/\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=".*?">/g,"<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\"192\" viewBox=\"0 0 30 30\" width=\"192\">");
                 //text=text.replace(/\<path /g,"<path transform=\"translate(3 3)\" ");
                 //text=text.replace(/\<rect fill="none" height=".*?" width=".*?"/g,"<rect fill=\"%23323232\" rx=\"3\" height=\"30\" width=\"30\"");
@@ -161,7 +160,7 @@ function showSvgEditor() {
     let rootMiddlePage = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (rootMiddlePage) rootMiddlePage.remove();
     rootMiddlePage = createPageDiv();
-    let pageImg = document.createElement("img");
+    pageImg = document.createElement("img");
     pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
     rootMiddlePage.append(pageImg);
     let { svgPanel, svgBody } = createSvgMenu({"color":"#FF0000","backgroundColor":"#0000FF","height":"512px","width":"512px"});
