@@ -90,7 +90,12 @@ function appendSvgParams(svgBody, svgParams) {
                 else if(_param=="color")
                 {
                     if(v.startsWith("#"))v="%23"+v.substring(1);
-                    source=source.replace(/\<path .*?d=/g,"<path  fill=\""+v+"\" transform=\"translate(3 3)\" d=");
+                    source=source.replace(/\<path [.\s\S]*transform/g,"<path fill=\""+v+"\" transform");
+                    window.editor.setValue(source);
+                }
+                else if(_param=="iconName")
+                {
+                    source=source.replace(/(\<path [.\s\S]*?transform=".?*")[.\s\S]*?(d=)"/g,"$1 name=\""+v+"\" $2");
                     window.editor.setValue(source);
                 }
                 else if(_param=="backgroundColor")
@@ -170,12 +175,15 @@ function showSvgEditor() {
     
     let c=source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
     if(!c)c="#AAAAAA";
-    else c=c.replace(/(\<path[.\s\S]*?fill=").*?("[.\s\S]*?\>)/g,"$2");
+    else c=c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
     if(c.startsWith("%23"))c="#"+c.substring(3);
+
+    let name=source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g)[0];
+    name=name.replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g,"$2");
 
     let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
     if(!bc)bc="#AAAAAA";
-    else bc=bc.replace(/(\<rect[.\s\S]*?fill=").*?("[.\s\S]*?\>)/g,"$2");
+    else bc=bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
     if(bc.startsWith("%23"))bc="#"+bc.substring(3);
 
     let h=source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
@@ -190,7 +198,7 @@ function showSvgEditor() {
     if(!br)br="3";
     else br=br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g,"$2");
 
-    let { svgPanel, svgBody } = createSvgMenu({"color":c,"backgroundColor":bc,"height":""+h,"width":""+w,"borderRadius":""+br});
+    let { svgPanel, svgBody } = createSvgMenu({"color":c,"backgroundColor":bc,"height":""+h,"width":""+w,"borderRadius":""+br,"iconName":""+name});
     rootMiddlePage.append(svgPanel);
     rootMiddlePage.append(pageImg);
     document.getElementById("pageMiddle").append(rootMiddlePage);
