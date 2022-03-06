@@ -163,27 +163,27 @@ function showSvgEditor() {
     pageImg = document.createElement("img");
     pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
     
-    let c=source.match(/\<path[\s\S]*?fill=".*?"[\s\S]*?\>/g)[0];
+    let c=source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
     if(!c)c="#AAAAAA";
-    else c=c.replace(/(\<path[\s\S]*?fill=").*?("[\s\S]*?\>)/g,"$2");
+    else c=c.replace(/(\<path[.\s\S]*?fill=").*?("[.\s\S]*?\>)/g,"$2");
     if(c.startsWith("%23"))c="#"+c.substring(3);
 
-    let bc=source.match(/\<rect[\s\S]*?fill=".*?"[\s\S]*?\>/g)[0];
+    let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
     if(!bc)bc="#AAAAAA";
-    else bc=bc.replace(/(\<rect[\s\S]*?fill=").*?("[\s\S]*?\>)/g,"$2");
+    else bc=bc.replace(/(\<rect[.\s\S]*?fill=").*?("[.\s\S]*?\>)/g,"$2");
     if(bc.startsWith("%23"))bc="#"+bc.substring(3);
 
-    let h=source.match(/\<[\s\S]*?height=".*?"[\s\S]*?\>/g)[0];
+    let h=source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
     if(!h)h="192";
-    else h=h.replace(/(\<[\s\S]*?height=")(.*?)("[\s\S]*?\>)/g,"$2");
+    else h=h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g,"$2");
 
-    let w=source.match(/\<[\s\S]*?width=".*?"[\s\S]*?\>/g)[0];
+    let w=source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g)[0];
     if(!w)w="192";
-    else h=h.replace(/(\<[\s\S]*?width=")(.*?)("[\s\S]*?\>)/g,"$2");
+    else w=w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g,"$2");
 
-    let br=source.match(/\<rect[\s\S]*?rx=".*?"[\s\S]*?\>/g)[0];
+    let br=source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g)[0];
     if(!br)br="3";
-    else br=br.replace(/(\<rect[\s\S]*?rx=").*?("[\s\S]*?\>)/g,"$2");
+    else br=br.replace(/(\<rect[.\s\S]*?rx=").*?("[.\s\S]*?\>)/g,"$2");
 
     let { svgPanel, svgBody } = createSvgMenu({"color":c,"backgroundColor":bc,"height":""+h,"width":""+w,"borderRadius":""+br});
     rootMiddlePage.append(svgPanel);
