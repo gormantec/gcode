@@ -27,6 +27,8 @@ function createSvgMenu(svgParams) {
 }
 
 function createInput(param, value, eventListener) {
+
+    console.log(param+"="+value);
     var input = document.createElement("input");
     input.id = "input-param-" + param;
     input.type = "text";
