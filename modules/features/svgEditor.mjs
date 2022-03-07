@@ -95,7 +95,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if(_param=="iconName")
                 {
-                    source=source.replace(/(\<path [.\s\S]*?transform=".?*")[.\s\S]*?(d=)"/g,"$1 name=\""+v+"\" $2");
+                    source=source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=)/g,"$1 name=\""+v+"\" $2");
                     window.editor.setValue(source);
                 }
                 else if(_param=="backgroundColor")
