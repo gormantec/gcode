@@ -178,8 +178,8 @@ function showSvgEditor() {
     else c=c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
     if(c.startsWith("%23"))c="#"+c.substring(3);
 
-    let name=source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g)[0];
-    if(name)name=name.replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g,"$2");
+    let name=source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
+    if(name && name[0])name=name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g,"$2");
     else name="";
 
     let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
