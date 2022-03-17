@@ -127,7 +127,7 @@ function colorInput(input) {
     input.type = "color";
     var input2 = document.createElement("input");
     input2.style.border = "none";
-    input2.size = 10;
+    input2.size = 20;
     input2.value = input.value;
     var pageDivC1 = document.createElement("div");
     pageDivC1.style.display = "inline-block";
