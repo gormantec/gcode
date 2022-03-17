@@ -56,6 +56,11 @@ function createInput(param, value, eventListener) {
     return input;
 }
 
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? "rgb("+parseInt(result[1], 16)+","+parseInt(result[2], 16)+","+parseInt(result[3], 16)+")": hex;
+  }
+
 function appendSvgParams(svgBody, svgParams) {
     if (svgParams && svgBody) {
         console.log(svgParams);
@@ -89,7 +94,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if(_param=="color")
                 {
-                    if(v.startsWith("#"))v="%23"+v.substring(1);
+                    if(v.startsWith("#"))v=hexToRgb(v);
                     source=source.replace(/\<path [.\s\S]*transform/g,"<path fill=\""+v+"\" transform");
                     window.editor.setValue(source);
                 }
@@ -100,7 +105,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if(_param=="backgroundColor")
                 {
-                    if(v.startsWith("#"))v="%23"+v.substring(1);
+                    if(v.startsWith("#"))v=hexToRgb(v);
                     source=source.replace(/(\<rect fill=").*?(" height=".*?" width=".*?")/g,"$1"+v+"$2");
                     window.editor.setValue(source);
                 }
@@ -174,18 +179,18 @@ function showSvgEditor() {
     pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
     
     let c=source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
-    if(!c)c="#AAAAAA";
+    if(!c)c=hexToRgb("#AAAAAA");
     else c=c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
-    if(c.startsWith("%23"))c="#"+c.substring(3);
+    if(c.startsWith("%23"))c=hexToRgb("#"+c.substring(3));
 
     let name=source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
     if(name && name[0])name=name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g,"$2");
     else name="";
 
     let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
-    if(!bc)bc="#AAAAAA";
+    if(!bc)bc=hexToRgb("#AAAAAA");
     else bc=bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
-    if(bc.startsWith("%23"))bc="#"+bc.substring(3);
+    if(bc.startsWith("%23"))bc=hexToRgb("#"+c.substring(3));
 
     let h=source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
     if(!h)h="192";
