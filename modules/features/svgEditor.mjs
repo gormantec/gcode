@@ -150,7 +150,7 @@ function colorInput(input) {
     pageDivC1.append(pageDivC11);
     pageDivC1.append(pageDivC2);
     input.addEventListener('change', function (evt) {
-        input2.value = this.value;
+        input2.value = hexToRgb(this.value);
     });
     input = pageDivC1;
     return input;
@@ -182,6 +182,7 @@ function showSvgEditor() {
     if(!c)c=hexToRgb("#AAAAAA");
     else c=c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
     if(c.startsWith("%23"))c=hexToRgb("#"+c.substring(3));
+    else if(c.startsWith("#"))c=hexToRgb(c);
 
     let name=source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
     if(name && name[0])name=name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g,"$2");
@@ -190,7 +191,8 @@ function showSvgEditor() {
     let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
     if(!bc)bc=hexToRgb("#AAAAAA");
     else bc=bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
-    if(bc.startsWith("%23"))bc=hexToRgb("#"+c.substring(3));
+    if(bc.startsWith("%23"))bc=hexToRgb("#"+bc.substring(3));
+    else if(bc.startsWith("#"))bc=hexToRgb(bc);
 
     let h=source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
     if(!h)h="192";
