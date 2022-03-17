@@ -189,7 +189,7 @@ function showSvgEditor() {
     else name="";
 
     let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
-    if(!bc)bc=hexToRgb("#AAAAAA");
+    if(!bc)bc=hexToRgb("#222222");
     else bc=bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
     if(bc.startsWith("%23"))bc=hexToRgb("#"+bc.substring(3));
     else if(bc.startsWith("#"))bc=hexToRgb(bc);
