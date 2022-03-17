@@ -1,10 +1,10 @@
 /* Feature Name: Help Menu */
 
-export const menuMetadata =  {"id":"svgEditor","class":"pageLeftToolbarButton","materialIcon":"image"};
+export const menuMetadata = { "id": "svgEditor", "class": "pageLeftToolbarButton", "materialIcon": "image" };
 
 
 let svgEditorVisible = false;
-let pageImg=null;
+let pageImg = null;
 
 function createSvgMenu(svgParams) {
     var svgPanel = document.createElement("div");
@@ -29,7 +29,7 @@ function createSvgMenu(svgParams) {
 
 function createInput(param, value, eventListener) {
 
-    console.log(param+"="+value);
+    console.log(param + "=" + value);
     var input = document.createElement("input");
     input.id = "input-param-" + param;
     input.type = "text";
@@ -44,7 +44,7 @@ function createInput(param, value, eventListener) {
             eventListener(this.value);
         }
     });
-    if (param == "color" || param == "backgroundColor" || param=="primaryColor") {
+    if (param == "color" || param == "backgroundColor" || param == "primaryColor") {
         input = colorInput(input);
     }
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
@@ -58,8 +58,18 @@ function createInput(param, value, eventListener) {
 
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? "rgb("+parseInt(result[1], 16)+","+parseInt(result[2], 16)+","+parseInt(result[3], 16)+")": hex;
-  }
+    return result ? "rgb(" + parseInt(result[1], 16) + "," + parseInt(result[2], 16) + "," + parseInt(result[3], 16) + ")" : hex;
+}
+
+function rgbToHex(rgb) {
+    var a = rgb.split("(")[1].split(")")[0];
+    a = a.split(",");
+    var b = a.map(function (x) {             //For each array element
+        x = parseInt(x).toString(16);      //Convert to a base16 string
+        return (x.length == 1) ? "0" + x : x;  //Add zero if we get only one character
+    });
+    b = "0x" + b.join("");
+}
 
 function appendSvgParams(svgBody, svgParams) {
     if (svgParams && svgBody) {
@@ -78,43 +88,37 @@ function appendSvgParams(svgBody, svgParams) {
             pageDivRow.append(pageDivC1);
             pageDivRow.append(pageDivC2);
             pageDivC1.innerHTML = param;
-            let _svgParams=svgParams;
-            let _param=param;
+            let _svgParams = svgParams;
+            let _param = param;
             pageDivC2.append(createInput(param, svgParams[param], (v) => {
                 var source = window.editor.getValue();
-                if(_param=="height")
-                {
-                    source=source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=").*?(" viewBox=".*?" width=".*?">)/g,"$1"+v+"$2");
+                if (_param == "height") {
+                    source = source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=").*?(" viewBox=".*?" width=".*?">)/g, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
-                else if(_param=="width")
-                {
-                    source=source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=").*?(">)/g,"$1"+v+"$2");
+                else if (_param == "width") {
+                    source = source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=").*?(">)/g, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
-                else if(_param=="color")
-                {
-                    if(v.startsWith("#"))v=hexToRgb(v);
-                    source=source.replace(/\<path [.\s\S]*transform/g,"<path fill=\""+v+"\" transform");
+                else if (_param == "color") {
+                    if (v.startsWith("#")) v = hexToRgb(v);
+                    source = source.replace(/\<path [.\s\S]*transform/g, "<path fill=\"" + v + "\" transform");
                     window.editor.setValue(source);
                 }
-                else if(_param=="iconName")
-                {
-                    source=source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=)/g,"$1 name=\""+v+"\" $2");
+                else if (_param == "iconName") {
+                    source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=)/g, "$1 name=\"" + v + "\" $2");
                     window.editor.setValue(source);
                 }
-                else if(_param=="backgroundColor")
-                {
-                    if(v.startsWith("#"))v=hexToRgb(v);
-                    source=source.replace(/(\<rect fill=").*?(" height=".*?" width=".*?")/g,"$1"+v+"$2");
+                else if (_param == "backgroundColor") {
+                    if (v.startsWith("#")) v = hexToRgb(v);
+                    source = source.replace(/(\<rect fill=").*?(" height=".*?" width=".*?")/g, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
-                else if(_param=="borderRadius")
-                {
-                    source=source.replace(/(\<rect [.\s\S]*?rx=").*?("[.\s\S]*?>)/g,"$1"+v+"$2");
+                else if (_param == "borderRadius") {
+                    source = source.replace(/(\<rect [.\s\S]*?rx=").*?("[.\s\S]*?>)/g, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
-                pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
+                pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
                 //text=text.replace(/\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=".*?">/g,"<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\"192\" viewBox=\"0 0 30 30\" width=\"192\">");
                 //text=text.replace(/\<path /g,"<path transform=\"translate(3 3)\" ");
                 //text=text.replace(/\<rect fill="none" height=".*?" width=".*?"/g,"<rect fill=\"%23323232\" rx=\"3\" height=\"30\" width=\"30\"");
@@ -124,11 +128,16 @@ function appendSvgParams(svgBody, svgParams) {
     }
 }
 function colorInput(input) {
+    let _value = input.value;
+    if (_value.startsWith("%23")) _value = "#" + c.substring(3);
+    if (_value.startsWith("rbg")) _value = rgbToHex(_value);
+    input.value=_value;
+
     input.type = "color";
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
-    input2.value = input.value;
+    input2.value = hexToRgb(input.value);
     var pageDivC1 = document.createElement("div");
     pageDivC1.style.display = "inline-block";
     pageDivC1.style.backgroundColor = "white";
@@ -176,37 +185,37 @@ function showSvgEditor() {
     if (rootMiddlePage) rootMiddlePage.remove();
     rootMiddlePage = createPageDiv();
     pageImg = document.createElement("img");
-    pageImg.src="data:image/svg+xml;utf8,"+source.replace(/\n/g, " ").replace(/\r/g, " ");;
-    
-    let c=source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
-    if(!c)c=hexToRgb("#AAAAAA");
-    else c=c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
-    if(c.startsWith("%23"))c=hexToRgb("#"+c.substring(3));
-    else if(c.startsWith("#"))c=hexToRgb(c);
+    pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
 
-    let name=source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
-    if(name && name[0])name=name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g,"$2");
-    else name="";
+    let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
+    if (!c) c = hexToRgb("#AAAAAA");
+    else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
+    else if (c.startsWith("#")) c = hexToRgb(c);
 
-    let bc=source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
-    if(!bc)bc=hexToRgb("#222222");
-    else bc=bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g,"$2");
-    if(bc.startsWith("%23"))bc=hexToRgb("#"+bc.substring(3));
-    else if(bc.startsWith("#"))bc=hexToRgb(bc);
+    let name = source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
+    if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    else name = "";
 
-    let h=source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
-    if(!h)h="192";
-    else h=h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g,"$2");
+    let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
+    if (!bc) bc = hexToRgb("#222222");
+    else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
+    else if (bc.startsWith("#")) bc = hexToRgb(bc);
 
-    let w=source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g)[0];
-    if(!w)w="192";
-    else w=w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g,"$2");
+    let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
+    if (!h) h = "192";
+    else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
-    let br=source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g)[0];
-    if(!br)br="3";
-    else br=br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g,"$2");
+    let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g)[0];
+    if (!w) w = "192";
+    else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
-    let { svgPanel, svgBody } = createSvgMenu({"color":c,"backgroundColor":bc,"height":""+h,"width":""+w,"borderRadius":""+br,"iconName":""+name});
+    let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g)[0];
+    if (!br) br = "3";
+    else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
+
+    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor": bc, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
     rootMiddlePage.append(pageImg);
     document.getElementById("pageMiddle").append(rootMiddlePage);
