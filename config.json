@@ -43,7 +43,12 @@
           "navPosition": 7,
           "enabled": true,
           "uri": "/modules/features/uiMenu.mjs"
-      }
+      }, {
+        "name": "svgEditor",
+        "navPosition": 8,
+        "enabled": true,
+        "uri": "/modules/features/svgEditor.mjs"
+    }
     ],
     "options": [{
             "name": "defaultAppSettings",
