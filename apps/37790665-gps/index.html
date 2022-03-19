@@ -166,6 +166,17 @@ class HomePage extends Page {
                             fontSize: "40px",
                             "child": new Text("-"),
                           	onclick:()=>{gps.zoomout()}
+                        }),
+                        new OutlinedButton({
+                            "position": "relative",
+                            "display": "inline-block",
+                            width: "50px",
+                            height: "50px",
+                            margin: "10px",
+                            backgroundColor: "#555555",
+                            fontSize: "40px",
+                            "child": new Text("x"),
+                          	onclick:()=>{gps.zoomout()}
                         })
                     ]
                 }),
