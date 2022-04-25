@@ -185,6 +185,24 @@ class HomePage extends Page {
                                         lockB2.firstChild.firstChild.innerText="UNLOCKED";
                                         lockB1.style.fontWeight="normal";
                                         lockB2.style.fontWeight="900";
+
+                                        
+                                        (async () => {
+                                          let rawResponse = await fetch('http://192.168.8.80:8082/api/v1/servers/localhost/zones', {
+                                            method: 'POST',
+                                            headers: {
+                                              'Accept': 'application/json',
+                                              'Content-Type': 'application/json',
+                                              'X-API-Key': '12345678901$'
+                                            },
+                                            body: JSON.stringify({"name": "google.com.au.","kind": "Forwarded","recursion_desired":false,"servers":[ "127.0.0.1:5300" ]})
+                                          });
+                                          const content = await rawResponse.json();
+
+                                          console.log(content);
+                                        })();
+                                        
+                                        
                                       }
                                     }
                                 })
