@@ -100,6 +100,12 @@ class GpsClass {
       this.zoom=this.zoom+1;
       this.updateLocation();
   	}
+  
+  	mark()
+  	{
+      this.zoom=this.zoom+1;
+      this.updateLocation();
+  	}
 
 }
 
