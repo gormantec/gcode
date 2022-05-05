@@ -201,7 +201,7 @@ div.pwapage div.pwadiv{
     left: 0px;
     right: 0px;
     top: 0px;
-    height: 70px;
+    height: 80px;
     padding:0px;
     margin:0px;
     background-color: var(--primaryColor);
@@ -216,7 +216,7 @@ div.pwapage div.pwadiv{
     right: unset;
     bottom: 5px;
     top: unset;
-    height:38px;
+    height:40px;
     font-weight: 900;
     cursor: pointer;
     overflow: hidden;
@@ -229,7 +229,7 @@ div.pwapage div.pwadiv{
     position: absolute;
     left: 40px;
     right: 5px;
-    bottom: 2px;
+    bottom: 1px;
     height: 40px;
     top: unset;
     font-size: 20px;
