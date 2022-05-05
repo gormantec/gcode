@@ -14,7 +14,7 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
     var dLat = degreesToRadians(lat2 - lat1);
     var dLon = degreesToRadians(lon2 - lon1);
 
-    lat1 = degreesToRadians(lat1);   
+    lat1 = degreesToRadians(lat1);
     lat2 = degreesToRadians(lat2);
 
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -23,20 +23,20 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
     return earthRadiusKm * c;
 }
 
-class GpsClass {     
-    constructor() {  
+class GpsClass {
+    constructor() {
         let _this = this;
         window.setInterval(() => {
-          _this.updateLocation();
+            _this.updateLocation();
         }, 5000);
         _this.updateLocation();
-      	_this.zoom=17;
+        _this.zoom = 17;
     }
 
 
 
     updateLocation() {
-      let _this=this;
+        let _this = this;
         if (_this.coordDiv) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -46,21 +46,26 @@ class GpsClass {
                     let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
 
                     _this.coordDiv.innerHTML = roughtlatlmg;
-                    if (_this.imageDiv && (latlmg != platlmg || _this.zoom !=_this.pzoom)) {
-                      	_this.pzoom=_this.zoom;
+                    if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
+                        _this.pzoom = _this.zoom;
                         var width = _this.imageDiv.element.offsetWidth;
                         var height = _this.imageDiv.element.offsetHeight;
+                      	let othermarkers="";
+                        if(_this.marks)
+                        {
+                          othermarkers="color:blue%7Clabel:S%7C"+_this.marks[0]+",";
+                        }
 
                         let imageLoaded = () => {
                             console.log("imageLoaded");
                             _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                                roughtlatlmg + '&zoom='+_this.zoom+'&markers=color:red%7Clabel:S%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                                roughtlatlmg + '&zoom=' + _this.zoom + '&markers='+othermarkers+'color:red%7Clabel:S%7C' + latlmg+'&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
                             platlmg = latlmg;
                         };
 
                         var img = new Image();
                         img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            roughtlatlmg + '&zoom='+_this.zoom+'&markers=color:red%7Clabel:S%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
+                            roughtlatlmg + '&zoom=' + _this.zoom + '&markers=color:red%7Clabel:S%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
                         if (img.complete) {
 
                             console.log("complete");
@@ -69,7 +74,7 @@ class GpsClass {
                             console.log("complete");
                             img.addEventListener('load', imageLoaded)
                             img.addEventListener('error', function(e) {
-                                console.log("error:"+e);
+                                console.log("error:" + e);
                             })
                         }
                     }
@@ -90,17 +95,33 @@ class GpsClass {
         if (!this.imageDiv) this.imageDiv = new Div(p);
         return this.imageDiv;
     }
-  	zoomout()
-    {
-      this.zoom=this.zoom-1;
-      this.updateLocation();
+    zoomout() {
+        this.zoom = this.zoom - 1;
+        this.updateLocation();
     }
-  	zoomin()
-  	{
-      this.zoom=this.zoom+1;
-      this.updateLocation();
-  	}
+    zoomin() {
+        this.zoom = this.zoom + 1;
+        this.updateLocation();
+    }
+    mark() {
+      let _this = this;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                        let lat = position.coords.latitude;
+                        let lng = position.coords.longitude;
+                        let latlmg = lat + "," + lng;
+                  		if(_this.marks){
+                          _this.push(latlmg);
+                        }
+                  		else{
+                          _this.marks=[];
+                          _this.push(latlmg);
+                        }
+                    
+                    });
+                }
 
+    }
 }
-
+	
 export var gps = new GpsClass();
