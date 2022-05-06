@@ -1,5 +1,10 @@
 name: build-apk
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - apps/**
 jobs:
   build-apk-job:
     runs-on: ubuntu-latest
