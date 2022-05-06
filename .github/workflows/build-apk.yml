@@ -26,7 +26,7 @@ jobs:
         run: mkdir android-cli
       - name: Install Android sdkmanager
         run: |
-          wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}.zip
+          wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-8092744.zip
           sudo unzip -d android-cli android-sdk.zip > /dev/null
       - uses: actions/setup-node@v3
         with:
