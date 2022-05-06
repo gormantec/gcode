@@ -325,4 +325,14 @@ div.pwapage div.pwadiv{
       zoom: 0.75;
     }
   }
+  @media all and (orientation: landscape) and (min-width:800px)
+  {
+      #pwaheader{
+           height: 60px;
+      }
+      
+    #pwabody{
+        top: 60px;
+      }
+  }
 
