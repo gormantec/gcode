@@ -55,7 +55,7 @@ class GpsClass {
                         {
                           othermarkers="&markers=color:blue%7Clabel:X%7C"+_this.marks[0];
                           
-                          _this.distDiv.innerHTML = (distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split[0]),parseFloat(_this.marks[0].split[1]),lat,lng)*1000)+" m";
+                          _this.distDiv.innerHTML = (distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]),parseFloat(_this.marks[0].split(",")[1]),lat,lng)*1000)+" m";
                         }
 
                         let imageLoaded = () => {
