@@ -107,8 +107,8 @@ class GpsClass {
       let _this = this;
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                        let lat = position.coords.latitude;
-                        let lng = position.coords.longitude;
+                        let lat = position.coords.latitude+0.001;
+                        let lng = position.coords.longitude+0.001;
                         let latlmg = lat + "," + lng;
                   		if(_this.marks){
                           _this.push(latlmg);
