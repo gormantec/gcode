@@ -33,7 +33,7 @@ jobs:
       - run: mkdir tools
       - run: cd tools
       - run: npm init -y
-      - run: npm npm i bw_manifest_url
+      - run: npm i bw_manifest_url
       - run: cd ..
       - run: mkdir ~/.bubblewrap
       - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
