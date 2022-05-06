@@ -54,8 +54,15 @@ class GpsClass {
                         if(_this.marks)
                         {
                           othermarkers="&markers=color:blue%7Clabel:X%7C"+_this.marks[0];
-                          
-                          _this.distDiv.innerHTML = (distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]),parseFloat(_this.marks[0].split(",")[1]),lat,lng)*1000)+" m";
+                          let dist=Math.floor((distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]),parseFloat(_this.marks[0].split(",")[1]),lat,lng)*1000));
+                          if(dist>1000)
+                          {
+							_this.distDiv.innerHTML = (dist/1000)+" km";
+                          }
+                          else
+                          {
+							_this.distDiv.innerHTML = dist+" m";
+                          }
                         }
 
                         let imageLoaded = () => {
