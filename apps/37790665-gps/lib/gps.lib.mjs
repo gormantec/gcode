@@ -31,7 +31,7 @@ class GpsClass {
         }, 5000);
         _this.updateLocation();
         _this.zoom = 17;
-    }   
+    }
 
 
 
@@ -50,25 +50,21 @@ class GpsClass {
                         _this.pzoom = _this.zoom;
                         var width = _this.imageDiv.element.offsetWidth;
                         var height = _this.imageDiv.element.offsetHeight;
-                      	let othermarkers="";
-                        if(_this.marks)
-                        {
-                          othermarkers="&markers=color:blue%7Clabel:X%7C"+_this.marks[0];
-                          let dist=Math.floor((distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]),parseFloat(_this.marks[0].split(",")[1]),lat,lng)*1000));
-                          if(dist>1000)
-                          {
-							_this.distDiv.innerHTML = (dist/1000)+" km";
-                          }
-                          else
-                          {
-							_this.distDiv.innerHTML = dist+" m";
-                          }
+                        let othermarkers = "";
+                        if (_this.marks) {
+                            othermarkers = "&markers=color:blue%7Clabel:X%7C" + _this.marks[0];
+                            let dist = Math.floor((distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]), parseFloat(_this.marks[0].split(",")[1]), lat, lng) * 1000));
+                            if (dist > 1000) {
+                                _this.distDiv.innerHTML = (dist / 1000) + " km";
+                            } else {
+                                _this.distDiv.innerHTML = dist + " m";
+                            }
                         }
 
                         let imageLoaded = () => {
                             console.log("imageLoaded");
                             _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                                roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg+'&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                                roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
                             platlmg = latlmg;
                         };
 
@@ -95,8 +91,8 @@ class GpsClass {
         }
         //https://maps.googleapis.com/maps/api/staticmap?center=51.477222,0&zoom=14&size=400x400&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=ciftxSv4681tGSAnes7ktLrVI3g=
     }
-  
-  newDistDiv(p) {
+
+    newDistDiv(p) {
         if (!this.distDiv) this.distDiv = new Div(p);
         return this.distDiv;
     }
@@ -117,24 +113,24 @@ class GpsClass {
         this.updateLocation();
     }
     mark() {
-      let _this = this;
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                        let lat = position.coords.latitude+0.001;
-                        let lng = position.coords.longitude+0.001;
-                        let latlmg = lat + "," + lng;
-                  		if(_this.marks){
-                          _this.marks.push(latlmg);
-                        }
-                  		else{
-                          _this.marks=[];
-                          _this.marks.push(latlmg);
-                        }
-                    
-                    });
+        let _this = this;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                let lat = position.coords.latitude;
+                let lng = position.coords.longitude;
+                let latlmg = lat + "," + lng;
+                if (_this.marks) {
+                    _this.marks.push(latlmg);
+                } else {
+                    _this.marks = [];
+                    _this.marks.push(latlmg);
                 }
+                this.updateLocation();
+
+            });
+        }
 
     }
 }
-	
+
 export var gps = new GpsClass();
