@@ -54,6 +54,7 @@ class GpsClass {
                         if(_this.marks)
                         {
                           othermarkers="&markers=color:blue%7Clabel:X%7C"+_this.marks[0];
+                          _this.distDiv.innerHTML = roughtlatlmg;
                         }
 
                         let imageLoaded = () => {
