@@ -86,7 +86,11 @@ class GpsClass {
         }
         //https://maps.googleapis.com/maps/api/staticmap?center=51.477222,0&zoom=14&size=400x400&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=ciftxSv4681tGSAnes7ktLrVI3g=
     }
-
+  
+  newDistDiv(p) {
+        if (!this.distDiv) this.distDiv = new Div(p);
+        return this.distDiv;
+    }
     newCoordDiv(p) {
         if (!this.coordDiv) this.coordDiv = new Div(p);
         return this.coordDiv;
