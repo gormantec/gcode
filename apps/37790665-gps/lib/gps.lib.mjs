@@ -53,13 +53,13 @@ class GpsClass {
                       	let othermarkers="";
                         if(_this.marks)
                         {
-                          othermarkers="color:blue%7Clabel:X%7C"+_this.marks[0]+"|";
+                          othermarkers="markers=color:blue%7Clabel:X%7C"+_this.marks[0]+"&";
                         }
 
                         let imageLoaded = () => {
                             console.log("imageLoaded");
                             _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                                roughtlatlmg + '&zoom=' + _this.zoom + '&markers='+othermarkers+'color:red%7Clabel:S%7C' + latlmg+'&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                                roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=color:red%7Clabel:S%7C' + latlmg+'&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
                             platlmg = latlmg;
                         };
 
