@@ -53,7 +53,7 @@ class GpsClass {
                       	let othermarkers="";
                         if(_this.marks)
                         {
-                          othermarkers="color:blue%7Clabel:S%7C"+_this.marks[0]+",";
+                          othermarkers="color:blue%7Clabel:S%7C"+_this.marks[0]+"|";
                         }
 
                         let imageLoaded = () => {
