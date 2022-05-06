@@ -320,19 +320,19 @@ div.pwapage div.pwadiv{
  }
  */
 
- @media only screen and (max-height: 768px) and (min-width:800px) {
+ @media only screen and (orientation: portrait) and (max-height: 768px) and (min-width:800px) {
     body {
       zoom: 0.75;
     }
   }
-  @media all and (orientation: landscape) and (min-width:800px)
+  @media only screen and (orientation: landscape)
   {
       #pwaheader{
-           height: 60px;
+           height: 45px;
       }
       
     #pwabody{
-        top: 60px;
+        top:45px;
       }
   }
 
