@@ -31,7 +31,7 @@ class GpsClass {
         }, 5000);
         _this.updateLocation();
         _this.zoom = 17;
-    }
+    }   
 
 
 
@@ -53,7 +53,7 @@ class GpsClass {
                       	let othermarkers="";
                         if(_this.marks)
                         {
-                          othermarkers="markers=color:blue%7Clabel:X%7C"+_this.marks[0]+"&";
+                          othermarkers="&markers=color:blue%7Clabel:X%7C"+_this.marks[0];
                         }
 
                         let imageLoaded = () => {
