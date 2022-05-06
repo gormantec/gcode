@@ -30,11 +30,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm i -g @bubblewrap/cli
-      - run: mkdir tools
-      - run: cd tools
-      - run: npm init -y
-      - run: npm i bw_manifest_url
-      - run: cd ..
+      - run: mkdir ~/tools && cd ~/tools && npm init -y && npm i bw_manifest_url
       - run: mkdir ~/.bubblewrap
       - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
-      - run: node ../tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
+      - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
