@@ -26,11 +26,11 @@ jobs:
         run: mkdir android-cli
       - name: Install Android sdkmanager
         run: |
-          wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-{ANDROID_SDK_TOOLS}.zip
+          wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}.zip
           sudo unzip -d android-cli android-sdk.zip > /dev/null
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - run: npm i -g @bubblewrap/cli
-      - run: echo '{"jdkPath":"./open-jdk","androidSdkPath":"./android-cli"}' > ${USER_HOME}/.bubblewrap/config.json
+      - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"./android-cli"}' > ~/.bubblewrap/config.json
       - run: bubblewrap init --manifest=https://gcode.com.au/apps/37790665-gps/manifest.json
