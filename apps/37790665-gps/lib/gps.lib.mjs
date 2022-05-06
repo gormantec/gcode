@@ -59,13 +59,13 @@ class GpsClass {
                         let imageLoaded = () => {
                             console.log("imageLoaded");
                             _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                                roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=color:red%7Clabel:S%7C' + latlmg+'&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                                roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg+'&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
                             platlmg = latlmg;
                         };
 
                         var img = new Image();
                         img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            roughtlatlmg + '&zoom=' + _this.zoom + '&markers=icon:https://gcode.com.au/images/blueDot.png' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
+                            roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
                         if (img.complete) {
 
                             console.log("complete");
