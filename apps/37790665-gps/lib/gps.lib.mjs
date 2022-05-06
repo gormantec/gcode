@@ -111,11 +111,11 @@ class GpsClass {
                         let lng = position.coords.longitude+0.001;
                         let latlmg = lat + "," + lng;
                   		if(_this.marks){
-                          _this.push(latlmg);
+                          _this.marks.push(latlmg);
                         }
                   		else{
                           _this.marks=[];
-                          _this.push(latlmg);
+                          _this.marks.push(latlmg);
                         }
                     
                     });
