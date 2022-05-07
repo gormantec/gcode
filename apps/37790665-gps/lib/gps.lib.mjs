@@ -33,7 +33,8 @@ class GpsClass {
         _this.zoom = 17;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                updateLocation(position.coords.latitude, position.coords.longitude);
+                _this._position = position;
+                _this.updateLocation(position.coords.latitude, position.coords.longitude);
                 _this._position = position;
             }, () => {}, {
                 enableHighAccuracy: true,
@@ -41,8 +42,8 @@ class GpsClass {
                 maximumAge: 0
             });
             navigator.geolocation.watchPosition((position) => {
-                updateLocation(position.coords.latitude, position.coords.longitude);
                 _this._position = position;
+                _this.updateLocation(position.coords.latitude, position.coords.longitude);
             }, () => {}, {
                 enableHighAccuracy: true,
                 timeout: 15000,
