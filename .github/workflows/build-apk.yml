@@ -28,7 +28,7 @@ jobs:
             if [[ "$file" == "apps/"* ]]; then
               echo "found app=$file"
               APP_NAME=$(echo "$file" | sed -e 's/apps\///g' | sed -e 's/\/.*//g')
-              echo APP_NAME=$APP_NAME
+              echo "APP_NAME=$APP_NAME"
             fi
           done
           if [ -z ${APP_NAME+x} ]; then 
