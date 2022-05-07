@@ -23,11 +23,16 @@ jobs:
         run: |
           FULL_GIT=${{ github.sha }}
           SUB_GIT=${FULL_GIT:0:7}
-          git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g'
-          echo "APP_NAME=$(git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g')" >> $GITHUB_ENV
+          /usr/bin/git show --name-only $FULL_GIT | grep 'apps'
+          echo "APP_NAME2=$(/usr/bin/git show --name-only $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g')" >> $GITHUB_ENV
+          /usr/bin/git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g'
+          echo "APP_NAME=$(/usr/bin/git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g')" >> $GITHUB_ENV
           echo "FULL_GIT=$FULL_GIT"
           echo "SUB_GIT=$SUB_GIT"
           echo "APP_NAME=$APP_NAME"
+          echo "APP_NAME2=$APP_NAME2"
+          /usr/bin/git log -1 --format='%H'
+          /usr/bin/git log -1 --format='%H'
       - name: github.run_attempt
         run: echo ${{ github.run_attempt }}
       - name: github.sha
