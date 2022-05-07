@@ -19,8 +19,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name: run_attempt
+      - name: github.run_attempt
         run: echo ${{ github.run_attempt }}
+      - name: github.sha
+        run: echo ${{ github.sha }}
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
