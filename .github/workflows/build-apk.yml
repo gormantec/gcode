@@ -8,7 +8,7 @@ on:
       - master
     paths:
       - apps/**
-      - '**/manifest.json'
+      - '**/index.html'
 jobs:
   build-apk-job:
     timeout-minutes: 10
