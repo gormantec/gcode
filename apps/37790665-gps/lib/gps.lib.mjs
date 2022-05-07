@@ -26,25 +26,34 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
 class GpsClass {
     constructor() {
         let _this = this;
-        window.setInterval(() => {
-            _this.updateLocation();
-        }, 5000);
-        _this.updateLocation();
+        //window.setInterval(() => {
+        //    _this.updateLocation();
+        //}, 10000);
+        //_this.updateLocation();
         _this.zoom = 17;
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(() => {
+            updateLocation(position.coords.latitude,position.coords.longitude);
+              _this._position=position;
+            }, () => {}, {
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                    maximumAge: 0
+                });
+        }
     }
 
 
 
-    updateLocation() {
+    updateLocation(lat,lng) {
         let _this = this;
+
         if (_this.coordDiv) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    let lat = position.coords.latitude;
-                    let lng = position.coords.longitude;
+                    if(!lat && _this._position && _this._position.coords.latitude)lat=_this._position.coords.latitude;
+      				if(!lng && _this._position && _this._position.coords.longitude)lng=_this._position.coords.longitude;
                     let latlmg = lat + "," + lng;
                     let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
-
                     _this.coordDiv.innerHTML = roughtlatlmg;
                     if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
                         _this.pzoom = _this.zoom;
@@ -83,8 +92,6 @@ class GpsClass {
                             })
                         }
                     }
-
-                });
             } else {
                 _this.coordDiv.innerHTML = "Geolocation not supported";
             }
