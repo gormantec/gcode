@@ -19,14 +19,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name: Where is JAVA
-        run: whereis javac
-      - name: Where is JAVA
-        run: readlink -f $(which java)
-      - name: List Android
-        run: ls -latr /usr/local/lib/android/sdk
-      - name: List JAVA
-        run: ls -latr $JAVA_HOME
+      - name: run_attempt
+        run: echo ${{ github.run_attempt }}
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
