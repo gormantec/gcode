@@ -136,10 +136,10 @@ class GpsClass {
                 let lng = position.coords.longitude;
                 let latlmg = lat + "," + lng;
                 if (_this.marks) {
-                    _this.marks.push(latlmg);
+                    _this.marks.unshift(latlmg);
                 } else {
                     _this.marks = [];
-                    _this.marks.push(latlmg);
+                    _this.marks.unshift(latlmg);
                 }
                 this.updateLocation();
 
