@@ -34,21 +34,22 @@ jobs:
       - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
+          FULL_GIT=${{ github.sha }}
+          SUB_GIT=${FULL_GIT:0:7}
+          git show --name-only abc $SUB_GIT
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
           APP_NAME=$(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo "$MANIFEST_URL"
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/apk
           rm -f apps/$APP_NAME/apk/*
-          cp -rf ./app-release-signed.apk ./apps/$APP_NAME/apk/*
-          cp -rf ./app-release-bundle.aab ./apps/$APP_NAME/apk/*
-      - run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
-      - name: Commit files # commit the output folder
-        run: |
+          cp -rf ./app-release-signed.apk ./apps/$APP_NAME/apk/
+          cp -rf ./app-release-bundle.aab ./apps/$APP_NAME/apk/       
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/apk
           git commit -m "Add changes"
+
       - name: Push changes # push the output folder to your repo
         uses: ad-m/github-push-action@master
         with:
