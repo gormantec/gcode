@@ -57,12 +57,13 @@ jobs:
       - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
-          ManifestUrl=https://gcode.com.au/apps/37790665-gps/manifest.json
-          Appname=$(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
+          MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
+          APP_NAME=$(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
+          echo $APP_NAME
           mkdir -p apps/name/apk
           rm -f apps/name/apk/*
-          cp -rf ./app-release-signed.apk ./apps/$(Appname)/apk/*
-          cp -rf ./app-release-bundle.aab ./apps/$(Appname)/apk/*
+          cp -rf ./app-release-signed.apk ./apps/$APP_NAME/apk/*
+          cp -rf ./app-release-bundle.aab ./apps/$APP_NAME/apk/*
       - name: Commit files # commit the output folder
         run: |
           git config --local user.email "craig@gormantec.com"
