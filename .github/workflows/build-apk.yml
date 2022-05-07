@@ -8,7 +8,6 @@ on:
       - master
     paths:
       - apps/**
-      - '**/index.html'
 jobs:
   build-apk-job:
     timeout-minutes: 10
