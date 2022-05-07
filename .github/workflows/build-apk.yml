@@ -35,6 +35,7 @@ jobs:
             echo "APP_NAME not found"
             exit 1
           fi
+          echo "APP_NAME=$(APP_NAME)" >> $GITHUB_ENV
       - name: set up JDK 11
         uses: actions/setup-java@v3
         with:
@@ -51,12 +52,10 @@ jobs:
       - run: mkdir ~/tools && cd ~/tools && npm init -y && npm i bw_manifest_url
       - run: mkdir ~/.bubblewrap
       - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
-      - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
+      - run: node ~/tools/node_modules/bw_manifest_url/init.js "https://gcode.com.au/apps/$APP_NAME/manifest.json"
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
-          echo "APP_NAME $APP_NAME"
-          MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
-          APP_NAME=$(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
+          MANIFEST_URL="https://gcode.com.au/apps/$APP_NAME/manifest.json"
           echo "$MANIFEST_URL"
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/apk
