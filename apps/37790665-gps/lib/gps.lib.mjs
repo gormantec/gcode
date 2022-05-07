@@ -32,66 +32,74 @@ class GpsClass {
         //_this.updateLocation();
         _this.zoom = 17;
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(() => {
-            updateLocation(position.coords.latitude,position.coords.longitude);
-              _this._position=position;
+            navigator.geolocation.getCurrentPosition((position) => {
+                updateLocation(position.coords.latitude, position.coords.longitude);
+                _this._position = position;
             }, () => {}, {
-                    enableHighAccuracy: true,
-                    timeout: 15000,
-                    maximumAge: 0
-                });
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 0
+            });
+            navigator.geolocation.watchPosition((position) => {
+                updateLocation(position.coords.latitude, position.coords.longitude);
+                _this._position = position;
+            }, () => {}, {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 0
+            });
         }
     }
 
 
 
-    updateLocation(lat,lng) {
+    updateLocation(lat, lng) {
         let _this = this;
 
         if (_this.coordDiv) {
             if (navigator.geolocation) {
-                    if(!lat && _this._position && _this._position.coords.latitude)lat=_this._position.coords.latitude;
-      				if(!lng && _this._position && _this._position.coords.longitude)lng=_this._position.coords.longitude;
-                    let latlmg = lat + "," + lng;
-                    let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
-                    _this.coordDiv.innerHTML = roughtlatlmg;
-                    if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
-                        _this.pzoom = _this.zoom;
-                        var width = _this.imageDiv.element.offsetWidth;
-                        var height = _this.imageDiv.element.offsetHeight;
-                        let othermarkers = "";
-                        if (_this.marks) {
-                            othermarkers = "&markers=color:blue%7Clabel:X%7C" + _this.marks[0];
-                            let dist = Math.floor((distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]), parseFloat(_this.marks[0].split(",")[1]), lat, lng) * 1000));
-                            if (dist > 1000) {
-                                _this.distDiv.innerHTML = (dist / 1000) + " km";
-                            } else {
-                                _this.distDiv.innerHTML = dist + " m";
-                            }
-                        }
-
-                        let imageLoaded = () => {
-                            console.log("imageLoaded");
-                            _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                                roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
-                            platlmg = latlmg;
-                        };
-
-                        var img = new Image();
-                        img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
-                        if (img.complete) {
-
-                            console.log("complete");
-                            imageLoaded();
+                if (!lat && _this._position && _this._position.coords.latitude) lat = _this._position.coords.latitude;
+                if (!lng && _this._position && _this._position.coords.longitude) lng = _this._position.coords.longitude;
+                let latlmg = lat + "," + lng;
+                let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
+                _this.coordDiv.innerHTML = roughtlatlmg;
+                if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
+                    _this.pzoom = _this.zoom;
+                    var width = _this.imageDiv.element.offsetWidth;
+                    var height = _this.imageDiv.element.offsetHeight;
+                    let othermarkers = "";
+                    if (_this.marks) {
+                        othermarkers = "&markers=color:blue%7Clabel:X%7C" + _this.marks[0];
+                        let dist = Math.floor((distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]), parseFloat(_this.marks[0].split(",")[1]), lat, lng) * 1000));
+                        if (dist > 1000) {
+                            _this.distDiv.innerHTML = (dist / 1000) + " km";
                         } else {
-                            console.log("complete");
-                            img.addEventListener('load', imageLoaded)
-                            img.addEventListener('error', function(e) {
-                                console.log("error:" + e);
-                            })
+                            _this.distDiv.innerHTML = dist + " m";
                         }
                     }
+
+                    let imageLoaded = () => {
+                        console.log("imageLoaded");
+                        _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
+                            roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                        platlmg = latlmg;
+                    };
+
+                    var img = new Image();
+                    img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
+                        roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
+                    if (img.complete) {
+
+                        console.log("complete");
+                        imageLoaded();
+                    } else {
+                        console.log("complete");
+                        img.addEventListener('load', imageLoaded)
+                        img.addEventListener('error', function(e) {
+                            console.log("error:" + e);
+                        })
+                    }
+                }
             } else {
                 _this.coordDiv.innerHTML = "Geolocation not supported";
             }
