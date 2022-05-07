@@ -25,6 +25,9 @@ jobs:
           SUB_GIT=${FULL_GIT:0:7}
           git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g'
           echo "APP_NAME=$(git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g')" >> $GITHUB_ENV
+          echo "FULL_GIT=$FULL_GIT"
+          echo "SUB_GIT=$SUB_GIT"
+          echo "APP_NAME=$APP_NAME"
       - name: github.run_attempt
         run: echo ${{ github.run_attempt }}
       - name: github.sha
