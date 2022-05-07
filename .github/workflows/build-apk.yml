@@ -34,19 +34,11 @@ jobs:
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
-          echo ----
-          echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g'
-          echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'
-          echo $(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
-          echo `echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'`
-          echo ----
           APP_NAME=$(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo "$MANIFEST_URL"
-          echo "APP_NAME (1) $APP_NAME"
-          APP_NAME=37790665-gps
-          echo "APP_NAME(2) $APP_NAME"
-          mkdir -p apps/name/apk
-          rm -f apps/name/apk/*
+          echo "APP_NAME $APP_NAME"
+          mkdir -p apps/$APP_NAME/apk
+          rm -f apps/$APP_NAME/apk/*
           cp -rf ./app-release-signed.apk ./apps/$APP_NAME/apk/*
           cp -rf ./app-release-bundle.aab ./apps/$APP_NAME/apk/*
       - run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
@@ -54,7 +46,7 @@ jobs:
         run: |
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
-          git add ./apps/$(Appname)/apk
+          git add ./apps/$APP_NAME/apk
           git commit -m "Add changes"
       - name: Push changes # push the output folder to your repo
         uses: ad-m/github-push-action@master
