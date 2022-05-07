@@ -34,6 +34,7 @@ jobs:
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
           git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+          git changed ${{ github.sha }}
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
           APP_NAME=$(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo $APP_NAME
