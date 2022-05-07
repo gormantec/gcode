@@ -35,4 +35,3 @@ jobs:
       - run: mkdir ~/.bubblewrap
       - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
       - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
-      - run: bubblewrap build
