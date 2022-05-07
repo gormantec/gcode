@@ -34,10 +34,15 @@ jobs:
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
+          echo ----
+          echo "$ManifestUrl" | sed -e 's/https.*apps\///g'
           echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'
+          echo ----
           APP_NAME=$(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo $MANIFEST_URL
-          echo $APP_NAME
+          echo APP_NAME (1) $APP_NAME
+          APP_NAME=37790665-gps
+          echo APP_NAME(2) $APP_NAME
           mkdir -p apps/name/apk
           rm -f apps/name/apk/*
           cp -rf ./app-release-signed.apk ./apps/$APP_NAME/apk/*
