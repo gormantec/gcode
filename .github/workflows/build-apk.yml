@@ -18,7 +18,13 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'temurin'
+          distribution: 'temurin'      
+      - name: move to apps/apk dir # Move the generated files into output folder
+        run: |
+          FULL_GIT=${{ github.sha }}
+          SUB_GIT=${FULL_GIT:0:7}
+          git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g'
+          echo "APP_NAME=$(git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e 'apps/' | head -n 1 | grep -e '/index.html' -e '.lib.mjs' -e '/manifext.json' | sed -e 's/apps\///g' | sed -e 's/\/.*//g')" >> $GITHUB_ENV
       - name: github.run_attempt
         run: echo ${{ github.run_attempt }}
       - name: github.sha
@@ -33,9 +39,7 @@ jobs:
       - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
-          FULL_GIT=${{ github.sha }}
-          SUB_GIT=${FULL_GIT:0:7}
-          git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep -e "apps/" | grep -e "index.html" -e ".lib.mjs" -e "/manifest.json"
+          echo "APP_NAME $APP_NAME"
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
           APP_NAME=$(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo "$MANIFEST_URL"
