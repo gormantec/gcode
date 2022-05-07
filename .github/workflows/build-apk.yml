@@ -35,16 +35,19 @@ jobs:
       - run: mkdir ~/.bubblewrap
       - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
       - run: node ~/tools/node_modules/bw_manifest_url/init.js https://gcode.com.au/apps/37790665-gps/manifest.json
-      - name: move to output dir # Move the generated files into output folder
+      - name: move to apps/apk dir # Move the generated files into output folder
         run: |
-          mkdir -p output
-          yes| cp -rf ./app-release-signed.apk ./output/
-          yes| cp -rf ./app-release-bundle.aab ./output/
+          ManifestUrl=https://gcode.com.au/apps/37790665-gps/manifest.json
+          Appname=$(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
+          mkdir -p apps/name/apk
+          rm -f apps/name/apk/*
+          cp -rf ./app-release-signed.apk ./apps/$(Appname)/apk/*
+          cp -rf ./app-release-bundle.aab ./apps/$(Appname)/apk/*
       - name: Commit files # commit the output folder
         run: |
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
-          git add ./output
+          git add ./apps/$(Appname)/apk
           git commit -m "Add changes"
       - name: Push changes # push the output folder to your repo
         uses: ad-m/github-push-action@master
