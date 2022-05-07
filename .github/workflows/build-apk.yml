@@ -35,7 +35,7 @@ jobs:
         run: |
           FULL_GIT=${{ github.sha }}
           SUB_GIT=${FULL_GIT:0:7}
-          git show --name-only $SUB_GIT
+          git diff-tree --no-commit-id --name-only -r $FULL_GIT | grep "app/"
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
           APP_NAME=$(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo "$MANIFEST_URL"
