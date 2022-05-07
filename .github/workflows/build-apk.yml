@@ -35,12 +35,12 @@ jobs:
         run: |
           MANIFEST_URL='https://gcode.com.au/apps/37790665-gps/manifest.json'
           echo ----
-          echo "$ManifestUrl" | sed -e 's/https.*apps\///g'
-          echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'
-          echo $(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
-          echo `echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'`
+          echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g'
+          echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'
+          echo $(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
+          echo `echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g'`
           echo ----
-          APP_NAME=$(echo "$ManifestUrl" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
+          APP_NAME=$(echo "$MANIFEST_URL" | sed -e 's/https.*apps\///g' | sed -e 's/\/.*//g')
           echo "$MANIFEST_URL"
           echo "APP_NAME (1) $APP_NAME"
           APP_NAME=37790665-gps
