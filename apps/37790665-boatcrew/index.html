@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><link rel="manifest" href="/apps/37790665-boatcrew/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta property="fpwa:template" content="pwa=true,name=boatcrew,short_name=boatcrew,theme_color=#222222,background_color=#222222,display=standalone,orientation=any"><link rel="apple-touch-icon" href="/apps/37790665-boatcrew/icon.png"><link rel="apple-touch-icon-precomposed" href="/apps/37790665-boatcrew/icon.png"><link rel="icon" href="/apps/37790665-boatcrew/icon.png"><style>
-.splash{position:absolute;background-size:200px;background-image:url(https://gcode.com.au/images/boatcrew/boat-logo.png);background-position:center;background-repeat:no-repeat;top:0px;bottom:0px;left:0px;right:0px;color:#0000FF;background-color:#222222;}
+.splash{position:absolute;background-size:200px;background-image:url(https://gcode.com.au/images/boatcrew/boat-logo.png);background-position:center;background-repeat:no-repeat;top:0px;bottom:0px;left:0px;right:0px;color:#AAAAAA;background-color:#222222;}
 .loader{font-size:50px;text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
 </style><script>
   window.PWA={globals:{}};
@@ -11,7 +11,7 @@
   window.PWA.globals.icon192x192="https://gcode.com.au/images/boatcrew/boat-logo-blue-icon192x192.png";
   window.PWA.globals.icon512x512="https://gcode.com.au/images/boatcrew/boat-logo-blue-icon512x512.png";
   window.PWA.globals.splash="https://gcode.com.au/images/boatcrew/boat-logo.png";
-  window.PWA.globals.splashColor="#0000FF";
+  window.PWA.globals.splashColor="#AAAAAA";
   window.PWA.globals.splashBackgroundColor="#222222";
   window.PWA.globals.splashDuration=2000;
 
@@ -81,7 +81,7 @@ if (window.opener && window.opener !== window) {
   icon192x192: https://gcode.com.au/images/boatcrew/boat-logo-blue-icon192x192.png
   icon512x512: https://gcode.com.au/images/boatcrew/boat-logo-blue-icon512x512.png
   splashBackgroundColor: #222222
-  splashColor: #0000FF
+  splashColor: #AAAAAA
   splashDuration: 2000
   splashSize: 200px
 
@@ -98,8 +98,11 @@ try {
 class LoginPage extends Page {
     constructor() {
         super({
+          
+          
+          
             "color": "#000000",
-            "backgroundColor": "#3b05ed",
+            "backgroundColor": "#2122d3",
             "backgroundPosition": "center",
             "backgroundSize": "cover",
             "backgroundRepeat": "no-repeat",
@@ -191,7 +194,7 @@ var aAsktoJoin = new AsktoJoin();
 var aPWA = new PWA({
     "title": "Boat Crew X3",
     "footer": "https://www.gormantec.com",
-    "primaryColor": "#3b05ed",
+    "primaryColor": "#d4216e",
     "pwaAuth": "true"
 });
 aPWA.floatingActionButton.onclick(function() {
