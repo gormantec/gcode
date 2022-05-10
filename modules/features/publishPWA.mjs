@@ -92,8 +92,8 @@ function publishToGit(code, user,token)
 {
     console.log(user);
     var filename = document.getElementById("filename").innerText;
-    var appName = code.replace(/\/\*.*?appName:[\s]*?([A-Za-z0-9\-_\. ]*)[\n].*?\*\/.*/s, '$1');
-    if (!appName || appName == code) appName = "gcode App";
+    var appName = code.replace(/\/\*.*?appName:[\s]*?([A-Za-z0-9\-_\. ]*)[\n].*?\*\/.*/s, '$1').replace(/ /g," ");
+    if (!appName || appName == code) appName = "gcode-app";
     appName = appName.trim();
 
 
