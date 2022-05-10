@@ -24,7 +24,7 @@ jobs:
       - name: List all changed files
         run: |
           oldIFS="$IFS"
-          IFS="\n"
+          IFS=$'\n'
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
             if [[ "$file" == "apps/"* ]]; then
