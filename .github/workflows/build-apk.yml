@@ -23,6 +23,8 @@ jobs:
         uses: tj-actions/changed-files@v19
       - name: List all changed files
         run: |
+          oldIFS="$IFS"
+          IFS="\n"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
             if [[ "$file" == "apps/"* ]]; then
@@ -31,6 +33,7 @@ jobs:
               echo "APP_NAME=$APP_NAME"
             fi
           done
+          IFS="$oldIFS"
           if [ -z ${APP_NAME+x} ]; then 
             echo "APP_NAME not found"
             exit 1
