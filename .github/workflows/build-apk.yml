@@ -24,8 +24,8 @@ jobs:
       - name: List all changed files
         run: |
           oldIFS="$IFS"
-          IFS=$'\n'
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          IFS=$'\n' read -a myarray <<< ${{ steps.changed-files.outputs.all_changed_files }}
+          for file in "${myarray[@]}"; do
             echo "$file was changed"
             if [[ "$file" == "apps/"* ]]; then
               echo "found app=$file"
