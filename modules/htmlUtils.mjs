@@ -1,4 +1,6 @@
 
+import { load, preload} from '/modules/gcodeStorage.mjs';
+
 export function htmlToElement(html) {
     var template = document.createElement('template');
     html = html.trim(); // Never return a text node of whitespace as the result
@@ -90,6 +92,7 @@ export function htmlToElement(html) {
 export function addSubImportLibFile(importFiles) {
   
     let newimportFiles = [];
+    preload(newimportFiles);
     for(let j=0;j<importFiles.length;j++)
     {
         let code=load(importsList[j]);
@@ -167,6 +170,7 @@ export function getImage(url, callback) {
 
 }
 export async function getImageAsync(url,x,y) {
+
     if (!url || (url.substring(url.length - 4) != ".png" && url.substring(url.length - 4) != ".svg")) {
         console.log("error");
         return null;
@@ -179,8 +183,16 @@ export async function getImageAsync(url,x,y) {
             bytes.forEach((b) => binary += String.fromCharCode(b));
             return window.btoa(binary);
         };
-        var response = await fetch(url, { mode: 'cors' });
-        var rText = await response.text();
+        var rText=null;
+        if(url.startsWith("git")){
+            await preload([url]);
+            rText=load(url);
+        }
+        else{
+            var response = await fetch(url, { mode: 'cors' });
+            rText = await response.text();
+        }
+
         if(x!=null && y!=null)
         {
             rText=rText.replace(/(<svg.*?"*?width"*? *?=)(.*?)([ >])/g,"$1\""+x+"\"$3");
