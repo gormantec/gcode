@@ -171,6 +171,8 @@ export function getImage(url, callback) {
 }
 export async function getImageAsync(url,x,y) {
 
+    console.log("***********");
+
     if (!url || (url.substring(url.length - 4) != ".png" && url.substring(url.length - 4) != ".svg")) {
         console.log("error");
         return null;
