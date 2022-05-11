@@ -177,7 +177,7 @@ export async function getImageAsync(url,x,y) {
         console.log("error");
         return null;
     }
-    else if (url.substring(url.length - 4) != ".svg") {
+    else if (url.substring(url.length - 4) == ".svg") {
         
         var arrayBufferToBase64 = function (buffer) {
             var binary = '';
