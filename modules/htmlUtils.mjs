@@ -200,6 +200,7 @@ export async function getImageAsync(url,x,y) {
             rText=rText.replace(/(<svg.*?"*?width"*? *?=)(.*?)([ >])/g,"$1\""+x+"\"$3");
             rText=rText.replace(/(<svg.*?"*?height"*? *?=)(.*?)([ >])/g,"$1\""+y+"\"$3");
         }
+        console.log(rText);
         var dataUrl=await svgToPng(rText,0);
         return dataURL.replace(/^data:image\/(png|jpg|svg);base64,/, "");
     }
