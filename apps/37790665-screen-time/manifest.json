@@ -1,6 +1,6 @@
 {
-  "name": "time",
-  "short_name": "time",
+  "name": "screen time",
+  "short_name": "screen time",
   "theme_color": "#212121",
   "background_color": "#212121",
   "display": "standalone",
@@ -20,6 +20,6 @@
     }
   ],
   "start_url": "/apps/37790665-screen-time/index.html",
-  "description": "time",
+  "description": "screen time",
   "prefer_related_applications": false
 }
