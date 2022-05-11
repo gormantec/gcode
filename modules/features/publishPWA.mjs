@@ -227,11 +227,23 @@ function _uploadFile(params, callback) {
 
     (async ()=>{
 
-        var iconBase64=await getImageAsync(icon);
-        var iconBase64_192;
-        if(params.icon192) iconBase64_192=await getImageAsync(params.icon192);
-        var iconBase64_512;
-        if(params.icon512) iconBase64_512=await getImageAsync(params.icon512);
+        if(icon.endsWith(".png"))
+        {
+            var iconBase64=await getImageAsync(icon);        
+            var iconBase64_192;
+            if(params.icon192) iconBase64_192=await getImageAsync(params.icon192);
+            var iconBase64_512;
+            if(params.icon512) iconBase64_512=await getImageAsync(params.icon512);
+        }
+        else if(icon.endsWith(".svg")){
+            var iconBase64=await getImageAsync(icon,180,180);        
+            var iconBase64_192;
+            if(params.icon192) iconBase64_192=await getImageAsync(params.icon192 ?? icon,192,192);
+            var iconBase64_512;
+            if(params.icon512) iconBase64_512=await getImageAsync(params.icon512 ?? icon,512,512);
+        }
+        
+
 
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
