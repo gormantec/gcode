@@ -24,6 +24,7 @@ export function htmlToElement(html) {
         if (!domUrl) {
           throw new Error("(browser doesnt support this)")
         }
+        console.log("svgText:"+svgText);
         
         // figure out the height and width from svg text
         var match = svgText.match(/height=\"(\d+)/m);
@@ -42,6 +43,8 @@ export function htmlToElement(html) {
         canvas.width = height+margin*2;
         canvas.height = width+margin*2;
         var ctx = canvas.getContext("2d");
+
+        console.log("canvas");
         
         
         // make a blob from the svg
@@ -77,13 +80,18 @@ export function htmlToElement(html) {
           // we don't need the original any more
           domUrl.revokeObjectURL(url);
           // now we can resolve the promise, passing the base64 url
+
+        console.log("resolve canvas toDataURL");  
           resolve(canvas.toDataURL());
         };
         
         // load the image
         img.src = url;
+        console.log("url:"+url);  
         
       } catch (err) {
+
+        console.log("err:"+err);  
         reject('failed to convert svg to png ' + err);
       }
     });
