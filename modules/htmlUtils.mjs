@@ -237,17 +237,23 @@ export function createHtml(code, options) {
 
 
 
-    splash = code.replace(/\/\*.*?splash:.*?(http.*?[png|gif|svg])[\n].*?\*\/.*/s, '$1');
+    splash = code.replace(/\/\*.*?splash:.*?(http.*?(png)|(gif)|(svg))[\n].*?\*\/.*/s, '$1');
+    console.log(splash);
     if (splash == code) splash = null;
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+
     if (splashSize == code) splashSize = "contain";
-    var icon = code.replace(/\/\*.*?icon:.*?(http.*?[png|svg])[\n].*?\*\/.*/s, '$1');
+    var icon = code.replace(/\/\*.*?icon:.*?(http.*?(png)|(gif)|(svg))[\n].*?\*\/.*/s, '$1');
+    console.log(icon);
     if (!icon || icon == code) icon = splash;
-    var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?[png|svg])[\n].*?\*\/.*/s, '$1');
+    var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(http.*?(png)|(gif)|(svg))[\n].*?\*\/.*/s, '$1');
+    console.log(icon180x180);
     if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
-    var icon192x192 = code.replace(/\/\*.*?icon192x192:.*?(http.*?[png|svg])[\n].*?\*\/.*/s, '$1');
+    var icon192x192 = code.replace(/\/\*.*?icon192x192:.*?(http.*?(png)|(gif)|(svg))[\n].*?\*\/.*/s, '$1');
+    console.log(icon192x192);
     if (!icon192x192 || icon192x192 == code) icon192x192 = icon;
-    var icon512x512 = code.replace(/\/\*.*?icon512x512:.*?(http.*?[png|svg])[\n].*?\*\/.*/s, '$1');
+    var icon512x512 = code.replace(/\/\*.*?icon512x512:.*?(http.*?(png)|(gif)|(svg))[\n].*?\*\/.*/s, '$1');
+    console.log(icon512x512);
     if (!icon512x512 || icon512x512 == code) icon512x512 = icon;
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
