@@ -239,22 +239,22 @@ export function createHtml(code, options) {
 
     splash = code.replace(/\/\*.*?splash:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
     console.log(splash);
-    if (splash == code) splash = null;
+    if (splash == code || !(splash.startsWith("http") || splash.startsWith("git"))) splash = null;
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
 
     if (splashSize == code) splashSize = "contain";
     var icon = code.replace(/\/\*.*?icon:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
     console.log(icon);
-    if (!icon || icon == code) icon = splash;
+    if (!icon || icon == code || !(icon.startsWith("http") || icon.startsWith("git"))) icon = splash;
     var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
     console.log(icon180x180);
-    if (!icon180x180 || icon180x180 == code) icon180x180 = icon;
+    if (!icon180x180 || icon180x180 == code || !(icon180x180.startsWith("http") || icon180x180.startsWith("git")))  icon180x180 = icon;
     var icon192x192 = code.replace(/\/\*.*?icon192x192:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
     console.log(icon192x192);
-    if (!icon192x192 || icon192x192 == code) icon192x192 = icon;
+    if (!icon192x192 || icon192x192 == code || !(icon192x192.startsWith("http") || icon192x192.startsWith("git")))  icon192x192 = icon;
     var icon512x512 = code.replace(/\/\*.*?icon512x512:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
     console.log(icon512x512);
-    if (!icon512x512 || icon512x512 == code) icon512x512 = icon;
+    if (!icon512x512 || icon512x512 == code || !(icon512x512.startsWith("http") || icon512x512.startsWith("git")))  icon512x512 = icon;
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
     mockFrame = code.replace(/\/\*.*?mockFrame:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
