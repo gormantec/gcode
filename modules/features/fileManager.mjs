@@ -533,6 +533,7 @@ function _openFile(element) {
         if (element.dataset.name.substring(0, 6) != "git://") {
             selectedFileWidget = element.dataset.name;
             document.getElementById("filename").innerText = element.dataset.name;
+            localStorage.setItem("lastFileName", selectedFileWidget);
             var pageLeftBody = document.getElementById("pageLeftBody");
             var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
             if (selectedItem) selectedItem.className = "fileWidget";
@@ -550,10 +551,9 @@ function _openFile(element) {
             var username = element.dataset.name.substring(6, firstColon);
             var repo = element.dataset.name.substring(firstColon + 1, secondColon);
             var path = element.dataset.name.substring(secondColon + 1);
-
-
             selectedFileWidget = element.dataset.name;
             document.getElementById("filename").innerText = element.dataset.name;
+            localStorage.setItem("lastFileName", selectedFileWidget);
             var pageLeftBody = document.getElementById("pageLeftBody");
             var selectedItem = pageLeftBody.querySelector("div.fileWidgetSelected");
             if (selectedItem) selectedItem.className = "fileWidget";
