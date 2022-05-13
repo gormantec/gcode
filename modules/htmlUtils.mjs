@@ -331,10 +331,10 @@ export function createHtml(code, options) {
     if (appName) _script.text += "  window.PWA.globals.appName=\"" + appName + "\";\n";
     if (orientation) _script.text += "  window.PWA.globals.orientation=\"" + orientation + "\";\n";
     if (icon) _script.text += "  window.PWA.globals.icon=\"" + icon + "\";\n";
-    if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"" + icon180x180 + "\";\n";
-    if (icon192x192) _script.text += "  window.PWA.globals.icon192x192=\"" + icon192x192 + "\";\n";
-    if (icon512x512) _script.text += "  window.PWA.globals.icon512x512=\"" + icon512x512 + "\";\n";
-    if (splash) _script.text += "  window.PWA.globals.splash=\"" + splash + "\";\n";
+    if (icon180x180) _script.text += "  window.PWA.globals.icon180x180=\"180x180.icon.png\";\n";
+    if (icon192x192) _script.text += "  window.PWA.globals.icon192x192=\"192x192.icon.png\";\n";
+    if (icon512x512) _script.text += "  window.PWA.globals.icon512x512=\"512x512.icon.png\";\n";
+    if (splash) _script.text += "  window.PWA.globals.splash=\"icon.png\";\n";
     if (splashColor) _script.text += "  window.PWA.globals.splashColor=\"" + splashColor + "\";\n";
     if (mockFrame) _script.text += "  window.PWA.globals.mockFrame=\"" + mockFrame + "\";\n";
     if (splashBackgroundColor) _script.text += "  window.PWA.globals.splashBackgroundColor=\"" + splashBackgroundColor + "\";\n";
