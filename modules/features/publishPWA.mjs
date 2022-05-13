@@ -228,6 +228,7 @@ function _uploadFile(params, callback) {
 
     (async ()=>{
         var iconBase64;
+        var iconBase64_180;
         var iconBase64_192;
         var iconBase64_512;
         if(icon.endsWith(".png"))
