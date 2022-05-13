@@ -210,9 +210,7 @@ export async function getImageAsync(url,x,y) {
         }
         console.log(rText);
         var dataUrl=await svgToPng(rText,0);
-        console.log("dataUrl:"+dataUrl);
-        console.log("dataUrl:"+dataURL.replace(/^.*?;base64,/, ""));
-        return dataURL.replace(/^.*?;base64,/, "");
+        return dataUrl.replace(/^.*?;base64,/, "");
     }
     else {
         var arrayBufferToBase64 = function (buffer) {
