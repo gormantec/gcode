@@ -232,7 +232,7 @@ function _uploadFile(params, callback) {
         var iconBase64_512;
         if(icon.endsWith(".png"))
         {
-            var iconBase64=await getImageAsync(icon);       
+            iconBase64=await getImageAsync(icon);       
             if(params.icon180) iconBase64_180=await getImageAsync(params.icon180);
             if(params.icon192) iconBase64_192=await getImageAsync(params.icon192);
             if(params.icon512) iconBase64_512=await getImageAsync(params.icon512);
