@@ -256,7 +256,7 @@ function _uploadFile(params, callback) {
 
         body.phonenumber="+61447680379";
 
-
+        console.log(body);
 
         fetch('https://8mzu0pqfyf.execute-api.ap-southeast-2.amazonaws.com/fpwaupload', {
             method: 'post',
