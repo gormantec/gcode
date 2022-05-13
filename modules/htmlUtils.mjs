@@ -24,7 +24,6 @@ export function htmlToElement(html) {
         if (!domUrl) {
           throw new Error("(browser doesnt support this)")
         }
-        console.log("svgText:"+svgText);
         
         // figure out the height and width from svg text
         var match = svgText.match(/height=\"(\d+)/m);
@@ -44,7 +43,6 @@ export function htmlToElement(html) {
         canvas.height = width+margin*2;
         var ctx = canvas.getContext("2d");
 
-        console.log("canvas");
         
         
         // make a blob from the svg
@@ -80,18 +78,14 @@ export function htmlToElement(html) {
           // we don't need the original any more
           domUrl.revokeObjectURL(url);
           // now we can resolve the promise, passing the base64 url
-
-        console.log("resolve canvas toDataURL");  
           resolve(canvas.toDataURL());
         };
         
         // load the image
         img.src = url;
-        console.log("url:"+url);  
         
       } catch (err) {
 
-        console.log("err:"+err);  
         reject('failed to convert svg to png ' + err);
       }
     });
@@ -179,7 +173,6 @@ export function getImage(url, callback) {
 }
 export async function getImageAsync(url,x,y) {
 
-    console.log("***********:"+url);
 
     if (!url || (url.substring(url.length - 4) != ".png" && url.substring(url.length - 4) != ".svg")) {
         console.log("error");
@@ -208,7 +201,6 @@ export async function getImageAsync(url,x,y) {
             rText=rText.replace(/(<svg.*?"*?width"*? *?=)(.*?)([ >])/g,"$1\""+x+"\"$3");
             rText=rText.replace(/(<svg.*?"*?height"*? *?=)(.*?)([ >])/g,"$1\""+y+"\"$3");
         }
-        console.log(rText);
         var dataUrl=await svgToPng(rText,0);
         return dataUrl.replace(/^.*?;base64,/, "");
     }
@@ -246,22 +238,17 @@ export function createHtml(code, options) {
 
 
     splash = code.replace(/\/\*.*?splash:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
-    console.log(splash);
     if (splash == code || !(splash.startsWith("http") || splash.startsWith("git"))) splash = null;
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
 
     if (splashSize == code) splashSize = "contain";
     var icon = code.replace(/\/\*.*?icon:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
-    console.log(icon);
     if (!icon || icon == code || !(icon.startsWith("http") || icon.startsWith("git"))) icon = splash;
     var icon180x180 = code.replace(/\/\*.*?icon180x180:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
-    console.log(icon180x180);
     if (!icon180x180 || icon180x180 == code || !(icon180x180.startsWith("http") || icon180x180.startsWith("git")))  icon180x180 = icon;
     var icon192x192 = code.replace(/\/\*.*?icon192x192:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
-    console.log(icon192x192);
     if (!icon192x192 || icon192x192 == code || !(icon192x192.startsWith("http") || icon192x192.startsWith("git")))  icon192x192 = icon;
     var icon512x512 = code.replace(/\/\*.*?icon512x512:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
-    console.log(icon512x512);
     if (!icon512x512 || icon512x512 == code || !(icon512x512.startsWith("http") || icon512x512.startsWith("git")))  icon512x512 = icon;
     var splashColor = code.replace(/\/\*.*?splashColor:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
     if (splashColor == code) splashColor = null;
