@@ -1,7 +1,7 @@
 import { beautify } from '/modules/beutify.mjs';
 import { loadFeatures, refreshFeatures } from '/modules/featureManager.mjs';
 import { getImage, createHtml } from '/modules/htmlUtils.mjs';
-import { save, load, remove,preload } from '/modules/gcodeStorage.mjs';
+import { save, load, remove, preload } from '/modules/gcodeStorage.mjs';
 import { getScript } from '/modules/getScript.mjs';
 
 
@@ -221,8 +221,8 @@ function _runCode() {
                                     import('/modules/near/nearConfig.mjs').then(({ nearConfig }) => {
                                         const getNearApi = getScript('https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js', ["nearApi"]);
                                         getNearApi.then(({ nearApi }) => {
-                                            const nearCfg = nearConfig(nearApi,accountId.endsWith(".near")?"mainnet":"testnet");
-                                            nearCfg.keyStore.getKey(accountId.endsWith(".near")?"mainnet":"testnet", accountId).then((key) => {
+                                            const nearCfg = nearConfig(nearApi, accountId.endsWith(".near") ? "mainnet" : "testnet");
+                                            nearCfg.keyStore.getKey(accountId.endsWith(".near") ? "mainnet" : "testnet", accountId).then((key) => {
                                                 const lll = function (e) {
                                                     console.log("Received Post: " + e.origin);
                                                     if (e.origin !== "https://s3-ap-southeast-2.amazonaws.com") return;
@@ -274,7 +274,7 @@ function _runCode() {
                             rootHTML.querySelector("head").appendChild(_script1);
                             var _script2 = window.document.createElement("script");
                             _script2.src = "https://gcode.com.au/modules/wasmdom/index.js";
-                            _script2.type="module";
+                            _script2.type = "module";
                             rootHTML.querySelector("head").appendChild(_script2);
 
                             var wpos = "top=50,left=50";
@@ -479,7 +479,7 @@ window.setEditorMode = function () {
         window.editor.setOption('lint', { options: { esversion: 6 } });
     }
     else if (filename.endsWith(".ts")) {
-        window.editor.setOption("mode","text/typescript");
+        window.editor.setOption("mode", "text/typescript");
         window.editor.setOption('lint', { options: { esversion: 6 } });
     }
     else if (filename.endsWith(".py")) {
@@ -542,56 +542,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //configure editor
 
+    (async () => {
+
+        var theme = "material-darker2";
+        window.editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
+            value: "/* NONE */",
+            lineNumbers: true,
+            theme: theme,
+            matchBrackets: true,
+            extraKeys: {
+                "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Enter": function (cm) { beautify(window.editor) }
+            },
+            foldGutter: true,
+            gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            lint: { esversion: 6 }
+        });
+
+        Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
+        Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme'); });
 
 
-    var theme = "material-darker2";
-    window.editor = CodeMirror.fromTextArea(document.getElementById("sourcecode"), {
-        value: "/* NONE */",
-        lineNumbers: true,
-        theme: theme,
-        matchBrackets: true,
-        extraKeys: {
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete",
-            "Ctrl-Enter": function (cm) { beautify(window.editor) }
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        lint: { esversion: 6 }
-    });
-
-    Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
-    Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.remove('cm-s-theme'); });
 
 
+        //get last filename
 
+        var lastFileName = localStorage.getItem("lastFileName");
+        console.log("lastFileName:" + lastFileName);
 
-    //get last filename
+        var lastFileData;
+        if (lastFileName && lastFileName.startsWith("git://")) { await preload(lastFileName); }
 
-    var lastFileName = localStorage.getItem("lastFileName");
-    
-    var lastFileData;
-    if(lastFileName)lastFileData=load(lastFileName, true);
-    if (lastFileData ) {
+        if (lastFileName) lastFileData = load(lastFileName, true);
+        if (lastFileData) {
 
-        document.getElementById("filename").innerText = lastFileName;
-        try {
-
-            window.editor.setValue(load(lastFileName, true));
-            window.setEditorMode();
-        }
-        catch (e) {
-            console.log(lastFileName);
-            console.log(load(lastFileName, true));
-            console.log(e);
-        }
-    }
-    else if(lastFileName && lastFileName.startsWith("git://")){
-        (async ()=>{
-            await preload(lastFileName);
-            console.log("main");
             document.getElementById("filename").innerText = lastFileName;
             try {
+
                 window.editor.setValue(load(lastFileName, true));
                 window.setEditorMode();
             }
@@ -600,136 +588,136 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(load(lastFileName, true));
                 console.log(e);
             }
-        })()
-    }
-    else{
-        document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
-    }
-
-    //resize page
-
-    document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
-    var w = window.outerWidth || document.documentElement.clientWidth || 0;
-    document.getElementById("pageLeftToolbar").style.width = window.leftToolbarWidth + "px";
-
-
-    // add event listeners
-
-    document.getElementById("terminalButton").onclick = _toggleTerminal;
-    document.getElementById("sideBarButton").onclick = _toggleSideBar;
-    document.getElementById("filename").onclick = _onclickFilename;
-    document.getElementById("runHeaderButton").onclick = _runCode;
-
-    //load features
-
-    _toggleSideBar();
-    _toggleSideBar();
-
-    loadFeatures();
-
-
-    //divert console output to webpage.
-
-    /*
-
-(function () {
-        var old = console.log;
-        var olde = console.error;
-        var logger = document.getElementById('log');
-        var pageBottom = document.getElementById('pageBottom');
-        console.log = function (message) {
-            if (typeof message == 'object') {
-                logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
-                pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
-            } else {
-                if (message.startsWith("\b")) {
-                    var lll = logger.innerHTML;
-                    logger.innerHTML = lll.substring(0, lll.lastIndexOf("</div>")) + message.substring(1) + '</div>';
-                }
-                else {
-                    logger.innerHTML += "<div>" + message + '</div>';
-                }
-                pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
-            }
-        }
-        console.error = function (message) {
-            logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
-            pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
-        }
-    })();
-
-    */
-
-
-    const BORDER_SIZE = 4;
-    const panel = document.getElementById("pageLeft");
-    const panelMiddle = document.getElementById("pageMiddle");
-    const pageBottom = document.getElementById("pageBottom");
-    const pageAll = document.getElementById("pageAll");
-
-    let m_posx;
-    let m_posy;
-    function resizex(e) {
-
-        if (w >= 576) {
-            const dx = m_posx - e.x;
-            m_posx = e.x;
-            window.leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx);
-            panel.style.width = window.leftPageWidth + "px";
-            panelMiddle.style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
         }
         else {
-            if (document.getElementById("pageLeftToolbar").style.display != "none") {
-                document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
-                document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
+            document.getElementById("filename").innerText = "new-file-" + (Math.round(Date.now() / 1000) - 1592000000) + ".mjs";
+        }
+
+
+
+        //resize page
+
+        document.getElementById("pageLeftToolbar").style.fontSize = leftToolbarFontSize + "px";
+        var w = window.outerWidth || document.documentElement.clientWidth || 0;
+        document.getElementById("pageLeftToolbar").style.width = window.leftToolbarWidth + "px";
+
+
+        // add event listeners
+
+        document.getElementById("terminalButton").onclick = _toggleTerminal;
+        document.getElementById("sideBarButton").onclick = _toggleSideBar;
+        document.getElementById("filename").onclick = _onclickFilename;
+        document.getElementById("runHeaderButton").onclick = _runCode;
+
+        //load features
+
+        _toggleSideBar();
+        _toggleSideBar();
+
+        loadFeatures();
+
+
+        //divert console output to webpage.
+
+        /*
+    
+    (function () {
+            var old = console.log;
+            var olde = console.error;
+            var logger = document.getElementById('log');
+            var pageBottom = document.getElementById('pageBottom');
+            console.log = function (message) {
+                if (typeof message == 'object') {
+                    logger.innerHTML += "<div>" + (JSON && JSON.stringify ? JSON.stringify(message) : message) + '</div>';
+                    pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
+                } else {
+                    if (message.startsWith("\b")) {
+                        var lll = logger.innerHTML;
+                        logger.innerHTML = lll.substring(0, lll.lastIndexOf("</div>")) + message.substring(1) + '</div>';
+                    }
+                    else {
+                        logger.innerHTML += "<div>" + message + '</div>';
+                    }
+                    pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
+                }
+            }
+            console.error = function (message) {
+                logger.innerHTML += "<div style=\"color:red\">" + message + '</div>';
+                pageBottomScroll.scrollTo({ left: 0, top: pageBottomScroll.scrollHeight, behavior: 'smooth' });
+            }
+        })();
+    
+        */
+
+
+        const BORDER_SIZE = 4;
+        const panel = document.getElementById("pageLeft");
+        const panelMiddle = document.getElementById("pageMiddle");
+        const pageBottom = document.getElementById("pageBottom");
+        const pageAll = document.getElementById("pageAll");
+
+        let m_posx;
+        let m_posy;
+        let resizex=function (e) {
+
+            if (w >= 576) {
+                const dx = m_posx - e.x;
+                m_posx = e.x;
+                window.leftPageWidth = (parseInt(getComputedStyle(panel, '').width) - dx);
+                panel.style.width = window.leftPageWidth + "px";
+                panelMiddle.style.left = (window.leftToolbarWidth + window.leftPageWidth + 2) + "px";
+            }
+            else {
+                if (document.getElementById("pageLeftToolbar").style.display != "none") {
+                    document.getElementById("filename").style.marginLeft = (window.leftToolbarWidth + 31) + "px";
+                    document.getElementById("runHeaderButton").style.left = (window.leftToolbarWidth + 2) + "px";
+                }
             }
         }
-    }
 
-    function resizey(e) {
-        const dy = m_posy - e.y;
-        m_posy = e.y;
-        pageBottomHeight = (parseInt(getComputedStyle(pageBottom, '').height) + dy);
-        pageBottom.style.height = pageBottomHeight + "px";
-        pageAll.style.bottom = (pageBottomHeight + 10) + "px";
-
-    }
-
-    panel.addEventListener("mousedown", function (e) {
-        console.log(window.editor.getOption("mode"));
-        if (e.offsetX > (panel.clientWidth - BORDER_SIZE)) {
-            m_posx = e.x;
-            document.addEventListener("mousemove", resizex, false);
-        }
-    }, false);
-
-    document.addEventListener("mouseup", function () {
-        document.removeEventListener("mousemove", resizex, false);
-        document.removeEventListener("mousemove", resizey, false);
-    }, false);
-
-    pageBottom.addEventListener("mousedown", function (e) {
-
-        if (e.offsetY < BORDER_SIZE) {
-
+        let resizey=function(e) {
+            const dy = m_posy - e.y;
             m_posy = e.y;
-            document.addEventListener("mousemove", resizey, false);
+            pageBottomHeight = (parseInt(getComputedStyle(pageBottom, '').height) + dy);
+            pageBottom.style.height = pageBottomHeight + "px";
+            pageAll.style.bottom = (pageBottomHeight + 10) + "px";
+
         }
-    }, false);
 
-    if(window.location.href!="http://127.0.0.1:8080/")
-    {
-        console.log(window.location.href);  
-        setTimeout(function () {
-            document.getElementById("splashScreen").hidden = true; 
-        }, 2000);
-    }
-    else{
-        document.getElementById("splashScreen").hidden = true;
-    }
+        panel.addEventListener("mousedown", function (e) {
+            console.log(window.editor.getOption("mode"));
+            if (e.offsetX > (panel.clientWidth - BORDER_SIZE)) {
+                m_posx = e.x;
+                document.addEventListener("mousemove", resizex, false);
+            }
+        }, false);
+
+        document.addEventListener("mouseup", function () {
+            document.removeEventListener("mousemove", resizex, false);
+            document.removeEventListener("mousemove", resizey, false);
+        }, false);
+
+        pageBottom.addEventListener("mousedown", function (e) {
+
+            if (e.offsetY < BORDER_SIZE) {
+
+                m_posy = e.y;
+                document.addEventListener("mousemove", resizey, false);
+            }
+        }, false);
+
+        if (window.location.href != "http://127.0.0.1:8080/") {
+            console.log(window.location.href);
+            setTimeout(function () {
+                document.getElementById("splashScreen").hidden = true;
+            }, 2000);
+        }
+        else {
+            document.getElementById("splashScreen").hidden = true;
+        }
 
 
-
+    })()
 
 
 
