@@ -7,6 +7,12 @@
   "orientation": "any",
   "icons": [
     {
+      "src": "/apps/37790665-screen-time/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "/apps/37790665-screen-time/192x192.icon.png",
       "sizes": "192x192",
       "type": "image/png",
