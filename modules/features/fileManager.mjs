@@ -686,7 +686,7 @@ function _save() {
     else {
         if (filename == "" || filename == null) return;
         save(filename, window.editor.getValue());
-        console.log("saved");
+        console.log("********* Saved:"+filename);
         localStorage.setItem("lastFileName", filename);
     }
 }

@@ -31,7 +31,7 @@ function _onclickFilename() {
     input.value = oldfilename;
     document.getElementById("filename").innerHTML = "";
     document.getElementById("filename").appendChild(input);
-    input.onkeypress = function (e) {
+    let ls=(e)=>{
         if (!e) e = window.event;
         var keyCode = e.keyCode || e.which;
         if (keyCode == '13') {
@@ -39,16 +39,17 @@ function _onclickFilename() {
             var filename = input.value;
             if (filename == "" || filename == null) return false;
             save(filename, window.editor.getValue());
+            console.log("******* setItem(\""+lastFileName+"\"")
             localStorage.setItem("lastFileName", filename);
             remove(oldfilename);
-
-            input.onkeypress = null;
+            input.removeEventListener("keypress",ls,false);
             document.getElementById("filename").innerHTML = filename;
             document.getElementById("filename").onclick = _onclickFilename;
             _refresh();
             return false;
         }
-    };
+    }
+    input.addEventListener("keypress",ls,false);
 }
 
 function _refresh() {
