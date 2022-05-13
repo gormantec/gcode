@@ -224,6 +224,7 @@ function _uploadFile(params, callback) {
 
     var html = params.html;
     var icon = params.icon;
+    var splash = params.splash;
 
     (async ()=>{
         var iconBase64;
@@ -244,9 +245,19 @@ function _uploadFile(params, callback) {
             if(params.icon512) iconBase64_512=await getImageAsync(params.icon512,512,512);
             else if(icon)      iconBase64_512=await getImageAsync(icon,512,512);
         }
+
+        var splashBase64=null;
+        if(splash)
+        {
+            splashBase64 = await getImageAsync(splash); 
+        }
+        else{
+            splashBase64 = iconBase64;
+        }
         
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
+        if (splashBase64) body.encodediconSplash = splashBase64;
         if (iconBase64_192) body.encodedicon192 = iconBase64_192;
         if (iconBase64_512) body.encodedicon512 = iconBase64_512;
 
