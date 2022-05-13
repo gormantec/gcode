@@ -261,7 +261,7 @@ function _uploadFile(params, callback) {
         
         var body = { encodedhtml: btoa(html) };
         if (iconBase64) body.encodedicon = iconBase64;
-        if (splashBase64) body.encodediconSplash = splashBase64;
+        if (splashBase64) body.encodedSplash = splashBase64;
         if (iconBase64_180) body.encodedicon180 = iconBase64_180;
         if (iconBase64_192) body.encodedicon192 = iconBase64_192;
         if (iconBase64_512) body.encodedicon512 = iconBase64_512;
