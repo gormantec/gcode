@@ -36,7 +36,7 @@ export class OutlinedButton extends Div
 export class Text extends Div
 {
       constructor(_text) {
-        super({"position":"relative",display: "flex",
+        super({"position":"absolute",top:"0px",bottom:"0px",left:"0px",right:"0px",display: "flex",
 alignItems: "center",
 justifyContent: "center","child":new Div({"classNameOverride":true,"innerText":_text})});
       }
