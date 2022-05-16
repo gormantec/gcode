@@ -1,1 +1,31 @@
-ewogICJuYW1lIjogImdwcyIsCiAgInNob3J0X25hbWUiOiAiZ3BzIiwKICAidGhlbWVfY29sb3IiOiAiIzIxMjEyMSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzIxMjEyMSIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogIi9hcHBzLzM3NzkwNjY1LWdwcy8xODB4MTgwLmljb24ucG5nIiwKICAgICAgInNpemVzIjogIjE4MHgxODAiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9hcHBzLzM3NzkwNjY1LWdwcy8xOTJ4MTkyLmljb24ucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9hcHBzLzM3NzkwNjY1LWdwcy81MTJ4NTEyLmljb24ucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXSwKICAic3RhcnRfdXJsIjogIi9hcHBzLzM3NzkwNjY1LWdwcy9pbmRleC5odG1sIiwKICAiZGVzY3JpcHRpb24iOiAiZ3BzIiwKICAicHJlZmVyX3JlbGF0ZWRfYXBwbGljYXRpb25zIjogZmFsc2UKfQ==
+{
+  "name": "gps",
+  "short_name": "gps",
+  "theme_color": "#212121",
+  "background_color": "#212121",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/apps/37790665-gps/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-gps/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-gps/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-gps/index.html",
+  "description": "gps",
+  "prefer_related_applications": false
+}

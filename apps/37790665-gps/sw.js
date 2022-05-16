@@ -1,1 +1,15 @@
-Y29uc3QgUFJFQ0FDSEUgPSAncHJlY2FjaGUtdjEtMzc3OTA2NjUtZ3BzJzsKY29uc3QgUlVOVElNRSA9ICdydW50aW1lLTM3NzkwNjY1LWdwcyc7CmNvbnN0IFBSRUNBQ0hFX1VSTFMgPSBbCiAgJy9hcHBzLzM3NzkwNjY1LWdwcy9pbmRleC5odG1sJywKICAnL2FwcHMvMzc3OTA2NjUtZ3BzL2luZGV4Lmh0bWw/bW9ja0ZyYW1lPWlwaG9uZVgnLAogICcvYXBwcy8zNzc5MDY2NS1ncHMvaWNvbi5wbmcnLAogICcvYXBwcy8zNzc5MDY2NS1ncHMvc3BsYXNoLnBuZycsCiAgJy9hcHBzLzM3NzkwNjY1LWdwcy8xODB4MTgwLmljb24ucG5nJywKICAnL2FwcHMvMzc3OTA2NjUtZ3BzLzE5MngxOTIuaWNvbi5wbmcnLAogICcvYXBwcy8zNzc5MDY2NS1ncHMvNTEyeDUxMi5pY29uLnBuZycsCiAgJy9hcHBzLzM3NzkwNjY1LWdwcy9tYW5pZmVzdC5qc29uJywKICAnaHR0cHM6Ly9nY29kZS5jb20uYXUvY3NzL3B3YS5jc3MnCl07CnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignaW5zdGFsbCcsIGV2ZW50ID0+IHtldmVudC53YWl0VW50aWwoY2FjaGVzLm9wZW4oUFJFQ0FDSEUpLnRoZW4oY2FjaGUgPT4gY2FjaGUuYWRkQWxsKFBSRUNBQ0hFX1VSTFMpKS50aGVuKHNlbGYuc2tpcFdhaXRpbmcoKSkpO30pOwpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2FjdGl2YXRlJywgZXZlbnQgPT4ge2NvbnN0IGN1cnJlbnRDYWNoZXMgPSBbUFJFQ0FDSEUsIFJVTlRJTUVdOyBldmVudC53YWl0VW50aWwoY2FjaGVzLmtleXMoKS50aGVuKGNhY2hlTmFtZXMgPT4gY2FjaGVOYW1lcy5maWx0ZXIoY2FjaGVOYW1lID0+ICFjdXJyZW50Q2FjaGVzLmluY2x1ZGVzKGNhY2hlTmFtZSkpKS50aGVuKGNhY2hlc1RvRGVsZXRlID0+IFByb21pc2UuYWxsKGNhY2hlc1RvRGVsZXRlLm1hcChjYWNoZVRvRGVsZXRlID0+Y2FjaGVzLmRlbGV0ZShjYWNoZVRvRGVsZXRlKSkpKS50aGVuKCgpID0+IHNlbGYuY2xpZW50cy5jbGFpbSgpKSk7fSk7c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ZW50ID0+IHsgaWYgKGV2ZW50LnJlcXVlc3QudXJsLnN0YXJ0c1dpdGgoc2VsZi5sb2NhdGlvbi5vcmlnaW4pIHx8IGV2ZW50LnJlcXVlc3QudXJsLnN0YXJ0c1dpdGgoJ2h0dHBzOi8vZ2NvZGUuY29tLmF1JykpIHsgZXZlbnQucmVzcG9uZFdpdGgoIGNhY2hlcy5tYXRjaChldmVudC5yZXF1ZXN0KS50aGVuKGNhY2hlZFJlc3BvbnNlID0+IHsgaWYgKGZhbHNlICYmIGNhY2hlZFJlc3BvbnNlKSB7IGNvbnNvbGUubG9nKGNhY2hlZFJlc3BvbnNlKTtyZXR1cm4gY2FjaGVkUmVzcG9uc2U7fSBlbHNlIHJldHVybiBjYWNoZXMub3BlbihSVU5USU1FKS50aGVuKGNhY2hlID0+ZmV0Y2goZXZlbnQucmVxdWVzdCkudGhlbihyZXNwb25zZSA9PiBjYWNoZS5wdXQoZXZlbnQucmVxdWVzdCwgcmVzcG9uc2UuY2xvbmUoKSkudGhlbigoKSA9PnJlc3BvbnNlKSkpO30pKTt9fSk7
+const PRECACHE = 'precache-v1-37790665-gps';
+const RUNTIME = 'runtime-37790665-gps';
+const PRECACHE_URLS = [
+  '/apps/37790665-gps/index.html',
+  '/apps/37790665-gps/index.html?mockFrame=iphoneX',
+  '/apps/37790665-gps/icon.png',
+  '/apps/37790665-gps/splash.png',
+  '/apps/37790665-gps/180x180.icon.png',
+  '/apps/37790665-gps/192x192.icon.png',
+  '/apps/37790665-gps/512x512.icon.png',
+  '/apps/37790665-gps/manifest.json',
+  'https://gcode.com.au/css/pwa.css'
+];
+self.addEventListener('install', event => {event.waitUntil(caches.open(PRECACHE).then(cache => cache.addAll(PRECACHE_URLS)).then(self.skipWaiting()));});
+self.addEventListener('activate', event => {const currentCaches = [PRECACHE, RUNTIME]; event.waitUntil(caches.keys().then(cacheNames => cacheNames.filter(cacheName => !currentCaches.includes(cacheName))).then(cachesToDelete => Promise.all(cachesToDelete.map(cacheToDelete =>caches.delete(cacheToDelete)))).then(() => self.clients.claim()));});self.addEventListener('fetch', event => { if (event.request.url.startsWith(self.location.origin) || event.request.url.startsWith('https://gcode.com.au')) { event.respondWith( caches.match(event.request).then(cachedResponse => { if (false && cachedResponse) { console.log(cachedResponse);return cachedResponse;} else return caches.open(RUNTIME).then(cache =>fetch(event.request).then(response => cache.put(event.request, response.clone()).then(() =>response)));}));}});

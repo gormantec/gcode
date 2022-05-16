@@ -1,1 +1,156 @@
-aW1wb3J0IHsKICAgIERpdgp9IGZyb20gJ2h0dHBzOi8vZ2NvZGUuY29tLmF1L21vZHVsZXMvcHdhLm1qcyc7CgpsZXQgcGxhdGxtZyA9ICIiOwoKZnVuY3Rpb24gZGVncmVlc1RvUmFkaWFucyhkZWdyZWVzKSB7CiAgICByZXR1cm4gZGVncmVlcyAqIE1hdGguUEkgLyAxODA7Cn0KCmZ1bmN0aW9uIGRpc3RhbmNlSW5LbUJldHdlZW5FYXJ0aENvb3JkaW5hdGVzKGxhdDEsIGxvbjEsIGxhdDIsIGxvbjIpIHsKICAgIHZhciBlYXJ0aFJhZGl1c0ttID0gNjM3MTsKCiAgICB2YXIgZExhdCA9IGRlZ3JlZXNUb1JhZGlhbnMobGF0MiAtIGxhdDEpOwogICAgdmFyIGRMb24gPSBkZWdyZWVzVG9SYWRpYW5zKGxvbjIgLSBsb24xKTsKCiAgICBsYXQxID0gZGVncmVlc1RvUmFkaWFucyhsYXQxKTsKICAgIGxhdDIgPSBkZWdyZWVzVG9SYWRpYW5zKGxhdDIpOwoKICAgIHZhciBhID0gTWF0aC5zaW4oZExhdCAvIDIpICogTWF0aC5zaW4oZExhdCAvIDIpICsKICAgICAgICBNYXRoLnNpbihkTG9uIC8gMikgKiBNYXRoLnNpbihkTG9uIC8gMikgKiBNYXRoLmNvcyhsYXQxKSAqIE1hdGguY29zKGxhdDIpOwogICAgdmFyIGMgPSAyICogTWF0aC5hdGFuMihNYXRoLnNxcnQoYSksIE1hdGguc3FydCgxIC0gYSkpOwogICAgcmV0dXJuIGVhcnRoUmFkaXVzS20gKiBjOwp9CgpjbGFzcyBHcHNDbGFzcyB7CiAgICBjb25zdHJ1Y3RvcigpIHsKICAgICAgICBsZXQgX3RoaXMgPSB0aGlzOwogICAgICAgIC8vd2luZG93LnNldEludGVydmFsKCgpID0+IHsKICAgICAgICAvLyAgICBfdGhpcy51cGRhdGVMb2NhdGlvbigpOwogICAgICAgIC8vfSwgMTAwMDApOwogICAgICAgIC8vX3RoaXMudXBkYXRlTG9jYXRpb24oKTsKICAgICAgICBfdGhpcy56b29tID0gMTc7CiAgICAgICAgaWYgKG5hdmlnYXRvci5nZW9sb2NhdGlvbikgewogICAgICAgICAgICBuYXZpZ2F0b3IuZ2VvbG9jYXRpb24uZ2V0Q3VycmVudFBvc2l0aW9uKChwb3NpdGlvbikgPT4gewogICAgICAgICAgICAgICAgX3RoaXMuX3Bvc2l0aW9uID0gcG9zaXRpb247CiAgICAgICAgICAgICAgICBfdGhpcy51cGRhdGVMb2NhdGlvbihwb3NpdGlvbi5jb29yZHMubGF0aXR1ZGUsIHBvc2l0aW9uLmNvb3Jkcy5sb25naXR1ZGUpOwogICAgICAgICAgICAgICAgX3RoaXMuX3Bvc2l0aW9uID0gcG9zaXRpb247CiAgICAgICAgICAgIH0sICgpID0+IHt9LCB7CiAgICAgICAgICAgICAgICBlbmFibGVIaWdoQWNjdXJhY3k6IHRydWUsCiAgICAgICAgICAgICAgICB0aW1lb3V0OiAxNTAwMCwKICAgICAgICAgICAgICAgIG1heGltdW1BZ2U6IDAKICAgICAgICAgICAgfSk7CiAgICAgICAgICAgIG5hdmlnYXRvci5nZW9sb2NhdGlvbi53YXRjaFBvc2l0aW9uKChwb3NpdGlvbikgPT4gewogICAgICAgICAgICAgICAgX3RoaXMuX3Bvc2l0aW9uID0gcG9zaXRpb247CiAgICAgICAgICAgICAgICBfdGhpcy51cGRhdGVMb2NhdGlvbihwb3NpdGlvbi5jb29yZHMubGF0aXR1ZGUsIHBvc2l0aW9uLmNvb3Jkcy5sb25naXR1ZGUpOwogICAgICAgICAgICB9LCAoKSA9PiB7fSwgewogICAgICAgICAgICAgICAgZW5hYmxlSGlnaEFjY3VyYWN5OiB0cnVlLAogICAgICAgICAgICAgICAgdGltZW91dDogMTUwMDAsCiAgICAgICAgICAgICAgICBtYXhpbXVtQWdlOiAwCiAgICAgICAgICAgIH0pOwogICAgICAgIH0KICAgIH0KCgoKICAgIHVwZGF0ZUxvY2F0aW9uKGxhdCwgbG5nKSB7CiAgICAgICAgbGV0IF90aGlzID0gdGhpczsKCiAgICAgICAgaWYgKF90aGlzLmNvb3JkRGl2KSB7CiAgICAgICAgICAgIGlmIChuYXZpZ2F0b3IuZ2VvbG9jYXRpb24pIHsKICAgICAgICAgICAgICAgIGlmICghbGF0ICYmIF90aGlzLl9wb3NpdGlvbiAmJiBfdGhpcy5fcG9zaXRpb24uY29vcmRzLmxhdGl0dWRlKSBsYXQgPSBfdGhpcy5fcG9zaXRpb24uY29vcmRzLmxhdGl0dWRlOwogICAgICAgICAgICAgICAgaWYgKCFsbmcgJiYgX3RoaXMuX3Bvc2l0aW9uICYmIF90aGlzLl9wb3NpdGlvbi5jb29yZHMubG9uZ2l0dWRlKSBsbmcgPSBfdGhpcy5fcG9zaXRpb24uY29vcmRzLmxvbmdpdHVkZTsKICAgICAgICAgICAgICAJaWYoX3RoaXMubGFzdExhdCAmJiBNYXRoLmFicyhsYXQtX3RoaXMubGFzdExhdCk8MC4wMDEpbGF0PShsYXQrX3RoaXMubGFzdExhdCkvMjsKICAgICAgICAgICAgICAJaWYoX3RoaXMubGFzdExuZyAmJiBNYXRoLmFicyhsbmctX3RoaXMubGFzdExuZyk8MC4wMDEpbG5nPShsbmcrX3RoaXMubGFzdExuZykvMjsKICAgICAgICAgICAgICAJX3RoaXMubGFzdExhdD1sYXQ7CiAgICAgICAgICAgICAgICBfdGhpcy5sYXN0TG5nPWxuZzsKICAgICAgICAgICAgICAgIGxldCBsYXRsbWcgPSBsYXQgKyAiLCIgKyBsbmc7CiAgICAgICAgICAgICAgICBsZXQgcm91Z2h0bGF0bG1nID0gTWF0aC5mbG9vcihsYXQgKiAxMDAwMDApIC8gMTAwMDAwICsgIiwiICsgTWF0aC5mbG9vcihsbmcgKiAxMDAwMDApIC8gMTAwMDAwOwogICAgICAgICAgICAgICAgX3RoaXMuY29vcmREaXYuaW5uZXJIVE1MID0gcm91Z2h0bGF0bG1nOwogICAgICAgICAgICAgICAgaWYgKF90aGlzLmltYWdlRGl2ICYmIChsYXRsbWcgIT0gcGxhdGxtZyB8fCBfdGhpcy56b29tICE9IF90aGlzLnB6b29tKSkgewogICAgICAgICAgICAgICAgICAgIF90aGlzLnB6b29tID0gX3RoaXMuem9vbTsKICAgICAgICAgICAgICAgICAgICB2YXIgd2lkdGggPSBfdGhpcy5pbWFnZURpdi5lbGVtZW50Lm9mZnNldFdpZHRoOwogICAgICAgICAgICAgICAgICAgIHZhciBoZWlnaHQgPSBfdGhpcy5pbWFnZURpdi5lbGVtZW50Lm9mZnNldEhlaWdodDsKICAgICAgICAgICAgICAgICAgICBsZXQgb3RoZXJtYXJrZXJzID0gIiI7CiAgICAgICAgICAgICAgICAgICAgaWYgKF90aGlzLm1hcmtzKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIG90aGVybWFya2VycyA9ICImbWFya2Vycz1jb2xvcjpibHVlJTdDbGFiZWw6WCU3QyIgKyBfdGhpcy5tYXJrc1swXTsKICAgICAgICAgICAgICAgICAgICAgICAgbGV0IGRpc3QgPSBNYXRoLmZsb29yKChkaXN0YW5jZUluS21CZXR3ZWVuRWFydGhDb29yZGluYXRlcyhwYXJzZUZsb2F0KF90aGlzLm1hcmtzWzBdLnNwbGl0KCIsIilbMF0pLCBwYXJzZUZsb2F0KF90aGlzLm1hcmtzWzBdLnNwbGl0KCIsIilbMV0pLCBsYXQsIGxuZykgKiAxMDAwKSk7CiAgICAgICAgICAgICAgICAgICAgICAgIGlmIChkaXN0ID4gMTAwMCkgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgX3RoaXMuZGlzdERpdi5pbm5lckhUTUwgPSAoZGlzdCAvIDEwMDApICsgIiBrbSI7CiAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICBfdGhpcy5kaXN0RGl2LmlubmVySFRNTCA9IGRpc3QgKyAiIG0iOwogICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgICAgICBsZXQgaW1hZ2VMb2FkZWQgPSAoKSA9PiB7CiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCJpbWFnZUxvYWRlZCIpOwogICAgICAgICAgICAgICAgICAgICAgICBfdGhpcy5pbWFnZURpdi5zdHlsZS5iYWNrZ3JvdW5kSW1hZ2UgPSAndXJsKCJodHRwczovL21hcHMuZ29vZ2xlYXBpcy5jb20vbWFwcy9hcGkvc3RhdGljbWFwP2NlbnRlcj0nICsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdWdodGxhdGxtZyArICcmem9vbT0nICsgX3RoaXMuem9vbSArIG90aGVybWFya2VycyArICcmbWFya2Vycz1pY29uOmh0dHBzOi8vZ2NvZGUuY29tLmF1L2ltYWdlcy9ibHVlRG90LnBuZyU3QycgKyBsYXRsbWcgKyAnJnNpemU9JyArIHdpZHRoICsgJ3gnICsgaGVpZ2h0ICsgJyZtYXB0eXBlPWh5YnJpZCZrZXk9QUl6YVN5QWhYZjhtbXBKcHVkYmRobUhPVzZZdG1HWTJZYUxBQVlVIiknOwogICAgICAgICAgICAgICAgICAgICAgICBwbGF0bG1nID0gbGF0bG1nOwogICAgICAgICAgICAgICAgICAgIH07CgogICAgICAgICAgICAgICAgICAgIHZhciBpbWcgPSBuZXcgSW1hZ2UoKTsKICAgICAgICAgICAgICAgICAgICBpbWcuc3JjID0gJ2h0dHBzOi8vbWFwcy5nb29nbGVhcGlzLmNvbS9tYXBzL2FwaS9zdGF0aWNtYXA/Y2VudGVyPScgKwogICAgICAgICAgICAgICAgICAgICAgICByb3VnaHRsYXRsbWcgKyAnJnpvb209JyArIF90aGlzLnpvb20gKyBvdGhlcm1hcmtlcnMgKyAnJm1hcmtlcnM9aWNvbjpodHRwczovL2djb2RlLmNvbS5hdS9pbWFnZXMvYmx1ZURvdC5wbmclN0MnICsgbGF0bG1nICsgJyZzaXplPScgKyB3aWR0aCArICd4JyArIGhlaWdodCArICcmbWFwdHlwZT1oeWJyaWQma2V5PUFJemFTeUFoWGY4bW1wSnB1ZGJkaG1IT1c2WXRtR1kyWWFMQUFZVSc7CiAgICAgICAgICAgICAgICAgICAgaWYgKGltZy5jb21wbGV0ZSkgewoKICAgICAgICAgICAgICAgICAgICAgICAgY29uc29sZS5sb2coImNvbXBsZXRlIik7CiAgICAgICAgICAgICAgICAgICAgICAgIGltYWdlTG9hZGVkKCk7CiAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgICAgICAgICAgICAgY29uc29sZS5sb2coImNvbXBsZXRlIik7CiAgICAgICAgICAgICAgICAgICAgICAgIGltZy5hZGRFdmVudExpc3RlbmVyKCdsb2FkJywgaW1hZ2VMb2FkZWQpCiAgICAgICAgICAgICAgICAgICAgICAgIGltZy5hZGRFdmVudExpc3RlbmVyKCdlcnJvcicsIGZ1bmN0aW9uKGUpIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCJlcnJvcjoiICsgZSk7CiAgICAgICAgICAgICAgICAgICAgICAgIH0pCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgX3RoaXMuY29vcmREaXYuaW5uZXJIVE1MID0gIkdlb2xvY2F0aW9uIG5vdCBzdXBwb3J0ZWQiOwogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIC8vaHR0cHM6Ly9tYXBzLmdvb2dsZWFwaXMuY29tL21hcHMvYXBpL3N0YXRpY21hcD9jZW50ZXI9NTEuNDc3MjIyLDAmem9vbT0xNCZzaXplPTQwMHg0MDAma2V5PUFJemFTeUEza2c3WVd1Z0dsMWxUWG1BbWFCR1BOaERXOXBFaDVibyZzaWduYXR1cmU9Y2lmdHhTdjQ2ODF0R1NBbmVzN2t0THJWSTNnPQogICAgfQoKICAgIG5ld0Rpc3REaXYocCkgewogICAgICAgIGlmICghdGhpcy5kaXN0RGl2KSB0aGlzLmRpc3REaXYgPSBuZXcgRGl2KHApOwogICAgICAgIHJldHVybiB0aGlzLmRpc3REaXY7CiAgICB9CiAgICBuZXdDb29yZERpdihwKSB7CiAgICAgICAgaWYgKCF0aGlzLmNvb3JkRGl2KSB0aGlzLmNvb3JkRGl2ID0gbmV3IERpdihwKTsKICAgICAgICByZXR1cm4gdGhpcy5jb29yZERpdjsKICAgIH0KICAgIG5ld0ltYWdlRGl2KHApIHsKICAgICAgICBpZiAoIXRoaXMuaW1hZ2VEaXYpIHRoaXMuaW1hZ2VEaXYgPSBuZXcgRGl2KHApOwogICAgICAgIHJldHVybiB0aGlzLmltYWdlRGl2OwogICAgfQogICAgem9vbW91dCgpIHsKICAgICAgICB0aGlzLnpvb20gPSB0aGlzLnpvb20gLSAxOwogICAgICAgIHRoaXMudXBkYXRlTG9jYXRpb24oKTsKICAgIH0KICAgIHpvb21pbigpIHsKICAgICAgICB0aGlzLnpvb20gPSB0aGlzLnpvb20gKyAxOwogICAgICAgIHRoaXMudXBkYXRlTG9jYXRpb24oKTsKICAgIH0KICAgIG1hcmsoKSB7CiAgICAgICAgbGV0IF90aGlzID0gdGhpczsKICAgICAgICBpZiAobmF2aWdhdG9yLmdlb2xvY2F0aW9uKSB7CiAgICAgICAgICAgIG5hdmlnYXRvci5nZW9sb2NhdGlvbi5nZXRDdXJyZW50UG9zaXRpb24oKHBvc2l0aW9uKSA9PiB7CiAgICAgICAgICAgICAgICBsZXQgbGF0ID0gcG9zaXRpb24uY29vcmRzLmxhdGl0dWRlOwogICAgICAgICAgICAgICAgbGV0IGxuZyA9IHBvc2l0aW9uLmNvb3Jkcy5sb25naXR1ZGU7CiAgICAgICAgICAgICAgICBsZXQgbGF0bG1nID0gbGF0ICsgIiwiICsgbG5nOwogICAgICAgICAgICAgICAgaWYgKF90aGlzLm1hcmtzKSB7CiAgICAgICAgICAgICAgICAgICAgX3RoaXMubWFya3MudW5zaGlmdChsYXRsbWcpOwogICAgICAgICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgICAgICAgICBfdGhpcy5tYXJrcyA9IFtdOwogICAgICAgICAgICAgICAgICAgIF90aGlzLm1hcmtzLnVuc2hpZnQobGF0bG1nKTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHRoaXMudXBkYXRlTG9jYXRpb24oKTsKCiAgICAgICAgICAgIH0pOwogICAgICAgIH0KCiAgICB9Cn0KCmV4cG9ydCB2YXIgZ3BzID0gbmV3IEdwc0NsYXNzKCk7
+import {
+    Div
+} from 'https://gcode.com.au/modules/pwa.mjs';
+
+let platlmg = "";
+
+function degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
+    var earthRadiusKm = 6371;
+
+    var dLat = degreesToRadians(lat2 - lat1);
+    var dLon = degreesToRadians(lon2 - lon1);
+
+    lat1 = degreesToRadians(lat1);
+    lat2 = degreesToRadians(lat2);
+
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusKm * c;
+}
+
+class GpsClass {
+    constructor() {
+        let _this = this;
+        //window.setInterval(() => {
+        //    _this.updateLocation();
+        //}, 10000);
+        //_this.updateLocation();
+        _this.zoom = 17;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                _this._position = position;
+                _this.updateLocation(position.coords.latitude, position.coords.longitude);
+                _this._position = position;
+            }, () => {}, {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 0
+            });
+            navigator.geolocation.watchPosition((position) => {
+                _this._position = position;
+                _this.updateLocation(position.coords.latitude, position.coords.longitude);
+            }, () => {}, {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 0
+            });
+        }
+    }
+
+
+
+    updateLocation(lat, lng) {
+        let _this = this;
+
+        if (_this.coordDiv) {
+            if (navigator.geolocation) {
+                if (!lat && _this._position && _this._position.coords.latitude) lat = _this._position.coords.latitude;
+                if (!lng && _this._position && _this._position.coords.longitude) lng = _this._position.coords.longitude;
+              	if(_this.lastLat && Math.abs(lat-_this.lastLat)<0.001)lat=(lat+_this.lastLat)/2;
+              	if(_this.lastLng && Math.abs(lng-_this.lastLng)<0.001)lng=(lng+_this.lastLng)/2;
+              	_this.lastLat=lat;
+                _this.lastLng=lng;
+                let latlmg = lat + "," + lng;
+                let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
+                _this.coordDiv.innerHTML = roughtlatlmg;
+                if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
+                    _this.pzoom = _this.zoom;
+                    var width = _this.imageDiv.element.offsetWidth;
+                    var height = _this.imageDiv.element.offsetHeight;
+                    let othermarkers = "";
+                    if (_this.marks) {
+                        othermarkers = "&markers=color:blue%7Clabel:X%7C" + _this.marks[0];
+                        let dist = Math.floor((distanceInKmBetweenEarthCoordinates(parseFloat(_this.marks[0].split(",")[0]), parseFloat(_this.marks[0].split(",")[1]), lat, lng) * 1000));
+                        if (dist > 1000) {
+                            _this.distDiv.innerHTML = (dist / 1000) + " km";
+                        } else {
+                            _this.distDiv.innerHTML = dist + " m";
+                        }
+                    }
+
+                    let imageLoaded = () => {
+                        console.log("imageLoaded");
+                        _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
+                            roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU")';
+                        platlmg = latlmg;
+                    };
+
+                    var img = new Image();
+                    img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
+                        roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=AIzaSyAhXf8mmpJpudbdhmHOW6YtmGY2YaLAAYU';
+                    if (img.complete) {
+
+                        console.log("complete");
+                        imageLoaded();
+                    } else {
+                        console.log("complete");
+                        img.addEventListener('load', imageLoaded)
+                        img.addEventListener('error', function(e) {
+                            console.log("error:" + e);
+                        })
+                    }
+                }
+            } else {
+                _this.coordDiv.innerHTML = "Geolocation not supported";
+            }
+        }
+        //https://maps.googleapis.com/maps/api/staticmap?center=51.477222,0&zoom=14&size=400x400&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=ciftxSv4681tGSAnes7ktLrVI3g=
+    }
+
+    newDistDiv(p) {
+        if (!this.distDiv) this.distDiv = new Div(p);
+        return this.distDiv;
+    }
+    newCoordDiv(p) {
+        if (!this.coordDiv) this.coordDiv = new Div(p);
+        return this.coordDiv;
+    }
+    newImageDiv(p) {
+        if (!this.imageDiv) this.imageDiv = new Div(p);
+        return this.imageDiv;
+    }
+    zoomout() {
+        this.zoom = this.zoom - 1;
+        this.updateLocation();
+    }
+    zoomin() {
+        this.zoom = this.zoom + 1;
+        this.updateLocation();
+    }
+    mark() {
+        let _this = this;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                let lat = position.coords.latitude;
+                let lng = position.coords.longitude;
+                let latlmg = lat + "," + lng;
+                if (_this.marks) {
+                    _this.marks.unshift(latlmg);
+                } else {
+                    _this.marks = [];
+                    _this.marks.unshift(latlmg);
+                }
+                this.updateLocation();
+
+            });
+        }
+
+    }
+}
+
+export var gps = new GpsClass();

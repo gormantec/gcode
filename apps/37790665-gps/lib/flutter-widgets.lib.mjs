@@ -1,1 +1,43 @@
-aW1wb3J0IHsgRGl2IH0gZnJvbSAnaHR0cHM6Ly9nY29kZS5jb20uYXUvbW9kdWxlcy9wd2EubWpzJzsKCi8qLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKi8KZXhwb3J0IGNsYXNzIFJvdyBleHRlbmRzIERpdgp7CiAgICAgIGNvbnN0cnVjdG9yKHBhcmFtcykgewogICAgICAgIHN1cGVyKHsicG9zaXRpb24iOiJyZWxhdGl2ZSIsInRvcCI6InVuc2V0IiwiYm90dG9tIjoidW5zZXQiLCJsZWZ0IjoidW5zZXQiLCJyaWdodCI6InVuc2V0IiwiY2hpbGRyZW4iOnBhcmFtcy5jaGlsZHJlbn0pOwogICAgICAgIGZvcih2YXIgaT0wO2k8dGhpcy5jaGlsZHJlbkNvdW50O2krKykKICAgICAgICB7CiAgICAgICAgICB0aGlzLmVsZW1lbnQuY2hpbGRyZW5baV0uc3R5bGUud2lkdGggPSAoTWF0aC5mbG9vcigxMDAwL3RoaXMuY2hpbGRyZW5Db3VudCkvMTApKyIlIjsKICAgICAgICB9CiAgICAgICAgCgogICAgICB9Cn0KZXhwb3J0IGNsYXNzIENvbHVtbiBleHRlbmRzIERpdgp7CiAgICAgIGNvbnN0cnVjdG9yKHBhcmFtcykgewogICAgICAgIHN1cGVyKHsicG9zaXRpb24iOiJyZWxhdGl2ZSIsImRpc3BsYXkiOiJpbmxpbmUtYmxvY2siLCJ0b3AiOiJ1bnNldCIsImJvdHRvbSI6InVuc2V0IiwibGVmdCI6InVuc2V0IiwicmlnaHQiOiJ1bnNldCJ9KTsKICAgICAgICBpZihwYXJhbXMgaW5zdGFuY2VvZiBEaXYpIHRoaXMuc2V0Q2hpbGQocGFyYW1zKTsKICAgICAgICBlbHNlIGlmKHBhcmFtcy5jaGlsZCkgdGhpcy5zZXRDaGlsZChwYXJhbXMuY2hpbGQpOwoJCXRoaXMuc3R5bGUuaGVpZ2h0ID0gdGhpcy5maXJzdENoaWxkLnN0eWxlLmhlaWdodDsKICAgICAgfQp9CmV4cG9ydCBjbGFzcyBPdXRsaW5lZEJ1dHRvbiBleHRlbmRzIERpdgp7CiAgICAgIGNvbnN0cnVjdG9yKHBhcmFtcykgewogICAgICAgIHN1cGVyKHBhcmFtcyk7CgkJaWYocGFyYW1zLmhlaWdodCkgdGhpcy5zdHlsZS5oZWlnaHQgPSBwYXJhbXMuaGVpZ2h0OwogICAgICAgIGVsc2UgdGhpcy5zdHlsZS5oZWlnaHQgPSAiODBweCI7CiAgICAgICAgdGhpcy5zdHlsZS53aWR0aCA9IHBhcmFtcy53aWR0aCB8fCAiODBweCI7CiAgICAgICAgdGhpcy5zdHlsZS5jdXJzb3IgPSJwb2ludGVyIjsKICAgIAl0aGlzLnN0eWxlLnBvaW50ZXJFdmVudHM9ImF1dG8iOwogICAgICB9Cn0KZXhwb3J0IGNsYXNzIFRleHQgZXh0ZW5kcyBEaXYKewogICAgICBjb25zdHJ1Y3RvcihfdGV4dCkgewogICAgICAgIHN1cGVyKHsicG9zaXRpb24iOiJhYnNvbHV0ZSIsdG9wOiIwcHgiLGJvdHRvbToiMHB4IixsZWZ0OiIwcHgiLHJpZ2h0OiIwcHgiLGRpc3BsYXk6ICJmbGV4IiwKYWxpZ25JdGVtczogImNlbnRlciIsCmp1c3RpZnlDb250ZW50OiAiY2VudGVyIiwiY2hpbGQiOm5ldyBEaXYoeyJjbGFzc05hbWVPdmVycmlkZSI6dHJ1ZSwiaW5uZXJUZXh0IjpfdGV4dH0pfSk7CiAgICAgIH0KfQ==
+import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
+
+/*---------------------------------------------------------------------------*/
+export class Row extends Div
+{
+      constructor(params) {
+        super({"position":"relative","top":"unset","bottom":"unset","left":"unset","right":"unset","children":params.children});
+        for(var i=0;i<this.childrenCount;i++)
+        {
+          this.element.children[i].style.width = (Math.floor(1000/this.childrenCount)/10)+"%";
+        }
+        
+
+      }
+}
+export class Column extends Div
+{
+      constructor(params) {
+        super({"position":"relative","display":"inline-block","top":"unset","bottom":"unset","left":"unset","right":"unset"});
+        if(params instanceof Div) this.setChild(params);
+        else if(params.child) this.setChild(params.child);
+		this.style.height = this.firstChild.style.height;
+      }
+}
+export class OutlinedButton extends Div
+{
+      constructor(params) {
+        super(params);
+		if(params.height) this.style.height = params.height;
+        else this.style.height = "80px";
+        this.style.width = params.width || "80px";
+        this.style.cursor ="pointer";
+    	this.style.pointerEvents="auto";
+      }
+}
+export class Text extends Div
+{
+      constructor(_text) {
+        super({"position":"absolute",top:"0px",bottom:"0px",left:"0px",right:"0px",display: "flex",
+alignItems: "center",
+justifyContent: "center","child":new Div({"classNameOverride":true,"innerText":_text})});
+      }
+}
