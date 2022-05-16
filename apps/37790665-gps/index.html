@@ -15,7 +15,7 @@
   window.PWA.globals.splashColor="#F0F0F0";
   window.PWA.globals.mockFrame="iphoneX";
   window.PWA.globals.splashBackgroundColor="#212121";
-  window.PWA.globals.splashDuration=100;
+  window.PWA.globals.splashDuration=2000;
 
 let deferredPrompt;
 if('serviceWorker' in navigator) {
@@ -80,7 +80,7 @@ if (window.opener && window.opener !== window) {
   splash: git://gormantec:gcode_repo/gps.svg
   mockFrame: iphoneX
   splashBackgroundColor: #212121
-  splashDuration: 100
+  splashDuration: 2000
   splashSize: 180px
   description: A simple GPS viewer, allowing you to measure between two points.
               This is an example of a new line.
