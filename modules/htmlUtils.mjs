@@ -266,7 +266,7 @@ export function createHtml(code, options) {
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
     if (!appName || appName == code) appName = "gcode App";
     var description = code.replace(/\/\*.*?description:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
-    if (!description || description == code) appName = "A gcode developed PWA app";
+    if (!description || description == code) description = "A gcode developed PWA app";
     description=description.trim();
     appName = appName.trim();
     var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
