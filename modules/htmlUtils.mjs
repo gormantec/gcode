@@ -265,7 +265,7 @@ export function createHtml(code, options) {
     if (!orientation || orientation == code) orientation = "any";
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
     if (!appName || appName == code) appName = "gcode App";
-    var description = code.replace(/\/\*.*?description:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
+    var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
     description=description.trim();
     appName = appName.trim();
