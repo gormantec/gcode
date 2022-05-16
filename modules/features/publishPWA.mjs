@@ -228,6 +228,7 @@ function _uploadFile(params, callback) {
     var html = params.html;
     var icon = params.icon;
     var splash = params.splash;
+    var description = params.description;
 
     (async ()=>{
         var iconBase64;
@@ -268,6 +269,7 @@ function _uploadFile(params, callback) {
         if (iconBase64_180) body.encodedicon180 = iconBase64_180;
         if (iconBase64_192) body.encodedicon192 = iconBase64_192;
         if (iconBase64_512) body.encodedicon512 = iconBase64_512;
+        if (description) body.description = description;
 
         if(params.gituser)body.gituser=params.gituser;
         if(params.gittoken)body.gittoken=params.gittoken;
