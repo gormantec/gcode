@@ -135,6 +135,7 @@ function publishToGit(code, user,token)
                 var splash = result.splash;
                 var mockFrame = result.mockFrame;
                 var description = result.description;
+                console.log("[description]:"+description);
                 var rootHTML = result.rootHTML; errorline=333;
     
                 var _module = window.document.createElement("script");
