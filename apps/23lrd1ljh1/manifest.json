@@ -1,31 +1,31 @@
 {
-  "name": "gps",
-  "short_name": "gps",
-  "theme_color": "#212121",
-  "background_color": "#212121",
+  "name": "gcodeApp",
+  "short_name": "AppName",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
   "display": "standalone",
   "orientation": "any",
-  "description": "gps",
+  "description": "gcodeApp",
   "icons": [
     {
-      "src": "/apps/37790665-gps/180x180.icon.png",
+      "src": "/apps/23lrd1ljh1/180x180.icon.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/apps/37790665-gps/192x192.icon.png",
+      "src": "/apps/23lrd1ljh1/192x192.icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/apps/37790665-gps/512x512.icon.png",
+      "src": "/apps/23lrd1ljh1/512x512.icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/apps/37790665-gps/index.html",
+  "start_url": "/apps/23lrd1ljh1/index.html",
   "prefer_related_applications": false
 }
