@@ -134,6 +134,7 @@ function publishToGit(code, user,token)
                 var splashBackgroundColor = result.splashBackgroundColor;
                 var splash = result.splash;
                 var mockFrame = result.mockFrame;
+                var description = result.description;
                 var rootHTML = result.rootHTML; errorline=333;
     
                 var _module = window.document.createElement("script");
@@ -170,6 +171,7 @@ function publishToGit(code, user,token)
                 if(result.icon192x192)uploadConfig.icon192=result.icon192x192;
                 if(result.icon512x512)uploadConfig.icon512=result.icon512x512;
                 if(filesArray && filesArray.length>0)uploadConfig.filesArray=filesArray;
+                if(description)uploadConfig.description=description;
                 _uploadFile(uploadConfig, function (error, uri) {
                     if (error) { errorline=361;
                         console.log(error); errorline=362;
