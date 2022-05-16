@@ -265,6 +265,9 @@ export function createHtml(code, options) {
     if (!orientation || orientation == code) orientation = "any";
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
     if (!appName || appName == code) appName = "gcode App";
+    var description = code.replace(/\/\*.*?description:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
+    if (!description || description == code) appName = "A gcode developed PWA app";
+    description=description.trim();
     appName = appName.trim();
     var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
     if (!manifest || manifest == "" || manifest == code) manifest = "xxxxx_manifest.json";
@@ -278,6 +281,10 @@ export function createHtml(code, options) {
     _link = window.document.createElement("meta");
     _link.setAttribute("name", "mobile-web-app-capable");
     _link.setAttribute("content", "yes");
+    rootHead.appendChild(_link);
+    _link = window.document.createElement("meta");
+    _link.setAttribute("name", "description");
+    _link.setAttribute("content", description);
     rootHead.appendChild(_link);
     _link = window.document.createElement("meta");
     _link.setAttribute("name", "apple-touch-fullscreen");
