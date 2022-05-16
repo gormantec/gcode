@@ -27,8 +27,8 @@ export class OutlinedButton extends Div
       constructor(params) {
         super(params);
 		if(params.height) this.style.height = params.height;
-        else this.style.height = "90px";
-        this.style.width = params.width || "90px";
+        else this.style.height = "80px";
+        this.style.width = params.width || "80px";
         this.style.cursor ="pointer";
     	this.style.pointerEvents="auto";
       }
@@ -36,6 +36,8 @@ export class OutlinedButton extends Div
 export class Text extends Div
 {
       constructor(_text) {
-        super({"position":"relative",height:"100%","verticalAlign": "middle","child":new Div({"position":"relative","verticalAlign": "middle","height":"100%",textAlign:"center","innerText":_text})});
+        super({"position":"absolute",top:"0px",bottom:"0px",left:"0px",right:"0px",display: "flex",
+alignItems: "center",
+justifyContent: "center","child":new Div({"classNameOverride":true,"innerText":_text})});
       }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "gps",
-  "short_name": "gps",
+  "name": "A gcode developed PWA app",
+  "short_name": "A gcode developed PWA app",
   "theme_color": "#212121",
   "background_color": "#212121",
   "display": "standalone",
@@ -26,6 +26,6 @@
     }
   ],
   "start_url": "/apps/37790665-gps/index.html",
-  "description": "gps",
+  "description": "A gcode developed PWA app",
   "prefer_related_applications": false
 }
