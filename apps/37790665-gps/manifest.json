@@ -5,6 +5,7 @@
   "background_color": "#212121",
   "display": "standalone",
   "orientation": "any",
+  "description": "gps",
   "icons": [
     {
       "src": "/apps/37790665-gps/180x180.icon.png",
@@ -26,6 +27,5 @@
     }
   ],
   "start_url": "/apps/37790665-gps/index.html",
-  "description": "gps",
   "prefer_related_applications": false
 }
