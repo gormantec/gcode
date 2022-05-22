@@ -5,6 +5,7 @@
   "background_color": "#212121",
   "display": "standalone",
   "orientation": "any",
+  "description": "A gcode developed PWA app",
   "icons": [
     {
       "src": "/apps/37790665-screen-time/180x180.icon.png",
@@ -26,6 +27,5 @@
     }
   ],
   "start_url": "/apps/37790665-screen-time/index.html",
-  "description": "screen time",
   "prefer_related_applications": false
 }

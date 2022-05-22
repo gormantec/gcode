@@ -61,6 +61,10 @@ class GpsClass {
             if (navigator.geolocation) {
                 if (!lat && _this._position && _this._position.coords.latitude) lat = _this._position.coords.latitude;
                 if (!lng && _this._position && _this._position.coords.longitude) lng = _this._position.coords.longitude;
+              	if(_this.lastLat && Math.abs(lat-_this.lastLat)<0.001)lat=(lat+_this.lastLat)/2;
+              	if(_this.lastLng && Math.abs(lng-_this.lastLng)<0.001)lng=(lng+_this.lastLng)/2;
+              	_this.lastLat=lat;
+                _this.lastLng=lng;
                 let latlmg = lat + "," + lng;
                 let roughtlatlmg = Math.floor(lat * 100000) / 100000 + "," + Math.floor(lng * 100000) / 100000;
                 _this.coordDiv.innerHTML = roughtlatlmg;
