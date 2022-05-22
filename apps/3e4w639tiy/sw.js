@@ -1,14 +1,14 @@
-const PRECACHE = 'precache-v1-37790665-calculator';
-const RUNTIME = 'runtime-37790665-calculator';
+const PRECACHE = 'precache-v1-3e4w639tiy';
+const RUNTIME = 'runtime-3e4w639tiy';
 const PRECACHE_URLS = [
-  '/apps/37790665-calculator/index.html',
-  '/apps/37790665-calculator/index.html?mockFrame=iphoneX',
-  '/apps/37790665-calculator/icon.png',
-  '/apps/37790665-calculator/splash.png',
-  '/apps/37790665-calculator/180x180.icon.png',
-  '/apps/37790665-calculator/192x192.icon.png',
-  '/apps/37790665-calculator/512x512.icon.png',
-  '/apps/37790665-calculator/manifest.json',
+  '/apps/3e4w639tiy/index.html',
+  '/apps/3e4w639tiy/index.html?mockFrame=iphoneX',
+  '/apps/3e4w639tiy/icon.png',
+  '/apps/3e4w639tiy/splash.png',
+  '/apps/3e4w639tiy/180x180.icon.png',
+  '/apps/3e4w639tiy/192x192.icon.png',
+  '/apps/3e4w639tiy/512x512.icon.png',
+  '/apps/3e4w639tiy/manifest.json',
   'https://gcode.com.au/css/pwa.css'
 ];
 self.addEventListener('install', event => {event.waitUntil(caches.open(PRECACHE).then(cache =>{

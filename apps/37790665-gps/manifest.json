@@ -5,7 +5,7 @@
   "background_color": "#212121",
   "display": "standalone",
   "orientation": "any",
-  "description": "gps",
+  "description": "A simple GPS viewer, allowing you to measure between two points.  This is an example of a new line.  This is another new line",
   "icons": [
     {
       "src": "/apps/37790665-gps/180x180.icon.png",

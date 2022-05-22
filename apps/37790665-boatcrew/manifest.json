@@ -5,7 +5,14 @@
   "background_color": "#222222",
   "display": "standalone",
   "orientation": "any",
+  "description": "A gcode developed PWA app",
   "icons": [
+    {
+      "src": "/apps/37790665-boatcrew/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "/apps/37790665-boatcrew/192x192.icon.png",
       "sizes": "192x192",
@@ -20,6 +27,5 @@
     }
   ],
   "start_url": "/apps/37790665-boatcrew/index.html",
-  "description": "boatcrew",
   "prefer_related_applications": false
 }
