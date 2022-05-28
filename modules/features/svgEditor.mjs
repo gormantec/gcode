@@ -228,7 +228,8 @@ function hideSvgEditor() {
     if (window.editor) window.editor.refresh();
 }
 
-export function menuAction() {
+export function menuAction(e) {
+    console.log(e);
     if (!svgEditorVisible && document.getElementById("filename").innerText.endsWith(".svg")) {
         showSvgEditor();
         svgEditorVisible = true;
