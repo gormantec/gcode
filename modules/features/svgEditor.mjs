@@ -113,6 +113,7 @@ function appendSvgParams(svgBody, svgParams) {
 
                     let r=await fetch("https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg");
                     let t=await r.text();
+                    console.log(t);
                     t=t.replace(/^.*?\<path .*?d=\"(.*?)\".*$/g, "$1");
                     source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
                     //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
