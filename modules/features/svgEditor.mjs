@@ -134,7 +134,7 @@ function colorInput(input) {
     let _value = _input.value;
     console.log(_value);
     if (_value.startsWith("%23")) _value = "#" + c.substring(3);
-    if (_value.startsWith("rbg")) _value = rgbToHex(_value);
+    if (_value.startsWith("rgb")) _value = rgbToHex(_value);
     _input.type = "color";
 
     console.log("Set input color");
