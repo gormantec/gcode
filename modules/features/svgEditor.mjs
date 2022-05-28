@@ -193,6 +193,7 @@ function showSvgEditor() {
     else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
     else if (c.startsWith("#")) c = hexToRgb(c);
+    console.log("c:"+c);
 
     let name = source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
 
