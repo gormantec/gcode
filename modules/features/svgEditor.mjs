@@ -229,7 +229,7 @@ function hideSvgEditor() {
 }
 
 export function menuAction() {
-    if (!svgEditorVisible) {
+    if (!svgEditorVisible && document.getElementById("filename").innerText.endsWith(".svg")) {
         showSvgEditor();
         svgEditorVisible = true;
     }
