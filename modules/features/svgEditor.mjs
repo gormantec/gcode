@@ -94,7 +94,7 @@ function appendSvgParams(svgBody, svgParams) {
             pageDivC1.innerHTML = param;
             let _svgParams = svgParams;
             let _param = param;
-            pageDivC2.append(createInput(param, svgParams[param], (v) => {
+            pageDivC2.append(createInput(param, svgParams[param], async (v) => {
                 var source = window.editor.getValue();
                 if (_param == "height") {
                     source = source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=").*?(" viewBox=".*?" width=".*?">)/g, "$1" + v + "$2");
@@ -110,7 +110,12 @@ function appendSvgParams(svgBody, svgParams) {
                     window.editor.setValue(source);
                 }
                 else if (_param == "iconName") {
-                    source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=)/g, "$1 name=\"" + v + "\" $2");
+
+                    let r=await fetch("https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg");
+                    let t=await r.text();
+                    t=t.replace(/^.*?\<path .*?d=\"(.*?)\".*$/g, "$1");
+                    source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
+                    //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
                     window.editor.setValue(source);
                 }
                 else if (_param == "backgroundColor") {
