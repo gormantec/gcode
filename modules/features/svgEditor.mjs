@@ -20,6 +20,7 @@ function createSvgMenu(svgParams) {
     svgBody.style.borderStyle = "solid";
     svgBody.style.borderTopWidth = "0px";
     svgBody.style.padding = "5px";
+    svgBody.style.margin = "5px";
     svgPanel.style.width = "420px";
     appendSvgParams(svgBody, svgParams)
     svgPanel.append(svgHeader);
