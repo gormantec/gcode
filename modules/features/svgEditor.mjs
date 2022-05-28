@@ -131,15 +131,17 @@ function appendSvgParams(svgBody, svgParams) {
 }
 function colorInput(input) {
     let _value = input.value;
+    console.log(_value);
     if (_value.startsWith("%23")) _value = "#" + c.substring(3);
     if (_value.startsWith("rbg")) _value = rgbToHex(_value);
-    input.value=_value;
-
     input.type = "color";
+    input.value=_value;
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
     input2.value = hexToRgb(input.value);
+
+    console.log(hexToRgb(input.value));
     var pageDivC1 = document.createElement("div");
     pageDivC1.style.display = "inline-block";
     pageDivC1.style.backgroundColor = "white";
