@@ -62,7 +62,9 @@ function hexToRgb(hex) {
 }
 
 function rgbToHex(rgb) {
-    var a = rgb.split("(")[1].split(")")[0];
+    var a = rgb.split("(")[1].split(")");
+    if(a && a.length>0)a=a[0];
+    else return null;
     a = a.split(",");
     var b = a.map(function (x) {             //For each array element
         x = parseInt(x).toString(16);      //Convert to a base16 string
@@ -187,7 +189,8 @@ function showSvgEditor() {
     pageImg = document.createElement("img");
     pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
 
-    let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
+    let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+    if(c && c.length>0)c=c[0];
     console.log("c:"+c);
     if (!c) c = hexToRgb("#AAAAAA");
     else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
@@ -201,7 +204,9 @@ function showSvgEditor() {
     if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
 
-    let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
+    let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+
+    if(bc && bc.length>0)bc=bc[0];
     console.log("bc:"+bc);
     if (!bc) bc = hexToRgb("#222222");
     else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
@@ -209,13 +214,17 @@ function showSvgEditor() {
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
     console.log("bc:"+bc);
 
-    let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
+    let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
+
+    if(h && h.length>0)h=h[0];
     console.log("h:"+h);
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
     console.log("h:"+h);
 
-    let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g)[0];
+    let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
+
+    if(w && w.length>0)w=w[0];
 
     console.log("w:"+w);
     if (!w) w = "192";
@@ -223,7 +232,9 @@ function showSvgEditor() {
 
     console.log("w:"+w);
 
-    let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g)[0];
+    let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
+
+    if(br && br.length>0)br=br[0];
     console.log("br:"+br);
     if (!br) br = "3";
     else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
