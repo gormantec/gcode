@@ -188,32 +188,46 @@ function showSvgEditor() {
     pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
 
     let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
+    console.log("c:"+c);
     if (!c) c = hexToRgb("#AAAAAA");
     else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
     else if (c.startsWith("#")) c = hexToRgb(c);
 
     let name = source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
+
+    console.log("name:"+name);
     if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
 
     let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g)[0];
+    console.log("bc:"+bc);
     if (!bc) bc = hexToRgb("#222222");
     else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
+    console.log("bc:"+bc);
 
     let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g)[0];
+    console.log("h:"+h);
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    console.log("h:"+h);
 
     let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g)[0];
+
+    console.log("w:"+w);
     if (!w) w = "192";
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
+    console.log("w:"+w);
+
     let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g)[0];
+    console.log("br:"+br);
     if (!br) br = "3";
     else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
+
+    console.log("br:"+br);
 
     let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor": bc, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
