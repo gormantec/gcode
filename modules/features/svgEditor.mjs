@@ -130,18 +130,19 @@ function appendSvgParams(svgBody, svgParams) {
     }
 }
 function colorInput(input) {
-    let _value = input.value;
+    let _input=input;
+    let _value = _input.value;
     console.log(_value);
     if (_value.startsWith("%23")) _value = "#" + c.substring(3);
     if (_value.startsWith("rbg")) _value = rgbToHex(_value);
-    input.type = "color";
-    input.value=_value;
+    _input.type = "color";
+    _input.value=_value;
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
-    input2.value = hexToRgb(input.value);
+    input2.value = hexToRgb(_input.value);
 
-    console.log(hexToRgb(input.value));
+    console.log(hexToRgb(_input.value));
     var pageDivC1 = document.createElement("div");
     pageDivC1.style.display = "inline-block";
     pageDivC1.style.backgroundColor = "white";
@@ -159,11 +160,12 @@ function colorInput(input) {
     pageDivC2.style.display = "inline-block";
     pageDivC2.style.float = "right";
     pageDivC2.style.margin = "-2px";
-    pageDivC2.append(input);
+    pageDivC2.append(_input);
     pageDivC1.append(pageDivC11);
     pageDivC1.append(pageDivC2);
     input.addEventListener('change', function (evt) {
-        input2.value = hexToRgb(this.value);
+        console.log(hexToRgb(_input.value));
+        input2.value = hexToRgb(_input.value);
     });
     input = pageDivC1;
     return input;
