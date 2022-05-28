@@ -71,7 +71,8 @@ function rgbToHex(rgb) {
         x = parseInt(x).toString(16);      //Convert to a base16 string
         return (x.length == 1) ? "0" + x : x;  //Add zero if we get only one character
     });
-    b = "0x" + b.join("");
+    b = "#" + b.join("");
+    return b;
 }
 
 function appendSvgParams(svgBody, svgParams) {
