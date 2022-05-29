@@ -491,11 +491,11 @@ async function _new(aFilename, data) {
 
                             if(aFilename.endsWith(".svg"))
                             {
-                                window.editor.setValue(pyChar + "/*\n" + pyChar + "\n" + pyChar + "  " +
+                                window.editor.setValue(pyChar + "<!--\n/*\n" + pyChar + "\n" + pyChar + "  " +
                                 "filename:" + aFilename + "\n" + pyChar + "  " +
                                 "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
                                 appStuff +
-                                "\n" + pyChar + "\n" + pyChar + "*/\n\n" + _samplecode);
+                                "\n" + pyChar + "\n" + pyChar + "*/\n-->\n\n" + _samplecode);
                             }
                             else{
                                 window.editor.setValue(_samplecode);
