@@ -111,7 +111,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "iconName") {
 
-                    let r=await fetch("https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg");
+                    let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
                     let t=await r.text();
                     console.log(t);
                     t=t.replace(/^.*?\<path .*?d=\"(.*?)\".*$/g, "$1");
