@@ -114,7 +114,7 @@ function appendSvgParams(svgBody, svgParams) {
                     let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
                     let t=await r.text();
                     console.log(t);
-                    t=t.replace(/^.*?\<path .*?d=\"(.*?)\".*$/g, "$1");
+                    t=t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
                     source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
                     //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
                     window.editor.setValue(source);
