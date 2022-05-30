@@ -31,30 +31,18 @@ function createSvgMenu(svgParams) {
 function createInput(param, value, eventListener) {
 
     console.log(param + "=" + value);
-    let input = document.createElement("input");
+    var input = document.createElement("input");
     input.id = "input-param-" + param;
     input.type = "text";
     input.size = 30;
     input.value = value;
     input.addEventListener('change', function (evt) {
-        var source = evt.target || evt.srcElement;
-        if (source.getAttribute("data-imagepath")) {
-            eventListener(source.getAttribute("data-imagepath"));
-        }
-        else {
-            eventListener(source.value);
-        }
+        eventListener(this.value);
     });
     input.addEventListener('input', function (evt) {
         if (evt.which == 13) {
             evt.preventDefault();
-            var source = evt.target || evt.srcElement;
-            if (source.getAttribute("data-imagepath")) {
-                eventListener(source.getAttribute("data-imagepath"));
-            }
-            else {
-                eventListener(source.value);
-            }
+            eventListener(this.value);
         }
     });
     if (param == "color" || param == "backgroundColor" || param == "primaryColor") {
@@ -65,26 +53,31 @@ function createInput(param, value, eventListener) {
         input.addEventListener('change', function (evt) {
             eventListener(this.value);
         });
-    } else if (param == "iconName") {
+    }else if(param == "iconName")
+    {
         input.removeAttribute("type");
-        input.setAttribute("list", "icon-name-list");
-        input.setAttribute("name", "icon-name-choice");
+        input.setAttribute("list","icon-name-list");
+        input.setAttribute("name","icon-name-choice");
 
-        let ddd = window.document.body.querySelector("datalist#icon-name-list");
-        if (!ddd) {
+        let ddd=window.document.body.querySelector("datalist#icon-name-list");
+        if(!ddd)
+        {      
             var datalist = document.createElement("datalist");
-            datalist.setAttribute("id", "icon-name-list");
+            datalist.setAttribute("id","icon-name-list");
             window.document.body.appendChild(datalist);
-            (async () => {
-                let r = await fetch("https://gcode.com.au/images/material/datalist.json");
-                let j = await r.json();
-                if (j && j.data && j.data.length > 0) {
-                    let dddd = window.document.body.querySelector("datalist#icon-name-list");
-                    for (let i = 0; i < j.data.length; i++) {
-                        if (j.data[i].value.endsWith("_materialicons")) {
+            (async()=>{
+                let r=await fetch("https://gcode.com.au/images/material/datalist.json");
+                let j=await r.json();
+                if(j && j.data && j.data.length>0)
+                {
+                    let dddd=window.document.body.querySelector("datalist#icon-name-list");
+                    for(let i=0;i<j.data.length;i++)
+                    {
+                        if(j.data[i].value.endsWith("_materialicons"))
+                        {
                             var option = document.createElement("option");
-                            option.setAttribute("data-imagepath", "/images/material/" + j.data[i].value + "_24px.svg");
-                            option.innerText = j.data[i].value.slice(0, -14).replaceAll("_", " ");
+                            option.setAttribute("data-imagepath","/images/material/"+j.data[i].value+"_24px.svg");
+                            option.innerText=j.data[i].value.slice(0,-14).replaceAll("_"," ");
                             dddd.appendChild(option);
                         }
 
@@ -105,7 +98,7 @@ function hexToRgb(hex) {
 
 function rgbToHex(rgb) {
     var a = rgb.split("(")[1].split(")");
-    if (a && a.length > 0) a = a[0];
+    if(a && a.length>0)a=a[0];
     else return null;
     a = a.split(",");
     var b = a.map(function (x) {             //For each array element
@@ -151,17 +144,15 @@ function appendSvgParams(svgBody, svgParams) {
                     window.editor.setValue(source);
                 }
                 else if (_param == "iconName") {
-                    let imagePath = "https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg";
-                    if (v) {
-                        console.log("----->"+v);
-                        imagePath = v;
-                    }
 
-                    let r = await fetch(imagePath);
-                    let t = await r.text();
+                    let ddoption=window.document.body.querySelector("datalist#icon-name-list option[value=\""+value+"\"]");
+                    console.log(ddoption.dataset.imagpath);
+
+                    let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
+                    let t=await r.text();
                     console.log(t);
-                    t = t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
-                    source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" " + "d=\"" + t + "\"");
+                    t=t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
+                    source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
                     //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
                     window.editor.setValue(source);
                 }
@@ -184,7 +175,7 @@ function appendSvgParams(svgBody, svgParams) {
     }
 }
 function colorInput(input) {
-    let _input = input;
+    let _input=input;
     let _value = _input.value;
     console.log(_value);
     if (_value.startsWith("%23")) _value = "#" + c.substring(3);
@@ -193,7 +184,7 @@ function colorInput(input) {
 
     console.log("Set input color");
     console.log(_value);
-    _input.value = _value;
+    _input.value=_value;
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
@@ -251,56 +242,56 @@ function showSvgEditor() {
     pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
 
     let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-    if (c && c.length > 0) c = c[0];
-    console.log("c:" + c);
+    if(c && c.length>0)c=c[0];
+    console.log("c:"+c);
     if (!c) c = hexToRgb("#AAAAAA");
     else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
     else if (c.startsWith("#")) c = hexToRgb(c);
-    console.log("c:" + c);
+    console.log("c:"+c);
 
     let name = source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
 
-    console.log("name:" + name);
+    console.log("name:"+name);
     if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
 
     let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
 
-    if (bc && bc.length > 0) bc = bc[0];
-    console.log("bc:" + bc);
+    if(bc && bc.length>0)bc=bc[0];
+    console.log("bc:"+bc);
     if (!bc) bc = hexToRgb("#222222");
     else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
-    console.log("bc:" + bc);
+    console.log("bc:"+bc);
 
     let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
 
-    if (h && h.length > 0) h = h[0];
-    console.log("h:" + h);
+    if(h && h.length>0)h=h[0];
+    console.log("h:"+h);
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
-    console.log("h:" + h);
+    console.log("h:"+h);
 
     let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
 
-    if (w && w.length > 0) w = w[0];
+    if(w && w.length>0)w=w[0];
 
-    console.log("w:" + w);
+    console.log("w:"+w);
     if (!w) w = "192";
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
-    console.log("w:" + w);
+    console.log("w:"+w);
 
     let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
 
-    if (br && br.length > 0) br = br[0];
-    console.log("br:" + br);
+    if(br && br.length>0)br=br[0];
+    console.log("br:"+br);
     if (!br) br = "3";
     else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
-    console.log("br:" + br);
+    console.log("br:"+br);
 
     let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor": bc, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
