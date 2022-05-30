@@ -145,7 +145,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "iconName") {
 
-                    let ddoption=window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\""+value+"\"]");
+                    let ddoption=window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\""+v+"\"]");
                     console.log(ddoption);
                     console.log(ddoption.dataset.imagepath);
 
