@@ -37,7 +37,7 @@ function createInput(param, value, eventListener) {
     input.size = 30;
     input.value = value;
     input.addEventListener('change', function (evt) {
-        eventListener(this.value);
+        eventListener(this.value,this.dataset);
     });
     input.addEventListener('input', function (evt) {
         if (evt.which == 13) {
@@ -57,7 +57,6 @@ function createInput(param, value, eventListener) {
     {
         input.removeAttribute("type");
         input.setAttribute("list","icon-name-list");
-        input.setAttribute("id","icon-name-choice");
         input.setAttribute("name","icon-name-choice");
 
         let ddd=window.document.body.querySelector("datalist#icon-name-list");
@@ -129,7 +128,7 @@ function appendSvgParams(svgBody, svgParams) {
             pageDivC1.innerHTML = param;
             let _svgParams = svgParams;
             let _param = param;
-            pageDivC2.append(createInput(param, svgParams[param], async (v) => {
+            pageDivC2.append(createInput(param, svgParams[param], async (v,dataset) => {
                 var source = window.editor.getValue();
                 if (_param == "height") {
                     source = source.replace(/(\<svg xmlns=".*?" enable-background=".*?" height=").*?(" viewBox=".*?" width=".*?">)/g, "$1" + v + "$2");
@@ -145,6 +144,8 @@ function appendSvgParams(svgBody, svgParams) {
                     window.editor.setValue(source);
                 }
                 else if (_param == "iconName") {
+
+                    if(dataset)console.log(dataset);
 
                     let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
                     let t=await r.text();
