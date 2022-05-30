@@ -78,7 +78,7 @@ function createInput(param, value, eventListener) {
                         {
                             var option = document.createElement("option");
                             option.value="/images/material/"+j.data[i]+"_24px.svg";
-                            option.innerText=j.data[i].value.slice(0,-14);
+                            option.innerText=j.data[i].value.slice(0,-14).replace("_"," ");
                             dddd.appendChild(option);
                         }
 
