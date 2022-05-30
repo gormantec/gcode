@@ -282,19 +282,18 @@ function showSvgEditor() {
     pageImg = document.createElement("img");
     pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
 
-    let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+    let c = source.match(/\<g[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(c && c.length>0)c=c[0];
     console.log("c:"+c);
     if (!c) c = hexToRgb("#AAAAAA");
-    else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    else c = c.replace(/(\<g[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
     else if (c.startsWith("#")) c = hexToRgb(c);
     console.log("c:"+c);
 
     let name = source.match(/\<g[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
-
     console.log("name:"+name);
-    if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
 
     let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
