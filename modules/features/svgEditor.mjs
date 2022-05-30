@@ -144,10 +144,13 @@ function appendSvgParams(svgBody, svgParams) {
                     window.editor.setValue(source);
                 }
                 else if (_param == "iconName") {
+                    let imagePath="https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg";
+                    if(dataset && dataset.imagepath){
+                        console.log(dataset.imagepath);
+                        imagePath=dataset.imagepath;
+                    }
 
-                    if(dataset)console.log(dataset);
-
-                    let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
+                    let r=await fetch(imagePath);
                     let t=await r.text();
                     console.log(t);
                     t=t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
