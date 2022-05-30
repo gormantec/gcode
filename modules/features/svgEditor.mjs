@@ -38,7 +38,8 @@ function createInput(param, value, eventListener) {
     input.value = value;
     input.addEventListener('change', function (evt) {
         console.log("change change");  
-        console.log(this.dataset);
+        console.log(this.dataset); 
+        console.log(this.getAttribute("data-imagepath"));
         eventListener(this.value,this.dataset);
     });
     input.addEventListener('input', function (evt) {
