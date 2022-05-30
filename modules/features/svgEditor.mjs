@@ -42,7 +42,7 @@ function createInput(param, value, eventListener) {
     input.addEventListener('input', function (evt) {
         if (evt.which == 13) {
             evt.preventDefault();
-            eventListener(this.value);
+            eventListener(this.value,this.dataset);
         }
     });
     if (param == "color" || param == "backgroundColor" || param == "primaryColor") {
@@ -51,7 +51,7 @@ function createInput(param, value, eventListener) {
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
         input = dropDownInput(input, param);
         input.addEventListener('change', function (evt) {
-            eventListener(this.value);
+            eventListener(this.value,this.dataset);
         });
     }else if(param == "iconName")
     {
