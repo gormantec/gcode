@@ -77,7 +77,7 @@ function createInput(param, value, eventListener) {
                         {
                             var option = document.createElement("option");
                             option.setAttribute("data-imagepath","/images/material/"+j.data[i].value+"_24px.svg");
-                            option.innerText=j.data[i].value.slice(0,-14).replaceAll("_"," ");
+                            option.value=j.data[i].value.slice(0,-14).replaceAll("_"," ");
                             dddd.appendChild(option);
                         }
 
