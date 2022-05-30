@@ -152,8 +152,40 @@ function appendSvgParams(svgBody, svgParams) {
                     {
                         let r=await fetch(ddoption.dataset.imagepath);
                         let t=await r.text();
-                        console.log(t);
-                        t=t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
+                        t=t.replace(/^.*?\>(\<.*?d=\".*?\".*)\<\/svg.*$/g, "$1");
+                        let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+                        if(c && c.length>0)c=c[0];
+                        if (!c) c = hexToRgb("#AAAAAA");
+                        else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
+                        else if (c.startsWith("#")) c = hexToRgb(c);
+                        let name = source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
+                        if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        else name = "";
+                        let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+                        if(bc && bc.length>0)bc=bc[0];
+                        if (!bc) bc = hexToRgb("#222222");
+                        else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
+                        else if (bc.startsWith("#")) bc = hexToRgb(bc);
+                        let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
+                        if(h && h.length>0)h=h[0];
+                        if (!h) h = "192";
+                        else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
+                        if(w && w.length>0)w=w[0];
+                        if (!w) w = "192";
+                        else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
+                        if(br && br.length>0)br=br[0];
+                        if (!br) br = "3";
+                        else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
+
+
+                        t="<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">"+
+                        "<rect fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>" +
+                        "<g id=\"icon\" fill=\""+c+"\" transform=\"translate(3 3)\">"+t+"</g></svg>";
+
                         source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
                         //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
                         window.editor.setValue(source);
@@ -261,7 +293,6 @@ function showSvgEditor() {
     else name = "";
 
     let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-
     if(bc && bc.length>0)bc=bc[0];
     console.log("bc:"+bc);
     if (!bc) bc = hexToRgb("#222222");
@@ -271,15 +302,12 @@ function showSvgEditor() {
     console.log("bc:"+bc);
 
     let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
-
     if(h && h.length>0)h=h[0];
     console.log("h:"+h);
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
     console.log("h:"+h);
-
     let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
-
     if(w && w.length>0)w=w[0];
 
     console.log("w:"+w);
@@ -287,9 +315,7 @@ function showSvgEditor() {
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
     console.log("w:"+w);
-
     let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
-
     if(br && br.length>0)br=br[0];
     console.log("br:"+br);
     if (!br) br = "3";
