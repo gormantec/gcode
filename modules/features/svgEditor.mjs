@@ -74,9 +74,13 @@ function createInput(param, value, eventListener) {
                     let dddd=window.document.body.querySelector("datalist#icon-name-list");
                     for(let i=0;i<j.data.length;i++)
                     {
-                        var option = document.createElement("option");
-                        option.value=j.data[i].value;
-                        dddd.appendChild(option);
+                        if(j.data[i].value.endsWith("_materialicons"))
+                        {
+                            var option = document.createElement("option");
+                            option.value=j.data[i].value.slice(0,-14);
+                            dddd.appendChild(option);
+                        }
+
                     }
                 }
             })();
