@@ -148,14 +148,17 @@ function appendSvgParams(svgBody, svgParams) {
                     let ddoption=window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\""+v+"\"]");
                     console.log(ddoption);
                     console.log(ddoption.dataset.imagepath);
+                    if(ddoption && ddoption.dataset && ddoption.dataset.imagepath)
+                    {
+                        let r=await fetch(ddoption.dataset.imagepath);
+                        let t=await r.text();
+                        console.log(t);
+                        t=t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
+                        source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
+                        //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
+                        window.editor.setValue(source);
+                    }
 
-                    let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
-                    let t=await r.text();
-                    console.log(t);
-                    t=t.replace(/^.*\<path .*?d=\"(.*?)\".*$/g, "$1");
-                    source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
-                    //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
-                    window.editor.setValue(source);
                 }
                 else if (_param == "backgroundColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
