@@ -140,7 +140,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "color") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    source = source.replace(/\<path [.\s\S]*transform/g, "<path fill=\"" + v + "\" transform");
+                    source = source.replace(/\<g id="icon" fill="(.*?)"/g, "<g id=\"icon\" fill=\""+v+"\"");
                     window.editor.setValue(source);
                 }
                 else if (_param == "iconName") {
