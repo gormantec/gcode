@@ -145,8 +145,9 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "iconName") {
 
-                    let ddoption=window.document.body.querySelector("datalist#icon-name-list option[value=\""+value+"\"]");
-                    console.log(ddoption.dataset.imagpath);
+                    let ddoption=window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\""+value+"\"]");
+                    console.log(ddoption);
+                    console.log(ddoption.dataset.imagepath);
 
                     let r=await fetch("https://gcode.com.au/images/material/hardware_headset_materialiconsoutlined_24px.svg");
                     let t=await r.text();
