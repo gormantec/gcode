@@ -77,7 +77,7 @@ function createInput(param, value, eventListener) {
                         if(j.data[i].value.endsWith("_materialicons"))
                         {
                             var option = document.createElement("option");
-                            option.value="/images/material/"+j.data[i]+"_24px.svg";
+                            option.value="/images/material/"+j.data[i].value+"_24px.svg";
                             option.innerText=j.data[i].value.slice(0,-14).replace("_"," ");
                             dddd.appendChild(option);
                         }
