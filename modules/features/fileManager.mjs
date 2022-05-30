@@ -445,7 +445,7 @@ async function _new(aFilename, data) {
             else if (aFilename.endsWith(".ts")) sampleName = "modules/sample.ts";
             else if (aFilename.endsWith(".js")) sampleName = "modules/sample.js";
             else if (aFilename.endsWith(".py")) sampleName = "modules/sample.py";
-            else if (aFilename.endsWith(".svg")) sampleName = "https://raw.githubusercontent.com/google/material-design-icons/master/src/action/shopping_bag/materialiconsoutlined/24px.svg";
+            else if (aFilename.endsWith(".svg")) sampleName = "modules/sample.svg";
             else sampleName = "modules/sample.txt";
 
             fetch(sampleName)
