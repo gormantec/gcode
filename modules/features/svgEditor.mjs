@@ -31,17 +31,21 @@ function createSvgMenu(svgParams) {
 function createInput(param, value, eventListener) {
 
     console.log(param + "=" + value);
-    var input = document.createElement("input");
+    let input = document.createElement("input");
     input.id = "input-param-" + param;
     input.type = "text";
     input.size = 30;
     input.value = value;
     input.addEventListener('change', function (evt) {
+        console.log("change change");  
+        console.log(this.dataset);
         eventListener(this.value,this.dataset);
     });
     input.addEventListener('input', function (evt) {
         if (evt.which == 13) {
             evt.preventDefault();
+            console.log("input change");  
+            console.log(this.dataset);
             eventListener(this.value,this.dataset);
         }
     });
@@ -51,6 +55,8 @@ function createInput(param, value, eventListener) {
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
         input = dropDownInput(input, param);
         input.addEventListener('change', function (evt) {
+            console.log("dropDownInput change");  
+            console.log(this.dataset);
             eventListener(this.value,this.dataset);
         });
     }else if(param == "iconName")
