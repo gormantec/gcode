@@ -53,6 +53,24 @@ function createInput(param, value, eventListener) {
         input.addEventListener('change', function (evt) {
             eventListener(this.value);
         });
+    }else if(param == "iconName")
+    {
+        input.removeAttribute("type");
+        input.setAttribute("list","icon-name-list");
+        input.setAttribute("id","icon-name-choice");
+        input.setAttribute("name","icon-name-choice");
+
+        let ddd=window.document.body.querySelector("datalist#icon-name-list");
+        if(!ddd)
+        {       
+            var datalist = document.createElement("datalist");
+            var option = document.createElement("option");
+            option.value="test1";
+            datalist.appendChild(option);
+            datalist.setAttribute("id","icon-name-list");
+            window.document.body.appendChild(datalist);
+        }
+
     }
     return input;
 }
