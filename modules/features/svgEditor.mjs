@@ -188,8 +188,8 @@ function appendSvgParams(svgBody, svgParams) {
                         comment=comment.trim();
 
                         t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
-                        "<rect fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
-                        "<g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n"+t+"\n</g>\n</svg>";
+                        "    <rect fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
+                        "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
 
                         //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
                         //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
