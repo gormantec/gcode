@@ -181,8 +181,13 @@ function appendSvgParams(svgBody, svgParams) {
                         if (!br) br = "3";
                         else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
+                        let comment = source.match(/\<\!\-\-[\s\S]*?\-\-\>/g);
+                        if(comment && comment.length>0)comment=comment[0];
+                        if (!comment) comment = "no comments";
+                        else comment = comment.replace(/\<\!\-\-([\s\S]*?)\-\-\>/g, "$1");
+                        comment=comment.trim();
 
-                        t="<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
+                        t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
                         "<rect fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
                         "<g id=\"icon\" fill=\""+c+"\" transform=\"translate(3 3)\">\n"+t+"\n</g>\n</svg>";
 
