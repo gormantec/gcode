@@ -62,13 +62,25 @@ function createInput(param, value, eventListener) {
 
         let ddd=window.document.body.querySelector("datalist#icon-name-list");
         if(!ddd)
-        {       
+        {      
             var datalist = document.createElement("datalist");
-            var option = document.createElement("option");
-            option.value="test1";
-            datalist.appendChild(option);
             datalist.setAttribute("id","icon-name-list");
             window.document.body.appendChild(datalist);
+            (async()=>{
+                let r=await fetch("https://gcode.com.au/images/material/datalist.json");
+                let j=await r.json();
+                if(j && j.data && j.data.length>0)
+                {
+                    let dddd=window.document.body.querySelector("datalist#icon-name-list");
+                    for(let i=0;i<j.data.length;i++)
+                    {
+                        var option = document.createElement("option");
+                        option.value=j.data[i].value;
+                        dddd.appendChild(option);
+                    }
+                }
+            })();
+
         }
 
     }
