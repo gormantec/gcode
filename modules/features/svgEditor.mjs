@@ -153,14 +153,14 @@ function appendSvgParams(svgBody, svgParams) {
                         let r=await fetch(ddoption.dataset.imagepath);
                         let t=await r.text();
                         t=t.replace(/^.*?\>(\<.*?d=\".*?\".*)\<\/svg.*$/g, "$1");
-                        let c = source.match(/\<path[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+                        let c = source.match(/\<g[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
                         if(c && c.length>0)c=c[0];
                         if (!c) c = hexToRgb("#AAAAAA");
-                        else c = c.replace(/(\<path[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        else c = c.replace(/(\<g[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
                         else if (c.startsWith("#")) c = hexToRgb(c);
-                        let name = source.match(/\<path[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
-                        if (name && name[0]) name = name[0].replace(/(\<path[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        let name = source.match(/\<g[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
+                        if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         else name = "";
                         let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
                         if(bc && bc.length>0)bc=bc[0];
