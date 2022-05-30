@@ -201,12 +201,12 @@ function appendSvgParams(svgBody, svgParams) {
                 else if (_param == "backgroundColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
                     console.log(source);
-                    source = source.replace(/(\<rect[\s\S]*?fill=").*?(")/, "$1" + v + "$2");
+                    source = source.replace(/(\<rect[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                     console.log(source);
                 }
                 else if (_param == "borderRadius") {
-                    source = source.replace(/(\<rect[\s\S]*?rx=").*?(")/, "$1" + v + "$2");
+                    source = source.replace(/(\<rect[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
                 pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
