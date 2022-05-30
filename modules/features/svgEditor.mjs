@@ -149,6 +149,10 @@ function appendSvgParams(svgBody, svgParams) {
                         console.log(dataset.imagepath);
                         imagePath=dataset.imagepath;
                     }
+                    else{
+                        console.log(dataset);
+                        if(dataset)console.log(dataset.imagepath);
+                    }
 
                     let r=await fetch(imagePath);
                     let t=await r.text();
