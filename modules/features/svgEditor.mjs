@@ -193,7 +193,8 @@ function appendSvgParams(svgBody, svgParams) {
 
                         //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
                         //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
-                        window.editor.setValue(t);
+                        source=t;
+                        window.editor.setValue(source);
                     }
 
                 }
