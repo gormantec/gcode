@@ -30,7 +30,7 @@ function createSvgMenu(svgParams) {
 
 function createInput(param, value, eventListener) {
 
-    console.log(param + "=" + value);
+
     var input = document.createElement("input");
     input.id = "input-param-" + param;
     input.type = "text";
@@ -112,10 +112,10 @@ function rgbToHex(rgb) {
 
 function appendSvgParams(svgBody, svgParams) {
     if (svgParams && svgBody) {
-        console.log(svgParams);
+    
         for (var param in svgParams) {
 
-            console.log(param);
+        
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
             let pageDivC1 = document.createElement("div");
@@ -147,8 +147,8 @@ function appendSvgParams(svgBody, svgParams) {
                 else if (_param == "iconName") {
 
                     let ddoption=window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\""+v+"\"]");
-                    console.log(ddoption);
-                    console.log(ddoption.dataset.imagepath);
+                
+                
                     if(ddoption && ddoption.dataset && ddoption.dataset.imagepath)
                     {
                         let r=await fetch(ddoption.dataset.imagepath);
@@ -202,7 +202,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "backgroundColor1") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    console.log("v:"+v);
+                
                     if(v=="none" || v=="clip")
                     {
                         window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "none";
@@ -218,7 +218,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "backgroundColor2") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    console.log("v:"+v);
+                
                     if(v=="none" || v=="clip")
                     {
                         window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "none";
@@ -250,13 +250,13 @@ function appendSvgParams(svgBody, svgParams) {
 function colorInput(input) {
     let _input=input;
     let _value = _input.value;
-    console.log(_value);
+
     if (_value.startsWith("%23")) _value = "#" + c.substring(3);
     if (_value.startsWith("rgb")) _value = rgbToHex(_value);
     _input.type = "color";
 
-    console.log("Set input color");
-    console.log(_value);
+
+
     _input.value=_value;
 
     var input2 = document.createElement("input");
@@ -321,57 +321,57 @@ function showSvgEditor() {
 
     let c = source.match(/\<g[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(c && c.length>0)c=c[0];
-    console.log("c:"+c);
+
     if (!c) c = hexToRgb("#AAAAAA");
     else c = c.replace(/(\<g[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
     else if (c.startsWith("#")) c = hexToRgb(c);
-    console.log("c:"+c);
+
 
     let name = source.match(/\<g[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
-    console.log("name:"+name);
+
     if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
 
     let bc2 = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc2 && bc2.length>0)bc2=bc2[0];
-    console.log("bc2:"+bc2);
+
     if (!bc2) bc2 = hexToRgb("#222222");
     else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
     else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
-    console.log("bc2:"+bc2);
+
 
     let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc && bc.length>0)bc=bc[0];
-    console.log("bc:"+bc);
+
     if (!bc) bc = hexToRgb("#222222");
     else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
-    console.log("bc:"+bc);
+
 
     let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
     if(h && h.length>0)h=h[0];
-    console.log("h:"+h);
+
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
-    console.log("h:"+h);
+
     let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
     if(w && w.length>0)w=w[0];
 
-    console.log("w:"+w);
+
     if (!w) w = "192";
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
-    console.log("w:"+w);
+
     let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
     if(br && br.length>0)br=br[0];
-    console.log("br:"+br);
+
     if (!br) br = "3";
     else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
-    console.log("br:"+br);
+
 
     let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor1": bc,"backgroundColor2": bc2, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
