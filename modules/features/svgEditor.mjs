@@ -221,11 +221,14 @@ function appendSvgParams(svgBody, svgParams) {
                 else if (_param == "backgroundColor2") {
                     if (v.startsWith("#")) v = hexToRgb(v);
                 
+                    console.log("backgroundColor2:"+v);
                     if(v=="none" || v=="clip")
                     {
+                        console.log("backgroundColor2:hide");
                         window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "none";
                     }
                     else{
+                        console.log("backgroundColor2:show");
                         window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "inline-block";
                     }
                     if(v!="clip")
