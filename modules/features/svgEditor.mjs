@@ -348,7 +348,7 @@ function showSvgEditor() {
 
     console.log("br:"+br);
 
-    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor1": bc,"backgroundColor2": bc, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
+    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor1": bc,"backgroundColor2": bc2, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
     rootMiddlePage.append(pageImg);
     document.getElementById("pageMiddle").append(rootMiddlePage);
