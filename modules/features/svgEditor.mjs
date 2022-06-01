@@ -45,7 +45,7 @@ function createInput(param, value, eventListener) {
             eventListener(this.value);
         }
     });
-    if (param == "color" || param == "backgroundColor" || param == "primaryColor") {
+    if (param == "color" || param == "backgroundColor1" || param == "backgroundColor2" || param == "primaryColor") {
         input = colorInput(input);
     }
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
@@ -199,15 +199,23 @@ function appendSvgParams(svgBody, svgParams) {
                     }
 
                 }
-                else if (_param == "backgroundColor") {
+                else if (_param == "backgroundColor1") {
                     if (v.startsWith("#")) v = hexToRgb(v);
                     console.log(source);
                     source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                     console.log(source);
                 }
+                else if (_param == "backgroundColor2") {
+                    if (v.startsWith("#")) v = hexToRgb(v);
+                    console.log(source);
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
+                    window.editor.setValue(source);
+                    console.log(source);
+                }
                 else if (_param == "borderRadius") {
                     source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
                 pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
@@ -331,7 +339,7 @@ function showSvgEditor() {
 
     console.log("br:"+br);
 
-    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor": bc, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
+    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor1": bc,"backgroundColor2": bc, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
     rootMiddlePage.append(pageImg);
     document.getElementById("pageMiddle").append(rootMiddlePage);
