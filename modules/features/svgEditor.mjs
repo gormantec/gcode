@@ -202,10 +202,9 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "backgroundColor1") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    console.log(source);
+                    console.log("v:"+v);
                     source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
-                    console.log(source);
                 }
                 else if (_param == "backgroundColor2") {
                     if (v.startsWith("#")) v = hexToRgb(v);
