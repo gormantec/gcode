@@ -215,7 +215,7 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "borderRadius") {
                     source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
-                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?rx=").*?(")/, "$1" + (v-1) + "$2");
                     window.editor.setValue(source);
                 }
                 pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
@@ -307,6 +307,15 @@ function showSvgEditor() {
     console.log("name:"+name);
     if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
+
+    let bc2 = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+    if(bc2 && bc2.length>0)bc2=bc2[0];
+    console.log("bc2:"+bc2);
+    if (!bc2) bc2 = hexToRgb("#222222");
+    else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
+    else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
+    console.log("bc2:"+bc2);
 
     let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc && bc.length>0)bc=bc[0];
