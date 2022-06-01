@@ -276,7 +276,8 @@ function colorInput(input) {
         input2.value = _input.value;
     }
     
-
+    console.log(value);
+    console.log(_input.value);
     console.log(hexToRgb(_input.value));
     var pageDivC1 = document.createElement("div");
     pageDivC1.style.display = "inline-block";
@@ -299,6 +300,8 @@ function colorInput(input) {
     if(_value=="none")
     {
         pageDivC2.style.display="none";
+        console.log(_input.id);
+        console.log("HIDE");
     }
     pageDivC1.append(pageDivC11);
     pageDivC1.append(pageDivC2);
