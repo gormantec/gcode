@@ -203,8 +203,18 @@ function appendSvgParams(svgBody, svgParams) {
                 else if (_param == "backgroundColor1") {
                     if (v.startsWith("#")) v = hexToRgb(v);
                     console.log("v:"+v);
-                    source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
-                    window.editor.setValue(source);
+                    if(v=="none" || v=="clip")
+                    {
+                        window.document.querySelector("input#input-param-backgroundColor1").style.display = "none";
+                    }
+                    else{
+                        window.document.querySelector("input#input-param-backgroundColor1").style.display = "inline-block";
+                    }
+                    if(v!="clip")
+                    {
+                        source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
+                        window.editor.setValue(source);
+                    }
                 }
                 else if (_param == "backgroundColor2") {
                     if (v.startsWith("#")) v = hexToRgb(v);
