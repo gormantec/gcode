@@ -42,6 +42,7 @@ function createInput(param, value, eventListener) {
     input.addEventListener('input', function (evt) {
         if (evt.which == 13) {
             evt.preventDefault();
+            console.log(this.value);
             eventListener(this.value);
         }
     });
