@@ -162,10 +162,10 @@ function appendSvgParams(svgBody, svgParams) {
                         let name = source.match(/\<g[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
                         if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         else name = "";
-                        let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+                        let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
                         if(bc && bc.length>0)bc=bc[0];
                         if (!bc) bc = hexToRgb("#222222");
-                        else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
                         else if (bc.startsWith("#")) bc = hexToRgb(bc);
                         let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
@@ -176,10 +176,10 @@ function appendSvgParams(svgBody, svgParams) {
                         if(w && w.length>0)w=w[0];
                         if (!w) w = "192";
                         else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
-                        let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
+                        let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
                         if(br && br.length>0)br=br[0];
                         if (!br) br = "3";
-                        else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
                         let comment = source.match(/\<\!\-\-[\s\S]*?\-\-\>/g);
                         if(comment && comment.length>0)comment=comment[0];
@@ -188,7 +188,8 @@ function appendSvgParams(svgBody, svgParams) {
                         comment=comment.trim();
 
                         t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
-                        "    <rect fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
+                        "    <rect name=\"outerBG\" fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
+                        "    <rect name=\"innerBG\" fill=\"none\" rx=\""+br+"\" height=\"28\" width=\"28\" transform=\"translate(1 1)\"/>\n" +
                         "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
 
                         //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
@@ -201,18 +202,18 @@ function appendSvgParams(svgBody, svgParams) {
                 else if (_param == "backgroundColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
                     console.log(source);
-                    source = source.replace(/(\<rect[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
+                    source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                     console.log(source);
                 }
                 else if (_param == "borderRadius") {
-                    source = source.replace(/(\<rect[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
+                    source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
                 pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
                 //text=text.replace(/\<svg xmlns=".*?" enable-background=".*?" height=".*?" viewBox=".*?" width=".*?">/g,"<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\"192\" viewBox=\"0 0 30 30\" width=\"192\">");
                 //text=text.replace(/\<path /g,"<path transform=\"translate(3 3)\" ");
-                //text=text.replace(/\<rect fill="none" height=".*?" width=".*?"/g,"<rect fill=\"%23323232\" rx=\"3\" height=\"30\" width=\"30\"");
+                //text=text.replace(/\<rect.*?name="outerBG" fill="none" height=".*?" width=".*?"/g,"<rect.*?name="outerBG" fill=\"%23323232\" rx=\"3\" height=\"30\" width=\"30\"");
             }));
             svgBody.append(pageDivRow);
         }
@@ -299,11 +300,11 @@ function showSvgEditor() {
     if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
 
-    let bc = source.match(/\<rect[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+    let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc && bc.length>0)bc=bc[0];
     console.log("bc:"+bc);
     if (!bc) bc = hexToRgb("#222222");
-    else bc = bc.replace(/(\<rect[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
     console.log("bc:"+bc);
@@ -322,11 +323,11 @@ function showSvgEditor() {
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
     console.log("w:"+w);
-    let br = source.match(/\<rect[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
+    let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
     if(br && br.length>0)br=br[0];
     console.log("br:"+br);
     if (!br) br = "3";
-    else br = br.replace(/(\<rect[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
+    else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
     console.log("br:"+br);
 
