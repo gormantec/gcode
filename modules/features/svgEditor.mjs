@@ -205,10 +205,10 @@ function appendSvgParams(svgBody, svgParams) {
                     console.log("v:"+v);
                     if(v=="none" || v=="clip")
                     {
-                        window.document.querySelector("input#input-param-backgroundColor1").style.display = "none";
+                        window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "none";
                     }
                     else{
-                        window.document.querySelector("input#input-param-backgroundColor1").style.display = "inline-block";
+                        window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "inline-block";
                     }
                     if(v!="clip")
                     {
@@ -221,10 +221,10 @@ function appendSvgParams(svgBody, svgParams) {
                     console.log("v:"+v);
                     if(v=="none" || v=="clip")
                     {
-                        window.document.querySelector("input#input-param-backgroundColor2").style.display = "none";
+                        window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "none";
                     }
                     else{
-                        window.document.querySelector("input#input-param-backgroundColor2").style.display = "inline-block";
+                        window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "inline-block";
                     }
                     if(v!="clip")
                     {
@@ -258,6 +258,7 @@ function colorInput(input) {
     console.log("Set input color");
     console.log(_value);
     _input.value=_value;
+
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
@@ -282,6 +283,10 @@ function colorInput(input) {
     pageDivC2.style.float = "right";
     pageDivC2.style.margin = "-2px";
     pageDivC2.append(_input);
+    if(_value=="none")
+    {
+        pageDivC2.style.display="none";
+    }
     pageDivC1.append(pageDivC11);
     pageDivC1.append(pageDivC2);
     input.addEventListener('change', function (evt) {
