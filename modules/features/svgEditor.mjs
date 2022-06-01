@@ -264,7 +264,15 @@ function colorInput(input) {
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
-    input2.value = hexToRgb(_input.value);
+    if(_input.value.startsWith("#"))
+    {
+        input2.value = hexToRgb(_input.value);
+    }
+    else 
+    {
+        input2.value = _input.value;
+    }
+    
 
     console.log(hexToRgb(_input.value));
     var pageDivC1 = document.createElement("div");
