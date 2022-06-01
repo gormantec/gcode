@@ -202,12 +202,14 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "backgroundColor1") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                
+                    console.log("backgroundColor1:"+v);
                     if(v=="none" || v=="clip")
                     {
+                        console.log("backgroundColor1:hide");
                         window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "none";
                     }
                     else{
+                        console.log("backgroundColor1:show");
                         window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "inline-block";
                     }
                     if(v!="clip")
