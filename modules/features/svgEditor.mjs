@@ -273,13 +273,9 @@ function colorInput(input) {
     {
         input2.value = hexToRgb(_value);
     }
-    else if(_value.startsWith("rgb"))
+    else
     {
         input2.value = _value;
-    }
-    else 
-    {
-        input2.value = _input.value;
     }
     
     console.log(_value);
