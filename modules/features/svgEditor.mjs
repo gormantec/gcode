@@ -213,6 +213,14 @@ function appendSvgParams(svgBody, svgParams) {
                     else{
                         console.log("backgroundColor1:show");
                         window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "inline-block";
+                        if(v.startsWith("rgb"))
+                        {
+                            window.document.querySelector("input#input-param-backgroundColor1").value=rgbToHex(v);
+                        }
+                        else if(v.startsWith("#"))
+                        {
+                            window.document.querySelector("input#input-param-backgroundColor1").value=v;
+                        }
                     }
                     if(v!="clip")
                     {
@@ -232,6 +240,14 @@ function appendSvgParams(svgBody, svgParams) {
                     else{
                         console.log("backgroundColor2:show");
                         window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "inline-block";
+                        if(v.startsWith("rgb"))
+                        {
+                            window.document.querySelector("input#input-param-backgroundColor2").value=rgbToHex(v);
+                        }
+                        else if(v.startsWith("#"))
+                        {
+                            window.document.querySelector("input#input-param-backgroundColor2").value=v;
+                        }
                     }
                     if(v!="clip")
                     {
