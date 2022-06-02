@@ -254,7 +254,7 @@ function appendSvgParams(svgBody, svgParams) {
         }
     }
 }
-function colorInput(input,eventHandler) {
+function colorInput(input,eventListener) {
     let _input=input;
     let _value = _input.value;
 
