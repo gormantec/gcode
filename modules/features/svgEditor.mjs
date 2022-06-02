@@ -47,9 +47,11 @@ function createInput(param, value, eventListener) {
         }
     });
     if (param == "color" || param == "backgroundColor1" || param == "backgroundColor2" || param == "primaryColor") {
+        console.log("------> param = "+param);
         input = colorInput(input);
     }
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
+
         input = dropDownInput(input, param);
         input.addEventListener('change', function (evt) {
             eventListener(this.value);
