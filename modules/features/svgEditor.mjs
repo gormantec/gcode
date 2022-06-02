@@ -280,7 +280,7 @@ function colorInput(input) {
         input2.value = _input.value;
     }
     
-    console.log(value);
+    console.log(_value);
     console.log(_input.value);
     console.log(hexToRgb(_input.value));
     var pageDivC1 = document.createElement("div");
