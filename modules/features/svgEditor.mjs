@@ -48,7 +48,7 @@ function createInput(param, value, eventListener) {
     });
     if (param == "color" || param == "backgroundColor1" || param == "backgroundColor2" || param == "primaryColor") {
         console.log("------> param = "+param);
-        input = colorInput(input);
+        input = colorInput(input,eventListener);
     }
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
 
@@ -254,7 +254,7 @@ function appendSvgParams(svgBody, svgParams) {
         }
     }
 }
-function colorInput(input) {
+function colorInput(input,eventHandler) {
     let _input=input;
     let _value = _input.value;
 
@@ -277,6 +277,17 @@ function colorInput(input) {
     {
         input2.value = _value;
     }
+
+    input2.addEventListener('change', function (evt) {
+        eventListener(this.value);
+    });
+    input2.addEventListener('input', function (evt) {
+        if (evt.which == 13) {
+            evt.preventDefault();
+            console.log(this.value);
+            eventListener(this.value);
+        }
+    });
     
     console.log(_value);
     console.log(_input.value);
