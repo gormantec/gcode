@@ -165,9 +165,15 @@ function appendSvgParams(svgBody, svgParams) {
                         let name = source.match(/\<g[.\s\S]*?name=".*?"[.\s\S]*?\>/g);
                         if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         else name = "";
+                        let bc2 = source.match(/\<rect.*?name="innerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
+                        if(bc2 && bc2.length>0)bc2=bc2[0];
+                        if (!bc2) bc2 = "none";
+                        else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                        if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
+                        else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
                         let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
                         if(bc && bc.length>0)bc=bc[0];
-                        if (!bc) bc = hexToRgb("#222222");
+                        if (!bc) bc = "none";
                         else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
                         else if (bc.startsWith("#")) bc = hexToRgb(bc);
@@ -192,7 +198,7 @@ function appendSvgParams(svgBody, svgParams) {
 
                         t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
                         "    <rect name=\"outerBG\" fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
-                        "    <rect name=\"innerBG\" fill=\"none\" rx=\""+br+"\" height=\"28\" width=\"28\" transform=\"translate(1 1)\"/>\n" +
+                        "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\"28\" width=\"28\" transform=\"translate(1 1)\"/>\n" +
                         "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
 
                         //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
