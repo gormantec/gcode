@@ -46,7 +46,7 @@ function createInput(param, value, eventListener) {
             eventListener(this.value);
         }
     });
-    if (param == "color" || param == "backgroundColor1" || param == "backgroundColor2" || param == "primaryColor") {
+    if (param == "color" || param == "borderColor" || param == "backgroundColor" || param == "primaryColor") {
         console.log("------> param = "+param);
         input = colorInput(input,eventListener);
     }
@@ -208,24 +208,24 @@ function appendSvgParams(svgBody, svgParams) {
                     }
 
                 }
-                else if (_param == "backgroundColor1") {
+                else if (_param == "borderColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    console.log("backgroundColor1:"+v);
+                    console.log("borderColor:"+v);
                     if(v=="none" || v=="clip")
                     {
-                        console.log("backgroundColor1:hide");
-                        window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "none";
+                        console.log("borderColor:hide");
+                        window.document.querySelector("input#input-param-borderColor").parentElement.style.display = "none";
                     }
                     else{
-                        console.log("backgroundColor1:show");
-                        window.document.querySelector("input#input-param-backgroundColor1").parentElement.style.display = "inline-block";
+                        console.log("borderColor:show");
+                        window.document.querySelector("input#input-param-borderColor").parentElement.style.display = "inline-block";
                         if(v.startsWith("rgb"))
                         {
-                            window.document.querySelector("input#input-param-backgroundColor1").value=rgbToHex(v);
+                            window.document.querySelector("input#input-param-borderColor").value=rgbToHex(v);
                         }
                         else if(v.startsWith("#"))
                         {
-                            window.document.querySelector("input#input-param-backgroundColor1").value=v;
+                            window.document.querySelector("input#input-param-borderColor").value=v;
                         }
                     }
                     if(v!="clip")
@@ -234,25 +234,25 @@ function appendSvgParams(svgBody, svgParams) {
                         window.editor.setValue(source);
                     }
                 }
-                else if (_param == "backgroundColor2") {
+                else if (_param == "backgroundColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
                 
-                    console.log("backgroundColor2:"+v);
+                    console.log("backgroundColor:"+v);
                     if(v=="none" || v=="clip")
                     {
-                        console.log("backgroundColor2:hide");
-                        window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "none";
+                        console.log("backgroundColor:hide");
+                        window.document.querySelector("input#input-param-backgroundColor").parentElement.style.display = "none";
                     }
                     else{
-                        console.log("backgroundColor2:show");
-                        window.document.querySelector("input#input-param-backgroundColor2").parentElement.style.display = "inline-block";
+                        console.log("backgroundColor:show");
+                        window.document.querySelector("input#input-param-backgroundColor").parentElement.style.display = "inline-block";
                         if(v.startsWith("rgb"))
                         {
-                            window.document.querySelector("input#input-param-backgroundColor2").value=rgbToHex(v);
+                            window.document.querySelector("input#input-param-backgroundColor").value=rgbToHex(v);
                         }
                         else if(v.startsWith("#"))
                         {
-                            window.document.querySelector("input#input-param-backgroundColor2").value=v;
+                            window.document.querySelector("input#input-param-backgroundColor").value=v;
                         }
                     }
                     if(v!="clip")
@@ -418,13 +418,21 @@ function showSvgEditor() {
 
     let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
     if(br && br.length>0)br=br[0];
-
     if (!br) br = "3";
     else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
+    let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
+    if(bt && bt.length>0)bt=bt[0];
+    if (!bt) bt = "0";
+    else{
+        bt = bt.replace(/(\<rect.*?name="outerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
+        bt=parseInt(height)-parseInt(bt);
+        if(bt<0)bt=0;
+        if(bt>10)bt=10;
+        bt=""+bt;
+    }
 
-
-    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "backgroundColor1": bc,"backgroundColor2": bc2, "height": "" + h, "width": "" + w, "borderRadius": "" + br, "iconName": "" + name });
+    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "borderColor": bc,"backgroundColor": bc2, "height": "" + h, "width": "" + w, "borderThickness": "" + br,"borderRadius": "" + bt, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
     rootMiddlePage.append(pageImg);
     document.getElementById("pageMiddle").append(rootMiddlePage);
