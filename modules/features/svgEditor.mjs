@@ -190,6 +190,17 @@ function appendSvgParams(svgBody, svgParams) {
                         if (!br) br = "3";
                         else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
 
+                        let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
+                        if(bt && bt.length>0)bt=bt[0];
+                        if (!bt) bt = "0";
+                        else{
+                            bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
+                            bt=Math.round((30-parseInt(bt))/2);
+                            if(bt<0)bt=0;
+                            if(bt>10)bt=10;
+                            bt=""+bt;
+                        }
+
                         let comment = source.match(/\<\!\-\-[\s\S]*?\-\-\>/g);
                         if(comment && comment.length>0)comment=comment[0];
                         if (!comment) comment = "no comments";
@@ -198,7 +209,7 @@ function appendSvgParams(svgBody, svgParams) {
 
                         t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
                         "    <rect name=\"outerBG\" fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
-                        "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\"28\" width=\"28\" transform=\"translate(1 1)\"/>\n" +
+                        "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\""+(30-(bt*2))+"\" width=\""+(30-(bt*2))+"\" transform=\"translate(1 1)\"/>\n" +
                         "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
 
                         //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
@@ -425,8 +436,8 @@ function showSvgEditor() {
     if(bt && bt.length>0)bt=bt[0];
     if (!bt) bt = "0";
     else{
-        bt = bt.replace(/(\<rect.*?name="outerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
-        bt=parseInt(height)-parseInt(bt);
+        bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
+        bt=Math.round((30-parseInt(bt))/2);
         if(bt<0)bt=0;
         if(bt>10)bt=10;
         bt=""+bt;
