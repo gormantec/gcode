@@ -281,6 +281,7 @@ function appendSvgParams(svgBody, svgParams) {
                 else if (_param == "borderThickness") {
                     source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=").*?(")/, "$1" + (30-v) + "$2");
                     source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?width=").*?(")/, "$1" + (30-v) + "$2");
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?transform=").*?(")/, "$1" + "translate("+v+" "+v+")"+ "$2");
                     window.editor.setValue(source);
                 }
                 pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
