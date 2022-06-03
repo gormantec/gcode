@@ -190,8 +190,14 @@ function appendSvgParams(svgBody, svgParams) {
                         if (!br) br = "3";
                         else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         br=parseInt(br);
-                        if(br>15)br=15;
-                        else if(br<0)br=0;
+                        if(br>15){
+                            br=15;
+                            window.document.querySelector("input#input-param-borderRadius").value=br;
+                        }
+                        else if(br<0){
+                            br=0;
+                            window.document.querySelector("input#input-param-borderRadius").value=br;
+                        }
                         br=""+br;
                         let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
                         if(bt && bt.length>0)bt=bt[0];
@@ -199,10 +205,18 @@ function appendSvgParams(svgBody, svgParams) {
                         else{
                             bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
                             bt=Math.round((30-parseInt(bt))/2);
-                            if(bt<0)bt=0;
-                            if(bt>4)bt=4;
+                            if(bt<0)
+                            {
+                                bt=0;
+                                indow.document.querySelector("input#input-param-borderThickness").value=bt;
+                            }
+                            else if(bt>4){
+                                bt=4;
+                                indow.document.querySelector("input#input-param-borderThickness").value=bt;
+                            }
                             bt=""+bt;
                         }
+                        w
 
                         let comment = source.match(/\<\!\-\-[\s\S]*?\-\-\>/g);
                         if(comment && comment.length>0)comment=comment[0];
