@@ -401,7 +401,7 @@ function showSvgEditor() {
     let bc2 = source.match(/\<rect.*?name="innerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc2 && bc2.length>0)bc2=bc2[0];
 
-    if (!bc2) bc2 = hexToRgb("#222222");
+    if (!bc2) bc2 = hexToRgb("#111111");
     else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
     else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
@@ -410,7 +410,7 @@ function showSvgEditor() {
     let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc && bc.length>0)bc=bc[0];
 
-    if (!bc) bc = hexToRgb("#222222");
+    if (!bc) bc = hexToRgb("#555555");
     else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
