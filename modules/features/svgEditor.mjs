@@ -209,7 +209,7 @@ function appendSvgParams(svgBody, svgParams) {
 
                         t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
                         "    <rect name=\"outerBG\" fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
-                        "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\""+(30-(bt*2))+"\" width=\""+(30-(bt*2))+"\" transform=\"translate(1 1)\"/>\n" +
+                        "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\""+(30-(bt*2))+"\" width=\""+(30-(bt*2))+"\" transform=\"translate("+bt+" "+bt+")\"/>\n" +
                         "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
 
                         //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
