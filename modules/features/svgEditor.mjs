@@ -189,7 +189,10 @@ function appendSvgParams(svgBody, svgParams) {
                         if(br && br.length>0)br=br[0];
                         if (!br) br = "3";
                         else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
-
+                        br=parseInt(br);
+                        if(br>15)br=15;
+                        else if(br<0)br=0;
+                        br=""+br;
                         let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
                         if(bt && bt.length>0)bt=bt[0];
                         if (!bt) bt = "0";
@@ -428,7 +431,7 @@ function showSvgEditor() {
         bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
         bt=Math.round((30-parseInt(bt))/2);
         if(bt<0)bt=0;
-        if(bt>10)bt=10;
+        if(bt>4)bt=4;
         bt=""+bt;
     }
 
