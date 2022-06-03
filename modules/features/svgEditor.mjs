@@ -397,44 +397,30 @@ function showSvgEditor() {
 
     if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
-
     let bc2 = source.match(/\<rect.*?name="innerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc2 && bc2.length>0)bc2=bc2[0];
-
     if (!bc2) bc2 = hexToRgb("#111111");
     else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
     else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
-
-
     let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
     if(bc && bc.length>0)bc=bc[0];
-
     if (!bc) bc = hexToRgb("#555555");
     else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
-
-
     let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
     if(h && h.length>0)h=h[0];
-
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
-
     let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
     if(w && w.length>0)w=w[0];
-
-
     if (!w) w = "192";
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
-
-
     let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
     if(br && br.length>0)br=br[0];
     if (!br) br = "3";
     else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
-
     let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
     if(bt && bt.length>0)bt=bt[0];
     if (!bt) bt = "0";
