@@ -197,7 +197,7 @@ function appendSvgParams(svgBody, svgParams) {
                             bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
                             bt=Math.round((30-parseInt(bt))/2);
                             if(bt<0)bt=0;
-                            if(bt>10)bt=10;
+                            if(bt>4)bt=4;
                             bt=""+bt;
                         }
 
