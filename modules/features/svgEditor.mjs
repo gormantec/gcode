@@ -47,8 +47,8 @@ function createInput(param, value, eventListener) {
         }
     });
     if (param == "color" || param == "borderColor" || param == "backgroundColor" || param == "primaryColor") {
-        console.log("------> param = "+param);
-        input = colorInput(input,eventListener);
+        console.log("------> param = " + param);
+        input = colorInput(input, eventListener);
     }
     else if (param == "backgroundPosition" || param == "backgroundRepeat" || param == "textAlign") {
 
@@ -56,31 +56,26 @@ function createInput(param, value, eventListener) {
         input.addEventListener('change', function (evt) {
             eventListener(this.value);
         });
-    }else if(param == "iconName")
-    {
+    } else if (param == "iconName") {
         input.removeAttribute("type");
-        input.setAttribute("list","icon-name-list");
-        input.setAttribute("name","icon-name-choice");
+        input.setAttribute("list", "icon-name-list");
+        input.setAttribute("name", "icon-name-choice");
 
-        let ddd=window.document.body.querySelector("datalist#icon-name-list");
-        if(!ddd)
-        {      
+        let ddd = window.document.body.querySelector("datalist#icon-name-list");
+        if (!ddd) {
             var datalist = document.createElement("datalist");
-            datalist.setAttribute("id","icon-name-list");
+            datalist.setAttribute("id", "icon-name-list");
             window.document.body.appendChild(datalist);
-            (async()=>{
-                let r=await fetch("https://gcode.com.au/images/material/datalist.json");
-                let j=await r.json();
-                if(j && j.data && j.data.length>0)
-                {
-                    let dddd=window.document.body.querySelector("datalist#icon-name-list");
-                    for(let i=0;i<j.data.length;i++)
-                    {
-                        if(j.data[i].value.endsWith("_materialicons"))
-                        {
+            (async () => {
+                let r = await fetch("https://gcode.com.au/images/material/datalist.json");
+                let j = await r.json();
+                if (j && j.data && j.data.length > 0) {
+                    let dddd = window.document.body.querySelector("datalist#icon-name-list");
+                    for (let i = 0; i < j.data.length; i++) {
+                        if (j.data[i].value.endsWith("_materialicons")) {
                             var option = document.createElement("option");
-                            option.setAttribute("data-imagepath","/images/material/"+j.data[i].value+"_24px.svg");
-                            option.value=j.data[i].value.slice(0,-14).replaceAll("_"," ");
+                            option.setAttribute("data-imagepath", "/images/material/" + j.data[i].value + "_24px.svg");
+                            option.value = j.data[i].value.slice(0, -14).replaceAll("_", " ");
                             dddd.appendChild(option);
                         }
 
@@ -101,7 +96,7 @@ function hexToRgb(hex) {
 
 function rgbToHex(rgb) {
     var a = rgb.split("(")[1].split(")");
-    if(a && a.length>0)a=a[0];
+    if (a && a.length > 0) a = a[0];
     else return null;
     a = a.split(",");
     var b = a.map(function (x) {             //For each array element
@@ -114,10 +109,10 @@ function rgbToHex(rgb) {
 
 function appendSvgParams(svgBody, svgParams) {
     if (svgParams && svgBody) {
-    
+
         for (var param in svgParams) {
 
-        
+
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
             let pageDivC1 = document.createElement("div");
@@ -143,21 +138,20 @@ function appendSvgParams(svgBody, svgParams) {
                 }
                 else if (_param == "color") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    source = source.replace(/(\<g.*?id="icon".*?fill.*?.*?").*?(")/, "$1"+v+"$2");
+                    source = source.replace(/(\<g.*?id="icon".*?fill.*?.*?").*?(")/, "$1" + v + "$2");
                     window.editor.setValue(source);
                 }
                 else if (_param == "iconName") {
 
-                    let ddoption=window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\""+v+"\"]");
-                
-                
-                    if(ddoption && ddoption.dataset && ddoption.dataset.imagepath)
-                    {
-                        let r=await fetch(ddoption.dataset.imagepath);
-                        let t=await r.text();
-                        t=t.replace(/^.*?\>(\<.*?d=\".*?\".*)\<\/svg.*$/g, "$1");
+                    let ddoption = window.document.body.querySelector("datalist#icon-name-list").querySelector("option[value=\"" + v + "\"]");
+
+
+                    if (ddoption && ddoption.dataset && ddoption.dataset.imagepath) {
+                        let r = await fetch(ddoption.dataset.imagepath);
+                        let t = await r.text();
+                        t = t.replace(/^.*?\>(\<.*?d=\".*?\".*)\<\/svg.*$/g, "$1");
                         let c = source.match(/\<g[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-                        if(c && c.length>0)c=c[0];
+                        if (c && c.length > 0) c = c[0];
                         if (!c) c = hexToRgb("#AAAAAA");
                         else c = c.replace(/(\<g[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         if (c.startsWith("%23")) c = hexToRgb("#" + c.substring(3));
@@ -166,136 +160,145 @@ function appendSvgParams(svgBody, svgParams) {
                         if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         else name = "";
                         let bc2 = source.match(/\<rect.*?name="innerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-                        if(bc2 && bc2.length>0)bc2=bc2[0];
+                        if (bc2 && bc2.length > 0) bc2 = bc2[0];
                         if (!bc2) bc2 = "none";
                         else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
                         else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
                         let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-                        if(bc && bc.length>0)bc=bc[0];
+                        if (bc && bc.length > 0) bc = bc[0];
                         if (!bc) bc = "none";
                         else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
                         else if (bc.startsWith("#")) bc = hexToRgb(bc);
                         let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
-                        if(h && h.length>0)h=h[0];
+                        if (h && h.length > 0) h = h[0];
                         if (!h) h = "192";
                         else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
-                        if(w && w.length>0)w=w[0];
+                        if (w && w.length > 0) w = w[0];
                         if (!w) w = "192";
                         else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
                         let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
-                        if(br && br.length>0)br=br[0];
+                        if (br && br.length > 0) br = br[0];
                         if (!br) br = "3";
                         else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
-                        br=parseInt(br);
-                        if(br>15){
-                            br=15;
-                            window.document.querySelector("input#input-param-borderRadius").value=br;
+                        br = parseInt(br);
+                        if (br > 15) {
+                            br = 15;
+                            window.document.querySelector("input#input-param-borderRadius").value = br;
                         }
-                        else if(br<0){
-                            br=0;
-                            window.document.querySelector("input#input-param-borderRadius").value=br;
+                        else if (br < 0) {
+                            br = 0;
+                            window.document.querySelector("input#input-param-borderRadius").value = br;
                         }
-                        br=""+br;
+                        br = "" + br;
                         let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
-                        if(bt && bt.length>0)bt=bt[0];
+                        if (bt && bt.length > 0) bt = bt[0];
                         if (!bt) bt = "0";
-                        else{
+                        else {
                             bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
-                            bt=Math.round((30-parseInt(bt))/2);
-                            if(bt<0)
-                            {
-                                bt=0;
-                                indow.document.querySelector("input#input-param-borderThickness").value=bt;
+                            bt = Math.round((30 - parseInt(bt)) / 2);
+                            if (bt < 0) {
+                                bt = 0;
+                                indow.document.querySelector("input#input-param-borderThickness").value = bt;
                             }
-                            else if(bt>4){
-                                bt=4;
-                                indow.document.querySelector("input#input-param-borderThickness").value=bt;
+                            else if (bt > 4) {
+                                bt = 4;
+                                indow.document.querySelector("input#input-param-borderThickness").value = bt;
                             }
-                            bt=""+bt;
+                            bt = "" + bt;
                         }
                         w
 
                         let comment = source.match(/\<\!\-\-[\s\S]*?\-\-\>/g);
-                        if(comment && comment.length>0)comment=comment[0];
+                        if (comment && comment.length > 0) comment = comment[0];
                         if (!comment) comment = "no comments";
                         else comment = comment.replace(/\<\!\-\-([\s\S]*?)\-\-\>/g, "$1");
-                        comment=comment.trim();
+                        comment = comment.trim();
 
-                        t="<!--\n"+comment+"\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\""+h+"\" viewBox=\"0 0 30 30\" width=\""+w+"\">\n"+
-                        "    <rect name=\"outerBG\" fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
-                        "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\""+(30-(bt*2))+"\" width=\""+(30-(bt*2))+"\" transform=\"translate("+bt+" "+bt+")\"/>\n" +
-                        "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
-                        source=t;
+                        t = "<!--\n" + comment + "\n-->\n<svg xmlns=\"http://www.w3.org/2000/svg\" enable-background=\"new 0 0 30 30\" height=\"" + h + "\" viewBox=\"0 0 30 30\" width=\"" + w + "\">\n" +
+                            "    <rect name=\"outerBG\" fill=\"" + bc + "\" rx=\"" + br + "\" height=\"30\" width=\"30\"/>\n" +
+                            "    <rect name=\"innerBG\" fill=\"" + bc2 + "\" rx=\"" + br + "\" height=\"" + (30 - (bt * 2)) + "\" width=\"" + (30 - (bt * 2)) + "\" transform=\"translate(" + bt + " " + bt + ")\"/>\n" +
+                            "    <g id=\"icon\" name=\"" + v + "\" fill=\"" + c + "\" transform=\"translate(3 3)\">\n        " + t + "\n    </g>\n</svg>";
+                        source = t;
                         window.editor.setValue(source);
                     }
 
                 }
                 else if (_param == "borderColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                    console.log("borderColor:"+v);
-                    if(v=="none" || v=="clip")
-                    {
+                    console.log("borderColor:" + v);
+                    if (v == "none" || v == "clip") {
                         console.log("borderColor:hide");
                         window.document.querySelector("input#input-param-borderColor").parentElement.style.display = "none";
                     }
-                    else{
+                    else {
                         console.log("borderColor:show");
                         window.document.querySelector("input#input-param-borderColor").parentElement.style.display = "inline-block";
-                        if(v.startsWith("rgb"))
-                        {
-                            window.document.querySelector("input#input-param-borderColor").value=rgbToHex(v);
+                        if (v.startsWith("rgb")) {
+                            window.document.querySelector("input#input-param-borderColor").value = rgbToHex(v);
                         }
-                        else if(v.startsWith("#"))
-                        {
-                            window.document.querySelector("input#input-param-borderColor").value=v;
+                        else if (v.startsWith("#")) {
+                            window.document.querySelector("input#input-param-borderColor").value = v;
                         }
                     }
-                    if(v!="clip")
-                    {
+                    if (v != "clip") {
                         source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
                         window.editor.setValue(source);
                     }
                 }
                 else if (_param == "backgroundColor") {
                     if (v.startsWith("#")) v = hexToRgb(v);
-                
-                    console.log("backgroundColor:"+v);
-                    if(v=="none" || v=="clip")
-                    {
+
+                    console.log("backgroundColor:" + v);
+                    if (v == "none" || v == "clip") {
                         console.log("backgroundColor:hide");
                         window.document.querySelector("input#input-param-backgroundColor").parentElement.style.display = "none";
                     }
-                    else{
+                    else {
                         console.log("backgroundColor:show");
                         window.document.querySelector("input#input-param-backgroundColor").parentElement.style.display = "inline-block";
-                        if(v.startsWith("rgb"))
-                        {
-                            window.document.querySelector("input#input-param-backgroundColor").value=rgbToHex(v);
+                        if (v.startsWith("rgb")) {
+                            window.document.querySelector("input#input-param-backgroundColor").value = rgbToHex(v);
                         }
-                        else if(v.startsWith("#"))
-                        {
-                            window.document.querySelector("input#input-param-backgroundColor").value=v;
+                        else if (v.startsWith("#")) {
+                            window.document.querySelector("input#input-param-backgroundColor").value = v;
                         }
                     }
-                    if(v!="clip")
-                    {
+                    if (v != "clip") {
                         source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=").*?(")/, "$1" + v + "$2");
                         window.editor.setValue(source);
                     }
 
                 }
                 else if (_param == "borderRadius") {
-                    source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=").*?(")/, "$1" + v + "$2");
-                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?rx=").*?(")/, "$1" + (v-1) + "$2");
+                    let br = parseInt(v);
+                    if (br > 15) {
+                        br = 15;
+                        window.document.querySelector("input#input-param-borderRadius").value = br;
+                    }
+                    else if (br < 0) {
+                        br = 0;
+                        window.document.querySelector("input#input-param-borderRadius").value = br;
+                    }
+                    source = source.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=").*?(")/, "$1" + br + "$2");
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?rx=").*?(")/, "$1" + (br - 1) + "$2");
                     window.editor.setValue(source);
                 }
                 else if (_param == "borderThickness") {
-                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=").*?(")/, "$1" + (30-2*v) + "$2");
-                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?width=").*?(")/, "$1" + (30-2*v) + "$2");
-                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?transform=").*?(")/, "$1" + "translate("+v+" "+v+")"+ "$2");
+                    let bt=parseInt(v);
+                    if (bt < 0) {
+                        bt = 0;
+                        indow.document.querySelector("input#input-param-borderThickness").value = bt;
+                    }
+                    else if (bt > 4) {
+                        bt = 4;
+                        indow.document.querySelector("input#input-param-borderThickness").value = bt;
+                    }
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=").*?(")/, "$1" + (30 - 2 * bt) + "$2");
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?width=").*?(")/, "$1" + (30 - 2 * bt) + "$2");
+                    source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?transform=").*?(")/, "$1" + "translate(" + v + " " + v + ")" + "$2");
                     window.editor.setValue(source);
                 }
                 pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
@@ -307,8 +310,8 @@ function appendSvgParams(svgBody, svgParams) {
         }
     }
 }
-function colorInput(input,eventListener) {
-    let _input=input;
+function colorInput(input, eventListener) {
+    let _input = input;
     let _value = _input.value;
 
     if (_value.startsWith("%23")) _value = "#" + c.substring(3);
@@ -317,17 +320,15 @@ function colorInput(input,eventListener) {
 
 
 
-    _input.value=_value;
+    _input.value = _value;
 
     var input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 20;
-    if(_value.startsWith("#"))
-    {
+    if (_value.startsWith("#")) {
         input2.value = hexToRgb(_value);
     }
-    else
-    {
+    else {
         input2.value = _value;
     }
 
@@ -341,7 +342,7 @@ function colorInput(input,eventListener) {
             eventListener(this.value);
         }
     });
-    
+
     console.log(_value);
     console.log(_input.value);
     console.log(hexToRgb(_input.value));
@@ -363,9 +364,8 @@ function colorInput(input,eventListener) {
     pageDivC2.style.float = "right";
     pageDivC2.style.margin = "-2px";
     pageDivC2.append(_input);
-    if(_value=="none")
-    {
-        pageDivC2.style.display="none";
+    if (_value == "none") {
+        pageDivC2.style.display = "none";
         console.log(_input.id);
         console.log("HIDE");
     }
@@ -402,7 +402,7 @@ function showSvgEditor() {
     pageImg.src = "data:image/svg+xml;utf8," + source.replace(/\n/g, " ").replace(/\r/g, " ");;
 
     let c = source.match(/\<g[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-    if(c && c.length>0)c=c[0];
+    if (c && c.length > 0) c = c[0];
 
     if (!c) c = hexToRgb("#AAAAAA");
     else c = c.replace(/(\<g[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
@@ -415,41 +415,41 @@ function showSvgEditor() {
     if (name && name[0]) name = name[0].replace(/(\<g[.\s\S]*?name=")(.*?)("[.\s\S]*?\>)/g, "$2");
     else name = "";
     let bc2 = source.match(/\<rect.*?name="innerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-    if(bc2 && bc2.length>0)bc2=bc2[0];
+    if (bc2 && bc2.length > 0) bc2 = bc2[0];
     if (!bc2) bc2 = hexToRgb("#111111");
     else bc2 = bc2.replace(/(\<rect.*?name="innerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc2.startsWith("%23")) bc2 = hexToRgb("#" + bc2.substring(3));
     else if (bc2.startsWith("#")) bc2 = hexToRgb(bc2);
     let bc = source.match(/\<rect.*?name="outerBG"[.\s\S]*?fill=".*?"[.\s\S]*?\>/g);
-    if(bc && bc.length>0)bc=bc[0];
+    if (bc && bc.length > 0) bc = bc[0];
     if (!bc) bc = hexToRgb("#555555");
     else bc = bc.replace(/(\<rect.*?name="outerBG"[.\s\S]*?fill=")(.*?)("[.\s\S]*?\>)/g, "$2");
     if (bc.startsWith("%23")) bc = hexToRgb("#" + bc.substring(3));
     else if (bc.startsWith("#")) bc = hexToRgb(bc);
     let h = source.match(/\<[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
-    if(h && h.length>0)h=h[0];
+    if (h && h.length > 0) h = h[0];
     if (!h) h = "192";
     else h = h.replace(/(\<[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
     let w = source.match(/\<[.\s\S]*?width=".*?"[.\s\S]*?\>/g);
-    if(w && w.length>0)w=w[0];
+    if (w && w.length > 0) w = w[0];
     if (!w) w = "192";
     else w = w.replace(/(\<[.\s\S]*?width=")(.*?)("[.\s\S]*?\>)/g, "$2");
     let br = source.match(/\<rect.*?name="outerBG"[.\s\S]*?rx=".*?"[.\s\S]*?\>/g);
-    if(br && br.length>0)br=br[0];
+    if (br && br.length > 0) br = br[0];
     if (!br) br = "3";
     else br = br.replace(/(\<rect.*?name="outerBG"[.\s\S]*?rx=")(.*?)("[.\s\S]*?\>)/g, "$2");
     let bt = source.match(/\<rect.*?name="innerBG"[.\s\S]*?height=".*?"[.\s\S]*?\>/g);
-    if(bt && bt.length>0)bt=bt[0];
+    if (bt && bt.length > 0) bt = bt[0];
     if (!bt) bt = "0";
-    else{
+    else {
         bt = bt.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=")(.*?)("[.\s\S]*?\>)/g, "$2");
-        bt=Math.round((30-parseInt(bt))/2);
-        if(bt<0)bt=0;
-        if(bt>4)bt=4;
-        bt=""+bt;
+        bt = Math.round((30 - parseInt(bt)) / 2);
+        if (bt < 0) bt = 0;
+        if (bt > 4) bt = 4;
+        bt = "" + bt;
     }
 
-    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "borderColor": bc,"backgroundColor": bc2, "height": "" + h, "width": "" + w, "borderThickness": "" + bt,"borderRadius": "" + br, "iconName": "" + name });
+    let { svgPanel, svgBody } = createSvgMenu({ "color": c, "borderColor": bc, "backgroundColor": bc2, "height": "" + h, "width": "" + w, "borderThickness": "" + bt, "borderRadius": "" + br, "iconName": "" + name });
     rootMiddlePage.append(svgPanel);
     rootMiddlePage.append(pageImg);
     document.getElementById("pageMiddle").append(rootMiddlePage);
