@@ -211,9 +211,6 @@ function appendSvgParams(svgBody, svgParams) {
                         "    <rect name=\"outerBG\" fill=\""+bc+"\" rx=\""+br+"\" height=\"30\" width=\"30\"/>\n" +
                         "    <rect name=\"innerBG\" fill=\""+bc2+"\" rx=\""+br+"\" height=\""+(30-(bt*2))+"\" width=\""+(30-(bt*2))+"\" transform=\"translate("+bt+" "+bt+")\"/>\n" +
                         "    <g id=\"icon\" name=\""+v+"\" fill=\""+c+"\" transform=\"translate(3 3)\">\n        "+t+"\n    </g>\n</svg>";
-
-                        //source = source.replace(/(\<path [.\s\S]*?transform=".*?")[.\s\S]*?(d=".*?")/g, "$1 name=\"" + v + "\" "+"d=\""+t+"\"");
-                        //https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/settings/default/48px.svg
                         source=t;
                         window.editor.setValue(source);
                     }
