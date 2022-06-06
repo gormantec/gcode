@@ -209,7 +209,7 @@ function appendSvgParams(svgBody, svgParams) {
                             }
                             bt = "" + bt;
                         }
-                        w
+                        
 
                         let comment = source.match(/\<\!\-\-[\s\S]*?\-\-\>/g);
                         if (comment && comment.length > 0) comment = comment[0];
