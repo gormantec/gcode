@@ -520,9 +520,10 @@ async function _new(aFilename, data) {
 
 
 }
-
+let stillOpeningFile=false;
 function _openFile(element) {
 
+    if(stillOpeningFile)return;
 
     if (element.dataset.name) {
         if (element.dataset.name.substring(0, 6) != "git://") {
@@ -555,6 +556,7 @@ function _openFile(element) {
             selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
+            stillOpeningFile=true;
             githubtree.getGitFile(username, repo, path, function (e, d) {
                 var cached = localStorage.getItem("gitfile-" + filename);
                 if (cached) {
@@ -572,6 +574,7 @@ function _openFile(element) {
                 }
                 window.editor.setValue(d);
                 window.setEditorMode();
+                stillOpeningFile=false;
             });
         }
     }
