@@ -60,7 +60,6 @@ export function menuAction(p) {
 }
 
 export function dialogAction(event) {
-    console.log(event.id);
     if (event.type == "dialog" && event.id == "newFileDialog" && event.value != "cancel") {
         _new(event.value).then(() => { });
     }
@@ -77,19 +76,14 @@ export function dialogAction(event) {
     }
     else if (event.id == "uploadFileDialogName") {
 
-        console.log(event);
-
         var handleFiles = function (files) {
-            console.log("change handleFiles");
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                console.log(file);
                 if (!file.type.startsWith('image/png')) { continue }
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     var i = new Image(); 
                     i.onload = function(){
-                        console.log(e.target.result);
                         let current = event.getInputValue("uploadFileDialogData");
                         if (!current || current.tim() == "") current = "{\"files\":[]}";
                         let currentJson = JSON.parse(current);
@@ -254,16 +248,10 @@ export function toolbarAction(e) {
 
         var doSomething = function () {
 
-            console.log("getAuthenticated")
             githubtree.getAuthenticated().then((resp) => {
-                console.log("gotAuthenticated:");
-                console.log(resp)
                 window.myLogin = resp.data.login;
-                console.log("myLogin:" + window.myLogin);
-                console.log(resp.data);
                 if (resp.data.login) {
 
-                    console.log("prompt:" + resp.data.login);
                     var gitRepoName = prompt("Git repo name to add", resp.data.login + "/gcode_repo");
                     if (gitRepoName) {
                         var username = gitRepoName.substring(0, gitRepoName.indexOf("/"));
@@ -318,17 +306,11 @@ export function toolbarAction(e) {
             githubtree.getCode(guid, (e, code) => {
                 console.log("gotCode");
                 if (!e) {
-
-                    console.log("fetch:" + code);
                     fetch("https://5q7l0c3xq9.execute-api.ap-southeast-2.amazonaws.com?code=" + code + "&state=" + guid).then(
                         response => response.json()
                     ).then((json) => {
-                        console.log("json");
-                        console.log(json);
                         githubtree.setToken(json.data.access_token);
-                        console.log("doSomething2:" + json.data.access_token);
                         doSomething();
-                        console.log("doSomething?");
                     });
                 }
                 else {
@@ -455,7 +437,6 @@ async function _new(aFilename, data) {
                     text => {
 
                         if (_data != null) {
-                            console.log("!!!!!!");
                             document.getElementById("filename").innerText = aFilename;
                             selectedFileWidget = aFilename;
                             window.editor.setValue(data);
@@ -684,7 +665,6 @@ function _save() {
     else {
         if (filename == "" || filename == null) return;
         save(filename, window.editor.getValue());
-        console.log("********* Saved:"+filename);
         localStorage.setItem("lastFileName", filename);
     }
 }
