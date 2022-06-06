@@ -459,6 +459,7 @@ async function _new(aFilename, data) {
                             document.getElementById("filename").innerText = aFilename;
                             selectedFileWidget = aFilename;
                             window.editor.setValue(data);
+                            window.setEditorMode();
                         }
                         else {
                             var _samplecode = text;
@@ -488,9 +489,11 @@ async function _new(aFilename, data) {
                                 "created: " + (new Date(Date.now())).getFullYear() + "-" + (new Date(Date.now())).getMonth() + "-" + (new Date(Date.now())).getDay() + "T" + (new Date()).toLocaleTimeString() + "\n" + pyChar + "  " +
                                 appStuff +
                                 "\n" + pyChar + "\n" + pyChar + "*/\n-->\n\n" + _samplecode);
+                                window.setEditorMode();
                             }
                             else{
                                 window.editor.setValue(_samplecode);
+                                window.setEditorMode();
                             }
 
                         }
@@ -552,7 +555,6 @@ function _openFile(element) {
             selectedItem = pageLeftBody.querySelector("div.dirWidgetSelected");
             if (selectedItem) selectedItem.className = "dirWidget";
             element.className = "fileWidget fileWidgetSelected";
-            window.setEditorMode();
             githubtree.getGitFile(username, repo, path, function (e, d) {
                 var cached = localStorage.getItem("gitfile-" + filename);
                 if (cached) {
@@ -569,6 +571,7 @@ function _openFile(element) {
                     }
                 }
                 window.editor.setValue(d);
+                window.setEditorMode();
             });
         }
     }
@@ -715,6 +718,7 @@ function _delete() {
         localStorage.setItem("lastFileName", "");
         document.getElementById("filename").innerText = "";
         window.editor.setValue("");
+        window.setEditorMode();
         selectedFileWidget = null;
         Array.from(document.getElementsByClassName("fileWidget")).forEach(function (e) {
             if (e.dataset.name == filename && e.dataset.nextname != null) selectedFileWidget = e.dataset.nextname;

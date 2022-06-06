@@ -1,5 +1,5 @@
 import { beautify } from '/modules/beutify.mjs';
-import { loadFeatures, refreshFeatures } from '/modules/featureManager.mjs';
+import { loadFeatures, refreshFeatures,setFeature } from '/modules/featureManager.mjs';
 import { getImage, createHtml } from '/modules/htmlUtils.mjs';
 import { save, load, remove, preload } from '/modules/gcodeStorage.mjs';
 import { getScript } from '/modules/getScript.mjs';
@@ -474,32 +474,41 @@ window.setEditorMode = function () {
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
         window.editor.setOption('lint', { options: { esversion: 6 } });
+        setFeature("javascript");
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
         window.editor.setOption('lint', { options: { esversion: 6 } });
+        setFeature("javascript");
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
         window.editor.setOption('lint', { options: { esversion: 6 } });
+        setFeature("typescript");
     }
     else if (filename.endsWith(".py")) {
         window.editor.setOption("mode", "python");
+        setFeature("python");
     }
     else if (filename.endsWith(".dart")) {
         window.editor.setOption("mode", "dart");
+        setFeature("dart");
     }
     else if (filename.endsWith(".css")) {
         window.editor.setOption("mode", "css");
+        setFeature("css");
     }
     else if (filename.endsWith(".json")) {
         window.editor.setOption("mode", "javascript");
+        setFeature("javascript");
     }
     else if (filename.endsWith(".htm") || filename.endsWith(".html")) {
         window.editor.setOption("mode", "htmlmixed");
+        setFeature("html");
     }
     else if (filename.endsWith(".svg") || filename.endsWith(".xml")) {
         window.editor.setOption("mode", "xml");
+        setFeature("svg");
     }
 
     console.log(window.editor.getOption("mode"));

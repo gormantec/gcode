@@ -473,3 +473,16 @@ export function menuAction(e) {
         svgEditorVisible = false;
     }
 }
+
+export function fileChanged(fileType)
+{
+    if(fileType!="svg")
+    {
+        hideSvgEditor();
+        svgEditorVisible = false;
+    }
+    else if(svgEditorVisible){
+        showSvgEditor();
+        svgEditorVisible = true;
+    }
+}

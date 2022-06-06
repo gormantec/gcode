@@ -1,6 +1,8 @@
 import dialogPolyfill from '/dist/dialog-polyfill/dialog-polyfill.esm.js';
 import { save, load } from '/modules/gcodeStorage.mjs';
 
+let fileChangedListeners=[];
+
 function parsableJSON(value) {
     try {
         JSON.parse(value);
@@ -31,7 +33,7 @@ export async function loadFeatures() {
             let res2 = await fetch(f.uri, { "method": "HEAD" });
             if (res2.ok) {
                 let dialogs = [];
-                let { afterLoad, menuMetadata, menuAction, toolbarMetadata, toolbarAction, dialogMetadata, dialogAction,runButtonFileSufix,runButtonAction } = await import(f.uri);
+                let { afterLoad, fileChanged, menuMetadata, menuAction, toolbarMetadata, toolbarAction, dialogMetadata, dialogAction,runButtonFileSufix,runButtonAction } = await import(f.uri);
                 if(runButtonFileSufix && runButtonFileSufix.length>1 && runButtonFileSufix.indexOf(".")>=0 && runButtonAction)
                 {
                     if (isFunction(runButtonAction)) {
@@ -42,6 +44,12 @@ export async function loadFeatures() {
                             }
                         }
                         );
+                    }
+                }
+                if(fileChanged)
+                {
+                    if (isFunction(fileChanged)) {
+                        fileChangedListeners.push(fileChanged);
                     }
                 }
                 if (menuMetadata) {
@@ -248,3 +256,12 @@ export async function refreshFeatures() {
         };
     }
 }
+export function setFeature(fileType) {
+
+    for(let i=0;i<fileChangedListeners.length;i++)
+    {
+        fileChangedListeners[i](fileType);
+    }
+
+}
+
