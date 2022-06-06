@@ -479,7 +479,7 @@ export function fileChanged(fileType)
     if(fileType!="svg")
     {
         hideSvgEditor();
-        svgEditorVisible = false;
+        //svgEditorVisible = false;
     }
     else if(svgEditorVisible){
         showSvgEditor();
