@@ -201,11 +201,11 @@ function appendSvgParams(svgBody, svgParams) {
                             bt = Math.round((30 - parseInt(bt)) / 2);
                             if (bt < 0) {
                                 bt = 0;
-                                indow.document.querySelector("input#input-param-borderThickness").value = bt;
+                                window.document.querySelector("input#input-param-borderThickness").value = bt;
                             }
                             else if (bt > 4) {
                                 bt = 4;
-                                indow.document.querySelector("input#input-param-borderThickness").value = bt;
+                                window.document.querySelector("input#input-param-borderThickness").value = bt;
                             }
                             bt = "" + bt;
                         }
@@ -290,11 +290,11 @@ function appendSvgParams(svgBody, svgParams) {
                     let bt=parseInt(v);
                     if (bt < 0) {
                         bt = 0;
-                        indow.document.querySelector("input#input-param-borderThickness").value = bt;
+                        window.document.querySelector("input#input-param-borderThickness").value = bt;
                     }
                     else if (bt > 4) {
                         bt = 4;
-                        indow.document.querySelector("input#input-param-borderThickness").value = bt;
+                        window.document.querySelector("input#input-param-borderThickness").value = bt;
                     }
                     source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?height=").*?(")/, "$1" + (30 - 2 * bt) + "$2");
                     source = source.replace(/(\<rect.*?name="innerBG"[.\s\S]*?width=").*?(")/, "$1" + (30 - 2 * bt) + "$2");
