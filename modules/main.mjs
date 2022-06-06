@@ -39,7 +39,6 @@ function _onclickFilename() {
             var filename = input.value;
             if (filename == "" || filename == null) return false;
             save(filename, window.editor.getValue());
-            console.log("******* setItem(\""+lastFileName+"\"")
             localStorage.setItem("lastFileName", filename);
             remove(oldfilename);
             input.removeEventListener("keypress",ls,false);
@@ -511,8 +510,6 @@ window.setEditorMode = function () {
         setFeature("svg");
     }
 
-    console.log(window.editor.getOption("mode"));
-    console.log(window.editor.options);
     //window.editor
 }
 
@@ -579,7 +576,6 @@ document.addEventListener("DOMContentLoaded", function () {
         //get last filename
 
         var lastFileName = localStorage.getItem("lastFileName");
-        console.log("lastFileName:" + lastFileName);
 
         var lastFileData;
         if (lastFileName && lastFileName.startsWith("git://")) { await preload(lastFileName); }
@@ -695,7 +691,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         panel.addEventListener("mousedown", function (e) {
-            console.log(window.editor.getOption("mode"));
             if (e.offsetX > (panel.clientWidth - BORDER_SIZE)) {
                 m_posx = e.x;
                 document.addEventListener("mousemove", resizex, false);
@@ -717,7 +712,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }, false);
 
         if (window.location.href != "http://127.0.0.1:8080/") {
-            console.log(window.location.href);
             setTimeout(function () {
                 document.getElementById("splashScreen").hidden = true;
             }, 2000);

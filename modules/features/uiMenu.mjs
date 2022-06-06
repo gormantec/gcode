@@ -66,24 +66,16 @@ async function refreshScreen() {
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
 
-    console.log("uimenu");
 
-    console.log("----------------");
-    console.log(sCode);
-    console.log("----------------");
     for(var i=0;i<importFiles.length;i++)
     {
         let slib=load(importFiles[i].dir+importFiles[i].name);
         if(slib && typeof slib=="string" && slib.length>0)
         {
-            console.log("replace:"+importFiles[i].dir+importFiles[i].name);
             sCode = sCode.replace("./lib/"+importFiles[i].name,"data:text/javascript;base64,"+window.btoa(slib));
         }
     }
 
-    console.log("----------------");
-    console.log(sCode);
-    console.log("----------------");
     
 
 
@@ -135,8 +127,7 @@ async function refreshScreen() {
 function structureToCode() {
 
     let resp = "";
-    console.log("structureToCode");
-    console.log(structure);
+
     structure.forEach((block) => {
         if (block.comment) {
             resp = resp + block.comment + "\n";
@@ -148,8 +139,7 @@ function structureToCode() {
             var params = block.widget.params;
             let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)\)/g
             paramString = block.widget.code.trim().replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
-            console.log("#WIDGET PWA:");
-            console.log(paramString);
+
             var regex22 = /\"widget\((\S+?)\)\"/g;
             paramString = paramString.replaceAll(regex22, "$1");
             var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
@@ -228,7 +218,7 @@ function pushCode(data) {
                 classCode = data.code.substring(0, i + 1);
             }
             var aClass = { class: { name: classname, extends: extendsname, constructor: { super: supername }, code: classCode } };
-            console.log(aClass);
+ 
             structure.push(aClass);
             if (data.code.trim().length > classCode.trim().length) {
                 pushCode({ code: data.code.substring(classCode.length).trim() });
@@ -252,7 +242,6 @@ function pushCode(data) {
 
                     let someParams = arr[6];
                     someParams = cleanParams(someParams);
-                    console.log(someParams);
                     try{someParams = JSON.parse(someParams);}catch(e){someParams="{}";}
                     line = line + ((i + 1) == codeLines.length ? "" : ";");
                     var aWidget = { widget: { name: arr[2], class: arr[4], params: someParams, code: line.trim() } };
@@ -387,14 +376,11 @@ function showUiEditor() {
     while(structure.length>0)structure.pop();
     //  try {
     splitComments(source);
-    console.log(structure);
     document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "none";
     let rootMiddlePage = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (rootMiddlePage) rootMiddlePage.remove();
     rootMiddlePage = createPageDiv();
     rootMiddlePage.append(createMockFrameDiv());
-    console.log("**************");
-    console.log(structure);
     let { pwaPanel, pwaBody } = createPWAMenu(getWidgetByClass( "PWA"));
     rootMiddlePage.append(pwaPanel);
     let { pagesPanel, pagesBody } = createPagesMenu();
