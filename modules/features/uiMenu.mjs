@@ -185,7 +185,7 @@ function cleanParams(paramString) {
     for(let i=0;wStrings && i<wStrings.length;i++)
     {
         console.log(wStrings[i]);
-        paramString = paramString.replace(wStrings[i], "\"widget("+wStrings[i].replaceAll("\"","\\\"").replaceAll(/[\t\r\n ]*/ig," ")+")\"");
+        paramString = paramString.replace(wStrings[i], "\"widget("+wStrings[i].replaceAll("\"","\\\"").replaceAll("\t"," ").replaceAll("\n"," ").replaceAll("    "," ").replaceAll("    "," ").replaceAll("   "," ").replaceAll("  "," ")+")\"");
     }
     const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
     paramString = paramString.replaceAll(regex8, '}');
