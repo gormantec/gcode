@@ -180,10 +180,11 @@ function cleanParams(paramString) {
     paramString = paramString.replaceAll(regex, '$1\"$2\"$3');
     const regex7 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
     paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
-    const regex9 = /([\s*?)([a-z0-9\.]+?\([\s|S]*?\))([\s,])/ig;
+    const regex9 = /\s*?[a-zA-Z\.]*?\(\s*?\{[\s\S]*?\}\s*?\)/ig;
     let wStrings = paramString.match(regex9);
-    for(let i=0;i<wStrings.length;i++)
+    for(let i=0;wStrings && i<wStrings.length;i++)
     {
+        console.log(wStrings[i]);
         paramString = paramString.replace(wStrings[i], "\"widget("+wStrings[i].replaceAll("\"","\\\"")+"\"");
     }
     const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
