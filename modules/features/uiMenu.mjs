@@ -185,8 +185,6 @@ function cleanParams(paramString) {
     paramString = paramString.replaceAll(regex61, '$1\"$2\"$3');
     const regex = /(\s*?)\"?([\S]*?)\"?(\s*?:[\s\"])/ig;
     paramString = paramString.replaceAll(regex, '$1\"$2\"$3');
-    const regex7 = /(:\s*?)([a-z0-9\.\-]+?)([\s,])/ig;
-    paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
     const regex9 = /\s*?[(new )a-zA-Z\.]*?\(\s*?\{[\s\S]*?\}\s*?\)/ig;
     let wStrings = paramString.match(regex9);
     for(let i=0;wStrings && i<wStrings.length;i++)
@@ -194,6 +192,8 @@ function cleanParams(paramString) {
         console.log(wStrings[i]);
         paramString = paramString.replace(wStrings[i], "\"widget("+wStrings[i].replaceAll("\"","\\\"").replaceAll("\t"," ").replaceAll("\n"," ").replaceAll("    "," ").replaceAll("    "," ").replaceAll("   "," ").replaceAll("  "," ").trim()+")\"");
     }
+    const regex7 = /(:\s*?)([a-z0-9\.\-]+?)([\s,])/ig;
+    paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
     const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
     paramString = paramString.replaceAll(regex8, '}');
     console.log(paramString);
