@@ -120,7 +120,15 @@ async function refreshScreen() {
     var doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
     rootHTML.getElementsByTagName("body")[0].innerHTML = "";
     doc.open();
-    doc.writeln(rootHTML.outerHTML);
+    let theHtml=rootHTML.outerHTML;
+    console.log(theHtml);
+    try{
+        doc.writeln(theHtml);
+    }
+    catch(e)
+    {
+        comsole.log(e);
+    }
     doc.close();
 }
 
