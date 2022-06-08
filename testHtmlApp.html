@@ -1,0 +1,63 @@
+<html><head><link rel="manifest" href="xxxxx_manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="A gcode developed PWA app"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta property="fpwa:template" content="pwa=true,name=gcode App,short_name=gcode App,theme_color=black,background_color=black,display=standalone,orientation=any"><link rel="apple-touch-icon" href="###ICONURI###"><link rel="apple-touch-icon-precomposed" href="###ICONURI###"><link rel="icon" href="###ICONURI###"><script>
+    window.PWA={globals:{}};
+    window.PWA.globals.appName="gcode App";
+    window.PWA.globals.orientation="any";
+    window.PWA.globals.splashColor="#F0F0F0";
+    window.PWA.globals.splashBackgroundColor="black";
+  </script><script type="module">
+  import { addkey } from "https://gcode.com.au/modules/near/index.mjs";
+  
+  if (window.opener && window.opener !== window) {
+      window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);
+      window.addEventListener("load", (event) => {window.opener.postMessage("loaded","https://gcode.com.au");});
+  }
+  
+  </script><script id="175806220543153" type="module">
+  /*---------------------------------------------------------------------------*/
+  import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+  try { Page.clearPages();
+  } catch (e) {}
+  /*---------------------------------------------------------------------------*/
+  class HomePage extends Page {
+      constructor() {
+          super({
+              "color": "#000000",
+              "backgroundColor": "#000000",
+              "backgroundPosition": "center",
+              "backgroundSize": "60%",
+              "backgroundRepeat": "no-repeat",
+              "backgroundImage": "url(https://c7.uihere.com/files/614/185/190/sun-solar-flare-uv-uv-light.jpg)",
+              "child": new Div({})
+          });
+      }
+  
+  }
+  class SecondPage extends Page {
+      constructor() {
+          super({
+              "color": "#000000",
+              "backgroundColor": "#000000",
+              "navigateBackPage": aHomePage)",
+              "child": "widget(myDiv
+          });
+      }
+  }
+  /*---------------------------------------------------------------------------*/
+  var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+  var aHomePage = new HomePage();
+  var aSecondPage = new SecondPage();
+  var aPWA = new PWA({
+      "title": "Gorman Technology Pty Ltd",
+      "footer": "https://www.gormantec.com",
+      "primaryColor": "#005040"
+  });
+  aPWA.floatingActionButton.onclick(function() {
+    aPWA.setPage(aSecondPage);
+  });
+  aPWA.setPage(aHomePage);
+  aPWA.show();//changed
+  /*---------------------------------------------------------------------------*/
+  
+  </script><script id="6485163746225113" type="module">
+  window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{"event":"pageChange","data":{"pageId":"'+pageId+'"}}', '*');});
+  </script></head><body style="zoom: 0.535628;"></body></html>
