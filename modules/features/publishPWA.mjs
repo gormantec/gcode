@@ -230,6 +230,8 @@ function _uploadFile(params, callback) {
     var splash = params.splash;
     var description = params.description;
 
+    if(!icon)icon="https://gcode.com.au/apps/37790665-gcode/icon.png";
+
     (async ()=>{
         var iconBase64;
         var iconBase64_180;
