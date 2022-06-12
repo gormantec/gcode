@@ -199,7 +199,7 @@ function cleanParams(paramString) {
         console.log("*************************");
         for(let i=0;arrNewWidgets!=null && i<arrNewWidgets.length;i++)
         {
-            paramString.replace(arrNewWidgets[1],arrNewWidgets[1].replaceAll("\"","'"));
+            paramString.replace(arrNewWidgets[i],arrNewWidgets[i].replaceAll("\"","'"));
             console.log("*************************");
         }
     }
