@@ -247,7 +247,7 @@ function pushCode(data) {
 
             if (line.trim() != "") {
                 let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)(\))$/g
-                arr = rx.exec(line.trim());
+                let arr = rx.exec(line.trim());
                 if (arr) {
 
                     let someParams = arr[6];
