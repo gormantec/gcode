@@ -122,6 +122,7 @@ async function refreshScreen() {
     doc.open();
     let theHtml=rootHTML.outerHTML;
     try{
+        console.log(theHtml);
         doc.writeln(theHtml);
     }
     catch(e)
@@ -145,9 +146,9 @@ function structureToCode() {
         else if (block.widget && block.widget.class=="PWA") {
             let params = block.widget.params;
             let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)\)/g
-            paramString = block.widget.code.trim().replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
-            let regex27 = /\"widget\(([\s\S]+)\)\"([,\n\}])/g;
-            paramString = paramString.replaceAll(regex27, "$1$2");
+            let paramString = block.widget.code.trim().replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
+            let regex27 = /(^.*?)\"widget\(([\s\S]+?)\)\"(.*?$)/gm;
+            paramString = paramString.replaceAll(regex27, "$1$2$3");
             let regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
             let regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
@@ -164,8 +165,8 @@ function structureToCode() {
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("\n    ", "\n            ").slice(0, -1) +
                 '        });\n    }$3');
-            let regex27 = /\"widget\(([\s\S]+)\)\"([,\n\}])/g;
-            paramString = paramString.replaceAll(regex27, "$1");
+            let regex27 = /(^.*?)\"widget\(([\s\S]+?)\)\"(.*?$)/gm;
+            paramString = paramString.replaceAll(regex27, "$1$2$3");
             let regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
             let regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
