@@ -5,7 +5,7 @@ import { load, preload} from '/modules/gcodeStorage.mjs';
 
 export const menuMetadata = { "id": "uiMenu", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
 
-var focusPage = "";
+let focusPage = "";
 const paramOptions = ["navigateBackPage", "innerHTML",
     "children",
     "child",
@@ -48,13 +48,13 @@ async function refreshScreen() {
     
     if (!block) return;
 
-    for (var param in block.class.constructor.super) {
-        var e = document.querySelector("div#pageMiddle-pageProps-" + block.class.name).querySelector("#input-param-" + param);
+    for (let param in block.class.constructor.super) {
+        let e = document.querySelector("div#pageMiddle-pageProps-" + block.class.name).querySelector("#input-param-" + param);
         block.class.constructor.super[param] = e.value.trim();
     }
     //document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
     //pageDiv.remove();
-    var sCode = structureToCode();
+    let sCode = structureToCode();
     window.editor.setValue(sCode);
     let thisURL = window.location.href;
     sCode = sCode.replaceAll("https:\/\/gcode\.com\.au\/", thisURL);
@@ -67,7 +67,7 @@ async function refreshScreen() {
     await preload(importFiles);
 
 
-    for(var i=0;i<importFiles.length;i++)
+    for(let i=0;i<importFiles.length;i++)
     {
         let slib=load(importFiles[i].dir+importFiles[i].name);
         if(slib && typeof slib=="string" && slib.length>0)
@@ -79,14 +79,14 @@ async function refreshScreen() {
     
 
 
-    var result = createHtml(sCode,{noInstallCode:true,noServiceWorker:true});
-    var splashBackgroundColor = result.splashBackgroundColor;
-    var splash = result.splash;
-    var mockFrame = result.mockFrame;
-    var rootHTML = result.rootHTML;
-    var _module = window.document.createElement("script");
+    let result = createHtml(sCode,{noInstallCode:true,noServiceWorker:true});
+    let splashBackgroundColor = result.splashBackgroundColor;
+    let splash = result.splash;
+    let mockFrame = result.mockFrame;
+    let rootHTML = result.rootHTML;
+    let _module = window.document.createElement("script");
     _module.id = cyrb53("mainSourceCode");
-    var exists = rootHTML.querySelector("head script[id='"+_module.id+"']");
+    let exists = rootHTML.querySelector("head script[id='"+_module.id+"']");
     if (exists)  exists.remove();
     _module.setAttribute("type", "module");
     _module.text = "\n" + sCode + "\n";
@@ -94,13 +94,13 @@ async function refreshScreen() {
     
     _module = window.document.createElement("script");
     _module.id = cyrb53("window.PWA.globals.pwaInstances[0].addPageChangeListener()");
-    var exists = rootHTML.querySelector("head script[id='"+_module.id+"']");
+    let exists = rootHTML.querySelector("head script[id='"+_module.id+"']");
     if (!exists) {
         _module.setAttribute("type", "module");
         _module.text = "\n" + "window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{\"event\":\"pageChange\",\"data\":{\"pageId\":\"'+pageId+'\"}}', '*');});" + "\n";
         rootHTML.querySelector("head").appendChild(_module);
     }
-    var izoom = mockFrameIframe.getAttribute("data-zoom");
+    let izoom = mockFrameIframe.getAttribute("data-zoom");
     rootHTML.querySelector("body").style.zoom = izoom;
     _module = window.document.createElement("script");
     _module.id = cyrb53("window.onmessage = function(e) {if (JSON.parse(e.data).event == 'pageChange') {}");
@@ -110,14 +110,14 @@ async function refreshScreen() {
         _module.text = "\n" +
             "window.onmessage = function(e) {let data=null;\ntry{data=JSON.parse(e.data);}catch(e){}\nif (data && data.event == 'pageChange') {\n" +
             "console.log(JSON.parse(e.data).data.pageId);\n" +
-            "var pageSelect=document.querySelector(\"#pageMiddle-" + menuMetadata.id + "-pageselect\");\n" +
+            "let pageSelect=document.querySelector(\"#pageMiddle-" + menuMetadata.id + "-pageselect\");\n" +
             "pageSelect.value=JSON.parse(e.data).data.pageId;\n" +
             "pageSelect.dispatchEvent(new Event(\"change\"))\n;" +
             "}};" + "\n";
         document.querySelector("head").appendChild(_module);
     }
 
-    var doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
+    let doc = mockFrameIframe.contentDocument || mockFrameIframe.contentWindow.document;
     rootHTML.getElementsByTagName("body")[0].innerHTML = "";
     doc.open();
     let theHtml=rootHTML.outerHTML;
@@ -143,14 +143,14 @@ function structureToCode() {
             resp = resp + block.code + "\n";
         }
         else if (block.widget && block.widget.class=="PWA") {
-            var params = block.widget.params;
+            let params = block.widget.params;
             let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)\)/g
             paramString = block.widget.code.trim().replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
-            var regex22 = /\"widget\(([\s\S]+)\)\"([,\n])/g;
+            let regex27 = /\"widget\(([\s\S]+)\)\"([,\n])/g;
+            paramString = paramString.replaceAll(regex27, "$1$2");
+            let regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
-            var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
-            paramString = paramString.replaceAll(regex22, "$1$2");
-            var regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
+            let regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
             paramString = paramString.replaceAll(regex23, "$1$2");
             resp = resp + paramString + "\n";
         }
@@ -158,17 +158,17 @@ function structureToCode() {
             resp = resp + block.widget.code + "\n";
         }
         else if (block.class) {
-            var params = block.class.constructor.super;
-            var regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\n\r\s]*?)\)[\s\r\n]*?;[\s\S]*?\}([\s\S]*$)/g;
-            var paramString = block.class.code.replaceAll(regex,
+            let params = block.class.constructor.super;
+            let regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\n\r\s]*?)\)[\s\r\n]*?;[\s\S]*?\}([\s\S]*$)/g;
+            let paramString = block.class.code.replaceAll(regex,
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("\n    ", "\n            ").slice(0, -1) +
                 '        });\n    }$3');
-            var regex22 = /\"widget\(([\s\S]+)\)\"/g;
-            paramString = paramString.replaceAll(regex22, "$1");
-            var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
+            let regex27 = /\"widget\(([\s\S]+)\)\"([,\n])/g;
+            paramString = paramString.replaceAll(regex27, "$1");
+            let regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
-            var regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
+            let regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
             paramString = paramString.replaceAll(regex23, "$1$2");
             resp = resp + paramString + "\n";
         }
@@ -205,21 +205,21 @@ function cleanParams(paramString) {
 function pushCode(data) {
     if (data.code.trim().startsWith("class")) {
 
-        var rx = /class (.*?) .*\n/g;
-        var arr = rx.exec(data.code);
-        var classname = arr[1];
+        let rx = /class (.*?) .*\n/g;
+        let arr = rx.exec(data.code);
+        let classname = arr[1];
         rx = /class .*?extends (.*?)[ \{][\s\S]*$/g
         arr = rx.exec(data.code);
-        var extendsname = arr[1];
+        let extendsname = arr[1];
         rx = /class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\(([\s\S]*?\}\s*?)\)\s*?;[\s\S]*$/g;
         arr = rx.exec(data.code);
         if (arr != null) {
-            var paramString = arr[1];
+            let paramString = arr[1];
             paramString = cleanParams(paramString);
-            var supername = JSON.parse(paramString.trim());
+            let supername = JSON.parse(paramString.trim());
             let classCode = data.code;
             let count = 1;
-            for (var i = data.code.indexOf("{") + 1; i < data.code.length && i > 0 && count > 0; i++) {
+            for (let i = data.code.indexOf("{") + 1; i < data.code.length && i > 0 && count > 0; i++) {
                 let c = data.code.charAt(i);
                 //if(c=="/" && data.code.charAt(i+1)=="/")i=data.code.indexOf("\n")+1;  
                 //else if(c=="/" && data.code.charAt(i+1)=="*")i=data.code.indexOf("*/")+2;  
@@ -227,7 +227,7 @@ function pushCode(data) {
                 else if (c == "}") count--;
                 classCode = data.code.substring(0, i + 1);
             }
-            var aClass = { class: { name: classname, extends: extendsname, constructor: { super: supername }, code: classCode } };
+            let aClass = { class: { name: classname, extends: extendsname, constructor: { super: supername }, code: classCode } };
  
             structure.push(aClass);
             if (data.code.trim().length > classCode.trim().length) {
@@ -254,7 +254,7 @@ function pushCode(data) {
                     someParams = cleanParams(someParams);
                     try{someParams = JSON.parse(someParams);}catch(e){someParams="{}";}
                     line = line + ((i + 1) == codeLines.length ? "" : ";");
-                    var aWidget = { widget: { name: arr[2], class: arr[4], params: someParams, code: line.trim() } };
+                    let aWidget = { widget: { name: arr[2], class: arr[4], params: someParams, code: line.trim() } };
                     structure.push(aWidget);
                 }
                 else {
@@ -271,13 +271,13 @@ function pushCode(data) {
 
 function splitComments(_source) {
     _source = _source.trim();
-    var firstBreak = _source.indexOf("/*");
+    let firstBreak = _source.indexOf("/*");
     if (firstBreak >= 0) {
         if (_source.substring(0, firstBreak).trim().length > 0) pushCode( { code: _source.substring(0, firstBreak).trim() });
-        var secondBreak = _source.indexOf("*/", firstBreak + 2);
+        let secondBreak = _source.indexOf("*/", firstBreak + 2);
         if (secondBreak >= 0) {
             if (_source.substring(firstBreak, secondBreak + 2).trim().replaceAll("*", '') == "//") {
-                var secondLineBreak = _source.indexOf("\n", secondBreak + 2);
+                let secondLineBreak = _source.indexOf("\n", secondBreak + 2);
                 structure.push({ comment: _source.substring(firstBreak, secondLineBreak + 1).trim() });
                 splitComments( _source.substring(secondLineBreak + 1));
             }
@@ -297,15 +297,15 @@ function splitComments(_source) {
 
 function dropDownInput(input, name) {
     //center
-    var input2 = document.createElement("select");
+    let input2 = document.createElement("select");
     input2.id = input.id;
-    var items = {
+    let items = {
         backgroundRepeat: ["", "repeat", "repeat-x", "repeat-y", "no-repeat", "initial", "inherit"],
         backgroundPosition: ["", "center", "top", "left", "bottom", "right", "left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"],
         textAlign: ["", "left", "right", "center", "justify", "initial", "inherit"]
     };
     items[name].forEach((item) => {
-        var option2 = document.createElement("option");
+        let option2 = document.createElement("option");
         option2.value = item;
         option2.innerHTML = item;
         if (item == input.value) option2.selected = "true"
@@ -321,24 +321,24 @@ function dropDownInput(input, name) {
 
 function colorInput(input) {
     input.type = "color";
-    var input2 = document.createElement("input");
+    let input2 = document.createElement("input");
     input2.style.border = "none";
     input2.size = 10;
     input2.value = input.value;
-    var pageDivC1 = document.createElement("div");
+    let pageDivC1 = document.createElement("div");
     pageDivC1.style.display = "inline-block";
     pageDivC1.style.backgroundColor = "white";
     pageDivC1.style.borderRadius = "2px";
     pageDivC1.style.width = "220px";
     pageDivC1.style.margin = "1px";
-    var pageDivC11 = document.createElement("div");
+    let pageDivC11 = document.createElement("div");
     pageDivC11.style.display = "inline-block";
     pageDivC11.style.marginTop = "3px";
     pageDivC11.style.marginLeft = "3px";
     pageDivC11.style.backgroundColor = "white";
     pageDivC11.append(input2);
 
-    var pageDivC2 = document.createElement("div");
+    let pageDivC2 = document.createElement("div");
     pageDivC2.style.display = "inline-block";
     pageDivC2.style.float = "right";
     pageDivC2.style.margin = "-2px";
@@ -353,7 +353,7 @@ function colorInput(input) {
 }
 
 function createInput(param, value, eventListener) {
-    var input = document.createElement("input");
+    let input = document.createElement("input");
     input.id = "input-param-" + param;
     input.type = "text";
     input.size = 30;
@@ -382,7 +382,7 @@ function createInput(param, value, eventListener) {
 const structure = [];
 
 function showUiEditor() {
-    var source = window.editor.getValue();
+    let source = window.editor.getValue();
     while(structure.length>0)structure.pop();
     //  try {
     splitComments(source);
@@ -435,9 +435,9 @@ function getWidgetByClass( name) {
 }
 
 function createPagesMenu() {
-    var pagesPanel = document.createElement("div");
-    var pagesHeader = document.createElement("div");
-    var pagesBody = document.createElement("div");
+    let pagesPanel = document.createElement("div");
+    let pagesHeader = document.createElement("div");
+    let pagesBody = document.createElement("div");
     pagesHeader.innerHTML = "[+] pages";
     pagesHeader.style.borderColor = "#AAAAAA";
     pagesHeader.style.borderWidth = "1px";
@@ -454,9 +454,9 @@ function createPagesMenu() {
     return { pagesPanel, pagesBody };
 }
 function createPWAMenu(pwaWidget) {
-    var pwaPanel = document.createElement("div");
-    var pwaHeader = document.createElement("div");
-    var pwaBody = document.createElement("div");
+    let pwaPanel = document.createElement("div");
+    let pwaHeader = document.createElement("div");
+    let pwaBody = document.createElement("div");
     pwaHeader.innerHTML = "[+] pwa";
     pwaHeader.style.borderColor = "#AAAAAA";
     pwaHeader.style.borderWidth = "1px";
@@ -476,7 +476,7 @@ function createPWAMenu(pwaWidget) {
 
 function appendPWAParams(pwaBody, pwaWidget) {
     if (pwaWidget && pwaBody) {
-        for (var param in pwaWidget.params) {
+        for (let param in pwaWidget.params) {
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
             let pageDivC1 = document.createElement("div");
@@ -500,7 +500,7 @@ function appendPWAParams(pwaBody, pwaWidget) {
 }
 
 function createPageSelect() {
-    var pageDivRow = document.createElement("div");
+    let pageDivRow = document.createElement("div");
     pageDivRow.style.width = "420px";
     let selectDiv = document.createElement("select");
     selectDiv.id = "pageMiddle-" + menuMetadata.id + "-pageselect";
@@ -529,11 +529,11 @@ function createPageDiv() {
 }
 
 function createMockFrameDiv() {
-    var mockFrameDiv = document.createElement("div");
-    var mockFrameIframe = document.createElement("iframe");
+    let mockFrameDiv = document.createElement("div");
+    let mockFrameIframe = document.createElement("iframe");
     mockFrameIframe.setAttribute("id", "pageMiddle-" + menuMetadata.id + "iframe");
     mockFrameIframe.setAttribute("frameBorder", "0");
-    var izoom = 1.0;
+    let izoom = 1.0;
     if ((window.innerHeight - 200) <= 896) {
         izoom = (window.innerHeight - 200) / 896;
     }
@@ -541,8 +541,8 @@ function createMockFrameDiv() {
         izoom = (window.innerWidth / 4) / 414;
     }
     if (izoom < 0.3) izoom = 0.3;
-    var iWidth = 414 * izoom;
-    var iHeight = 896 * izoom;
+    let iWidth = 414 * izoom;
+    let iHeight = 896 * izoom;
     mockFrameIframe.setAttribute("width", iWidth + "px");
     mockFrameIframe.setAttribute("height", iHeight + "px");
     mockFrameIframe.setAttribute("data-zoom", izoom);
@@ -561,7 +561,7 @@ function createMockFrameDiv() {
 }
 
 function createPagePropsDiv(block) {
-    var selectDiv = document.querySelector("#pageMiddle-" + menuMetadata.id + "-pageselect");
+    let selectDiv = document.querySelector("#pageMiddle-" + menuMetadata.id + "-pageselect");
     let pagePropsDiv = document.createElement("div");
     pagePropsDiv.id = "pageMiddle-pageProps-" + block.class.name;
     if (selectDiv.querySelectorAll("option").length > 0) pagePropsDiv.style.display = "none";
@@ -606,7 +606,7 @@ function createPagePropsDiv(block) {
     return pagePropsDiv;
 }
 function appendClassParams(pagePropsDiv, params) {
-    for (var param in params) {
+    for (let param in params) {
         let pageDivRow = document.createElement("div");
         pageDivRow.style.width = "420px";
         let pageDivC1 = document.createElement("div");
@@ -627,7 +627,7 @@ function appendClassParams(pagePropsDiv, params) {
     }
 }
 function appendBlankParams(pagePropsDiv, params) {
-    for (var paramIndex in paramOptions) {
+    for (let paramIndex in paramOptions) {
         if (!params[paramOptions[paramIndex]]) {
             let pageDivRow = document.createElement("div");
             pageDivRow.style.width = "420px";
@@ -653,7 +653,7 @@ function appendBlankParams(pagePropsDiv, params) {
 
 
 function hideUiEditor() {
-    var pageDiv = document.getElementById("pageMiddle-" + menuMetadata.id);
+    let pageDiv = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (pageDiv) pageDiv.remove();
     document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
     if (window.editor) window.editor.refresh();
