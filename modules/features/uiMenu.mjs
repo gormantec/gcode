@@ -200,7 +200,8 @@ function cleanParams(paramString) {
         for(let i=0;arrNewWidgets!=null && i<arrNewWidgets.length;i++)
         {
             paramString.replace(arrNewWidgets[i],arrNewWidgets[i].replaceAll("\"","'"));
-            console.log("*************************");
+            console.log("** replace: "+arrNewWidgets[i]);
+            console.log("** with:    "+arrNewWidgets[i].replaceAll("\"","'"));
         }
     }
 
