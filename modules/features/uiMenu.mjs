@@ -94,7 +94,7 @@ async function refreshScreen() {
     
     _module = window.document.createElement("script");
     _module.id = cyrb53("window.PWA.globals.pwaInstances[0].addPageChangeListener()");
-    let exists = rootHTML.querySelector("head script[id='"+_module.id+"']");
+    exists = rootHTML.querySelector("head script[id='"+_module.id+"']");
     if (!exists) {
         _module.setAttribute("type", "module");
         _module.text = "\n" + "window.PWA.globals.pwaInstances[0].addPageChangeListener((pageId)=>{window.top.postMessage('{\"event\":\"pageChange\",\"data\":{\"pageId\":\"'+pageId+'\"}}', '*');});" + "\n";
