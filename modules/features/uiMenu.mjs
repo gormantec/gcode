@@ -146,8 +146,8 @@ function structureToCode() {
             var params = block.widget.params;
             let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)\)/g
             paramString = block.widget.code.trim().replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
-            var regex22 = /\"widget\(([\s\S]+?)\)\"/g;
-            paramString = paramString.replaceAll(regex22, "$1");
+            var regex22 = /\"widget\(([\s\S]+)\)\"([,\n])/g;
+            paramString = paramString.replaceAll(regex22, "$1$2");
             var regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
             var regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
