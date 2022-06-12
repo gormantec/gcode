@@ -193,7 +193,7 @@ function cleanParams(paramString) {
         paramString = paramString.replace(wStrings[i], "\"widget("+wStrings[i].replaceAll("\"","\\\"").replaceAll("\t"," ").replaceAll("\n"," ").replaceAll("    "," ").replaceAll("    "," ").replaceAll("   "," ").replaceAll("  "," ").trim()+")\"");
     }
     */
-    const regex7 = /(:\s*?)([a-z0-9]+?)([\s,])/ig;
+    const regex7 = /(^(?!import).*?:\s?)((?!.*\").*?)(\s*?[\,]?\s*?$)/gm;
     paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
     const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
     paramString = paramString.replaceAll(regex8, '}');
