@@ -680,7 +680,7 @@ export function fileChanged(fileType)
         hideUiEditor();
         //uiEditorVisible = false;
     }
-    else if(svgEditorVisible){
+    else if(uiEditorVisible){
         showUiEditor();
         uiEditorVisible = true;
     }
