@@ -161,6 +161,10 @@ function structureToCode() {
         }
         else if (block.class) {
             let params = block.class.constructor.super;
+            for (let param in params) {
+                params[param] = params[param].trim();
+                params[param] = params[param].replaceAll("\"","#####QUOTE#####")
+            }
             let regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\n\r\s]*?)\)[\s\r\n]*?;[\s\S]*?\}([\s\S]*$)/g;
             let paramString = block.class.code.replaceAll(regex,
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
@@ -175,6 +179,7 @@ function structureToCode() {
             let regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
             paramString = paramString.replaceAll(regex23, "$1$2");
             resp = resp + paramString + "\n";
+            resp =  resp.replaceAll("#####QUOTE#####","\"");
         }
     });
     return resp;
@@ -182,6 +187,24 @@ function structureToCode() {
 }
 
 function cleanParams(paramString) {
+    paramString=paramString.trim();
+
+
+    let inside=paramString.slice(1,-1);
+    console.log("*************************");
+    if(inside && inside.trim()!=null)
+    {
+        let rxNewWidget = /\(\s*?\{[\s\S]*?\}\s*?\)/g
+        let arrNewWidgets = rxNewWidget.exec(inside);
+        console.log("*************************");
+        for(let i=0;arrNewWidgets!=null && i<arrNewWidgets.length;i++)
+        {
+            paramString.replace(arrNewWidgets[1],arrNewWidgets[1].replaceAll("\"","'"));
+            console.log("*************************");
+        }
+    }
+
+
     const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})(\s*?[,}])/g;
     paramString = paramString.replaceAll(regex6, '$1\"$2\"$3');
     const regex61 = /(:\s*?)(this\.\S*?\s*?)([,}])/g;
