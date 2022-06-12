@@ -475,10 +475,15 @@ window.setEditorMode = function () {
         window.editor.setOption('lint', { options: { esversion: 6 } });
         setFeature("javascript");
     }
+    else if (filename.endsWith(".lib.mjs")) {
+        window.editor.setOption("mode", "javascript");
+        window.editor.setOption('lint', { options: { esversion: 6 } });
+        setFeature("javascript/lib");
+    }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
         window.editor.setOption('lint', { options: { esversion: 6 } });
-        setFeature("javascript");
+        setFeature("javascript/module");
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");

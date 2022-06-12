@@ -663,12 +663,25 @@ function hideUiEditor() {
 let uiEditorVisible = false;
 
 export function menuAction() {
-    if (!uiEditorVisible) {
+    if (!uiEditorVisible  && document.getElementById("filename").innerText.endsWith(".mjs")  && !document.getElementById("filename").innerText.endsWith(".lib.mjs")) {
         showUiEditor();
         uiEditorVisible = true;
     }
     else {
         hideUiEditor();
         uiEditorVisible = false;
+    }
+}
+
+export function fileChanged(fileType)
+{
+    if(fileType!="javascript/module")
+    {
+        hideUiEditor();
+        //uiEditorVisible = false;
+    }
+    else if(svgEditorVisible){
+        showUiEditor();
+        uiEditorVisible = true;
     }
 }
