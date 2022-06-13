@@ -168,7 +168,7 @@ function structureToCode() {
             let regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\n\r\s]*?)\)[\s\r\n]*?;[\s\S]*?\}([\s\S]*$)/g;
             let paramString = block.class.code.replaceAll(regex,
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
-                JSON.stringify(params, null, 4)replaceAll("%22","\"").replaceAll("\n    ", "\n            ").slice(0, -1) +
+                JSON.stringify(params, null, 4).replaceAll("%22","\"").replaceAll("\n    ", "\n            ").slice(0, -1) +
                 '        });\n    }$3');
             console.log(paramString);
             let regex27 = /\"widget\(([\s\S]+?)\)\"([,]?$)/gm;
