@@ -484,5 +484,6 @@ export function fileChanged(fileType)
     else if(svgEditorVisible){
         showSvgEditor();
         svgEditorVisible = true;
+        return true;
     }
 }

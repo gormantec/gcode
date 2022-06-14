@@ -122,7 +122,6 @@ async function refreshScreen() {
     doc.open();
     let theHtml=rootHTML.outerHTML;
     try{
-        console.log(theHtml);
         doc.writeln(theHtml);
     }
     catch(e)
@@ -135,7 +134,6 @@ async function refreshScreen() {
 function structureToCode() {
 
     let resp = "";
-    console.log(structure);
 
     structure.forEach((block) => {
         if (block.comment) {
@@ -170,10 +168,8 @@ function structureToCode() {
                 'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("%22","\"").replaceAll("\n    ", "\n            ").slice(0, -1) +
                 '        });\n    }$3');
-            console.log(paramString);
             let regex27 = /\"widget\(([\s\S]+?)\)\"([,]?$)/gm;
             paramString = paramString.replaceAll(regex27, "$1$2");
-            console.log(paramString);
             let regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
             paramString = paramString.replaceAll(regex22, "$1$2");
             let regex23 = /(:\s*?)\"(this\.\S*?)\"/g;
@@ -191,17 +187,13 @@ function cleanParams(paramString) {
 
 
     let inside=paramString.slice(1,-1);
-    console.log("*************************");
     if(inside && inside.trim()!=null)
     {
         let rxNewWidget = /\(\s*?\{[\s\S]*?\}\s*?\)/g
         let arrNewWidgets = rxNewWidget.exec(inside);
-        console.log("*************************");
         for(let i=0;arrNewWidgets!=null && i<arrNewWidgets.length;i++)
         {
             paramString=paramString.replace(arrNewWidgets[i],arrNewWidgets[i].replaceAll("\"","%22"));
-            console.log("** replace: "+arrNewWidgets[i]);
-            console.log("** with:    "+arrNewWidgets[i].replaceAll("\"","%22"));
         }
     }
 
@@ -224,7 +216,6 @@ function cleanParams(paramString) {
     paramString = paramString.replaceAll(regex7, '$1\"widget($2)\"$3');
     const regex8 = /,[\s\n\r]*?\}[\s\n\r]*?$/ig;
     paramString = paramString.replaceAll(regex8, '}');
-    console.log(paramString)
     return paramString;
 }
 
@@ -694,6 +685,7 @@ export function menuAction() {
     if (!uiEditorVisible  && document.getElementById("filename").innerText.endsWith(".mjs")  && !document.getElementById("filename").innerText.endsWith(".lib.mjs")) {
         showUiEditor();
         uiEditorVisible = true;
+        document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display="none";
     }
     else {
         hideUiEditor();
@@ -703,13 +695,17 @@ export function menuAction() {
 
 export function fileChanged(fileType)
 {
+    console.log("fileChanged");
     if(fileType!="javascript/module")
     {
+        console.log("fileType!=javascript/module");
         hideUiEditor();
-        //uiEditorVisible = false;
+        uiEditorVisible = false;
     }
     else if(uiEditorVisible){
+        console.log("uiEditorVisible=true");
         showUiEditor();
         uiEditorVisible = true;
+        return true;
     }
 }

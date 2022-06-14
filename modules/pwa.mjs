@@ -154,6 +154,13 @@ class PWA {
             debug.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
         }
+
+        if (aPage.floatingActionButtonPage) {
+            debug.log("floatingActionButtonPage:" + aPage.floatingActionButtonPage);
+            this.floatingActionButton.onclick(function() {
+                aPWA.setPage(aPage.floatingActionButtonPage);
+              });
+        }
         if (aPage.hideFloatingActionButtonFlag == "true") this.hideFloatingActionButton();
         else this.showFloatingActionButton();
         if (aPage.hideFooterFlag == "true") this.hideFooter();
@@ -689,6 +696,7 @@ class Page extends Div {
         else {
             console.log("Error:" + params.navigateBackPage);
         }
+        if (params && params.floatingActionButtonPage) this.floatingActionButtonPage = params.floatingActionButtonPage;
         if (params && params.hideFloatingActionButton && params.hideFloatingActionButton == "true") this.hideFloatingActionButtonFlag = "true";
         if (params && params.hideFooter && params.hideFooter == "true") this.hideFooterFlag = "true";
     }

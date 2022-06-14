@@ -258,9 +258,10 @@ export async function refreshFeatures() {
 }
 export function setFeature(fileType) {
 
-    for(let i=0;i<fileChangedListeners.length;i++)
+    let r=false;
+    for(let i=0;!r && i<fileChangedListeners.length;i++)
     {
-        fileChangedListeners[i](fileType);
+        r=fileChangedListeners[i](fileType);
     }
 
 }
