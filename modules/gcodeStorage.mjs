@@ -118,6 +118,7 @@ export function load(filename, asString = false, ageInSec = -1) {
         
     }
     else {
+        if(filename.startsWith("./"))filename=filename.substring(2);
         let b64 = localStorage.getItem(FILE_PREFIX + filename);
         let contentType = localStorage.getItem(CONTENT_TYPE_PREFIX + filename);
         let dateChange = localStorage.getItem(DATE_PREFIX + filename);

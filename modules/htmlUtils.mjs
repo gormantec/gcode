@@ -191,9 +191,13 @@ export async function getImageAsync(url,x,y) {
             await preload([url]);
             rText=load(url);
         }
-        else{
+        else if(url.startsWith("http")){
             var response = await fetch(url, { mode: 'cors' });
             rText = await response.text();
+        }
+        else{
+            console.log("CASHE IMAGE");
+            rText=load(url);
         }
 
         if(x!=null && y!=null)
@@ -237,8 +241,9 @@ export function createHtml(code, options) {
 
 
 
-    splash = code.replace(/\/\*.*?splash:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
-    if (splash == code || !(splash.startsWith("http") || splash.startsWith("git"))) splash = null;
+    splash = code.replace(/\/\*.*?splash:((?!\n).)*?(((http)|(git)|(\.\/))((?!\n).)*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$2');
+    if (splash == code || !(splash.startsWith("http") || splash.startsWith("git") || splash.startsWith("./"))) splash = null;
+    console.log("splash =================>"+splash);
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
 
     if (splashSize == code) splashSize = "contain";
