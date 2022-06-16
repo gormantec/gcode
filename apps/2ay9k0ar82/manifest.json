@@ -1,0 +1,31 @@
+{
+  "name": "gcode",
+  "short_name": "gcode",
+  "theme_color": "#005040",
+  "background_color": "#005040",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "A gcode developed PWA app",
+  "icons": [
+    {
+      "src": "/apps/2ay9k0ar82/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/2ay9k0ar82/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/2ay9k0ar82/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/2ay9k0ar82/index.html",
+  "prefer_related_applications": false
+}
