@@ -452,6 +452,8 @@ async function _new(aFilename, data) {
                             var appStuff = "";
                             if (aFilename.endsWith(".mjs") || aFilename.endsWith(".ts")) appStuff = "appName: gcode" + "\n  " +
                                 "splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png" + "\n  " +
+
+                                "splashSize: 300px\n " +
                                 "icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
                                 "icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png" + "\n  " +
                                 "mockFrame: iphoneX" + "\n  " +
