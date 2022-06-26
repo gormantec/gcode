@@ -54,15 +54,14 @@ jobs:
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
 
-          echo "BUILD_DIR = $BUILD_DIR"
-          xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings
           BUILD_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
+          BUILT_PRODUCTS_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | grep -oEi "\/.*"`
           echo "BUILD_DIR = $BUILD_DIR"
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
-          xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
+          xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet
 
-          cp -R $BUILD_DIR $OUT_DIR_VAR
+          cp -R $BUILT_PRODUCTS_DIR/* $OUT_DIR_VAR
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder
@@ -75,8 +74,7 @@ jobs:
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
           rm -f apps/$APP_NAME/ios/*
-          cp -rf build/out/*.app ./apps/$APP_NAME/ios/
-          cp -rf build/out/*.ipa ./apps/$APP_NAME/ios/       
+          cp -rf build/out/* ./apps/$APP_NAME/ios/     
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
