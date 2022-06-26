@@ -25,7 +25,7 @@ jobs:
           IFS=$'\n'
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
-            if [[ "$file" == "apps/"* ]] && [[ "$file" -ne "apps/gcode_manifests.json" ]]; then
+            if [[ "$file" == "apps/"* ]]; then
               echo "found app=$file"
               APP_NAME=$(echo "$file" | sed -e 's/apps\///g' | sed -e 's/\/.*//g')
               echo "APP_NAME=$APP_NAME"
