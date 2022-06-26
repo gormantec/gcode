@@ -20,12 +20,12 @@ jobs:
           node-version: '>=16.0.0'
       - run: | 
           node -v
+          npm install node-fetch
           pwd
           mkdir build
           cd build
           pwd
           ls
-          npm install node-fetch
           node ../modules/pwabuilder/buildIIOS.mjs   
           ls 
       - name: Set Default Scheme
