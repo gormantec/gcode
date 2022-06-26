@@ -54,7 +54,7 @@ jobs:
       - name: move to apps/ipa dir # Move the generated files into output folder
         run: |
           cd build/src
-          ls
+          ls -latr
           cd ..
           cd ..
           APP_NAME="screen_time"
