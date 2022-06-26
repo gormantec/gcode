@@ -55,8 +55,8 @@ jobs:
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
 
           echo "BUILD_DIR = $BUILD_DIR"
-          xcodebuild -scheme "$scheme" -showBuildSettings
-          BUILD_DIR=`xcodebuild -scheme "$scheme" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
+          xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings
+          BUILD_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
           echo "BUILD_DIR = $BUILD_DIR"
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
