@@ -47,7 +47,7 @@ jobs:
           mkdir -p out
           cd src
 
-          pod install
+          
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
           if [ $scheme = default ]; then scheme=$(cat default); fi
@@ -59,7 +59,7 @@ jobs:
           BUILD_DIR=`xcodebuild -scheme "$scheme" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
           echo "BUILD_DIR = $BUILD_DIR"
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
-
+          pod install
           xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
 
           cp -R $BUILD_DIR $OUT_DIR_VAR
