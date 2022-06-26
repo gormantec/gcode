@@ -1,10 +1,12 @@
-name: iOS starter workflow
+name: build-iOS
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+    paths:
+      - apps/**
+      - '!**/ios/**'
 
 jobs:
   build:
@@ -14,11 +16,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v19
+      - name: List all changed files
+        run: |
+          oldIFS="$IFS"
+          IFS=$'\n'
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+            if [[ "$file" == "apps/"* ]]; then
+              echo "found app=$file"
+              APP_NAME=$(echo "$file" | sed -e 's/apps\///g' | sed -e 's/\/.*//g')
+              echo "APP_NAME=$APP_NAME"
+            fi
+          done
+          IFS="$oldIFS"
+          if [ -z ${APP_NAME+x} ]; then 
+            echo "APP_NAME not found"
+            exit 1
+          fi
+          echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.3.0
         with:
           node-version: '>=16.0.0'
       - run: | 
+          echo "APP_NAME = $APP_NAME"
           node -v
           npm install node-fetch
           pwd
@@ -26,7 +50,7 @@ jobs:
           cd build
           pwd
           ls
-          node ../modules/pwabuilder/buildIIOS.mjs   
+          node ../modules/pwabuilder/buildIIOS.mjs
           unzip pwa.zip
           ls
       - name: Set Default Scheme
