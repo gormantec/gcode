@@ -60,17 +60,16 @@ jobs:
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
           xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet
-
           cp -R $BUILT_PRODUCTS_DIR/* $OUT_DIR_VAR
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder
         run: |
+          BASE_DIR_VAR=$(pwd)
           cd build/src
           ls -latr
-          cd ..
-          cd ..
-          APP_NAME="screen_time"
+          cd $BASE_DIR_VAR
+          APP_NAME="37790665-screen-time"
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
           rm -f apps/$APP_NAME/ios/*
