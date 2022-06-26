@@ -84,9 +84,7 @@ jobs:
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
           xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet
-          ls -latr $BUILD_DIR
-          ls -latr $BUILT_PRODUCTS_DIR
-          
+          ls -latr $BUILD_DIR/Debug-iphonesimulator
           cp -R $BUILD_DIR/* $OUT_DIR_VAR
           cd $OUT_DIR_VAR
           ls -latr
