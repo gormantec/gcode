@@ -14,20 +14,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: v15.4.0 
+      - run: | 
+          node -v
+          pwd
+          mkdir build
+          cd build
+          pwd
+          ls
+          node gcode/modules/pwabuilder/buildIIOS.mjs  
       - name: Set Default Scheme
         run: |
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
           echo Using default scheme: $default
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.3.0
-        with:
-          node-version: v15.4.0 
-      - run: node -v
-      - run: pwd
-      - run: mkdir build
-      - run: cd build; pwd; ls; node gcode/modules/pwabuilder/buildIIOS.mjs  
       - name: Build
         env:
           scheme: ${{ 'default' }}
