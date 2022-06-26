@@ -56,6 +56,7 @@ jobs:
           BUILD_DIR=`xcodebuild -scheme "$scheme" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
           echo $BUILD_DIR
           cp -r $BUILD_DIR $OUT_DIR_VAR
+          cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder
         run: |
