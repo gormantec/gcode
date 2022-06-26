@@ -63,7 +63,7 @@ jobs:
           ls -latr $BUILD_DIR
           ls -latr $BUILT_PRODUCTS_DIR
           
-          cp -R $BUILT_PRODUCTS_DIR/* $OUT_DIR_VAR
+          cp -R $BUILD_DIR/* $OUT_DIR_VAR
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder
