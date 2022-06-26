@@ -42,6 +42,7 @@ jobs:
           platform: ${{ 'iOS Simulator' }}
         run: |
           cd build/src
+          mkdir ../out
           ls -latr
           pod install
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
@@ -49,7 +50,7 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet
+          xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet CONFIGURATION_BUILD_DIR=../out
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder
         run: |
@@ -61,8 +62,8 @@ jobs:
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
           rm -f apps/$APP_NAME/ios/*
-          cp -rf build/src/*.app ./apps/$APP_NAME/ios/
-          cp -rf build/src/*.ipa ./apps/$APP_NAME/ios/       
+          cp -rf build/out/*.app ./apps/$APP_NAME/ios/
+          cp -rf build/out/*.ipa ./apps/$APP_NAME/ios/       
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
