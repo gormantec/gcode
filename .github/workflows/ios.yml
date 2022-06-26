@@ -25,7 +25,9 @@ jobs:
           cd build
           pwd
           ls
-          node gcode/modules/pwabuilder/buildIIOS.mjs  
+          npm install node-fetch
+          node ../modules/pwabuilder/buildIIOS.mjs 
+          ls 
       - name: Set Default Scheme
         run: |
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
