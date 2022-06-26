@@ -49,15 +49,26 @@ jobs:
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
-      - name: Test
-        env:
-          scheme: ${{ 'default' }}
-          platform: ${{ 'iOS Simulator' }}
+      - name: move to apps/ipa dir # Move the generated files into output folder
         run: |
           cd build/src
-          # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-          device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
+          ls
+          cd ..
+          cd ..
+          APP_NAME="screen_time"
+          echo "APP_NAME $APP_NAME"
+          mkdir -p apps/$APP_NAME/ios
+          rm -f apps/$APP_NAME/ios/*
+          cp -rf build/src/*.app ./apps/$APP_NAME/ios/
+          cp -rf build/src/*.ipa ./apps/$APP_NAME/ios/       
+          git config --local user.email "craig@gormantec.com"
+          git config --local user.name "gormantec"
+          git add ./apps/$APP_NAME/ios
+          git commit -m "Add changes"
+
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          branch: master #ignore if your branch is master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
