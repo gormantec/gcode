@@ -27,7 +27,8 @@ jobs:
           pwd
           ls
           node ../modules/pwabuilder/buildIIOS.mjs   
-          ls 
+          unzip pwa.zip
+          ls
       - name: Set Default Scheme
         run: |
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
