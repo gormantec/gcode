@@ -1,0 +1,31 @@
+{
+  "name": "gcodeApp",
+  "short_name": "AppName",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "A progressive web app, developed on gcode.",
+  "icons": [
+    {
+      "src": "/apps/3n82927hj7/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/3n82927hj7/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/3n82927hj7/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/3n82927hj7/index.html",
+  "prefer_related_applications": false
+}
