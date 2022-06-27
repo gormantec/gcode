@@ -13,8 +13,7 @@ on:
 jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
-    runs-on: self-hosted
+    runs-on: [self-hosted, macos-latest]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
