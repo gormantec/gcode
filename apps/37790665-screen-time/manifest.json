@@ -1,8 +1,8 @@
 {
   "name": "screen time",
   "short_name": "screen time",
-  "theme_color": "#212121",
-  "background_color": "#212121",
+  "theme_color": "#212122",
+  "background_color": "#212122",
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
