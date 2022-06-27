@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 console.log("https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json");
 const _manifest = await fetch("https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json");
 const _manifestJSON=await _manifest.json();
-console.log(_manifestJSON);
+
 
 
 const streamPipeline = promisify(pipeline);
