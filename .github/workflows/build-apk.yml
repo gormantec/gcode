@@ -39,11 +39,12 @@ jobs:
             exit 1
           fi
           echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
-      - name: pwaBuilder build APK
+      - name: setup node
         uses: actions/setup-node@v3.3.0
         with:
           node-version: '>=16.0.0'
-      - run: | 
+      - name: pwaBuilder build APK
+        run: | 
           echo "APP_NAME = $APP_NAME"
           node -v
           npm install node-fetch
