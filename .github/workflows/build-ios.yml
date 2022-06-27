@@ -98,7 +98,7 @@ jobs:
           APP_NAME="37790665-screen-time"
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
-          rm -f apps/$APP_NAME/ios/*
+          rm -rf apps/$APP_NAME/ios/*
           cp -rf build/out/* ./apps/$APP_NAME/ios/     
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
