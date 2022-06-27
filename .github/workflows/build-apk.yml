@@ -8,8 +8,9 @@ on:
       - master
     paths:
       - apps/**
-      - '!**.aab'
-      - '!**.apk'
+      - '!**/ios/**'
+      - '!**/apk/**'
+      - '!apps/gcode_manifests.json'
 jobs:
   build-apk-job:
     timeout-minutes: 10
