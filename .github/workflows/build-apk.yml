@@ -27,7 +27,7 @@ jobs:
           IFS=$'\n'
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
-            if [[ "$file" == "apps/"* ]]; then
+            if [[ "$file" == "apps/"* ]] && [[ "$file" != "apps/gcode_manifests.json" ]]; then
               echo "found app=$file"
               APP_NAME=$(echo "$file" | sed -e 's/apps\///g' | sed -e 's/\/.*//g')
               echo "APP_NAME=$APP_NAME"
@@ -39,23 +39,22 @@ jobs:
             exit 1
           fi
           echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
+      - name: pwaBuilder build APK
+        uses: actions/setup-node@v3.3.0
         with:
-          java-version: '11'
-          distribution: 'temurin'      
-      - name: github.run_attempt
-        run: echo ${{ github.run_attempt }}
-      - name: github.sha
-        run: echo ${{ github.sha }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm i -g @bubblewrap/cli
-      - run: mkdir ~/tools && cd ~/tools && npm init -y && npm i bw_manifest_url
-      - run: mkdir ~/.bubblewrap
-      - run: echo '{"jdkPath":"'$JAVA_HOME'","androidSdkPath":"/usr/local/lib/android/sdk"}' > ~/.bubblewrap/config.json
-      - run: node ~/tools/node_modules/bw_manifest_url/init.js "https://gcode.com.au/apps/$APP_NAME/manifest.json"
+          node-version: '>=16.0.0'
+      - run: | 
+          echo "APP_NAME = $APP_NAME"
+          node -v
+          npm install node-fetch
+          pwd
+          mkdir build 
+          cd build
+          pwd
+          ls
+          node ../modules/pwabuilder/buildAPK.mjs
+          unzip pwa.zip
+          ls
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |
           MANIFEST_URL="https://gcode.com.au/apps/$APP_NAME/manifest.json"
@@ -63,8 +62,8 @@ jobs:
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/apk
           rm -f apps/$APP_NAME/apk/*
-          cp -rf ./app-release-signed.apk ./apps/$APP_NAME/apk/
-          cp -rf ./app-release-bundle.aab ./apps/$APP_NAME/apk/       
+          cp -rf ./build/pwa/*.apk ./apps/$APP_NAME/apk/
+          cp -rf ./build/pwa/*.aab ./apps/$APP_NAME/apk/       
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/apk

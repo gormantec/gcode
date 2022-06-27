@@ -37,7 +37,7 @@ jobs:
             exit 1
           fi
           echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
-      - name: Setup Node.js environment
+      - name: pwaBuilder build IOS
         uses: actions/setup-node@v3.3.0
         with:
           node-version: '>=16.0.0'
@@ -84,7 +84,7 @@ jobs:
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
           xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet
-          ls -latr $BUILD_DIR/Debug-iphonesimulator
+          ls -latr $BUILD_DIR/Debug-iphonesimulator/*
           cp -R $BUILD_DIR/* $OUT_DIR_VAR
           cd $OUT_DIR_VAR
           ls -latr
