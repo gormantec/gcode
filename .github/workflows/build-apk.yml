@@ -62,8 +62,8 @@ jobs:
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/apk
           rm -f apps/$APP_NAME/apk/*
-          cp -rf ./build/pwa/*.apk ./apps/$APP_NAME/apk/
-          cp -rf ./build/pwa/*.aab ./apps/$APP_NAME/apk/       
+          cp -rf ./build/*.apk ./apps/$APP_NAME/apk/
+          cp -rf ./build/*.aab ./apps/$APP_NAME/apk/       
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/apk
