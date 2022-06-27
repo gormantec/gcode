@@ -65,7 +65,7 @@ jobs:
       - name: Build
         env:
           scheme: ${{ 'default' }}
-          platform: ${{ 'iOS Simulator' }}
+          platform: ${{ 'iOS' }}
         run: |
           cd build
           BASE_DIR_VAR=$(pwd)
