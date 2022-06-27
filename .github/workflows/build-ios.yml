@@ -86,15 +86,11 @@ jobs:
           pod install
           xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet
           ls -latr $BUILD_DIR/Debug-iphonesimulator/*
-          cp -R $BUILD_DIR/* $OUT_DIR_VAR
+          cp -R $BUILD_DIR/Debug-iphonesimulator/* $OUT_DIR_VAR
           cd $OUT_DIR_VAR
-          ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder
         run: |
           BASE_DIR_VAR=$(pwd)
-          cd build/src
-          ls -latr
-          cd $BASE_DIR_VAR
           APP_NAME="37790665-screen-time"
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios

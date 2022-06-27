@@ -48,11 +48,8 @@ jobs:
           echo "APP_NAME = $APP_NAME"
           node -v
           npm install node-fetch
-          pwd
           mkdir build 
           cd build
-          pwd
-          ls
           node ../modules/pwabuilder/buildAPK.mjs
           unzip pwa.zip
           ls
