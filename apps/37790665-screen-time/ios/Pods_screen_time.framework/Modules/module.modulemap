@@ -1,6 +1,0 @@
-framework module Pods_screen_time {
-  umbrella header "Pods-screen time-umbrella.h"
-
-  export *
-  module * { export * }
-}
