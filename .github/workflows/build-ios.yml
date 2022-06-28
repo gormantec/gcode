@@ -86,11 +86,10 @@ jobs:
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
           xcodebuild -allowProvisioningUpdates -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
-          xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
           ls -latr $BUILD_DIR/Debug-iphonesimulator/*
           cp -R $BUILD_DIR/Debug-iphonesimulator/*.app $OUT_DIR_VAR
           cd $OUT_DIR_VAR
-      - name: move to apps/ipa dir # Move the generated files into output folder
+      - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
         run: |
           BASE_DIR_VAR=$(pwd)
           APP_NAME="37790665-screen-time"
