@@ -111,8 +111,8 @@ jobs:
 
           
           rm -rf apps/$APP_NAME/ios/*
-          cp -f modules/pwabuilder/isoHtml.plist
-          cp -rf build/out/* ./apps/$(APP_NAME)/ios/$(APP_NAME).plist     
+          cp -f modules/pwabuilder/isoHtml.plist ./apps/$(APP_NAME)/ios/$(APP_NAME).plist  
+          cp -rf build/out/* ./apps/$APP_NAME/ios/     
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
