@@ -89,8 +89,8 @@ jobs:
           pod install
           if [[ $platform == "iOS" ]]; then
             echo "Export"
-            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -allowProvisioningUpdates -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
-            xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -allowProvisioningUpdates -exportOptionsPlist ../../modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/$APP_NAME.ipa"  -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -allowProvisioningUpdates -allowProvisioningDeviceRegistration -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -exportOptionsPlist ../../modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/$APP_NAME.ipa"  -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
           if [[ $platform == "iOS Simulator" ]]; then
             echo"Simulate"
