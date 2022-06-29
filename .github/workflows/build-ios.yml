@@ -80,13 +80,10 @@ jobs:
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
 
-          BUILD_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
-          echo "BUILD_DIR = $BUILD_DIR"
+          
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
           if [[ $platform == "iOS" ]]; then
-            echo "Export"
-            echo "Export"
             echo "Export"
             xcodebuild clean
             xcodebuild archive -scheme "$scheme" -sdk iphoneos -allowProvisioningUpdates -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" DEVELOPMENT_TEAM=9R8LPM6UR2
@@ -94,6 +91,8 @@ jobs:
           fi
           if [[ $platform == "iOS Simulator" ]]; then
             echo"Simulate"
+            BUILD_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
+            echo "BUILD_DIR = $BUILD_DIR"
             BUILT_PRODUCTS_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | grep -oEi "\/.*"`
             xcodebuild -allowProvisioningUpdates -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
