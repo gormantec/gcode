@@ -89,7 +89,7 @@ jobs:
           pod install
           if [[ $platform == "iOS" ]]; then
             echo "Export"
-            xcodebuild archive -scheme "$scheme" -sdk iphoneos -allowProvisioningUpdates -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -allowProvisioningUpdates -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" DEVELOPMENT_TEAM=9R8LPM6UR2
             xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -exportOptionsPlist ./modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/$APP_NAME.ipa" DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
           if [[ $platform == "iOS Simulator" ]]; then
