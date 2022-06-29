@@ -85,14 +85,16 @@ jobs:
           echo "BUILD_DIR = $BUILD_DIR"
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           pod install
-          if [[ $platform == "iOS Simulator" ]]; then echo "Simulate"; xcodebuild -allowProvisioningUpdates -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2; fi
           if [[ $platform == "iOS" ]]; then
             echo "Export"
             echo "Export"
             echo "Export"
+            xcodebuild clean
             xcodebuild archive -scheme "$scheme" -sdk iphoneos -allowProvisioningUpdates -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" DEVELOPMENT_TEAM=9R8LPM6UR2
             xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -exportOptionsPlist ./modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/$APP_NAME.ipa" DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
+          if [[ $platform == "iOS Simulator" ]]; then echo "Simulate"; xcodebuild -allowProvisioningUpdates -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2; fi
+          
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
