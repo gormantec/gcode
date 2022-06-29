@@ -91,7 +91,7 @@ jobs:
             echo "Export"
             echo "Export"
             xcodebuild archive -scheme "$scheme" -sdk iphoneos -allowProvisioningUpdates -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" DEVELOPMENT_TEAM=9R8LPM6UR2
-            xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -exportOptionsPlist exportOptions.plist -exportPath "$OUT_DIR_VAR/$APP_NAME.ipa" DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -exportOptionsPlist ./modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/$APP_NAME.ipa" DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
           cd $OUT_DIR_VAR
           ls -latr
