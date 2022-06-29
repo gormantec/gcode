@@ -108,8 +108,11 @@ jobs:
           BASE_DIR_VAR=$(pwd)
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
+
+          
           rm -rf apps/$APP_NAME/ios/*
-          cp -rf build/out/* ./apps/$APP_NAME/ios/     
+          cp -f modules/pwabuilder/isoHtml.plist
+          cp -rf build/out/* ./apps/$(APP_NAME)/ios/$(APP_NAME).plist     
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
