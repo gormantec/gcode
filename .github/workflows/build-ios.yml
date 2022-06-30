@@ -108,8 +108,6 @@ jobs:
           BASE_DIR_VAR=$(pwd)
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
-
-          
           rm -rf apps/$APP_NAME/ios/*
           cp -f modules/pwabuilder/isoHtml.plist ./apps/$(APP_NAME)/ios/$(APP_NAME).plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/     
