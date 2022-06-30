@@ -52,7 +52,7 @@ jobs:
           mkdir build 
           cd build
           node ../modules/pwabuilder/buildAPK.mjs
-          unzip pwa.zip
+          unzip -q pwa.zip
           ls
       - name: move to apps/apk dir # Move the generated files into output folder
         run: |

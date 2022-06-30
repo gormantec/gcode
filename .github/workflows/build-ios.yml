@@ -53,7 +53,7 @@ jobs:
           pwd
           ls
           node ../modules/pwabuilder/buildIIOS.mjs
-          unzip pwa.zip
+          unzip -q pwa.zip
           ls
       - name: Set Default Scheme
         run: |
