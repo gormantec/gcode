@@ -111,6 +111,7 @@ jobs:
           mkdir -p apps/$APP_NAME/ios
           rm -rf apps/$APP_NAME/ios/*
           cp -f modules/pwabuilder/isoHtml.plist ./apps/$APP_NAME/ios/$APP_NAME.plist  
+          SPLIT="-"
           VINDEX=${APP_NAME/$SPLIT*/$SPLIT}
           VINDEX=${#VINDEX}
           SHORT_APP_NAME=${APP_NAME:$VINDEX}
