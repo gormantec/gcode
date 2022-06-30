@@ -8,6 +8,8 @@ on:
       - apps/**
       - '!**/ios/**'
       - '!**/apk/**'
+      - '!**.xcarchive/Info.plist'
+Info.plist
       - '!apps/gcode_manifests.json'
 
 jobs:
