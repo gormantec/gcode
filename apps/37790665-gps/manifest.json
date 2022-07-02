@@ -1,8 +1,8 @@
 {
   "name": "gps",
   "short_name": "gps",
-  "theme_color": "#212121",
-  "background_color": "#212121",
+  "theme_color": "#ff0000",
+  "background_color": "#ff0000",
   "display": "standalone",
   "orientation": "any",
   "description": "A simple GPS viewer, allowing you to measure between two points.  This is an example of a new line.  This is another new line",
