@@ -89,6 +89,9 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
+import {
+    Text,OutlinedButton
+} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -103,7 +106,7 @@ class HomePage extends Page {
                 "display": "flex",
                 "justifyContent": "center",
                 "classNameOverride": "true",
-                "child": new Div({
+                "children": [new Div({
                     "classNameOverride": "true",
                     "children": [
                         new Div({
@@ -115,20 +118,30 @@ class HomePage extends Page {
                             "marginLeft": "10px",
                             "position": "relative",
                             "display": "inline-block",
-                            "innerText": "0000-0000000000000000"
+                            "innerText": "0000"
                         })
                     ]
-                })
+                }), new OutlinedButton({
+                    "position": "relative",
+                    "display": "inline-block",
+                    width: "75px",
+                    height: "75px",
+                    borderRadius: "5px",
+                    margin: "10px",
+                    backgroundColor: "#555555",
+                    fontSize: "46px",
+                    "child": new Text("-"),
+                    onclick: () => {
+                        window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+                    }
+                })]
             })
         });
-      this.UDID="0000-0000000000000000";
     }
-  
-  setUUID(aUDID)
-  {
-    this.UDID=aUDID;
-    this.firstChild().firstChild().children[1].innerText=aUDID;
-  }
+
+    setUUID(aUDID) {
+        this.firstChild.firstChild.children[1].innerText = aUDID;
+    }
 
 }
 /*---------------------------------------------------------------------------*/
@@ -149,14 +162,15 @@ aPWA.floatingActionButton.onclick(function() {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const aUDID = urlParams.get('UDID')
+aHomePage.setUUID("0000-0000000000000000");
 if (aUDID) {
     localStorage.setItem('UDID', aUDID);
     console.log(aUDID);
     window.location.replace("http://gcode.com.au");
-  	aHomePage.setUUID(aUDID);
+    aHomePage.setUUID(aUDID);
 }
 
-aHomePage.setUUID("0000-0000000000000001");
+
 
 
 aPWA.show();
