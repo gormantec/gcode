@@ -99,24 +99,26 @@ class HomePage extends Page {
             "color": "#ffffff",
             "backgroundColor": "#000000",
             "child": new Div({
-                "position": "relative",
                 "marginTop": "80px",
-                "marginLeft": "auto",
-                "marginRight": "auto",
-              	"classNameOverride":"true",
-                "children": [
-                    new Div({
-                        "position": "relative",
-                      	"display":"inline-block",
-                        "innerText": "UDID:"
-                    }),
-                    new Div({
-                      	"marginLeft":"10px",
-                        "position": "relative",
-                      	"display":"inline-block",
-                        "innerText": "0000-0000000000000000"
-                    })
-                ]
+              	"display": "flex",
+              	"justifyContent": "center",
+                "classNameOverride": "true",
+                "child": new Div({
+                    "classNameOverride": "true",
+                    "children": [
+                        new Div({
+                            "position": "relative",
+                            "display": "inline-block",
+                            "innerText": "UDID:"
+                        }),
+                        new Div({
+                            "marginLeft": "10px",
+                            "position": "relative",
+                            "display": "inline-block",
+                            "innerText": "0000-0000000000000000"
+                        })
+                    ]
+                })
             })
         });
     }
