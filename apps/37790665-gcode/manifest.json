@@ -1,8 +1,8 @@
 {
   "name": "gcode",
   "short_name": "gcode",
-  "theme_color": "#005040",
-  "background_color": "#005040",
+  "theme_color": "#323232",
+  "background_color": "#323232",
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
