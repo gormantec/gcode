@@ -123,14 +123,14 @@ class HomePage extends Page {
                     ]
                 }), new OutlinedButton({
                     "position": "relative",
-                    "display": "inline-block",
-                    width: "75px",
-                    height: "75px",
+                    "display": "block",
+                    width: "175px",
+                    height: "45px",
                     borderRadius: "5px",
                     margin: "10px",
                     backgroundColor: "#555555",
                     fontSize: "46px",
-                    "child": new Text("-"),
+                    "child": new Text("Get UDID"),
                     onclick: () => {
                         window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
                     }
