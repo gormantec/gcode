@@ -103,7 +103,7 @@ class HomePage extends Page {
             "color": "#ffffff",
             "backgroundColor": "#000000",
             "bottom":"50px",
-            "children": [new Div({
+            "children": new Div({
                 "marginTop": "80px",
                 "display": "flex",
                 "justifyContent": "center",
@@ -124,18 +124,9 @@ class HomePage extends Page {
                         })
                     ]
                 })
-            }), new OutlinedButton({
-               	"bottom":"0px",
-                borderRadius: "5px",
-                margin: "10px",
-                backgroundColor: "#555555",
-                fontSize: "12px",
-                "child": new Text("Get UDID"),
-                onclick: () => {
-                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
-                }
-            })]
+            })
         });
+
     }
 
     setUUID(aUDID) {
