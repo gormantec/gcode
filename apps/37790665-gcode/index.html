@@ -100,8 +100,8 @@ class HomePage extends Page {
             "backgroundColor": "#000000",
             "child": new Div({
                 "marginTop": "80px",
-              	"display": "flex",
-              	"justifyContent": "center",
+                "display": "flex",
+                "justifyContent": "center",
                 "classNameOverride": "true",
                 "child": new Div({
                     "classNameOverride": "true",
@@ -121,7 +121,14 @@ class HomePage extends Page {
                 })
             })
         });
+      this.UDID="0000-0000000000000000";
     }
+  
+  setUUID(aUDID)
+  {
+    this.UDID=aUDID;
+    this.firstChild().firstChild().children[1].innerText=aUDID;
+  }
 
 }
 /*---------------------------------------------------------------------------*/
@@ -135,6 +142,23 @@ var aPWA = new PWA({
     "primaryColor": "#323232"
 });
 aPWA.setPage(aHomePage);
+aPWA.floatingActionButton.onclick(function() {
+    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+});
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const aUDID = urlParams.get('UDID')
+if (aUDID) {
+    localStorage.setItem('UDID', aUDID);
+    console.log(aUDID);
+    window.location.replace("http://gcode.com.au");
+  	aHomePage.setUUID(aUDID);
+}
+
+aHomePage.setUUID("0000-0000000000000001");
+
+
 aPWA.show();
 /*---------------------------------------------------------------------------*/
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
