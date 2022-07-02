@@ -84,8 +84,13 @@ if (window.opener && window.opener !== window) {
 
 */
 /*---------------------------------------------------------------------------*/
-import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-try { Page.clearPages();
+import {
+    PWA,
+    Page,
+    Div
+} from 'https://gcode.com.au/modules/pwa.mjs';
+try {
+    Page.clearPages();
 } catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
@@ -93,13 +98,34 @@ class HomePage extends Page {
         super({
             "color": "#ffffff",
             "backgroundColor": "#000000",
-          	"child": new Div({"position":"relative","marginLeft":"30px","marginRight":"auto","width":"200px","children":[new Div({"position":"relative","innerText":"UDID"}),new Div({"position":"relative","innerText":"xxxx"})]})
+            "child": new Div({
+                "position": "relative",
+                "marginTop": "60px",
+                "marginLeft": "30px",
+                "marginRight": "auto",
+                "width": "200px",
+                "children": [
+                    new Div({
+                        "position": "relative",
+                      	"display":"inline-block",
+                        "innerText": "UDID:"
+                    }),
+                    new Div({
+                      	"marginLeft":"40px",
+                        "position": "relative",
+                      	"display":"inline-block",
+                        "innerText": "0000-0000000000000000"
+                    })
+                ]
+            })
         });
     }
 
 }
 /*---------------------------------------------------------------------------*/
-var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+var myDiv = new Div({
+    innerHTML: "url(https://gcode.com.au/html/test.html)"
+});
 var aHomePage = new HomePage();
 var aPWA = new PWA({
     "title": "Gorman Technology Pty Ltd",
@@ -109,5 +135,4 @@ var aPWA = new PWA({
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
