@@ -131,7 +131,7 @@ class HomePage extends Page {
             child: new Div({
                 "position": "absolute",
                 "bottom": "30px",
-                "height": "70px",
+                "height": "44px",
                 "width": "200px",
                 borderRadius: "5px",
                 margin: "10px",
@@ -139,8 +139,9 @@ class HomePage extends Page {
                 fontSize: "24px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
-              	"textAlign":"center",
-                "innerText":"Get UDID",
+                "textAlign": "center",
+                paddingTpp: "10px",
+                "innerText": "Get UDID",
                 onclick: () => {
                     window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
                 }
@@ -176,7 +177,7 @@ aHomePage.setUUID("0000-0000000000000000");
 if (aUDID) {
     localStorage.setItem('UDID', aUDID);
     console.log(aUDID);
-    window.location.replace("http://gcode.com.au");
+    window.location.replace("/");
     aHomePage.setUUID(aUDID);
 }
 
