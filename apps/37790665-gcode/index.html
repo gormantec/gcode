@@ -125,19 +125,22 @@ class HomePage extends Page {
                 })
             })
         });
-            	this.appendChild(new OutlinedButton({
-               	"bottom":"30px",
-                 "height":"30px",
-                 "width":"130px",
-                borderRadius: "5px",
-                margin: "10px",
-                backgroundColor: "#555555",
-                fontSize: "24px",
-                "child": new Text("Get UDID"),
-                onclick: () => {
-                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
-                }
-            }));
+        this.appendChild(new Div({
+          	"position":"absolute",
+            "bottom": "30px",
+            "height": "30px",
+            "width": "200px",
+            borderRadius: "5px",
+            margin: "10px",
+            backgroundColor: "#555555",
+            fontSize: "24px",
+            "cursor": "pointer",
+            "pointerEvents": "auto",
+            "innerText": "Get UDID",
+            onclick: () => {
+                window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+            }
+        }));
 
     }
 
