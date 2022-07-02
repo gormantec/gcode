@@ -41,6 +41,15 @@
            // const el = document.createElement('pwa-update');
           //  document.body.appendChild(el);
         }
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const aUDID = urlParams.get('UDID')
+        if(aUDID){
+            localStorage.setItem('UDID', aUDID);
+            console.log(aUDID);
+        }
+
     </script>
 
 
