@@ -131,7 +131,7 @@ class HomePage extends Page {
             child: new Div({
                 "position": "absolute",
                 "bottom": "30px",
-                "height": "30px",
+                "height": "40px",
                 "width": "200px",
                 borderRadius: "5px",
                 margin: "10px",
@@ -139,7 +139,7 @@ class HomePage extends Page {
                 fontSize: "24px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
-                "innerText": "Get UDID",
+                "child": new Text("Get UDID"),
                 onclick: () => {
                     window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
                 }
