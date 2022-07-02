@@ -90,7 +90,8 @@ import {
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
 import {
-    Text,OutlinedButton
+    Text,
+    OutlinedButton
 } from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
@@ -101,12 +102,12 @@ class HomePage extends Page {
         super({
             "color": "#ffffff",
             "backgroundColor": "#000000",
-            "child": new Div({
+            "children": [new Div({
                 "marginTop": "80px",
                 "display": "flex",
                 "justifyContent": "center",
                 "classNameOverride": "true",
-                "children": [new Div({
+                "child": new Div({
                     "classNameOverride": "true",
                     "children": [
                         new Div({
@@ -121,21 +122,21 @@ class HomePage extends Page {
                             "innerText": "0000"
                         })
                     ]
-                }), new OutlinedButton({
-                    "position": "relative",
-                    "display": "block",
-                    width: "175px",
-                    height: "45px",
-                    borderRadius: "5px",
-                    margin: "10px",
-                    backgroundColor: "#555555",
-                    fontSize: "12px",
-                    "child": new Text("Get UDID"),
-                    onclick: () => {
-                        window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
-                    }
-                })]
-            })
+                })
+            }), new OutlinedButton({
+                "position": "relative",
+                "display": "block",
+                width: "175px",
+                height: "45px",
+                borderRadius: "5px",
+                margin: "10px",
+                backgroundColor: "#555555",
+                fontSize: "12px",
+                "child": new Text("Get UDID"),
+                onclick: () => {
+                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+                }
+            })]
         });
     }
 
