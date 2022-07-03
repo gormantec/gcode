@@ -105,7 +105,7 @@ jobs:
             BUILD_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
             echo "BUILD_DIR = $BUILD_DIR"
             BUILT_PRODUCTS_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | grep -oEi "\/.*"`
-            xcodebuild -allowProvisioningUpdates -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild -allowProvisioningUpdates -destination 'id=00008030-000A6D022285402E' -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
           
           cd $OUT_DIR_VAR
