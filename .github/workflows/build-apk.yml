@@ -28,10 +28,12 @@ jobs:
           IFS=$'\n'
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
-            if [[ "$file" == "apps/"* ]] && [[ "$file" != "apps/gcode_manifests.json" ]]; then
+            if [[ "$file" == "apps/"* ]] && [[ "$file" != "apps/gcode_manifests.json" ]] && [ -z ${APP_NAME+x} ]; then
               echo "found app=$file"
               APP_NAME=$(echo "$file" | sed -e 's/apps\///g' | sed -e 's/\/.*//g')
               echo "APP_NAME=$APP_NAME"
+            else
+              echo "not an app file=$file"
             fi
           done
           IFS="$oldIFS"
@@ -62,7 +64,8 @@ jobs:
           mkdir -p apps/$APP_NAME/apk
           rm -f apps/$APP_NAME/apk/*
           cp -rf ./build/*.apk ./apps/$APP_NAME/apk/
-          cp -rf ./build/*.aab ./apps/$APP_NAME/apk/       
+          cp -rf ./build/*.aab ./apps/$APP_NAME/apk/
+          ls -latr ./apps/$APP_NAME/apk/     
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/apk
