@@ -17,7 +17,8 @@ const response = await fetch('https://pwabuilder-ios.azurewebsites.net/packages/
         "splashColor": _manifestJSON.background_color,
         "progressBarColor": _manifestJSON.theme_color,
         "statusBarColor": _manifestJSON.background_color,
-        "permittedUrls": [], "manifestUrl": "https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json",
+        "permittedUrls": ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"],
+        "manifestUrl": "https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json",
         "manifest": _manifestJSON
     }),
     headers: { 'Content-Type': 'application/json' }
