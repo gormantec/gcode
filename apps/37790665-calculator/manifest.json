@@ -8,6 +8,7 @@
   "description": "A gcode developed PWA app",
   "scope": "https://gcode.com.au/37790665-calculator/",
   "prefer_related_applications": false,
+  "permittedUrls": [],
   "icons": [
     {
       "src": "/apps/37790665-calculator/180x180.icon.png",
