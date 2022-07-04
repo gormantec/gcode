@@ -278,7 +278,7 @@
 			<key>entitlements</key>
 			<dict>
 				<key>application-identifier</key>
-				<string>9R8LPM6UR2.au.com.gcode</string>
+				<string>9R8LPM6UR2.au.com.gcode.37790665-boatcrew</string>
 				<key>aps-environment</key>
 				<string>production</string>
 				<key>com.apple.developer.associated-domains</key>
@@ -296,11 +296,11 @@
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>acd9fe8f-a43f-44e6-909d-f6b09a87d498</string>
+				<string>e1927e84-22e0-4482-868d-f91a3db1106d</string>
 				<key>dateExpires</key>
 				<string>29/6/23</string>
 				<key>name</key>
-				<string>iOS Team Ad Hoc Provisioning Profile: au.com.gcode</string>
+				<string>iOS Team Ad Hoc Provisioning Profile: au.com.gcode.37790665-boatcrew</string>
 			</dict>
 			<key>team</key>
 			<dict>
