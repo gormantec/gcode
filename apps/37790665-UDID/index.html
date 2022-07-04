@@ -90,10 +90,6 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {
-    Text,
-    OutlinedButton
-} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -186,6 +182,17 @@ if (aUDID) {
     }
 }
 
+
+function logCookies(cookies) {
+  for (let cookie of cookies) {
+    console.log(cookie.value);
+  }
+}
+
+let gettingAll = browser.cookies.getAll({
+  name: "app-platform"
+});
+gettingAll.then(logCookies);
 
 
 

@@ -6,6 +6,8 @@
   "display": "standalone",
   "orientation": "any",
   "description": "An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.",
+  "scope": "https://gcode.com.au/37790665-UDID/",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/apps/37790665-UDID/180x180.icon.png",
@@ -26,6 +28,5 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/apps/37790665-UDID/index.html",
-  "prefer_related_applications": false
+  "start_url": "/apps/37790665-UDID/index.html"
 }
