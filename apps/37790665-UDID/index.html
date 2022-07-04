@@ -183,17 +183,25 @@ if (aUDID) {
 }
 
 
-function logCookies(cookies) {
-  for (let cookie of cookies) {
-    console.log(cookie.value);
+console.log(document.cookie);
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
   }
+  return "";
 }
 
-let gettingAll = browser.cookies.getAll({
-  name: "app-platform"
-});
-gettingAll.then(logCookies);
-
+let appPlatform=getCookie("app-platform");
+if(appPlatform)aHomePage.setUUID(appPlatform);
 
 
 aPWA.show();
