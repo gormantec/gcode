@@ -427,7 +427,7 @@ export function createHtml(code, options) {
         rootHead.appendChild(_module);
     }
 
-    let rt= { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, description:description,permittedUrls:permittedUrls,icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
+    return { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, description:description,permittedUrls:permittedUrls,icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
 }
 
 export function sleep(delay) {

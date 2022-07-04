@@ -171,6 +171,7 @@ function publishToGit(code, user,token)
                 }
                 if(result.icon192x192)uploadConfig.icon192=result.icon192x192;
                 if(result.icon512x512)uploadConfig.icon512=result.icon512x512;
+                if(result.permittedUrls)uploadConfig.permittedUrls=result.permittedUrls;
                 if(filesArray && filesArray.length>0)uploadConfig.filesArray=filesArray;
                 if(description)uploadConfig.description=description;
                 _uploadFile(uploadConfig, function (error, uri) {
