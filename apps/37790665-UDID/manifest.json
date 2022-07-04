@@ -5,7 +5,7 @@
   "background_color": "#323232",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.",
   "scope": "https://gcode.com.au/37790665-UDID/",
   "prefer_related_applications": false,
   "icons": [
