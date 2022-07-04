@@ -11,7 +11,7 @@ const response = await fetch('https://pwabuilder-ios.azurewebsites.net/packages/
     method: 'post',
     body: JSON.stringify({
         "name": _manifestJSON.name,
-        "bundleId": "au.com.gcode",
+        "bundleId": "au.com.gcode."+process.env.APP_NAME,
         "url": "https://gcode.com.au"+_manifestJSON.start_url,
         "imageUrl": "/apps/" + process.env.APP_NAME + "/512x512.icon.png",
         "splashColor": _manifestJSON.background_color,
@@ -24,7 +24,7 @@ const response = await fetch('https://pwabuilder-ios.azurewebsites.net/packages/
 });
 console.log(JSON.stringify({
     "name": _manifestJSON.name,
-    "bundleId": "au.com.gcode",
+    "bundleId": "au.com.gcode."+process.env.APP_NAME,
     "url": "https://gcode.com.au"+_manifestJSON.start_url,
     "imageUrl": "/apps/" + process.env.APP_NAME + "/512x512.icon.png",
     "splashColor": _manifestJSON.background_color,
