@@ -1,0 +1,31 @@
+{
+  "name": "UDID",
+  "short_name": "UDID",
+  "theme_color": "#323232",
+  "background_color": "#323232",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.",
+  "icons": [
+    {
+      "src": "/apps/37790665-UDID/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-UDID/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-UDID/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-UDID/index.html",
+  "prefer_related_applications": false
+}
