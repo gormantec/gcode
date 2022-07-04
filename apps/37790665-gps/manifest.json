@@ -8,6 +8,7 @@
   "description": "A simple GPS viewer, allowing you to measure between two points.  This is an example of a new line.  This is another new line",
   "scope": "https://gcode.com.au/37790665-gps/",
   "prefer_related_applications": false,
+  "permittedUrls": [],
   "icons": [
     {
       "src": "/apps/37790665-gps/180x180.icon.png",
