@@ -82,7 +82,7 @@ if (window.opener && window.opener !== window) {
   splashBackgroundColor: #323232
   splashDuration: 2000
   description: An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.
-
+  permittedUrls: ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"]
 */
 /*---------------------------------------------------------------------------*/
 import {
@@ -183,17 +183,25 @@ if (aUDID) {
 }
 
 
-function logCookies(cookies) {
-  for (let cookie of cookies) {
-    console.log(cookie.value);
+console.log(document.cookie);
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
   }
+  return "";
 }
 
-let gettingAll = browser.cookies.getAll({
-  name: "app-platform"
-});
-gettingAll.then(logCookies);
-
+let appPlatform=getCookie("app-platform");
+if(appPlatform)aHomePage.setUUID(appPlatform);
 
 
 aPWA.show();
