@@ -270,6 +270,12 @@ export function createHtml(code, options) {
     if (!orientation || orientation == code) orientation = "any";
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
     if (!appName || appName == code) appName = "gcode App";
+    var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
+    if (!permittedUrls || permittedUrls == code) permittedUrls = "[]";
+    console.log("permittedUrls="+permittedUrls);
+    permittedUrls=permittedUrls.trim();
+    permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
+    console.log("permittedUrls="+permittedUrls);
     var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
     console.log("description="+description);
@@ -421,7 +427,7 @@ export function createHtml(code, options) {
         rootHead.appendChild(_module);
     }
 
-    return { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, description:description,icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
+    let rt= { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, description:description,permittedUrls:permittedUrls,icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
 }
 
 export function sleep(delay) {
