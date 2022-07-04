@@ -6,6 +6,9 @@
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
+  "scope": "https://gcode.com.au/37790665-screen-time/",
+  "prefer_related_applications": false,
+  "permittedUrls": [],
   "icons": [
     {
       "src": "/apps/37790665-screen-time/180x180.icon.png",
@@ -26,6 +29,5 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/apps/37790665-screen-time/index.html",
-  "prefer_related_applications": false
+  "start_url": "/apps/37790665-screen-time/index.html"
 }
