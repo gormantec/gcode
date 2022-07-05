@@ -20,9 +20,6 @@ const pwabuilderData={
 }
 if(Array.isArray(_manifestJSON.permitted_urls) && _manifestJSON.permitted_urls.length>0)
 {
-    console.log("****************B");
-    console.log(_manifestJSON.permitted_urls);
-    console.log("****************B");
     pwabuilderData.permittedUrls=_manifestJSON.permitted_urls;
 }
 const response = await fetch('https://pwabuilder-ios.azurewebsites.net/packages/create', {
@@ -30,9 +27,7 @@ const response = await fetch('https://pwabuilder-ios.azurewebsites.net/packages/
     body: JSON.stringify(pwabuilderData),
     headers: { 'Content-Type': 'application/json' }
 });
-console.log("****************A");
 console.log(JSON.stringify(pwabuilderData));
-console.log("****************A");
 if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
 await streamPipeline(response.body, createWriteStream('./pwa.zip'));
 
