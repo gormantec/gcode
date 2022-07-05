@@ -230,6 +230,7 @@ function _uploadFile(params, callback) {
     var icon = params.icon;
     var splash = params.splash;
     var description = params.description;
+    var permittedUrls = params.permittedUrls;
 
     if(!icon)icon="https://gcode.com.au/apps/37790665-gcode/icon.png";
 
@@ -273,6 +274,8 @@ function _uploadFile(params, callback) {
         if (iconBase64_192) body.encodedicon192 = iconBase64_192;
         if (iconBase64_512) body.encodedicon512 = iconBase64_512;
         if (description) body.description = description;
+        if (permittedUrls) body.permittedUrls = permittedUrls;
+
 
         if(params.gituser)body.gituser=params.gituser;
         if(params.gittoken)body.gittoken=params.gittoken;
