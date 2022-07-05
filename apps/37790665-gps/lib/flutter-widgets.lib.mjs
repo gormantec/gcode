@@ -22,6 +22,7 @@ export class Column extends Div
 		this.style.height = this.firstChild.style.height;
       }
 }
+
 export class OutlinedButton extends Div
 {
       constructor(params) {
