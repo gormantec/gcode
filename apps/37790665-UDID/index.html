@@ -84,7 +84,8 @@ if (window.opener && window.opener !== window) {
   description: An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.
   permittedUrls: ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"]
   
- 
+  
+  
   
 */
 /*---------------------------------------------------------------------------*/
@@ -177,7 +178,7 @@ aHomePage.setUUID("0000-0000000000000000");
 if (aUDID) {
     aHomePage.setUUID(aUDID);
     localStorage.setItem('UDID', aUDID);
-    window.location.replace("https://gcode.com.au/apps/37790665-gcode/index.html");
+    window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
     aUDID = localStorage.getItem('UDID');
     if (aUDID) {
