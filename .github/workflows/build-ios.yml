@@ -82,6 +82,7 @@ jobs:
           mkdir -p out
           cd src
 
+
           
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
@@ -90,10 +91,9 @@ jobs:
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           echo "file_to_build = $file_to_build"
           echo "filetype_parameter = $filetype_parameter"
-
-          
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
-
+          project_file="`ls -A | grep -i \\.xcodeproj\$`"
+          sed -i '' "s/DEVELOPMENT_TEAM = ""/DEVELOPMENT_TEAM = 9R8LPM6UR2/g" "$project_file/project.pbxproj"
           xcodebuild clean
           pod install
           if [[ $platform == "iOS" ]]; then
