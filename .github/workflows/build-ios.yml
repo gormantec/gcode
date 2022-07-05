@@ -99,7 +99,7 @@ jobs:
           pod install
           if [[ $platform == "iOS" ]]; then
             echo "Archive"
-            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -allowProvisioningUpdates -allowProvisioningDeviceRegistration -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -destination generic/platform=iOS -allowProvisioningUpdates -allowProvisioningDeviceRegistration -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
             echo "Export"
             xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -exportOptionsPlist ../../modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/ipa" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
