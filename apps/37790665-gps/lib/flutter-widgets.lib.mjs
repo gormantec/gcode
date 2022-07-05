@@ -33,6 +33,7 @@ export class OutlinedButton extends Div
     	this.style.pointerEvents="auto";
       }
 }
+
 export class Text extends Div
 {
       constructor(_text) {
