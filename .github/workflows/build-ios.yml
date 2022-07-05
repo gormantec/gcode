@@ -93,7 +93,7 @@ jobs:
           echo "filetype_parameter = $filetype_parameter"
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           project_file="`ls -A | grep -i \\.xcodeproj\$`"
-          sed -i '' "s/DEVELOPMENT_TEAM = ""/DEVELOPMENT_TEAM = 9R8LPM6UR2/g" "$project_file/project.pbxproj"
+          sed -i '' "s/DEVELOPMENT_TEAM = \"\"/DEVELOPMENT_TEAM = 9R8LPM6UR2/g" "$project_file/project.pbxproj"
           xcodebuild clean
           pod install
           if [[ $platform == "iOS" ]]; then
