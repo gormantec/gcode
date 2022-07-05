@@ -9,7 +9,7 @@ const _manifestJSON=await _manifest.json();
 const streamPipeline = promisify(pipeline);
 const pwabuilderData={
     "name": _manifestJSON.name,
-    "bundleId": "au.com.gcode.*",
+    "bundleId": "au.com.gcode."+process.env.APP_NAME,
     "url": "https://gcode.com.au"+_manifestJSON.start_url,
     "imageUrl": "/apps/" + process.env.APP_NAME + "/512x512.icon.png",
     "splashColor": _manifestJSON.background_color,
