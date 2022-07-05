@@ -43,10 +43,10 @@ jobs:
           SHORT_NAME=`grep '"short_name"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           THEME_COLOR=`grep '"theme_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           BACKGROUND_COLOR=`grep '"background_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
-          SHORT_NAME_NPSP=`echo "$SHORT_NAME" | sed -r 's/[ -\/\\\+\_]//g'`
+          SHORT_NAME_NOSP=`echo "$SHORT_NAME" | sed 's/ //g'`
           echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
           echo "SHORT_NAME=$(echo $SHORT_NAME)" >> $GITHUB_ENV
-          echo "SHORT_NAME_NPSP=$(echo $SHORT_NAME_NPSP)" >> $GITHUB_ENV
+          echo "SHORT_NAME_NOSP=$(echo $SHORT_NAME_NOSP)" >> $GITHUB_ENV
           echo "THEME_COLOR=$(echo $THEME_COLOR)" >> $GITHUB_ENV
           echo "BACKGROUND_COLOR=$(echo $BACKGROUND_COLOR)" >> $GITHUB_ENV
       - name: setup node
@@ -125,7 +125,7 @@ jobs:
           VINDEX=${#VINDEX}
           SHORT_APP_NAME=$SHORT_NAME
           echo "SHORT_APP_NAME = $SHORT_APP_NAME"
-          SHORT_APP_NAME_NOS=$SHORT_NAME_NPSP
+          SHORT_APP_NAME_NOS=$SHORT_NAME_NOSP
           echo "SHORT_APP_NAME_NOS = $SHORT_APP_NAME_NOS"
           sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
