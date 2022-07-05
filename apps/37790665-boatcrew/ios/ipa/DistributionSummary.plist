@@ -16,7 +16,7 @@
 				<key>SHA1</key>
 				<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 				<key>dateExpires</key>
-				<string>27/6/23</string>
+				<string>27/6/2023</string>
 				<key>type</key>
 				<string>Apple Distribution</string>
 			</dict>
@@ -34,7 +34,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -62,7 +62,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -90,7 +90,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -118,7 +118,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -146,7 +146,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -174,7 +174,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -202,7 +202,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -230,7 +230,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -258,7 +258,7 @@
 						<key>SHA1</key>
 						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
 						<key>dateExpires</key>
-						<string>27/6/23</string>
+						<string>27/6/2023</string>
 						<key>type</key>
 						<string>Apple Distribution</string>
 					</dict>
@@ -298,7 +298,7 @@
 				<key>UUID</key>
 				<string>e1927e84-22e0-4482-868d-f91a3db1106d</string>
 				<key>dateExpires</key>
-				<string>29/6/23</string>
+				<string>29/6/2023</string>
 				<key>name</key>
 				<string>iOS Team Ad Hoc Provisioning Profile: au.com.gcode.37790665-boatcrew</string>
 			</dict>
