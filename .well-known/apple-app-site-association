@@ -1,0 +1,25 @@
+{
+  "applinks": {
+      "details": [
+        {
+          "appIDs": [ "9R8LPM6UR2.au.com.gcode.37790665-UDID" ],
+          "components": [
+            {
+               "/": "/apps/37790665-UDID/*",
+               "comment": "Matches any URL whose path starts with /apps/37790665-UDID/"
+            }
+          ]
+        },
+
+        {
+            "appIDs": [ "9R8LPM6UR2.au.com.gcode.37790665-calculator" ],
+            "components": [
+                {
+                    "/": "/apps/37790665-calculator/*",
+                    "comment": "Matches any URL whose path starts with /apps/37790665-calculator/"
+                 }
+            ]
+          }
+       ]
+   }
+}
