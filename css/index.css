@@ -397,6 +397,83 @@ dialog{
     background-repeat: no-repeat; /* Do not repeat the image */
 }
 
+
+.alertdialog{
+
+    display:none;
+
+    position:absolute;
+  
+    top:10%;
+    left:50%;
+    margin-left:-200px;
+    max-width: 400px;
+    width:90%;
+    
+    background-color: #ddd;
+    color:#333;
+    border: 1px solid #000;
+    padding: 15px;
+    z-index: 100; /* Sit on top */
+
+}
+
+.button {
+    outline: none;
+    color: #aaa;
+    fill: #aaa;
+    border: 1px solid #222;
+    border-radius: 2px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12pt;
+    line-height: 18px;
+    height: 24px;
+    cursor: pointer;
+    padding: 2px 6px;
+    transition: 100ms;
+    min-width: 75px;
+    background-color: #444;
+    background-image: linear-gradient(to bottom, #444, #333);
+}
+.button.default,
+.button:hover {
+color: #fff;
+fill: #fff;
+}
+
+.button:active {
+background: rgba(255, 255, 255, 0.2);
+}
+
+.button[disabled] {
+color: #555;
+fill: #555;
+pointer-events: none;
+border-color: #272727;
+background-color: #3b3b3b;
+background-image: none;
+}
+
+button.close {
+border: none;
+background: url("packages/dart_pad/elements/close.svg") center no-repeat;
+width: 24px;
+height: 24px;
+cursor: pointer;
+opacity: 0.8;
+}
+
+button.close:hover {
+opacity: 1;
+}
+
+.alertdialog .button{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    margin-left:-37px;
+}
+
 @media only screen and (max-width: 1000px) {
     #pageLeftToolbarTop i {
         font-size: 36px;
