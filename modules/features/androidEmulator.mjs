@@ -60,8 +60,9 @@ export function menuAction() {
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
             'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
             'APPNAME='+appName.replace(/ /g,"")+'; \\\n' +
+            'wget https://gcode.com.au/apps/$APPID/apk/'+appName.replace(/ /g,"%20")+'.apk; \\\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
-            '$ATOOLS/adb install -r ~/Downloads/${APPNAME}.apk; \\\n' +
+            '$ATOOLS/adb install -r ./'+appName.replace(/ /g,"%20")+'.apk; \\\n' +
             '$ATOOLS/adb \\\n' +
             'shell am start -S -n \\\n' +
             'au.com.gcode.${APPID}/\\\n' +
