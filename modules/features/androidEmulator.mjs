@@ -60,7 +60,7 @@ export function menuAction() {
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
             'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
             'APPNAME="'+appName+'"; \\\n' +
-            'PWAURI="https://gcode.com.au/apps"; \\' +
+            'PWAURI="https://gcode.com.au/apps"; \\\n' +
             'wget $PWAURL/$APPID/apk/${APPNAME}.apk; \\\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
             '$ATOOLS/adb install -r ./${APPNAME}.apk; \\\n' +
