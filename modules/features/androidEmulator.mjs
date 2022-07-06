@@ -59,6 +59,7 @@ export function menuAction() {
             '-netdelay none -netspeed full & </code>' +
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
             'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
+            'APPID_X='+window.myLoginID+'-'+appName.replace(/ /g,"_")+'; \\\n' +
             'APPNAME="'+appName+'"; \\\n' +
             'PWAURI="https://gcode.com.au/apps"; \\\n' +
             'wget "$PWAURI/$APPID/apk/${APPNAME}.apk"; \\\n' +
@@ -66,8 +67,8 @@ export function menuAction() {
             '$ATOOLS/adb install -r "./${APPNAME}.apk"; \\\n' +
             '$ATOOLS/adb \\\n' +
             'shell am start -S -n \\\n' +
-            'au.com.gcode.${APPID}/\\\n' +
-            'au.com.gcode.${APPID}.LauncherActivity</code>' +
+            'au.com.gcode.${APPID_X}/\\\n' +
+            'au.com.gcode.${APPID_X}.LauncherActivity</code>' +
             '    </pre>' +
             '    <button type="button" id="android_alertdonebutton" onclick="document.getElementById(\'android_alertdialog\').remove();" class="button">Done</button>';
         document.body.appendChild(android_alertdialog);
