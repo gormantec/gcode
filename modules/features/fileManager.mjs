@@ -194,6 +194,7 @@ export function afterLoad() {
         githubtree.waitForOctokit(() => {
             githubtree.getAuthenticated().then((resp) => {
                 window.myLogin = resp.data.login;
+                window.myLoginID = resp.data.id;
                 document.querySelector("#userIcon").style.backgroundImage = "url('" + resp.data.avatar_url + "')";
                 document.querySelector("#userLoginMaterialIcon").style.display = "none";
                 githubtree.cacheRepo({ username: window.myLogin, repo: "wasmdom" }, function (state, repo) { console.log("state=" + state); });

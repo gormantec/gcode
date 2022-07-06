@@ -11,7 +11,7 @@ export function menuAction() {
     if (!appName || appName == code) appName = null;
     else appName=appName.trim();
 
-    if (filename.endsWith(".mjs") && appName) {
+    if (filename.endsWith(".mjs") && appName && window.myLoginID) {
         let html = '<div id="apple_alertdialog" class="alertdialog">' +
             '    <h3>Running in Apple XCode Emulator</h3>' +
             '    <pre>' +
@@ -58,7 +58,7 @@ export function menuAction() {
             'nohup $EMUDIR/emulator -avd ${PIXEL} \\\n' +
             '-netdelay none -netspeed full & </code>' +
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
-            'APPID=37790665-'+appName.replace(/ /g,"-")+'; \\\n' +
+            'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
             'APPNAME='+appName.replace(/ /g,"")+'; \\\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
             '$ATOOLS/adb install -r ~/Downloads/${APPNAME}.apk; \\\n' +
