@@ -21,7 +21,7 @@ jobs:
       - name: GIT SHA
         run: |
           echo SHA = ${GITHUB_SHA}
-          git show --name-only ${GITHUB_SHA} | grep "apps/"
+          git show ${GITHUB_SHA} | grep "+++"
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v19
