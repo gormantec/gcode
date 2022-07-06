@@ -50,13 +50,14 @@ let html='<div id="apple_alertdialog" class="alertdialog">'+
     'nohup $ATOOLS/../emulator/emulator -avd Pixel_XL_API_24 \\\n'+
     '-netdelay none -netspeed full & </code>'+
     '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n'+
-    'APPID=f00000000; \\\n'+
+    'APPID=37790665-UDID; \\\n'+
+    'APPNAME=UDID; \\\n'+
     'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n'+
-    '$ATOOLS/adb install -r ~/Downloads/48ugm4xy6k.apk; \\\n'+
+    '$ATOOLS/adb install -r ~/Downloads/${APPNAME}.apk; \\\n'+
     '$ATOOLS/adb \\\n'+
     'shell am start -S -n \\\n'+
-    'com.gormantec.${APPID}/\\\n'+
-    'com.gormantec.${APPID}.MainActivity</code>'+
+    'au.com.gcode.${APPID}/\\\n'+
+    'au.com.gcode.${APPID}.LauncherActivity</code>'+
     '    </pre>'+
     '    <button type="button" id="android_alertdonebutton" onclick="document.getElementById(\'android_alertdialog\').remove();" class="button">Done</button>';
     document.body.appendChild(android_alertdialog);
