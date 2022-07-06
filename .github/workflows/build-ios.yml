@@ -74,6 +74,7 @@ jobs:
           echo $default | cat >default
           echo Using default scheme: $default
       - name: Build
+        timeout-minutes: 10
         env:
           scheme: ${{ 'default' }}
           platform: ${{ 'iOS' }}
@@ -114,6 +115,7 @@ jobs:
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
+        timeout-minutes: 5
         run: |
           BASE_DIR_VAR=$(pwd)
           echo "APP_NAME $APP_NAME"
@@ -137,6 +139,7 @@ jobs:
           git commit -m "Add changes"
 
       - name: Push changes # push the output folder to your repo
+        timeout-minutes: 5
         uses: ad-m/github-push-action@master
         with:
           branch: master #ignore if your branch is master
