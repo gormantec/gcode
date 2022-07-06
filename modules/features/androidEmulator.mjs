@@ -61,9 +61,9 @@ export function menuAction() {
             'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
             'APPNAME="'+appName+'"; \\\n' +
             'PWAURI="https://gcode.com.au/apps"; \\\n' +
-            'wget $PWAURL/$APPID/apk/${APPNAME}.apk; \\\n' +
+            'wget "$PWAURO/$APPID/apk/${APPNAME}.apk"; \\\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
-            '$ATOOLS/adb install -r ./${APPNAME}.apk; \\\n' +
+            '$ATOOLS/adb install -r "./${APPNAME}.apk"; \\\n' +
             '$ATOOLS/adb \\\n' +
             'shell am start -S -n \\\n' +
             'au.com.gcode.${APPID}/\\\n' +
