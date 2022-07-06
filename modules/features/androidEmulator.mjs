@@ -54,7 +54,7 @@ export function menuAction() {
             '    <pre style="padding-left: 0px;border-left-width: 0px; ">' +
             '<code contenteditable spellcheck="false">#start emulator\n' +
             'EMUDIR=~/Library/Android/sdk/emulator; \\\n' +
-            'PIXEL=$EMUDIR/emulator -list-avds | grep -m 1 Pixel; \\\n' +
+            'PIXEL=`echo $EMUDIR/emulator -list-avds | grep -m 1 Pixel`; \\\n' +
             'nohup $EMUDIR/emulator -avd ${PIXEL} \\\n' +
             '-netdelay none -netspeed full & </code>' +
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
