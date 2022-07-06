@@ -59,10 +59,10 @@ export function menuAction() {
             '-netdelay none -netspeed full & </code>' +
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
             'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
-            'APPNAME='+appName.replace(/ /g,"")+'; \\\n' +
-            'wget https://gcode.com.au/apps/$APPID/apk/'+appName.replace(/ /g,"%20")+'.apk; \\\n' +
+            'APPNAME="'+appName+'"; \\\n' +
+            'wget https://gcode.com.au/apps/$APPID/apk/${APPNAME}.apk; \\\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
-            '$ATOOLS/adb install -r ./'+appName.replace(/ /g,"%20")+'.apk; \\\n' +
+            '$ATOOLS/adb install -r ./${APPNAME}.apk; \\\n' +
             '$ATOOLS/adb \\\n' +
             'shell am start -S -n \\\n' +
             'au.com.gcode.${APPID}/\\\n' +
