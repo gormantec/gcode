@@ -59,7 +59,7 @@ export function menuAction() {
             '-netdelay none -netspeed full & </code>' +
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
             'APPID='+window.myLoginID+'-'+appName.replace(/ /g,"-")+'; \\\n' +
-            'APPID_X='+window.myLoginID+'-'+appName.replace(/ /g,"")+'; \\\n' +
+            'APPID_X=x'+window.myLoginID+appName.replace(/ /g,"")+'; \\\n' +
             'APPNAME="'+appName+'"; \\\n' +
             'PWAURI="https://gcode.com.au/apps"; \\\n' +
             'wget "$PWAURI/$APPID/apk/${APPNAME}.apk"; \\\n' +
