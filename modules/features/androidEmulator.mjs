@@ -54,7 +54,9 @@ export function menuAction() {
             '    <pre>' +
             '<code contenteditable spellcheck="false">#start emulator\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
-            'nohup $ATOOLS/../emulator/emulator -avd Pixel_XL_API_24 \\\n' +
+            'EMUDIR=~/Library/Android/sdk/emulator; \\\n' +
+            'PIXEL=$EMUDIR/emulator -list-avds | grep -m 1 Pixel; \\\n' +
+            'nohup $EMUDIR/emulator -avd ${PIXEL} \\\n' +
             '-netdelay none -netspeed full & </code>' +
             '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n' +
             'APPID=37790665-'+appName.replace(/ /g,"-")+'; \\\n' +
