@@ -35,7 +35,7 @@ const response = await fetch('https://pwabuilder-cloudapk.azurewebsites.net/gene
             "navigationDividerColor":_manifestJSON.background_color,
             "navigationDividerColorDark":_manifestJSON.background_color,
             "orientation":_manifestJSON.orientation,
-            "packageId":"au.com.gcode."+process.env.APP_NAME,
+            "packageId":"au.com.gcode."+process.env.APP_NAME.replace(/\-/g,"_"),
             "shortcuts":[],"signing":{
                 "file":null,
                 "alias":"my-key-alias",
