@@ -6,9 +6,9 @@ import fetch from 'node-fetch';
 console.log("https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json");
 const _manifest = await fetch("https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json");
 const _manifestJSON=await _manifest.json();
-
+const date2 = new Date('2022-01-01T00:00:00');
 const theBody={
-    "appVersion":"1.0.0.0",
+    "appVersion":"1.0.0."+Math.floor((Date.now()-date2.getTime())/10000),
     "appVersionCode":1,
     "backgroundColor":_manifestJSON.background_color,
     "display":"standalone",
