@@ -45,11 +45,11 @@ let html='<div id="apple_alertdialog" class="alertdialog">'+
     android_alertdialog.className="alertdialog";
     android_alertdialog.innerHTML='    <h3>Running in Android Emulator</h3>'+
     '    <pre>'+
-    '<code contenteditable spellcheck="false">#start emulator'+
+    '<code contenteditable spellcheck="false">#start emulator\n'+
     'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n'+
     'nohup $ATOOLS/../emulator/emulator -avd Pixel_XL_API_24 \\\n'+
     '-netdelay none -netspeed full & </code>'+
-    '<code id="android_script" contenteditable spellcheck="false">#load and start APK'+
+    '<code id="android_script" contenteditable spellcheck="false">#load and start APK\n'+
     'APPID=f00000000; \\\n'+
     'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n'+
     '$ATOOLS/adb install -r ~/Downloads/48ugm4xy6k.apk; \\\n'+
