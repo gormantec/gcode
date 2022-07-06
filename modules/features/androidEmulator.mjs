@@ -53,7 +53,6 @@ export function menuAction() {
         android_alertdialog.innerHTML = '    <h3>Running in Android Emulator</h3>' +
             '    <pre>' +
             '<code contenteditable spellcheck="false">#start emulator\n' +
-            'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
             'EMUDIR=~/Library/Android/sdk/emulator; \\\n' +
             'PIXEL=$EMUDIR/emulator -list-avds | grep -m 1 Pixel; \\\n' +
             'nohup $EMUDIR/emulator -avd ${PIXEL} \\\n' +
