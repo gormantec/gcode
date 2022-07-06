@@ -474,6 +474,21 @@ opacity: 1;
     margin-left:-37px;
 }
 
+pre, code {
+    font-family: monospace, monospace;
+}
+pre {
+    overflow: auto;
+}
+pre > code {
+    font-size: 8pt;
+    display: block;
+    padding: 1rem;
+    word-wrap: normal;
+    background-color: #fff;
+}
+
+
 @media only screen and (max-width: 1000px) {
     #pageLeftToolbarTop i {
         font-size: 36px;
