@@ -5,7 +5,7 @@
   "background_color": "#212121",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "A simple calculator pWA app.",
   "scope": "/apps/37790665-calculator/",
   "permitted_urls": [],
   "icons": [
