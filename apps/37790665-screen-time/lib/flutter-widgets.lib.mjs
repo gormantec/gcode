@@ -22,6 +22,7 @@ export class Column extends Div
 		this.style.height = this.firstChild.style.height;
       }
 }
+
 export class OutlinedButton extends Div
 {
       constructor(params) {
@@ -33,6 +34,7 @@ export class OutlinedButton extends Div
     	this.style.pointerEvents="auto";
       }
 }
+
 export class Text extends Div
 {
       constructor(_text) {
