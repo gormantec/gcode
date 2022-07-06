@@ -418,7 +418,42 @@ dialog{
 
 }
 
-.button {
+
+
+.alertdialog .button.default,
+.alertdialog .button:hover {
+color: #fff;
+fill: #fff;
+}
+
+.alertdialog .button:active {
+background: rgba(255, 255, 255, 0.2);
+}
+
+.alertdialog .button[disabled] {
+color: #555;
+fill: #555;
+pointer-events: none;
+border-color: #272727;
+background-color: #3b3b3b;
+background-image: none;
+}
+
+.alertdialog button.close {
+border: none;
+background: url("packages/dart_pad/elements/close.svg") center no-repeat;
+width: 24px;
+height: 24px;
+cursor: pointer;
+opacity: 0.8;
+}
+
+.alertdialog button.close:hover {
+opacity: 1;
+}
+
+.alertdialog .button{
+
     outline: none;
     color: #aaa;
     fill: #aaa;
@@ -434,40 +469,7 @@ dialog{
     min-width: 75px;
     background-color: #444;
     background-image: linear-gradient(to bottom, #444, #333);
-}
-.button.default,
-.button:hover {
-color: #fff;
-fill: #fff;
-}
 
-.button:active {
-background: rgba(255, 255, 255, 0.2);
-}
-
-.button[disabled] {
-color: #555;
-fill: #555;
-pointer-events: none;
-border-color: #272727;
-background-color: #3b3b3b;
-background-image: none;
-}
-
-button.close {
-border: none;
-background: url("packages/dart_pad/elements/close.svg") center no-repeat;
-width: 24px;
-height: 24px;
-cursor: pointer;
-opacity: 0.8;
-}
-
-button.close:hover {
-opacity: 1;
-}
-
-.alertdialog .button{
     position:absolute;
     bottom:10px;
     left:50%;
