@@ -5,7 +5,7 @@
   "background_color": "#222222",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "An app to colaborate with freinds on trips to the river.",
   "scope": "/apps/37790665-boatcrew/",
   "permitted_urls": [],
   "icons": [
