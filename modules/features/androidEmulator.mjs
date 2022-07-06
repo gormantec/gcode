@@ -58,7 +58,7 @@ let html='<div id="apple_alertdialog" class="alertdialog">'+
     'com.gormantec.${APPID}/\\'+
     'com.gormantec.${APPID}.MainActivity</code>'+
     '    </pre>'+
-    '    <button type="button" id="android_alertdonebutton" onclick="document.getElementById(\"android_alertdialog\").style.display=none;" class="button">Done</button>';
+    '    <button type="button" id="android_alertdonebutton" onclick="document.getElementById(\"android_alertdialog\").remove();" class="button">Done</button>';
     document.body.appendChild(android_alertdialog);
     android_alertdialog.style.display="block";
 
