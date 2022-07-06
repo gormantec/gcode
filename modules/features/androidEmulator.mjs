@@ -51,7 +51,7 @@ export function menuAction() {
         android_alertdialog.id = "android_alertdialog";
         android_alertdialog.className = "alertdialog";
         android_alertdialog.innerHTML = '    <h3>Running in Android Emulator</h3>' +
-            '    <prestyle="padding-left: 0px;border-left-width: 0px; ">' +
+            '    <pre style="padding-left: 0px;border-left-width: 0px; ">' +
             '<code contenteditable spellcheck="false">#start emulator\n' +
             'EMUDIR=~/Library/Android/sdk/emulator; \\\n' +
             'PIXEL=$EMUDIR/emulator -list-avds | grep -m 1 Pixel; \\\n' +
