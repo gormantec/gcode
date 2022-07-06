@@ -9,6 +9,7 @@ export function menuAction() {
     const code = window.editor.getValue();
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
     if (!appName || appName == code) appName = null;
+    else appName=appName.trim();
 
     if (filename.endsWith(".mjs") && appName) {
         let html = '<div id="apple_alertdialog" class="alertdialog">' +
