@@ -59,7 +59,7 @@ let html='<div id="apple_alertdialog" class="alertdialog">'+
     'com.gormantec.${APPID}.MainActivity</code>'+
     '    </pre>'+
     '    <button type="button" id="android_alertdonebutton" class="button">Done</button>';
-    document.appendChild(android_alertdialog);
+    document.body.appendChild(android_alertdialog);
     android_alertdialog.style.display="block";
 
 
