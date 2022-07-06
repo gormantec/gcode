@@ -64,7 +64,7 @@ export function menuAction() {
             'PWAURI="https://gcode.com.au/apps"; \\\n' +
             'wget "$PWAURI/$APPID/apk/${APPNAME}.apk" -o "${APPNAME}.apk"; \\\n' +
             'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n' +
-            '$ATOOLS/adb uninstall "au.com.gcode.${APPID_X}"; \\\n' +
+            '$ATOOLS/adb uninstall "au.com.gcode.${APPID_X}" > /dev/null; \\\n' +
             '$ATOOLS/adb install -r "./${APPNAME}.apk"; \\\n' +
             '$ATOOLS/adb shell am start -S -n \\\n' +
             'au.com.gcode.${APPID_X}/\\\n' +
