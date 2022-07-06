@@ -46,16 +46,16 @@ let html='<div id="apple_alertdialog" class="alertdialog">'+
     android_alertdialog.innerHTML='    <h3>Running in Android Emulator</h3>'+
     '    <pre>'+
     '<code contenteditable spellcheck="false">#start emulator'+
-    'ATOOLS=~/Library/Android/sdk/platform-tools; \\'+
-    'nohup $ATOOLS/../emulator/emulator -avd Pixel_XL_API_24 \\'+
+    'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n'+
+    'nohup $ATOOLS/../emulator/emulator -avd Pixel_XL_API_24 \\\n'+
     '-netdelay none -netspeed full & </code>'+
     '<code id="android_script" contenteditable spellcheck="false">#load and start APK'+
-    'APPID=f00000000; \\'+
-    'ATOOLS=~/Library/Android/sdk/platform-tools; \\'+
-    '$ATOOLS/adb install -r ~/Downloads/48ugm4xy6k.apk; \\'+
-    '$ATOOLS/adb \\'+
-    'shell am start -S -n \\'+
-    'com.gormantec.${APPID}/\\'+
+    'APPID=f00000000; \\\n'+
+    'ATOOLS=~/Library/Android/sdk/platform-tools; \\\n'+
+    '$ATOOLS/adb install -r ~/Downloads/48ugm4xy6k.apk; \\\n'+
+    '$ATOOLS/adb \\\n'+
+    'shell am start -S -n \\\n'+
+    'com.gormantec.${APPID}/\\\n'+
     'com.gormantec.${APPID}.MainActivity</code>'+
     '    </pre>'+
     '    <button type="button" id="android_alertdonebutton" onclick="document.getElementById(\'android_alertdialog\').remove();" class="button">Done</button>';
