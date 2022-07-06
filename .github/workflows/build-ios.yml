@@ -84,9 +84,6 @@ jobs:
           OUT_DIR_VAR="$BASE_DIR_VAR/out"
           mkdir -p out
           cd src
-
-
-          
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
@@ -111,7 +108,6 @@ jobs:
             BUILT_PRODUCTS_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | grep -oEi "\/.*"`
             xcodebuild -allowProvisioningUpdates  -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
           fi
-          
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
@@ -133,6 +129,7 @@ jobs:
           sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/     
+          rm -rf build
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
