@@ -37,8 +37,14 @@ jobs:
           done
           IFS="$oldIFS"
           if [ -z ${APP_NAME+x} ]; then 
-            echo "APP_NAME not found"
-            exit 1
+            GNAME=$(git show --name-only ${GITHUB_SHA} | grep "apps/" -m 1)
+            GCOUNT=$(git show --name-only 9df3cac52736bb38e226f22ef86244a1d7abf176 | grep "apps/" -c)
+            if [ $GCOUNT -ge 1 ] && [ $GCOUNT -le 10 ] ; then
+               APP_NAME=$(echo "$GCOUNT" | sed -e 's/apps\///g' | sed -e 's/\/.*//g')
+            else
+              echo "APP_NAME not found"
+              exit 1
+            fi
           fi
           SHORT_NAME=`grep '"short_name"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           THEME_COLOR=`grep '"theme_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
@@ -49,10 +55,6 @@ jobs:
           echo "SHORT_NAME_NOSP=$(echo $SHORT_NAME_NOSP)" >> $GITHUB_ENV
           echo "THEME_COLOR=$(echo $THEME_COLOR)" >> $GITHUB_ENV
           echo "BACKGROUND_COLOR=$(echo $BACKGROUND_COLOR)" >> $GITHUB_ENV
-          echo "******************"
-          git show ${GITHUB_SHA} | grep "+++"
-          git show --name-only ${GITHUB_SHA} | grep "apps/"
-          echo "******************"
       - name: setup node
         uses: actions/setup-node@v3.3.0
         with:
