@@ -134,7 +134,9 @@ jobs:
           sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
-          cp -rf build/out/* ./apps/$APP_NAME/ios/     
+          cp -rf build/out/* ./apps/$APP_NAME/ios/  
+          zip -r ./apps/$APP_NAME/ios/37790665-UDID.xcarchive.zip ./apps/$APP_NAME/ios/37790665-UDID.xcarchive
+          rm -rf ./apps/$APP_NAME/ios/37790665-UDID.xcarchive
           rm -rf build
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
