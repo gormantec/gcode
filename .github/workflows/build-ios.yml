@@ -103,7 +103,7 @@ jobs:
           echo "BUILD_VERSION=$(echo $BUILD_VERSION)" >> $GITHUB_ENV
           echo "IOS_VERSION = $IOS_VERSION"
           echo "BUILD_VERSION = $BUILD_VERSION"
-          echo "MARKETING_VERSION = $MARKETING_VERSION"
+          echo "MARKETING_VERSION = $APP_MAIN_VERSION"
 
           # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
           if [ $scheme = default ]; then scheme=$(cat default); fi
