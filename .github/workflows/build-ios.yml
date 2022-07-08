@@ -158,6 +158,8 @@ jobs:
           ls -latr ./apps/$APP_NAME/ios
           zip -r ./apps/$APP_NAME/ios/$APP_NAME.xcarchive.zip ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
           rm -rf ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
+          echo "-------------------------------"
+          ls -latr ./apps/$APP_NAME/ios
           rm -rf build
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
