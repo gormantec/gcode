@@ -767,6 +767,7 @@ class AuthButtons extends Div {
         if (params && params.microsoftkey) authButtons.element.setAttribute("microsoftkey", params.microsoftkey);
         if (params && params.applekey) authButtons.element.setAttribute("applekey", params.applekey);
         if (params && params.appearance) authButtons.element.setAttribute("appearance", params.appearance);
+        let _onsignin = null;
         if (params && params.onsignin) _onsignin=params.onsignin;
         this.element.style.marginLeft = "50%";
         let _nextPage = null;
