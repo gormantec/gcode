@@ -689,7 +689,7 @@ class Script extends Div
                 console.log(`${key}: ${value}`);
               
                 let p=value;
-                if(typeof params.params[i]!="string")
+                if(typeof value!="string")
                 {
                     p=JSON.stringify(p);
                 }
