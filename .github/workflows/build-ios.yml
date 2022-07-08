@@ -98,7 +98,7 @@ jobs:
           mkdir -p out
           cd src
           project_file="`ls -A | grep -i \\.xcodeproj\$`"
-          IOS_VERSION=`cat $project_file.pbxproj | grep IPHONEOS_DEPLOYMENT_TARGET -m 1 | sed -e 's/\t//g'| sed -e 's/IPHONEOS_DEPLOYMENT_TARGET = //g' | sed -e 's/;//g'`
+          IOS_VERSION=`cat "$project_file.pbxproj" | grep IPHONEOS_DEPLOYMENT_TARGET -m 1 | sed -e 's/\t//g'| sed -e 's/IPHONEOS_DEPLOYMENT_TARGET = //g' | sed -e 's/;//g'`
           BUILD_VERSION="$IOS_VERSION.$APP_SUB_VERSION"
           echo "BUILD_VERSION=$(echo $BUILD_VERSION)" >> $GITHUB_ENV
           echo "IOS_VERSION = $IOS_VERSION"
@@ -116,7 +116,9 @@ jobs:
           sed -i '' "s/CURRENT_PROJECT_VERSION = 1\;/CURRENT_PROJECT_VERSION = $BUILD_VERSION;/g" "$project_file/project.pbxproj"
           sed -i '' "s/MARKETING_VERSION = 1\;/MARKETING_VERSION = $APP_MAIN_VERSION;/g" "$project_file/project.pbxproj"
           sed -i '' "s/DEVELOPMENT_TEAM = \"\"/DEVELOPMENT_TEAM = 9R8LPM6UR2/g" "$project_file/project.pbxproj"
-          cat "$project_file/project.pbxproj"
+          cat "$project_file/project.pbxproj" | grep MARKETING_VERSION
+          cat "$project_file/project.pbxproj" | grep CURRENT_PROJECT_VERSION
+          cat "$project_file/project.pbxproj" | grep DEVELOPMENT_TEAM
           xcodebuild clean
           pod install
           if [[ $platform == "iOS" ]]; then
