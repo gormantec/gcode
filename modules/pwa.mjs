@@ -403,7 +403,27 @@ class PWA {
 
 }
 
-
+class Script extends Div
+{
+    constructor(params) {
+        super({tagName:"script"});
+        let code=params.code;
+        if(params.params && typeof params.params === 'object')
+        {
+            for (const [key, value] of Object.entries(params.params)) {
+                console.log(`${key}: ${value}`);
+              
+                let p=value;
+                if(typeof params.params[i]!="string")
+                {
+                    p=JSON.stringify(p);
+                }
+                code.replace("/\$\{"+key+"\}/g",p);
+            }
+            this.element.innerText="#code\n"+code+"\n";
+        }
+    }
+}
 
 class Div {
 
@@ -531,6 +551,11 @@ class Div {
         if (params && params.backgroundRepeat) this.element.style.backgroundRepeat = params.backgroundRepeat;
         if (params && params.backgroundImage) this.element.style.backgroundImage = params.backgroundImage;
         if (params && params.backgroundSize) this.element.style.backgroundSize = params.backgroundSize;
+        if (params && params.data && typeof params.data === 'object'){
+            for (const [key, value] of Object.entries(params.data)) {
+                this.element.setAttribute("data-"+key,value);
+            }
+        }
 
 
 
