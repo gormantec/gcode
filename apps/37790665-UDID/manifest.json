@@ -10,7 +10,7 @@
   "permitted_urls": [
     "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"
   ],
-  "version": "1.0.0.1626073",
+  "version": "1.0.0.1626077",
   "icons": [
     {
       "src": "/apps/37790665-UDID/180x180.icon.png",
