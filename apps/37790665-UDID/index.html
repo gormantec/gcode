@@ -175,7 +175,10 @@ class HomePage extends Page {
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
            	bottom:"50px",
-          	onsignin: (s)=>{console.log("++++++>"+JSON.stringify(signin));}
+          	onsignin: (s)=>{
+              console.log("++++++>"+JSON.stringify(signin));
+              console.log("++++++>"+PWA.getPWA().credentials.email);
+            }
         }));
 
 
