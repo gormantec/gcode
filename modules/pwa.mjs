@@ -779,7 +779,7 @@ class AuthButtons extends Div {
                 console.log("logged in");
                 console.log("Email: ", signIn.email);
                 console.log("Name: ", signIn.name);
-                console.log("Picture: ", signIn.imageUrl);
+                console.log("Picture: ", signIn.imageUrl);    
                 console.log("Access token", signIn.accessToken);
                 console.log("Access token expiration date", signIn.accessTokenExpiration);
                 console.log("Provider (MS, Google, FB): ", signIn.provider);
