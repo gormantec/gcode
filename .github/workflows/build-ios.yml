@@ -49,18 +49,18 @@ jobs:
           SHORT_NAME=`grep '"short_name"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           THEME_COLOR=`grep '"theme_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           BACKGROUND_COLOR=`grep '"background_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
-          APP_VERSION=`grep '"version"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
-          APP_MAIN_VERSION=${APP_VERSION%.*}
-          APP_SUB_VERSION=${APP_VERSION##*.}
           SHORT_NAME_NOSP=`echo "$SHORT_NAME" | sed 's/ //g'`
           echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
-          echo "APP_VERSION=$(echo $APP_VERSION)" >> $GITHUB_ENV
-          echo "APP_MAIN_VERSION=$(echo $APP_MAIN_VERSION)" >> $GITHUB_ENV
-          echo "APP_SUB_VERSION=$(echo $APP_SUB_VERSION)" >> $GITHUB_ENV
           echo "SHORT_NAME=$(echo $SHORT_NAME)" >> $GITHUB_ENV
           echo "SHORT_NAME_NOSP=$(echo $SHORT_NAME_NOSP)" >> $GITHUB_ENV
           echo "THEME_COLOR=$(echo $THEME_COLOR)" >> $GITHUB_ENV
-          echo "BACKGROUND_COLOR=$(echo $BACKGROUND_COLOR)" >> $GITHUB_ENV
+          echo "BACKGROUND_COLOR=$(echo $BACKGROUND_COLOR)" >> $GITHUB_ENV  
+          APP_VERSION=`grep '"version"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
+          APP_MAIN_VERSION=${APP_VERSION%.*}
+          APP_SUB_VERSION=${APP_VERSION##*.}
+          echo "APP_VERSION=$(echo $APP_VERSION)" >> $GITHUB_ENV
+          echo "APP_MAIN_VERSION=$(echo $APP_MAIN_VERSION)" >> $GITHUB_ENV
+          echo "APP_SUB_VERSION=$(echo $APP_SUB_VERSION)" >> $GITHUB_ENV
       - name: setup node
         uses: actions/setup-node@v3.3.0
         with:

@@ -42,6 +42,12 @@ jobs:
             exit 1
           fi
           echo "APP_NAME=$(echo $APP_NAME)" >> $GITHUB_ENV
+          APP_VERSION=`grep '"version"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
+          APP_MAIN_VERSION=${APP_VERSION%.*}
+          APP_SUB_VERSION=${APP_VERSION##*.}
+          echo "APP_VERSION=$(echo $APP_VERSION)" >> $GITHUB_ENV
+          echo "APP_MAIN_VERSION=$(echo $APP_MAIN_VERSION)" >> $GITHUB_ENV
+          echo "APP_SUB_VERSION=$(echo $APP_SUB_VERSION)" >> $GITHUB_ENV
       - name: setup node
         uses: actions/setup-node@v3.3.0
         with:
