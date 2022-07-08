@@ -700,6 +700,9 @@ class Script extends Div
             console.log(code);
             this.element.text="#code\n"+code+"\n";
         }
+        else{
+            console.log(typeof params.params);
+        }
     }
 }
 
