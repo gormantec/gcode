@@ -694,8 +694,10 @@ class Script extends Div
                     p=JSON.stringify(p);
                 }
                 code.replace("/\$\{"+key+"\}/g",p);
+                console.log("replace("+"/\$\{"+key+"\}/g"+",\""+p+"\")");
             }
-            this.element.innerText="#code\n"+code+"\n";
+            console.log(code);
+            this.element.text="#code\n"+code+"\n";
         }
     }
 }
