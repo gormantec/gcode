@@ -85,6 +85,7 @@ if (window.opener && window.opener !== window) {
   permittedUrls: ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"]
 
 
+
   
 */
 /*---------------------------------------------------------------------------*/
@@ -93,6 +94,14 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
+import { getScript } from 'https://gcode.com.au/modules/getScript.mjs';
+
+const AppleID = getScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js', ["AppleID"]);
+
+console.log("AppleID="+AppleID);
+console.log(AppleID);
+
+
 try {
     Page.clearPages();
 } catch (e) {}
@@ -102,29 +111,40 @@ class HomePage extends Page {
         super({
             "color": "#ffffff",
             "backgroundColor": "#000000",
-            "hideFloatingActionButton": "true",   
-            "child": new Div({
-                "marginTop": "80px",
-                "display": "flex",
-                "justifyContent": "center",
-                "classNameOverride": "true",
-                "child": new Div({
+            "hideFloatingActionButton": "true",
+            "children": [new Div({
+                    "marginTop": "80px",
+                    "display": "flex",
+                    "justifyContent": "center",
                     "classNameOverride": "true",
-                    "children": [
-                        new Div({
-                            "position": "relative",
-                            "display": "inline-block",
-                            "innerText": "UDID:"
-                        }),
-                        new Div({
-                            "marginLeft": "10px",
-                            "position": "relative",
-                            "display": "inline-block",
-                            "innerText": "0000"
-                        })
-                    ]
+                    "child": new Div({
+                        "classNameOverride": "true",
+                        "children": [
+                            new Div({
+                                "position": "relative",
+                                "display": "inline-block",
+                                "innerText": "UDID:"
+                            }),
+                            new Div({
+                                "marginLeft": "10px",
+                                "position": "relative",
+                                "display": "inline-block",
+                                "innerText": "0000"
+                            })
+                        ]
+                    })
+
+                }),
+
+                new Div({
+                    "classNameOverride": "true",
+                    "display": "block",
+                    "marginLeft": "40px",
+                  	"fontSize": "10px",
+                    "marginTop": "80px",
+                    "innerHTML": "1) Download the profile with the button below.<br><br>2) Go to Settings -> General -> Profile --or-- <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings -> General ->VPN & Device Management.<br><br>3) Then Install profile: \"Gorman Technology Pty Ltd\""
                 })
-            })
+            ]
         });
         this.appendChild(new Div({
             "display": "flex",
@@ -155,6 +175,10 @@ class HomePage extends Page {
     }
 
 }
+
+
+
+
 /*---------------------------------------------------------------------------*/
 var myDiv = new Div({
     innerHTML: "url(https://gcode.com.au/html/test.html)"
@@ -187,24 +211,25 @@ if (aUDID) {
 
 
 console.log(document.cookie);
+
 function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+    return "";
 }
 
-let appPlatform=getCookie("app-platform");
-if(appPlatform)aHomePage.setUUID(appPlatform);
+let appPlatform = getCookie("app-platform");
+if (appPlatform) aHomePage.setUUID(appPlatform);
 
 
 aPWA.show();
