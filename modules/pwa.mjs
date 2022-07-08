@@ -789,7 +789,7 @@ class AuthButtons extends Div {
                 if(signIn.providerData && signIn.providerData.user)console.log(signIn.providerData.user.id);
                 else if(signIn.providerData)console.log(signIn.providerData);
                 myglobals.PWA.setCredentials(signIn);
-                if(typeof _nextPage === 'function')
+                if(typeof _onsignin === 'function')
                 {
                     _onsignin(signIn);
                 }
