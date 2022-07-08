@@ -104,11 +104,11 @@ class HomePage extends Page {
             "backgroundColor": "#000000",
             "hideFloatingActionButton": "true",
             "children": [new Div({
-                "marginTop": "80px",
-                "display": "flex",
-                "justifyContent": "center",
-                "classNameOverride": "true",
-                "child": new Div({
+                    "marginTop": "80px",
+                    "display": "flex",
+                    "justifyContent": "center",
+                    "classNameOverride": "true",
+                    "child": new Div({
                         "classNameOverride": "true",
                         "children": [
                             new Div({
@@ -124,16 +124,18 @@ class HomePage extends Page {
                             })
                         ]
                     })
-                
-            }),
 
-                    new Div({
-                        "classNameOverride": "true",
-                        "display": "block",
-                        "marginLeft": "10px",
-                        "marginTop": "30px",
-                        "innerHTML": "Download the profile with the button below.<br>Goto: Settings->General-><br>&nbsp;&nbsp;->Profile or <br>&nbsp;&nbsp;->VPN & Device Management. <br>Then Install profile:<br>&nbsp;&nbsp;\"Gorman Technology Pty Ltd\""
-                    })]
+                }),
+
+                new Div({
+                    "classNameOverride": "true",
+                    "display": "block",
+                    "marginLeft": "10px",
+                  	"fontSize": "10px",
+                    "marginTop": "50px",
+                    "innerHTML": "Download the profile with the button below.<br>Goto: Settings->General-><br>&nbsp;&nbsp;->Profile or <br>&nbsp;&nbsp;->VPN & Device Management. <br>Then Install profile:<br>&nbsp;&nbsp;\"Gorman Technology Pty Ltd\""
+                })
+            ]
         });
         this.appendChild(new Div({
             "display": "flex",
