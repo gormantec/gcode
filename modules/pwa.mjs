@@ -686,14 +686,15 @@ class Script extends Div
         if(params.params && typeof params.params === 'object')
         {
             for (const [key, value] of Object.entries(params.params)) {
-                console.log(`${key}: ${value}`);
+                
               
                 let p=value;
                 if(typeof value!="string")
                 {
                     p=JSON.stringify(p);
                 }
-                code.replace("/\$\{"+key+"\}/g",p);
+                console.log(`${key}: ${p}`);
+                code=code.replace("/\$\{"+key+"\}/g",p);
                 console.log("replace("+"/\$\{"+key+"\}/g"+",\""+p+"\")");
             }
             console.log(code);
