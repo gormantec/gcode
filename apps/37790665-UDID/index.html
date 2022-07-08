@@ -154,7 +154,7 @@ class HomePage extends Page {
             child: new Div({
                 "position": "absolute",
                 "bottom": "35px",
-                "height": "46px",
+                "height": "42px",
                 "width": "200px",
                 borderRadius: "5px",
                 paddingTop: "15px",
@@ -177,7 +177,7 @@ class HomePage extends Page {
                 "position": "absolute",
               	"data":{"color":"black","border":"true","type":"sign in"},
                 "bottom": "135px",
-                "height": "46px",
+                "height": "42px",
                 "width": "200px",
                 borderRadius: "5px",
                 paddingTop: "15px",
@@ -186,10 +186,7 @@ class HomePage extends Page {
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "textAlign": "center",
-                "innerText": "Get UDID",
-                onclick: () => {
-                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
-                }
+                "innerText": "Login"
             })
         }));
       	this.appendChild(new Script({code:"AppleID.auth.init(${P1});",params:{"P1":{
