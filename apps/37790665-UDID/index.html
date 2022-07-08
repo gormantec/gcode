@@ -43,9 +43,9 @@ function showAddToHomeScreen() {
  });
 function showIosInstall() {
   let iosPrompt = document.querySelector(".ios-prompt");
-  iosPrompt.style.display = "block";
-  iosPrompt.addEventListener("click", () => {
-    iosPrompt.style.display = "none";
+  if(iosPrompt)iosPrompt.style.display = "block";
+  if(iosPrompt)iosPrompt.addEventListener("click", () => {
+  if(iosPrompt)iosPrompt.style.display = "none";
   });
 }
 
@@ -174,7 +174,8 @@ class HomePage extends Page {
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-           	bottom:"50px"
+           	bottom:"50px",
+          	onsignin: (s)=>{console.log("++++++>"+JSON.stringify(signin));}
         }));
 
 
