@@ -173,7 +173,10 @@ class PWA {
     }
     setCredentials(credentials) {
         this.credentials = credentials;
-        this.userhash = credentials.provider + "-" + credentials.providerData.user.id;
+        if(credentials.providerData.user && credentials.providerData.user.id)
+        {
+            this.userhash = credentials.provider + "-" + credentials.providerData.user.id;
+        }
         this.setAlert(this.userhash);
     }
     alertPageChangeListener(pageId) {
@@ -764,6 +767,7 @@ class AuthButtons extends Div {
         if (params && params.microsoftkey) authButtons.element.setAttribute("microsoftkey", params.microsoftkey);
         if (params && params.applekey) authButtons.element.setAttribute("applekey", params.applekey);
         if (params && params.appearance) authButtons.element.setAttribute("appearance", params.appearance);
+        if (params && params.onsignin) _onsignin=params.onsignin;
         this.element.style.marginLeft = "50%";
         let _nextPage = null;
         if (params && params.nextPage) _nextPage = params.nextPage;
@@ -778,6 +782,10 @@ class AuthButtons extends Div {
                 if(signIn.providerData && signIn.providerData.user)console.log(signIn.providerData.user.id);
                 else if(signIn.providerData)console.log(signIn.providerData);
                 myglobals.PWA.setCredentials(signIn);
+                if(typeof _nextPage === 'function')
+                {
+                    _onsignin(signIn);
+                }
                 if (_nextPage) {
                     console.log(_nextPage);
                     myglobals.PWA.setPage(_nextPage);
