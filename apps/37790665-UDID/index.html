@@ -96,7 +96,7 @@ import {
 } from 'https://gcode.com.au/modules/pwa.mjs';
 import { getScript } from 'https://gcode.com.au/modules/getScript.mjs';
 
-const AppleID = getScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js', ["AppleID"]);
+const AppleID = await getScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js', ["AppleID"]);
 
 console.log("AppleID="+AppleID);
 console.log(AppleID);
@@ -167,7 +167,38 @@ class HomePage extends Page {
                 }
             })
         }));
-
+        this.appendChild(new Div({
+            "display": "flex",
+            "justifyContent": "center",
+            child: new Div({
+              	"id":"appleid-signin",
+                "position": "absolute",
+              	"data":{"color":"black","border":"true","type":"sign in"},
+                "bottom": "135px",
+                "height": "46px",
+                "width": "200px",
+                borderRadius: "5px",
+                paddingTop: "15px",
+                backgroundColor: "#555555",
+                fontSize: "24px",
+                "cursor": "pointer",
+                "pointerEvents": "auto",
+                "textAlign": "center",
+                "innerText": "Get UDID",
+                onclick: () => {
+                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+                }
+            })
+        }));
+      	this.appendChild(new Script({code:"AppleID.auth.init(${P1});",params:{"P1":{
+                clientId : '[CLIENT_ID]',
+                scope : '[SCOPES]',
+                redirectURI : '[REDIRECT_URI]',
+                state : '[STATE]',
+                nonce : '[NONCE]',
+                usePopup : true
+            }}}));
+      
     }
 
     setUUID(aUDID) {
