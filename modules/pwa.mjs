@@ -687,7 +687,7 @@ class Script extends Div
         {
             for (const [key, value] of Object.entries(params.params)) {
                 
-              
+    
                 let p=value;
                 if(typeof value!="string")
                 {
