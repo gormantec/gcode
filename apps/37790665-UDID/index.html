@@ -84,9 +84,6 @@ if (window.opener && window.opener !== window) {
   description: An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.
   permittedUrls: ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"]
 
-
-
-
   
 */
 /*---------------------------------------------------------------------------*/
@@ -94,16 +91,18 @@ import {
     PWA,
     Page,
     Div,
-    Script
+  AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
+
+/*
 import {
-    getScript
-} from 'https://gcode.com.au/modules/getScript.mjs';
+    AppleAuthButton
+} from './lib/apple-auth.lib.mjs';
+*/
 
-const AppleID = await getScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js', ["AppleID"]);
 
-console.log("AppleID=" + AppleID);
-console.log(AppleID);
+//console.log("AppleID=" + AppleID);
+//console.log(AppleID);
 
 
 try {
@@ -172,54 +171,13 @@ class HomePage extends Page {
                 }
             })
         }));
-        this.appendChild(new Div({
-            "display": "flex",
-            "justifyContent": "center",
-            child: new Div({
-                "id": "appleid-signin",
-                "position": "absolute",
-                "data": {
-                    "color": "black",
-                    "border": "true",
-                    "type": "sign in"
-                },
-                "bottom": "35px",
-                "height": "32px",
-                "width": "200px",
-                borderRadius: "5px",
-                paddingTop: "15px",
-                fontSize: "24px",
-                "cursor": "pointer",
-                "pointerEvents": "auto",
-                "textAlign": "center",
-                "innerText": "Login"
-            })
-        }));
-        this.appendChild(new Script({
-            code: "AppleID.auth.init(${P1});",
-            params: {
-                "P1": {
-                    clientId: 'au.com.gcode.appleauth',
-                    scope: 'name email',
-                    redirectURI: 'https://gcode.com.au/apps/37790665-UDID/index.html',
-                    state: 'e86d6da0f9cd53acd9cdada9cd8a6cdaabda9cd6cdada91da8c72d',
-                    nonce: 'gormantec501',
-                    usePopup: true
-                }
-            }
+        this.appendChild(new AuthButtons({
+            applekey: "au.com.gcode.appleauth",
+            appearance: "list",
+           	bottom:"50px"
         }));
 
-        // Listen for authorization success.
-        document.addEventListener('AppleIDSignInOnSuccess', (event) => {
-            // Handle successful response.
-            console.log(event.detail);
-        });
 
-        // Listen for authorization failures.
-        document.addEventListener('AppleIDSignInOnFailure', (event) => {
-            // Handle error.
-            console.log(event.detail.error);
-        });
 
     }
 
@@ -240,7 +198,8 @@ var aHomePage = new HomePage();
 var aPWA = new PWA({
     "title": "Gorman Technology Pty Ltd",
     "footer": "https://www.gormantec.com",
-    "primaryColor": "#323232"
+    "primaryColor": "#323232",
+  	"pwaAuth": "true"
 });
 aPWA.setPage(aHomePage);
 aPWA.floatingActionButton.onclick(function() {
