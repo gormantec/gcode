@@ -212,7 +212,7 @@ class HomePage extends Page {
         // Listen for authorization success.
         document.addEventListener('AppleIDSignInOnSuccess', (event) => {
             // Handle successful response.
-            console.log(event.detail.data);
+            console.log(event.detail);
         });
 
         // Listen for authorization failures.
