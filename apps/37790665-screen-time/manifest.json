@@ -8,7 +8,7 @@
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-screen-time/",
   "permitted_urls": [],
-  "version": "1.0.0.1624545",
+  "version": "1.0.0.1624578",
   "icons": [
     {
       "src": "/apps/37790665-screen-time/180x180.icon.png",
