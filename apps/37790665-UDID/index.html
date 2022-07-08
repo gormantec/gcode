@@ -91,7 +91,7 @@ import {
     PWA,
     Page,
     Div,
-  AuthButtons
+    AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
 /*
@@ -120,7 +120,7 @@ class HomePage extends Page {
                     "display": "flex",
                     "justifyContent": "center",
                     "classNameOverride": "true",
-                    "children": [new Div({
+                    "child": new Div({
                         "classNameOverride": "true",
                         "children": [
                             new Div({
@@ -135,7 +135,15 @@ class HomePage extends Page {
                                 "innerText": "0000"
                             })
                         ]
-                    }),new Div({
+                    })
+
+                }),
+                new Div({
+                    "marginTop": "80px",
+                    "display": "flex",
+                    "justifyContent": "center",
+                    "classNameOverride": "true",
+                    "child": new Div({
                         "classNameOverride": "true",
                         "children": [
                             new Div({
@@ -147,10 +155,10 @@ class HomePage extends Page {
                                 "marginLeft": "10px",
                                 "position": "relative",
                                 "display": "inline-block",
-                                "innerText": "your@email.com"
+                                "innerText": "your-emain@email.com"
                             })
                         ]
-                    })]
+                    })
 
                 }),
 
@@ -189,10 +197,10 @@ class HomePage extends Page {
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-           	bottom:"50px",
-          	onsignin: (s)=>{
-              console.log("++++++>"+JSON.stringify(signin));
-              console.log("++++++>"+PWA.getPWA().credentials.email);
+            bottom: "50px",
+            onsignin: (s) => {
+                console.log("++++++>" + JSON.stringify(signin));
+                console.log("++++++>" + PWA.getPWA().credentials.email);
             }
         }));
 
@@ -218,7 +226,7 @@ var aPWA = new PWA({
     "title": "Gorman Technology Pty Ltd",
     "footer": "https://www.gormantec.com",
     "primaryColor": "#323232",
-  	"pwaAuth": "true"
+    "pwaAuth": "true"
 });
 aPWA.setPage(aHomePage);
 aPWA.floatingActionButton.onclick(function() {
