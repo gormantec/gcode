@@ -98,6 +98,8 @@ jobs:
           echo "filetype_parameter = $filetype_parameter"
           echo "OUT_DIR_VAR = $OUT_DIR_VAR"
           project_file="`ls -A | grep -i \\.xcodeproj\$`"
+          sed -i '' "s/CURRENT_PROJECT_VERSION = 1\;/CURRENT_PROJECT_VERSION = 2.0.10001/g" "$project_file/project.pbxproj"
+          sed -i '' "s/MARKETING_VERSION = 1\;/MARKETING_VERSION = 2.0/g" "$project_file/project.pbxproj"
           sed -i '' "s/DEVELOPMENT_TEAM = \"\"/DEVELOPMENT_TEAM = 9R8LPM6UR2/g" "$project_file/project.pbxproj"
           xcodebuild clean
           pod install
