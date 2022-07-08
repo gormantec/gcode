@@ -91,7 +91,7 @@ import {
     PWA,
     Page,
     Div,
-  AuthButtons
+    AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
 /*
@@ -138,6 +138,29 @@ class HomePage extends Page {
                     })
 
                 }),
+                new Div({
+                    "marginTop": "10px",
+                    "display": "flex",
+                    "justifyContent": "center",
+                    "classNameOverride": "true",
+                    "child": new Div({
+                        "classNameOverride": "true",
+                        "children": [
+                            new Div({
+                                "position": "relative",
+                                "display": "inline-block",
+                                "innerText": "Email:"
+                            }),
+                            new Div({
+                                "marginLeft": "10px",
+                                "position": "relative",
+                                "display": "inline-block",
+                                "innerText": "your-emain@email.com"
+                            })
+                        ]
+                    })
+
+                }),
 
                 new Div({
                     "classNameOverride": "true",
@@ -174,10 +197,10 @@ class HomePage extends Page {
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-           	bottom:"50px",
-          	onsignin: (s)=>{
-              console.log("++++++>"+JSON.stringify(signin));
-              console.log("++++++>"+PWA.getPWA().credentials.email);
+            bottom: "50px",
+            onsignin: (s) => {
+                console.log("++++++>" + JSON.stringify(signin));
+                console.log("++++++>" + PWA.getPWA().credentials.email);
             }
         }));
 
@@ -203,7 +226,7 @@ var aPWA = new PWA({
     "title": "Gorman Technology Pty Ltd",
     "footer": "https://www.gormantec.com",
     "primaryColor": "#323232",
-  	"pwaAuth": "true"
+    "pwaAuth": "true"
 });
 aPWA.setPage(aHomePage);
 aPWA.floatingActionButton.onclick(function() {
