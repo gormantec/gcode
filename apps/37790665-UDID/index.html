@@ -93,7 +93,9 @@ import {
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
-import { AppleAuthButton } from './lib/apple-auth.lib.mjs';
+import {
+    AppleAuthButton
+} from './lib/apple-auth.lib.mjs';
 
 
 
@@ -167,8 +169,10 @@ class HomePage extends Page {
                 }
             })
         }));
-        this.appendChild(new AppleAuthButton());
-
+        this.appendChild(new AuthButtons({
+            applekey: "au.com.gcode.appleauth",
+            appearance: "list"
+        }));
 
 
 
