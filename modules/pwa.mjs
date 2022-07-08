@@ -777,7 +777,13 @@ class AuthButtons extends Div {
                 console.error("Sign in failed", signIn.error);
             } else {
                 console.log("logged in");
-                console.log(signIn);
+                console.log("Email: ", signIn.email);
+                console.log("Name: ", signIn.name);
+                console.log("Picture: ", signIn.imageUrl);
+                console.log("Access token", signIn.accessToken);
+                console.log("Access token expiration date", signIn.accessTokenExpiration);
+                console.log("Provider (MS, Google, FB): ", signIn.provider);
+                console.log("Raw data from provider: ", signIn.providerData);
                 console.log("----------------");
                 if(signIn.providerData && signIn.providerData.user)console.log(signIn.providerData.user.id);
                 else if(signIn.providerData)console.log(signIn.providerData);
