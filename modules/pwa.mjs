@@ -694,8 +694,7 @@ class Script extends Div
                     p=JSON.stringify(p);
                 }
                 console.log(`${key}: ${p}`);
-                code=code.replace("/\\\$\\\{"+key+"\\\}/g",p);
-                console.log("replace("+"/\\\$\\\{"+key+"\\\}/g"+",\""+p+"\")");
+                code=code.replaceAll("${"+key+"}",p);
                 console.log(code);
             }
             console.log(code);
