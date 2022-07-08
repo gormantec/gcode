@@ -960,4 +960,4 @@ class DivForm extends Div {
 
 
 
-export { PWA, Page, Div, AuthButtons, ActionButton, DivForm };
+export { PWA, Page, Div, Script, AuthButtons, ActionButton, DivForm };
