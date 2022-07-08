@@ -190,11 +190,11 @@ class HomePage extends Page {
             })
         }));
       	this.appendChild(new Script({code:"AppleID.auth.init(${P1});",params:{"P1":{
-                clientId : '[CLIENT_ID]',
-                scope : '[SCOPES]',
-                redirectURI : '[REDIRECT_URI]',
-                state : '[STATE]',
-                nonce : '[NONCE]',
+                clientId : 'au.com.gcode.appleauth',
+                scope : 'email',
+                redirectURI : 'https://gcode.com.au/auth',
+                state : 'ae6dafdab8dabda9cdacd',
+                nonce : 'gormantec501',
                 usePopup : true
             }}}));
       
