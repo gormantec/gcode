@@ -94,10 +94,11 @@ import {
   AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
+/*
 import {
     AppleAuthButton
 } from './lib/apple-auth.lib.mjs';
-
+*/
 
 
 console.log("AppleID=" + AppleID);
@@ -172,7 +173,8 @@ class HomePage extends Page {
         }));
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
-            appearance: "list"
+            appearance: "list",
+           height:"50px"
         }));
 
 
