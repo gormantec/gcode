@@ -395,9 +395,9 @@ export function createHtml(code, options) {
             " });\n" +
             "function showIosInstall() {\n" +
             "  let iosPrompt = document.querySelector(\".ios-prompt\");\n" +
-            "  iosPrompt.style.display = \"block\";\n" +
-            "  iosPrompt.addEventListener(\"click\", () => {\n" +
-            "    iosPrompt.style.display = \"none\";\n" +
+            "  if(iosPrompt)iosPrompt.style.display = \"block\";\n" +
+            "  if(iosPrompt)iosPrompt.addEventListener(\"click\", () => {\n" +
+            "  if(iosPrompt)iosPrompt.style.display = \"none\";\n" +
             "  });\n" +
             "}\n\n" +
             "const isIos = () => {\n" +
