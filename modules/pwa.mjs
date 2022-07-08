@@ -698,7 +698,7 @@ class Script extends Div
                 console.log("replace("+"/\$\{"+key+"\}/g"+",\""+p+"\")");
             }
             console.log(code);
-            this.element.text="#code\n"+code+"\n";
+            this.element.text="\n"+code+"\n";
         }
         else{
             console.log(typeof params.params);
