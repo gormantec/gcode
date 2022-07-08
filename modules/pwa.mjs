@@ -403,27 +403,7 @@ class PWA {
 
 }
 
-class Script extends Div
-{
-    constructor(params) {
-        super({tagName:"script"});
-        let code=params.code;
-        if(params.params && typeof params.params === 'object')
-        {
-            for (const [key, value] of Object.entries(params.params)) {
-                console.log(`${key}: ${value}`);
-              
-                let p=value;
-                if(typeof params.params[i]!="string")
-                {
-                    p=JSON.stringify(p);
-                }
-                code.replace("/\$\{"+key+"\}/g",p);
-            }
-            this.element.innerText="#code\n"+code+"\n";
-        }
-    }
-}
+
 
 class Div {
 
@@ -695,6 +675,29 @@ class Div {
         this.element.innerHTML = htmlString;
     }
 }
+
+class Script extends Div
+{
+    constructor(params) {
+        super({tagName:"script"});
+        let code=params.code;
+        if(params.params && typeof params.params === 'object')
+        {
+            for (const [key, value] of Object.entries(params.params)) {
+                console.log(`${key}: ${value}`);
+              
+                let p=value;
+                if(typeof params.params[i]!="string")
+                {
+                    p=JSON.stringify(p);
+                }
+                code.replace("/\$\{"+key+"\}/g",p);
+            }
+            this.element.innerText="#code\n"+code+"\n";
+        }
+    }
+}
+
 
 var pages = {};
 class Page extends Div {
