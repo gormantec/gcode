@@ -102,35 +102,37 @@ class HomePage extends Page {
         super({
             "color": "#ffffff",
             "backgroundColor": "#000000",
-            "hideFloatingActionButton": "true",   
+            "hideFloatingActionButton": "true",
             "child": new Div({
                 "marginTop": "80px",
                 "display": "flex",
                 "justifyContent": "center",
                 "classNameOverride": "true",
-                "child": new Div({
-                    "classNameOverride": "true",
-                    "children": [
-                        new Div({
-                            "position": "relative",
-                            "display": "inline-block",
-                            "innerText": "UDID:"
-                        }),
-                        new Div({
-                            "marginLeft": "10px",
-                            "position": "relative",
-                            "display": "inline-block",
-                            "innerText": "0000"
-                        }),
-                        new Div({
-                            "marginLeft": "10px",
-                            "marginTop": "30px",
-                            "position": "relative",
-                            "display": "inline-block",
-                            "innerHTML": "Goto: Settings->General-><br>&nbsp;&nbsp;->Profile or <br>&nbsp;&nbsp;->VPN & Device Management. <br>Then Install profile:<br>&nbsp;&nbsp;\"Gorman Technology Pty Ltd\""
-                        })
-                    ]
-                })
+                "children": [new Div({
+                        "classNameOverride": "true",
+                        "children": [
+                            new Div({
+                                "position": "relative",
+                                "display": "inline-block",
+                                "innerText": "UDID:"
+                            }),
+                            new Div({
+                                "marginLeft": "10px",
+                                "position": "relative",
+                                "display": "inline-block",
+                                "innerText": "0000"
+                            })
+                        ]
+                    }),
+
+                    new Div({
+                        "marginLeft": "10px",
+                        "marginTop": "30px",
+                        "position": "relative",
+                        "display": "inline-block",
+                        "innerHTML": "Goto: Settings->General-><br>&nbsp;&nbsp;->Profile or <br>&nbsp;&nbsp;->VPN & Device Management. <br>Then Install profile:<br>&nbsp;&nbsp;\"Gorman Technology Pty Ltd\""
+                    })
+                ]
             })
         });
         this.appendChild(new Div({
@@ -194,24 +196,25 @@ if (aUDID) {
 
 
 console.log(document.cookie);
+
 function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+    return "";
 }
 
-let appPlatform=getCookie("app-platform");
-if(appPlatform)aHomePage.setUUID(appPlatform);
+let appPlatform = getCookie("app-platform");
+if (appPlatform) aHomePage.setUUID(appPlatform);
 
 
 aPWA.show();
