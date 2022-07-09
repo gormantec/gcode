@@ -283,7 +283,7 @@ if (aUDID) {
     localStorage.setItem('UDID', aUDID);
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
-    window.addEventListener('load', function() {
+    window.addEventListener('pwaLoaded', function() {
         aUDID = localStorage.getItem('UDID');
         let aEmail = localStorage.getItem('Email');
         if (aUDID && aEmail) {
