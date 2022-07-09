@@ -112,7 +112,7 @@ try {
 class HomePage extends Page {
     constructor() {
         super({
-            "color": "#ffffff",
+            "color": "#dddddd",
             "backgroundColor": "#000000",
             "hideFloatingActionButton": "true",
             "children": [new Div({
@@ -155,7 +155,7 @@ class HomePage extends Page {
                                 "marginLeft": "10px",
                                 "position": "relative",
                                 "display": "inline-block",
-                                "innerText": "your-emain@email.com"
+                                "innerText": "your-email@email.com"
                             })
                         ]
                     })
@@ -166,8 +166,8 @@ class HomePage extends Page {
                     "classNameOverride": "true",
                     "display": "block",
                     "marginLeft": "40px",
-                    "fontSize": "10px",
-                    "marginTop": "80px",
+                    "fontSize": "11px",
+                    "marginTop": "50px",
                     "innerHTML": "1) Login to your Apple ID below.<br><br>2) Download the profile with \"Get UDID\" below.<br><br>3) Go to Settings -> General -> Profile --or-- <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings -> General ->VPN & Device Management.<br><br>4) Then Install profile: \"Gorman Technology Pty Ltd\"<br><br>5) This will email your ID and UDID to gormantec."
                 })
             ]
@@ -176,14 +176,15 @@ class HomePage extends Page {
             "display": "flex",
             "justifyContent": "center",
             child: new Div({
+              	"id":"getUDIDButton",
                 "position": "absolute",
                 "bottom": "35px",
-                "height": "42px",
+                "height": "32px",
                 "width": "200px",
-                borderRadius: "5px",
-                paddingTop: "15px",
+                borderRadius: "8px",
+                paddingTop: "10px",
                 backgroundColor: "#555555",
-                fontSize: "24px",
+                fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "textAlign": "center",
@@ -194,16 +195,45 @@ class HomePage extends Page {
                 }
             })
         }));
+        this.appendChild(new Div({
+            "display": "flex",
+            "justifyContent": "center",
+            child: new Div({
+              	"id":"sendToGcodeButton",
+                "position": "absolute",
+                "bottom": "35px",
+                "height": "32px",
+                "width": "200px",
+                borderRadius: "8px",
+                paddingTop: "10px",
+                backgroundColor: "#555555",
+                fontSize: "20px",
+                "cursor": "pointer",
+                "pointerEvents": "auto",
+                "textAlign": "center",
+                "innerText": "Send info to gcode",
+                "display": "none",
+                onclick: () => {
+                  fetch("https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID="+encodeURIComponent(localStorage.getItem('UDID'))+"&Email="+encodeURIComponent(localStorage.getItem('Email')))
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+                	document.getElementById("sendToGcodeButton").style.display="none";
+                }
+            })
+        }));
       	const _this=this;
         this.appendChild(new AuthButtons({
+          
+            "id":"getEmailButton",
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-            bottom: "50px",
+            bottom: "20px",
             onsignin: (s) => {
-                console.log("++++++>" + JSON.stringify(s));
-                console.log("++++++>" + PWA.getPWA().credentials.email);
-                console.log("++++++>" + s.email);
+    			if(s.email)localStorage.setItem('Email', s.email);
+    			if(s.name)localStorage.setItem('Name', s.name);
               	_this.setEmail(s.email);
+                document.getElementById("getUDIDButton").style.display="block";
+                document.getElementById("getEmailButton").style.display="none";
             }
         }));
 
@@ -250,9 +280,20 @@ if (aUDID) {
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
     aUDID = localStorage.getItem('UDID');
-    if (aUDID) {
+    let aEmail = localStorage.getItem('Email');
+    if (aUDID && aEmail) {
         aHomePage.setUUID(aUDID);
+        aHomePage.setEmail(aEmail);
+        document.getElementById("getUDIDButton").style.display="none";
+        document.getElementById("getEmailButton").style.display="none";
+        document.getElementById("sendToGcodeButton").style.display="block";
     }
+  else if (aUDID) {
+      aHomePage.setUUID(aUDID);
+      document.getElementById("getUDIDButton").style.display="none";
+      document.getElementById("getEmailButton").style.display="block";
+      document.getElementById("sendToGcodeButton").style.display="none";
+   }
 }
 
 
