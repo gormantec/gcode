@@ -365,7 +365,7 @@ class PWA {
             rootWindow = frame.element;
             this.buildScreen(msec, win, rootWindow);
         }
-        document.dispatchEvent(new Event('pwaLoaded'));
+        window.dispatchEvent(new Event('pwaLoaded'));
 
 
     }
