@@ -105,15 +105,12 @@ class HomePage extends Page {
 /*---------------------------------------------------------------------------*/
 var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
 var aHomePage = new HomePage();
-var aSecondPage = new SecondPage();
 var aPWA = new PWA({
   title: "Gorman Technology Pty Ltd",
   footer: "https://www.gormantec.com",
   primaryColor: "#D41616",
 });
-aPWA.floatingActionButton.onclick(function() {
-  aPWA.setPage(aSecondPage);
-});
+
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
