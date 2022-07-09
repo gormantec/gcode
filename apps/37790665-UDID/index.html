@@ -216,7 +216,7 @@ class HomePage extends Page {
     }
   	setEmail(email) {
       	console.log(this.firstChild.children);
-        this.firstChild.firstChild.children[1].innerText = email;
+        this.element.children[1].firstChild.children[1].innerText = email;
     }
 
 }
