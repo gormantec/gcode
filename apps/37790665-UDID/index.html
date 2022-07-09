@@ -194,7 +194,7 @@ class HomePage extends Page {
                 }
             })
         }));
-      	_this=this;
+      	const _this=this;
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
@@ -215,7 +215,7 @@ class HomePage extends Page {
         this.firstChild.firstChild.children[1].innerText = aUDID;
     }
   	setEmail(email) {
-        this.children[1].firstChild.children[1].innerText = email;
+        this.firstChild.firstChild.children[1].innerText = email;
     }
 
 }
