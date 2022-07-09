@@ -195,6 +195,29 @@ class HomePage extends Page {
                 }
             })
         }));
+        this.appendChild(new Div({
+            "display": "flex",
+            "justifyContent": "center",
+            child: new Div({
+              	"id":"sendToGcodeButton",
+                "position": "absolute",
+                "bottom": "35px",
+                "height": "32px",
+                "width": "200px",
+                borderRadius: "8px",
+                paddingTop: "10px",
+                backgroundColor: "#555555",
+                fontSize: "20px",
+                "cursor": "pointer",
+                "pointerEvents": "auto",
+                "textAlign": "center",
+                "innerText": "Send info to gcode",
+                "display": "none",
+                onclick: () => {
+                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID="+encodeURIComponent(localStorage.getItem('UDID'))+"&Email="+encodeURIComponent(localStorage.getItem('Email'));
+                }
+            })
+        }));
       	const _this=this;
         this.appendChild(new AuthButtons({
           
@@ -203,9 +226,8 @@ class HomePage extends Page {
             appearance: "list",
             bottom: "20px",
             onsignin: (s) => {
-                console.log("++++++>" + JSON.stringify(s));
-                console.log("++++++>" + PWA.getPWA().credentials.email);
-                console.log("++++++>" + s.email);
+    			if(s.email)localStorage.setItem('Email', s.email);
+    			if(s.name)localStorage.setItem('Name', s.name);
               	_this.setEmail(s.email);
                 document.getElementById("getUDIDButton").style.display="block";
                 document.getElementById("getEmailButton").style.display="none";
@@ -242,7 +264,7 @@ var aPWA = new PWA({
 });
 aPWA.setPage(aHomePage);
 aPWA.floatingActionButton.onclick(function() {
-    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?email="+encodeURIComponent(PWA.getPWA().credentials.email);
+    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
 });
 
 const queryString = window.location.search;
@@ -255,9 +277,20 @@ if (aUDID) {
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
     aUDID = localStorage.getItem('UDID');
-    if (aUDID) {
+    let aEmail = localStorage.getItem('Email');
+    if (aUDID && aEmail) {
         aHomePage.setUUID(aUDID);
+        aHomePage.setEmail(aEmail);
+        document.getElementById("getUDIDButton").style.display="none";
+        document.getElementById("getEmailButton").style.display="none";
+        document.getElementById("sendToGcodeButton").style.display="block";
     }
+  else if (aUDID) {
+      aHomePage.setUUID(aUDID);
+      document.getElementById("getUDIDButton").style.display="none";
+      document.getElementById("getEmailButton").style.display="block";
+      document.getElementById("sendToGcodeButton").style.display="none";
+   }
 }
 
 
