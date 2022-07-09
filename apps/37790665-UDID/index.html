@@ -187,7 +187,7 @@ class HomePage extends Page {
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
-              	"zIndex":"10000",
+              	"zIndex":"10001",
                 "textAlign": "center",
                 "innerText": "Get UDID",
                 "display": "none",
@@ -211,10 +211,12 @@ class HomePage extends Page {
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
+              	"zIndex":"10001",
                 "textAlign": "center",
                 "innerText": "Send info to gcode",
                 "display": "none",
                 onclick: () => {
+                  console.log("click");
                   fetch("https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID="+encodeURIComponent(localStorage.getItem('UDID'))+"&Email="+encodeURIComponent(localStorage.getItem('Email')))
                     .then(response => response.json())
                     .then(data => console.log(data));
