@@ -8,7 +8,7 @@
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-SallyG/",
   "permitted_urls": [],
-  "version": "1.0.0.1636650",
+  "version": "1.0.0.1636653",
   "icons": [
     {
       "src": "/apps/37790665-SallyG/180x180.icon.png",
