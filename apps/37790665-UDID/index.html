@@ -194,15 +194,16 @@ class HomePage extends Page {
                 }
             })
         }));
+      	_this=this;
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
             bottom: "50px",
             onsignin: (s) => {
-                console.log("++++++>" + JSON.stringify(signin));
+                console.log("++++++>" + JSON.stringify(s));
                 console.log("++++++>" + PWA.getPWA().credentials.email);
                 console.log("++++++>" + s.email);
-              	setEmail(s.email);
+              	_this.setEmail(s.email);
             }
         }));
 
