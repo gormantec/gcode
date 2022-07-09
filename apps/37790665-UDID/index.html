@@ -201,6 +201,8 @@ class HomePage extends Page {
             onsignin: (s) => {
                 console.log("++++++>" + JSON.stringify(signin));
                 console.log("++++++>" + PWA.getPWA().credentials.email);
+                console.log("++++++>" + s.email);
+              	setEmail(s.email);
             }
         }));
 
@@ -210,6 +212,9 @@ class HomePage extends Page {
 
     setUUID(aUDID) {
         this.firstChild.firstChild.children[1].innerText = aUDID;
+    }
+  	setEmail(email) {
+        this.children[1].firstChild.children[1].innerText = email;
     }
 
 }
