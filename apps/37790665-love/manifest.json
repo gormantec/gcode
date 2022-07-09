@@ -8,7 +8,7 @@
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-love/",
   "permitted_urls": [],
-  "version": "1.0.0.1641187",
+  "version": "1.0.0.1641190",
   "icons": [
     {
       "src": "/apps/37790665-love/180x180.icon.png",
