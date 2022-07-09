@@ -242,7 +242,7 @@ var aPWA = new PWA({
 });
 aPWA.setPage(aHomePage);
 aPWA.floatingActionButton.onclick(function() {
-    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?email="+encodeURIComponent(PWA.getPWA().credentials.email);
 });
 
 const queryString = window.location.search;
