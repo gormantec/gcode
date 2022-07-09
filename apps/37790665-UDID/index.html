@@ -176,6 +176,7 @@ class HomePage extends Page {
             "display": "flex",
             "justifyContent": "center",
             child: new Div({
+              	"id":"getUDIDButton",
                 "position": "absolute",
                 "bottom": "35px",
                 "height": "42px",
@@ -196,6 +197,8 @@ class HomePage extends Page {
         }));
       	const _this=this;
         this.appendChild(new AuthButtons({
+          
+            "id":"getEmailButton",
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
             bottom: "50px",
@@ -204,6 +207,8 @@ class HomePage extends Page {
                 console.log("++++++>" + PWA.getPWA().credentials.email);
                 console.log("++++++>" + s.email);
               	_this.setEmail(s.email);
+                document.getElementById("getUDIDButton").style.display="block";
+                document.getElementById("getEmailButton").style.display="none";
             }
         }));
 
