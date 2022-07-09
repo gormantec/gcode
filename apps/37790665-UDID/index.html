@@ -232,14 +232,14 @@ class HomePage extends Page {
             appearance: "list",
             bottom: "20px",
             onsignin: (s) => {
-                window.addEventListener('load', function() {
-                    alert("It's loaded!")
-                    if (s.email) localStorage.setItem('Email', s.email);
-                    if (s.name) localStorage.setItem('Name', s.name);
-                    _this.setEmail(s.email);
-                    document.getElementById("getUDIDButton").style.display = "block";
-                    document.getElementById("getEmailButton").style.display = "none";
-                });
+
+                alert("It's loaded!")
+                if (s.email) localStorage.setItem('Email', s.email);
+                if (s.name) localStorage.setItem('Name', s.name);
+                _this.setEmail(s.email);
+                document.getElementById("getUDIDButton").style.display = "block";
+                document.getElementById("getEmailButton").style.display = "none";
+
             }
         }));
 
@@ -285,20 +285,22 @@ if (aUDID) {
     localStorage.setItem('UDID', aUDID);
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
-    aUDID = localStorage.getItem('UDID');
-    let aEmail = localStorage.getItem('Email');
-    if (aUDID && aEmail) {
-        aHomePage.setUUID(aUDID);
-        aHomePage.setEmail(aEmail);
-        document.getElementById("getUDIDButton").style.display = "none";
-        document.getElementById("getEmailButton").style.display = "none";
-        document.getElementById("sendToGcodeButton").style.display = "block";
-    } else if (aUDID) {
-        aHomePage.setUUID(aUDID);
-        document.getElementById("getUDIDButton").style.display = "none";
-        document.getElementById("getEmailButton").style.display = "block";
-        document.getElementById("sendToGcodeButton").style.display = "none";
-    }
+    window.addEventListener('load', function() {
+        aUDID = localStorage.getItem('UDID');
+        let aEmail = localStorage.getItem('Email');
+        if (aUDID && aEmail) {
+            aHomePage.setUUID(aUDID);
+            aHomePage.setEmail(aEmail);
+            document.getElementById("getUDIDButton").style.display = "none";
+            document.getElementById("getEmailButton").style.display = "none";
+            document.getElementById("sendToGcodeButton").style.display = "block";
+        } else if (aUDID) {
+            aHomePage.setUUID(aUDID);
+            document.getElementById("getUDIDButton").style.display = "none";
+            document.getElementById("getEmailButton").style.display = "block";
+            document.getElementById("sendToGcodeButton").style.display = "none";
+        }
+    });
 }
 
 
