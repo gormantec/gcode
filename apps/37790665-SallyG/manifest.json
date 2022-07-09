@@ -1,0 +1,33 @@
+{
+  "name": "SallyG",
+  "short_name": "SallyG",
+  "theme_color": "#00FFCC",
+  "background_color": "#00FFCC",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "A gcode developed PWA app",
+  "scope": "/apps/37790665-SallyG/",
+  "permitted_urls": [],
+  "version": "1.0.0.1636634",
+  "icons": [
+    {
+      "src": "/apps/37790665-SallyG/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-SallyG/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-SallyG/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-SallyG/index.html"
+}
