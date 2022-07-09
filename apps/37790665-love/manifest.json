@@ -1,14 +1,14 @@
 {
   "name": "love",
   "short_name": "love",
-  "theme_color": "#005040",
-  "background_color": "#005040",
+  "theme_color": "#f20202",
+  "background_color": "#f20202",
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-love/",
   "permitted_urls": [],
-  "version": "1.0.0.1641170",
+  "version": "1.0.0.1641187",
   "icons": [
     {
       "src": "/apps/37790665-love/180x180.icon.png",
