@@ -665,6 +665,9 @@ class Div {
     get childrenCount() {
         return this.element.children.length;
     }
+    get children() {
+        return this.element.children;
+    }
 
     get style() {
         return this.element.style;
