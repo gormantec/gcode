@@ -215,7 +215,8 @@ class HomePage extends Page {
         this.firstChild.firstChild.children[1].innerText = aUDID;
     }
   	setEmail(email) {
-        this.firstChild.children[1].children[1].innerText = email;
+      	console.log(this.children);
+        this.firstChild.firstChild.children[1].innerText = email;
     }
 
 }
