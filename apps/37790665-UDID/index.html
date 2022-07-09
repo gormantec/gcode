@@ -214,7 +214,10 @@ class HomePage extends Page {
                 "innerText": "Send info to gcode",
                 "display": "none",
                 onclick: () => {
-                    window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID="+encodeURIComponent(localStorage.getItem('UDID'))+"&Email="+encodeURIComponent(localStorage.getItem('Email'));
+                  fetch("https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID="+encodeURIComponent(localStorage.getItem('UDID'))+"&Email="+encodeURIComponent(localStorage.getItem('Email')))
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+                	document.getElementById("sendToGcodeButton").style.display="none";
                 }
             })
         }));
