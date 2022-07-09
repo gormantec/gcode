@@ -194,13 +194,16 @@ class HomePage extends Page {
                 }
             })
         }));
+      	const _this=this;
         this.appendChild(new AuthButtons({
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
             bottom: "50px",
             onsignin: (s) => {
-                console.log("++++++>" + JSON.stringify(signin));
+                console.log("++++++>" + JSON.stringify(s));
                 console.log("++++++>" + PWA.getPWA().credentials.email);
+                console.log("++++++>" + s.email);
+              	_this.setEmail(s.email);
             }
         }));
 
@@ -210,6 +213,10 @@ class HomePage extends Page {
 
     setUUID(aUDID) {
         this.firstChild.firstChild.children[1].innerText = aUDID;
+    }
+  	setEmail(email) {
+      	console.log(this.firstChild.children);
+        this.element.children[1].firstChild.children[1].innerText = email;
     }
 
 }
