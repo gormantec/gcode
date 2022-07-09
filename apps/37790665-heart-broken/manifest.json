@@ -1,0 +1,33 @@
+{
+  "name": "heart broken",
+  "short_name": "heart broken",
+  "theme_color": "#f20202",
+  "background_color": "#f20202",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "A gcode developed PWA app",
+  "scope": "/apps/37790665-heart-broken/",
+  "permitted_urls": [],
+  "version": "1.0.0.1641239",
+  "icons": [
+    {
+      "src": "/apps/37790665-heart-broken/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-heart-broken/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-heart-broken/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-heart-broken/index.html"
+}
