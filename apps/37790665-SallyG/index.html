@@ -111,6 +111,10 @@ var aPWA = new PWA({
   primaryColor: "#00FFCC",
 });
 
+aPWA.floatingActionButton.onclick(function() {
+  aPWA.Alert("Hi!");
+});
+
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
