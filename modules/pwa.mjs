@@ -485,6 +485,7 @@ class Div {
         if (params && params.lineHeight) this.element.style.lineHeight = params.lineHeight;
         if (params && params.position) this.element.style.position = params.position;
         if (params && params.display) this.element.style.display = params.display;
+        if (params && params.zIndex) this.element.style.zIndex = params.zIndex;
         if (params && params.src) try {this.element.setAttribute("src", params.src);}catch(e){};
         if (params && params.inputType) this.element.setAttribute("type", params.inputType);
         if (params && params.inputStep) this.element.setAttribute("step", params.inputStep);
