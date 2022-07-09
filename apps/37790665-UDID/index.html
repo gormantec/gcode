@@ -176,10 +176,10 @@ class HomePage extends Page {
             "display": "flex",
             "justifyContent": "center",
             child: new Div({
-              	"id":"getUDIDButton",
+                "id": "getUDIDButton",
                 "position": "absolute",
                 "bottom": "35px",
-                "height": "32px",
+                "height": "42px",
                 "width": "200px",
                 borderRadius: "8px",
                 paddingTop: "10px",
@@ -187,6 +187,7 @@ class HomePage extends Page {
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
+                "zIndex": "10001",
                 "textAlign": "center",
                 "innerText": "Get UDID",
                 "display": "none",
@@ -199,7 +200,7 @@ class HomePage extends Page {
             "display": "flex",
             "justifyContent": "center",
             child: new Div({
-              	"id":"sendToGcodeButton",
+                "id": "sendToGcodeButton",
                 "position": "absolute",
                 "bottom": "35px",
                 "height": "32px",
@@ -210,30 +211,33 @@ class HomePage extends Page {
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
+                "zIndex": "10001",
                 "textAlign": "center",
                 "innerText": "Send info to gcode",
                 "display": "none",
                 onclick: () => {
-                  fetch("https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID="+encodeURIComponent(localStorage.getItem('UDID'))+"&Email="+encodeURIComponent(localStorage.getItem('Email')))
-                    .then(response => response.json())
-                    .then(data => console.log(data));
-                	document.getElementById("sendToGcodeButton").style.display="none";
+                    console.log("click");
+                    fetch("https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid?UDID=" + encodeURIComponent(localStorage.getItem('UDID')) + "&Email=" + encodeURIComponent(localStorage.getItem('Email')))
+                        .then(response => response.json())
+                        .then(data => console.log(data));
+                    document.getElementById("sendToGcodeButton").style.display = "none";
                 }
             })
         }));
-      	const _this=this;
+        const _this = this;
         this.appendChild(new AuthButtons({
-          
-            "id":"getEmailButton",
+
+            "id": "getEmailButton",
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
             bottom: "20px",
             onsignin: (s) => {
-    			if(s.email)localStorage.setItem('Email', s.email);
-    			if(s.name)localStorage.setItem('Name', s.name);
-              	_this.setEmail(s.email);
-                document.getElementById("getUDIDButton").style.display="block";
-                document.getElementById("getEmailButton").style.display="none";
+                if (s.email) localStorage.setItem('Email', s.email);
+                if (s.name) localStorage.setItem('Name', s.name);
+                _this.setEmail(s.email);
+                document.getElementById("getUDIDButton").style.display = "block";
+                document.getElementById("getEmailButton").style.display = "none";
+
             }
         }));
 
@@ -244,8 +248,8 @@ class HomePage extends Page {
     setUUID(aUDID) {
         this.firstChild.firstChild.children[1].innerText = aUDID;
     }
-  	setEmail(email) {
-      	console.log(this.firstChild.children);
+    setEmail(email) {
+        console.log(this.firstChild.children);
         this.element.children[1].firstChild.children[1].innerText = email;
     }
 
@@ -279,25 +283,40 @@ if (aUDID) {
     localStorage.setItem('UDID', aUDID);
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
-    aUDID = localStorage.getItem('UDID');
-    let aEmail = localStorage.getItem('Email');
-    if (aUDID && aEmail) {
-        aHomePage.setUUID(aUDID);
-        aHomePage.setEmail(aEmail);
-        document.getElementById("getUDIDButton").style.display="none";
-        document.getElementById("getEmailButton").style.display="none";
-        document.getElementById("sendToGcodeButton").style.display="block";
-    }
-  else if (aUDID) {
-      aHomePage.setUUID(aUDID);
-      document.getElementById("getUDIDButton").style.display="none";
-      document.getElementById("getEmailButton").style.display="block";
-      document.getElementById("sendToGcodeButton").style.display="none";
-   }
+    window.addEventListener('load', function() {
+        aUDID = localStorage.getItem('UDID');
+        let aEmail = localStorage.getItem('Email');
+        if (aUDID && aEmail) {
+          	console.log("Email and UDID exist");
+            aHomePage.setUUID(aUDID);
+            aHomePage.setEmail(aEmail);
+            document.getElementById("getUDIDButton").style.display = "none";
+            document.getElementById("getEmailButton").style.display = "none";
+            document.getElementById("sendToGcodeButton").style.display = "block";
+        } else if (aUDID) {
+          
+          	console.log("Only UDID exist");
+            aHomePage.setUUID(aUDID);
+            document.getElementById("getUDIDButton").style.display = "none";
+            document.getElementById("getEmailButton").style.display = "block";
+            document.getElementById("sendToGcodeButton").style.display = "none";
+        }
+        else if (aEmail) {
+          	console.log("Only aEmail exist");
+            aHomePage.setEmail(aEmail);
+            document.getElementById("getUDIDButton").style.display = "block";
+            document.getElementById("getEmailButton").style.display = "none";
+            document.getElementById("sendToGcodeButton").style.display = "none";
+        }
+        else  {
+          	console.log("Neither UDID or aEmail exist");
+            document.getElementById("getUDIDButton").style.display = "none";
+            document.getElementById("getEmailButton").style.display = "block";
+            document.getElementById("sendToGcodeButton").style.display = "none";
+        }
+    });
 }
 
-
-console.log(document.cookie);
 
 function getCookie(cname) {
     let name = cname + "=";
