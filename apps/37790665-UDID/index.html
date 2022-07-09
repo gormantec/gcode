@@ -290,29 +290,41 @@ if (aUDID) {
           	console.log("Email and UDID exist");
             aHomePage.setUUID(aUDID);
             aHomePage.setEmail(aEmail);
-            document.getElementById("getUDIDButton").style.display = "none";
-            document.getElementById("getEmailButton").style.display = "none";
-            document.getElementById("sendToGcodeButton").style.display = "block";
+          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
+          	aHomePage.children[5].firstChild.style.display = "none";//getEmailButton
+          	aHomePage.children[4].firstChild.style.display = "block";//sendToGcodeButton
+           // document.getElementById("getUDIDButton").style.display = "none";
+            //document.getElementById("getEmailButton").style.display = "none";
+            //document.getElementById("sendToGcodeButton").style.display = "block";
         } else if (aUDID) {
           
           	console.log("Only UDID exist");
             aHomePage.setUUID(aUDID);
-            document.getElementById("getUDIDButton").style.display = "none";
-            document.getElementById("getEmailButton").style.display = "block";
-            document.getElementById("sendToGcodeButton").style.display = "none";
+          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
+          	aHomePage.children[5].firstChild.style.display = "block";//getEmailButton
+          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            //document.getElementById("getUDIDButton").style.display = "none";
+            //document.getElementById("getEmailButton").style.display = "block";
+            //document.getElementById("sendToGcodeButton").style.display = "none";
         }
         else if (aEmail) {
           	console.log("Only aEmail exist");
             aHomePage.setEmail(aEmail);
-            document.getElementById("getUDIDButton").style.display = "block";
-            document.getElementById("getEmailButton").style.display = "none";
-            document.getElementById("sendToGcodeButton").style.display = "none";
+          	aHomePage.children[3].firstChild.style.display = "block";//getUDIDButton
+          	aHomePage.children[5].firstChild.style.display = "none";//getEmailButton
+          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            //document.getElementById("getUDIDButton").style.display = "block";
+            //document.getElementById("getEmailButton").style.display = "none";
+            //document.getElementById("sendToGcodeButton").style.display = "none";
         }
         else  {
           	console.log("Neither UDID or aEmail exist");
-            document.getElementById("getUDIDButton").style.display = "none";
-            document.getElementById("getEmailButton").style.display = "block";
-            document.getElementById("sendToGcodeButton").style.display = "none";
+          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
+          	aHomePage.children[5].firstChild.style.display = "block";//getEmailButton
+          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            //document.getElementById("getUDIDButton").style.display = "none";
+            //document.getElementById("getEmailButton").style.display = "block";
+            //document.getElementById("sendToGcodeButton").style.display = "none";
         }
     });
 }
