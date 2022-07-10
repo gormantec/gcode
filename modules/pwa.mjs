@@ -734,7 +734,7 @@ class Page extends Div {
         if (params.navigateBackPage instanceof Page) {
             this.navigateBackPage = params.navigateBackPage;
         }
-        else if (typeof params.navigateBackPage == "string" && params.navigateBackPage.trim().substring(0, 5) == "page(") {
+        else if (typeof params.navigateBackPage == "string") {
 
             this.navigateBackPage = params.navigateBackPage;
         }
