@@ -286,7 +286,7 @@ class PWA {
         this.addMeta(win.document, "apple-mobile-web-app-title", this.title);
         this.addMeta(win.document, "apple-mobile-web-app-capable", "yes");
         this.addMeta(win.document, "apple-mobile-web-app-status-bar-style", "black-translucent");
-        this.addMeta(win.document, "viewport", "viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
+        this.addMeta(win.document, "viewport", "viewport-fit=cover, user-scalable=no, width=375px, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0");
         this.addMeta(win.document, "msapplication-TileColor", this.primaryColor);
         this.addMeta(win.document, "theme-color", this.primaryColor);
 
