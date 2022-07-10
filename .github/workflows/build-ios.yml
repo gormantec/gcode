@@ -156,7 +156,7 @@ jobs:
           sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/  
           ls -latr ./apps/$APP_NAME/ios
-          zip -r ./apps/$APP_NAME/ios/$APP_NAME.xcarchive.zip ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
+          zip -rq ./apps/$APP_NAME/ios/$APP_NAME.xcarchive.zip ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
           rm -rf ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
           echo "-------------------------------"
           ls -latr ./apps/$APP_NAME/ios
