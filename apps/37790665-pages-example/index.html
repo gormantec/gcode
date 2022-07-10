@@ -104,7 +104,8 @@ class HomePage extends Page {
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(192x192.icon.png)",
           "innerHTML":"<center><h1>First Page</h1></center>",
-          "onclick": ()=>{PWA.getPWA().setPage(aSecondPage);}
+          "onclick": ()=>{PWA.getPWA().setPage(aSecondPage);},
+          "floatingActionButtonPage":aSecondPage
       });
   }
 
@@ -119,7 +120,23 @@ class SecondPage extends Page {
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(192x192.icon.png)",
         	"navigateBackPage":aHomePage,
-        	"innerHTML":"<center><h1>Second Page</h1></center>"
+        	"innerHTML":"<center><h1>Second Page</h1></center>",
+          "floatingActionButtonPage":aThirdPage
+      });
+  }
+}
+class ThirdPage extends Page {
+  constructor() {
+      super({
+          "color": "#a2a2a2",
+          "backgroundColor": "black",
+          "backgroundPosition": "center",
+          "backgroundSize": "50px",
+          "backgroundRepeat": "no-repeat",
+          "backgroundImage": "url(192x192.icon.png)",
+        	"navigateBackPage":aSecondPage,
+        	"innerHTML":"<center><h1>Third Page</h1></center>",
+        	"hideFloatingActionButton:"true"
       });
   }
 }
@@ -127,6 +144,7 @@ class SecondPage extends Page {
 
 var aHomePage = new HomePage();
 var aSecondPage = new SecondPage();
+var aThirdPage = new ThirdPage();
 var aPWA = new PWA({
   title: "Pages Example",
   footer: "https://www.gormantec.com",
