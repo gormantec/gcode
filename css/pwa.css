@@ -338,12 +338,12 @@ div.pwapage div.pwadiv{
   {
       #pwaheader{
            height: 35px;
-           padding-top:0px;
+           padding-top:env(safe-area-inset-bottom,0px);
       }
       
     #pwabody{
         top:35px;
-        margin-top:0px;
+        margin-top: env(safe-area-inset-bottom,0px);
       }
   }
 
