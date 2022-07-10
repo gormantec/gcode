@@ -551,9 +551,9 @@ class Div {
     onclick(afunc) {
         let _this = this;
         if (afunc && {}.toString.call(afunc) === '[object Function]') {
-            //this.element.onclick = afunc;
-
-            this.element.addEventListener("click", (e) => { e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e.thisDiv = _this; e.parentDiv = _this.parentDiv; afunc(e); });
+            if(this.myOnClickFunction)this.element.removeEventListener("click",this.myOnClickFunction);
+            this.myOnClickFunction = (e) => { e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e.thisDiv = _this; e.parentDiv = _this.parentDiv; afunc(e); };
+            this.element.addEventListener("click", this.myOnClickFunction);
         }
 
     }
