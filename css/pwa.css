@@ -244,7 +244,6 @@ div.pwapage div.pwadiv{
     bottom: 40px;
     background-color: #FFFFFF;
     overflow: hidden;
-    padding-top: env(safe-area-inset-bottom, 20px);
 }
 
 .pwapage{
