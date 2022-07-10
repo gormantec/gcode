@@ -209,6 +209,11 @@ div.pwapage div.pwadiv{
     overflow: hidden;
     padding-top: env(safe-area-inset-bottom);
 }
+
+.pwadiv.mockFrame.iphoneX #pwaheader{
+    padding-top: 20px;
+}
+
 #pwaheaderback{
     position: absolute;
     left: 2px;
@@ -246,6 +251,10 @@ div.pwapage div.pwadiv{
     background-color: #FFFFFF;
     overflow: hidden;
     margin-top: env(safe-area-inset-bottom);
+}
+
+.pwadiv.mockFrame.iphoneX #pwabody{
+    padding-top: 20px;
 }
 
 .pwapage{
