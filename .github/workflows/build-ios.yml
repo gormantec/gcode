@@ -137,7 +137,7 @@ jobs:
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
           BASE_DIR_VAR=$(pwd)
           echo "APP_NAME $APP_NAME"
