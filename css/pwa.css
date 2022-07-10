@@ -207,7 +207,7 @@ div.pwapage div.pwadiv{
     background-color: var(--primaryColor);
     color: var(--primaryColorText);
     overflow: hidden;
-    padding-top: env(safe-area-inset-bottom, 20px);
+    padding-top: env(safe-area-inset-bottom);
 }
 #pwaheaderback{
     position: absolute;
@@ -245,7 +245,7 @@ div.pwapage div.pwadiv{
     bottom: 40px;
     background-color: #FFFFFF;
     overflow: hidden;
-    margin-top: env(safe-area-inset-bottom, 20px);
+    margin-top: env(safe-area-inset-bottom);
 }
 
 .pwapage{
