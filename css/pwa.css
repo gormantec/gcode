@@ -201,12 +201,13 @@ div.pwapage div.pwadiv{
     left: 0px;
     right: 0px;
     top: 0px;
-    height: 70px;
+    height: 35px;
     padding:0px;
     margin:0px;
     background-color: var(--primaryColor);
     color: var(--primaryColorText);
     overflow: hidden;
+    padding-top: env(safe-area-inset-bottom, 20px);
 }
 #pwaheaderback{
     position: absolute;
@@ -240,10 +241,11 @@ div.pwapage div.pwadiv{
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 70px;
+    top: 35px;
     bottom: 40px;
     background-color: #FFFFFF;
     overflow: hidden;
+    padding-top: env(safe-area-inset-bottom, 20px);
 }
 
 .pwapage{
