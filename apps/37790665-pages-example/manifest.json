@@ -1,14 +1,14 @@
 {
-  "name": "example",
-  "short_name": "example",
+  "name": "pages example",
+  "short_name": "pages example",
   "theme_color": "#0000FF",
   "background_color": "#0000FF",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "An example gcode app showing pages.",
   "scope": "/apps/37790665-pages-example/",
   "permitted_urls": [],
-  "version": "1.0.0.1643336",
+  "version": "1.0.0.1643613",
   "icons": [
     {
       "src": "/apps/37790665-pages-example/180x180.icon.png",
