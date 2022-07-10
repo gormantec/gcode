@@ -104,7 +104,7 @@ class HomePage extends Page {
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(192x192.icon.png)",
           "innerHTML":"<center><h1>First Page</h1></center>",
-          "onclick": ()=>{PWA.getPWA().setPage("SecondPage");},
+          "onclick": ()=>PWA.getPWA().setPage("SecondPage"),
           "floatingActionButtonPage":Page.getPage("SecondPage")
       });
   }
@@ -119,8 +119,8 @@ class SecondPage extends Page {
           "backgroundSize": "200px",
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(192x192.icon.png)",
-        	"navigateBackPage":Page.getPage("HomePage"),
-        	"innerHTML":"<center><h1>Second Page</h1></center>",
+          "navigateBackPage":Page.getPage("HomePage"),
+          "innerHTML":"<center><h1>Second Page</h1></center>",
           "floatingActionButtonPage":Page.getPage("ThirdPage")
       });
   }
@@ -134,9 +134,9 @@ class ThirdPage extends Page {
           "backgroundSize": "50px",
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(192x192.icon.png)",
-        	"navigateBackPage":Page.getPage("SecondPage"),
-        	"innerHTML":"<center><h1>Third Page</h1></center>",
-        	"hideFloatingActionButton":"true"
+          "navigateBackPage":Page.getPage("SecondPage"),
+          "innerHTML":"<center><h1>Third Page</h1></center>",
+          "hideFloatingActionButton":"true"
       });
   }
 }
