@@ -72,7 +72,7 @@ jobs:
           node -v
           npm install node-fetch
           pwd
-          mkdir build 
+          mkdir -p build 
           cd build
           pwd
           ls
