@@ -745,6 +745,10 @@ class Page extends Div {
             this.floatingActionButtonPage = params.floatingActionButtonPage;
 
         }
+        else
+        {
+            console.log("params.floatingActionButtonPage= null :: "+params.floatingActionButtonPage);    
+        }
         if (params && params.hideFloatingActionButton && params.hideFloatingActionButton == "true") this.hideFloatingActionButtonFlag = "true";
         if (params && params.hideFooter && params.hideFooter == "true") this.hideFooterFlag = "true";
     }
