@@ -104,7 +104,7 @@ class HomePage extends Page {
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(192x192.icon.png)",
           "innerHTML":"<center><h1>First Page</h1></center>",
-          "onclick": ()=>{PWA.getPWA().setPage(Page.getPage("SecondPage"));},
+          "onclick": ()=>{PWA.getPWA().setPage("SecondPage");},
           "floatingActionButtonPage":Page.getPage("SecondPage")
       });
   }
