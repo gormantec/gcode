@@ -201,7 +201,7 @@ div.pwapage div.pwadiv{
     left: 0px;
     right: 0px;
     top: 0px;
-    height: 35px;
+    height: 45px;
     padding:0px;
     margin:0px;
     background-color: var(--primaryColor);
@@ -241,11 +241,11 @@ div.pwapage div.pwadiv{
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 35px;
+    top: 45px;
     bottom: 40px;
     background-color: #FFFFFF;
     overflow: hidden;
-    padding-top: env(safe-area-inset-bottom, 20px);
+    margin-top: env(safe-area-inset-bottom, 20px);
 }
 
 .pwapage{
@@ -329,10 +329,12 @@ div.pwapage div.pwadiv{
   {
       #pwaheader{
            height: 45px;
+           padding-top:0px;
       }
       
     #pwabody{
         top:45px;
+        margin-top:0px;
       }
   }
 
