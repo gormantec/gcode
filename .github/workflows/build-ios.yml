@@ -166,7 +166,7 @@ jobs:
           git commit -m "Add changes"
 
       - name: Push changes # push the output folder to your repo
-        timeout-minutes: 10
+        timeout-minutes: 20
         uses: ad-m/github-push-action@master
         with:
           branch: master #ignore if your branch is master
