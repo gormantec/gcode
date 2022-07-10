@@ -5,10 +5,10 @@
   "background_color": "#00FFCC",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "An app for Sal!",
   "scope": "/apps/37790665-SallyG/",
   "permitted_urls": [],
-  "version": "1.0.0.1643574",
+  "version": "1.0.0.1643587",
   "icons": [
     {
       "src": "/apps/37790665-SallyG/180x180.icon.png",
