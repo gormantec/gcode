@@ -8,7 +8,7 @@
   "description": "An example gcode app showing pages.",
   "scope": "/apps/37790665-pages-example/",
   "permitted_urls": [],
-  "version": "1.0.0.1643887",
+  "version": "1.0.0.1643889",
   "icons": [
     {
       "src": "/apps/37790665-pages-example/180x180.icon.png",
