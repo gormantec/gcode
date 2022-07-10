@@ -5,10 +5,10 @@
   "background_color": "#f20202",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "A sample app from gcode.",
   "scope": "/apps/37790665-heart-broken/",
   "permitted_urls": [],
-  "version": "1.0.0.1643578",
+  "version": "1.0.0.1643592",
   "icons": [
     {
       "src": "/apps/37790665-heart-broken/180x180.icon.png",
