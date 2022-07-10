@@ -137,7 +137,7 @@ jobs:
           cd $OUT_DIR_VAR
           ls -latr
       - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
-        timeout-minutes: 10
+        timeout-minutes: 10 #zip -rq ./apps/$APP_NAME/ios/$APP_NAME.xcarchive.zip ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
         run: |
           BASE_DIR_VAR=$(pwd)
           echo "APP_NAME $APP_NAME"
@@ -156,7 +156,6 @@ jobs:
           sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/  
           ls -latr ./apps/$APP_NAME/ios
-          zip -rq ./apps/$APP_NAME/ios/$APP_NAME.xcarchive.zip ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
           rm -rf ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
           echo "-------------------------------"
           ls -latr ./apps/$APP_NAME/ios
