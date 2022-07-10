@@ -4,7 +4,7 @@ const PRECACHE_URLS = [
   '/apps/37790665-heart-broken/index.html',
   '/apps/37790665-heart-broken/index.html?mockFrame=iphoneX',
   '/apps/37790665-heart-broken/icon.png',
-  '/apps/37790665-heart-broken/splash.png',
+  '/apps/37790665-heart-broken/splash.icon.png',
   '/apps/37790665-heart-broken/180x180.icon.png',
   '/apps/37790665-heart-broken/192x192.icon.png',
   '/apps/37790665-heart-broken/512x512.icon.png',
