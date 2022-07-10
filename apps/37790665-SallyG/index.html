@@ -77,7 +77,7 @@ if (window.opener && window.opener !== window) {
   created: 2022-6-6T18:39:54
   appName: SallyG
   splashSize: 300px
- splash: git://gormantec:gcode_repo/sally.svg
+  splash: git://gormantec:gcode_repo/sally.svg
   mockFrame: iphoneX
   splashBackgroundColor: #00FFCC
   splashDuration: 2000
@@ -86,39 +86,27 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-try { Page.clearPages(); } catch (e) {}
+import {PWA,Page,Div} from 'https://gcode.com.au/modules/pwa.mjs';
+try {Page.clearPages();} catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
-  constructor() {
-      super({
-          "color": "black",
-          "backgroundColor": "#323232",
-          "backgroundPosition": "center",
-          "backgroundSize": "100px",
-          "backgroundRepeat": "no-repeat",
-          "backgroundImage": "url(/apps/37790665-SallyG/192x192.icon.png)"
-      });
-  }
-
+    constructor() {
+        super({
+            "color": "black",
+            "backgroundColor": "#323232",
+            "backgroundPosition": "center",
+            "backgroundSize": "100px",
+            "backgroundRepeat": "no-repeat",
+            "backgroundImage": "url(/apps/37790665-SallyG/192x192.icon.png)"
+        });
+    }
 }
-
 /*---------------------------------------------------------------------------*/
-var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+var myDiv = new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
 var aHomePage = new HomePage();
-var aPWA = new PWA({
-  title: "Sally Gorman Pty Ltd",
-  footer: "https://www.gormantec.com",
-  primaryColor: "#00FFCC",
-});
-
-aPWA.floatingActionButton.onclick(function() {
-  console.log("xxx");
-  aPWA.alert("<div style=\"color:#aaaaaa;font-size:24px\">I hope you are having a great day!!!<br>Love Craig</div>");
-});
-
+var aPWA = new PWA({title: "Sally Gorman Pty Ltd",footer: "https://www.gormantec.com",primaryColor: "#00FFCC"});
+aPWA.floatingActionButton.onclick(function() {aPWA.alert("<div style=\"color:#aaaaaa;font-size:24px\">I hope you are having a great day!!!<br>Love Craig</div>");});
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
