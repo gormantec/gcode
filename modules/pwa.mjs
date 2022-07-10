@@ -741,7 +741,7 @@ class Page extends Div {
             console.log("Error:" + params.navigateBackPage);
         }
         if (params && params.floatingActionButtonPage){
-            console.log("set floatingActionButtonPage="+params.floatingActionButtonPage);
+            console.log("set floatingActionButtonPage="+params.floatingActionButtonPage);    
             this.floatingActionButtonPage = params.floatingActionButtonPage;
 
         }
