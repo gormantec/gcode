@@ -158,7 +158,7 @@ class PWA {
         if (aPage.floatingActionButtonPage) {
             console.log("floatingActionButtonPage:" + aPage.floatingActionButtonPage);
             this.floatingActionButton.onclick(function() {
-                aPWA.setPage(aPage.floatingActionButtonPage);
+                PWA.getPWA().setPage(aPage.floatingActionButtonPage);
               });
         }
         if (aPage.hideFloatingActionButtonFlag == "true") this.hideFloatingActionButton();
