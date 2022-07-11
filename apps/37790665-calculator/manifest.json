@@ -8,7 +8,7 @@
   "description": "A simple calculator pWA app.",
   "scope": "/apps/37790665-calculator/",
   "permitted_urls": [],
-  "version": "1.0.0.1652930",
+  "version": "1.0.0.1652953",
   "icons": [
     {
       "src": "/apps/37790665-calculator/180x180.icon.png",
