@@ -42,9 +42,9 @@ function showAddToHomeScreen() {
  });
 function showIosInstall() {
   let iosPrompt = document.querySelector(".ios-prompt");
-  iosPrompt.style.display = "block";
-  iosPrompt.addEventListener("click", () => {
-    iosPrompt.style.display = "none";
+  if(iosPrompt)iosPrompt.style.display = "block";
+  if(iosPrompt)iosPrompt.addEventListener("click", () => {
+  if(iosPrompt)iosPrompt.style.display = "none";
   });
 }
 
@@ -81,6 +81,7 @@ if (window.opener && window.opener !== window) {
   splashDuration: 2000
   splashSize: 200px
   description: An app to colaborate with freinds on trips to the river.
+  permittedUrls: ["connect.facebook.net","cdn.jsdelivr.net","www.facebook.com","m.facebook.com","graph.facebook.com","rpc.testnet.near.org","fonts.gstatic.com","sdk.amazonaws.com","maps.googleapis.com","fonts.googleapis.com","maps.gstatic.com"]
   
   
   

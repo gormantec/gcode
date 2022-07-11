@@ -4,7 +4,7 @@ const PRECACHE_URLS = [
   '/apps/37790665-boatcrew/index.html',
   '/apps/37790665-boatcrew/index.html?mockFrame=iphoneX',
   '/apps/37790665-boatcrew/icon.png',
-  '/apps/37790665-boatcrew/splash.png',
+  '/apps/37790665-boatcrew/splash.icon.png',
   '/apps/37790665-boatcrew/180x180.icon.png',
   '/apps/37790665-boatcrew/192x192.icon.png',
   '/apps/37790665-boatcrew/512x512.icon.png',
