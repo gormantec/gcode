@@ -43,9 +43,9 @@ function showAddToHomeScreen() {
  });
 function showIosInstall() {
   let iosPrompt = document.querySelector(".ios-prompt");
-  iosPrompt.style.display = "block";
-  iosPrompt.addEventListener("click", () => {
-    iosPrompt.style.display = "none";
+  if(iosPrompt)iosPrompt.style.display = "block";
+  if(iosPrompt)iosPrompt.addEventListener("click", () => {
+  if(iosPrompt)iosPrompt.style.display = "none";
   });
 }
 
@@ -85,7 +85,7 @@ if (window.opener && window.opener !== window) {
               This is an example of a new line.
               This is another new line 
     
-    
+     
 
 
 */

@@ -4,7 +4,7 @@ const PRECACHE_URLS = [
   '/apps/37790665-gps/index.html',
   '/apps/37790665-gps/index.html?mockFrame=iphoneX',
   '/apps/37790665-gps/icon.png',
-  '/apps/37790665-gps/splash.png',
+  '/apps/37790665-gps/splash.icon.png',
   '/apps/37790665-gps/180x180.icon.png',
   '/apps/37790665-gps/192x192.icon.png',
   '/apps/37790665-gps/512x512.icon.png',
