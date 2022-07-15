@@ -126,8 +126,8 @@ class PWA {
 
         this.pwaHeader = new Div({
             id: "pwaheader", tagName: "header", children: [
-                this.navigateBackButton,
-                this.pwaHeaderTitle
+                this.pwaHeaderTitle,
+                this.navigateBackButton
             ]
         });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
