@@ -72,6 +72,8 @@ class PWA {
         this.showNavigateBackButton();
     }
     showNavigateBackButton() {
+        console.log("showNavigateBackButton");
+        console.log(this);
         this.navigateBackButton.style.display = "";
         this.pwaHeader.style.paddingLeft="40px";
     }
