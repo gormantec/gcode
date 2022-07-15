@@ -150,5 +150,6 @@ export class Icon extends Div {
 export const Icons = {
     battery_full: "battery_full",
     star: "star",
-  	star_outline: "star_outline"
+  	star_outline: "star_outline",
+  	"flag":"flag"
 }
