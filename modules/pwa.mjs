@@ -16,6 +16,7 @@ class PWA {
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 45;
+        if(params.headerBackgroundImage)this.headerBackgroundImage = params.headerBackgroundImage;
         this.footerHeight = params.footerHeight || 40;
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
         this.headerFontSize = params.headerFontSize || 24;
@@ -127,6 +128,7 @@ class PWA {
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
         if (this.headerHeight) this.pwaHeader.style.height = this.headerHeight;
+        if (this.headerBackgroundImage) this.pwaHeader.style.backgroundImage = this.headerBackgroundImage;
         if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
         if (!this.navigateBackPage) this.navigateBackButton.style.display = "none";
