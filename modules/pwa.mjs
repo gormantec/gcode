@@ -73,9 +73,11 @@ class PWA {
     }
     showNavigateBackButton() {
         this.navigateBackButton.style.display = "";
+        this.pwaHeader.style.paddingLeft="40px";
     }
     hideNavigateBackButton() {
         this.navigateBackButton.style.display = "none";
+        this.pwaHeader.style.paddingLeft="8px";
     }
 
     getTextColor(backColor) {
