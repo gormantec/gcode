@@ -81,6 +81,7 @@ if (window.opener && window.opener !== window) {
   mockFrame: iphoneX
   splashBackgroundColor: #FA00AB
   splashDuration: 2000
+  gitImages: ["git://gormantec:gcode_repo/BabyDazeTitle400.png.svg"]
 
 */
 
@@ -106,18 +107,21 @@ class HomePage extends Page {
                 "padding": "8px",
                 "children": [
                     new ListTile({
+                      	color:"red",
                         title: new Text("Title: Battery Full"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
                         trailing: new Icon(Icons.star)
                     }),
                     new ListTile({
+                      	color:"green",
                         title: new Text("Title: Battery Full"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.flag),
                         trailing: new Icon(Icons.star)
                     }),
                     new ListTile({
+                      	color:"blue",
                         title: new Text("Title: Battery Full"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
@@ -128,78 +132,6 @@ class HomePage extends Page {
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
                         trailing: new Icon(Icons.star_outline)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
-                    }),
-                    new ListTile({
-                        title: new Text("Title: Battery Full"),
-                        subtitle: new Text("Subtitle: The battery is full."),
-                        leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
                     }),
                 ],
             })
@@ -216,6 +148,8 @@ var myDiv = new Div({
 var aHomePage = new HomePage();
 var aPWA = new PWA({
     title: "Baby Daze",
+  	titleHeight: "80px",
+  	titleBackgronfImage: "url(BabyDazeTitle400.png.svg)",
     footer: "https://www.gormantec.com",
     primaryColor: "#FA00AB",
 });
