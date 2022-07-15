@@ -618,16 +618,27 @@ class Div {
         this.parentDiv = parentDiv;
     }
     async getParentStyle(style) {
-        if(this.parentDiv && this.parentDiv.style && this.parentDiv.style[style])
-        {
-            return this.parentDiv.style[style];
+        let start = Date.now();
+        let timeout = 5000; 
+        let _this=this;
+        return new Promise(waitForParent); 
+        function waitForParent(resolve, reject) {
+            if (_this.parentDiv){
+                if(_this.parentDiv && _this.parentDiv.style && _this.parentDiv.style[style])
+                {
+                    resolve(_this.parentDiv.style[style]);
+                }
+                else if(this.parentDiv){
+                    resolve(_this.parentDiv.getParentStyle(style));
+                }
+                else{
+                    resolve(null);
+                }
+            }
+            else if (timeout && (Date.now() - start) >= timeout)resolve(null);
+            else setTimeout(waitForParent.bind(this, resolve, reject), 30);
         }
-        else if(this.parentDiv){
-            return this.parentDiv.getParentStyle(style);
-        }
-        else{
-            return "unset";
-        }
+
     }
 
     appendChild(params) {
