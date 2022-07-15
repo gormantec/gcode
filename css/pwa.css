@@ -232,8 +232,10 @@ div.pwapage div.pwadiv{
 }
 #pwaheadertitle{
     position: absolute;
-    left: 40px;
-    right: 5px;
+    left: 0px;
+    padding-left: 40px;
+    padding-top: 8px;
+    right: 0px;
     bottom: 1px;
     height: 29px;
     top: unset;
