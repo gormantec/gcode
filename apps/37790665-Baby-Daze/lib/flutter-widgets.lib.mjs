@@ -65,6 +65,7 @@ export class ListView extends Div {
             console.log("x");
             this.appendChild(new Div({
                 "position": "relative",
+				"padding" : "8px",
                 height: this.divChildren[i].style.height,
                 child: this.divChildren[i]
             }));
@@ -89,7 +90,6 @@ export class ListTile extends Div {
     constructor(params) {
         super(params);
         this.style.height = "40px";
-        this.style.padding = "8px";
         if (params.title) {
             this.appendChild(new Container({
                 height: "18px",
@@ -110,8 +110,8 @@ export class ListTile extends Div {
         }
         if (params.leading) {
             this.appendChild(new Container({
-                height: "30px",
-                fontSize: "30px",
+                height: "25px",
+                fontSize: "24px",
                 top: "0px",
                 left: "0px",
                 width: "40px",
@@ -121,7 +121,7 @@ export class ListTile extends Div {
         if (params.trailing) {
             this.appendChild(new Container({
                 height: "35px",
-                fontSize: "30px",
+                fontSize: "24px",
                 top: "0px",
                 right: "0px",
                 width: "40px",
