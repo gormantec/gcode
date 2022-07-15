@@ -128,7 +128,11 @@ class PWA {
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
         if (this.headerHeight) this.pwaHeader.style.height = this.headerHeight;
-        if (this.headerBackgroundImage) this.pwaHeader.style.backgroundImage = this.headerBackgroundImage;
+        if (this.headerBackgroundImage){
+            this.pwaHeader.style.backgroundImage = this.headerBackgroundImage;
+            this.pwaHeader.style.backgroundSize = "100%";
+            this.pwaHeader.style.backgroundRepeat = "no-repeat";
+        }
         if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
         if (!this.navigateBackPage) this.navigateBackButton.style.display = "none";
