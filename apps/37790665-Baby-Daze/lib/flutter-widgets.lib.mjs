@@ -49,7 +49,7 @@ export class Text extends Div {
     constructor(_text) {
         super({
                 "classNameOverride": true,
-          		"className":"span",
+          		"tagName":"span",
                 "innerText": _text
         });
     }
@@ -90,28 +90,47 @@ export class ListTile extends Div {
         super(params);
       	this.style.height="40px";
         if(params.title){
-          params.title.style.height="20px";
-          params.title.style.fontSize="18px";
+          params.title.style.height="18px";
+          params.title.style.fontSize="16px";
           params.title.style.top="0px";
-          params.title.style.left="0px";
+          params.title.style.left="42px";
           this.appendChild(params.title);
     	}
         if(params.subtitle){
-          params.subtitle.style.height="16px";
-          params.subtitle.style.fontSize="14px";
+          params.subtitle.style.height="12px";
+          params.subtitle.style.fontSize="10px";
           params.subtitle.style.top="20px";
-          params.subtitle.style.left="0px";
+          params.subtitle.style.left="42px";
           this.appendChild(params.subtitle);
         }
-        if(params.leading)this.appendChild(params.leading);
-        if(params.trailing)this.appendChild(params.trailing);
+        if(params.leading){
+          
+          params.subtitle.style.height="40px";
+          params.subtitle.style.fontSize="38px";
+          params.subtitle.style.top="0px";
+          params.subtitle.style.left="0px";
+          this.appendChild(params.leading);
+        }
+        if(params.trailing){
+          params.subtitle.style.height="40px";
+          params.subtitle.style.fontSize="38px";
+          params.subtitle.style.top="0px";
+          params.subtitle.style.right="0px";
+          this.appendChild(params.trailing);
+        }
     }
 }
 export class Icon extends Div {
-    constructor(params) {
-        super(params);
+    constructor(icon) {
+        super();
+        this.setChild(new Div({
+                tagName: "i",
+                class: "material-icons",
+                classNameOverride: true,
+                innerText: icon
+            }));
     }}
 export const Icons = {
-  battery_full:"",
-  star:""
+  battery_full:"battery_full",
+  star:"star"
 }
