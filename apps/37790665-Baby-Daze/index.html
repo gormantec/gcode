@@ -120,34 +120,39 @@ class HomePage extends Page {
                         title: new Text("17 hours 34 min ago"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.flag),
-                        trailing: new Icon(Icons.star)
+                        trailing: new Icon(Icons.star),
+                      	onclick: ()=>PWA.getPWA().setPage("SomeOtherPage1")
                     }),
                     new ListTile({
                       	color:"green",
                         title: new Text("Sleep"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
+                        trailing: new Icon(Icons.star_outline),
+                      	onclick: ()=>PWA.getPWA().setPage("SomeOtherPage2")
                     }),
                     new ListTile({
                         title: new Text("18 hours 20 min ago"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
+                        trailing: new Icon(Icons.star_outline),
+                      	onclick: ()=>PWA.getPWA().setPage("SomeOtherPage3")
                     }),
                     new ListTile({
                       	color:"#2222FF",
                         title: new Text("17 hours 19 min ago"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
+                        trailing: new Icon(Icons.star_outline),
+                      	onclick: ()=>PWA.getPWA().setPage("SomeOtherPage4")
                     }),
                     new ListTile({
                       	color:"#FF3333",
                         title: new Text("18 hours 20 min ago"),
                         subtitle: new Text("Subtitle: The battery is full."),
                         leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star_outline)
+                        trailing: new Icon(Icons.star_outline),
+                      	onclick: ()=>PWA.getPWA().setPage("SomeOtherPage5")
                     }),
                 ],
             })
@@ -171,6 +176,20 @@ class NursingPaused extends Page {
         });
     }
 }
+class SomeOtherPage extends Page {
+    constructor(params) {
+        super({
+            "color": "#545454",
+            "backgroundColor": "#FAEBF2",
+            "hideFloatingActionButton": "true",
+            "hideFooter": "true",
+          	"navigateBackPage":"HomePage",
+          	"padding":"15px",
+          	"id":params?params.id:null,
+          	"child": new Text((params && params.id)?params.id:"Some Other Page")
+        });
+    }
+}
 
 /*---------------------------------------------------------------------------*/
 var myDiv = new Div({
@@ -178,6 +197,11 @@ var myDiv = new Div({
 });
 var aHomePage = new HomePage();
 var aNursingPaused = new NursingPaused({id:"NursingPaused"});
+var aSomeOtherPage1 = new SomeOtherPage({id:"SomeOtherPage1"});
+var aSomeOtherPage2 = new SomeOtherPage({id:"SomeOtherPage2"});
+var aSomeOtherPage3 = new SomeOtherPage({id:"SomeOtherPage3"});
+var aSomeOtherPage4 = new SomeOtherPage({id:"SomeOtherPage4"});
+var aSomeOtherPage5 = new SomeOtherPage({id:"SomeOtherPage5"});
 var aPWA = new PWA({
     title: "Baby Daze",
   	titleBackgroundColor: "rgb(250,0,171,0.3)",
