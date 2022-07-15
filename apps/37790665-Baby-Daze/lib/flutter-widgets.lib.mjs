@@ -121,11 +121,11 @@ export class ListTile extends Div {
         }
         if (params.trailing) {
             this.appendChild(new Container({
-                height: "35px",
+                height: "30px",
                 fontSize: "24px",
-                top: "0px",
+                top: "5px",
                 right: "0px",
-                width: "40px",
+                width: "30px",
                 child: params.trailing
             }));
         }
