@@ -109,8 +109,8 @@ export class ListTile extends Div {
         }
         if (params.leading) {
             this.appendChild(new Container({
-                height: "40px",
-                fontSize: "38px",
+                height: "30px",
+                fontSize: "30px",
                 top: "0px",
                 left: "0px",
                 width: "40px",
@@ -119,8 +119,8 @@ export class ListTile extends Div {
         }
         if (params.trailing) {
             this.appendChild(new Container({
-                height: "40px",
-                fontSize: "38px",
+                height: "35px",
+                fontSize: "30px",
                 top: "0px",
                 right: "0px",
                 width: "40px",
