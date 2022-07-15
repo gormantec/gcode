@@ -48,18 +48,9 @@ export class OutlinedButton extends Div {
 export class Text extends Div {
     constructor(_text) {
         super({
-            "position": "absolute",
-            top: "0px",
-            bottom: "0px",
-            left: "0px",
-            right: "0px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            "child": new Div({
                 "classNameOverride": true,
+          		"className":"span",
                 "innerText": _text
-            })
         });
     }
 }
@@ -106,10 +97,10 @@ export class ListTile extends Div {
           this.appendChild(params.title);
     	}
         if(params.subtitle){
-          params.title.style.height="16px";
-          params.title.style.fontSize="14px";
-          params.title.style.top="20px";
-          params.title.style.left="0px";
+          params.subtitle.style.height="16px";
+          params.subtitle.style.fontSize="14px";
+          params.subtitle.style.top="20px";
+          params.subtitle.style.left="0px";
           this.appendChild(params.subtitle);
         }
         if(params.leading)this.appendChild(params.leading);
