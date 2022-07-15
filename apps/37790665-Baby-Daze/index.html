@@ -109,9 +109,10 @@ class HomePage extends Page {
                     new ListTile({
                       	color:"red",
                         title: new Text("34 min ago"),
-                        subtitle: new Text("Subtitle: The battery is full."),
+                        subtitle: new Text("Nursing paused."),
                         leading: new Icon(Icons.battery_full),
-                        trailing: new Icon(Icons.star)
+                        trailing: new Icon(Icons.star),
+                      	onclick: PWA.getPWA().setPage("NursingPaused")
                     }),
                     new ListTile({
                       	color:"blue",
@@ -155,11 +156,24 @@ class HomePage extends Page {
 
 }
 
+class NursingPaused extends Page {
+    constructor() {
+        super({
+            "color": "#545454",
+            "backgroundColor": "#FAEBF2",
+            "hideFloatingActionButton": "true",
+            "hideFooter": "true",
+          	"id":params?params.id:null
+        });
+    }
+}
+
 /*---------------------------------------------------------------------------*/
 var myDiv = new Div({
     innerHTML: "url(https://gcode.com.au/html/test.html)"
 });
 var aHomePage = new HomePage();
+var aNursingPaused = new NursingPaused({id:"NursingPaused"});
 var aPWA = new PWA({
     title: "Baby Daze",
   	headerHeight: "180px",
