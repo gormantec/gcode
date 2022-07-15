@@ -1,6 +1,4 @@
-import {
-    Div
-} from 'https://gcode.com.au/modules/pwa.mjs';
+import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
 
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
@@ -65,7 +63,7 @@ export class ListView extends Div {
             console.log("x");
             this.appendChild(new Div({
                 "position": "relative",
-				"padding" : "8px",
+                "padding": "8px",
                 height: this.divChildren[i].style.height,
                 child: this.divChildren[i]
             }));
@@ -101,7 +99,7 @@ export class ListTile extends Div {
         }
         if (params.subtitle) {
             this.appendChild(new Container({
-              	
+
                 height: "14px",
                 fontSize: "12px",
                 top: "22px",
@@ -131,6 +129,7 @@ export class ListTile extends Div {
         }
     }
 }
+
 export class Icon extends Div {
     constructor(icon) {
         super();
@@ -156,3 +155,5 @@ export const Icons = {
     "flag": "flag",
     "alarm": "alarm"
 };
+
+
