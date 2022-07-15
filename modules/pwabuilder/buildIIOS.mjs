@@ -18,16 +18,18 @@ const pwabuilderData={
     "manifestUrl": "https://gcode.com.au/apps/" + process.env.APP_NAME + "/manifest.json",
     "manifest": _manifestJSON
 }
+
 if(Array.isArray(_manifestJSON.permitted_urls) && _manifestJSON.permitted_urls.length>0)
 {
     pwabuilderData.permittedUrls=_manifestJSON.permitted_urls;
 }
+console.log(JSON.stringify(pwabuilderData));
 const response = await fetch('https://pwabuilder-ios.azurewebsites.net/packages/create', {
     method: 'post',
     body: JSON.stringify(pwabuilderData),
     headers: { 'Content-Type': 'application/json' }
 });
-console.log(JSON.stringify(pwabuilderData));
+
 if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
 await streamPipeline(response.body, createWriteStream('./pwa.zip'));
 

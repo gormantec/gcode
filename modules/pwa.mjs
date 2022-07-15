@@ -617,6 +617,18 @@ class Div {
     setParent(parentDiv) {
         this.parentDiv = parentDiv;
     }
+    getParentStyle(style) {
+        if(this.parentDiv.style[style])
+        {
+            return this.parentDiv.style[style];
+        }
+        else if(this.parentDiv){
+            return this.parentDiv.getParentStyle(style);
+        }
+        else{
+            return "unset";
+        }
+    }
 
     appendChild(params) {
         //debug.log("appendChild");

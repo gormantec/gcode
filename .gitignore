@@ -3,4 +3,5 @@
 _update.sh
 temp/**
 /scripts
+/build/**
 apps/37790665-calculator/.DS_Store
