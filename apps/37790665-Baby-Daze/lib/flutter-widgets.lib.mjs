@@ -138,9 +138,11 @@ export class Icon extends Div {
             classNameOverride: true,
             innerText: icon
         };
-        let fontSize=this.getParentStyle("fontSize");
-      	if(fontSize && fontSize!="unset") {  params.fontSize=fontSize; }
-        this.setChild(new Div(params));
+        this.getParentStyle("fontSize").then((fontSize)=>{
+            if(fontSize) {  params.fontSize=fontSize; }
+        	this.setChild(new Div(params));
+        })
+
     }
 }
 export const Icons = {
