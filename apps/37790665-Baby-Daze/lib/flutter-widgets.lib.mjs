@@ -140,16 +140,19 @@ export class Icon extends Div {
             classNameOverride: true,
             innerText: icon
         };
-        this.getParentStyle("fontSize").then((fontSize)=>{
-            if(fontSize) {  params.fontSize=fontSize; }
-        	this.setChild(new Div(params));
-        })
+        this.getParentStyle("fontSize").then((fontSize) => {
+            if (fontSize) {
+                params.fontSize = fontSize;
+            }
+            this.setChild(new Div(params));
+        });
 
     }
 }
 export const Icons = {
-    battery_full: "battery_full",
-    star: "star",
-  	star_outline: "star_outline",
-  	"flag":"flag"
-}
+    "battery_full": "battery_full",
+    "star": "star",
+    "star_outline": "star_outline",
+    "flag": "flag",
+    "alarm": "alarm"
+};
