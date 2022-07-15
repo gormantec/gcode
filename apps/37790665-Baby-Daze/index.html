@@ -85,33 +85,60 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-try { Page.clearPages(); } catch (e) {}
+import {
+    PWA,
+    Page,
+    Div
+} from 'https://gcode.com.au/modules/pwa.mjs';
+import {Text,Center,Container,ListView} from './lib/flutter-widgets.lib.mjs';
+try {
+    Page.clearPages();
+} catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
-  constructor() {
-      super({
-          "color": "black",
-          "backgroundColor": "FAF5FC",
-          "backgroundPosition": "center",
-          "backgroundSize": "60%",
-          "backgroundRepeat": "no-repeat",
-          "backgroundImage": "url(https://c7.uihere.com/files/614/185/190/sun-solar-flare-uv-uv-light.jpg)"
-      });
-  }
+    constructor() {
+        super({
+            "color": "black",
+            "backgroundColor": "#FAEBF2",
+            "hideFloatingActionButton": "true",
+            "hideFooter": "true",
+            "child": new ListView({
+                "padding": "8px",
+                "children": [
+                    new Container({
+                        child: new Center({
+                            child: new Text('Entry A')
+                        }),
+                    }),
+                    new Container({
+                        child: new Center({
+                            child: new Text('Entry B')
+                        }),
+                    }),
+                    new Container({
+                        child: new Center({
+                            child: new Text('Entry C')
+                        }),
+                    }),
+                ],
+            })
+
+        });
+    }
 
 }
 
 /*---------------------------------------------------------------------------*/
-var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+var myDiv = new Div({
+    innerHTML: "url(https://gcode.com.au/html/test.html)"
+});
 var aHomePage = new HomePage();
 var aPWA = new PWA({
-  title: "Baby Daze",
-  footer: "https://www.gormantec.com",
-  primaryColor: "#FA00AB",
+    title: "Baby Daze",
+    footer: "https://www.gormantec.com",
+    primaryColor: "#FA00AB",
 });
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
