@@ -97,6 +97,10 @@ export class Center extends Div {
 export class ListTile extends Div {
     constructor(params) {
         super(params);
+        if(params.title)this.appendChild(params.title);
+        if(params.subtitle)this.appendChild(params.subtitle);
+        if(params.leading)this.appendChild(params.leading);
+        if(params.trailing)this.appendChild(params.trailing);
     }
 }
 export class Icon extends Div {
