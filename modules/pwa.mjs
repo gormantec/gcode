@@ -617,8 +617,8 @@ class Div {
     setParent(parentDiv) {
         this.parentDiv = parentDiv;
     }
-    getParentStyle(style) {
-        if(this.parentDiv.style[style])
+    async getParentStyle(style) {
+        if(this.parentDiv && this.parentDiv.style && this.parentDiv.style[style])
         {
             return this.parentDiv.style[style];
         }
