@@ -97,8 +97,21 @@ export class Center extends Div {
 export class ListTile extends Div {
     constructor(params) {
         super(params);
-        if(params.title)this.appendChild(params.title);
-        if(params.subtitle)this.appendChild(params.subtitle);
+      	this.style.height="40px";
+        if(params.title){
+          params.title.style.height="20px";
+          params.title.style.fontSize="18px";
+          params.title.style.top="0px";
+          params.title.style.left="0px";
+          this.appendChild(params.title);
+    	}
+        if(params.subtitle){
+          params.title.style.height="16px";
+          params.title.style.fontSize="14px";
+          params.title.style.top="20px";
+          params.title.style.left="0px";
+          this.appendChild(params.subtitle);
+        }
         if(params.leading)this.appendChild(params.leading);
         if(params.trailing)this.appendChild(params.trailing);
     }
