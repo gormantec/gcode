@@ -99,6 +99,7 @@ try {
 class HomePage extends Page {
     constructor() {
         super({
+          	"id":"HomePage",
             "color": "#545454",
             "backgroundColor": "#FAEBF2",
             "hideFloatingActionButton": "true",
@@ -163,7 +164,9 @@ class NursingPaused extends Page {
             "backgroundColor": "#FAEBF2",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
-          	"id":params?params.id:null
+          	"navigateBackPage":"HomePage",
+          	"id":params?params.id:null,
+          	"child": new Text("Nursing Paused!")
         });
     }
 }
