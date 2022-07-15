@@ -96,10 +96,10 @@ export class ListTile extends Div {
           this.appendChild(new Container({height:"12px",fontSize:"10px",top:"20px",left:"42px",child:params.subtitle}));
         }
         if(params.leading){
-          this.appendChild(new Container({height:"40px",fontSize:"38px",top:"0px",left:"0px",child:params.leading}));
+          this.appendChild(new Container({height:"40px",fontSize:"38px",top:"0px",left:"0px",width:"40px",child:params.leading}));
         }
         if(params.trailing){
-          this.appendChild(new Container({height:"40px",fontSize:"38px",top:"0px",right:"0px",child:params.trailing}));
+          this.appendChild(new Container({height:"40px",fontSize:"38px",top:"0px",right:"0px",width:"40px",child:params.trailing}));
         }
     }
 }
