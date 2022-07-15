@@ -136,14 +136,15 @@ jobs:
           fi
           cd $OUT_DIR_VAR
           ls -latr
-      - name: move to apps/ipa dir # Move the generated files into output folder # xcodebuild -allowProvisioningUpdates -scheme "$scheme" -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" archive DEVELOPMENT_TEAM=9R8LPM6UR2
-        timeout-minutes: 10 #zip -rq ./apps/$APP_NAME/ios/$APP_NAME.xcarchive.zip ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
+      - name: move to apps/ipa dir 
+        timeout-minutes: 10 
         run: |
           BASE_DIR_VAR=$(pwd)
           echo "APP_NAME $APP_NAME"
           mkdir -p apps/$APP_NAME/ios
           rm -rf apps/$APP_NAME/ios/*
-          cp -f modules/pwabuilder/isoHtml.plist ./apps/$APP_NAME/ios/$APP_NAME.plist  
+          cp -f modules/pwabuilder/ipa_manifest.plist ./apps/$APP_NAME/ios/ipa_manifest.plist
+          cp -f modules/pwabuilder/ipa_link.html ./apps/$APP_NAME/ios/ipa_link.html
           SPLIT="-"
           VINDEX=${APP_NAME/$SPLIT*/$SPLIT}
           VINDEX=${#VINDEX}
@@ -151,9 +152,10 @@ jobs:
           echo "SHORT_APP_NAME = $SHORT_APP_NAME"
           SHORT_APP_NAME_NOS=$SHORT_NAME_NOSP
           echo "SHORT_APP_NAME_NOS = $SHORT_APP_NAME_NOS"
-          sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
-          sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
-          sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/$APP_NAME.plist  
+          sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_manifest.plist 
+          sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_link.plist  
+          sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/ipa_manifest.plist  
+          sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/ipa_manifest.plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/  
           ls -latr ./apps/$APP_NAME/ios
           rm -rf ./apps/$APP_NAME/ios/$APP_NAME.xcarchive
