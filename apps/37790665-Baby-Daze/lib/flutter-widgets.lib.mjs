@@ -53,7 +53,7 @@ export class ListView extends Div
     for(let i=0;i<this.divChildren.length;i++)
     {
       console.log("x");
-      this.appendChild(new Div({"position":"relative",child:this.divChildren[i]}));
+      this.appendChild(new Div({"position":"relative",height:this.divChildren[i].style.height,child:this.divChildren[i]}));
     }
   }
 }
