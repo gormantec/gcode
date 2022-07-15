@@ -90,7 +90,7 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {Text,Center,Container,ListView} from './lib/flutter-widgets.lib.mjs';
+import {Text,Center, Container, ListView,ListTile,Icon,Icons} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -105,26 +105,11 @@ class HomePage extends Page {
             "child": new ListView({
                 "padding": "8px",
                 "children": [
-                    new Container({
-                      	height:"20px",
-                        child: new Center({
-                          	color: "red",
-                            child: new Text('34 min ago')
-                        }),
-                    }),
-                    new Container({
-                      	height:"20px",
-                        child: new Center({
-                          	color: "blue",
-                            child: new Text('17 housr 34 min ago')
-                        }),
-                    }),
-                    new Container({
-                      	height:"20px",
-                        child: new Center({
-                          	color: "green",
-                            child: new Text('Sleep')
-                        }),
+                    new ListTile({
+                        title: new Text("Battery Full"),
+                        subtitle: new Text("The battery is full."),
+                        leading: new Icon(Icons.battery_full),
+                        trailing: new Icon(Icons.star)
                     }),
                 ],
             })
