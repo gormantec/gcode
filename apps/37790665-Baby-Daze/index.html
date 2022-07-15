@@ -165,6 +165,7 @@ class NursingPaused extends Page {
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
           	"navigateBackPage":"HomePage",
+          	"padding":"15px",
           	"id":params?params.id:null,
           	"child": new Text("Nursing Paused!")
         });
@@ -179,9 +180,9 @@ var aHomePage = new HomePage();
 var aNursingPaused = new NursingPaused({id:"NursingPaused"});
 var aPWA = new PWA({
     title: "Baby Daze",
+  	titleBackgroundColor: "rgb(250,0,171,0.3)",
   	headerHeight: "180px",
   	headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
-  	headerBackgroundColor: "rgb(250,0,171,0.3)",
     primaryColor: "#FA00AB",
 });
 aPWA.setPage(aHomePage);
