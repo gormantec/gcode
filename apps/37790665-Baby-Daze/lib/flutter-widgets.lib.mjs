@@ -89,6 +89,7 @@ export class ListTile extends Div {
     constructor(params) {
         super(params);
         this.style.height = "40px";
+        this.style.padding = "8px";
         if (params.title) {
             this.appendChild(new Container({
                 height: "18px",
