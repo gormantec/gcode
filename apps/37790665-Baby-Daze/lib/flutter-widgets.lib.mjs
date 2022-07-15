@@ -101,9 +101,10 @@ export class ListTile extends Div {
         }
         if (params.subtitle) {
             this.appendChild(new Container({
-                height: "12px",
-                fontSize: "10px",
-                top: "20px",
+              	
+                height: "14px",
+                fontSize: "12px",
+                top: "22px",
                 left: "42px",
                 child: params.subtitle
             }));
