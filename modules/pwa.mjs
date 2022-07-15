@@ -16,7 +16,7 @@ class PWA {
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 45;
-        if(params.headerBackgroundColor)this.headerBackgroundColor = params.headerBackgroundColor;
+        if(params.titleBackgroundColor)this.titleBackgroundColor = params.titleBackgroundColor;
         if(params.headerBackgroundImage)this.headerBackgroundImage = params.headerBackgroundImage;
         this.footerHeight = params.footerHeight || 40;
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
@@ -123,11 +123,13 @@ class PWA {
                 _this.setPage(_this.navigateBackPage);
             }
         });
+        this.pwaHeaderTitle=new Div({ id: "pwaheadertitle", innerHTML: this.title });
+        if (this.titleBackgroundColor) this.pwaHeaderTitle.style.backgroundColor = this.titleBackgroundColor;    
 
         this.pwaHeader = new Div({
             id: "pwaheader", tagName: "header", children: [
                 this.navigateBackButton,
-                new Div({ id: "pwaheadertitle", innerHTML: this.title })
+                this.pwaHeaderTitle
             ]
         });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
@@ -139,10 +141,7 @@ class PWA {
             this.pwaHeader.style.backgroundRepeat = "no-repeat";
         }
 
-        if (this.headerBackgroundColor){
-            
-            this.pwaHeader.style.backgroundColor = this.headerBackgroundColor;    
-        }
+
         
         if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
