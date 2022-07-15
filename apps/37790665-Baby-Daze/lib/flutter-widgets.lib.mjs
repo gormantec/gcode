@@ -37,8 +37,8 @@ export class Text extends Div
 {
       constructor(_text) {
         super({"position":"absolute",top:"0px",bottom:"0px",left:"0px",right:"0px",display: "flex",
-alignItems: "center",
-justifyContent: "center","child":new Div({"classNameOverride":true,"innerText":_text})});
+        alignItems: "center",
+        justifyContent: "center","child":new Div({"classNameOverride":true,"innerText":_text})});
       }
 }
 export class ListView extends Div
@@ -46,6 +46,14 @@ export class ListView extends Div
   constructor(params)
   {
     super(params);
+    this.childrenElements=this.element.children;
+    while (this.element.firstChild) {
+      this.element.removeChild(this.element.lastChild);
+    }
+    for(let i=0;i<this.childrenElements.length;i++)
+    {
+      this.appendChild(new Div({"position":"relative",child:this.childrenElements[i]}));
+    }
   }
 }
 export class Container extends Div
