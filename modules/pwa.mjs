@@ -16,6 +16,7 @@ class PWA {
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = params.headerHeight || 45;
+        if(params.headerBackgroundColor)this.headerBackgroundColor = params.headerBackgroundColor;
         if(params.headerBackgroundImage)this.headerBackgroundImage = params.headerBackgroundImage;
         this.footerHeight = params.footerHeight || 40;
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
@@ -133,6 +134,12 @@ class PWA {
             this.pwaHeader.style.backgroundSize = "100%";
             this.pwaHeader.style.backgroundRepeat = "no-repeat";
         }
+
+        if (this.headerBackgroundColor){
+            
+            this.pwaHeader.style.backgroundRepeat = headerBackgroundColor;
+        }
+        
         if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
         this.pwaRoot.insertBefore(this.pwaHeader, this.pwaBody || this.pwaRoot.firstChild);
         if (!this.navigateBackPage) this.navigateBackButton.style.display = "none";
