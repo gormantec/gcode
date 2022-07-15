@@ -112,7 +112,7 @@ class HomePage extends Page {
                         subtitle: new Text("Nursing paused."),
                         leading: new Icon(Icons.battery_full),
                         trailing: new Icon(Icons.star),
-                      	onclick: PWA.getPWA().setPage("NursingPaused")
+                      	onclick: ()=>PWA.getPWA().setPage("NursingPaused")
                     }),
                     new ListTile({
                       	color:"blue",
