@@ -761,14 +761,28 @@ class Page extends Div {
     constructor(params) {
         super(params);
         this.pages = this.pages || {};
-        var id = 0;
-        this.pageId = this.constructor.name;
-        while (pages[this.pageId]) {
-            id++;
-            this.pageId = this.constructor.name + "" + id;
+        if(params.id)
+        {
+            var id = 0;
+            this.pageId=params.id;
+            while (pages[this.pageId]) {
+                id++;
+                this.pageId = this.constructor.name + "" + id;
+            }
+            pages[this.pageId] = this;
+            this.element.id = this.pageId;
         }
-        pages[this.pageId] = this;
-        this.element.id = this.pageId;
+        else{
+            var id = 0;
+            this.pageId = this.constructor.name;
+            while (pages[this.pageId]) {
+                id++;
+                this.pageId = this.constructor.name + "" + id;
+            }
+            pages[this.pageId] = this;
+            this.element.id = this.pageId;
+        }
+
         this.element.className = (this.element.className + " pwapage").trim();
         if (params.navigateBackPage instanceof Page) {
             this.navigateBackPage = params.navigateBackPage;
