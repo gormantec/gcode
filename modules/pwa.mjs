@@ -15,7 +15,7 @@ class PWA {
         this.pwaAuth = params.pwaAuth || "false";
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
-        this.headerHeight = params.headerHeight || 60;
+        this.headerHeight = params.headerHeight || 45;
         this.footerHeight = params.footerHeight || 40;
         this.footerPadding = params.footerPadding || (this.footerHeight - 10) / 2;
         this.headerFontSize = params.headerFontSize || 24;
@@ -134,7 +134,9 @@ class PWA {
 
     setBody() {
         if (this.pwaBody) this.pwaRoot.removeChild(this.pwaBody);
+        
         this.pwaBody = new Div({ id: "pwabody" });
+        if (this.headerHeight) this.pwaBody.style.top = this.headerHeight;
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
     setPage(aPage) {
