@@ -90,33 +90,16 @@ export class ListTile extends Div {
         super(params);
       	this.style.height="40px";
         if(params.title){
-          params.title.style.height="18px";
-          params.title.style.fontSize="16px";
-          params.title.style.top="0px";
-          params.title.style.left="42px";
-          this.appendChild(params.title);
+          this.appendChild(new Container({height:"18px",fontSize:"16px",top:"0px",left:"42px",child:params.title}));
     	}
         if(params.subtitle){
-          params.subtitle.style.height="12px";
-          params.subtitle.style.fontSize="10px";
-          params.subtitle.style.top="20px";
-          params.subtitle.style.left="42px";
-          this.appendChild(params.subtitle);
+          this.appendChild(new Container({height:"12px",fontSize:"10px",top:"20px",left:"42px",child:params.subtitle}));
         }
         if(params.leading){
-          
-          params.subtitle.style.height="40px";
-          params.subtitle.style.fontSize="38px";
-          params.subtitle.style.top="0px";
-          params.subtitle.style.left="0px";
-          this.appendChild(params.leading);
+          this.appendChild(new Container({height:"40px",fontSize:"38px",top:"0px",left:"0px",child:params.leading}));
         }
         if(params.trailing){
-          params.subtitle.style.height="40px";
-          params.subtitle.style.fontSize="38px";
-          params.subtitle.style.top="0px";
-          params.subtitle.style.right="0px";
-          this.appendChild(params.trailing);
+          this.appendChild(new Container({height:"40px",fontSize:"38px",top:"0px",right:"0px",child:params.trailing}));
         }
     }
 }
