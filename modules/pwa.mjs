@@ -139,7 +139,7 @@ class PWA {
 
         if (this.headerBackgroundColor){
             
-            this.pwaHeader.style.backgroundRepeat = headerBackgroundColor;
+            this.pwaHeader.style.backgroundRepeat = this.headerBackgroundColor;
         }
         
         if (this.headerFontSize) this.pwaHeader.style.fontSize = this.headerFontSize;
