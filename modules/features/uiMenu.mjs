@@ -122,6 +122,7 @@ async function refreshScreen() {
     doc.open();
     let theHtml=rootHTML.outerHTML;
     try{
+        console.log(theHtml);
         doc.writeln(theHtml);
     }
     catch(e)
@@ -135,6 +136,8 @@ function structureToCode() {
 
     let resp = "";
 
+    console.log(structure);
+
     structure.forEach((block) => {
         if (block.comment) {
             resp = resp + block.comment + "\n";
@@ -145,7 +148,10 @@ function structureToCode() {
         else if (block.widget && block.widget.class=="PWA") {
             let params = block.widget.params;
             let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)\)/g
-            let paramString = block.widget.code.trim().replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
+
+            let paramString=block.widget.code.trim().replace(/(\".*?)(\))(.*?\")/g,"$1##CLBK##$3");
+            paramString = paramString.replaceAll(rx,"$1$2$3$4$5"+JSON.stringify(params, null, 4)+")");
+            paramString=paramString.replaceAll("##CLBK##",")");
             let regex27 = /\"widget\(([\s\S]+?)\)\"([,]?$)/gm;
             paramString = paramString.replaceAll(regex27, "$1$2");
             let regex22 = /(:\s*?)\"(function\s*?\(.*?\)\s*?\{.*\})\"/g;
@@ -178,6 +184,8 @@ function structureToCode() {
             resp =  resp.replaceAll("#####QUOTE#####","\"");
         }
     });
+
+    console.log(resp);
     return resp;
 
 }
@@ -231,6 +239,8 @@ function pushCode(data) {
         arr = rx.exec(data.code);
         let extendsname = arr[1];
         rx = /class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\(([\s\S]*?\}\s*?)\)\s*?;[\s\S]*$/g;
+        console.log(data.code);
+        console.log("---------code");
         arr = rx.exec(data.code);
         if (arr != null) {
             let paramString = arr[1];
@@ -265,11 +275,17 @@ function pushCode(data) {
             
 
             if (line.trim() != "") {
+                
+                let line2=line.replace(/(\".*?)(\))(.*?\")/g,"$1##CLBK##$3");
+                console.log(line2);
+                console.log("---------line");
                 let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)(\))$/g
-                let arr = rx.exec(line.trim());
+                let arr = rx.exec(line2.trim());
                 if (arr) {
 
                     let someParams = arr[6];
+                    someParams=someParams.replaceAll("##CLBK##",")");
+                    console.log(someParams);
                     someParams = cleanParams(someParams);
                     try{someParams = JSON.parse(someParams);}catch(e){someParams="{}";}
                     line = line + ((i + 1) == codeLines.length ? "" : ";");
