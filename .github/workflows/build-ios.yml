@@ -153,7 +153,7 @@ jobs:
           SHORT_APP_NAME_NOS=$SHORT_NAME_NOSP
           echo "SHORT_APP_NAME_NOS = $SHORT_APP_NAME_NOS"
           sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_manifest.plist 
-          sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_link.plist  
+          sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_link.html  
           sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/ipa_manifest.plist  
           sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/ipa_manifest.plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/  
