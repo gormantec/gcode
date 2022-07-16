@@ -87,9 +87,9 @@ export class TextFormField extends Div {
       	this.element.setAttribute("contenteditable","true");
       	this.style.height="30px";
       	this.style.fontSize="24px";
-      	this.style.paddingBottom="2px";
+      	this.style.padding="3px";
       	this.style.backgroundColor="white";
-      	this.style.borderBottom="2px solid #545454";
+      	this.style.borderBottom="2px solid #999999";
     }
 }
 export class Padding extends Div {
