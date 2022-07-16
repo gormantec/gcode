@@ -28,7 +28,7 @@ export class Column extends Div {
         });
         if (params instanceof Div) this.setChild(params);
         else if (params.child) this.setChild(params.child);
-        this.style.height = this.firstChild.style.height;
+        if(this.firstChild && this.firstChild.style)this.style.height = this.firstChild.style.height;
     }
 }
 
