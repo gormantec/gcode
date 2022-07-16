@@ -150,10 +150,10 @@ class HomePage extends Page {
                     new ListTile({
                         color: "#FF3333",
                         title: new Text("18 hours 20 min ago"),
-                        subtitle: new Text("Subtitle: The battery is full."),
+                        subtitle: new Text("Video Blog"),
                         leading: new Icon(Icons.battery_full),
                         trailing: new Icon(Icons.star_outline),
-                        onclick: () => PWA.getPWA().setPage("SomeOtherPage5")
+                        onclick: () => PWA.getPWA().setPage("VideoBlog")
                     }),
                 ],
             })
@@ -177,6 +177,22 @@ class NursingPaused extends Page {
         });
     }
 }
+class VideoBlog extends Page {
+    constructor(params) {
+        super({
+            "id": "VideoBlog",
+            "color": "#545454",
+            "backgroundColor": "#FAEBF2",
+            "hideFooter": "true",
+            "child": new ListView({
+                "padding": "8px",
+                "children": [
+                    new ListTile({})
+                  ]
+            })
+        })
+    }
+}
 class SomeOtherPage extends Page {
     constructor(params) {
         super({
@@ -197,6 +213,7 @@ var myDiv = new Div({
     innerHTML: "url(https://gcode.com.au/html/test.html)"
 });
 var aHomePage = new HomePage();
+var aVideoBlog = new VideoBlog({id: "VideoBlog"});
 var aNursingPaused = new NursingPaused({id: "NursingPaused"});
 var aSomeOtherPage1 = new SomeOtherPage({id: "SomeOtherPage1"});
 var aSomeOtherPage2 = new SomeOtherPage({id: "SomeOtherPage2"});
