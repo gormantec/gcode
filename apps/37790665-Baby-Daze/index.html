@@ -184,6 +184,7 @@ class VideoBlog extends Page {
             "color": "#545454",
             "backgroundColor": "#FAEBF2",
             "hideFooter": "true",
+          	"floatingActionButtonPage": "AddVideo",
             "child": new ListView({
                 "padding": "8px",
                 "children": [
@@ -203,7 +204,7 @@ class VideoBlog extends Page {
                                 child: new Container({
                                     width: "300px",
                                     height: "200px",
-                                    backgroundColor: "black"
+                                    backgroundColor: "black",
                                   	backgroundSize: "100% 100%",
                                   	backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                                 })
@@ -225,7 +226,7 @@ class VideoBlog extends Page {
                                 child: new Container({
                                     width: "300px",
                                     height: "200px",
-                                    backgroundColor: "black"
+                                    backgroundColor: "black",
                                   	backgroundSize: "100% 100%",
                                   	backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                                 })
@@ -273,12 +274,27 @@ class SomeOtherPage extends Page {
         });
     }
 }
+class AddVideo extends Page {
+    constructor(params) {
+        super({
+            "color": "#545454",
+            "backgroundColor": "#FAEBF2",
+            "hideFloatingActionButton": "true",
+            "hideFooter": "true",
+            "navigateBackPage": "HomePage",
+            "padding": "15px",
+            "id": params ? params.id : null,
+            "child": new Text((params && params.id) ? params.id : "AddVideo")
+        });
+    }
+}
 
 /*---------------------------------------------------------------------------*/
 var myDiv = new Div({
     innerHTML: "url(https://gcode.com.au/html/test.html)"
 });
 var aHomePage = new HomePage();
+var aAddVideo = new AddVideo();
 var aVideoBlog = new VideoBlog({
     id: "VideoBlog"
 });
