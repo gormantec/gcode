@@ -190,13 +190,14 @@ class VideoBlog extends Page {
                     new Container({
                         children: [
                             new ListTile({
+                              	top: "40px",
                                 color: "#545454",
                                 title: new Text("10 days ago"),
                                 subtitle: new Text("Video of baby"),
                                 leading: new Icon(Icons.battery_full),
                                 trailing: new Icon(Icons.star_outline),
                                 onclick: () => PWA.getPWA().setPage("VideoBlog")
-                            }), new Container({width:"300px",height:"200px",backgroundColor:"black"})
+                            }), new Center({child:new Container({width:"300px",height:"200px",backgroundColor:"black"})})
                         ]
                     })
                 ]
