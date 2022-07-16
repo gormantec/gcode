@@ -165,7 +165,7 @@ jobs:
           git config --local user.email "craig@gormantec.com"
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
-          git commit -m "Add changes"
+          git commit -m "Add changes" -a
 
       - name: Push changes # push the output folder to your repo
         timeout-minutes: 25
