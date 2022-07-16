@@ -75,6 +75,30 @@ export class Container extends Div {
         super(params);
     }
 }
+
+export class Form extends Div {
+    constructor(params) {
+        super(params);
+    }
+}
+export class TextFormField extends Div {
+    constructor(params) {
+        super(params);
+      	this.style.contentEditable="true";
+      	this.style.height="30px";
+      	this.style.fontSize="28px";
+      	this.style.backgroundColor="white";
+      	this.style.borderBottom="2px solid #545454";
+    }
+}
+export class Padding extends Div {
+    constructor(params) {
+        super(params);
+    }
+}
+
+
+
 export class Center extends Div {
     constructor(params) {
         super(params);
