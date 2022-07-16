@@ -84,7 +84,7 @@ export class Form extends Div {
 export class TextFormField extends Div {
     constructor(params) {
         super(params);
-      	this.style.contentEditable="true";
+      	this.element.setAttribute("contenteditable","true");
       	this.style.height="30px";
       	this.style.fontSize="28px";
       	this.style.backgroundColor="white";
