@@ -85,13 +85,14 @@ if (window.opener && window.opener !== window) {
 
 */
 
+
 /*---------------------------------------------------------------------------*/
 import {
     PWA,
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {Text,Center,Container,ListView,ListTile,Icon,Icons,Form,TextFormField,Padding,Column} from './lib/flutter-widgets.lib.mjs';
+import {Text,Center,Container,ListView,ListTile,Icon,Icons} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -183,7 +184,6 @@ class VideoBlog extends Page {
             "color": "#545454",
             "backgroundColor": "#FAEBF2",
             "hideFooter": "true",
-            "navigateBackPage": "HomePage",
           	"floatingActionButtonPage": "AddVideo",
             "child": new ListView({
                 "padding": "8px",
@@ -284,11 +284,7 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "id": params ? params.id : null,
-            "child": new Form({child:new ListView({padding:"15px",children:[
-              new TextFormField({margin:"5px"}),
-              new TextFormField({margin:"5px"}),
-              new TextFormField({margin:"5px"}),
-            ]})})
+            "child": new Text((params && params.id) ? params.id : "AddVideo")
         });
     }
 }
