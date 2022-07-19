@@ -2,6 +2,15 @@
 import { getImage, createHtml,getImportLibFileList } from '/modules/htmlUtils.mjs';
 import { cyrb53 } from '/modules/cyrb53.mjs';
 import { load, preload} from '/modules/gcodeStorage.mjs';
+import { getScript } from '/modules/getScript.mjs';
+const getAcorn = getScript('https://cdnjs.cloudflare.com/ajax/libs/acorn/8.7.1/acorn.min.js', ["acorn"]);
+let acornParser=null;
+getAcorn.then(({acorn})=>{
+    console.log("acorn");
+    console.log(acorn);
+    acornParser=acorn;
+});
+
 
 export const menuMetadata = { "id": "uiMenu", "class": "pageLeftToolbarButton", "materialIcon": "wysiwyg" };
 
@@ -35,33 +44,83 @@ const paramOptions = ["navigateBackPage", "innerHTML",
     "backgroundImage",
     "backgroundSize"];
 
+
+    function updateCodeFromStructure(sCode)
+    {
+        let sCode2=sCode;
+        let offset=0;
+        for (let ii = 0; ii < structure.length; ii++) {
+            let block = structure[ii];
+            if (block.type=="ClassDeclaration" && block.superClass.name == "Page") {
+                let props=block.body.body[0].value.body.body[0].expression.arguments[0].properties; 
+                let newClassName=block.id.newName;  
+                let className=block.id.name;  
+                let nameStart=block.id.start;  
+                let nameEnd=block.id.end;
+                
+                if(newClassName && className)
+                {
+                    sCode2=sCode2.substring(0,nameStart+offset)+newClassName+sCode2.substring(nameEnd+offset);
+                    offset=offset+(newClassName.length-className.length);
+                }               
+                for(let i=0;i<props.length;i++)
+                {
+                    if(props[i].value.type=="Literal")
+                    {
+                        let start=props[i].value.start;
+                        let end=props[i].value.end;
+                        let replacement=props[i].value.rawReplacement;
+                        let rawValue=props[i].value.raw;
+                        if(replacement && rawValue)
+                        {
+                            sCode2=sCode2.substring(0,start+offset)+replacement+sCode2.substring(end+offset);
+                            offset=offset+(replacement.length-rawValue.length);
+                        }
+                    }
+                }
+            }
+        }
+        return sCode2;
+    }
+
 async function refreshScreen() {
 
     let mockFrameIframe = document.getElementById("pageMiddle").querySelector("#pageMiddle-" + menuMetadata.id + "iframe");
 
     let block=null;
-        structure.forEach((b) => {
-            if (b.class && b.class.name == focusPage.substring(21)) {
-                block = b;
-            }
-        });
+
+    for (let ii = 0; block==null && ii < structure.length; ii++) {
+        let b = structure[ii];
+        if (b.type=="ClassDeclaration" && (b.id.name == focusPage.substring(21) || b.id.newName == focusPage.substring(21))) {
+            block = b;
+        }
+    }
+
     
     if (!block) return;
 
-    for (let param in block.class.constructor.super) {
-        let e = document.querySelector("div#pageMiddle-pageProps-" + block.class.name).querySelector("#input-param-" + param);
-        block.class.constructor.super[param] = e.value.trim();
+    let params=getSuperClassProperties(block);
+
+    for (let param in params) {
+        let bname=block.id.name;
+        if(block.id.newName)bname=block.id.newName;
+        let e = document.querySelector("div#pageMiddle-pageProps-" + bname).querySelector("#input-param-" + param);
+        params[param] = e.value.trim();
     }
     //document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
     //pageDiv.remove();
-    let sCode = structureToCode();
+    let sCode=window.editor.getValue();
+    console.log(structure);
+    sCode=updateCodeFromStructure(sCode);
+    //let sCode = structureToCode();
     window.editor.setValue(sCode);
+    structure=acornParser.parse(sCode, {ecmaVersion: 2022,sourceType: "module"}).body;
     let thisURL = window.location.href;
     sCode = sCode.replaceAll("https:\/\/gcode\.com\.au\/", thisURL);
 
     let regex3 = new RegExp("\.setPage\(.*?a.*?\).*?;\naPWA.show...", "g");
 
-    sCode = sCode.replaceAll(regex3, ".setPage(a" + block.class.name + ");\naPWA.show();//changed");
+    sCode = sCode.replaceAll(regex3, ".setPage(a" + block.id.name + ");\naPWA.show();//changed");
 
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
@@ -122,7 +181,6 @@ async function refreshScreen() {
     doc.open();
     let theHtml=rootHTML.outerHTML;
     try{
-        console.log(theHtml);
         doc.writeln(theHtml);
     }
     catch(e)
@@ -136,7 +194,6 @@ function structureToCode() {
 
     let resp = "";
 
-    console.log(structure);
 
     structure.forEach((block) => {
         if (block.comment) {
@@ -171,7 +228,7 @@ function structureToCode() {
             }
             let regex = /(class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\()([\s\S]*?\}[\n\r\s]*?)\)[\s\r\n]*?;[\s\S]*?\}([\s\S]*$)/g;
             let paramString = block.class.code.replaceAll(regex,
-                'class ' + block.class.name + ' extends ' + block.class.extends + ' {\n    constructor() {\n        super(' +
+                'class ' + block.id.name + ' extends ' + block.superClass.name + ' {\n    constructor() {\n        super(' +
                 JSON.stringify(params, null, 4).replaceAll("%22","\"").replaceAll("\n    ", "\n            ").slice(0, -1) +
                 '        });\n    }$3');
             let regex27 = /\"widget\(([\s\S]+?)\)\"([,]?$)/gm;
@@ -185,7 +242,6 @@ function structureToCode() {
         }
     });
 
-    console.log(resp);
     return resp;
 
 }
@@ -193,7 +249,7 @@ function structureToCode() {
 function cleanParams(paramString) {
     paramString=paramString.trim();
 
-
+/*
     let inside=paramString.slice(1,-1);
     if(inside && inside.trim()!=null)
     {
@@ -204,10 +260,39 @@ function cleanParams(paramString) {
             paramString=paramString.replace(arrNewWidgets[i],arrNewWidgets[i].replaceAll("\"","%22"));
         }
     }
+*/
 
 
-    const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})(\s*?[,}])/g;
-    paramString = paramString.replaceAll(regex6, '$1\"$2\"$3');
+
+
+
+let rgxOnCLick = /\"?onclick\"?\s*?:\s*?\(\s*?\)\s*?=>\s*?{?(.*)}?([\n|,])/g;
+paramString = paramString.replaceAll(rgxOnCLick, '\"onclick\":\"function(){ $1 }\"$2');
+
+const regex6 = /(:\s*?)(function\s*?\(.*?\)\s*?\{.*\})(\s*?[,}])/g;
+paramString = paramString.replaceAll(regex6, '$1\"$2\"$3');
+
+let allMatches=paramString.match(/\"?onclick\"?\s*?:\s*?\"(.*)"/g);
+for(let i=0;i<allMatches.length;i++)
+{
+    paramString.replaceAll("","");
+}
+
+
+    paramString=paramString.replace(/(new.*?\".*?)(\))(.*?\")/g,"$1##CLBK##$3");
+    let rxNewClass = /:\s*?new\s*?([A-Za-z0-9\_\-]*?)\((.*?)\)[,|\n| ]/g;
+    paramString = paramString.replaceAll(rxNewClass, ':{\"type\":\"new\",\"class\":\"$1\",\"params\":$2},');
+    paramString=paramString.replaceAll("##CLBK##",")");
+
+    
+    
+    paramString=paramString.replace(/(new.*?\".*?)(\))(.*?\")/g,"$1##CLBK##$3");
+    let rxFirstChildNewClass = /([\s\S*]\"children\"\s*?:\s*?\[\s\S*?\s*?)new\s*?([A-Za-z0-9\_\-]*?)\((((?!xx)[\s\S])*?)\)[,|\n| ]/;
+    paramString = paramString.replace(rxNewClass, '$1:{\"type\":\"new\",\"class\":\"$2\",\"params\":$3},');
+    paramString=paramString.replaceAll("##CLBK##",")");
+
+
+
     const regex61 = /(:\s*?)(this\.\S*?\s*?)([,}])/g;
     paramString = paramString.replaceAll(regex61, '$1\"$2\"$3');
     const regex = /(\s*?)\"?([\S]*?)\"?(\s*?:[\s\"])/ig;
@@ -239,8 +324,7 @@ function pushCode(data) {
         arr = rx.exec(data.code);
         let extendsname = arr[1];
         rx = /class .*?extends .*?[ \{][\s\S]*?constructor[\s\S]*?super\(([\s\S]*?\}\s*?)\)\s*?;[\s\S]*$/g;
-        console.log(data.code);
-        console.log("---------code");
+
         arr = rx.exec(data.code);
         if (arr != null) {
             let paramString = arr[1];
@@ -260,6 +344,7 @@ function pushCode(data) {
  
             structure.push(aClass);
             if (data.code.trim().length > classCode.trim().length) {
+                console.log("push class: "+classname);
                 pushCode({ code: data.code.substring(classCode.length).trim() });
             }
         }
@@ -277,8 +362,6 @@ function pushCode(data) {
             if (line.trim() != "") {
                 
                 let line2=line.replace(/(\".*?)(\))(.*?\")/g,"$1##CLBK##$3");
-                console.log(line2);
-                console.log("---------line");
                 let rx = /^(.*?)(\S*?)(\s*?=\s*?new[\s]*?)(\S*?)(\s*?\()([\s\S]*?)(\))$/g
                 let arr = rx.exec(line2.trim());
                 if (arr) {
@@ -414,13 +497,49 @@ function createInput(param, value, eventListener) {
     return input;
 }
 
-const structure = [];
+let structure = [];
+
+
+
+function getSuperClassProperties(block)
+{
+    let props=block.body.body[0].value.body.body[0].expression.arguments[0].properties;
+    let props2={};
+    
+    for(let i=0;i<props.length;i++)
+    {
+        if(props[i].value.type=="Literal")
+        {
+            props2[props[i].key.value]=props[i].value.value;
+        }
+        else if(props[i].value.type=="NewExpression")
+        {
+            props2[props[i].key.value]="widget(new "+props[i].value.callee.name+"(...))";
+        }
+    }
+    console.log(props2);
+    return props2;
+}
+function setSuperClassPropertieValue(_blockIndex,name,value)
+{
+    for(let i=0;i<structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties.length;i++)
+    {
+        if(structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties[i].value.type=="Literal" && structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties[i].key.value==name)
+        {
+            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties[i].value.rawReplacement=value;
+        }
+    }
+}
+
 
 function showUiEditor() {
     let source = window.editor.getValue();
-    while(structure.length>0)structure.pop();
+    //while(structure.length>0)structure.pop();
     //  try {
-    splitComments(source);
+    //splitComments(source);
+    structure=acornParser.parse(window.editor.getValue(), {ecmaVersion: 2022,sourceType: "module"}).body;
+    console.log(structure);
     document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "none";
     let rootMiddlePage = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (rootMiddlePage) rootMiddlePage.remove();
@@ -432,7 +551,7 @@ function showUiEditor() {
     pagesBody.append(createPageSelect());
     rootMiddlePage.append(pagesPanel);
     document.getElementById("pageMiddle").append(rootMiddlePage);
-    for (let ii = 0; ii < structure.length; ii++) {
+   /*for (let ii = 0; ii < structure.length; ii++) {
         let block = structure[ii];
         if (block.class && block.class.extends == "Page") {
             let pagePropsDiv = createPagePropsDiv(block);
@@ -442,7 +561,22 @@ function showUiEditor() {
             //refreshScreen();
 
         }
+    }*/
+    for (let ii = 0; ii < structure.length; ii++) {
+        let block = structure[ii];
+        console.log(block);
+        if (block.type=="ClassDeclaration" && block.superClass.name == "Page") {
+            let blockIndex=ii;
+            let pagePropsDiv = createPagePropsDiv(block,blockIndex);
+            let props=getSuperClassProperties(block);
+            appendClassParams( pagePropsDiv, props,block,blockIndex);
+            appendBlankParams( pagePropsDiv, props);
+            pagesBody.append(pagePropsDiv);
+            //refreshScreen();
+
+        }
     }
+
     refreshScreen();
     // }
     // catch (e) { console.log(e); }
@@ -595,15 +729,15 @@ function createMockFrameDiv() {
     return mockFrameDiv;
 }
 
-function createPagePropsDiv(block) {
+function createPagePropsDiv(block,blockIndex) {
     let selectDiv = document.querySelector("#pageMiddle-" + menuMetadata.id + "-pageselect");
     let pagePropsDiv = document.createElement("div");
-    pagePropsDiv.id = "pageMiddle-pageProps-" + block.class.name;
+    pagePropsDiv.id = "pageMiddle-pageProps-" + block.id.name;
     if (selectDiv.querySelectorAll("option").length > 0) pagePropsDiv.style.display = "none";
-    else focusPage = "pageMiddle-pageProps-" + block.class.name;
+    else focusPage = "pageMiddle-pageProps-" + block.id.name;
     let option = document.createElement("option");
-    option.value = block.class.name;
-    option.innerHTML = block.class.name;
+    option.value = block.id.name;
+    option.innerHTML = block.id.name;
     selectDiv.append(option);
     let pageDivRow = document.createElement("div");
     pageDivRow.style.width = "420px";
@@ -614,22 +748,24 @@ function createPagePropsDiv(block) {
     let pageDivC2 = document.createElement("div");
     pageDivC2.style.display = "inline-block";
     pageDivC2.style.width = "220px";
-    pageDivC2.append(createInput("pageName", block.class.name, (v) => {
+    let _blockIndex=blockIndex;
+    pageDivC2.append(createInput("pageName", block.id.name, (v) => {
+        let pageDiv = document.getElementById("pageMiddle-" + menuMetadata.id);
         pageDiv.querySelector("div#" + focusPage).id = "pageMiddle-pageProps-" + v;
         focusPage = "pageMiddle-pageProps-" + v;
-        structure.forEach((block2) => {
+       /* structure.forEach((block2) => {
             if (block2.comment) {
-                block2.comment = block2.comment.replaceAll("\s*?" + block.class.name + "(", " " + v + "(");
+                block2.comment = block2.comment.replaceAll("\s*?" + block.id.name + "(", " " + v + "(");
             }
             else if (block2.code) {
-                let regex2 = new RegExp("\\s*?" + block.class.name + "\\(", "g");
+                let regex2 = new RegExp("\\s*?" + block.id.name + "\\(", "g");
                 block2.code = block2.code.replaceAll(regex2, " " + v + "(");
             }
             else if (block2.class) {
-                block2.class.code = block2.class.code.replaceAll("\s*?" + block.class.name + "(", " " + v + "(");
+                block2.class.code = block2.class.code.replaceAll("\s*?" + block.id.name + "(", " " + v + "(");
             }
-        });
-        block.class.name = v;
+        });*/
+        structure[_blockIndex].id.newName = v;
         option.value = v;
         option.innerHTML = v;
 
@@ -640,8 +776,10 @@ function createPagePropsDiv(block) {
     pagePropsDiv.append(pageDivRow);
     return pagePropsDiv;
 }
-function appendClassParams(pagePropsDiv, params) {
+function appendClassParams(pagePropsDiv, params,block,blockIndex) {
     for (let param in params) {
+        console.log("param key="+param);
+        console.log("param value="+params[param]);
         let pageDivRow = document.createElement("div");
         pageDivRow.style.width = "420px";
         let pageDivC1 = document.createElement("div");
@@ -654,8 +792,10 @@ function appendClassParams(pagePropsDiv, params) {
         pageDivRow.append(pageDivC2);
         pageDivC1.innerHTML = param;
         let _param=param;
+        let _blockIndex=blockIndex;
         pageDivC2.append(createInput(param, params[param], (v) => {
             params[_param] = v;
+            setSuperClassPropertieValue(_blockIndex,_param,"\""+v+"\"");
             refreshScreen();
         }));
         pagePropsDiv.append(pageDivRow);
