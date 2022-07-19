@@ -289,17 +289,15 @@ class AddVideo extends Page {
             "padding": "15px",
             "id": params ? params.id : null,
             "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Video({id: "video",muted:"true"}),
-                new Center({
-                    width: "50%",
-                  	left:"0px",
+                new Center({child:new Div({
+                    width: "40px",
                     height: "40px",
                     fontSize: "35px",
                     child: new Icon("save"),
                     onclick: () => {}
-                }),
-                new Center({
-                    width: "50%",
-                  	right:"0px",
+                })}),
+                new Center({child:new Div({
+                    width: "40px",
                     height: "40px",
                     fontSize: "35px",
                     child: new Icon("not_started"),
