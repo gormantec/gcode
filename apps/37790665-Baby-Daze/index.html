@@ -285,7 +285,7 @@ class AddVideo extends Page {
             "padding": "15px",
             "id": params ? params.id : null,
             "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Div({width:"360px",height:"200px",id:"video",tagName:"video",classNameOverride: true}),
-                         new Div({width:"40px",height:"40px",fontSize:"35px",backgroundColor:"red",child:new Icon(Icons.flag),onclick:()=>{
+                         new Div({width:"40px",height:"40px",fontSize:"35px",backgroundColor:"red",child:new Icon("not_started"),onclick:()=>{
               // Prefer camera resolution nearest to 1280x720.
 				const constraints = { audio: true, video: { width: 1280, height: 720 } };
 
@@ -311,7 +311,7 @@ class AddVideo extends Page {
                       };
 
 
-                  
+
                   
                   
                   
