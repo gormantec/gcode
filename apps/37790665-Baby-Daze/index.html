@@ -292,16 +292,19 @@ class AddVideo extends Page {
                 navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
                       const video = document.querySelector('video');
                       video.srcObject = mediaStream;
-                      video.onloadedmetadata = function(e) {video.play();};
-                      let mediaRecorder = new MediaRecorder(mediaStream);
-                      mediaRecorder.start(1000);
-                      let chunks = [];
-                      mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
-                      mediaRecorder.onstop = function(e) {
-                          var blob = new Blob(chunks, { 'type' : 'video/webm' });               
-                          video.src = URL.createObjectURL(blob);
-                      }
-                  	  setTimeout(()=>{mediaRecorder.stop();},10000);
+                      video.onloadedmetadata = function(e) {
+                        video.play();
+                        let mediaRecorder = new MediaRecorder(mediaStream);
+                        mediaRecorder.start(1000);
+                        let chunks = [];
+                        mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
+                        mediaRecorder.onstop = function(e) {
+                            var blob = new Blob(chunks, { 'type' : 'video/webm' });               
+                            video.src = URL.createObjectURL(blob);
+                        }
+                        setTimeout(()=>{console.log("stop");mediaRecorder.stop();},10000);
+                      };
+
 
                   
                   
