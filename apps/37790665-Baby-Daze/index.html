@@ -184,7 +184,7 @@ class VideoBlog extends Page {
             "color": "#545454",
             "backgroundColor": "#FAEBF2",
             "hideFooter": "true",
-          	"floatingActionButtonPage": "AddVideo",
+            "floatingActionButtonPage": "AddVideo",
             "child": new ListView({
                 "padding": "8px",
                 "children": [
@@ -205,12 +205,12 @@ class VideoBlog extends Page {
                                     width: "300px",
                                     height: "200px",
                                     backgroundColor: "black",
-                                  	backgroundSize: "100% 100%",
-                                  	backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
+                                    backgroundSize: "100% 100%",
+                                    backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                                 })
                             })
                         ]
-                    }),new Container({
+                    }), new Container({
                         height: "240px",
                         children: [
                             new ListTile({
@@ -227,12 +227,12 @@ class VideoBlog extends Page {
                                     width: "300px",
                                     height: "200px",
                                     backgroundColor: "black",
-                                  	backgroundSize: "100% 100%",
-                                  	backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
+                                    backgroundSize: "100% 100%",
+                                    backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                                 })
                             })
                         ]
-                    }),new Container({
+                    }), new Container({
                         height: "240px",
                         children: [
                             new ListTile({
@@ -249,8 +249,8 @@ class VideoBlog extends Page {
                                     width: "300px",
                                     height: "200px",
                                     backgroundColor: "black",
-                                  	backgroundSize: "100% 100%",
-                                  	backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
+                                    backgroundSize: "100% 100%",
+                                    backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                                 })
                             })
                         ]
@@ -284,44 +284,74 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Div({width:"360px",height:"200px",id:"video",tagName:"video",classNameOverride: true}),
-                         new Div({width:"40px",height:"40px",fontSize:"35px",backgroundColor:"red",child:new Icon("not_started"),onclick:()=>{
-              // Prefer camera resolution nearest to 1280x720.
-				const constraints = { audio: true, video: { width: 1280, height: 720 } };
-				let done=false;
-                navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
-                  if(!done){
-                      const video = document.querySelector('video');
-                      video.srcObject = mediaStream;
-                      video.onloadedmetadata = function(e) {
-                        if(!done)
-                        {
-                          video.play();
-                          let mediaRecorder = new MediaRecorder(mediaStream);
-                          mediaRecorder.start(1000);
-                          let chunks = [];
-                          mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
-                          mediaRecorder.onstop = function(e) {
-                              console.log("stopped");
-                              var blob = new Blob(chunks, { 'type' : 'video/webm' });  
-                              video.srcObject=null;
-                              video.src = URL.createObjectURL(blob);
-                              video.pause();
-                              video.setAttribute("controls","true");
-                              video.setAttribute("loop","false");
-                          }
-                          setTimeout(()=>{console.log("stop");done=true;mediaRecorder.stop();mediaStream.stop();},10000);
-                        }
-                      }
-                      };
+            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Div({
+                    width: "360px",
+                    height: "200px",
+                    id: "video",
+                    tagName: "video",
+                    classNameOverride: true
+                }),
+                new Div({
+                    width: "40px",
+                    height: "40px",
+                    fontSize: "35px",
+                    backgroundColor: "red",
+                    child: new Icon("not_started"),
+                    onclick: () => {
+                        // Prefer camera resolution nearest to 1280x720.
+                        const constraints = {
+                            audio: true,
+                            video: {
+                                width: 1280,
+                                height: 720
+                            }
+                        };
+                        let done = false;
+                        navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+                            if (!done) {
+                                const video = document.querySelector('video');
+                                video.srcObject = mediaStream;
+                                video.onloadedmetadata = function(e) {
+                                    if (!done) {
+                                        video.play();
+                                        let mediaRecorder = new MediaRecorder(mediaStream);
+                                        mediaRecorder.start(1000);
+                                        let chunks = [];
+                                        mediaRecorder.ondataavailable = function(e) {
+                                            chunks.push(e.data);
+                                        }
+                                        mediaRecorder.onstop = function(e) {
+                                            console.log("stopped");
+                                            var blob = new Blob(chunks, {
+                                                'type': 'video/webm'
+                                            });
+                                            video.srcObject = null;
+                                            video.src = URL.createObjectURL(blob);
+                                            video.pause();
+                                            video.setAttribute("controls", "true");
+                                            video.setAttribute("loop", "false");
+                                        }
+                                        setTimeout(() => {
+                                            console.log("stop");
+                                            done = true;
+                                            mediaRecorder.stop();
+                                            mediaStream.stop();
+                                        }, 10000);
+                                    }
+                                }
+                            };
 
 
 
-                  
-                  
-                  
-                    }).catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
-            }})]
+
+
+
+                        }).catch(function(err) {
+                            console.log(err.name + ": " + err.message);
+                        }); // always check for errors at the end.
+                    }
+                })
+            ]
         });
     }
 }
