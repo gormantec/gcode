@@ -288,26 +288,31 @@ class AddVideo extends Page {
                          new Div({width:"40px",height:"40px",fontSize:"35px",backgroundColor:"red",child:new Icon("not_started"),onclick:()=>{
               // Prefer camera resolution nearest to 1280x720.
 				const constraints = { audio: true, video: { width: 1280, height: 720 } };
-
+				let done=false;
                 navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+                  if(!done){
                       const video = document.querySelector('video');
                       video.srcObject = mediaStream;
                       video.onloadedmetadata = function(e) {
-                        video.play();
-                        let mediaRecorder = new MediaRecorder(mediaStream);
-                        mediaRecorder.start(1000);
-                        let chunks = [];
-                        mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
-                        mediaRecorder.onstop = function(e) {
-                            console.log("stopped");
-                            var blob = new Blob(chunks, { 'type' : 'video/webm' });  
-                          	video.srcObject=null;
-                            video.src = URL.createObjectURL(blob);
-                          	video.pause();
-                          	video.setAttribute("controls","true");
-                          	video.setAttribute("loop","false");
+                        if(!done)
+                        {
+                          video.play();
+                          let mediaRecorder = new MediaRecorder(mediaStream);
+                          mediaRecorder.start(1000);
+                          let chunks = [];
+                          mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
+                          mediaRecorder.onstop = function(e) {
+                              console.log("stopped");
+                              var blob = new Blob(chunks, { 'type' : 'video/webm' });  
+                              video.srcObject=null;
+                              video.src = URL.createObjectURL(blob);
+                              video.pause();
+                              video.setAttribute("controls","true");
+                              video.setAttribute("loop","false");
+                          }
+                          setTimeout(()=>{console.log("stop");done=true;mediaRecorder.stop();mediaStream.stop();},10000);
                         }
-                        setTimeout(()=>{console.log("stop");mediaRecorder.stop();mediaStream.stop();},10000);
+                      }
                       };
 
 
