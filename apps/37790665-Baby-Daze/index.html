@@ -284,13 +284,14 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({child:new Div({
+            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Div({
                     width: "320px",
                     height: "180px",
                     id: "video",
                     tagName: "video",
+              		backgroundColor:"black",
                     classNameOverride: true
-                })}),
+                }),
                 new Center({
                     width: "40px",
                     height: "40px",
