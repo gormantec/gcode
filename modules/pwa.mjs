@@ -186,6 +186,7 @@ class PWA {
 
 
         this.pwaBody.setChild({ child: aPage });
+        if(aPage.onOpen)aPage.onOpen();
         this.alertPageChangeListener(aPage.pageId);
 
     }
@@ -806,6 +807,14 @@ class Page extends Div {
         }
         if (params && params.hideFloatingActionButton && params.hideFloatingActionButton == "true") this.hideFloatingActionButtonFlag = "true";
         if (params && params.hideFooter && params.hideFooter == "true") this.hideFooterFlag = "true";
+        if(params.onOpen)
+        {
+            this.onOpen=params.onOpen;
+        }
+        else if(params.onopen)
+        {
+            this.onOpen=params.onopen;
+        }
     }
 
     static getPage(id) {
