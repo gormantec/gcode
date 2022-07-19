@@ -299,8 +299,9 @@ class AddVideo extends Page {
                         const constraints = {
                             audio: true,
                             video: {
-                                width: 1280,
-                                height: 720
+                                width: 320,
+                                height: 180,
+                              	facingMode:"environment"
                             }
                         };
                         let done = false;
