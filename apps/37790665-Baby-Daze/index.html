@@ -314,11 +314,11 @@ class AddVideo extends Page {
                         navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
                             if (!done) {
                                 const video = document.querySelector('video');
+                              	video.setAttribute("muted", "true");
                                 video.srcObject = mediaStream;
                                 video.onloadedmetadata = function(e) {
                                     if (!done) {
                                         video.play();
-										video.setAttribute("muted", "true");
                                         let mediaRecorder = new MediaRecorder(mediaStream);
                                         mediaRecorder.start(1000);
                                         let chunks = [];
