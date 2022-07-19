@@ -310,7 +310,6 @@ class AddVideo extends Page {
                                 video.srcObject = mediaStream;
                                 video.onloadedmetadata = function(e) {
                                     if (!done) {
-                                      	video.mute();
                                         video.play();
                                         let mediaRecorder = new MediaRecorder(mediaStream);
                                         mediaRecorder.start(1000);
