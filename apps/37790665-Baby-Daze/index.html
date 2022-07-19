@@ -293,6 +293,30 @@ class AddVideo extends Page {
                       const video = document.querySelector('video');
                       video.srcObject = mediaStream;
                       video.onloadedmetadata = function(e) {video.play();};
+                  
+                      let mediaRecorder = new MediaRecorder(mediaStream);
+
+                      // save for later so we can mediaRecorder.stop() from a button click
+                      this.set('mediaRecorder', mediaRecorder); 
+
+                      // Start with number of ms per "chunk"
+                      mediaRecorder.start(1000);
+
+                      let chunks = [];
+
+                      mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
+
+                      mediaRecorder.onstop = function(e) {
+                          var blob = new Blob(chunks, { 'type' : 'video/webm' });               
+                          video.src = URL.createObjectURL(blob);
+                      }
+                  
+                  	  setTimeout(()=>{mediaRecorder.stop();},10000);
+
+                  
+                  
+                  
+                  
                     }).catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
             }})]
         });
