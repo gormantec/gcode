@@ -96,6 +96,8 @@ import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video} from './lib/fl
 try {
     Page.clearPages();
 } catch (e) {}
+
+let listView=null;
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -186,7 +188,8 @@ class VideoBlog extends Page {
             "backgroundColor": "#FAEBF2",
             "hideFooter": "true",
             "floatingActionButtonPage": "AddVideo",
-            "child": new ListView({
+        })
+      	listView=new ListView({
                 "padding": "8px",
                 "children": [
                     new Container({
@@ -257,8 +260,8 @@ class VideoBlog extends Page {
                         ]
                     })
                 ]
-            })
-        })
+            });
+      	this.appendChild(listView);
     }
 }
 class SomeOtherPage extends Page {
@@ -331,7 +334,7 @@ class AddVideo extends Page {
                                             video.src = b;
                                             video.pause();
                                             video.setAttribute("controls", "true");
-                                            document.querySelector('#myListView').appendChild(new Container({
+                                            listView.appendChild(new Container({
                                                     height: "240px",
                                                     children: [
                                                         new ListTile({
