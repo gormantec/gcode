@@ -299,6 +299,7 @@ class AddVideo extends Page {
                         let chunks = [];
                         mediaRecorder.ondataavailable = function(e) {  chunks.push(e.data);  }
                         mediaRecorder.onstop = function(e) {
+                            console.log("stopped");
                             var blob = new Blob(chunks, { 'type' : 'video/webm' });               
                             video.src = URL.createObjectURL(blob);
                         }
