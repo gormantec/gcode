@@ -309,9 +309,17 @@ class AddVideo extends Page {
                             if (!done) {
                                 const video = document.querySelector('video');
                                 video.srcObject = mediaStream;
+                              	video.volume = 0.0;
+                              	video.muted = true;
                                 video.onloadedmetadata = function(e) {
                                     if (!done) {
+                                      	
+                                        video.volume = 0.0;
+                                        video.muted = true;
                                         video.play();
+                                      
+                                        video.volume = 0.0;
+                                        video.muted = true;
                                         let mediaRecorder = new MediaRecorder(mediaStream);
                                         mediaRecorder.start(1000);
                                         let chunks = [];
