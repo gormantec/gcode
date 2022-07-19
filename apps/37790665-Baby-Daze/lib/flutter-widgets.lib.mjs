@@ -72,7 +72,7 @@ export class ListView extends Div {
   	
   	appendChild(child)
     {
-      	this.divChildren.push(child);
+      	//this.divChildren.push(child);
       	super.appendChild(new Div({
                 "position": "relative",
                 "padding": "8px",
