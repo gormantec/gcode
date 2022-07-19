@@ -61,7 +61,7 @@ export class ListView extends Div {
         }
         for (let i = 0; i < this.divChildren.length; i++) {
             console.log("x");
-            this.appendChild(new Div({
+            super.appendChild(new Div({
                 "position": "relative",
                 "padding": "8px",
                 height: this.divChildren[i].style.height,
@@ -69,10 +69,37 @@ export class ListView extends Div {
             }));
         }
     }
+  	
+  	appendChild(child)
+    {
+      	this.divChildren.push(child);
+      	super.appendChild(new Div({
+                "position": "relative",
+                "padding": "8px",
+                height: child.style.height,
+                child: child
+            }));
+    }
 }
 export class Container extends Div {
     constructor(params) {
         super(params);
+    }
+}
+export class Video extends Div {
+    constructor(params) {
+        super({
+          			width: params.width?params.width:"320px",
+                    height: params.height?params.height:"180px",
+                    id: params.id?params.id:"video-"+Date.now(),
+                    tagName: "video",
+              		backgroundColor:"black",
+                    classNameOverride: true
+              });
+      	if(params.src)
+        {
+          	this.element.src=params.src;
+        }
     }
 }
 export class Center extends Div {
