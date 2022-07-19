@@ -99,7 +99,15 @@ export class Video extends Div {
       	if(params.src)
         {
           	this.element.src=params.src;
-          	this.element.setAttribute("controls", "true");
+          	this.element.setAttribute("controls", "controls");
+        }
+      	if(params.muted)
+        {
+          	this.element.setAttribute("muted","muted");
+        }
+      	if(params.controls)
+        {
+          	this.element.setAttribute("controls","controls");
         }
     }
 }

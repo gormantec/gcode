@@ -288,14 +288,7 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Div({
-                    width: "320px",
-                    height: "180px",
-                    id: "video",
-                    tagName: "video",
-                    backgroundColor: "black",
-                    classNameOverride: true
-                }),
+            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Video({id: "video",muted:"true"}),
                 new Center({
                     width: "40px",
                     height: "40px",
@@ -314,7 +307,6 @@ class AddVideo extends Page {
                         navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
                             if (!done) {
                                 const video = document.querySelector('video');
-                              	video.setAttribute("muted", "true");
                                 video.srcObject = mediaStream;
                                 video.onloadedmetadata = function(e) {
                                     if (!done) {
@@ -335,7 +327,7 @@ class AddVideo extends Page {
                                             let b = URL.createObjectURL(blob);
                                             video.src = b;
                                             video.pause();
-                              				video.setAttribute("controls", "true");
+                              				video.setAttribute("controls", "");
 											video.removeAttribute("muted");
                                             listView.appendChild(new Container({
                                                     height: "240px",
