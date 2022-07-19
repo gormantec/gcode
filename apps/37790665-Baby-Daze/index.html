@@ -318,6 +318,7 @@ class AddVideo extends Page {
                                 video.srcObject = mediaStream;
                                 video.onloadedmetadata = function(e) {
                                     if (!done) {
+                                      	video.mute();
                                         video.play();
                                         let mediaRecorder = new MediaRecorder(mediaStream);
                                         mediaRecorder.start(1000);
@@ -334,6 +335,7 @@ class AddVideo extends Page {
                                             let b = URL.createObjectURL(blob);
                                             video.src = b;
                                             video.pause();
+                              				video.setAttribute("controls", "true");
 											video.removeAttribute("muted");
                                             listView.appendChild(new Container({
                                                     height: "240px",
