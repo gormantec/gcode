@@ -329,7 +329,6 @@ class AddVideo extends Page {
                                             video.src = URL.createObjectURL(blob);
                                             video.pause();
                                             video.setAttribute("controls", "true");
-                                            video.setAttribute("loop", "false");
                                         }
                                         setTimeout(() => {
                                             console.log("stop");
