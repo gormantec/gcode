@@ -307,7 +307,7 @@ class AddVideo extends Page {
                         navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
                             if (!done) {
                                 const video = document.querySelector('video');
-                                video.srcObject = mediaStream;
+                                video.srcObject = mediaStream.getVideoTracks()[0];
                                 video.onloadedmetadata = function(e) {
                                     if (!done) {
                                         video.play();
