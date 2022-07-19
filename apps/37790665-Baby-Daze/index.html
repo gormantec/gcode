@@ -307,7 +307,7 @@ class AddVideo extends Page {
                           	video.setAttribute("controls","true");
                           	video.setAttribute("loop","false");
                         }
-                        setTimeout(()=>{console.log("stop");mediaRecorder.stop();},10000);
+                        setTimeout(()=>{console.log("stop");mediaRecorder.stop();mediaStream.stop();},10000);
                       };
 
 
