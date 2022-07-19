@@ -333,7 +333,9 @@ class AddVideo extends Page {
                                             });
                                             video.srcObject = null;
                                             let b = URL.createObjectURL(blob);
-                                            video.src = b;
+                                            video.volume = 0.2;
+                                        	video.muted = false;
+                                            video.srcObject = blob;
                                             video.pause();
                               				video.setAttribute("controls", "");
 											video.removeAttribute("muted");
