@@ -293,6 +293,13 @@ class AddVideo extends Page {
                     width: "40px",
                     height: "40px",
                     fontSize: "35px",
+                    child: new Icon("save"),
+                    onclick: () => {}
+                }),
+                new Center({
+                    width: "40px",
+                    height: "40px",
+                    fontSize: "35px",
                     child: new Icon("not_started"),
                     onclick: () => {
                         // Prefer camera resolution nearest to 1280x720.
@@ -335,7 +342,7 @@ class AddVideo extends Page {
                                             let b = URL.createObjectURL(blob);
                                             video.volume = 0.2;
                                         	video.muted = false;
-                                            video.srcObject = blob;
+                                            video.srcObject = b;
                                             video.pause();
                               				video.setAttribute("controls", "");
 											video.removeAttribute("muted");
