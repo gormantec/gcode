@@ -303,6 +303,7 @@ class AddVideo extends Page {
                             var blob = new Blob(chunks, { 'type' : 'video/webm' });  
                           	video.srcObject=null;
                             video.src = URL.createObjectURL(blob);
+                          	video.pause();
                         }
                         setTimeout(()=>{console.log("stop");mediaRecorder.stop();},10000);
                       };
