@@ -361,7 +361,7 @@ class AddVideo extends Page {
                     })
                 }),
                          
-                new Center({height:"100px",bottom:"0px",
+                new Center({height:"60px",bottom:"150px",
                     child: new Div({
                       	id:"recButton",
                         width: "50px",
@@ -371,8 +371,14 @@ class AddVideo extends Page {
                         child: new Icon("radio_button_checked"),
                         onclick: () => {
 
-        						document.querySelector('video').style.color="red";
+        						document.querySelector('recButton').style.color="red";
                                 const video = document.querySelector('video');
+                          		video.src = null;
+                          		video.srcObject = mediaStream;
+								video.removeAttribute("controls");
+                                video.setAttribute("muted");
+                                video.volume = 0.0;
+                                video.muted = true;
                                 let mediaRecorder = new MediaRecorder(mediaStream);
                                 mediaRecorder.start(1000);
                                 let chunks = [];
@@ -415,7 +421,7 @@ class AddVideo extends Page {
                                 setTimeout(() => {
                                     console.log("stop");
                                     mediaRecorder.stop();
-                                  	document.querySelector('video').style.color="black";
+                                  	document.querySelector('recButton').style.color="black";
                                 }, 10000);
                         }
                     })
