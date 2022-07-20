@@ -200,7 +200,7 @@ class VideoBlog extends Page {
                 };
                 request.onsuccess = function (event) {
                   db = request.result;
-                  var transaction = db.transaction(["videos"], "read");
+                  var transaction = db.transaction(["videos"], "readonly");
                   var get = transaction.objectStore("videos").getAll();
                   get.onsuccess = function(event) {
                     console.log(event.target.result);
