@@ -179,18 +179,17 @@ class HomePage extends Page {
             child: new Div({
                 "id": "getUDIDButton",
                 "position": "absolute",
-                "bottom": "35px",
+                "bottom": "55px",
                 "height": "42px",
                 "width": "200px",
                 borderRadius: "8px",
-                paddingTop: "10px",
                 backgroundColor: "#555555",
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "zIndex": "10001",
                 "textAlign": "center",
-                "innerText": "Get UDID",
+                "child": new Center({child:new Text("Get UDID")}),
                 "display": "none",
                 onclick: () => {
                     window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
@@ -203,18 +202,17 @@ class HomePage extends Page {
             child: new Div({
                 "id": "sendToGcodeButton",
                 "position": "absolute",
-                "bottom": "35px",
+                "bottom": "55px",
                 "height": "32px",
                 "width": "200px",
                 borderRadius: "8px",
-                paddingTop: "10px",
                 backgroundColor: "#555555",
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "zIndex": "10001",
                 "textAlign": "center",
-                "innerText": "Send info to gcode",
+                "innerText": new Center({child:new Text("Send info to gcode")}),
                 "display": "none",
                 onclick: () => {
                     console.log("click");
@@ -231,7 +229,7 @@ class HomePage extends Page {
             "id": "getEmailButton",
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-            bottom: "20px",
+            bottom: "45px",
             onsignin: (s) => {
                 if (s.email) localStorage.setItem('Email', s.email);
                 if (s.name) localStorage.setItem('Name', s.name);
