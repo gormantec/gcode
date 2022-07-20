@@ -145,7 +145,7 @@ class HomePage extends Page {
                                     "marginRight": "auto",
                                     "marginTop": "30px",
                 					"fontWeight":"900",
-                                    "child": new Text("LOCKED"),
+                                    "child": new Center({new Text("LOCKED")}),
                                     "onclick": (e) => {
                                       let lockB1=document.getElementById("lockB1");
                                       let lockB2=document.getElementById("lockB2");
@@ -173,7 +173,7 @@ class HomePage extends Page {
                                     "marginLeft": "auto",
                                     "marginRight": "auto",
                                     "marginTop": "30px",
-                                    "child": new Text("UNLOCK"),
+                                    "child": new Center({child:new Text("UNLOCK")}),
                                     "onclick": (e) => {
                                       let lockB1=document.getElementById("lockB1");
                                       let lockB2=document.getElementById("lockB2");
