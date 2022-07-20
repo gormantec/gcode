@@ -424,7 +424,7 @@ class AddVideo extends Page {
                                       dbVersion = 2.0;
 
                                   // Create/open database
-                                  var request = indexedDB.open("babyVideos2", dbVersion),db;
+                                  var request = indexedDB.open("babyVideos3", dbVersion),db;
 
                                   request.onerror = function (event) {
                                       console.log("Error creating/accessing IndexedDB database");
@@ -445,7 +445,7 @@ class AddVideo extends Page {
 
                                   // For future use. Currently only in latest Firefox versions
                                   request.onupgradeneeded = function (event) {
-                                          db.createObjectStore("videos");
+                                          event.target.result.createObjectStore("videos");
                                   };
                                   
                                   
