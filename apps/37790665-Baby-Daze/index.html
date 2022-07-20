@@ -290,6 +290,8 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "onopen": () => {
+              
+                document.querySelector('#recButton').style.color="grey";
                 let done = false;
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
@@ -311,6 +313,7 @@ class AddVideo extends Page {
                                 video.volume = 0.0;
                                 video.muted = true;
                                 done = true;
+                              	document.querySelector('#recButton').style.color="black";
                             }
                         }
                     }
@@ -371,7 +374,7 @@ class AddVideo extends Page {
                         child: new Icon("radio_button_checked"),
                         onclick: () => {
 
-        						document.querySelector('recButton').style.color="red";
+        						document.querySelector('#recButton').style.color="red";
                                 const video = document.querySelector('video');
                           		video.src = null;
                           		video.srcObject = mediaStream;
@@ -421,7 +424,7 @@ class AddVideo extends Page {
                                 setTimeout(() => {
                                     console.log("stop");
                                     mediaRecorder.stop();
-                                  	document.querySelector('recButton').style.color="black";
+                                  	document.querySelector('#recButton').style.color="black";
                                 }, 10000);
                         }
                     })
