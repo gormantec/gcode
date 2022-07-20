@@ -379,7 +379,7 @@ class AddVideo extends Page {
                           		video.src = null;
                           		video.srcObject = mediaStream;
 								video.removeAttribute("controls");
-                                video.setAttribute("muted");
+                                video.setAttribute("muted","muted");
                                 video.volume = 0.0;
                                 video.muted = true;
                                 let mediaRecorder = new MediaRecorder(mediaStream);
@@ -399,7 +399,7 @@ class AddVideo extends Page {
                                     video.muted = false;
                                     video.src = b;
                                     video.pause();
-                                    video.setAttribute("controls", "");
+                                    video.setAttribute("controls", "controls");
                                     video.removeAttribute("muted");
                                     listView.appendChild(new Container({
                                         height: "240px",
