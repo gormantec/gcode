@@ -346,7 +346,9 @@ class AddVideo extends Page {
                     video: {
                         width: 320,
                         height: 180,
-                        facingMode: "environment"
+                        facingMode: "environment",
+                      	resizeMode: "crop-and-scale",
+                      	aspectRatio: { exact: 1.7777777778 }
                     }
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
