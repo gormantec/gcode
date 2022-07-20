@@ -98,6 +98,7 @@ try {
 } catch (e) {}
 
 let listView=null;
+let mediaStream=null;
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -296,7 +297,8 @@ class AddVideo extends Page {
                         height: 180,
                         facingMode: "environment"
                     }
-                }).then(function(mediaStream) {
+                }).then(function(aMediaStream) {
+                  	mediaStream=aMediaStream;
                     if (!done) {
                         const video = document.querySelector('video');
                         video.srcObject = mediaStream;
