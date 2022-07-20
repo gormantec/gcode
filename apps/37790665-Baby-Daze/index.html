@@ -374,7 +374,7 @@ class AddVideo extends Page {
             },
             "id": params ? params.id : null,
             "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({
-                    height: "260px",
+                    height: "280px",
                     top: "0px",
                     child: new Video({
                         id: "video",
@@ -383,7 +383,7 @@ class AddVideo extends Page {
                       	autoplay: "true"
                     })
                 }),
-                new Form({top:"290px",padding:"20px",children:[new TextFormField({})]}),
+                new Form({top:"280px",paddingLeft:"20px",paddingRight:"20px",children:[new TextFormField({})]}),
 
                 new Center({
                     height: "60px",
