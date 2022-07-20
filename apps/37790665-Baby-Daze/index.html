@@ -360,15 +360,18 @@ class AddVideo extends Page {
                         }
                     })
                 }),
+                         
                 new Center({height:"100px",bottom:"0px",
                     child: new Div({
-                        width: "40px",
-                        height: "40px",
-                        fontSize: "35px",
-                        child: new Icon("not_started"),
+                      	id:"recButton",
+                        width: "50px",
+                        height: "50px",
+                        fontSize: "45px",
+                      	color: "black",
+                        child: new Icon("radio_button_checked"),
                         onclick: () => {
 
-        
+        						document.querySelector('video').style.color="red";
                                 const video = document.querySelector('video');
                                 let mediaRecorder = new MediaRecorder(mediaStream);
                                 mediaRecorder.start(1000);
@@ -412,6 +415,7 @@ class AddVideo extends Page {
                                 setTimeout(() => {
                                     console.log("stop");
                                     mediaRecorder.stop();
+                                  	document.querySelector('video').style.color="black";
                                 }, 10000);
                         }
                     })
