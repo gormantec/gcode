@@ -426,18 +426,12 @@ class AddVideo extends Page {
                                   // Create/open database
                                   var request = indexedDB.open("babyVideos", dbVersion),
                                       db,
-                                      createObjectStore = function (dataBase) {
-                                          // Create an objectStore
-                                          console.log("Creating objectStore")
-                                          dataBase.createObjectStore("videos");
-                                      },
                                       putVideoInDb = function (blob) {
                                           console.log("Putting video in IndexedDB");
 
                                           // Open a transaction to the database
                                           var transaction = db.transaction(["videos"], IDBTransaction.READ_WRITE);
 										  var videoName="video-"+Date.now();
-                                          // Put the blob into the dabase
                                           var put = transaction.objectStore("videos").put(blob, videoName);
 
                                           // Retrieve the file that was just stored
@@ -461,28 +455,14 @@ class AddVideo extends Page {
                                       db.onerror = function (event) {
                                           console.log("Error creating/accessing IndexedDB database");
                                       };
-
-                                      // Interim solution for Google Chrome to create an objectStore. Will be deprecated
-                                      if (db.setVersion) {
-                                          if (db.version != dbVersion) {
-                                              var setVersion = db.setVersion(dbVersion);
-                                              setVersion.onsuccess = function () {
-                                                  createObjectStore(db);
-                                                  putVideoInDb(_blob);
-                                              };
-                                          }
-                                          else {
-                                              putVideoInDb(_blob);
-                                          }
-                                      }
-                                      else {
-                                          putVideoInDb(_blob);
-                                      }
+                                      var videoName="video-"+Date.now();  
+                                      var transaction = db.transaction(["videos"], IDBTransaction.READ_WRITE);
+                                      var put = transaction.objectStore("videos").put(_blob, videoName);
                                   }
 
                                   // For future use. Currently only in latest Firefox versions
                                   request.onupgradeneeded = function (event) {
-                                      createObjectStore(event.target.result);
+                                          db.createObjectStore("videos");
                                   };
                                   
                                   
