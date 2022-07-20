@@ -431,28 +431,6 @@ class AddVideo extends Page {
                                           console.log("Creating objectStore")
                                           dataBase.createObjectStore("videos");
                                       },
-
-                                      getVideoFile = function () {
-                                          // Create XHR
-                                          var xhr = new XMLHttpRequest(),
-                                              blob;
-                                          xhr.open("GET", "video.webm", true);
-                                          // Set the responseType to blob
-                                          xhr.responseType = "blob";
-                                          xhr.addEventListener("load", function () {
-                                              if (xhr.status === 200) {
-                                                  console.log("Video retrieved");
-                                                  // Blob as response
-                                                  blob = xhr.response;
-                                                  console.log("Blob:" + blob);
-                                                  // Put the received blob into IndexedDB
-                                                  putVideoInDb(blob);
-                                              }
-                                          }, false);
-                                          // Send XHR
-                                          xhr.send();
-                                      },
-
                                       putVideoInDb = function (blob) {
                                           console.log("Putting video in IndexedDB");
 
@@ -490,15 +468,15 @@ class AddVideo extends Page {
                                               var setVersion = db.setVersion(dbVersion);
                                               setVersion.onsuccess = function () {
                                                   createObjectStore(db);
-                                                  getVideoFile();
+                                                  putVideoInDb(_blob);
                                               };
                                           }
                                           else {
-                                              getVideoFile();
+                                              putVideoInDb(_blob);
                                           }
                                       }
                                       else {
-                                          getVideoFile();
+                                          putVideoInDb(_blob);
                                       }
                                   }
 
