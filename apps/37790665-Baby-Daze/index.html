@@ -437,7 +437,7 @@ class AddVideo extends Page {
                                 mediaRecorder.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
-                                document.querySelector('#dateTextFormField').innerText = (new Date()).toString();
+                                document.querySelector('#dateTextFormField').innerText = (new Date()).toLocaleString();
                               
                             }, 5000);
                         }
