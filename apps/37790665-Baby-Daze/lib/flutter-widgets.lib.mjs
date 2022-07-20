@@ -69,6 +69,15 @@ export class ListView extends Div {
             }));
         }
     }
+  
+  	removeChildren()
+    {
+        var child = this.element.lastElementChild; 
+        while (child) {
+            this.element.removeChild(child);
+            child = this.element.lastElementChild;
+        }
+    }
   	
   	appendChild(child)
     {

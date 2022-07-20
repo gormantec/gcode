@@ -204,6 +204,36 @@ class VideoBlog extends Page {
                   var get = transaction.objectStore("videos").getAll();
                   get.onsuccess = function(event) {
                     console.log(event.target.result);
+                    if(event.target.result && event.target.result.length>0)
+                    {
+                      listView.removeChildren();
+                      for(let i=0;i<event.target.result.length;i++)
+                      {
+                        	let b = URL.createObjectURL(event.target.result[i]);
+                                listView.appendChild(new Container({
+                                    height: "240px",
+                                    children: [
+                                        new ListTile({
+                                            color: "#545454",
+                                            title: new Text("10 days ago"),
+                                            subtitle: new Text("Video of baby"),
+                                            leading: new Icon(Icons.battery_full),
+                                            trailing: new Icon(Icons.star_outline)
+                                        }), new Center({
+                                            top: "40px",
+                                            height: "200px",
+                                            child: new Video({
+                                                src: b
+                                            })
+                                        })
+                                    ]
+                                }));
+                        
+                        
+                        
+                        
+                      }
+                    }
                   };
                 }
                 request.onupgradeneeded = function (event) {
