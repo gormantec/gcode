@@ -384,7 +384,7 @@ class AddVideo extends Page {
                     })
                 }),
                 new Form({top:"260px",left:"20px",right:"20px",children:[
-                  new TextFormField({}),
+                  new TextFormField({id:"dateTextFormField"}),
                   new TextFormField({}),
                 ]}),
 
@@ -437,6 +437,8 @@ class AddVideo extends Page {
                                 mediaRecorder.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
+                                document.querySelector('#dateTextFormField').innerText = (new Date()).toString();
+                              
                             }, 5000);
                         }
                     })
@@ -468,6 +470,7 @@ class AddVideo extends Page {
                                       var videoName="video-"+Date.now();  
                                       var transaction = db.transaction(["videos"], "readwrite");
                                       var put = transaction.objectStore("videos").put(_blob,videoName);
+                                      document.querySelector('#saveButton').style.display = "none";
                                   }
                                   request.onupgradeneeded = function (event) {
                                           event.target.result.createObjectStore("videos");
