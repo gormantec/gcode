@@ -396,7 +396,7 @@ class AddVideo extends Page {
                                 mediaRecorder.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
-                            }, 10000);
+                            }, 5000);
                         }
                     })
                 }),
@@ -438,9 +438,9 @@ class AddVideo extends Page {
                                           console.log("Error creating/accessing IndexedDB database");
                                       };
                                       var videoName="video-"+Date.now();  
-                                      db.createObjectStore("videos");
+                                      //db.createObjectStore("videos");
                                       var transaction = db.transaction(["videos"], "readwrite");
-                                      var put = transaction.objectStore("videos").put(_blob);
+                                      var put = transaction.objectStore("videos").put(_blob,videoName);
                                   }
 
                                   // For future use. Currently only in latest Firefox versions
