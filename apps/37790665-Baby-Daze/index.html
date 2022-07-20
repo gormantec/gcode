@@ -325,46 +325,7 @@ class AddVideo extends Page {
                     id: "video",
                     muted: "true"
                 })}),
-                new Center({height:"60px",bottom:"50px",width:"100px",right:"0px",
-                    child: new Div({
-                      	id:"saveButton",
-                        width: "40px",
-                        height: "40px",
-                        fontSize: "35px",
-                        display: "none",
-                        child: new Icon("save"),
-                        onclick: () => {
-                            // Request persistent storage for site
-                            if (navigator.storage && navigator.storage.persist) {
-                                navigator.storage.persist().then((isPersisted) => {
-                                    console.log(`Persisted storage granted: ${isPersisted}`);
-                                    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-                                        IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
-                                        dbVersion = 1;
-                                    var request = indexedDB.open("videoStorage", dbVersion);
-
-                                    console.log("Success creating/accessing IndexedDB database");
-                                    db = request.result;
-
-                                    db.createObjectStore("blobs");
-                                    db.onerror = function(event) {
-                                        console.log("Error creating/accessing IndexedDB database");
-                                    };
-                                    var transaction = db.transaction(["blobs"], IDBTransaction.READ_WRITE);
-                                    let name = "image-" + Date.now();
-                                    transaction.objectStore("blobs").put(blob, name);
-
-                                    console.log("Success saved - " + name);
-
-                                });
-
-
-
-                            }
-                        }
-                    })
-                }),
-                         
+ 
                 new Center({height:"60px",bottom:"50px",
                     child: new Div({
                       	id:"recButton",
@@ -433,7 +394,46 @@ class AddVideo extends Page {
                                 }, 10000);
                         }
                     })
-                })
+                }),
+                new Center({height:"60px",bottom:"50px",width:"100px",right:"0px",
+                    child: new Div({
+                      	id:"saveButton",
+                        width: "40px",
+                        height: "40px",
+                        fontSize: "35px",
+                        display: "none",
+                        child: new Icon("save"),
+                        onclick: () => {
+                            // Request persistent storage for site
+                            if (navigator.storage && navigator.storage.persist) {
+                                navigator.storage.persist().then((isPersisted) => {
+                                    console.log(`Persisted storage granted: ${isPersisted}`);
+                                    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
+                                        IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
+                                        dbVersion = 1;
+                                    var request = indexedDB.open("videoStorage", dbVersion);
+
+                                    console.log("Success creating/accessing IndexedDB database");
+                                    db = request.result;
+
+                                    db.createObjectStore("blobs");
+                                    db.onerror = function(event) {
+                                        console.log("Error creating/accessing IndexedDB database");
+                                    };
+                                    var transaction = db.transaction(["blobs"], IDBTransaction.READ_WRITE);
+                                    let name = "image-" + Date.now();
+                                    transaction.objectStore("blobs").put(blob, name);
+
+                                    console.log("Success saved - " + name);
+
+                                });
+
+
+
+                            }
+                        }
+                    })
+                }),
             ]
         });
     }
