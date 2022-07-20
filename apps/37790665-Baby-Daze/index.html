@@ -456,8 +456,8 @@ class AddVideo extends Page {
                                           console.log("Error creating/accessing IndexedDB database");
                                       };
                                       var videoName="video-"+Date.now();  
-                                      var transaction = db.transaction("videos", "readwrite");
-                                      var put = transaction.objectStore("videos").put(_blob, videoName);
+                                      var transaction = db.transaction(["videos"], IDBTransaction.READ_WRITE);
+                                      var put = transaction.objectStore("videos").put(_blob);
                                   }
 
                                   // For future use. Currently only in latest Firefox versions
