@@ -439,7 +439,7 @@ class AddVideo extends Page {
                                       };
                                       var videoName="video-"+Date.now();  
                                       db.createObjectStore("videos");
-                                      var transaction = db.transaction(["videos"], IDBTransaction.READ_WRITE);
+                                      var transaction = db.transaction(["videos"], "readwrite");
                                       var put = transaction.objectStore("videos").put(_blob);
                                   }
 
