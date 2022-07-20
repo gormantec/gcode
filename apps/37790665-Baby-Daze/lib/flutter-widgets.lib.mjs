@@ -110,14 +110,20 @@ export class Video extends Div {
           	this.element.src=params.src;
           	this.element.setAttribute("controls", "controls");
         }
-      	if(params.muted)
+      	if(params.muted && params.muted!="false" && params.muted!=false)
         {
           	this.element.setAttribute("muted","muted");
         }
-      	if(params.controls)
+      	if(params.controls && params.controls!="false" && params.controls!=false)
         {
           	this.element.setAttribute("controls","controls");
         }
+      
+      	if(params.playsinline && params.playsinline!="false" && params.playsinline!=false)
+        {
+          	this.element.setAttribute("playsinline","playsinline");
+        }
+      	
     }
 }
 export class Center extends Div {
