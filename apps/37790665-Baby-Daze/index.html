@@ -209,29 +209,25 @@ class VideoBlog extends Page {
                       listView.removeChildren();
                       for(let i=0;i<event.target.result.length;i++)
                       {
-                        	let b = URL.createObjectURL(event.target.result[i]);
-                                listView.appendChild(new Container({
-                                    height: "240px",
-                                    children: [
-                                        new ListTile({
-                                            color: "#545454",
-                                            title: new Text("10 days ago"),
-                                            subtitle: new Text("Video of baby"),
-                                            leading: new Icon(Icons.battery_full),
-                                            trailing: new Icon(Icons.star_outline)
-                                        }), new Center({
-                                            top: "40px",
-                                            height: "200px",
-                                            child: new Video({
-                                                src: b
-                                            })
-                                        })
-                                    ]
-                                }));
-                        
-                        
-                        
-                        
+                          let b = URL.createObjectURL(event.target.result[i]);
+                          listView.appendChild(new Container({
+                            height: "240px",
+                            children: [
+                              new ListTile({
+                                color: "#545454",
+                                title: new Text("10 days ago"),
+                                subtitle: new Text("Video of baby"),
+                                leading: new Icon(Icons.battery_full),
+                                trailing: new Icon(Icons.star_outline)
+                              }), new Center({
+                                top: "40px",
+                                height: "200px",
+                                child: new Video({
+                                  src: b
+                                })
+                              })
+                            ]
+                          }));
                       }
                     }
                   };
