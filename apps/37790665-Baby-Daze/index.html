@@ -421,15 +421,13 @@ class AddVideo extends Page {
                                         IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
                                         dbVersion = 1;
                                     var request = indexedDB.open("videoStorage", dbVersion);
+                                  	request.upgradeneeded =function(event){                                        
+                                      	var db = event.target.result;
+                                        db.createObjectStore("blobs");
+                                    };
                                     request.onsuccess = function(event) {
                                         var db = event.target.result;
-                                        console.log("Success creating/accessing IndexedDB database");
-                                        db = event.target.result;
-
-                                        db.createObjectStore("blobs");
-                                        db.onerror = function(event) {
-                                            console.log("Error creating/accessing IndexedDB database");
-                                        };
+                                        db.onerror = function(event) {console.log("Error creating/accessing IndexedDB database");};
                                         var transaction = db.transaction(["blobs"], IDBTransaction.READ_WRITE);
                                         let name = "image-" + Date.now();
                                         transaction.objectStore("blobs").put(blob, name);
