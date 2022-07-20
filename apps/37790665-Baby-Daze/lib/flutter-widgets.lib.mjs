@@ -95,6 +95,29 @@ export class Container extends Div {
         super(params);
     }
 }
+
+export class Form extends Div {
+    constructor(params) {
+        super(params);
+    }
+}
+export class TextFormField extends Div {
+    constructor(params) {
+        super(params);
+      	this.element.setAttribute("contenteditable","true");
+      	this.style.height="30px";
+      	this.style.fontSize="24px";
+      	this.style.padding="3px";
+      	this.style.backgroundColor="white";
+      	this.style.borderBottom="2px solid #999999";
+    }
+}
+export class Padding extends Div {
+    constructor(params) {
+        super(params);
+    }
+}
+
 export class Video extends Div {
     constructor(params) {
         super({
@@ -123,6 +146,11 @@ export class Video extends Div {
         {
           	this.element.setAttribute("playsinline","playsinline");
         }
+      	if(params.autoplay && params.autoplay!="false" && params.autoplay!=false)
+        {
+          	this.element.setAttribute("autoplay","autoplay");
+        }
+      
       	
     }
 }
