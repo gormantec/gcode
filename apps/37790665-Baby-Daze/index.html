@@ -376,8 +376,11 @@ class AddVideo extends Page {
 
         						document.querySelector('#recButton').style.color="red";
                                 const video = document.querySelector('video');
-                          		video.src = null;
-                          		video.srcObject = mediaStream;
+                          		if(!video.srcObject && mediaStream)
+                                {
+                                  video.src = null;
+                                  video.srcObject = mediaStream;
+                                }
 								video.removeAttribute("controls");
                                 video.setAttribute("muted","muted");
                                 video.volume = 0.0;
