@@ -421,28 +421,10 @@ class AddVideo extends Page {
                                   // IndexedDB
                                   var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
                                       IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
-                                      dbVersion = 1.0;
+                                      dbVersion = 2.0;
 
                                   // Create/open database
-                                  var request = indexedDB.open("babyVideos", dbVersion),
-                                      db,
-                                      putVideoInDb = function (blob) {
-                                          console.log("Putting video in IndexedDB");
-
-                                          // Open a transaction to the database
-                                          var transaction = db.transaction(["videos"], IDBTransaction.READ_WRITE);
-										  var videoName="video-"+Date.now();
-                                          var put = transaction.objectStore("videos").put(blob, videoName);
-
-                                          // Retrieve the file that was just stored
-                                          transaction.objectStore("videos").get(videoName).onsuccess = function (event) {
-                                              var imgFile = event.target.result;
-                                              console.log("Got "+videoName+" " + imgFile);
-                                              var URL = window.URL || window.webkitURL;
-                                              var imgURL = URL.createObjectURL(imgFile);
-                                              URL.revokeObjectURL(imgURL);
-                                          };
-                                      };
+                                  var request = indexedDB.open("babyVideos2", dbVersion),db;
 
                                   request.onerror = function (event) {
                                       console.log("Error creating/accessing IndexedDB database");
