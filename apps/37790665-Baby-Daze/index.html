@@ -99,6 +99,7 @@ try {
 
 let listView=null;
 let mediaStream=null;
+let _blob=null;
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -381,7 +382,7 @@ class AddVideo extends Page {
                                         'type': 'video/webm'
                                     });
                                     video.srcObject = null;
-                                    let b = URL.createObjectURL(blob);
+                                    let b = URL.createObjectURL(_blob);
                                     video.volume = 0.2;
                                     video.muted = false;
                                     video.srcObject = b;
