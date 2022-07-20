@@ -61,7 +61,7 @@ export class ListView extends Div {
         }
         for (let i = 0; i < this.divChildren.length; i++) {
             console.log("x");
-            this.appendChild(new Div({
+            super.appendChild(new Div({
                 "position": "relative",
                 "padding": "8px",
                 height: this.divChildren[i].style.height,
@@ -69,10 +69,89 @@ export class ListView extends Div {
             }));
         }
     }
+  
+  	removeChildren()
+    {
+        var child = this.element.lastElementChild; 
+        while (child) {
+            this.element.removeChild(child);
+            child = this.element.lastElementChild;
+        }
+    }
+  	
+  	appendChild(child)
+    {
+      	//this.divChildren.push(child);
+      	super.appendChild(new Div({
+                "position": "relative",
+                "padding": "8px",
+                height: child.style.height,
+                child: child
+            }));
+    }
 }
 export class Container extends Div {
     constructor(params) {
         super(params);
+    }
+}
+
+export class Form extends Div {
+    constructor(params) {
+        super(params);
+    }
+}
+export class TextFormField extends Div {
+    constructor(params) {
+        super(params);
+      	this.element.setAttribute("contenteditable","true");
+      	this.style.height="30px";
+      	this.style.fontSize="24px";
+      	this.style.padding="3px";
+      	this.style.backgroundColor="white";
+      	this.style.borderBottom="2px solid #999999";
+    }
+}
+export class Padding extends Div {
+    constructor(params) {
+        super(params);
+    }
+}
+
+export class Video extends Div {
+    constructor(params) {
+        super({
+          			width: params.width?params.width:"320px",
+                    height: params.height?params.height:"180px",
+                    id: params.id?params.id:"video-"+Date.now(),
+                    tagName: "video",
+              		backgroundColor:"black",
+                    classNameOverride: true
+              });
+      	if(params.src)
+        {
+          	this.element.src=params.src;
+          	this.element.setAttribute("controls", "controls");
+        }
+      	if(params.muted && params.muted!="false" && params.muted!=false)
+        {
+          	this.element.setAttribute("muted","muted");
+        }
+      	if(params.controls && params.controls!="false" && params.controls!=false)
+        {
+          	this.element.setAttribute("controls","controls");
+        }
+      
+      	if(params.playsinline && params.playsinline!="false" && params.playsinline!=false)
+        {
+          	this.element.setAttribute("playsinline","playsinline");
+        }
+      	if(params.autoplay && params.autoplay!="false" && params.autoplay!=false)
+        {
+          	this.element.setAttribute("autoplay","autoplay");
+        }
+      
+      	
     }
 }
 export class Center extends Div {
