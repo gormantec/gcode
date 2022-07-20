@@ -189,79 +189,79 @@ class VideoBlog extends Page {
             "hideFooter": "true",
             "floatingActionButtonPage": "AddVideo",
         })
-      	listView=new ListView({
-                "padding": "8px",
-                "children": [
-                    new Container({
-                        height: "240px",
-                        children: [
-                            new ListTile({
-                                color: "#545454",
-                                title: new Text("10 days ago"),
-                                subtitle: new Text("Video of baby"),
-                                leading: new Icon(Icons.battery_full),
-                                trailing: new Icon(Icons.star_outline),
-                                onclick: () => PWA.getPWA().setPage("VideoBlog")
-                            }), new Center({
-                                top: "40px",
+        listView = new ListView({
+            "padding": "8px",
+            "children": [
+                new Container({
+                    height: "240px",
+                    children: [
+                        new ListTile({
+                            color: "#545454",
+                            title: new Text("10 days ago"),
+                            subtitle: new Text("Video of baby"),
+                            leading: new Icon(Icons.battery_full),
+                            trailing: new Icon(Icons.star_outline),
+                            onclick: () => PWA.getPWA().setPage("VideoBlog")
+                        }), new Center({
+                            top: "40px",
+                            height: "200px",
+                            child: new Container({
+                                width: "300px",
                                 height: "200px",
-                                child: new Container({
-                                    width: "300px",
-                                    height: "200px",
-                                    backgroundColor: "black",
-                                    backgroundSize: "100% 100%",
-                                    backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
-                                })
+                                backgroundColor: "black",
+                                backgroundSize: "100% 100%",
+                                backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                             })
-                        ]
-                    }), new Container({
-                        height: "240px",
-                        children: [
-                            new ListTile({
-                                color: "#545454",
-                                title: new Text("11 days ago"),
-                                subtitle: new Text("Video of baby"),
-                                leading: new Icon(Icons.battery_full),
-                                trailing: new Icon(Icons.star_outline),
-                                onclick: () => PWA.getPWA().setPage("VideoBlog")
-                            }), new Center({
-                                top: "40px",
+                        })
+                    ]
+                }), new Container({
+                    height: "240px",
+                    children: [
+                        new ListTile({
+                            color: "#545454",
+                            title: new Text("11 days ago"),
+                            subtitle: new Text("Video of baby"),
+                            leading: new Icon(Icons.battery_full),
+                            trailing: new Icon(Icons.star_outline),
+                            onclick: () => PWA.getPWA().setPage("VideoBlog")
+                        }), new Center({
+                            top: "40px",
+                            height: "200px",
+                            child: new Container({
+                                width: "300px",
                                 height: "200px",
-                                child: new Container({
-                                    width: "300px",
-                                    height: "200px",
-                                    backgroundColor: "black",
-                                    backgroundSize: "100% 100%",
-                                    backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
-                                })
+                                backgroundColor: "black",
+                                backgroundSize: "100% 100%",
+                                backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                             })
-                        ]
-                    }), new Container({
-                        height: "240px",
-                        children: [
-                            new ListTile({
-                                color: "#545454",
-                                title: new Text("12 days ago"),
-                                subtitle: new Text("Video of baby"),
-                                leading: new Icon(Icons.battery_full),
-                                trailing: new Icon(Icons.star_outline),
-                                onclick: () => PWA.getPWA().setPage("VideoBlog")
-                            }), new Center({
-                                top: "40px",
+                        })
+                    ]
+                }), new Container({
+                    height: "240px",
+                    children: [
+                        new ListTile({
+                            color: "#545454",
+                            title: new Text("12 days ago"),
+                            subtitle: new Text("Video of baby"),
+                            leading: new Icon(Icons.battery_full),
+                            trailing: new Icon(Icons.star_outline),
+                            onclick: () => PWA.getPWA().setPage("VideoBlog")
+                        }), new Center({
+                            top: "40px",
+                            height: "200px",
+                            child: new Container({
+                                width: "300px",
                                 height: "200px",
-                                child: new Container({
-                                    width: "300px",
-                                    height: "200px",
-                                    backgroundColor: "black",
-                                    backgroundSize: "100% 100%",
-                                    backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
-                                })
+                                backgroundColor: "black",
+                                backgroundSize: "100% 100%",
+                                backgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)"
                             })
-                        ]
-                    })
-                ]
-            });
-      	this.appendChild(listView);
+                        })
+                    ]
+                })
+            ]
+        });
+        this.appendChild(listView);
     }
 }
 class SomeOtherPage extends Page {
@@ -287,107 +287,133 @@ class AddVideo extends Page {
             "hideFooter": "true",
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
-            "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Video({id: "video",muted:"true"}),
-                new Center({child:new Div({
-                    width: "40px",
-                    height: "40px",
-                    fontSize: "35px",
-                    child: new Icon("save"),
-                    onclick: () => {}
-                })}),
-                new Center({child:new Div({
-                    width: "40px",
-                    height: "40px",
-                    fontSize: "35px",
-                    child: new Icon("not_started"),
-                    onclick: () => {
-                        // Prefer camera resolution nearest to 1280x720.
-                        const constraints = {
-                            audio: true,
-                            video: {
-                                width: 320,
-                                height: 180,
-                              	facingMode:"environment"
-                            }
-                        };
-                        let done = false;
-                        navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
-                            if (!done) {
-                                const video = document.querySelector('video');
-                                video.srcObject = mediaStream;
-                              	video.volume = 0.0;
-                              	video.muted = true;
-                                video.onloadedmetadata = function(e) {
-                                    if (!done) {
-                                      	
-                                        video.volume = 0.0;
-                                        video.muted = true;
-                                        video.play();
-                                      
-                                        video.volume = 0.0;
-                                        video.muted = true;
-                                        let mediaRecorder = new MediaRecorder(mediaStream);
-                                        mediaRecorder.start(1000);
-                                        let chunks = [];
-                                        mediaRecorder.ondataavailable = function(e) {
-                                            chunks.push(e.data);
-                                        }
-                                        mediaRecorder.onstop = function(e) {
-                                            console.log("stopped");
-                                            var blob = new Blob(chunks, {
-                                                'type': 'video/webm'
-                                            });
-                                            video.srcObject = null;
-                                            let b = URL.createObjectURL(blob);
-                                            video.volume = 0.2;
-                                        	video.muted = false;
-                                            video.srcObject = b;
-                                            video.pause();
-                              				video.setAttribute("controls", "");
-											video.removeAttribute("muted");
-                                            listView.appendChild(new Container({
-                                                    height: "240px",
-                                                    children: [
-                                                        new ListTile({
-                                                            color: "#545454",
-                                                            title: new Text("10 days ago"),
-                                                            subtitle: new Text("Video of baby"),
-                                                            leading: new Icon(Icons.battery_full),
-                                                            trailing: new Icon(Icons.star_outline),
-                                                            onclick: () => PWA.getPWA().setPage("VideoBlog")
-                                                        }), new Center({
-                                                            top: "40px",
-                                                            height: "200px",
-                                                            child: new Video({
-                                                                src: b
-                                                            })
-                                                        })
-                                                    ]
-                                                })
-                                            );
-                                        }
-                                        setTimeout(() => {
-                                            console.log("stop");
-                                            done = true;
-                                            mediaRecorder.stop();
-                                            mediaStream.stop();
-
-                                        }, 10000);
-                                    }
-                                }
-                            };
-
-
-
-
-
-
-                        }).catch(function(err) {
-                            console.log(err.name + ": " + err.message);
-                        }); // always check for errors at the end.
+            "onopen": () => {
+                let done = false;
+                navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: {
+                        width: 320,
+                        height: 180,
+                        facingMode: "environment"
                     }
-                })})
+                }).then(function(mediaStream) {
+                    if (!done) {
+                        const video = document.querySelector('video');
+                        video.srcObject = mediaStream;
+                        video.volume = 0.0;
+                        video.muted = true;
+                        video.onloadedmetadata = function(e) {
+                            if (!done) {
+                                video.play();
+                                video.volume = 0.0;
+                                video.muted = true;
+                                done = true;
+                            }
+                        }
+                    }
+                })
+
+            },
+            "id": params ? params.id : null,
+            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Video({
+                    id: "video",
+                    muted: "true"
+                }),
+                new Center({
+                    child: new Div({
+                        width: "40px",
+                        height: "40px",
+                        fontSize: "35px",
+                        display: "none",
+                        child: new Icon("save"),
+                        onclick: () => {
+                            // Request persistent storage for site
+                            if (navigator.storage && navigator.storage.persist) {
+                                navigator.storage.persist().then((isPersisted) => {
+                                    console.log(`Persisted storage granted: ${isPersisted}`);
+                                    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
+                                        IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
+                                        dbVersion = 1;
+                                    var request = indexedDB.open("videoStorage", dbVersion);
+
+                                    console.log("Success creating/accessing IndexedDB database");
+                                    db = request.result;
+
+                                    db.createObjectStore("blobs");
+                                    db.onerror = function(event) {
+                                        console.log("Error creating/accessing IndexedDB database");
+                                    };
+                                    var transaction = db.transaction(["blobs"], IDBTransaction.READ_WRITE);
+                                    let name = "image-" + Date.now();
+                                    transaction.objectStore("blobs").put(blob, name);
+
+                                    console.log("Success saved - " + name);
+
+                                });
+
+
+
+                            }
+                        }
+                    })
+                }),
+                new Center({
+                    child: new Div({
+                        width: "40px",
+                        height: "40px",
+                        fontSize: "35px",
+                        child: new Icon("not_started"),
+                        onclick: () => {
+
+        
+                                const video = document.querySelector('video');
+                                let mediaRecorder = new MediaRecorder(mediaStream);
+                                mediaRecorder.start(1000);
+                                let chunks = [];
+                                mediaRecorder.ondataavailable = function(e) {
+                                    chunks.push(e.data);
+                                }
+                                mediaRecorder.onstop = function(e) {
+                                    console.log("stopped");
+                                    _blob = new Blob(chunks, {
+                                        'type': 'video/webm'
+                                    });
+                                    video.srcObject = null;
+                                    let b = URL.createObjectURL(blob);
+                                    video.volume = 0.2;
+                                    video.muted = false;
+                                    video.srcObject = b;
+                                    video.pause();
+                                    video.setAttribute("controls", "");
+                                    video.removeAttribute("muted");
+                                    listView.appendChild(new Container({
+                                        height: "240px",
+                                        children: [
+                                            new ListTile({
+                                                color: "#545454",
+                                                title: new Text("10 days ago"),
+                                                subtitle: new Text("Video of baby"),
+                                                leading: new Icon(Icons.battery_full),
+                                                trailing: new Icon(Icons.star_outline),
+                                                onclick: () => PWA.getPWA().setPage("VideoBlog")
+                                            }), new Center({
+                                                top: "40px",
+                                                height: "200px",
+                                                child: new Video({
+                                                    src: b
+                                                })
+                                            })
+                                        ]
+                                    }));
+                                }
+                                setTimeout(() => {
+                                    console.log("stop");
+                                    mediaRecorder.stop();
+                                    mediaStream.stop();
+                                }, 10000);
+                        }
+                    })
+                })
             ]
         });
     }
