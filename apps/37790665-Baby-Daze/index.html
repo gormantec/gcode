@@ -318,11 +318,11 @@ class AddVideo extends Page {
 
             },
             "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({child:new Video({height:"280px",top:"0px",
+            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({height:"280px",top:"0px",child:new Video({
                     id: "video",
                     muted: "true"
                 })}),
-                new Center({
+                new Center({height:"100px",bottom:"0px",
                     child: new Div({
                         width: "40px",
                         height: "40px",
@@ -360,7 +360,7 @@ class AddVideo extends Page {
                         }
                     })
                 }),
-                new Center({
+                new Center({height:"100px",bottom:"0px",
                     child: new Div({
                         width: "40px",
                         height: "40px",
