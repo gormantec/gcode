@@ -477,12 +477,11 @@ class AddVideo extends Page {
                                   request.onsuccess = function (event) {
                                       db = request.result;
                                       var videoName="video-"+Date.now();  
-                                      var transaction = db.transaction(["videos"], "readwrite");
                                       console.log(_blob);
                                       new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
                                         
                                       	console.log(arrayBuffer);
-                                        var put = transaction.objectStore("videos").put(arrayBuffer,videoName);
+                                        var put = db.transaction(["videos"], "readwrite").objectStore("videos").put(arrayBuffer,videoName);
                                         document.querySelector('#saveButton').style.display = "none";
                                       });
                                   }
