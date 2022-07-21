@@ -210,7 +210,9 @@ class VideoBlog extends Page {
                       listView.removeChildren();
                       for(let i=event.target.result.length-1;i>=0;i--)
                       {
-                          let b = URL.createObjectURL(event.target.result[i]);
+                          
+                         var b = new Blob([event.target.result[i]], { type: 'video/webm'});
+                         let obUrl = URL.createObjectURL(b);
                           listView.appendChild(new Container({
                             height: "240px",
                             children: [
@@ -224,7 +226,7 @@ class VideoBlog extends Page {
                                 top: "40px",
                                 height: "200px",
                                 child: new Video({
-                                  src: b
+                                  src: obUrl
                                 })
                               })
                             ]
@@ -471,8 +473,13 @@ class AddVideo extends Page {
                                       db = request.result;
                                       var videoName="video-"+Date.now();  
                                       var transaction = db.transaction(["videos"], "readwrite");
-                                      var put = transaction.objectStore("videos").put(_blob,videoName);
-                                      document.querySelector('#saveButton').style.display = "none";
+                                      console.log(_blob);
+                                      new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
+                                        
+                                      	console.log(arrayBuffer);
+                                        var put = transaction.objectStore("videos").put(arrayBuffer,videoName);
+                                        document.querySelector('#saveButton').style.display = "none";
+                                      });
                                   }
                                   request.onupgradeneeded = function (event) {
                                           event.target.result.createObjectStore("videos");
