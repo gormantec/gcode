@@ -410,6 +410,7 @@ class AddVideo extends Page {
                             video.setAttribute("muted", "muted");
                             video.volume = 0.0;
                             video.muted = true;
+                          	
                             let mediaRecorder = new MediaRecorder(mediaStream);
                             mediaRecorder.start(1000);
                             let chunks = [];
@@ -417,6 +418,7 @@ class AddVideo extends Page {
                                 chunks.push(e.data);
                             }
                             mediaRecorder.onstop = function(e) {
+                              	console.log(mediaRecorder);
                                 console.log("stopped");
                                 _blob = new Blob(chunks, {
                                     'type': 'video/webm'
