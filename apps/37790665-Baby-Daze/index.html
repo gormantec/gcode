@@ -422,9 +422,14 @@ class AddVideo extends Page {
                             mediaRecorder.onstop = function(e) {
                               	console.log(mediaRecorder);
                                 console.log("stopped");
-                                _blob = new Blob(chunks, {
-                                    'type': 'video/webm'
-                                });
+                              	if(mediaRecorder.mimeType=="video/mp4")
+                                {
+                                	_blob = new Blob(chunks, { 'type': 'video/mp4' });
+                                }
+                              	else
+                                {
+                                	_blob = new Blob(chunks, { 'type': 'video/webm' });
+                                }
                                 video.srcObject = null;
                                 let b = URL.createObjectURL(_blob);
                                 video.volume = 0.2;
