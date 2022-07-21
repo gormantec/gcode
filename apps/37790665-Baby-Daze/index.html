@@ -210,14 +210,21 @@ class VideoBlog extends Page {
                       {
                           
                          var b = new Blob([event.target.result[i].data], { type: 'video/'+event.target.result[i].type});
+                        let timestamp=event.target.result[i].timestamp;
                          let obUrl = URL.createObjectURL(b);
+                        let timeago=Math.floor((Date.now()-timestamp)/610000);
+                        let timeagoString=timeago+" minutes ago";
+                        if(timeago>60)timeagoString=Math.fooor(timeago/60)+" hours ago";
+                        else if(timeago>1440)timeagoString=Math.fooor(timeago/1440)+" days ago";
+                        else if(timeago>43200)timeagoString=Math.fooor(timeago/43200)+" months ago";
+                        else if(timeago>524160)timeagoString=Math.fooor(timeago/524160)+" years ago";
                           listView.appendChild(new Container({
                             height: "240px",
                             children: [
                               new ListTile({
                                 color: "#545454",
-                                title: new Text("10 days ago"),
-                                subtitle: new Text("Video of baby"),
+                                title: new Text(timeagoString),
+                                subtitle: new Text((event.target.result[i].comment || "")),
                                 leading: new Icon(Icons.battery_full),
                                 trailing: new Icon(Icons.star_outline)
                               }), new Center({
@@ -346,7 +353,7 @@ class AddVideo extends Page {
                     video: {
                         facingMode: "environment",
                       	resizeMode: "crop-and-scale",
-                      	aspectRatio: { exact: 1.7777777778 }
+                      	aspectRatio: 16/9
                     }
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
@@ -442,10 +449,13 @@ class AddVideo extends Page {
                             }
                             setTimeout(() => {
                                 console.log("stop");
+                              	let dt=Date.now();
+                              	let d= new Date(dt);
                                 mediaRecorder.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
-                                document.querySelector('#dateTextFormField').innerText = (new Date()).toLocaleString();
+                                document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
+                                document.querySelector('#dateTextFormField').data.timestamp = dt;
                               
                             }, 5000);
                         }
@@ -481,7 +491,7 @@ class AddVideo extends Page {
                                       console.log(_blob);
                                       new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
                                       	console.log(arrayBuffer);
-                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put({name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer},videoName);
+                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put({name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,timestamp:document.querySelector('#dateTextFormField').data.timestamp,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer},videoName);
                                         document.querySelector('#saveButton').style.display = "none";
                                       });
                                   }
