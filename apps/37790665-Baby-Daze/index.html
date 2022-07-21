@@ -209,7 +209,7 @@ class VideoBlog extends Page {
                       for(let i=event.target.result.length-1;i>=0;i--)
                       {
                           
-                         var b = new Blob([event.target.result[i]], { type: 'video/webm'});
+                         var b = new Blob([event.target.result[i].data], { type: 'video/'+event.target.result[i].type});
                          let obUrl = URL.createObjectURL(b);
                           listView.appendChild(new Container({
                             height: "240px",
@@ -385,7 +385,7 @@ class AddVideo extends Page {
                 }),
                 new Form({top:"260px",left:"20px",right:"20px",children:[
                   new TextFormField({id:"dateTextFormField"}),
-                  new TextFormField({}),
+                  new TextFormField({id:"commentTextFormField"}),
                 ]}),
 
                 new Center({
@@ -475,11 +475,13 @@ class AddVideo extends Page {
                                       console.log("Error creating/accessing IndexedDB database");
                                   };
                                   request.onsuccess = function (event) {
-                                      var videoName="video-"+Date.now();  
+                                    let type="webm";
+                                    if(_blob.type=="video/mp4")type="mp4"
+                                      var videoName="video-"+Date.now()+"."+type;  
                                       console.log(_blob);
                                       new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
                                       	console.log(arrayBuffer);
-                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(arrayBuffer,videoName);
+                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put({name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer},videoName);
                                         document.querySelector('#saveButton').style.display = "none";
                                       });
                                   }
