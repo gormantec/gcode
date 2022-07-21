@@ -195,14 +195,12 @@ class VideoBlog extends Page {
               
                 var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
                 var dbVersion = 2.0;
-                var request = indexedDB.open("babyVideos3", dbVersion),db;
+                var request = indexedDB.open("babyVideos3", dbVersion);
                 request.onerror = function (event) {
                   console.log("Error creating/accessing IndexedDB database");
                 };
                 request.onsuccess = function (event) {
-                  db = request.result;
-                  var transaction = db.transaction(["videos"], "readonly");
-                  var get = transaction.objectStore("videos").getAll();
+                  var get = request.result.transaction(["videos"], "readonly").objectStore("videos").getAll();
                   get.onsuccess = function(event) {
                     console.log(event.target.result);
                     if(event.target.result && event.target.result.length>0)
@@ -475,13 +473,11 @@ class AddVideo extends Page {
                                       console.log("Error creating/accessing IndexedDB database");
                                   };
                                   request.onsuccess = function (event) {
-                                      db = request.result;
                                       var videoName="video-"+Date.now();  
                                       console.log(_blob);
                                       new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
-                                        
                                       	console.log(arrayBuffer);
-                                        var put = db.transaction(["videos"], "readwrite").objectStore("videos").put(arrayBuffer,videoName);
+                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(arrayBuffer,videoName);
                                         document.querySelector('#saveButton').style.display = "none";
                                       });
                                   }
