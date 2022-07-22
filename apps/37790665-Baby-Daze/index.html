@@ -370,6 +370,8 @@ class AddVideo extends Page {
                     mediaStream = aMediaStream;
                     if (!done) {
                         const video = document.querySelector('video');
+                      	console.log(mediaStream);
+                         console.log(mediaStream.getVideoTracks()[0]);
                         video.srcObject = mediaStream;
                         video.volume = 0.0;
                         video.muted = true;
