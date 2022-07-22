@@ -455,7 +455,7 @@ class AddVideo extends Page {
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
                                 document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
-                                document.querySelector('#dateTextFormField').data.timestamp = dt;
+                                document.querySelector('#dateTextFormField').dataset.timestamp = dt;
                               
                             }, 5000);
                         }
@@ -487,11 +487,13 @@ class AddVideo extends Page {
                                   request.onsuccess = function (event) {
                                     let type="webm";
                                     if(_blob.type=="video/mp4")type="mp4"
-                                      var videoName="video-"+Date.now()+"."+type;  
+                                      var videoName="video-"+document.querySelector('#dateTextFormField').dataset.timestamp+"."+type;  
                                       console.log(_blob);
                                       new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
                                       	console.log(arrayBuffer);
-                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put({name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,timestamp:document.querySelector('#dateTextFormField').data.timestamp,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer},videoName);
+                                        let obj={name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,timestamp:document.querySelector('#dateTextFormField').dataset.timestamp,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer};
+                                        console.log(obj);
+                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj,videoName);
                                         document.querySelector('#saveButton').style.display = "none";
                                       });
                                   }
