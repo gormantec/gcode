@@ -394,12 +394,12 @@ class AddVideo extends Page {
             "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({
                     height: "200px",
                     top: "40px",
-                    child: new Video({
+                    child: new Div({width:"360px",height:"200px",overflow: "hidden",child:new Video({width:"100%",
                         id: "video",
                         muted: "true",
                       	playsinline: "true",
                       	autoplay: "true"
-                    })
+                    })})
                 }),
                 new Form({top:"260px",left:"20px",right:"20px",children:[
                   new TextFormField({id:"dateTextFormField"}),
