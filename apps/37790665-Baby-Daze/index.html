@@ -100,6 +100,7 @@ try {
 let listView=null;
 let mediaStream=null;
 let _blob=null;
+let _iblob=null;
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -210,6 +211,10 @@ class VideoBlog extends Page {
                                 var b = new Blob([event.target.result[i].data], {
                                     type: 'video/' + event.target.result[i].type
                                 });
+                              	var ib = new Blob([event.target.result[i].image], {
+                                    type: 'image/jpeg'
+                                });
+                              	let iobUrl = URL.createObjectURL(ib);
                                 let timestamp = event.target.result[i].timestamp;
                                 let obUrl = URL.createObjectURL(b);
                                 let timeago = Math.floor((Date.now() - timestamp) / 610000);
@@ -218,6 +223,7 @@ class VideoBlog extends Page {
                                 else if (timeago > 1440) timeagoString = Math.fooor(timeago / 1440) + " days ago";
                                 else if (timeago > 43200) timeagoString = Math.fooor(timeago / 43200) + " months ago";
                                 else if (timeago > 524160) timeagoString = Math.fooor(timeago / 524160) + " years ago";
+                              	let iii=i;
                                 listView.appendChild(new Container({
                                     height: "240px",
                                     children: [
@@ -232,12 +238,24 @@ class VideoBlog extends Page {
                                             width: "360px",
                                             height: "202px",
                                             overflow: "hidden",
-                                            child: new Video({
+                                            children: [new Video({
                                                 width: "360px",
                                                 height: "unset",
                                                 src: obUrl,
-                                                playsinline: "true"
-                                            })
+                                                playsinline: "true",
+                                                display: "none",
+                                                id: "video-"+iii
+                                            }),
+                                            new VideoImage({
+                                                width: "360px",
+                                                height: "202px",
+                                                id: "videoCover-"+iii,
+                                              	src: iobUrl,
+                                              	onclick: ()=>{
+                                                  document.querySelector("video-"+iii).style.display="";
+                                                  document.querySelector("videoCover-"+iii).style.display="none";
+                                                }
+                                            })]
                                         })
                                     ]
                                 }));
@@ -477,10 +495,11 @@ class AddVideo extends Page {
                                 }
                                 video.srcObject = null;
                               
-                              	Video.getVideoCover(_blob,1.5).then(({width,height,blob})=>{
+                              	Video.getVideoCover(_blob,1.5).then(({width,height,iblob})=>{
                                   	document.querySelector('#video').style.display="none";
                                   	document.querySelector('#videoCover').style.display="";
-                                    videoCover.src=URL.createObjectURL(blob);
+                                    videoCover.src=URL.createObjectURL(iblob);
+                                  	_iblob=_blob;
                                   	videoCover.style.height=height*parseInt(videoCover.style.width)/width+"px";
                                 });
                               
@@ -537,20 +556,23 @@ class AddVideo extends Page {
                                         if (_blob.type == "video/mp4") type = "mp4"
                                         var videoName = "video-" + document.querySelector('#dateTextFormField').dataset.timestamp + "." + type;
                                         console.log(_blob);
-                                        new Response(_blob).arrayBuffer().then((arrayBuffer) => {
-                                            console.log(arrayBuffer);
-                                            let obj = {
-                                                name: videoName,
-                                                type: type,
-                                                time: document.querySelector('#dateTextFormField').innerText,
-                                                timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
-                                                comment: document.querySelector('#commentTextFormField').innerText,
-                                                data: arrayBuffer
-                                            };
-                                            console.log(obj);
-                                            var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
-                                            document.querySelector('#saveButton').style.display = "none";
-                                        });
+                                        new Response(_iblob).arrayBuffer().then((imageArrayBuffer) => {
+                                          new Response(_blob).arrayBuffer().then((arrayBuffer) => {
+                                              console.log(arrayBuffer);
+                                              let obj = {
+                                                  name: videoName,
+                                                  type: type,
+                                                  time: document.querySelector('#dateTextFormField').innerText,
+                                                  timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                  comment: document.querySelector('#commentTextFormField').innerText,
+                                                  image: imageArrayBuffer,
+                                                  data: arrayBuffer
+                                              };
+                                              console.log(obj);
+                                              var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
+                                              document.querySelector('#saveButton').style.display = "none";
+                                          });
+                                          });
                                     }
                                     request.onupgradeneeded = function(event) {
                                         event.target.result.createObjectStore("videos");
