@@ -120,6 +120,19 @@ export class Padding extends Div {
     }
 }
 
+export class Image extends Div {
+    constructor(params) {
+        super({
+          			width: params.width?params.width:"100%",
+                    height: params.height?params.height:"unset",
+                    id: params.id?params.id:"image-"+Date.now(),
+                    tagName: "img",
+              		backgroundColor:"black",
+                    classNameOverride: true
+              });
+    }
+}
+
 export class Video extends Div {
     constructor(params) {
         super({

@@ -400,14 +400,19 @@ class AddVideo extends Page {
                         width: "360px",
                         height: "202px",
                         overflow: "hidden",
-                        child: new Video({
+                        children: [new Video({
                             width: "360px",
                             height: "unset",
                             id: "video",
                             muted: "true",
                             playsinline: "true",
                             autoplay: "true"
-                        })
+                        }),new Image({
+                            width: "360px",
+                            height: "unset",
+                            id: "videoCover",
+                          	display: "none"
+                        })]
                     })
                 }),
                 new Form({
@@ -468,12 +473,17 @@ class AddVideo extends Page {
                                     });
                                 }
                                 video.srcObject = null;
-                                let b = URL.createObjectURL(_blob);
                               
                               	Video.getVideoCover(_blob).then((image)=>{
+                                  let videoCover = document.querySelector('videoCover');
                                 	console.log("image");
                                   	console.log(image);
+                                  	video.style.display="none";
+                                    videoCover.src=URL.createObjectURL(image);
+                                  	videoCover.style.display="";
                                 });
+                              
+                                let b = URL.createObjectURL(_blob);
                                 video.volume = 0.2;
                                 video.muted = false;
                                 video.playsinline = true;
