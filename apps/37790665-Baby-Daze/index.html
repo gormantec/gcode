@@ -402,7 +402,7 @@ class AddVideo extends Page {
                         overflow: "hidden",
                         children: [new Video({
                             width: "360px",
-                            height: "unset",
+                        	height: "202px",
                             id: "video",
                             muted: "true",
                             playsinline: "true",
@@ -475,9 +475,7 @@ class AddVideo extends Page {
                                 video.srcObject = null;
                               
                               	Video.getVideoCover(_blob,1.5).then(({width,height,blob})=>{
-                                  	let videoCover = document.querySelector('videoCover');
-                                	console.log("image");
-                                  	console.log(image);
+                                  	let videoCover = document.querySelector('#videoCover');
                                   	video.style.display="none";
                                     videoCover.src=URL.createObjectURL(blob);
                           
