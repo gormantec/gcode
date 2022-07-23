@@ -474,7 +474,7 @@ class AddVideo extends Page {
                                 }
                                 video.srcObject = null;
                               
-                              	Video.getVideoCover(_blob).then((image)=>{
+                              	Video.getVideoCover(_blob,1.5).then((image)=>{
                                   let videoCover = document.querySelector('videoCover');
                                 	console.log("image");
                                   	console.log(image);
