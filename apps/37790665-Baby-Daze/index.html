@@ -92,7 +92,7 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,Padding,Column} from './lib/flutter-widgets.lib.mjs';
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,Padding,Column,VideoImage} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -407,7 +407,7 @@ class AddVideo extends Page {
                             muted: "true",
                             playsinline: "true",
                             autoplay: "true"
-                        }),new Image({
+                        }),new VideoImage({
                             width: "360px",
                             height: "unset",
                             id: "videoCover",
@@ -475,7 +475,7 @@ class AddVideo extends Page {
                                 video.srcObject = null;
                               
                               	Video.getVideoCover(_blob,1.5).then((image)=>{
-                                  let videoCover = document.querySelector('videoCover');
+                                  	let videoCover = document.querySelector('videoCover');
                                 	console.log("image");
                                   	console.log(image);
                                   	video.style.display="none";

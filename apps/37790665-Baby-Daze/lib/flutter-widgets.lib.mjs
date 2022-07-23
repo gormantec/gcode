@@ -120,7 +120,7 @@ export class Padding extends Div {
     }
 }
 
-export class Image extends Div {
+export class VideoImage extends Div {
     constructor(params) {
         super({
           			width: params.width?params.width:"100%",
