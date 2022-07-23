@@ -191,62 +191,64 @@ class VideoBlog extends Page {
             "hideFooter": "true",
             "navigateBackPage": "HomePage",
             "floatingActionButtonPage": "AddVideo",
-          	"onopen": () => {
-              
+            "onopen": () => {
+
                 var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
                 var dbVersion = 2.0;
                 var request = indexedDB.open("babyVideos3", dbVersion);
-                request.onerror = function (event) {
-                  console.log("Error creating/accessing IndexedDB database");
+                request.onerror = function(event) {
+                    console.log("Error creating/accessing IndexedDB database");
                 };
-                request.onsuccess = function (event) {
-                  var get = request.result.transaction(["videos"], "readonly").objectStore("videos").getAll();
-                  get.onsuccess = function(event) {
-                    console.log(event.target.result);
-                    if(event.target.result && event.target.result.length>0)
-                    {
-                      listView.removeChildren();
-                      for(let i=event.target.result.length-1;i>=0;i--)
-                      {
-                          
-                         var b = new Blob([event.target.result[i].data], { type: 'video/'+event.target.result[i].type});
-                        let timestamp=event.target.result[i].timestamp;
-                         let obUrl = URL.createObjectURL(b);
-                        let timeago=Math.floor((Date.now()-timestamp)/610000);
-                        let timeagoString=timeago+" minutes ago";
-                        if(timeago>60)timeagoString=Math.fooor(timeago/60)+" hours ago";
-                        else if(timeago>1440)timeagoString=Math.fooor(timeago/1440)+" days ago";
-                        else if(timeago>43200)timeagoString=Math.fooor(timeago/43200)+" months ago";
-                        else if(timeago>524160)timeagoString=Math.fooor(timeago/524160)+" years ago";
-                          listView.appendChild(new Container({
-                            height: "240px",
-                            children: [
-                              new ListTile({
-                                color: "#545454",
-                                title: new Text(timeagoString),
-                                subtitle: new Text((event.target.result[i].comment || "")),
-                                leading: new Icon(Icons.battery_full),
-                                trailing: new Icon(Icons.star_outline)
-                              }), new Center({
-                                top: "40px",
-                                width:"360px",height:"202px",overflow: "hidden",
-                                child: new Video({
-                                  width:"360px",
-                                  height:"unset",
-                                  src: obUrl,
-                				  playsinline:"true"
-                                })
-                              })
-                            ]
-                          }));
-                      }
-                    }
-                  };
+                request.onsuccess = function(event) {
+                    var get = request.result.transaction(["videos"], "readonly").objectStore("videos").getAll();
+                    get.onsuccess = function(event) {
+                        console.log(event.target.result);
+                        if (event.target.result && event.target.result.length > 0) {
+                            listView.removeChildren();
+                            for (let i = event.target.result.length - 1; i >= 0; i--) {
+
+                                var b = new Blob([event.target.result[i].data], {
+                                    type: 'video/' + event.target.result[i].type
+                                });
+                                let timestamp = event.target.result[i].timestamp;
+                                let obUrl = URL.createObjectURL(b);
+                                let timeago = Math.floor((Date.now() - timestamp) / 610000);
+                                let timeagoString = timeago + " minutes ago";
+                                if (timeago > 60) timeagoString = Math.fooor(timeago / 60) + " hours ago";
+                                else if (timeago > 1440) timeagoString = Math.fooor(timeago / 1440) + " days ago";
+                                else if (timeago > 43200) timeagoString = Math.fooor(timeago / 43200) + " months ago";
+                                else if (timeago > 524160) timeagoString = Math.fooor(timeago / 524160) + " years ago";
+                                listView.appendChild(new Container({
+                                    height: "240px",
+                                    children: [
+                                        new ListTile({
+                                            color: "#545454",
+                                            title: new Text(timeagoString),
+                                            subtitle: new Text((event.target.result[i].comment || "")),
+                                            leading: new Icon(Icons.battery_full),
+                                            trailing: new Icon(Icons.star_outline)
+                                        }), new Center({
+                                            top: "40px",
+                                            width: "360px",
+                                            height: "202px",
+                                            overflow: "hidden",
+                                            child: new Video({
+                                                width: "360px",
+                                                height: "unset",
+                                                src: obUrl,
+                                                playsinline: "true"
+                                            })
+                                        })
+                                    ]
+                                }));
+                            }
+                        }
+                    };
                 }
-                request.onupgradeneeded = function (event) {
-                  event.target.result.createObjectStore("videos");
+                request.onupgradeneeded = function(event) {
+                    event.target.result.createObjectStore("videos");
                 };
-              
+
             }
         })
         listView = new ListView({
@@ -351,19 +353,25 @@ class AddVideo extends Page {
 
                 document.querySelector('#recButton').style.color = "grey";
                 let done = false;
+                if (mediaStream) {
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                    mediaStream = null;
+                }
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
                     video: {
                         facingMode: "environment",
-                      	resizeMode: "crop-and-scale",
-                      	aspectRatio: 16/9
+                        resizeMode: "crop-and-scale",
+                        aspectRatio: 16 / 9
                     }
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
                     if (!done) {
                         const video = document.querySelector('video');
-                      	console.log(mediaStream);
-                         console.log(mediaStream.getVideoTracks()[0].getSettings());
+                        console.log(mediaStream);
+                        console.log(mediaStream.getVideoTracks()[0].getSettings());
                         video.srcObject = mediaStream;
                         video.volume = 0.0;
                         video.muted = true;
@@ -388,17 +396,34 @@ class AddVideo extends Page {
             "children": [new Center({
                     height: "202px",
                     top: "10px",
-                    child: new Center({width:"360px",height:"202px",overflow: "hidden",child:new Video({width:"360px",height:"unset",
-                        id: "video",
-                        muted: "true",
-                      	playsinline: "true",
-                      	autoplay: "true"
-                    })})
+                    child: new Center({
+                        width: "360px",
+                        height: "202px",
+                        overflow: "hidden",
+                        child: new Video({
+                            width: "360px",
+                            height: "unset",
+                            id: "video",
+                            muted: "true",
+                            playsinline: "true",
+                            autoplay: "true"
+                        })
+                    })
                 }),
-                new Form({top:"240px",left:"20px",right:"20px",fontSize:"12px",children:[
-                  new TextFormField({id:"dateTextFormField"}),
-                  new TextFormField({id:"commentTextFormField"}),
-                ]}),
+                new Form({
+                    top: "240px",
+                    left: "20px",
+                    right: "20px",
+                    fontSize: "12px",
+                    children: [
+                        new TextFormField({
+                            id: "dateTextFormField"
+                        }),
+                        new TextFormField({
+                            id: "commentTextFormField"
+                        }),
+                    ]
+                }),
 
                 new Center({
                     height: "60px",
@@ -417,13 +442,13 @@ class AddVideo extends Page {
                             if (!video.srcObject && mediaStream) {
                                 video.src = null;
                                 video.srcObject = mediaStream;
-                        		video.autoplay = true;
+                                video.autoplay = true;
                             }
                             video.removeAttribute("controls");
                             video.setAttribute("muted", "muted");
                             video.volume = 0.0;
                             video.muted = true;
-                          	
+
                             let mediaRecorder = new MediaRecorder(mediaStream);
                             mediaRecorder.start(1000);
                             let chunks = [];
@@ -431,15 +456,16 @@ class AddVideo extends Page {
                                 chunks.push(e.data);
                             }
                             mediaRecorder.onstop = function(e) {
-                              	console.log(mediaRecorder);
+                                console.log(mediaRecorder);
                                 console.log("stopped");
-                              	if(mediaRecorder.mimeType=="video/mp4")
-                                {
-                                	_blob = new Blob(chunks, { 'type': 'video/mp4' });
-                                }
-                              	else
-                                {
-                                	_blob = new Blob(chunks, { 'type': 'video/webm' });
+                                if (mediaRecorder.mimeType == "video/mp4") {
+                                    _blob = new Blob(chunks, {
+                                        'type': 'video/mp4'
+                                    });
+                                } else {
+                                    _blob = new Blob(chunks, {
+                                        'type': 'video/webm'
+                                    });
                                 }
                                 video.srcObject = null;
                                 let b = URL.createObjectURL(_blob);
@@ -454,14 +480,15 @@ class AddVideo extends Page {
                             }
                             setTimeout(() => {
                                 console.log("stop");
-                              	let dt=Date.now();
-                              	let d= new Date(dt);
+                                let dt = Date.now();
+                                let d = new Date(dt);
                                 mediaRecorder.stop();
+                                mediaStream.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
                                 document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
                                 document.querySelector('#dateTextFormField').dataset.timestamp = dt;
-                              
+
                             }, 5000);
                         }
                     })
@@ -476,35 +503,43 @@ class AddVideo extends Page {
                         width: "40px",
                         height: "40px",
                         fontSize: "45px",
-                      	color:"black",
+                        color: "black",
                         display: "none",
                         child: new Icon("save"),
                         onclick: () => {
                             // Request persistent storage for site
                             if (navigator.storage && navigator.storage.persist) {
                                 navigator.storage.persist().then((isPersisted) => {
-                                  var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
-                                  var dbVersion = 2.0;
-                                  var request = indexedDB.open("babyVideos3", dbVersion),db;
-                                  request.onerror = function (event) {
-                                      console.log("Error creating/accessing IndexedDB database");
-                                  };
-                                  request.onsuccess = function (event) {
-                                    let type="webm";
-                                    if(_blob.type=="video/mp4")type="mp4"
-                                      var videoName="video-"+document.querySelector('#dateTextFormField').dataset.timestamp+"."+type;  
-                                      console.log(_blob);
-                                      new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
-                                      	console.log(arrayBuffer);
-                                        let obj={name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,timestamp:document.querySelector('#dateTextFormField').dataset.timestamp,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer};
-                                        console.log(obj);
-                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj,videoName);
-                                        document.querySelector('#saveButton').style.display = "none";
-                                      });
-                                  }
-                                  request.onupgradeneeded = function (event) {
-                                          event.target.result.createObjectStore("videos");
-                                  };
+                                    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
+                                    var dbVersion = 2.0;
+                                    var request = indexedDB.open("babyVideos3", dbVersion),
+                                        db;
+                                    request.onerror = function(event) {
+                                        console.log("Error creating/accessing IndexedDB database");
+                                    };
+                                    request.onsuccess = function(event) {
+                                        let type = "webm";
+                                        if (_blob.type == "video/mp4") type = "mp4"
+                                        var videoName = "video-" + document.querySelector('#dateTextFormField').dataset.timestamp + "." + type;
+                                        console.log(_blob);
+                                        new Response(_blob).arrayBuffer().then((arrayBuffer) => {
+                                            console.log(arrayBuffer);
+                                            let obj = {
+                                                name: videoName,
+                                                type: type,
+                                                time: document.querySelector('#dateTextFormField').innerText,
+                                                timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                comment: document.querySelector('#commentTextFormField').innerText,
+                                                data: arrayBuffer
+                                            };
+                                            console.log(obj);
+                                            var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
+                                            document.querySelector('#saveButton').style.display = "none";
+                                        });
+                                    }
+                                    request.onupgradeneeded = function(event) {
+                                        event.target.result.createObjectStore("videos");
+                                    };
                                 });
                             }
                         }
