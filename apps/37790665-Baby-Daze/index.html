@@ -354,24 +354,14 @@ class AddVideo extends Page {
                     video: {
                         facingMode: "environment",
                       	resizeMode: "crop-and-scale",
-                      	aspectRatio: 16/9,
-                      	width:640,
-                      	height:480
-                      	//1794x1009
-                      	//1676x943
-                      	//1673x941
-                      	//1529x860
-                      	//1454x818
-                      	//929x697
-                      	//1161x653
-                      	//792x594
+                      	aspectRatio: 16/9
                     }
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
                     if (!done) {
                         const video = document.querySelector('video');
                       	console.log(mediaStream);
-                         console.log(mediaStream.getVideoTracks()[0]);
+                         console.log(mediaStream.getVideoTracks()[0].getSettings());
                         video.srcObject = mediaStream;
                         video.volume = 0.0;
                         video.muted = true;
@@ -396,7 +386,7 @@ class AddVideo extends Page {
             "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({
                     height: "200px",
                     top: "40px",
-                    child: new Div({width:"360px",height:"200px",overflow: "hidden",child:new Video({width:"100%",
+                    child: new Center({width:"360px",height:"200px",overflow: "hidden",child:new Video({width:"360px",
                         id: "video",
                         muted: "true",
                       	playsinline: "true",
