@@ -483,7 +483,6 @@ class AddVideo extends Page {
                                 let dt = Date.now();
                                 let d = new Date(dt);
                                 mediaRecorder.stop();
-                                mediaStream.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
                                 document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
