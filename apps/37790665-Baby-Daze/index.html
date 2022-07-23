@@ -495,10 +495,10 @@ class AddVideo extends Page {
                                 }
                                 video.srcObject = null;
                               
-                              	Video.getVideoCover(_blob,1.5).then(({width,height,iblob})=>{
+                              	Video.getVideoCover(_blob,1.5).then(({width,height,blob})=>{
                                   	document.querySelector('#video').style.display="none";
                                   	document.querySelector('#videoCover').style.display="";
-                                    videoCover.src=URL.createObjectURL(iblob);
+                                    videoCover.src=URL.createObjectURL(blob);
                                   	_iblob=_blob;
                                   	videoCover.style.height=height*parseInt(videoCover.style.width)/width+"px";
                                 });
