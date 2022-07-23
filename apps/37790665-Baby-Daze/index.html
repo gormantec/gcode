@@ -469,6 +469,11 @@ class AddVideo extends Page {
                                 }
                                 video.srcObject = null;
                                 let b = URL.createObjectURL(_blob);
+                              
+                              	getVideoCover(_blob).then((image)=>{
+                                	console.log("image");
+                                  	console.log(image);
+                                });
                                 video.volume = 0.2;
                                 video.muted = false;
                                 video.playsinline = true;
