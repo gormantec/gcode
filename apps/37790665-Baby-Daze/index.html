@@ -229,8 +229,10 @@ class VideoBlog extends Page {
                                 trailing: new Icon(Icons.star_outline)
                               }), new Center({
                                 top: "40px",
-                                height: "200px",
+                                width:"360px",height:"202px",overflow: "hidden",
                                 child: new Video({
+                                  width:"360px",
+                                  height:"unset",
                                   src: obUrl,
                 				  playsinline:"true"
                                 })
@@ -383,10 +385,10 @@ class AddVideo extends Page {
 
             },
             "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({
-                    height: "200px",
-                    top: "40px",
-                    child: new Center({width:"360px",height:"100px",overflow: "hidden",child:new Video({width:"360px",height:"unset",
+            "children": [new Center({
+                    height: "202px",
+                    top: "10px",
+                    child: new Center({width:"360px",height:"202px",overflow: "hidden",child:new Video({width:"360px",height:"unset",
                         id: "video",
                         muted: "true",
                       	playsinline: "true",
