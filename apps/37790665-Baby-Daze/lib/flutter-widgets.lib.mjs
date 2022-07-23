@@ -203,7 +203,7 @@ export class Video extends Div {
                 // return the canvas image as a blob
                 ctx.canvas.toBlob(
                     blob => {
-                        resolve(blob);
+                        resolve({width:canvas.width,height:canvas.height,blob:blob});
                     },
                     "image/jpeg",
                     0.75 /* quality */
