@@ -350,8 +350,8 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "onopen": () => {
-                document.querySelector('#video').style.display="none";
-                document.querySelector('#videoCover').style.display="";
+                document.querySelector('#video').style.display="";
+                document.querySelector('#videoCover').style.display="none";
                 document.querySelector('#recButton').style.color = "grey";
                 let done = false;
                 if (mediaStream) {
@@ -442,9 +442,9 @@ class AddVideo extends Page {
                         color: "black",
                         child: new Icon("radio_button_checked"),
                         onclick: () => {
-							
-                            document.querySelector('#video').style.display="none";
-                            document.querySelector('#videoCover').style.display="";
+						
+                            document.querySelector('#video').style.display="";
+                            document.querySelector('#videoCover').style.display="none";
                             document.querySelector('#recButton').style.color = "red";
                             const video = document.querySelector('video');
                             if (!video.srcObject && mediaStream) {
