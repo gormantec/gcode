@@ -128,13 +128,16 @@ export class VideoImage extends Div {
                     id: params.id?params.id:"image-"+Date.now(),
                     tagName: "img",
               		backgroundColor:"black",
-                    classNameOverride: true,
-          			display:params.display?params.display:""
+                    classNameOverride: true
               });
       
       	if(params.src)
         {
           	this.element.src=params.src;
+        }
+      	if(params.display)
+        {
+          	this.element.style.display=params.display;
         }
     }
 }
@@ -147,8 +150,7 @@ export class Video extends Div {
                     id: params.id?params.id:"video-"+Date.now(),
                     tagName: "video",
               		backgroundColor:"black",
-                    classNameOverride: true,
-          			display:params.display?params.display:""
+                    classNameOverride: true
               });
       	if(params.src)
         {
@@ -171,6 +173,11 @@ export class Video extends Div {
       	if(params.autoplay && params.autoplay!="false" && params.autoplay!=false)
         {
           	this.element.setAttribute("autoplay","autoplay");
+        }
+      
+      	if(params.display)
+        {
+          	this.element.style.display=params.display;
         }
       
       	
