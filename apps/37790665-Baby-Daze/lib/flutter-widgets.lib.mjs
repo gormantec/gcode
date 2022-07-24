@@ -128,7 +128,8 @@ export class VideoImage extends Div {
                     id: params.id?params.id:"image-"+Date.now(),
                     tagName: "img",
               		backgroundColor:"black",
-                    classNameOverride: true
+                    classNameOverride: true,
+          			onclick:params.onclick
               });
       
       	if(params.src)
