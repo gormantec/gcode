@@ -219,7 +219,7 @@ class VideoBlog extends Page {
                                 let obUrl = URL.createObjectURL(b);
                                 let timeago = Math.floor((Date.now() - timestamp) / 610000);
                                 let timeagoString = timeago + " minutes ago";
-                                if (timeago > 60) timeagoString = Math.fooor(timeago / 60) + " hours ago";
+                                if (timeago > 60) timeagoString = Math.floor(timeago / 60) + " hours ago";
                                 else if (timeago > 1440) timeagoString = Math.fooor(timeago / 1440) + " days ago";
                                 else if (timeago > 43200) timeagoString = Math.fooor(timeago / 43200) + " months ago";
                                 else if (timeago > 524160) timeagoString = Math.fooor(timeago / 524160) + " years ago";
