@@ -130,6 +130,12 @@ export class VideoImage extends Div {
               		backgroundColor:"black",
                     classNameOverride: true
               });
+      
+      	if(params.src)
+        {
+          	this.element.src=params.src;
+          	this.element.setAttribute("controls", "controls");
+        }
     }
 }
 
