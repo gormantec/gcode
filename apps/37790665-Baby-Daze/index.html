@@ -410,7 +410,8 @@ class AddVideo extends Page {
                         max: 480
                     },
                 }
-                if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+                console.log(orientation);
+                //if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
                     videoSpecs = {
                         facingMode: "environment",
                         resizeMode: "crop-and-scale",
@@ -421,7 +422,7 @@ class AddVideo extends Page {
                             max: 480
                         },
                     }
-                }
+                //}
               	console.log(videoSpecs);
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
