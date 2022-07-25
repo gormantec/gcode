@@ -187,8 +187,16 @@ class PWA {
 
         this.pwaBody.setChild({ child: aPage });
         if(aPage.onOpen)aPage.onOpen();
+        this.currentPage=aPage;
         this.alertPageChangeListener(aPage.pageId);
 
+    }
+    static refeshCurrentPage()
+    {
+        if(myglobals.PWA && this.currentPage && this.currentPage.onOpen)
+        {
+            myglobals.PWA.currentPage.onOpen();
+        }
     }
     setCredentials(credentials) {
         this.credentials = credentials;
