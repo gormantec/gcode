@@ -381,310 +381,311 @@ class SomeOtherPage extends Page {
 class AddVideo extends Page {
     constructor(params) {
         super({
-                "color": "#545454",
-                "backgroundColor": "#FAEBF2",
-                "hideFloatingActionButton": "true",
-                "hideFooter": "true",
-                "navigateBackPage": "VideoBlog",
-                "padding": "15px",
-                "onopen": () => {
-                    document.querySelector('#video').style.display = "";
-                    document.querySelector('#videoCover').style.display = "none";
-                    document.querySelector('#recButton').style.color = "grey";
-                    let done = false;
-                    if (mediaStream) {
-                        mediaStream.getTracks().forEach(function(track) {
-                            track.stop();
-                        });
-                        mediaStream = null;
-                    }
-                    var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
-                    let videoSpecs = {
+            "color": "#545454",
+            "backgroundColor": "#FAEBF2",
+            "hideFloatingActionButton": "true",
+            "hideFooter": "true",
+            "navigateBackPage": "VideoBlog",
+            "padding": "15px",
+            "onopen": () => {
+                document.querySelector('#video').style.display = "";
+                document.querySelector('#videoCover').style.display = "none";
+                document.querySelector('#recButton').style.color = "grey";
+                let done = false;
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                    mediaStream = null;
+                }
+                var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+                let videoSpecs = {
+                    facingMode: "environment",
+                    resizeMode: "crop-and-scale",
+                    aspectRatio: 16 / 9,
+                    width: {
+                        min: 300,
+                        ideal: 360,
+                        max: 480
+                    },
+                }
+                if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+                    videoSpecs = {
                         facingMode: "environment",
                         resizeMode: "crop-and-scale",
-                        aspectRatio: 16 / 9,
+                        aspectRatio: 9 / 16,
                         width: {
                             min: 300,
                             ideal: 360,
                             max: 480
                         },
                     }
-                    if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
-                        videoSpecs = {
-                            facingMode: "environment",
-                            resizeMode: "crop-and-scale",
-                            aspectRatio: 9 / 16,
-                            width: {
-                                min: 300,
-                                ideal: 360,
-                                max: 480
-                            },
+                }
+                navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: videoSpecs
+                }).then(function(aMediaStream) {
+                    mediaStream = aMediaStream;
+                    if (!done) {
+                        const video = document.querySelector('video');
+                        console.log(mediaStream);
+                        console.log(mediaStream.getVideoTracks()[0].getSettings());
+                        video.srcObject = mediaStream;
+                        video.volume = 0.0;
+                        video.muted = true;
+                        video.playsinline = true;
+                        video.autoplay = true;
+                        video.onloadedmetadata = function(e) {
+                            if (!done) {
+                                video.play();
+                                video.volume = 0.0;
+                                video.muted = true;
+                                video.playsinline = true;
+                                video.autoplay = true;
+                                done = true;
+                                document.querySelector('#recButton').style.color = "black";
+                            }
                         }
                     }
-                    navigator.mediaDevices.getUserMedia({
-                        audio: true,
-                        video: videoSpecs
-                    }).then(function(aMediaStream) {
-                        mediaStream = aMediaStream;
-                        if (!done) {
-                            const video = document.querySelector('video');
-                            console.log(mediaStream);
-                            console.log(mediaStream.getVideoTracks()[0].getSettings());
-                            video.srcObject = mediaStream;
-                            video.volume = 0.0;
-                            video.muted = true;
-                            video.playsinline = true;
-                            video.autoplay = true;
-                            video.onloadedmetadata = function(e) {
-                                if (!done) {
-                                    video.play();
-                                    video.volume = 0.0;
-                                    video.muted = true;
-                                    video.playsinline = true;
+                })
+
+            },
+            "id": params ? params.id : null,
+            "children": [new Center({
+                    height: "202px",
+                    top: "10px",
+                    child: new Center({
+                        width: "360px",
+                        height: "202px",
+                        overflow: "hidden",
+                        children: [new Video({
+                            width: "360px",
+                            height: "unset",
+                            id: "video",
+                            muted: "true",
+                            playsinline: "true",
+                            autoplay: "true"
+                        }), new VideoImage({
+                            width: "360px",
+                            height: "202px",
+                            id: "videoCover",
+                            display: "none"
+                        })]
+                    })
+                }),
+                new Form({
+                    top: "230px",
+                    left: "20px",
+                    right: "20px",
+                    fontSize: "12px",
+                    children: [
+                        new TextFormField({
+                            fontSize: "12px",
+                            id: "dateTextFormField"
+                        }),
+                        new TextFormField({
+                            fontSize: "12px",
+                            id: "commentTextFormField"
+                        }),
+                    ]
+                }),
+
+                new Center({
+                    height: "50px",
+                    bottom: "25px",
+                    child: new Div({
+                        id: "recButton",
+                        width: "50px",
+                        height: "50px",
+                        fontSize: "50px",
+                        color: "black",
+                        child: new Icon("radio_button_checked"),
+                        onclick: () => {
+                            let aTimeout = null;
+                            if (document.querySelector('#recButton').style.color == "black") {
+                                document.querySelector('#video').style.display = "";
+                                document.querySelector('#videoCover').style.display = "none";
+                                document.querySelector('#recButton').style.color = "red";
+                                const video = document.querySelector('video');
+                                if (!video.srcObject && mediaStream) {
+                                    video.src = null;
+                                    video.srcObject = mediaStream;
                                     video.autoplay = true;
-                                    done = true;
-                                    document.querySelector('#recButton').style.color = "black";
                                 }
+                                video.removeAttribute("controls");
+                                video.setAttribute("muted", "muted");
+                                video.volume = 0.0;
+                                video.muted = true;
+
+                                let mediaRecorder = new MediaRecorder(mediaStream);
+                                mediaRecorder.start(1000);
+                                let chunks = [];
+                                mediaRecorder.ondataavailable = function(e) {
+                                    chunks.push(e.data);
+                                }
+                                mediaRecorder.onstop = function(e) {
+                                    console.log(mediaRecorder);
+                                    console.log("stopped");
+                                    if (mediaRecorder.mimeType == "video/mp4") {
+                                        _blob = new Blob(chunks, {
+                                            'type': 'video/mp4'
+                                        });
+                                    } else {
+                                        _blob = new Blob(chunks, {
+                                            'type': 'video/webm'
+                                        });
+                                    }
+                                    video.srcObject = null;
+
+                                    Video.getVideoCover(_blob, 1.5).then(({
+                                        width,
+                                        height,
+                                        blob
+                                    }) => {
+                                        document.querySelector('#video').style.display = "none";
+                                        document.querySelector('#videoCover').style.display = "";
+                                        videoCover.src = URL.createObjectURL(blob);
+                                        _iblob = blob;
+                                        videoCover.style.height = height * parseInt(videoCover.style.width) / width + "px";
+                                        videoCover.dataset.realwidth = width;
+                                        videoCover.dataset.realheight = height;
+                                    });
+
+                                    let b = URL.createObjectURL(_blob);
+                                    video.volume = 0.2;
+                                    video.muted = false;
+                                    video.playsinline = true;
+                                    video.autoplay = false;
+                                    video.src = b;
+                                    video.pause();
+                                    video.setAttribute("controls", "controls");
+                                    video.removeAttribute("muted");
+                                }
+                                aTimeout = setTimeout(() => {
+                                    aTimeout = null;
+                                    console.log("stop");
+                                    let dt = Date.now();
+                                    let d = new Date(dt);
+                                    mediaRecorder.stop();
+                                    document.querySelector('#recButton').style.color = "black";
+                                    document.querySelector('#saveButton').style.display = "";
+                                    document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
+                                    document.querySelector('#dateTextFormField').dataset.timestamp = dt;
+
+                                }, 5000);
+                            } else if (document.querySelector('#recButton').style.color == "red") {
+                                if (aTimeout) clearTimeout(aTimeout);
+                                console.log("stop");
+                                let dt = Date.now();
+                                let d = new Date(dt);
+                                mediaRecorder.stop();
+                                document.querySelector('#recButton').style.color = "black";
+                                document.querySelector('#saveButton').style.display = "";
+                                document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
+                                document.querySelector('#dateTextFormField').dataset.timestamp = dt;
+                            }
+                        }
+
+                    })
+                }),
+                new Center({
+                    height: "50px",
+                    bottom: "25px",
+                    width: "100px",
+                    right: "0px",
+                    child: new Div({
+                        id: "saveButton",
+                        width: "40px",
+                        height: "50px",
+                        fontSize: "50px",
+                        color: "black",
+                        display: "none",
+                        child: new Icon("save"),
+                        onclick: () => {
+                            // Request persistent storage for site
+                            if (navigator.storage && navigator.storage.persist) {
+                                navigator.storage.persist().then((isPersisted) => {
+                                    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
+                                    var dbVersion = 2.0;
+                                    var request = indexedDB.open("babyVideos3", dbVersion),
+                                        db;
+                                    request.onerror = function(event) {
+                                        console.log("Error creating/accessing IndexedDB database");
+                                    };
+                                    request.onsuccess = function(event) {
+                                        let type = "webm";
+                                        if (_blob.type == "video/mp4") type = "mp4"
+                                        var videoName = "video-" + document.querySelector('#dateTextFormField').dataset.timestamp + "." + type;
+                                        console.log(_blob);
+                                        new Response(_iblob).arrayBuffer().then((imageArrayBuffer) => {
+                                            new Response(_blob).arrayBuffer().then((arrayBuffer) => {
+                                                console.log(arrayBuffer);
+                                                let obj = {
+                                                    name: videoName,
+                                                    type: type,
+                                                    time: document.querySelector('#dateTextFormField').innerText,
+                                                    timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                    comment: document.querySelector('#commentTextFormField').innerText,
+                                                    image: imageArrayBuffer,
+                                                    realwidth: document.querySelector('#videoCover').dataset.realwidth,
+                                                    realheight: document.querySelector('#videoCover').dataset.realheight,
+                                                    data: arrayBuffer
+                                                };
+                                                console.log(obj);
+                                                var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
+                                                document.querySelector('#saveButton').style.display = "none";
+                                                PWA.refeshCurrentPage();
+                                            });
+                                        });
+                                    }
+                                    request.onupgradeneeded = function(event) {
+                                        event.target.result.createObjectStore("videos");
+                                    };
+                                });
                             }
                         }
                     })
-
-                },
-                "id": params ? params.id : null,
-                "children": [new Center({
-                        height: "202px",
-                        top: "10px",
-                        child: new Center({
-                            width: "360px",
-                            height: "202px",
-                            overflow: "hidden",
-                            children: [new Video({
-                                width: "360px",
-                                height: "unset",
-                                id: "video",
-                                muted: "true",
-                                playsinline: "true",
-                                autoplay: "true"
-                            }), new VideoImage({
-                                width: "360px",
-                                height: "202px",
-                                id: "videoCover",
-                                display: "none"
-                            })]
-                        })
-                    }),
-                    new Form({
-                        top: "230px",
-                        left: "20px",
-                        right: "20px",
-                        fontSize: "12px",
-                        children: [
-                            new TextFormField({
-                                fontSize: "12px",
-                                id: "dateTextFormField"
-                            }),
-                            new TextFormField({
-                                fontSize: "12px",
-                                id: "commentTextFormField"
-                            }),
-                        ]
-                    }),
-
-                    new Center({
-                            height: "50px",
-                            bottom: "25px",
-                            child: new Div({
-                                    id: "recButton",
-                                    width: "50px",
-                                    height: "50px",
-                                    fontSize: "50px",
-                                    color: "black",
-                                    child: new Icon("radio_button_checked"),
-                                    onclick: () => {
-                                        let aTimeout = null;
-                                        if (document.querySelector('#recButton').style.color == "black") {
-                                            document.querySelector('#video').style.display = "";
-                                            document.querySelector('#videoCover').style.display = "none";
-                                            document.querySelector('#recButton').style.color = "red";
-                                            const video = document.querySelector('video');
-                                            if (!video.srcObject && mediaStream) {
-                                                video.src = null;
-                                                video.srcObject = mediaStream;
-                                                video.autoplay = true;
-                                            }
-                                            video.removeAttribute("controls");
-                                            video.setAttribute("muted", "muted");
-                                            video.volume = 0.0;
-                                            video.muted = true;
-
-                                            let mediaRecorder = new MediaRecorder(mediaStream);
-                                            mediaRecorder.start(1000);
-                                            let chunks = [];
-                                            mediaRecorder.ondataavailable = function(e) {
-                                                chunks.push(e.data);
-                                            }
-                                            mediaRecorder.onstop = function(e) {
-                                                console.log(mediaRecorder);
-                                                console.log("stopped");
-                                                if (mediaRecorder.mimeType == "video/mp4") {
-                                                    _blob = new Blob(chunks, {
-                                                        'type': 'video/mp4'
-                                                    });
-                                                } else {
-                                                    _blob = new Blob(chunks, {
-                                                        'type': 'video/webm'
-                                                    });
-                                                }
-                                                video.srcObject = null;
-
-                                                Video.getVideoCover(_blob, 1.5).then(({
-                                                    width,
-                                                    height,
-                                                    blob
-                                                }) => {
-                                                    document.querySelector('#video').style.display = "none";
-                                                    document.querySelector('#videoCover').style.display = "";
-                                                    videoCover.src = URL.createObjectURL(blob);
-                                                    _iblob = blob;
-                                                    videoCover.style.height = height * parseInt(videoCover.style.width) / width + "px";
-                                                    videoCover.dataset.realwidth = width;
-                                                    videoCover.dataset.realheight = height;
-                                                });
-
-                                                let b = URL.createObjectURL(_blob);
-                                                video.volume = 0.2;
-                                                video.muted = false;
-                                                video.playsinline = true;
-                                                video.autoplay = false;
-                                                video.src = b;
-                                                video.pause();
-                                                video.setAttribute("controls", "controls");
-                                                video.removeAttribute("muted");
-                                            }
-                                            aTimeout = setTimeout(() => {
-                                                aTimeout = null;
-                                                console.log("stop");
-                                                let dt = Date.now();
-                                                let d = new Date(dt);
-                                                mediaRecorder.stop();
-                                                document.querySelector('#recButton').style.color = "black";
-                                                document.querySelector('#saveButton').style.display = "";
-                                                document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
-                                                document.querySelector('#dateTextFormField').dataset.timestamp = dt;
-
-                                            }, 5000);
-                                        } else if (document.querySelector('#recButton').style.color == "red") {
-                                            if (aTimeout) clearTimeout(aTimeout);
-                                            console.log("stop");
-                                            let dt = Date.now();
-                                            let d = new Date(dt);
-                                            mediaRecorder.stop();
-                                            document.querySelector('#recButton').style.color = "black";
-                                            document.querySelector('#saveButton').style.display = "";
-                                            document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
-                                            document.querySelector('#dateTextFormField').dataset.timestamp = dt;
-                                        }
-
-                                    })
-                            }),
-                        new Center({
-                            height: "50px",
-                            bottom: "25px",
-                            width: "100px",
-                            right: "0px",
-                            child: new Div({
-                                id: "saveButton",
-                                width: "40px",
-                                height: "50px",
-                                fontSize: "50px",
-                                color: "black",
-                                display: "none",
-                                child: new Icon("save"),
-                                onclick: () => {
-                                    // Request persistent storage for site
-                                    if (navigator.storage && navigator.storage.persist) {
-                                        navigator.storage.persist().then((isPersisted) => {
-                                            var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
-                                            var dbVersion = 2.0;
-                                            var request = indexedDB.open("babyVideos3", dbVersion),
-                                                db;
-                                            request.onerror = function(event) {
-                                                console.log("Error creating/accessing IndexedDB database");
-                                            };
-                                            request.onsuccess = function(event) {
-                                                let type = "webm";
-                                                if (_blob.type == "video/mp4") type = "mp4"
-                                                var videoName = "video-" + document.querySelector('#dateTextFormField').dataset.timestamp + "." + type;
-                                                console.log(_blob);
-                                                new Response(_iblob).arrayBuffer().then((imageArrayBuffer) => {
-                                                    new Response(_blob).arrayBuffer().then((arrayBuffer) => {
-                                                        console.log(arrayBuffer);
-                                                        let obj = {
-                                                            name: videoName,
-                                                            type: type,
-                                                            time: document.querySelector('#dateTextFormField').innerText,
-                                                            timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
-                                                            comment: document.querySelector('#commentTextFormField').innerText,
-                                                            image: imageArrayBuffer,
-                                                            realwidth: document.querySelector('#videoCover').dataset.realwidth,
-                                                            realheight: document.querySelector('#videoCover').dataset.realheight,
-                                                            data: arrayBuffer
-                                                        };
-                                                        console.log(obj);
-                                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
-                                                        document.querySelector('#saveButton').style.display = "none";
-                                                        PWA.refeshCurrentPage();
-                                                    });
-                                                });
-                                            }
-                                            request.onupgradeneeded = function(event) {
-                                                event.target.result.createObjectStore("videos");
-                                            };
-                                        });
-                                    }
-                                }
-                            })
-                        }),
-                    ]
-                });
-        }
+                }),
+            ]
+        });
     }
+}
 
-    /*---------------------------------------------------------------------------*/
-    var myDiv = new Div({
-        innerHTML: "url(https://gcode.com.au/html/test.html)"
-    });
-    var aHomePage = new HomePage();
-    var aAddVideo = new AddVideo();
-    var aVideoBlog = new VideoBlog({
-        id: "VideoBlog"
-    });
-    var aNursingPaused = new NursingPaused({
-        id: "NursingPaused"
-    });
-    var aSomeOtherPage1 = new SomeOtherPage({
-        id: "SomeOtherPage1"
-    });
-    var aSomeOtherPage2 = new SomeOtherPage({
-        id: "SomeOtherPage2"
-    });
-    var aSomeOtherPage3 = new SomeOtherPage({
-        id: "SomeOtherPage3"
-    });
-    var aSomeOtherPage4 = new SomeOtherPage({
-        id: "SomeOtherPage4"
-    });
-    var aSomeOtherPage5 = new SomeOtherPage({
-        id: "SomeOtherPage5"
-    });
-    var aPWA = new PWA({
-        title: "Baby Daze",
-        titleBackgroundColor: "rgb(250,0,171,0.3)",
-        headerHeight: "180px",
-        headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
-        primaryColor: "#FA00AB",
-    });
-    aPWA.setPage(aHomePage);
-    aPWA.show();
-    /*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*/
+var myDiv = new Div({
+    innerHTML: "url(https://gcode.com.au/html/test.html)"
+});
+var aHomePage = new HomePage();
+var aAddVideo = new AddVideo();
+var aVideoBlog = new VideoBlog({
+    id: "VideoBlog"
+});
+var aNursingPaused = new NursingPaused({
+    id: "NursingPaused"
+});
+var aSomeOtherPage1 = new SomeOtherPage({
+    id: "SomeOtherPage1"
+});
+var aSomeOtherPage2 = new SomeOtherPage({
+    id: "SomeOtherPage2"
+});
+var aSomeOtherPage3 = new SomeOtherPage({
+    id: "SomeOtherPage3"
+});
+var aSomeOtherPage4 = new SomeOtherPage({
+    id: "SomeOtherPage4"
+});
+var aSomeOtherPage5 = new SomeOtherPage({
+    id: "SomeOtherPage5"
+});
+var aPWA = new PWA({
+    title: "Baby Daze",
+    titleBackgroundColor: "rgb(250,0,171,0.3)",
+    headerHeight: "180px",
+    headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
+    primaryColor: "#FA00AB",
+});
+aPWA.setPage(aHomePage);
+aPWA.show();
+/*---------------------------------------------------------------------------*/
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
