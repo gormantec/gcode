@@ -399,7 +399,8 @@ class AddVideo extends Page {
                     });
                     mediaStream = null;
                 }
-                var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+              	let getOrientation= ()=>window.innerWidth > window.innerHeight ? "landscape-primary" : "portrait-primary";
+                var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation || getOrientation();
                 let videoSpecs = {
                     facingMode: "environment",
                     resizeMode: "crop-and-scale",
@@ -411,7 +412,7 @@ class AddVideo extends Page {
                     },
                 }
                 console.log(orientation);
-                //if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+                if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
                     videoSpecs = {
                         facingMode: "environment",
                         resizeMode: "crop-and-scale",
@@ -422,7 +423,7 @@ class AddVideo extends Page {
                             max: 480
                         },
                     }
-                //}
+                }
               	console.log(videoSpecs);
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
