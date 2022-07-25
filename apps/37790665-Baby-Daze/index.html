@@ -211,10 +211,10 @@ class VideoBlog extends Page {
                                 var b = new Blob([event.target.result[i].data], {
                                     type: 'video/' + event.target.result[i].type
                                 });
-                              	var ib = new Blob([event.target.result[i].image], {
+                                var ib = new Blob([event.target.result[i].image], {
                                     type: 'image/jpeg'
                                 });
-                              	let iobUrl = URL.createObjectURL(ib);
+                                let iobUrl = URL.createObjectURL(ib);
                                 let timestamp = event.target.result[i].timestamp;
                                 let obUrl = URL.createObjectURL(b);
                                 let timeago = Math.floor((Date.now() - timestamp) / 610000);
@@ -223,7 +223,7 @@ class VideoBlog extends Page {
                                 else if (timeago > 1440) timeagoString = Math.fooor(timeago / 1440) + " days ago";
                                 else if (timeago > 43200) timeagoString = Math.fooor(timeago / 43200) + " months ago";
                                 else if (timeago > 524160) timeagoString = Math.fooor(timeago / 524160) + " years ago";
-                              	let iii=i;
+                                let iii = i;
                                 listView.appendChild(new Container({
                                     height: "240px",
                                     children: [
@@ -239,23 +239,24 @@ class VideoBlog extends Page {
                                             height: "202px",
                                             overflow: "hidden",
                                             children: [new Video({
-                                                width: "360px",
-                                                height: "unset",
-                                                src: obUrl,
-                                                playsinline: "true",
-                                                display: "none",
-                                                id: "video-"+iii
-                                            }),
-                                            new VideoImage({
-                                                width: "360px",
-                                                height: "202px",
-                                                id: "videoCover-"+iii,
-                                              	src: iobUrl,
-                                              	onclick: ()=>{
-                                                  document.querySelector("video-"+iii).style.display="";
-                                                  document.querySelector("videoCover-"+iii).style.display="none";
-                                                }
-                                            })]
+                                                    width: "360px",
+                                                    height: "unset",
+                                                    src: obUrl,
+                                                    playsinline: "true",
+                                                    display: "none",
+                                                    id: "video-" + iii
+                                                }),
+                                                new VideoImage({
+                                                    width: "360px",
+                                                    height: "202px",
+                                                    id: "videoCover-" + iii,
+                                                    src: iobUrl,
+                                                    onclick: () => {
+                                                        document.querySelector("video-" + iii).style.display = "";
+                                                        document.querySelector("videoCover-" + iii).style.display = "none";
+                                                    }
+                                                })
+                                            ]
                                         })
                                     ]
                                 }));
@@ -368,8 +369,8 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "onopen": () => {
-                document.querySelector('#video').style.display="";
-                document.querySelector('#videoCover').style.display="none";
+                document.querySelector('#video').style.display = "";
+                document.querySelector('#videoCover').style.display = "none";
                 document.querySelector('#recButton').style.color = "grey";
                 let done = false;
                 if (mediaStream) {
@@ -378,14 +379,32 @@ class AddVideo extends Page {
                     });
                     mediaStream = null;
                 }
-                navigator.mediaDevices.getUserMedia({
-                    audio: true,
-                    video: {
+                var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+                let videoSepcs = {
+                    facingMode: "environment",
+                    resizeMode: "crop-and-scale",
+                    aspectRatio: 16 / 9,
+                    width: {
+                        min: 300,
+                        ideal: 360,
+                        max: 480
+                    },
+                }
+                if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+                    videoSepcs = {
                         facingMode: "environment",
                         resizeMode: "crop-and-scale",
-                        aspectRatio: 9/16,
-                      	width: { min: 300, ideal: 360, max: 480 },
+                        aspectRatio: 9 / 16,
+                        width: {
+                            min: 300,
+                            ideal: 360,
+                            max: 480
+                        },
                     }
+                }
+                navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: videoSpecs
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
                     if (!done) {
@@ -422,16 +441,16 @@ class AddVideo extends Page {
                         overflow: "hidden",
                         children: [new Video({
                             width: "360px",
-                        	height: "unset",
+                            height: "unset",
                             id: "video",
                             muted: "true",
                             playsinline: "true",
                             autoplay: "true"
-                        }),new VideoImage({
+                        }), new VideoImage({
                             width: "360px",
-                        	height: "202px",
+                            height: "202px",
                             id: "videoCover",
-                          	display: "none"
+                            display: "none"
                         })]
                     })
                 }),
@@ -461,9 +480,9 @@ class AddVideo extends Page {
                         color: "black",
                         child: new Icon("radio_button_checked"),
                         onclick: () => {
-						
-                            document.querySelector('#video').style.display="";
-                            document.querySelector('#videoCover').style.display="none";
+
+                            document.querySelector('#video').style.display = "";
+                            document.querySelector('#videoCover').style.display = "none";
                             document.querySelector('#recButton').style.color = "red";
                             const video = document.querySelector('video');
                             if (!video.srcObject && mediaStream) {
@@ -495,17 +514,21 @@ class AddVideo extends Page {
                                     });
                                 }
                                 video.srcObject = null;
-                              
-                              	Video.getVideoCover(_blob,1.5).then(({width,height,blob})=>{
-                                  	document.querySelector('#video').style.display="none";
-                                  	document.querySelector('#videoCover').style.display="";
-                                    videoCover.src=URL.createObjectURL(blob);
-                                  	_iblob=blob;
-                                  	videoCover.style.height=height*parseInt(videoCover.style.width)/width+"px";
-                                  	videoCover.dataset.realwidth=width;
-                                  	videoCover.dataset.realheight=height;
+
+                                Video.getVideoCover(_blob, 1.5).then(({
+                                    width,
+                                    height,
+                                    blob
+                                }) => {
+                                    document.querySelector('#video').style.display = "none";
+                                    document.querySelector('#videoCover').style.display = "";
+                                    videoCover.src = URL.createObjectURL(blob);
+                                    _iblob = blob;
+                                    videoCover.style.height = height * parseInt(videoCover.style.width) / width + "px";
+                                    videoCover.dataset.realwidth = width;
+                                    videoCover.dataset.realheight = height;
                                 });
-                              
+
                                 let b = URL.createObjectURL(_blob);
                                 video.volume = 0.2;
                                 video.muted = false;
@@ -560,24 +583,24 @@ class AddVideo extends Page {
                                         var videoName = "video-" + document.querySelector('#dateTextFormField').dataset.timestamp + "." + type;
                                         console.log(_blob);
                                         new Response(_iblob).arrayBuffer().then((imageArrayBuffer) => {
-                                          new Response(_blob).arrayBuffer().then((arrayBuffer) => {
-                                              console.log(arrayBuffer);
-                                              let obj = {
-                                                  name: videoName,
-                                                  type: type,
-                                                  time: document.querySelector('#dateTextFormField').innerText,
-                                                  timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
-                                                  comment: document.querySelector('#commentTextFormField').innerText,
-                                                  image: imageArrayBuffer,
-                                                  realwidth:document.querySelector('#videoCover').dataset.realwidth,
-                                                  realheight:document.querySelector('#videoCover').dataset.realheight,
-                                                  data: arrayBuffer
-                                              };
-                                              console.log(obj);
-                                              var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
-                                              document.querySelector('#saveButton').style.display = "none";
-                                          });
-                                          });
+                                            new Response(_blob).arrayBuffer().then((arrayBuffer) => {
+                                                console.log(arrayBuffer);
+                                                let obj = {
+                                                    name: videoName,
+                                                    type: type,
+                                                    time: document.querySelector('#dateTextFormField').innerText,
+                                                    timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                    comment: document.querySelector('#commentTextFormField').innerText,
+                                                    image: imageArrayBuffer,
+                                                    realwidth: document.querySelector('#videoCover').dataset.realwidth,
+                                                    realheight: document.querySelector('#videoCover').dataset.realheight,
+                                                    data: arrayBuffer
+                                                };
+                                                console.log(obj);
+                                                var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
+                                                document.querySelector('#saveButton').style.display = "none";
+                                            });
+                                        });
                                     }
                                     request.onupgradeneeded = function(event) {
                                         event.target.result.createObjectStore("videos");
@@ -623,7 +646,7 @@ var aPWA = new PWA({
     title: "Baby Daze",
     titleBackgroundColor: "rgb(250,0,171,0.3)",
     headerHeight: "180px",
-   // headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
+    // headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
     primaryColor: "#000000",
 });
 aPWA.setPage(aHomePage);
