@@ -599,6 +599,7 @@ class AddVideo extends Page {
                                                 console.log(obj);
                                                 var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
                                                 document.querySelector('#saveButton').style.display = "none";
+                                              	PWA.refeshCurrentPage();
                                             });
                                         });
                                     }
@@ -612,6 +613,10 @@ class AddVideo extends Page {
                 }),
             ]
         });
+      	refreshPage()
+        {
+          if(this.onopen)this.onopen();
+        }
     }
 }
 
