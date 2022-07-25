@@ -502,6 +502,8 @@ class AddVideo extends Page {
                                     videoCover.src=URL.createObjectURL(blob);
                                   	_iblob=blob;
                                   	videoCover.style.height=height*parseInt(videoCover.style.width)/width+"px";
+                                  	videoCover.dataset.realwidth=width;
+                                  	videoCover.dataset.realheight=height;
                                 });
                               
                                 let b = URL.createObjectURL(_blob);
@@ -567,6 +569,8 @@ class AddVideo extends Page {
                                                   timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
                                                   comment: document.querySelector('#commentTextFormField').innerText,
                                                   image: imageArrayBuffer,
+                                                  realwidth:document.querySelector('#videoCover').dataset.realwidth,
+                                                  realheight:document.querySelector('#videoCover').dataset.realheight,
                                                   data: arrayBuffer
                                               };
                                               console.log(obj);
