@@ -600,7 +600,10 @@ class AddVideo extends Page {
                                 console.log("stop");
                                 let dt = Date.now();
                                 let d = new Date(dt);
-                                if(mediaRecorder) mediaRecorder.stop();
+                                if(mediaRecorder){
+                                  console.log("stopping");
+                                  mediaRecorder.stop();
+                                }
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
                                 document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
