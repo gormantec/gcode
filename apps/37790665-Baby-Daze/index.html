@@ -224,6 +224,8 @@ class VideoBlog extends Page {
                                 else if (timeago > 43200) timeagoString = Math.fooor(timeago / 43200) + " months ago";
                                 else if (timeago > 524160) timeagoString = Math.fooor(timeago / 524160) + " years ago";
                                 let iii = i;
+                              	let width=360;
+                              	let height = event.target.result[i].realheight * parseInt(videoCover.style.width) / event.target.result[i].realwidth ;
                                 listView.appendChild(new Container({
                                     height: "240px",
                                     children: [
@@ -239,16 +241,16 @@ class VideoBlog extends Page {
                                             height: "202px",
                                             overflow: "hidden",
                                             children: [new Video({
-                                                    width: "360px",
-                                                    height: "unset",
+                                                    width: width+"360px",
+                                                    height: height+"px",
                                                     src: obUrl,
                                                     playsinline: "true",
                                                     display: "none",
                                                     id: "video-" + iii
                                                 }),
                                                 new VideoImage({
-                                                    width: "360px",
-                                                    height: "202px",
+                                                    width: width+"px",
+                                                    height: height+"px",
                                                     id: "videoCover-" + iii,
                                                     src: iobUrl,
                                                     onclick: () => {
