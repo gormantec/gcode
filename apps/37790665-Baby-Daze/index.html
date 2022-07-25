@@ -258,7 +258,7 @@ class VideoBlog extends Page {
                                                       	video.style.display = "";
                                                         document.querySelector("#videoCover-" + iii).style.display = "none";
                                                       	video.currentTime=0;
-                                                      	video.autoplay=true;
+                                                      	try{video.play();}catch(e){console.log(e);}
                                                     }
                                                 })
                                             ]
