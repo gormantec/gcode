@@ -252,8 +252,9 @@ class VideoBlog extends Page {
                                                     id: "videoCover-" + iii,
                                                     src: iobUrl,
                                                     onclick: () => {
-                                                        document.querySelector("video-" + iii).style.display = "";
-                                                        document.querySelector("videoCover-" + iii).style.display = "none";
+                                                        document.querySelector("#video-" + iii).style.display = "";
+                                                        document.querySelector("#videoCover-" + iii).style.display = "none";
+                                                      	document.querySelector("#video-" + iii).play();
                                                     }
                                                 })
                                             ]
