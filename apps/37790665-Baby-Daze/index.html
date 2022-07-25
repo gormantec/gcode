@@ -258,7 +258,17 @@ class VideoBlog extends Page {
                                                       	video.style.display = "";
                                                         document.querySelector("#videoCover-" + iii).style.display = "none";
                                                       	video.currentTime=0;
+                                                      	video.controls=true;
+                                                      	video.playsinline=true;
                                                       	try{video.play();}catch(e){console.log(e);}
+                                                      	const ev=()=>{
+                                                          let video2=document.querySelector("#video-" + iii);
+                                                          video2.style.display = "none";
+                                                          document.querySelector("#videoCover-" + iii).style.display = "";
+                                                          video2.currentTime=0;
+                                                          video2.removeEventListener(ev);
+                                                        };
+                                                      	video.addEventListener('ended',ev,false);
                                                     }
                                                 })
                                             ]
