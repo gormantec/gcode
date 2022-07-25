@@ -415,13 +415,14 @@ class AddVideo extends Page {
                         facingMode: "environment",
                         resizeMode: "crop-and-scale",
                         aspectRatio: 9 / 16,
-                        height: {
+                        width: {
                             min: 300,
                             ideal: 360,
                             max: 480
                         },
                     }
                 }
+              	console.log(videoSpecs);
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
                     video: videoSpecs
