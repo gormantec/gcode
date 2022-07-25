@@ -595,7 +595,7 @@ class AddVideo extends Page {
                                     document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
                                     document.querySelector('#dateTextFormField').dataset.timestamp = dt;
 
-                                }, 5000);
+                                }, 10000);
                             } else if (document.querySelector('#recButton').style.color == "red") {
                                 if (aTimeout) clearTimeout(aTimeout);
                                 console.log("stop");
