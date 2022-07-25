@@ -270,7 +270,7 @@ class VideoBlog extends Page {
                                                             video2.style.display = "none";
                                                             document.querySelector("#videoCover-" + iii).style.display = "";
                                                             video2.currentTime = 0;
-                                                            video2.removeEventListener(ev);
+                                                            video2.removeEventListener('ended',ev);
                                                         };
                                                         video.addEventListener('ended', ev, false);
                                                     }
@@ -487,7 +487,7 @@ class AddVideo extends Page {
                               video2.style.display = "none";
                               document.querySelector("#videoCover").style.display = "";
                               video2.currentTime = 0;
-                              video2.removeEventListener(ev2);
+                              video2.removeEventListener('ended',ev2);
                             };
                             video.addEventListener('ended', ev2, false);
                           }
