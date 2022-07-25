@@ -101,6 +101,7 @@ let listView=null;
 let mediaStream=null;
 let _blob=null;
 let _iblob=null;
+let mediaRecorder = null;
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -523,7 +524,6 @@ class AddVideo extends Page {
                         child: new Icon("radio_button_checked"),
                         onclick: () => {
                             let aTimeout = null;
-                            let mediaRecorder = null;
                             if (document.querySelector('#recButton').style.color == "black") {
                                 document.querySelector('#video').style.display = "";
                                 document.querySelector('#videoCover').style.display = "none";
@@ -582,13 +582,14 @@ class AddVideo extends Page {
                                     video.pause();
                                     video.setAttribute("controls", "controls");
                                     video.removeAttribute("muted");
+                                  	mediaRecorder=null;
                                 }
                                 aTimeout = setTimeout(() => {
                                     aTimeout = null;
                                     console.log("stop");
                                     let dt = Date.now();
                                     let d = new Date(dt);
-                                    mediaRecorder.stop();
+                                    if(mediaRecorder)mediaRecorder.stop();
                                     document.querySelector('#recButton').style.color = "black";
                                     document.querySelector('#saveButton').style.display = "";
                                     document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
