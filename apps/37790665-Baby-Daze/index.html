@@ -383,8 +383,8 @@ class AddVideo extends Page {
                     video: {
                         facingMode: "environment",
                         resizeMode: "crop-and-scale",
-                        aspectRatio: 16 / 9,
-                      	width: { min: 300, ideal: 360, max: 400 },
+                        aspectRatio: 9/16,
+                      	height: { min: 300, ideal: 360, max: 400 },
                     }
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
