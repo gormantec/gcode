@@ -1,14 +1,14 @@
 {
   "name": "Baby Daze",
   "short_name": "Baby Daze",
-  "theme_color": "#FA00AB",
-  "background_color": "#FA00AB",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-Baby-Daze/",
   "permitted_urls": [],
-  "version": "1.0.0.1754856",
+  "version": "1.0.0.1771445",
   "icons": [
     {
       "src": "/apps/37790665-Baby-Daze/180x180.icon.png",

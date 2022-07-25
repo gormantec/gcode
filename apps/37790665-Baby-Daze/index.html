@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html><head><link rel="manifest" href="/apps/37790665-Baby-Daze/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="A gcode developed PWA app"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta property="fpwa:template" content="pwa=true,name=Baby Daze,short_name=Baby Daze,theme_color=#FA00AB,background_color=#FA00AB,display=standalone,orientation=any"><link rel="apple-touch-icon" href="/apps/37790665-Baby-Daze/icon.png"><link rel="apple-touch-icon-precomposed" href="/apps/37790665-Baby-Daze/icon.png"><link rel="icon" href="/apps/37790665-Baby-Daze/icon.png"><style>
-.splash{position:absolute;background-size:300px;background-image:url('splash.icon.png');background-position:center;background-repeat:no-repeat;top:0px;bottom:0px;left:0px;right:0px;color:#F0F0F0;background-color:#FA00AB;}
+<html><head><link rel="manifest" href="/apps/37790665-Baby-Daze/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="A gcode developed PWA app"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta property="fpwa:template" content="pwa=true,name=Baby Daze,short_name=Baby Daze,theme_color=#000000,background_color=#000000,display=standalone,orientation=any"><link rel="apple-touch-icon" href="/apps/37790665-Baby-Daze/icon.png"><link rel="apple-touch-icon-precomposed" href="/apps/37790665-Baby-Daze/icon.png"><link rel="icon" href="/apps/37790665-Baby-Daze/icon.png"><style>
+.splash{position:absolute;background-size:300px;background-image:url('splash.icon.png');background-position:center;background-repeat:no-repeat;top:0px;bottom:0px;left:0px;right:0px;color:#F0F0F0;background-color:#000000;}
 .loader{font-size:50px;text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
 </style><script>
   window.PWA={globals:{}};
@@ -13,7 +13,7 @@
   window.PWA.globals.splash="splash.png";
   window.PWA.globals.splashColor="#F0F0F0";
   window.PWA.globals.mockFrame="iphoneX";
-  window.PWA.globals.splashBackgroundColor="#FA00AB";
+  window.PWA.globals.splashBackgroundColor="#000000";
   window.PWA.globals.splashDuration=2000;
 
 let deferredPrompt;
@@ -79,12 +79,12 @@ if (window.opener && window.opener !== window) {
   splashSize: 300px
   splash: git://gormantec:gcode_repo/BabyDaze.svg
   mockFrame: iphoneX
-  splashBackgroundColor: #FA00AB
+  splashBackgroundColor: #000000
   splashDuration: 2000
   includedImages: ["git://gormantec:gcode_repo/BabyDazeTitle400.png.svg"]
 
 */
-
+// FA00AB
 
 /*---------------------------------------------------------------------------*/
 import {
@@ -92,7 +92,7 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,Padding,Column} from './lib/flutter-widgets.lib.mjs';
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,Padding,Column,VideoImage} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -100,6 +100,7 @@ try {
 let listView=null;
 let mediaStream=null;
 let _blob=null;
+let _iblob=null;
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -191,60 +192,82 @@ class VideoBlog extends Page {
             "hideFooter": "true",
             "navigateBackPage": "HomePage",
             "floatingActionButtonPage": "AddVideo",
-          	"onopen": () => {
-              
+            "onopen": () => {
+
                 var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
                 var dbVersion = 2.0;
                 var request = indexedDB.open("babyVideos3", dbVersion);
-                request.onerror = function (event) {
-                  console.log("Error creating/accessing IndexedDB database");
+                request.onerror = function(event) {
+                    console.log("Error creating/accessing IndexedDB database");
                 };
-                request.onsuccess = function (event) {
-                  var get = request.result.transaction(["videos"], "readonly").objectStore("videos").getAll();
-                  get.onsuccess = function(event) {
-                    console.log(event.target.result);
-                    if(event.target.result && event.target.result.length>0)
-                    {
-                      listView.removeChildren();
-                      for(let i=event.target.result.length-1;i>=0;i--)
-                      {
-                          
-                         var b = new Blob([event.target.result[i].data], { type: 'video/'+event.target.result[i].type});
-                        let timestamp=event.target.result[i].timestamp;
-                         let obUrl = URL.createObjectURL(b);
-                        let timeago=Math.floor((Date.now()-timestamp)/610000);
-                        let timeagoString=timeago+" minutes ago";
-                        if(timeago>60)timeagoString=Math.fooor(timeago/60)+" hours ago";
-                        else if(timeago>1440)timeagoString=Math.fooor(timeago/1440)+" days ago";
-                        else if(timeago>43200)timeagoString=Math.fooor(timeago/43200)+" months ago";
-                        else if(timeago>524160)timeagoString=Math.fooor(timeago/524160)+" years ago";
-                          listView.appendChild(new Container({
-                            height: "240px",
-                            children: [
-                              new ListTile({
-                                color: "#545454",
-                                title: new Text(timeagoString),
-                                subtitle: new Text((event.target.result[i].comment || "")),
-                                leading: new Icon(Icons.battery_full),
-                                trailing: new Icon(Icons.star_outline)
-                              }), new Center({
-                                top: "40px",
-                                height: "200px",
-                                child: new Video({
-                                  src: obUrl,
-                				  playsinline:"true"
-                                })
-                              })
-                            ]
-                          }));
-                      }
-                    }
-                  };
+                request.onsuccess = function(event) {
+                    var get = request.result.transaction(["videos"], "readonly").objectStore("videos").getAll();
+                    get.onsuccess = function(event) {
+                        console.log(event.target.result);
+                        if (event.target.result && event.target.result.length > 0) {
+                            listView.removeChildren();
+                            for (let i = event.target.result.length - 1; i >= 0; i--) {
+
+                                var b = new Blob([event.target.result[i].data], {
+                                    type: 'video/' + event.target.result[i].type
+                                });
+                                var ib = new Blob([event.target.result[i].image], {
+                                    type: 'image/jpeg'
+                                });
+                                let iobUrl = URL.createObjectURL(ib);
+                                let timestamp = event.target.result[i].timestamp;
+                                let obUrl = URL.createObjectURL(b);
+                                let timeago = Math.floor((Date.now() - timestamp) / 610000);
+                                let timeagoString = timeago + " minutes ago";
+                                if (timeago > 60) timeagoString = Math.floor(timeago / 60) + " hours ago";
+                                else if (timeago > 1440) timeagoString = Math.fooor(timeago / 1440) + " days ago";
+                                else if (timeago > 43200) timeagoString = Math.fooor(timeago / 43200) + " months ago";
+                                else if (timeago > 524160) timeagoString = Math.fooor(timeago / 524160) + " years ago";
+                                let iii = i;
+                                listView.appendChild(new Container({
+                                    height: "240px",
+                                    children: [
+                                        new ListTile({
+                                            color: "#545454",
+                                            title: new Text(timeagoString),
+                                            subtitle: new Text((event.target.result[i].comment || "")),
+                                            leading: new Icon(Icons.battery_full),
+                                            trailing: new Icon(Icons.star_outline)
+                                        }), new Center({
+                                            top: "40px",
+                                            width: "360px",
+                                            height: "202px",
+                                            overflow: "hidden",
+                                            children: [new Video({
+                                                    width: "360px",
+                                                    height: "unset",
+                                                    src: obUrl,
+                                                    playsinline: "true",
+                                                    display: "none",
+                                                    id: "video-" + iii
+                                                }),
+                                                new VideoImage({
+                                                    width: "360px",
+                                                    height: "202px",
+                                                    id: "videoCover-" + iii,
+                                                    src: iobUrl,
+                                                    onclick: () => {
+                                                        document.querySelector("video-" + iii).style.display = "";
+                                                        document.querySelector("videoCover-" + iii).style.display = "none";
+                                                    }
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }));
+                            }
+                        }
+                    };
                 }
-                request.onupgradeneeded = function (event) {
-                  event.target.result.createObjectStore("videos");
+                request.onupgradeneeded = function(event) {
+                    event.target.result.createObjectStore("videos");
                 };
-              
+
             }
         })
         listView = new ListView({
@@ -346,22 +369,48 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "onopen": () => {
-
+                document.querySelector('#video').style.display = "";
+                document.querySelector('#videoCover').style.display = "none";
                 document.querySelector('#recButton').style.color = "grey";
                 let done = false;
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                    mediaStream = null;
+                }
+                var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+                let videoSpecs = {
+                    facingMode: "environment",
+                    resizeMode: "crop-and-scale",
+                    aspectRatio: 16 / 9,
+                    width: {
+                        min: 300,
+                        ideal: 360,
+                        max: 480
+                    },
+                }
+                if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+                    videoSpecs = {
+                        facingMode: "environment",
+                        resizeMode: "crop-and-scale",
+                        aspectRatio: 9 / 16,
+                        width: {
+                            min: 300,
+                            ideal: 360,
+                            max: 480
+                        },
+                    }
+                }
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
-                    video: {
-                        facingMode: "environment",
-                      	resizeMode: "crop-and-scale",
-                      	aspectRatio: 16/9
-                    }
+                    video: videoSpecs
                 }).then(function(aMediaStream) {
                     mediaStream = aMediaStream;
                     if (!done) {
                         const video = document.querySelector('video');
-                      	console.log(mediaStream);
-                         console.log(mediaStream.getVideoTracks()[0].getSettings());
+                        console.log(mediaStream);
+                        console.log(mediaStream.getVideoTracks()[0].getSettings());
                         video.srcObject = mediaStream;
                         video.volume = 0.0;
                         video.muted = true;
@@ -383,20 +432,42 @@ class AddVideo extends Page {
 
             },
             "id": params ? params.id : null,
-            "children": [new Text((params && params.id) ? params.id : "AddVideo"), new Center({
-                    height: "200px",
-                    top: "40px",
-                    child: new Center({width:"360px",height:"100px",overflow: "hidden",child:new Video({width:"360px",height:"unset",
-                        id: "video",
-                        muted: "true",
-                      	playsinline: "true",
-                      	autoplay: "true"
-                    })})
+            "children": [new Center({
+                    height: "202px",
+                    top: "10px",
+                    child: new Center({
+                        width: "360px",
+                        height: "202px",
+                        overflow: "hidden",
+                        children: [new Video({
+                            width: "360px",
+                            height: "unset",
+                            id: "video",
+                            muted: "true",
+                            playsinline: "true",
+                            autoplay: "true"
+                        }), new VideoImage({
+                            width: "360px",
+                            height: "202px",
+                            id: "videoCover",
+                            display: "none"
+                        })]
+                    })
                 }),
-                new Form({top:"260px",left:"20px",right:"20px",children:[
-                  new TextFormField({id:"dateTextFormField"}),
-                  new TextFormField({id:"commentTextFormField"}),
-                ]}),
+                new Form({
+                    top: "240px",
+                    left: "20px",
+                    right: "20px",
+                    fontSize: "12px",
+                    children: [
+                        new TextFormField({
+                            id: "dateTextFormField"
+                        }),
+                        new TextFormField({
+                            id: "commentTextFormField"
+                        }),
+                    ]
+                }),
 
                 new Center({
                     height: "60px",
@@ -410,18 +481,20 @@ class AddVideo extends Page {
                         child: new Icon("radio_button_checked"),
                         onclick: () => {
 
+                            document.querySelector('#video').style.display = "";
+                            document.querySelector('#videoCover').style.display = "none";
                             document.querySelector('#recButton').style.color = "red";
                             const video = document.querySelector('video');
                             if (!video.srcObject && mediaStream) {
                                 video.src = null;
                                 video.srcObject = mediaStream;
-                        		video.autoplay = true;
+                                video.autoplay = true;
                             }
                             video.removeAttribute("controls");
                             video.setAttribute("muted", "muted");
                             video.volume = 0.0;
                             video.muted = true;
-                          	
+
                             let mediaRecorder = new MediaRecorder(mediaStream);
                             mediaRecorder.start(1000);
                             let chunks = [];
@@ -429,17 +502,33 @@ class AddVideo extends Page {
                                 chunks.push(e.data);
                             }
                             mediaRecorder.onstop = function(e) {
-                              	console.log(mediaRecorder);
+                                console.log(mediaRecorder);
                                 console.log("stopped");
-                              	if(mediaRecorder.mimeType=="video/mp4")
-                                {
-                                	_blob = new Blob(chunks, { 'type': 'video/mp4' });
-                                }
-                              	else
-                                {
-                                	_blob = new Blob(chunks, { 'type': 'video/webm' });
+                                if (mediaRecorder.mimeType == "video/mp4") {
+                                    _blob = new Blob(chunks, {
+                                        'type': 'video/mp4'
+                                    });
+                                } else {
+                                    _blob = new Blob(chunks, {
+                                        'type': 'video/webm'
+                                    });
                                 }
                                 video.srcObject = null;
+
+                                Video.getVideoCover(_blob, 1.5).then(({
+                                    width,
+                                    height,
+                                    blob
+                                }) => {
+                                    document.querySelector('#video').style.display = "none";
+                                    document.querySelector('#videoCover').style.display = "";
+                                    videoCover.src = URL.createObjectURL(blob);
+                                    _iblob = blob;
+                                    videoCover.style.height = height * parseInt(videoCover.style.width) / width + "px";
+                                    videoCover.dataset.realwidth = width;
+                                    videoCover.dataset.realheight = height;
+                                });
+
                                 let b = URL.createObjectURL(_blob);
                                 video.volume = 0.2;
                                 video.muted = false;
@@ -452,14 +541,14 @@ class AddVideo extends Page {
                             }
                             setTimeout(() => {
                                 console.log("stop");
-                              	let dt=Date.now();
-                              	let d= new Date(dt);
+                                let dt = Date.now();
+                                let d = new Date(dt);
                                 mediaRecorder.stop();
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
                                 document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
                                 document.querySelector('#dateTextFormField').dataset.timestamp = dt;
-                              
+
                             }, 5000);
                         }
                     })
@@ -474,35 +563,48 @@ class AddVideo extends Page {
                         width: "40px",
                         height: "40px",
                         fontSize: "45px",
-                      	color:"black",
+                        color: "black",
                         display: "none",
                         child: new Icon("save"),
                         onclick: () => {
                             // Request persistent storage for site
                             if (navigator.storage && navigator.storage.persist) {
                                 navigator.storage.persist().then((isPersisted) => {
-                                  var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
-                                  var dbVersion = 2.0;
-                                  var request = indexedDB.open("babyVideos3", dbVersion),db;
-                                  request.onerror = function (event) {
-                                      console.log("Error creating/accessing IndexedDB database");
-                                  };
-                                  request.onsuccess = function (event) {
-                                    let type="webm";
-                                    if(_blob.type=="video/mp4")type="mp4"
-                                      var videoName="video-"+document.querySelector('#dateTextFormField').dataset.timestamp+"."+type;  
-                                      console.log(_blob);
-                                      new Response(_blob).arrayBuffer().then((arrayBuffer)=>{
-                                      	console.log(arrayBuffer);
-                                        let obj={name:videoName,type:type,time:document.querySelector('#dateTextFormField').innerText,timestamp:document.querySelector('#dateTextFormField').dataset.timestamp,comment:document.querySelector('#commentTextFormField').innerText,data:arrayBuffer};
-                                        console.log(obj);
-                                        var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj,videoName);
-                                        document.querySelector('#saveButton').style.display = "none";
-                                      });
-                                  }
-                                  request.onupgradeneeded = function (event) {
-                                          event.target.result.createObjectStore("videos");
-                                  };
+                                    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
+                                    var dbVersion = 2.0;
+                                    var request = indexedDB.open("babyVideos3", dbVersion),
+                                        db;
+                                    request.onerror = function(event) {
+                                        console.log("Error creating/accessing IndexedDB database");
+                                    };
+                                    request.onsuccess = function(event) {
+                                        let type = "webm";
+                                        if (_blob.type == "video/mp4") type = "mp4"
+                                        var videoName = "video-" + document.querySelector('#dateTextFormField').dataset.timestamp + "." + type;
+                                        console.log(_blob);
+                                        new Response(_iblob).arrayBuffer().then((imageArrayBuffer) => {
+                                            new Response(_blob).arrayBuffer().then((arrayBuffer) => {
+                                                console.log(arrayBuffer);
+                                                let obj = {
+                                                    name: videoName,
+                                                    type: type,
+                                                    time: document.querySelector('#dateTextFormField').innerText,
+                                                    timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                    comment: document.querySelector('#commentTextFormField').innerText,
+                                                    image: imageArrayBuffer,
+                                                    realwidth: document.querySelector('#videoCover').dataset.realwidth,
+                                                    realheight: document.querySelector('#videoCover').dataset.realheight,
+                                                    data: arrayBuffer
+                                                };
+                                                console.log(obj);
+                                                var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
+                                                document.querySelector('#saveButton').style.display = "none";
+                                            });
+                                        });
+                                    }
+                                    request.onupgradeneeded = function(event) {
+                                        event.target.result.createObjectStore("videos");
+                                    };
                                 });
                             }
                         }
@@ -544,8 +646,8 @@ var aPWA = new PWA({
     title: "Baby Daze",
     titleBackgroundColor: "rgb(250,0,171,0.3)",
     headerHeight: "180px",
-    headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
-    primaryColor: "#FA00AB",
+    // headerBackgroundImage: "url(https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=387&h=81&dpr=2)",
+    primaryColor: "#000000",
 });
 aPWA.setPage(aHomePage);
 aPWA.show();
