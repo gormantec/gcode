@@ -390,6 +390,7 @@ class AddVideo extends Page {
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
             "onopen": () => {
+              	console.log("load page");
                 document.querySelector('#video').style.display = "";
                 document.querySelector('#videoCover').style.display = "none";
                 let done = false;
