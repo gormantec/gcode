@@ -193,7 +193,7 @@ class PWA {
     }
     static refeshCurrentPage()
     {
-        if(myglobals.PWA && this.currentPage && this.currentPage.onOpen)
+        if(myglobals.PWA && myglobals.PWA.currentPage && myglobals.PWA.currentPage.onOpen)
         {
             myglobals.PWA.currentPage.onOpen();
         }
