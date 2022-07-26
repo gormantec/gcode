@@ -106,8 +106,9 @@ export class TextFormField extends Div {
         super(params);
       	this.style.position="relative";
       	this.element.setAttribute("contenteditable","true");
-      	this.style.height="30px";
-      	this.style.fontSize="24px";
+      	if(!params.fontSize)this.style.height="30px";
+      	else this.style.height=(parseInt(params.fontSize)+4)+"px";
+      	if(!params.fontSize)this.style.fontSize="24px";
       	this.style.padding="3px";
       	this.style.marginBottom="5px";
       	this.style.backgroundColor="white";
