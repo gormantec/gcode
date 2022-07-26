@@ -102,6 +102,7 @@ let mediaStream=null;
 let _blob=null;
 let _iblob=null;
 let mediaRecorder = null;
+let facingMode="environment";
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -391,8 +392,10 @@ class AddVideo extends Page {
             "onopen": () => {
                 document.querySelector('#video').style.display = "";
                 document.querySelector('#videoCover').style.display = "none";
-                document.querySelector('#recButton').style.color = "grey";
                 let done = false;
+              
+                document.querySelector('#recButton').style.color = "grey";
+                document.querySelector('#flipButton').style.color = "grey";
                 if (mediaStream) {
                     mediaStream.getTracks().forEach(function(track) {
                         track.stop();
@@ -414,7 +417,7 @@ class AddVideo extends Page {
                 console.log(orientation);
                 if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
                     videoSpecs = {
-                        facingMode: "environment",
+                        facingMode: facingMode,
                         resizeMode: "crop-and-scale",
                         aspectRatio: 9 / 16,
                         width: {
@@ -448,6 +451,8 @@ class AddVideo extends Page {
                                 video.autoplay = true;
                                 done = true;
                                 document.querySelector('#recButton').style.color = "black";
+                                document.querySelector('#flipButton').style.color = "black";
+                              	
                             }
                         }
                     }
@@ -526,7 +531,12 @@ class AddVideo extends Page {
                         height: "30px",
                         fontSize: "30px",
                         color: "grey",
-                        child: new Icon("flip_camera_ios")})
+                        child: new Icon("flip_camera_ios")}),
+                        onclick: () => {
+                          if(facingMode=="environment")facingMode="user";
+                          else facingMode="environment";
+                          PWA.refeshCurrentPage();
+                        }
                 }),
 
                 new Center({
