@@ -115,6 +115,12 @@ export class TextFormField extends Div {
         {
           console.log('setAttribute("contenteditable","true")');
           inputDiv.element.setAttribute("contenteditable","true");
+      		inputDiv.style.marginBottom="7px";
+        }
+      	else
+        {
+      		inputDiv.style.borderBottom="2px solid #999999";
+      		inputDiv.style.marginBottom="5px";
         }
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
@@ -122,7 +128,6 @@ export class TextFormField extends Div {
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	inputDiv.style.borderBottom="2px solid #999999";
       	this.appendChild(inputDiv);
       if(params.decoration)
       {
@@ -394,9 +399,10 @@ export class AddVideo extends Page {
                   
                     children: [
                         new TextFormField({
-                          	decoration: new InputDecoration({labelText:'Date',contenteditable:false}),
+                          	decoration: new InputDecoration({labelText:'Date'}),
                             fontSize: "12px",
-                            id: "dateTextFormField"
+                            id: "dateTextFormField",
+                          	contenteditable:false
                         }),
                         new TextFormField({
                           	decoration: new InputDecoration({labelText:'Title'}),
