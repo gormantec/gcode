@@ -124,8 +124,8 @@ export class TextFormField extends Div {
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
-      	if(params.height){
-          inputDiv.style.height=params.height;
+      	if(params.height || params.minHeight){
+          inputDiv.style.minHeight=params.height || params.minHeight;
           this.style.height=(parseInt(params.height)+14)+"px";
         }
       	inputDiv.style.padding="3px";
@@ -583,6 +583,7 @@ export class AddVideo extends Page {
                                                     type: type,
                                                     time: document.querySelector('#dateTextFormField').innerText,
                                                     timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                    title: document.querySelector('#tilteTextFormField').innerText,
                                                     comment: document.querySelector('#commentTextFormField').innerText,
                                                     image: imageArrayBuffer,
                                                     realwidth: document.querySelector('#videoCover').dataset.realwidth,
