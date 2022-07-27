@@ -111,7 +111,11 @@ export class TextFormField extends Div {
       
       	let inputDiv=new Div(params);
       	inputDiv.style.position="relative";
-      	if(params.contenteditable==null || (params.contenteditable!=false && params.contenteditable!="false"))inputDiv.element.setAttribute("contenteditable","true");
+      	if(params.contenteditable!=false && params.contenteditable!="false")
+        {
+          console.log('setAttribute("contenteditable","true")');
+          inputDiv.element.setAttribute("contenteditable","true");
+        }
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
