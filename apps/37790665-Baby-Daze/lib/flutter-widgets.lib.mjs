@@ -113,6 +113,12 @@ export class TextFormField extends Div {
       	this.style.marginBottom="5px";
       	this.style.backgroundColor="white";
       	this.style.borderBottom="2px solid #999999";
+      if(params.decoration)
+      {
+        let aDiv=new Div({child:params.decoration});
+        aDiv.appendChild({children:this.element.cloneNode(true).children});
+        this.setChild(aDiv);
+      }
     }
 }
 export class Padding extends Div {
@@ -237,6 +243,13 @@ export class Center extends Div {
         this.element.style.display = "flex";
         this.element.style.alignItems = "center";
         this.element.style.justifyContent = "center";
+    }
+}
+
+export class InputDecoration extends Div {
+    constructor(params) {
+        super(params);
+      if(params.labelText)this.element.innerText=params.labelText;
     }
 }
 
@@ -365,12 +378,20 @@ export class AddVideo extends Page {
                     left: "20px",
                     right: "20px",
                     fontSize: "12px",
+                  
                     children: [
                         new TextFormField({
+                          	decoration: new InputDecoration({labelText:'Date'}),
                             fontSize: "12px",
                             id: "dateTextFormField"
                         }),
                         new TextFormField({
+                          	decoration: new InputDecoration({labelText:'Title'}),
+                            fontSize: "12px",
+                            id: "titleTextFormField"
+                        }),
+                        new TextFormField({
+                          	decoration: new InputDecoration({labelText:'Comment'}),
                             fontSize: "12px",
                             id: "commentTextFormField"
                         }),
