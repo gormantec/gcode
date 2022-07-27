@@ -103,7 +103,7 @@ export class Form extends Div {
 }
 export class TextFormField extends Div {
     constructor(params) {
-        super({position:"relative",overflow: "hidden"});
+        super({position:"relative",overflowY: "scroll",overflowX: "none"});
       
       	if(!params.fontSize)this.style.height="44px";
       	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
@@ -126,7 +126,7 @@ export class TextFormField extends Div {
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
       	if(params.height){
           inputDiv.style.height=params.height;
-          this.style.height=(params.height+14)+"px";
+          this.style.height=(parseInt(params.height)+14)+"px";
         }
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
