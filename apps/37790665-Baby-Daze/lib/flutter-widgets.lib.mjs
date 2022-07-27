@@ -59,7 +59,7 @@ export class ListView extends Div {
         while (this.element.firstChild) {
             this.element.removeChild(this.element.lastChild);
         }
-        for (let i = 0; i < this.divChildren.length; i++) {
+        for (let i = 0; this.divChildren && i < this.divChildren.length; i++) {
             console.log("x");
             super.appendChild(new Div({
                 "position": "relative",
