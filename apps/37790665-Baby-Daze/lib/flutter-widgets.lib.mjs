@@ -103,22 +103,42 @@ export class Form extends Div {
 }
 export class TextFormField extends Div {
     constructor(params) {
-        super(params);
-      	this.style.position="relative";
-      	this.element.setAttribute("contenteditable","true");
-      	if(!params.fontSize)this.style.height="30px";
-      	else this.style.height=(parseInt(params.fontSize)+4)+"px";
-      	if(!params.fontSize)this.style.fontSize="24px";
-      	this.style.padding="3px";
-      	this.style.marginBottom="5px";
-      	this.style.backgroundColor="white";
-      	this.style.borderBottom="2px solid #999999";
+        super({position:"relative",overflow: "hidden"});
+      
+      	if(!params.fontSize)this.style.height="44px";
+      	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
+      
+      
+      	let inputDiv=new Div(params);
+      	inputDiv.style.position="relative";
+      	if(params.contenteditable!=false && params.contenteditable!="false")
+        {
+          	inputDiv.element.setAttribute("contenteditable","true");
+      		inputDiv.style.borderBottom="2px solid #999999";
+      		inputDiv.style.marginBottom="5px";
+        }
+      	else
+        {
+      		inputDiv.style.marginBottom="7px";
+        }
+      	if(!params.fontSize)inputDiv.style.height="30px";
+      	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
+      	if(!params.fontSize)inputDiv.style.fontSize="24px";
+      	if(params.height){
+          inputDiv.style.height=params.height;
+          this.style.height=(params.height+14)+"px";
+        }
+      	inputDiv.style.padding="3px";
+      	inputDiv.style.marginBottom="5px";
+      	inputDiv.style.backgroundColor="white";
+      	this.appendChild(inputDiv);
       if(params.decoration)
       {
-      	this.style.marginLeft="50px";
-        let s=document.createElement("span");
-        s.innerText=params.decoration.element.innerText;
-        this.element.parentNode.insertBefore(s,this.element);
+          inputDiv.style.marginLeft="60px";
+          params.decoration.style.left="3px";
+          params.decoration.style.width="57px";
+          params.decoration.style.paddingTop="5px";
+          this.appendChild(params.decoration);
       }
     }
 }
@@ -251,6 +271,7 @@ export class InputDecoration extends Div {
     constructor(params) {
         super(params);
       if(params.labelText)this.element.innerText=params.labelText;
+      this.style.overflow="hidden";
     }
 }
 
@@ -384,7 +405,8 @@ export class AddVideo extends Page {
                         new TextFormField({
                           	decoration: new InputDecoration({labelText:'Date'}),
                             fontSize: "12px",
-                            id: "dateTextFormField"
+                            id: "dateTextFormField",
+                          	contenteditable:false
                         }),
                         new TextFormField({
                           	decoration: new InputDecoration({labelText:'Title'}),
@@ -394,6 +416,7 @@ export class AddVideo extends Page {
                         new TextFormField({
                           	decoration: new InputDecoration({labelText:'Comment'}),
                             fontSize: "12px",
+                          	height: "45px",
                             id: "commentTextFormField"
                         }),
                     ]
