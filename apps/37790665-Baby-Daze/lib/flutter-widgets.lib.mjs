@@ -1,4 +1,4 @@
-import { Div } from 'https://gcode.com.au/modules/pwa.mjs';
+import { Div,Page } from 'https://gcode.com.au/modules/pwa.mjs';
 
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
