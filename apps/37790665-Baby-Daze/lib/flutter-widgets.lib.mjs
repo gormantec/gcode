@@ -113,14 +113,13 @@ export class TextFormField extends Div {
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
         {
-          console.log('setAttribute("contenteditable","true")');
-          inputDiv.element.setAttribute("contenteditable","true");
-      		inputDiv.style.marginBottom="7px";
+          	inputDiv.element.setAttribute("contenteditable","true");
+      		inputDiv.style.borderBottom="2px solid #999999";
+      		inputDiv.style.marginBottom="5px";
         }
       	else
         {
-      		inputDiv.style.borderBottom="2px solid #999999";
-      		inputDiv.style.marginBottom="5px";
+      		inputDiv.style.marginBottom="7px";
         }
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
