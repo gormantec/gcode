@@ -124,7 +124,7 @@ export class TextFormField extends Div {
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
-      	if(params.height)inputDiv.style.height=height;
+      	if(params.height)inputDiv.style.height=params.height;
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
