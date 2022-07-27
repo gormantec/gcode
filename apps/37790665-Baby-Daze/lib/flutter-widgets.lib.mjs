@@ -103,25 +103,29 @@ export class Form extends Div {
 }
 export class TextFormField extends Div {
     constructor(params) {
-        super(params);
-      	this.style.position="relative";
-      	this.element.setAttribute("contenteditable","true");
-      	if(!params.fontSize)this.style.height="30px";
-      	else this.style.height=(parseInt(params.fontSize)+4)+"px";
-      	if(!params.fontSize)this.style.fontSize="24px";
-      	this.style.padding="3px";
-      	this.style.marginBottom="5px";
-      	this.style.backgroundColor="white";
-      	this.style.borderBottom="2px solid #999999";
+        super({position:"relative"});
+      
+      	if(!params.fontSize)this.style.height="44px";
+      	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
+      
+      
+      	let inputDiv=new Div(params);
+      	inputDiv.style.position="relative";
+      	inputDiv.element.setAttribute("contenteditable","true");
+      	if(!params.fontSize)inputDiv.style.height="30px";
+      	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
+      	if(!params.fontSize)inputDiv.style.fontSize="24px";
+      	inputDiv.style.padding="3px";
+      	inputDiv.style.marginBottom="5px";
+      	inputDiv.style.backgroundColor="white";
+      	inputDiv.style.borderBottom="2px solid #999999";
+      	this.appendChild(inputDiv);
       if(params.decoration)
       {
-         this.getParentDiv().then((parent)=>{
-          this.style.marginLeft="50px";
+          inputDiv.style.marginLeft="50px";
           params.decoration.style.left="3px";
           params.decoration.style.width="47px";
-          parent.appendChild(params.decoration);
-          this.element.parentNode.insertBefore(s,this.element);
-        });
+          this.appendChild(params.decoration);
       }
     }
 }
