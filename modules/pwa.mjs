@@ -501,6 +501,8 @@ class Div {
         if (params && params.borderStyle) this.element.style.borderStyle = params.borderStyle;
         if (params && params.padding) this.element.style.padding = params.padding;
         if (params && params.overflow) this.element.style.overflow = params.overflow;  
+        if (params && params.overflowX) this.element.style.overflowX = params.overflowX;  
+        if (params && params.overflowY) this.element.style.overflowY = params.overflowY;  
         if (params && params.paddingTop) this.element.style.paddingTop = params.paddingTop;
         if (params && params.paddingRight) this.element.style.paddingRight = params.paddingRight;
         if (params && params.paddingLeft) this.element.style.paddingLeft = params.paddingLeft;
