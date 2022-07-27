@@ -122,9 +122,10 @@ export class TextFormField extends Div {
       	this.appendChild(inputDiv);
       if(params.decoration)
       {
-          inputDiv.style.marginLeft="50px";
+          inputDiv.style.marginLeft="60px";
           params.decoration.style.left="3px";
-          params.decoration.style.width="47px";
+          params.decoration.style.width="57px";
+          params.decoration.style.paddingTop="5px";
           this.appendChild(params.decoration);
       }
     }
