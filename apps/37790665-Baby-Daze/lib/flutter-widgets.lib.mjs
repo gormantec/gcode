@@ -115,7 +115,7 @@ export class TextFormField extends Div {
       	this.style.borderBottom="2px solid #999999";
       if(params.decoration)
       {
-        getParentDiv().then((parent)=>{
+         this.getParentDiv().then((parent)=>{
           this.style.marginLeft="50px";
           params.decoration.style.left="3px";
           params.decoration.style.width="47px";
