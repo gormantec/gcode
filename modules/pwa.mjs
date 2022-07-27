@@ -667,6 +667,21 @@ class Div {
 
     }
 
+    async getParentDiv() {
+        let start = Date.now();
+        let timeout = 5000; 
+        let _this=this;
+        return new Promise(waitForParent); 
+        function waitForParent(resolve, reject) {
+            if (_this.parentDiv){
+                resolve(_this.parentDiv);
+            }
+            else if (timeout && (Date.now() - start) >= timeout)resolve(null);
+            else setTimeout(waitForParent.bind(this, resolve, reject), 30);
+        }
+
+    }
+
     appendChild(params) {
         //debug.log("appendChild");
         if (!params) return;
