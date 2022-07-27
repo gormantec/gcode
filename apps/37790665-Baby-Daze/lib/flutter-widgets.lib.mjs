@@ -125,6 +125,7 @@ export class TextFormField extends Div {
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
       	if(params.height || params.minHeight){
+          inputDiv.style.height="";
           inputDiv.style.minHeight=params.height || params.minHeight;
           this.style.height=(parseInt(params.height)+14)+"px";
         }
