@@ -111,7 +111,7 @@ export class TextFormField extends Div {
       
       	let inputDiv=new Div(params);
       	inputDiv.style.position="relative";
-      	inputDiv.element.setAttribute("contenteditable","true");
+      	if(params.contenteditable==null || (params.contenteditable!=false && params.contenteditable!="false"))inputDiv.element.setAttribute("contenteditable","true");
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
@@ -390,7 +390,7 @@ export class AddVideo extends Page {
                   
                     children: [
                         new TextFormField({
-                          	decoration: new InputDecoration({labelText:'Date'}),
+                          	decoration: new InputDecoration({labelText:'Date',contenteditable:false}),
                             fontSize: "12px",
                             id: "dateTextFormField"
                         }),
