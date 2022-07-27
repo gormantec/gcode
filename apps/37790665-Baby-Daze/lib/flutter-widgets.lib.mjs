@@ -103,12 +103,13 @@ export class Form extends Div {
 }
 export class TextFormField extends Div {
     constructor(params) {
-        super({position:"relative",overflowY: "scroll",overflowX: "none"});
+        super({position:"relative",overflowY: "none",overflowX: "none"});
       
       	if(!params.fontSize)this.style.height="44px";
       	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
       
       
+      	let inputScrollDiv=new Div({overflowY: "scroll",overflowX: "none"});
       	let inputDiv=new Div(params);
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
@@ -132,7 +133,9 @@ export class TextFormField extends Div {
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	this.appendChild(inputDiv);
+      	inputScrollDiv.style.height=this.style.height;
+      	inputScrollDiv.appendChild(inputDiv);
+      	this.appendChild(inputScrollDiv);
       if(params.decoration)
       {
           inputDiv.style.marginLeft="60px";
