@@ -124,6 +124,7 @@ export class TextFormField extends Div {
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
+      	if(params.height)inputDiv.style.height=height;
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
@@ -406,6 +407,7 @@ export class AddVideo extends Page {
                         new TextFormField({
                           	decoration: new InputDecoration({labelText:'Title'}),
                             fontSize: "12px",
+                          	height: "45px",
                             id: "titleTextFormField"
                         }),
                         new TextFormField({
