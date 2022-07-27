@@ -118,7 +118,7 @@ export class TextFormField extends Div {
       	this.style.marginLeft="50px";
         let s=document.createElement("span");
         s.innerText=params.decoration.element.innerText;
-        Node.insertBefore(s);
+        this.parentNode.insertBefore(s);
       }
     }
 }
