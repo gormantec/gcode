@@ -115,9 +115,10 @@ export class TextFormField extends Div {
       	this.style.borderBottom="2px solid #999999";
       if(params.decoration)
       {
-        let aDiv=new Div({child:params.decoration});
-        aDiv.appendChild({children:this.element.cloneNode(true).children});
-        this.setChild(aDiv);
+      	this.style.marginLeft="50px";
+        let s=document.createElement("span");
+        s.innerText=params.decoration.element.innerText;
+        this.element.insertBefore(s);
       }
     }
 }
