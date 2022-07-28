@@ -235,18 +235,20 @@ class Nursing extends Page {
 
                             children: [
                                 new DateFormField({
-                                    decoration: new InputDecoration({labelText:'Date'}),
+                                    decoration: new InputDecoration({labelText:'Time'}),
                                     fontSize: "12px",
                                     id: "dateTextFormField"
                                 }),
                                 new TextFormField({
-                                    decoration: new InputDecoration({labelText:'Title'}),
+                                    decoration: new InputDecoration({labelText:'Last start side'}),
                                     fontSize: "12px",
                                     id: "titleTextFormField"
                                 }),
+                              	new Div({position:"relative",height:"50px"}),
                                 new TextFormField({
-                                    decoration: new InputDecoration({labelText:'Comment'}),
+                                    decoration: new InputDecoration({labelText:'Notes'}),
                                     fontSize: "12px",
+                                    height: "45px",
                                     id: "commentTextFormField"
                                 }),
                             ]
