@@ -128,7 +128,11 @@ export class DateFormField extends Div {
           params.decoration.style.paddingTop="5px";
           this.appendChild(params.decoration);
       }
+      
+      const now = new Date();
+      inputField.value = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().substring(0, 19);
     }
+  
 }
 
 export class TextFormField extends Div {
