@@ -131,7 +131,7 @@ export class DateFormField extends Div {
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	inputScrollDiv.style.height=(parseInt(this.style.height)-2)+"px";
+      	inputScrollDiv.style.height=(parseInt(this.style.height))+"px";
       	inputScrollDiv.appendChild(inputDiv);
       	this.appendChild(inputScrollDiv);
       if(params.decoration)
@@ -177,14 +177,15 @@ export class TextFormField extends Div {
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	inputScrollDiv.style.height=(parseInt(this.style.height)-2)+"px";
+      	inputScrollDiv.style.height=(parseInt(this.style.height))+"px";
       	inputScrollDiv.appendChild(inputDiv);
       	this.appendChild(inputScrollDiv);
       if(params.decoration)
       {
           inputDiv.style.marginLeft="60px";
+          if(params.decoration.style.width)inputDiv.style.marginLeft=(parseInt(params.decoration.style.width)+3)+"px";
           params.decoration.style.left="3px";
-          params.decoration.style.width="57px";
+          if(!params.decoration.style.width)params.decoration.style.width="57px";
           params.decoration.style.paddingTop="5px";
           this.appendChild(params.decoration);
       }
