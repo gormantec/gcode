@@ -414,7 +414,7 @@ class PWA {
 
     showHeader() {
         this.pwaHeader.style.display = "";
-        this.pwaBody.style.top = this.headerHeight + "px";
+        this.pwaBody.style.top = parseInt(this.headerHeight) + "px";
         console.log("-----------> "+this.headerHeight);
     }
     hideFooter() {
