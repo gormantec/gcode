@@ -226,7 +226,33 @@ class Nursing extends Page {
                 		top:"80px",
                 		bottom:"4px",
                 		borderRadius:"16px",
-                		backgroundColor:"white"
+                		backgroundColor:"white",
+                		children:[new Form({
+                            top: "20px",
+                            left: "20px",
+                            right: "20px",
+                            fontSize: "12px",
+
+                            children: [
+                                new TextFormField({
+                                    decoration: new InputDecoration({labelText:'Date'}),
+                                    fontSize: "12px",
+                                    id: "dateTextFormField",
+                                    contenteditable:false
+                                }),
+                                new TextFormField({
+                                    decoration: new InputDecoration({labelText:'Title'}),
+                                    fontSize: "12px",
+                                    id: "titleTextFormField"
+                                }),
+                                new TextFormField({
+                                    decoration: new InputDecoration({labelText:'Comment'}),
+                                    fontSize: "12px",
+                                    height: "45px",
+                                    id: "commentTextFormField"
+                                }),
+                            ]
+                        })]
               })
           	],
             onopen: ()=>{
