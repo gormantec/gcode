@@ -244,7 +244,7 @@ class Nursing extends Page {
                                     fontSize: "12px",
                                     id: "titleTextFormField"
                                 }),
-                              	new Div({position:"relative",height:"100px",children:[
+                              	new Center({position:"relative",height:"100px",child:new Div({width:"160px",children:[
                                   new Div({
                                             id: "recButton",
                                             left:"10px",
@@ -259,7 +259,7 @@ class Nursing extends Page {
                                               PWA.getPWA().setPage("HomePage");
                                             }
                                   }),
-                                  new Center({left:"60px",right:"60px",child:new Div({
+                                  new Div({
                                             id: "recButton",
                                             top:"10px",
                                             width: "50px",
@@ -271,7 +271,7 @@ class Nursing extends Page {
                                               PWA.getPWA().showHeader();
                                               PWA.getPWA().setPage("HomePage");
                                             }
-                                  })}),
+                                  }),
                                   new Div({
                                             id: "recButton",
                                             right:"10px",
@@ -286,7 +286,7 @@ class Nursing extends Page {
                                               PWA.getPWA().setPage("HomePage");
                                             }
                                   }),
-                                ]}),
+                                ]})}),
                                 new TextFormField({
                                     decoration: new InputDecoration({labelText:'Notes'}),
                                     fontSize: "12px",
