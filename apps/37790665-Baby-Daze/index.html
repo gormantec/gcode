@@ -235,12 +235,12 @@ class Nursing extends Page {
 
                             children: [
                                 new DateFormField({
-                                    decoration: new InputDecoration({labelText:'Time',width:"120px"}),
+                                    decoration: new InputDecoration({labelText:'Time',width:"100px"}),
                                     fontSize: "16px",
                                     id: "dateTextFormField"
                                 }),
                                 new TextFormField({
-                                    decoration: new InputDecoration({labelText:'Last start side',width:"120px"}),
+                                    decoration: new InputDecoration({labelText:'Last start side',width:"100px"}),
                                     fontSize: "12px",
                                     id: "titleTextFormField"
                                 }),
@@ -253,7 +253,7 @@ class Nursing extends Page {
                                             height: "50px",
                                             fontSize: "50px",
                                             color: "#f67904",
-                                            child: new Icon("close"),
+                                            child: new Icon("play"),
                                             onclick: () => {
                                               PWA.getPWA().showHeader();
                                               PWA.getPWA().setPage("HomePage");
@@ -267,7 +267,7 @@ class Nursing extends Page {
                                             height: "50px",
                                             fontSize: "50px",
                                             color: "#f67904",
-                                            child: new Icon("close"),
+                                            child: new Icon("play"),
                                             onclick: () => {
                                               PWA.getPWA().showHeader();
                                               PWA.getPWA().setPage("HomePage");
