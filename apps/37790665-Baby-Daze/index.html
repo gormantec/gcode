@@ -117,7 +117,7 @@ class HomePage extends Page {
                         "subtitle": new Text("Nursing paused."),
                         "leading": new Icon(Icons.battery_full),
                         "trailing": new Icon(Icons.alarm),
-                        "onclick": () => PWA.getPWA().setPage("NursingPaused")
+                        "onclick": () => PWA.getPWA().setPage("Nursing")
                     }),
                     new ListTile({
                         "color": "blue",
@@ -166,17 +166,72 @@ class HomePage extends Page {
 
 }
 
-class NursingPaused extends Page {
+class Nursing extends Page {
     constructor(params) {
         super({
             "color": "#545454",
-            "backgroundColor": "#FAEBF2",
+            "backgroundColor": "#f67904",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
+            "hideHeader": "true",
             "navigateBackPage": "HomePage",
             "padding": "15px",
-            "id": params ? params.id : null,
-            "child": new Text("Nursing Paused!")
+            "id": "Nursing",
+          	"children":[
+              new Div({
+                        id: "recButton",
+                		right:"10px",
+                		top:"10px",
+                        width: "50px",
+                        height: "50px",
+                        fontSize: "50px",
+                        color: "white",
+                        child: new Icon("close"),
+                        onclick: () => {
+              			  PWA.getPWA().showHeader();
+                          PWA.getPWA().setPage("HomePage");
+                        }
+              }),
+              new Div({
+                        id: "recButton",
+                		left:"10px",
+                		top:"10px",
+                        width: "50px",
+                        height: "50px",
+                        fontSize: "50px",
+                        color: "white",
+                        child: new Icon("done"),
+                        onclick: () => {
+              			  PWA.getPWA().showHeader();
+                          PWA.getPWA().setPage("HomePage");
+                        }
+              }),
+              new Center({
+                		left:"60px",
+                		right:"60px",
+                		top:"10px",
+                		height:"50px",
+                        child:new Div({
+                          id: "recButton",
+                          width: "50px",
+                          height: "50px",
+                          fontSize: "50px",
+                          color: "white",
+                          child: new Icon("child_care")
+              			})
+              }),
+              new Div({
+                		left:"4px",
+                		right:"4px",
+                		top:"80px",
+                		bottom:"4px",
+                		borderRadius:"16px",
+                		backgroundColor:"white"
+              })
+          	],
+            onopen: ()=>{
+              PWA.getPWA().hideHeader();
+            }
         });
     }
 }
@@ -317,9 +372,7 @@ var aAddVideo = new AddVideo();
 var aVideoBlog = new VideoBlog({
     id: "VideoBlog"
 });
-var aNursingPaused = new NursingPaused({
-    id: "NursingPaused"
-});
+var aNursing = new Nursing();
 var aSomeOtherPage1 = new SomeOtherPage({
     id: "SomeOtherPage1"
 });

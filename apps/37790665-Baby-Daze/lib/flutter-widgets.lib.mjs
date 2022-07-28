@@ -103,12 +103,13 @@ export class Form extends Div {
 }
 export class TextFormField extends Div {
     constructor(params) {
-        super({position:"relative",overflowY: "scroll",overflowX: "none"});
+        super({position:"relative",overflowY: "none",overflowX: "none"});
       
       	if(!params.fontSize)this.style.height="44px";
       	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
       
       
+      	let inputScrollDiv=new Div({overflowY: "scroll",overflowX: "none"});
       	let inputDiv=new Div(params);
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
@@ -124,14 +125,17 @@ export class TextFormField extends Div {
       	if(!params.fontSize)inputDiv.style.height="30px";
       	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
       	if(!params.fontSize)inputDiv.style.fontSize="24px";
-      	if(params.height){
-          inputDiv.style.height=params.height;
+      	if(params.height || params.minHeight){
+          inputDiv.style.height="";
+          inputDiv.style.minHeight=params.height || params.minHeight;
           this.style.height=(parseInt(params.height)+14)+"px";
         }
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	this.appendChild(inputDiv);
+      	inputScrollDiv.style.height=this.style.height;
+      	inputScrollDiv.appendChild(inputDiv);
+      	this.appendChild(inputScrollDiv);
       if(params.decoration)
       {
           inputDiv.style.marginLeft="60px";
@@ -583,6 +587,7 @@ export class AddVideo extends Page {
                                                     type: type,
                                                     time: document.querySelector('#dateTextFormField').innerText,
                                                     timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
+                                                    title: document.querySelector('#tilteTextFormField').innerText,
                                                     comment: document.querySelector('#commentTextFormField').innerText,
                                                     image: imageArrayBuffer,
                                                     realwidth: document.querySelector('#videoCover').dataset.realwidth,
