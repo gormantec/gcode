@@ -109,12 +109,12 @@ export class DateFormField extends Div {
         super({position:"relative",overflowY: "none",overflowX: "none"});
       
       	if(!params.fontSize)this.style.height="44px";
-      	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
+      	else this.style.height=(parseInt(params.fontSize)+20)+"px";
       	let inputField=document.createElement("input");
       	inputField.setAttribute("type","datetime-local");
       	inputField.style.marginBottom="7px";
-      	if(!params.fontSize)inputField.style.height="30px";
-      	else inputField.style.height=(parseInt(params.fontSize)+4)+"px";
+      	if(!params.fontSize)inputField.style.height="44px";
+      	else inputField.style.height=(parseInt(params.fontSize)+20)+"px";
       	if(!params.fontSize)inputField.style.fontSize="24px";
       	inputField.style.padding="3px";
       	inputField.style.backgroundColor="white";
