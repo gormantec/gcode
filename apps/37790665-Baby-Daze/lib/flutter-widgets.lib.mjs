@@ -110,33 +110,18 @@ export class DateFormField extends Div {
       
       	if(!params.fontSize)this.style.height="44px";
       	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
-      
-      
-      	let inputScrollDiv=new Div({overflowY: "auto",overflowX: "none"});
-      	let inputDiv=new Div(params);
-      	inputDiv.style.position="relative";
-      	if(params.contenteditable!=false && params.contenteditable!="false")
-        {
-          	inputDiv.element.setAttribute("contenteditable","true");
-      		inputDiv.style.borderBottom="2px solid #999999";
-      		inputDiv.style.marginBottom="5px";
-        }
-      	else
-        {
-      		inputDiv.style.marginBottom="7px";
-        }
-      	if(!params.fontSize)inputDiv.style.height="30px";
-      	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
-      	if(!params.fontSize)inputDiv.style.fontSize="24px";
-      	inputDiv.style.padding="3px";
-      	inputDiv.style.marginBottom="5px";
-      	inputDiv.style.backgroundColor="white";
-      	inputScrollDiv.style.height=(parseInt(this.style.height))+"px";
-      	inputScrollDiv.appendChild(inputDiv);
-      	this.appendChild(inputScrollDiv);
+      	let inputField=document.createElement("input");
+      	inputField.setAttribute("type","datetime-local");
+      	inputField.style.marginBottom="7px";
+      	if(!params.fontSize)inputField.style.height="30px";
+      	else inputField.style.height=(parseInt(params.fontSize)+4)+"px";
+      	if(!params.fontSize)inputField.style.fontSize="24px";
+      	inputField.style.padding="3px";
+      	inputField.style.backgroundColor="white";
+      	this.appendChild(inputField);
       if(params.decoration)
       {
-          inputDiv.style.marginLeft="60px";
+          inputField.style.marginLeft="60px";
           params.decoration.style.left="3px";
           params.decoration.style.width="57px";
           params.decoration.style.paddingTop="5px";
