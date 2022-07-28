@@ -15,7 +15,7 @@ class PWA {
         this.pwaAuth = params.pwaAuth || "false";
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
-        this.headerHeight = params.headerHeight || 45;
+        this.headerHeight = parseInt(params.headerHeight) || 45;
         if(params.titleBackgroundColor)this.titleBackgroundColor = params.titleBackgroundColor;
         if(params.headerBackgroundImage)this.headerBackgroundImage = params.headerBackgroundImage;
         this.footerHeight = params.footerHeight || 40;
@@ -132,7 +132,7 @@ class PWA {
         });
         this.pwaHeader.style.backgroundColor = this.primaryColor;
         this.pwaHeader.style.color = this.primaryColorText;
-        if (this.headerHeight) this.pwaHeader.style.height = this.headerHeight;
+        if (this.headerHeight || this.headerHeight===0) this.pwaHeader.style.height = this.headerHeight+"px";
         if (this.headerBackgroundImage){
             this.pwaHeader.style.backgroundImage = this.headerBackgroundImage;
             this.pwaHeader.style.backgroundSize = "100%";
@@ -150,7 +150,7 @@ class PWA {
         if (this.pwaBody) this.pwaRoot.removeChild(this.pwaBody);
         
         this.pwaBody = new Div({ id: "pwabody" });
-        if (this.headerHeight) this.pwaBody.style.top = this.headerHeight;
+        if (this.headerHeight || this.headerHeight===0) this.pwaBody.style.top = this.headerHeight+"px";
         this.pwaRoot.insertBefore(this.pwaBody, this.pwaFooter);
     }
     setPage(aPage) {
@@ -414,7 +414,7 @@ class PWA {
 
     showHeader() {
         this.pwaHeader.style.display = "";
-        this.pwaBody.style.top = parseInt(this.headerHeight) + "px";
+        this.pwaBody.style.top = this.headerHeight + "px";
         console.log("-----------> "+this.headerHeight);
     }
     hideFooter() {
