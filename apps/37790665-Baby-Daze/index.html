@@ -117,7 +117,7 @@ class HomePage extends Page {
                         "subtitle": new Text("Nursing paused."),
                         "leading": new Icon(Icons.battery_full),
                         "trailing": new Icon(Icons.alarm),
-                        "onclick": () => PWA.getPWA().setPage("NursingPaused")
+                        "onclick": () => PWA.getPWA().setPage("Nursing")
                     }),
                     new ListTile({
                         "color": "blue",
@@ -166,17 +166,20 @@ class HomePage extends Page {
 
 }
 
-class NursingPaused extends Page {
+class Nursing extends Page {
     constructor(params) {
         super({
             "color": "#545454",
-            "backgroundColor": "#FAEBF2",
+            "backgroundColor": "#f67904",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
+            "hideHeader": "true",
             "navigateBackPage": "HomePage",
             "padding": "15px",
-            "id": params ? params.id : null,
-            "child": new Text("Nursing Paused!")
+            "id": "Nursing",
+            onopen: ()=>{
+              PWA.getPWA().hideHeader();
+            }
         });
     }
 }
@@ -317,9 +320,7 @@ var aAddVideo = new AddVideo();
 var aVideoBlog = new VideoBlog({
     id: "VideoBlog"
 });
-var aNursingPaused = new NursingPaused({
-    id: "NursingPaused"
-});
+var aNursing = new Nursing();
 var aSomeOtherPage1 = new SomeOtherPage({
     id: "SomeOtherPage1"
 });
