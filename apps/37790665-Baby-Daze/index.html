@@ -185,9 +185,12 @@ class Nursing extends Page {
                         width: "50px",
                         height: "50px",
                         fontSize: "50px",
-                        color: "black",
-                        child: new Icon("radio_button_checked"),
-                        onclick: () => {}
+                        color: "white",
+                        child: new Icon("close"),
+                        onclick: () => {
+              			  PWA.getPWA().showHeader();
+                          PWA.getPWA().setPage("HomePage");
+                        }
               }),
               new Div({
                         id: "recButton",
@@ -196,9 +199,12 @@ class Nursing extends Page {
                         width: "50px",
                         height: "50px",
                         fontSize: "50px",
-                        color: "black",
-                        child: new Icon("radio_button_checked"),
-                        onclick: () => {}
+                        color: "white",
+                        child: new Icon("done"),
+                        onclick: () => {
+              			  PWA.getPWA().showHeader();
+                          PWA.getPWA().setPage("HomePage");
+                        }
               }),
               new Center({
                 		left:"60px",
@@ -210,11 +216,18 @@ class Nursing extends Page {
                           width: "50px",
                           height: "50px",
                           fontSize: "50px",
-                          color: "black",
-                          child: new Icon("radio_button_checked"),
-                          onclick: () => {}
+                          color: "white",
+                          child: new Icon("child_care")
               			})
               }),
+              new Div({
+                		left:"4px",
+                		right:"4px",
+                		top:"80px",
+                		bottom:"4px",
+                		borderRadius:"16px",
+                		backgroundColor:"white"
+              })
           	],
             onopen: ()=>{
               PWA.getPWA().hideHeader();
