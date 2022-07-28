@@ -246,7 +246,7 @@ class Nursing extends Page {
                                 }),
                               	new Center({position:"relative",height:"100px",child:new Div({width:"160px",children:[
                                   new Div({
-                                            id: "recButton",
+                                            id: "startNursingButtonL",
                                             left:"0px",
                                             top:"10px",
                                             width: "50px",
@@ -260,7 +260,7 @@ class Nursing extends Page {
                                             }
                                   }),
                                   new Div({
-                                            id: "recButton",
+                                            id: "startNursingButtonR",
                                             top:"10px",
                                             left:"55px",
                                             width: "50px",
@@ -274,14 +274,14 @@ class Nursing extends Page {
                                             }
                                   }),
                                   new Div({
-                                            id: "recButton",
+                                            id: "stopNursingButton",
                                             right:"0px",
                                             top:"10px",
                                             width: "50px",
                                             height: "50px",
                                             fontSize: "50px",
                                             color: "#f67904",
-                                            child: new Icon("close"),
+                                            child: new Icon("stop"),
                                             onclick: () => {
                                               PWA.getPWA().showHeader();
                                               PWA.getPWA().setPage("HomePage");
