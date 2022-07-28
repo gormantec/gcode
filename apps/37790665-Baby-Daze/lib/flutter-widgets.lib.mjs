@@ -122,8 +122,9 @@ export class DateFormField extends Div {
       if(params.decoration)
       {
           inputField.style.marginLeft="60px";
+          if(params.decoration.style.width)inputField.style.marginLeft=(parseInt(params.decoration.style.width)+3)+"px";
           params.decoration.style.left="3px";
-          params.decoration.style.width="57px";
+          if(!params.decoration.style.width)params.decoration.style.width="57px";
           params.decoration.style.paddingTop="5px";
           this.appendChild(params.decoration);
       }
