@@ -92,7 +92,7 @@ import {
     Page,
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,InputDecoration,Padding,Column,VideoImage,AddVideo} from './lib/flutter-widgets.lib.mjs';
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column,VideoImage,AddVideo} from './lib/flutter-widgets.lib.mjs';
 try {
     Page.clearPages();
 } catch (e) {}
@@ -234,11 +234,10 @@ class Nursing extends Page {
                             fontSize: "12px",
 
                             children: [
-                                new TextFormField({
+                                new DateFormField({
                                     decoration: new InputDecoration({labelText:'Date'}),
                                     fontSize: "12px",
-                                    id: "dateTextFormField",
-                                    contenteditable:false
+                                    id: "dateTextFormField"
                                 }),
                                 new TextFormField({
                                     decoration: new InputDecoration({labelText:'Title'}),

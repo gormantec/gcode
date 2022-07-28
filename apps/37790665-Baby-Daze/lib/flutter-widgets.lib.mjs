@@ -101,6 +101,50 @@ export class Form extends Div {
         super(params);
     }
 }
+
+
+
+export class DateFormField extends Div {
+    constructor(params) {
+        super({position:"relative",overflowY: "none",overflowX: "none"});
+      
+      	if(!params.fontSize)this.style.height="44px";
+      	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
+      
+      
+      	let inputScrollDiv=new Div({overflowY: "scroll",overflowX: "none"});
+      	let inputDiv=new Div(params);
+      	inputDiv.style.position="relative";
+      	if(params.contenteditable!=false && params.contenteditable!="false")
+        {
+          	inputDiv.element.setAttribute("contenteditable","true");
+      		inputDiv.style.borderBottom="2px solid #999999";
+      		inputDiv.style.marginBottom="5px";
+        }
+      	else
+        {
+      		inputDiv.style.marginBottom="7px";
+        }
+      	if(!params.fontSize)inputDiv.style.height="30px";
+      	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
+      	if(!params.fontSize)inputDiv.style.fontSize="24px";
+      	inputDiv.style.padding="3px";
+      	inputDiv.style.marginBottom="5px";
+      	inputDiv.style.backgroundColor="white";
+      	inputScrollDiv.style.height=this.style.height;
+      	inputScrollDiv.appendChild(inputDiv);
+      	this.appendChild(inputScrollDiv);
+      if(params.decoration)
+      {
+          inputDiv.style.marginLeft="60px";
+          params.decoration.style.left="3px";
+          params.decoration.style.width="57px";
+          params.decoration.style.paddingTop="5px";
+          this.appendChild(params.decoration);
+      }
+    }
+}
+
 export class TextFormField extends Div {
     constructor(params) {
         super({position:"relative",overflowY: "none",overflowX: "none"});
