@@ -145,7 +145,7 @@ export class TextFormField extends Div {
       	if(params.contenteditable!=false && params.contenteditable!="false")
         {
           	inputDiv.element.setAttribute("contenteditable","true");
-      		inputDiv.style.borderBottom="2px solid #999999";
+      		inputDiv.style.borderBottom="2px solid #BBBBBB";
       		inputDiv.style.marginBottom="5px";
         }
       	else
@@ -159,6 +159,8 @@ export class TextFormField extends Div {
           inputDiv.style.height="";
           inputDiv.style.minHeight=params.height || params.minHeight;
           this.style.height=(parseInt(params.height)+14)+"px";
+          inputDiv.style.borderBottom="unset";
+		  inputDiv.style.border="1px solid #BBBBBB";
         }
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
