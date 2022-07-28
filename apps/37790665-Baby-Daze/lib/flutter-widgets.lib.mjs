@@ -112,7 +112,7 @@ export class DateFormField extends Div {
       	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
       
       
-      	let inputScrollDiv=new Div({overflowY: "scroll",overflowX: "none"});
+      	let inputScrollDiv=new Div({overflowY: "auto",overflowX: "none"});
       	let inputDiv=new Div(params);
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
@@ -131,7 +131,7 @@ export class DateFormField extends Div {
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	inputScrollDiv.style.height=this.style.height;
+      	inputScrollDiv.style.height=(parseInt(this.style.height)-2)+"px";
       	inputScrollDiv.appendChild(inputDiv);
       	this.appendChild(inputScrollDiv);
       if(params.decoration)
@@ -153,7 +153,7 @@ export class TextFormField extends Div {
       	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
       
       
-      	let inputScrollDiv=new Div({overflowY: "scroll",overflowX: "none"});
+      	let inputScrollDiv=new Div({overflowY: "auto",overflowX: "none"});
       	let inputDiv=new Div(params);
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
@@ -177,7 +177,7 @@ export class TextFormField extends Div {
       	inputDiv.style.padding="3px";
       	inputDiv.style.marginBottom="5px";
       	inputDiv.style.backgroundColor="white";
-      	inputScrollDiv.style.height=this.style.height;
+      	inputScrollDiv.style.height=(parseInt(this.style.height)-2)+"px";
       	inputScrollDiv.appendChild(inputDiv);
       	this.appendChild(inputScrollDiv);
       if(params.decoration)
