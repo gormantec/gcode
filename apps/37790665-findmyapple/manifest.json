@@ -7,8 +7,10 @@
   "orientation": "any",
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-findmyapple/",
-  "permitted_urls": [],
-  "version": "1.0.0.1808115",
+  "permitted_urls": [
+    "https://www.icloud.com/find/"
+  ],
+  "version": "1.0.0.1808126",
   "icons": [
     {
       "src": "/apps/37790665-findmyapple/180x180.icon.png",
