@@ -239,7 +239,7 @@ class Nursing extends Page {
                                     fontSize: "16px",
                                     id: "dateTextFormField"
                                 }),
-                              	new Center({position: "relative",height:"20px",fontSize:"24px",children:[
+                              	new Center({id: "timerFields",position: "relative",height:"20px",fontSize:"24px",children:[
                                   new Div({
                                     id: "timerField",
                                     top:"0px",
@@ -275,7 +275,7 @@ class Nursing extends Page {
                                               if(icon.innerText=="play_circle"){
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
-                                                document.querySelector("#timerField").style.height="56px";
+                                                document.querySelector("#timerFields").style.height="56px";
                                                 this.startTimer(document.querySelector("#timerField"));
                                               }
                                               else{
@@ -300,7 +300,7 @@ class Nursing extends Page {
                                               if(icon.innerText=="play_circle"){
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
-                                                document.querySelector("#timerField").style.height="56px";
+                                                document.querySelector("#timerFields").style.height="56px";
                                                 document.querySelector("#timerField").innerText=this.getTimerValue();
                                                 this.startTimer();
                                               }
