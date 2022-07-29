@@ -258,7 +258,9 @@ class Nursing extends Page {
                                             color: "#f67904",
                                             child: new Icon("play_circle"),
                                             onclick: () => {
-                                              document.querySelector("#startNursingButtonL > div > i").innerText="pause_circle";
+                                              var icon=document.querySelector("#startNursingButtonL > div > i");
+                                              if(icon.innerText=="play_circle") icon.innerText="pause_circle";
+                                              else icon.innerText="play_circle";
                                             }
                                   }),
                                   new Div({
@@ -271,8 +273,9 @@ class Nursing extends Page {
                                             color: "#f67904",
                                             child: new Icon("play_circle"),
                                             onclick: () => {
-                                              PWA.getPWA().showHeader();
-                                              PWA.getPWA().setPage("HomePage");
+                                              var icon=document.querySelector("#startNursingButtonR > div > i");
+                                              if(icon.innerText=="play_circle") icon.innerText="pause_circle";
+                                              else icon.innerText="play_circle";
                                             }
                                   }),
                                   new Div({
