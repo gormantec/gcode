@@ -345,12 +345,14 @@ class Nursing extends Page {
     }
   	stopTimer()
     {
+      console.log(this.timer);
       if(this.timer!=null && this.started)
       {
         this.timer=Date.now()-this.startTime;
       	this.started=false;
         if(this.anInterval)clearInterval(this.anInterval);
       }
+      console.log(this.timer);
     }
   	resetTimer()
     {
