@@ -359,7 +359,7 @@ class Nursing extends Page {
           this.timer=this.timer+(now-this.startTime);
           this.startTime=now;
         }
-      	return Math.foor(this.timer/60000)+":"+Math.floor((this.timer-Math.floor(this.timer/60000)*60000)/1000);
+      	return Math.floor(this.timer/60000)+":"+Math.floor((this.timer-Math.floor(this.timer/60000)*60000)/1000);
     }
 }
 class VideoBlog extends Page {
