@@ -239,7 +239,7 @@ class Nursing extends Page {
                                     fontSize: "16px",
                                     id: "dateTextFormField"
                                 }),
-                              	new Div({position: "relative",height:"20px"}),
+                              	new Div({position: "relative",height:"20px", id: "timerField"}),
                                 new TextFormField({
                                     decoration: new InputDecoration({labelText:'Last start side',width:"100px"}),
                                     fontSize: "18px",
@@ -262,10 +262,12 @@ class Nursing extends Page {
                                               if(icon.innerText=="play_circle"){
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
+                                                document.querySelector("#timerField").style.height="50px";
                                               }
                                               else{
                                                 icon.innerText="play_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
+                                                document.querySelector("#timerField").style.height="20px";
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Left side";
                                               
