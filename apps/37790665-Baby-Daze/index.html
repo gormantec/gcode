@@ -190,6 +190,8 @@ class Nursing extends Page {
                         onclick: () => {
               			  PWA.getPWA().showHeader();
                           PWA.getPWA().setPage("HomePage");
+                          this.resetTimerL();
+                          this.resetTimerR();
                         }
               }),
               new Div({
