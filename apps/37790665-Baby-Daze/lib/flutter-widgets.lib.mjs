@@ -1,4 +1,4 @@
-import { Div,Page } from 'https://gcode.com.au/modules/pwa.mjs';
+import { PWA,Div,Page } from 'https://gcode.com.au/modules/pwa.mjs';
 
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
@@ -483,7 +483,7 @@ export class AddVideo extends Page {
                           if(facingMode=="environment")facingMode="user";
                           else facingMode="environment";
                           console.log("click");
-                          PWA.refeshCurrentPage();
+                          PWA.getPWA().currentPage.onOpen();
                         }
                 }),
 
@@ -628,7 +628,7 @@ export class AddVideo extends Page {
                                                     type: type,
                                                     time: document.querySelector('#dateTextFormField').innerText,
                                                     timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
-                                                    title: document.querySelector('#tilteTextFormField').innerText,
+                                                    title: document.querySelector('#titleTextFormField').innerText,
                                                     comment: document.querySelector('#commentTextFormField').innerText,
                                                     image: imageArrayBuffer,
                                                     realwidth: document.querySelector('#videoCover').dataset.realwidth,
@@ -638,7 +638,7 @@ export class AddVideo extends Page {
                                                 console.log(obj);
                                                 var put = request.result.transaction(["videos"], "readwrite").objectStore("videos").put(obj, videoName);
                                                 document.querySelector('#saveButton').style.display = "none";
-                                                PWA.refeshCurrentPage();
+                                                PWA.getPWA().currentPage.onOpen();
                                             });
                                         });
                                     }
