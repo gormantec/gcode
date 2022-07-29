@@ -331,9 +331,35 @@ class Nursing extends Page {
             }
         });
     }
+  	startTimer()
+    {
+      if(this.timer==null)this.timer=0;
+      this.startTime=Date.now();
+      this.started=true;
+    }
+  	stopTimer()
+    {
+      if(this.timer!=null && this.started)
+      {
+        this.timer=Date.now()-this.startTime;
+      	this.started=false;
+      }
+    }
+  	resetTimer()
+    {
+      this.stopTimer();
+      this.timer=0;
+    }
   	getTimerValue()
     {
-      	return "0:00";
+      	if(this.timer==null)this.timer=0;
+        if(this.started==true)
+        {
+          let now=Date.now();
+          this.timer=this.timer+(now-this.startTime);
+          this.startTime=now;
+        }
+      	return Math.foor(this.timer/60000)+":"+Math.floor((this.timer-Math.foor(this.timer/60000)*60000)/1000);
     }
 }
 class VideoBlog extends Page {
