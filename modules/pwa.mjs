@@ -198,6 +198,8 @@ class PWA {
             myglobals.PWA.currentPage.onOpen();
         }
     }
+
+    
     setCredentials(credentials) {
         this.credentials = credentials;
         if(credentials.providerData.user && credentials.providerData.user.id)
