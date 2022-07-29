@@ -288,8 +288,11 @@ class Nursing extends Page {
                                             color: "#f67904",
                                             child: new Icon("stop_circle"),
                                             onclick: () => {
-                                              PWA.getPWA().showHeader();
-                                              PWA.getPWA().setPage("HomePage");
+                                              var icon=document.querySelector("#startNursingButtonL > div > i");
+                                              icon.innerText="play_circle";
+                                              
+                                              icon=document.querySelector("#startNursingButtonR > div > i");
+                                              icon.innerText="play_circle";
                                             }
                                   }),
                                 ]})}),
