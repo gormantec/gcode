@@ -190,9 +190,12 @@ class Nursing extends Page {
                         onclick: () => {
                           this.resetTimerL();
                           this.resetTimerR();
+                        document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
+                          document.querySelector("#timerFields").style.height="20px";
                           document.querySelector("#timerFieldL").innerText="";
                           document.querySelector("#timerFieldR").innerText="";
-                          document.querySelector("#startNursingButtonL > div > i").innerText=="play_circle";
+                          document.querySelector("#startNursingButtonL > div > i").innerText="play_circle";
+                          document.querySelector("#startNursingButtonR > div > i").innerText="play_circle";
               			  PWA.getPWA().showHeader();
                           PWA.getPWA().setPage("HomePage");
                         }
@@ -210,9 +213,13 @@ class Nursing extends Page {
                           
                           this.resetTimerL();
                           this.resetTimerR();
+
+                          document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
+                          document.querySelector("#timerFields").style.height="20px";
                           document.querySelector("#timerFieldL").innerText="";
                           document.querySelector("#timerFieldR").innerText="";
-                          document.querySelector("#startNursingButtonL > div > i").innerText=="play_circle";
+                          document.querySelector("#startNursingButtonL > div > i").innerText="play_circle";
+                          document.querySelector("#startNursingButtonR > div > i").innerText="play_circle";
               			  PWA.getPWA().showHeader();
                           PWA.getPWA().setPage("HomePage");
                         }
