@@ -335,6 +335,15 @@ export class AddVideo extends Page {
             "hideFooter": "true",
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
+          	"onback":()=>{
+              console.log("stop stream");
+				if (mediaStream) {
+                    mediaStream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                    mediaStream = null;
+                }
+            },
             "onopen": () => {
               	console.log("load page");
                 document.querySelector('#video').style.display = "";
