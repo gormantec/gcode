@@ -112,6 +112,19 @@ class PWA {
         var _this = this;
 
         this.navigateBackButton.onclick(function () {
+
+            console.log("back");
+            if( _this.currentPage && typeof _this.currentPage.onback == "function")
+            {
+                console.log("call onback");
+                _this.currentPage.onback();
+            }
+            else
+            {
+                console.log(_this.currentPage);
+                console.log(_this.currentPage.onback);
+            }
+
             if (_this.navigateBackPage) {
                 if (_this.navigateBackPage.navigateBackPage) _this.setNavigateBackPage(_this.navigateBackPage.navigateBackPage);
                 else _this.hideNavigateBackButton();
@@ -120,12 +133,7 @@ class PWA {
                 }
                 _this.setPage(_this.navigateBackPage);
             }
-            console.log("back");
-            if( _this.currentPage && typeof _this.currentPage.onback == "function")
-            {
-                console.log("call onback");
-                _this.currentPage.onback();
-            }
+            
         });
         this.pwaHeaderTitle=new Div({ id: "pwaheadertitle", innerHTML: this.title });
         if (this.titleBackgroundColor) this.pwaHeaderTitle.style.backgroundColor = this.titleBackgroundColor;    
