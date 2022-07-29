@@ -120,8 +120,10 @@ class PWA {
                 }
                 _this.setPage(_this.navigateBackPage);
             }
-            if(typeof _this.currentPage.onback == "function")
+            console.log("back");
+            if( _this.currentPage && typeof _this.currentPage.onback == "function")
             {
+                console.log("call onback");
                 _this.currentPage.onback();
             }
         });
