@@ -261,6 +261,8 @@ class Nursing extends Page {
                                               var icon=document.querySelector("#startNursingButtonL > div > i");
                                               if(icon.innerText=="play_circle") icon.innerText="pause_circle";
                                               else icon.innerText="play_circle";
+                                              document.querySelector("#titleTextFormField").innerText="Left side";
+                                              
                                             }
                                   }),
                                   new Div({
@@ -276,6 +278,7 @@ class Nursing extends Page {
                                               var icon=document.querySelector("#startNursingButtonR > div > i");
                                               if(icon.innerText=="play_circle") icon.innerText="pause_circle";
                                               else icon.innerText="play_circle";
+                                              document.querySelector("#titleTextFormField").innerText="Right side";
                                             }
                                   }),
                                   new Div({
