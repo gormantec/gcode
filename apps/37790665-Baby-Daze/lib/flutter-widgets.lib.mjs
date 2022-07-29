@@ -145,7 +145,7 @@ export class TextFormField extends Div {
       
       	let inputScrollDiv=new Div({overflowY: "auto",overflowX: "none"});
       	let inputDiv=new Div(params);
-      	if(params.params)inputDiv.innerText=params.params;
+      	if(params.value)inputDiv.innerText=params.value;
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
         {
