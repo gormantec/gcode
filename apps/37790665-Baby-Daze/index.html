@@ -262,7 +262,7 @@ class Nursing extends Page {
                                               if(icon.innerText=="play_circle"){
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
-                                                document.querySelector("#timerField").style.height="56px";
+                                                document.querySelector("#timerField").style.height="5px";
                                               }
                                               else{
                                                 icon.innerText="play_circle";
@@ -286,13 +286,13 @@ class Nursing extends Page {
                                               var icon=document.querySelector("#startNursingButtonR > div > i");
                                               if(icon.innerText=="play_circle"){
                                                 icon.innerText="pause_circle";
-                                                document.querySelector("#titleTextFormField").parentElement.style.display="none";
-                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="none";
+                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
+                                                document.querySelector("#timerField").style.height="5px";
                                               }
                                               else{
                                                 icon.innerText="play_circle";
-                                                document.querySelector("#titleTextFormField").parentElement.style.display="";
-                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="";
+                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
+                                                document.querySelector("#timerField").style.height="20px";
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Right side";
                                             }
@@ -312,8 +312,8 @@ class Nursing extends Page {
                                               
                                               icon=document.querySelector("#startNursingButtonR > div > i");
                                               icon.innerText="play_circle";
-                                              document.querySelector("#titleTextFormField").parentElement.style.display="";
-                                              document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="";
+                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
+                                                document.querySelector("#timerField").style.height="20px";
                                             }
                                   }),
                                 ]})}),
