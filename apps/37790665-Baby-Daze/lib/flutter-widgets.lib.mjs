@@ -628,7 +628,7 @@ export class AddVideo extends Page {
                                                     type: type,
                                                     time: document.querySelector('#dateTextFormField').innerText,
                                                     timestamp: document.querySelector('#dateTextFormField').dataset.timestamp,
-                                                    title: document.querySelector('#tilteTextFormField').innerText,
+                                                    title: document.querySelector('#titleTextFormField').innerText,
                                                     comment: document.querySelector('#commentTextFormField').innerText,
                                                     image: imageArrayBuffer,
                                                     realwidth: document.querySelector('#videoCover').dataset.realwidth,
