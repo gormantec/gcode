@@ -261,13 +261,11 @@ class Nursing extends Page {
                                               var icon=document.querySelector("#startNursingButtonL > div > i");
                                               if(icon.innerText=="play_circle"){
                                                 icon.innerText="pause_circle";
-                                                document.querySelector("#titleTextFormField").parentElement.style.display="none";
-                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="none";
+                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                               }
                                               else{
                                                 icon.innerText="play_circle";
-                                                document.querySelector("#titleTextFormField").parentElement.style.display="";
-                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="";
+                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Left side";
                                               
