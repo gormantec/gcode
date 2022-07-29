@@ -147,7 +147,7 @@ export class TextFormField extends Div {
       	let inputDiv=new Div(params);
       	if(params.value){
           console.log("TextFormField Value: "+params.value);
-          inputDiv.innerText=params.value;
+          inputDiv.element.innerText=params.value;
         }
       	inputDiv.style.position="relative";
       	if(params.contenteditable!=false && params.contenteditable!="false")
