@@ -263,8 +263,7 @@ class Nursing extends Page {
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerField").style.height="56px";
-                                                document.querySelector("#timerField").innerText=this.getTimerValue();
-                                                this.startTimer();
+                                                this.startTimer(document.querySelector("#timerField"));
                                               }
                                               else{
                                                 icon.innerText="play_circle";
@@ -336,11 +335,13 @@ class Nursing extends Page {
             }
         });
     }
-  	startTimer()
+  	startTimer(e)
     {
       if(this.timer==null)this.timer=0;
       this.startTime=Date.now();
       this.started=true;
+      e.innerText=this.getTimerValue();
+      this.anInterval=setInterval(()=>e.innerText=this.getTimerValue(),1000);
     }
   	stopTimer()
     {
@@ -348,6 +349,7 @@ class Nursing extends Page {
       {
         this.timer=Date.now()-this.startTime;
       	this.started=false;
+        if(this.anInterval)clearInerval(this.anInterval);
       }
     }
   	resetTimer()
