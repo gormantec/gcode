@@ -264,9 +264,11 @@ class Nursing extends Page {
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerField").style.height="56px";
                                                 document.querySelector("#timerField").innerText=this.getTimerValue();
+                                                this.startTimer();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
+                                                this.stopTimer();
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Left side";
                                               
@@ -288,9 +290,11 @@ class Nursing extends Page {
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerField").style.height="56px";
                                                 document.querySelector("#timerField").innerText=this.getTimerValue();
+                                                this.startTimer();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
+                                                this.stopTimer();
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Right side";
                                             }
@@ -313,6 +317,7 @@ class Nursing extends Page {
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
                                                 document.querySelector("#timerField").style.height="20px";
                                                 document.querySelector("#timerField").innerText="";
+                                                this.stopTimer();
                                             }
                                   }),
                                 ]})}),
