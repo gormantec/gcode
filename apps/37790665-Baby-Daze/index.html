@@ -188,12 +188,12 @@ class Nursing extends Page {
                         color: "white",
                         child: new Icon("done"),
                         onclick: () => {
-              			  PWA.getPWA().showHeader();
-                          PWA.getPWA().setPage("HomePage");
                           this.resetTimerL();
                           this.resetTimerR();
                           document.querySelector("#timerFieldL").innerText="";
                           document.querySelector("#timerFieldR").innerText="";
+              			  PWA.getPWA().showHeader();
+                          PWA.getPWA().setPage("HomePage");
                         }
               }),
               new Div({
@@ -206,12 +206,13 @@ class Nursing extends Page {
                         color: "white",
                         child: new Icon("close"),
                         onclick: () => {
-              			  PWA.getPWA().showHeader();
-                          PWA.getPWA().setPage("HomePage");
+                          
                           this.resetTimerL();
                           this.resetTimerR();
                           document.querySelector("#timerFieldL").innerText="";
                           document.querySelector("#timerFieldR").innerText="";
+              			  PWA.getPWA().showHeader();
+                          PWA.getPWA().setPage("HomePage");
                         }
               }),
               new Center({
