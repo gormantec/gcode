@@ -120,6 +120,10 @@ class PWA {
                 }
                 _this.setPage(_this.navigateBackPage);
             }
+            if(typeof _this.currentPage.onback == "function")
+            {
+                _this.currentPage.onback();
+            }
         });
         this.pwaHeaderTitle=new Div({ id: "pwaheadertitle", innerHTML: this.title });
         if (this.titleBackgroundColor) this.pwaHeaderTitle.style.backgroundColor = this.titleBackgroundColor;    
@@ -844,6 +848,10 @@ class Page extends Div {
         else if(params.onopen)
         {
             this.onOpen=params.onopen;
+        }
+        if(params.onback)
+        {
+            this.onback=params.onback;
         }
     }
 
