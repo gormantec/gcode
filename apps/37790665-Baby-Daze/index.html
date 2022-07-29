@@ -239,7 +239,20 @@ class Nursing extends Page {
                                     fontSize: "16px",
                                     id: "dateTextFormField"
                                 }),
-                              	new Center({position: "relative",height:"20px",fontSize:"24px", id: "timerField"}),
+                              	new Center({position: "relative",height:"20px",fontSize:"24px",children:[
+                                  new Div({
+                                    id: "timerField",
+                                    top:"0px",
+                                    left:"0px",
+                                    width: "140px"
+                                  }),
+                                  new Div({
+                                    id: "timerFieldR",
+                                    top:"0px",
+                                    right:"0px",
+                                    width: "140px"
+                                  })
+                                ]}),
                                 new TextFormField({
                                     decoration: new InputDecoration({labelText:'Last start side',width:"100px"}),
                                     fontSize: "18px",
