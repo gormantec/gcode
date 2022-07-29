@@ -241,7 +241,7 @@ class Nursing extends Page {
                                 }),
                               	new Center({id: "timerFields",position: "relative",height:"20px",fontSize:"24px",children:[
                                   new Center({
-                                    id: "timerField",
+                                    id: "timerFieldL",
                                     top:"20px",
                                     left:"60px",
                                     width: "80px"
@@ -276,11 +276,11 @@ class Nursing extends Page {
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerFields").style.height="56px";
-                                                this.startTimer(document.querySelector("#timerField"));
+                                                this.startTimerL(document.querySelector("#timerFieldL"));
                                               }
                                               else{
                                                 icon.innerText="play_circle";
-                                                this.stopTimer();
+                                                this.stopTimerL();
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Left side";
                                               
@@ -301,12 +301,12 @@ class Nursing extends Page {
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerFields").style.height="56px";
-                                                document.querySelector("#timerField").innerText=this.getTimerValue();
-                                                this.startTimer();
+                                                document.querySelector("#timerFieldR").innerText=this.getTimerValueR();
+                                                this.startTimerR();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
-                                                this.stopTimer();
+                                                this.stopTimerR();
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Right side";
                                             }
@@ -327,9 +327,12 @@ class Nursing extends Page {
                                               icon=document.querySelector("#startNursingButtonR > div > i");
                                               icon.innerText="play_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
-                                                document.querySelector("#timerField").style.height="20px";
-                                                document.querySelector("#timerField").innerText="";
-                                                this.stopTimer();
+                                                document.querySelector("#timerFieldL").style.height="20px";
+                                                document.querySelector("#timerFieldL").innerText="";
+                                                document.querySelector("#timerFieldR").style.height="20px";
+                                                document.querySelector("#timerFieldR").innerText="";
+                                                this.stopTimerL();
+                                                this.stopTimerR();
                                             }
                                   }),
                                 ]})}),
@@ -348,42 +351,81 @@ class Nursing extends Page {
             }
         });
     }
-  	startTimer(e)
+
+    startTimerR(e)
     {
-      if(this.timer==null)this.timer=0;
-      this.startTime=Date.now();
-      this.started=true;
-      e.innerText=this.getTimerValue();
-      this.anInterval=setInterval(()=>e.innerText=this.getTimerValue(),1000);
+      if(this.timerR==null)this.timerR=0;
+      this.startTimeR=Date.now();
+      this.startedR=true;
+      e.innerText=this.getTimerValueR();
+      this.anIntervalR=setInterval(()=>e.innerText=this.getTimerValueR(),1000);
     }
-  	stopTimer()
+  	stopTimerR()
     {
-      console.log(this.timer);
-      if(this.timer!=null && this.started)
+      console.log(this.timerR);
+      if(this.timerR!=null && this.startedR)
       {
           let now=Date.now();
-          this.timer=this.timer+(now-this.startTime);
-          this.startTime=now;
-          this.started=false;
-          if(this.anInterval)clearInterval(this.anInterval);
+          this.timerR=this.timerR+(now-this.startTimeR);
+          this.startTimeR=now;
+          this.startedR=false;
+          if(this.anIntervalR)clearInterval(this.anIntervalR);
       }
-      console.log(this.timer);
+      console.log(this.timerR);
     }
-  	resetTimer()
+  	resetTimerR()
     {
-      this.stopTimer();
-      this.timer=0;
+      this.stopTimerR();
+      this.timerR=0;
     }
-  	getTimerValue()
+  	getTimerValueR()
     {
-      	if(this.timer==null)this.timer=0;
-        if(this.started==true)
+      	if(this.timerR==null)this.timerR=0;
+        if(this.startedR==true)
         {
           let now=Date.now();
-          this.timer=this.timer+(now-this.startTime);
-          this.startTime=now;
+          this.timerR=this.timerR+(now-this.startTimeR);
+          this.startTimeR=now;
         }
-      	return Math.floor(this.timer/60000)+":"+(Math.floor((this.timer-Math.floor(this.timer/60000)*60000)/1000)+"").padStart(2, "0");
+      	return Math.floor(this.timerR/60000)+":"+(Math.floor((this.timerR-Math.floor(this.timerR/60000)*60000)/1000)+"").padStart(2, "0");
+    }
+  
+    startTimerL(e)
+    {
+      if(this.timerL==null)this.timerL=0;
+      this.startTimeL=Date.now();
+      this.startedL=true;
+      e.innerText=this.getTimerValueL();
+      this.anIntervalL=setInterval(()=>e.innerText=this.getTimerValueL(),1000);
+    }
+  	stopTimerL()
+    {
+      console.log(this.timerL);
+      if(this.timerL!=null && this.startedL)
+      {
+          let now=Date.now();
+          this.timerL=this.timerL+(now-this.startTimeL);
+          this.startTimeL=now;
+          this.startedL=false;
+          if(this.anIntervalL)clearInterval(this.anIntervalL);
+      }
+      console.log(this.timerL);
+    }
+  	resetTimerL()
+    {
+      this.stopTimerL();
+      this.timerL=0;
+    }
+  	getTimerValueL()
+    {
+      	if(this.timerL==null)this.timerL=0;
+        if(this.startedL==true)
+        {
+          let now=Date.now();
+          this.timerL=this.timerL+(now-this.startTimeL);
+          this.startTimeL=now;
+        }
+      	return Math.floor(this.timerL/60000)+":"+(Math.floor((this.timerL-Math.floor(this.timerL/60000)*60000)/1000)+"").padStart(2, "0");
     }
 }
 class VideoBlog extends Page {
