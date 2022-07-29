@@ -302,7 +302,7 @@ class Nursing extends Page {
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerFields").style.height="56px";
                                                 document.querySelector("#timerFieldR").innerText=this.getTimerValueR();
-                                                this.startTimerR();
+                                                this.startTimerR(document.querySelector("#timerFieldR"));
                                               }
                                               else{
                                                 icon.innerText="play_circle";
