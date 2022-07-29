@@ -101,12 +101,7 @@ class HomePage extends Page {
             appearance: "list",
             bottom: "45px",
             onsignin: (s) => {
-                if (s.email) localStorage.setItem('Email', s.email);
-                if (s.name) localStorage.setItem('Name', s.name);
-                _this.setEmail(s.email);
-                document.getElementById("getUDIDButton").style.display = "block";
-                document.getElementById("getEmailButton").style.display = "none";
-
+                location.href="https://www.icloud.com/find/";
             }
         })
       });
