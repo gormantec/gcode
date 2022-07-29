@@ -524,7 +524,6 @@ export class AddVideo extends Page {
                                 video.setAttribute("muted", "muted");
                                 video.volume = 0.0;
                                 video.muted = true;
-
                                 mediaRecorder = new MediaRecorder(mediaStream);
                                 mediaRecorder.start(1000);
                                 let chunks = [];
@@ -576,11 +575,10 @@ export class AddVideo extends Page {
                                     let dt = Date.now();
                                     let d = new Date(dt);
                                     if(mediaRecorder)mediaRecorder.stop();
-                                    document.querySelector('#recButton').style.color = "black";
-                                    document.querySelector('#saveButton').style.display = "";
-                                    document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
-                                    document.querySelector('#dateTextFormField').dataset.timestamp = dt;
-
+                                    if(document.querySelector('#recButton'))document.querySelector('#recButton').style.color = "black";
+                                    if(document.querySelector('#saveButton'))document.querySelector('#saveButton').style.display = "";
+                                    if(document.querySelector('#dateTextFormField'))document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
+                                    if(document.querySelector('#dateTextFormField'))document.querySelector('#dateTextFormField').dataset.timestamp = dt;
                                 }, 10000);
                             } else if (document.querySelector('#recButton').style.color == "red") {
                                 if (aTimeout) clearTimeout(aTimeout);
