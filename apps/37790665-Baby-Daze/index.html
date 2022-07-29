@@ -263,13 +263,10 @@ class Nursing extends Page {
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerField").style.height="56px";
-                                                document.querySelector("#timerField").innerText="1:00";
+                                                document.querySelector("#timerField").innerText=this.getTimerValue();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
-                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
-                                                document.querySelector("#timerField").style.height="20px";
-                                                document.querySelector("#timerField").innerText="";
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Left side";
                                               
@@ -290,13 +287,10 @@ class Nursing extends Page {
                                                 icon.innerText="pause_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerField").style.height="56px";
-                                                document.querySelector("#timerField").innerText="1:00";
+                                                document.querySelector("#timerField").innerText=this.getTimerValue();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
-                                                document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
-                                                document.querySelector("#timerField").style.height="20px";
-                                                document.querySelector("#timerField").innerText="";
                                               }
                                               document.querySelector("#titleTextFormField").innerText="Right side";
                                             }
@@ -336,6 +330,10 @@ class Nursing extends Page {
               PWA.getPWA().hideHeader();
             }
         });
+    }
+  	getTimerValue()
+    {
+      	return "0:00";
     }
 }
 class VideoBlog extends Page {
