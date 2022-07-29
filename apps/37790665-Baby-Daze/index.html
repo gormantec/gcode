@@ -259,11 +259,17 @@ class Nursing extends Page {
                                             child: new Icon("play_circle"),
                                             onclick: () => {
                                               var icon=document.querySelector("#startNursingButtonL > div > i");
-                                              if(icon.innerText=="play_circle") icon.innerText="pause_circle";
-                                              else icon.innerText="play_circle";
+                                              if(icon.innerText=="play_circle"){
+                                                icon.innerText="pause_circle";
+                                                document.querySelector("#titleTextFormField").parentElement.style.display="none";
+                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="none";
+                                              }
+                                              else{
+                                                icon.innerText="play_circle";
+                                                document.querySelector("#titleTextFormField").parentElement.style.display="";
+                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="";
+                                              }
                                               document.querySelector("#titleTextFormField").innerText="Left side";
-                                              document.querySelector("#titleTextFormField").parentElement.style.display="none";
-                                              document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="none";
                                               
                                             }
                                   }),
@@ -278,8 +284,16 @@ class Nursing extends Page {
                                             child: new Icon("play_circle"),
                                             onclick: () => {
                                               var icon=document.querySelector("#startNursingButtonR > div > i");
-                                              if(icon.innerText=="play_circle") icon.innerText="pause_circle";
-                                              else icon.innerText="play_circle";
+                                              if(icon.innerText=="play_circle"){
+                                                icon.innerText="pause_circle";
+                                                document.querySelector("#titleTextFormField").parentElement.style.display="none";
+                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="none";
+                                              }
+                                              else{
+                                                icon.innerText="play_circle";
+                                                document.querySelector("#titleTextFormField").parentElement.style.display="";
+                                                document.querySelector("#titleTextFormField").parentElement.nextSibling.style.display="";
+                                              }
                                               document.querySelector("#titleTextFormField").innerText="Right side";
                                             }
                                   }),
