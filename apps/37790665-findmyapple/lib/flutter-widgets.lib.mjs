@@ -749,6 +749,7 @@ const blueListView=new ListView({
                         "borderRadius": "20px",
                     marginTop: "15px",
                     marginBottom: "15px",
+  					overflowY:"auto",
   					paddingBottom: "30px",
                         "id": "myListView",
                         "color": "#232323",
@@ -770,7 +771,7 @@ export class BluetoothPage extends Page {
                     bottom: "60px",
                     child: blueListView
                 }),
-              new Center({height:"30px",bottom: "65px",innerText:"scanning"}),
+              new Center({height:"30px",bottom: "75px",color:"#323232",innerText:"scanning"}),
               new Center({
                     id: "recButton",
                     left: "40px",
