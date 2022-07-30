@@ -124,6 +124,7 @@ class HomePage extends Page {
                     borderRadius: "10px",
                     innerText: "BLE",
                     onclick: () => {
+                      	console.log("click");
                         if ('bluetooth' in navigator) {
                             let bleService = 'battery_service',
                                 bleCharacteristic = 'battery_level';
