@@ -139,11 +139,10 @@ class HomePage extends Page {
                                 device.gatt.connect().then((server) => {
                                     console.log("server");
                                     console.log(server);
-                                    server.getPrimaryService(0x180a).then(services => {
+                                    server.getPrimaryService(0x180a).then(service => {
                                         console.log("service 0x180a");
                                         console.log(services);
                                       	service.getCharacteristics().then(characteristics => {
-                                          console.log("> Service: " + service.uuid);
                                           characteristics.forEach(characteristic => {
                                             console.log(characteristic);
                                           }).catch(e => console.log("-1:" + e));
