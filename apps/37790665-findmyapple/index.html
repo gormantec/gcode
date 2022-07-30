@@ -181,6 +181,8 @@ class HomePage extends Page {
     }
 }
 
+window.addEventListener("bluetooth-peripheral-found",(e)=>{console.log(e);});
+
 /*---------------------------------------------------------------------------*/
 
 var aHomePage = new HomePage();
