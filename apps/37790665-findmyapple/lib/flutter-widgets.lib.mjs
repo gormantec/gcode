@@ -738,15 +738,16 @@ export class BluetoothPage extends Page
 {
       constructor() {
         super({            
-          "color": "#232323",
-            "backgroundColor": "#ffffff",
-          	"borderRadius":"40px",
+          
             "hideFloatingActionButton": "true",
             "hideHeader": "true",
             "hideFooter": "true",
             "child": new ListView({
                 "id": "myListView",
                 "padding": "8px",
+              "color": "#232323",
+              "backgroundColor": "#ffffff",
+          	"borderRadius":"40px",
                 "children": [
                     new ListTile({
                         "color": "red",
