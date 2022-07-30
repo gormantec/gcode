@@ -795,13 +795,24 @@ export class BluetoothPage extends Page {
     }
   	appendPeripheral(e)
   {
-        blueListView.appendChild(    new ListTile({
+    	if(!this.identifiers)this.identifiers={};
+    	if(!this.identifiers[e.identifier])
+        {
+          	this.identifiers[e.identifier]=e.name;
+            blueListView.appendChild(    new ListTile({
+              id:"id"+e.identifier,
             "color": "black",
-            "title": new Text(e.name),
+            "title": new Text((e.name && e.name!="")?e.name:"N/A"),
             "subtitle": new Text(e.identifier),
             "leading": new Icon(Icons.battery_full),
             "trailing": new Icon(e.status?"bluetooth":"close"),
             "onclick": () => PWA.getPWA().setPage("HomePage")
-        }));
+       	 }));
+        }
+    	else if(e.name !=this.identifiers[e.identifier])
+        {
+			//document.querySelector("#id"+e.identifier)
+        }
+
   }
 }
