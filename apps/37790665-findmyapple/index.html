@@ -141,7 +141,7 @@ class HomePage extends Page {
                                     console.log(server);
                                     server.getPrimaryService(0x180a).then(service => {
                                         console.log("service 0x180a");
-                                        console.log(services);
+                                        console.log(service);
                                       	service.getCharacteristics().then(characteristics => {
                                           characteristics.forEach(characteristic => {
                                             console.log(characteristic);
