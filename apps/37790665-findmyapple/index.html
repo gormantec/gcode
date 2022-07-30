@@ -92,7 +92,7 @@ import {
     Div,
     AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import { BluetoothPage } from './lib/flutter-widgets.lib.mjs';
+import { Center,BluetoothPage } from './lib/flutter-widgets.lib.mjs';
 
 try {
     Page.clearPages();
@@ -123,7 +123,7 @@ class HomePage extends Page {
                     right: "50px",
                     height: "50px",
                     borderRadius: "10px",
-                    innerText: "BLE",
+                    innerText: "Scan BLE",
                     onclick: () => {
                         PWA.getPWA().setPage("BluetoothPage")
                         console.log("click");
