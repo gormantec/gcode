@@ -742,12 +742,15 @@ export class BluetoothPage extends Page
             "hideFloatingActionButton": "true",
             "hideHeader": "true",
             "hideFooter": "true",
-            "child": new ListView({
+            "child": new Div({
+              
+          		"borderRadius":"40px",
+              "margin":"10px",
+              child:new ListView({
                 "id": "myListView",
                 "padding": "8px",
               "color": "#232323",
               "backgroundColor": "#ffffff",
-          	"borderRadius":"40px",
                 "children": [
                     new ListTile({
                         "color": "red",
@@ -773,7 +776,7 @@ export class BluetoothPage extends Page
                         "trailing": new Icon(Icons.alarm),
                         "onclick": () => PWA.getPWA().setPage("Nursing")
                     })]
-            }),
+            })}),
             onopen: ()=>{
               PWA.getPWA().hideHeader();
             }
