@@ -135,7 +135,18 @@ class HomePage extends Page {
                                 device.addEventListener('gattserverdisconnected', () => {
                                     console.log(gattserverdisconnected);
                                 });
-                             	device.gatt.connect().then((server)=>{console.log("server");console.log(server);});
+                             	device.gatt.connect().then((server)=>{
+                                  console.log("server");
+                                  console.log(server);
+                                  
+                                  server.getPrimaryServices().then(services => {
+                                  
+                                  
+                                  console.log("services");
+                                  console.log(services);
+                                    	
+                                  });
+                                });
 
                             });
                         }
