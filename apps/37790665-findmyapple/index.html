@@ -127,9 +127,7 @@ class HomePage extends Page {
                                 bleCharacteristic = 'battery_level';
                             console.log("got bluetooth");
                             navigator.bluetooth.requestDevice({
-                                filters: [{
-                                    services: [bleService]
-                                }]
+                                acceptAllDevices:true
                             }).then((device) => {
                                 device.addEventListener('gattserverdisconnected', () => {
                                     console.log(gattserverdisconnected);
