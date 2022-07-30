@@ -129,6 +129,9 @@ class HomePage extends Page {
                             navigator.bluetooth.requestDevice({
                                 acceptAllDevices:true
                             }).then((device) => {
+                              	console.log(device.id);
+                              	console.log(device.name);
+                              	console.log(device);
                                 device.addEventListener('gattserverdisconnected', () => {
                                     console.log(gattserverdisconnected);
                                 });
