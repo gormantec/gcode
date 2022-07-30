@@ -127,7 +127,7 @@ class HomePage extends Page {
                     onclick: () => {
                         if (window.webkit.messageResponse) {
                             PWA.getPWA().setPage("BluetoothPage")
-                        } else {
+                      
                             console.log("click");
                             if ('bluetooth' in navigator) {
                                 let bleService = 'battery_service',
@@ -175,7 +175,7 @@ class HomePage extends Page {
                             } else {
                                 console.log(navigator);
                             }
-                        }
+                        
                     }
                 })
             ]
