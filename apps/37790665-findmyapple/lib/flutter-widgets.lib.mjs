@@ -797,11 +797,11 @@ export class BluetoothPage extends Page {
   {
         blueListView.appendChild(    new ListTile({
             "color": "black",
-            "title": new Text(e.identifier),
-            "subtitle": new Text("Nursing paused."),
+            "title": new Text(e.name),
+            "subtitle": new Text(e.identifier),
             "leading": new Icon(Icons.battery_full),
-            "trailing": new Icon(Icons.alarm),
-            "onclick": () => PWA.getPWA().setPage("Nursing")
+            "trailing": new Icon(e.status?"bluetooth":"close"),
+            "onclick": () => PWA.getPWA().setPage("HomePage")
         }));
   }
 }
