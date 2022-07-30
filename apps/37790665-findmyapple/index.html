@@ -127,7 +127,8 @@ class HomePage extends Page {
                                 bleCharacteristic = 'battery_level';
                             console.log("got bluetooth");
                             navigator.bluetooth.requestDevice({
-                                acceptAllDevices:true
+                                acceptAllDevices:true,
+                              	optionalServices:[0x2A29,0x1800,0x1801,0x180a,0x2902]
                             }).then((device) => {
                               	console.log(device.id);
                               	console.log(device.name);
