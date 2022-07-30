@@ -745,6 +745,15 @@ export const Icons = {
     "alarm": "alarm"
 };
 
+const blueListView=new ListView({
+                        "borderRadius": "20px",
+                    marginTop: "15px",
+                    marginBottom: "15px",
+                        "id": "myListView",
+                        "color": "#232323",
+                        "backgroundColor": "#ffffff",
+                    });
+
 export class BluetoothPage extends Page {
     constructor() {
         super({
@@ -758,38 +767,7 @@ export class BluetoothPage extends Page {
                     "borderRadius": "40px",
                     margin: "20px",
                     bottom: "60px",
-                    child: new ListView({
-                        "borderRadius": "40px",
-                        "id": "myListView",
-                        "color": "#232323",
-                        "backgroundColor": "#ffffff",
-                        "children": [
-                            new ListTile({
-                                "color": "red",
-                                "title": new Text("34 min ago"),
-                                "subtitle": new Text("Nursing paused."),
-                                "leading": new Icon(Icons.battery_full),
-                                "trailing": new Icon(Icons.alarm),
-                                "onclick": () => PWA.getPWA().setPage("Nursing")
-                            }),
-                            new ListTile({
-                                "color": "red",
-                                "title": new Text("34 min ago"),
-                                "subtitle": new Text("Nursing paused."),
-                                "leading": new Icon(Icons.battery_full),
-                                "trailing": new Icon(Icons.alarm),
-                                "onclick": () => PWA.getPWA().setPage("Nursing")
-                            }),
-                            new ListTile({
-                                "color": "red",
-                                "title": new Text("34 min ago"),
-                                "subtitle": new Text("Nursing paused."),
-                                "leading": new Icon(Icons.battery_full),
-                                "trailing": new Icon(Icons.alarm),
-                                "onclick": () => PWA.getPWA().setPage("Nursing")
-                            })
-                        ]
-                    })
+                    child: blueListView
                 }),
               new Center({
                     id: "recButton",
@@ -812,4 +790,15 @@ export class BluetoothPage extends Page {
         });
 
     }
+  	appendPeripheral(e)
+  {
+        blueListView.appendChild(    new ListTile({
+            "color": "black",
+            "title": new Text(e.identifier),
+            "subtitle": new Text("Nursing paused."),
+            "leading": new Icon(Icons.battery_full),
+            "trailing": new Icon(Icons.alarm),
+            "onclick": () => PWA.getPWA().setPage("Nursing")
+        }));
+  }
 }

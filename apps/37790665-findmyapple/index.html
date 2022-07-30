@@ -92,7 +92,7 @@ import {
     Div,
     AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
-import {BluetoothPage} from './lib/flutter-widgets.lib.mjs';
+import { BluetoothPage } from './lib/flutter-widgets.lib.mjs';
 
 try {
     Page.clearPages();
@@ -117,25 +117,25 @@ class HomePage extends Page {
                 new Div({
                     color: "white",
                     backgroundColor: "grey",
-                	"zIndex": "10001",
+                    "zIndex": "10001",
                     top: "50px",
                     left: "50px",
                     right: "50px",
-                  	paddingLeft:"100px",
-                  	paddingTop:"20px",
+                    paddingLeft: "100px",
+                    paddingTop: "20px",
                     height: "50px",
                     borderRadius: "10px",
                     innerText: "BLE",
                     onclick: () => {
-                      PWA.getPWA().setPage("BluetoothPage")
-                      	console.log("click");
+                        PWA.getPWA().setPage("BluetoothPage")
+                        console.log("click");
                         if ('bluetooth' in navigator) {
                             let bleService = 'battery_service',
                                 bleCharacteristic = 'battery_level';
                             console.log("got bluetooth");
                             navigator.bluetooth.requestDevice({
                                 //filters: [0x2A29, 0x1800, 0x1801, 0x180a, 0x2902]
-                              acceptAllDevices:true
+                                acceptAllDevices: true
                             }).then((device) => {
                                 console.log(device.id);
                                 console.log(device.name);
@@ -147,35 +147,33 @@ class HomePage extends Page {
                                     console.log("server");
                                     console.log(server);
                                     server.getPrimaryServices().then(services => {
-                                      services.forEach(service => {
-                                          //console.log("service "+service.uuid);
-                                          //console.log(service.uuid);
-                                          service.getCharacteristics().then(characteristics => {
-                                            
-                                              //console.log("characteristics");
-                                              //console.log(characteristics);
-                                            
-                                            characteristics.forEach(characteristic => {
-                                              //console.log("characteristic");
-                                              //console.log(characteristic);
-                                              //console.log(characteristic.value);
-                                              //console.log(characteristic.properties);
-                                              
-                                              if (characteristic.properties.notify) {
-                                                characteristic.addEventListener('characteristicvaluechanged', event=>console.log(event));
-                                                characteristic.startNotifications();
-                                              }
-                                            })
-                                           
-                                          }).catch(e => console.log("0:" + e));
-                                      });
+                                        services.forEach(service => {
+                                            //console.log("service "+service.uuid);
+                                            //console.log(service.uuid);
+                                            service.getCharacteristics().then(characteristics => {
+
+                                                //console.log("characteristics");
+                                                //console.log(characteristics);
+
+                                                characteristics.forEach(characteristic => {
+                                                    //console.log("characteristic");
+                                                    //console.log(characteristic);
+                                                    //console.log(characteristic.value);
+                                                    //console.log(characteristic.properties);
+
+                                                    if (characteristic.properties.notify) {
+                                                        characteristic.addEventListener('characteristicvaluechanged', event => console.log(event));
+                                                        characteristic.startNotifications();
+                                                    }
+                                                })
+
+                                            }).catch(e => console.log("0:" + e));
+                                        });
                                     }).catch(e => console.log("1:" + e));
                                 }).catch(e => console.log("2:" + e));
                             }).catch(e => console.log("3:" + e));
-                        }
-                      	else
-                        {
-                          console.log(navigator);
+                        } else {
+                            console.log(navigator);
                         }
                     }
                 })
@@ -184,12 +182,15 @@ class HomePage extends Page {
     }
 }
 
-window.addEventListener("bluetooth-peripheral-found",(e)=>{console.log(e);});
+window.addEventListener("bluetooth-peripheral-found", (e) => {
+    console.log(e);
+    aBluetoothPage.appendPeripheral(e);
+});
 
 /*---------------------------------------------------------------------------*/
 
 var aHomePage = new HomePage();
-var aBluetoothPage=new BluetoothPage();
+var aBluetoothPage = new BluetoothPage();
 var aPWA = new PWA({
     title: "Find my Apple",
     footer: "https://www.gormantec.com",
