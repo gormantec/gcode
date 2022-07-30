@@ -184,11 +184,11 @@ class HomePage extends Page {
 
 window.addEventListener("bluetooth-peripheral-found", (e) => {
     console.log(e);
-  console.log(e.identifier);
-  console.log(e.name);
-  console.log(e.state);
+  console.log(e.detail.identifier);
+  console.log(e.detail.name);
+  console.log(e.detail.state);
   
-    aBluetoothPage.appendPeripheral(e);
+    aBluetoothPage.appendPeripheral(e.detail);
 });
 
 /*---------------------------------------------------------------------------*/
