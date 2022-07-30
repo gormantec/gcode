@@ -770,7 +770,7 @@ export class BluetoothPage extends Page {
                     bottom: "60px",
                     child: blueListView
                 }),
-              new Center({bottom: "65px",innerText:"scanning"}),
+              new Center({height:"30px",bottom: "65px",innerText:"scanning"}),
               new Center({
                     id: "recButton",
                     left: "40px",
