@@ -101,12 +101,25 @@ class HomePage extends Page {
             appearance: "list",
             bottom: "45px",
             onsignin: (s) => {
-                location.href="https://www.icloud.com/find/";
+                //location.href="https://www.icloud.com/find/";
+              if('bluetooth' in navigator) {
+                	let bleService='battery_service', bleCharacteristic='battery_level';
+                    console.log("got bluetooth");
+					navigator.bluetooth.requestDevice({
+                        filters: [{
+                          services: [bleService]
+                        }]
+                      }).then((device)=>{
+                        device.addEventListener('gattserverdisconnected', () => {
+                        console.log(gattserverdisconnected);
+                      });
+                      
+                    });
+              } 
             }
         })
       });
   }
-
 }
 
 /*---------------------------------------------------------------------------*/
