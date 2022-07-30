@@ -129,8 +129,7 @@ class HomePage extends Page {
                                 bleCharacteristic = 'battery_level';
                             console.log("got bluetooth");
                             navigator.bluetooth.requestDevice({
-                                acceptAllDevices: true,
-                                optionalServices: [0x2A29, 0x1800, 0x1801, 0x180a, 0x2902]
+                                filters: [0x2A29, 0x1800, 0x1801, 0x180a, 0x2902]
                             }).then((device) => {
                                 console.log(device.id);
                                 console.log(device.name);
@@ -141,14 +140,16 @@ class HomePage extends Page {
                                 device.gatt.connect().then((server) => {
                                     console.log("server");
                                     console.log(server);
-                                    server.getPrimaryService(0x2A29).then(service => {
-                                        console.log("service 0x2A29");
-                                        console.log(service);
-                                      	service.getCharacteristics().then(characteristics => {
-                                          characteristics.forEach(characteristic => {
-                                            console.log(characteristic);
-                                          }).catch(e => console.log("-1:" + e));
-                                        }).catch(e => console.log("0:" + e));
+                                    server.getPrimaryServices().then(services => {
+                                      services.forEach(service => {
+                                          console.log("service "+service.uuid);
+                                          console.log(service.uuid);
+                                          service.getCharacteristics().then(characteristics => {
+                                            characteristics.forEach(characteristic => {
+                                              console.log(characteristic);
+                                            }).catch(e => console.log("-1:" + e));
+                                          }).catch(e => console.log("0:" + e));
+                                      });
                                     }).catch(e => console.log("1:" + e));
                                 }).catch(e => console.log("2:" + e));
                             }).catch(e => console.log("3:" + e));
