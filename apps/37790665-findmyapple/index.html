@@ -142,6 +142,12 @@ class HomePage extends Page {
                                     server.getPrimaryService(0x180a).then(services => {
                                         console.log("service 0x180a");
                                         console.log(services);
+                                      	service.getCharacteristics().then(characteristics => {
+                                          console.log("> Service: " + service.uuid);
+                                          characteristics.forEach(characteristic => {
+                                            console.log(characteristic);
+                                          }).catch(e => console.log("-1:" + e));
+                                        }).catch(e => console.log("0:" + e));
                                     }).catch(e => console.log("1:" + e));
                                 }).catch(e => console.log("2:" + e));
                             }).catch(e => console.log("3:" + e));
