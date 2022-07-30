@@ -86,54 +86,68 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import { PWA, Page, Div,AuthButtons } from 'https://gcode.com.au/modules/pwa.mjs';
-try { Page.clearPages(); } catch (e) {}
+import {
+    PWA,
+    Page,
+    Div,
+    AuthButtons
+} from 'https://gcode.com.au/modules/pwa.mjs';
+try {
+    Page.clearPages();
+} catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
-  constructor() {
-      super({
-          "color": "black",
-          "backgroundColor": "black",
+    constructor() {
+        super({
+            "color": "black",
+            "backgroundColor": "black",
             "hideFloatingActionButton": "true",
-          "child": new AuthButtons({
-            "id": "getEmailButton",
-            applekey: "au.com.gcode.appleauth",
-            appearance: "list",
-            bottom: "45px",
-            onsignin: (s) => {
-                //location.href="https://www.icloud.com/find/";
-              if('bluetooth' in navigator) {
-                	let bleService='battery_service', bleCharacteristic='battery_level';
-                    console.log("got bluetooth");
-					navigator.bluetooth.requestDevice({
-                        filters: [{
-                          services: [bleService]
-                        }]
-                      }).then((device)=>{
-                        device.addEventListener('gattserverdisconnected', () => {
-                        console.log(gattserverdisconnected);
-                      });
-                      
-                    });
-              } 
-            }
-        })
-      });
-  }
+            "children": [new AuthButtons({
+                    "id": "getEmailButton",
+                    applekey: "au.com.gcode.appleauth",
+                    appearance: "list",
+                    bottom: "45px",
+                    onsignin: (s) => {
+                        //location.href="https://www.icloud.com/find/";
+
+                    }
+                }),
+                new Div({
+                    innerText: "BLE",
+                    onclick: () => {
+                        if ('bluetooth' in navigator) {
+                            let bleService = 'battery_service',
+                                bleCharacteristic = 'battery_level';
+                            console.log("got bluetooth");
+                            navigator.bluetooth.requestDevice({
+                                filters: [{
+                                    services: [bleService]
+                                }]
+                            }).then((device) => {
+                                device.addEventListener('gattserverdisconnected', () => {
+                                    console.log(gattserverdisconnected);
+                                });
+
+                            });
+                        }
+                    }
+                })
+            ]
+        });
+    }
 }
 
 /*---------------------------------------------------------------------------*/
 
 var aHomePage = new HomePage();
 var aPWA = new PWA({
-  title: "Find my Apple",
-  footer: "https://www.gormantec.com",
-  primaryColor: "#212121",
+    title: "Find my Apple",
+    footer: "https://www.gormantec.com",
+    primaryColor: "#212121",
     "pwaAuth": "true"
 });
 
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
