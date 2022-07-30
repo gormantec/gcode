@@ -146,10 +146,9 @@ class HomePage extends Page {
                                   console.log("services");
                                   console.log(services);
                                     	
-                                  });
-                                });
-
-                            });
+                                  }).catch(e=>console.log("1:"+e));
+                                }).catch(e=>console.log("2:"+e));
+                            }).catch(e=>console.log("3:"+e));
                         }
                     }
                 })
