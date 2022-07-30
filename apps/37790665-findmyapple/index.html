@@ -92,6 +92,8 @@ import {
     Div,
     AuthButtons
 } from 'https://gcode.com.au/modules/pwa.mjs';
+import {BluetoothPage} from './lib/flutter-widgets.lib.mjs';
+
 try {
     Page.clearPages();
 } catch (e) {}
@@ -125,6 +127,7 @@ class HomePage extends Page {
                     borderRadius: "10px",
                     innerText: "BLE",
                     onclick: () => {
+                      PWA.getPWA().setPage("BluetoothPage")
                       	console.log("click");
                         if ('bluetooth' in navigator) {
                             let bleService = 'battery_service',
@@ -145,18 +148,18 @@ class HomePage extends Page {
                                     console.log(server);
                                     server.getPrimaryServices().then(services => {
                                       services.forEach(service => {
-                                          console.log("service "+service.uuid);
-                                          console.log(service.uuid);
+                                          //console.log("service "+service.uuid);
+                                          //console.log(service.uuid);
                                           service.getCharacteristics().then(characteristics => {
                                             
-                                              console.log("characteristics");
-                                              console.log(characteristics);
+                                              //console.log("characteristics");
+                                              //console.log(characteristics);
                                             
                                             characteristics.forEach(characteristic => {
-                                              console.log("characteristic");
-                                              console.log(characteristic);
-                                              console.log(characteristic.value);
-                                              console.log(characteristic.properties);
+                                              //console.log("characteristic");
+                                              //console.log(characteristic);
+                                              //console.log(characteristic.value);
+                                              //console.log(characteristic.properties);
                                               
                                               if (characteristic.properties.notify) {
                                                 characteristic.addEventListener('characteristicvaluechanged', event=>console.log(event));
@@ -186,6 +189,7 @@ window.addEventListener("bluetooth-peripheral-found",(e)=>{console.log(e);});
 /*---------------------------------------------------------------------------*/
 
 var aHomePage = new HomePage();
+var aBluetoothPage=new BluetoothPage();
 var aPWA = new PWA({
     title: "Find my Apple",
     footer: "https://www.gormantec.com",
