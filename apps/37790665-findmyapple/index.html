@@ -118,6 +118,8 @@ class HomePage extends Page {
                     top: "50px",
                     left: "50px",
                     right: "50px",
+                  	paddingLeft:"100px",
+                  	paddingTop:"20px",
                     height: "50px",
                     borderRadius: "10px",
                     innerText: "BLE",
@@ -139,8 +141,8 @@ class HomePage extends Page {
                                 device.gatt.connect().then((server) => {
                                     console.log("server");
                                     console.log(server);
-                                    server.getPrimaryService(0x180a).then(service => {
-                                        console.log("service 0x180a");
+                                    server.getPrimaryService(0x2A29).then(service => {
+                                        console.log("service 0x2A29");
                                         console.log(service);
                                       	service.getCharacteristics().then(characteristics => {
                                           characteristics.forEach(characteristic => {
