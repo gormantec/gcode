@@ -768,7 +768,7 @@ export class BluetoothPage extends Page {
               new Div({
                     "borderRadius": "40px",
                     margin: "20px",
-                    bottom: "60px",
+                    bottom: "40px",
                     child: blueListView
                 }),
               new Center({height:"30px",bottom: "85px",color:"#323232",innerText:"scanning"}),
