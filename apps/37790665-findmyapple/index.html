@@ -151,6 +151,8 @@ class HomePage extends Page {
                                             characteristics.forEach(characteristic => {
                                               console.log("characteristic");
                                               console.log(characteristic);
+                                              console.log(characteristic.value);
+                                              console.log(characteristic.properties);
                                             }).catch(e => console.log("-1:" + e));
                                           }).catch(e => console.log("0:" + e));
                                       });
