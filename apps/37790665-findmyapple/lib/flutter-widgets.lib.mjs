@@ -826,7 +826,9 @@ export class BluetoothPage extends Page {
                     });
                     let responseType = "bluetooth-request-device-" + id;
                     return new Promise((resolve, reject) => {
+                      	console.log("listen for:"+responseType);
                         window.addEventListener(responseType, (e) => {
+                          console.log("event :"+responseType);
                             resolve({
                                 id: e.detail.selectedPeripheralId,
                                 name: e.detail.selectedPeripheralName,
