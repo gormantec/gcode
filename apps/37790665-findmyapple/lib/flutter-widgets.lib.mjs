@@ -790,7 +790,6 @@ export class BluetoothPage extends Page {
                         PWA.getPWA().showHeader();
                         PWA.getPWA().setPage("HomePage");
                         this.notifySelectedPerefial();
-
                     }
                 })
             ],
@@ -808,15 +807,15 @@ export class BluetoothPage extends Page {
 
 
     }
-    notifySelectedPerefial() {
+    notifySelectedPerefial({selectedPeripheralId,selectedPeripheralName}) {
         console.log(this.scanningDetails);
         let start = Date.now();
         let d = {acceptAllDevices:this.scanningDetails.acceptAllDevices?this.scanningDetails.acceptAllDevices==true:false };
         timeout = 10000;
         let id = this.scanningDetails.bluetoothRequestDeviceId;
         let messagetype = 'bluetooth-request-device';
-        d.selectedPeripheralId = "An_ID";
-        d.selectedPeripheralName = "A_Name";
+        d.selectedPeripheralId = selectedPeripheralId;
+        d.selectedPeripheralName = selectedPeripheralName;
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
@@ -826,14 +825,23 @@ export class BluetoothPage extends Page {
         if (!this.identifiers) this.identifiers = {};
         if (!this.identifiers[e.identifier]) {
             this.identifiers[e.identifier] = e.name;
+          	let _name=(e.name && e.name != "") ? e.name : "N/A";
+          	let _identifier=e.identifier;
             blueListView.appendChild(new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
-                "title": new Text((e.name && e.name != "") ? e.name : "N/A"),
-                "subtitle": new Text(e.identifier),
+                "title": new Text(_name),
+                "subtitle": new Text(_identifier),
                 "leading": new Icon(Icons.battery_full),
                 "trailing": new Icon(e.status ? "bluetooth" : "close"),
-                "onclick": () => PWA.getPWA().setPage("HomePage")
+                "onclick": () => {
+              
+                    onclick: () => {
+                        PWA.getPWA().showHeader();
+                        PWA.getPWA().setPage("HomePage");
+                        this.notifySelectedPerefial({selectedPeripheralId:_identifier,selectedPeripheralName:_name});
+                    }
+                }
             }));
         } else if (e.name != this.identifiers[e.identifier]) {
             //document.querySelector("#id"+e.identifier)
