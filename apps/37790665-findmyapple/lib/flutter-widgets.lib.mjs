@@ -853,7 +853,7 @@ export class BluetoothPage extends Page {
                                                               startNotifications: () => {
                                                                   console.log('startNotifications');
                                                               }
-                                                          }];
+                                                          }]
 
                                                   },
                                                   {
@@ -869,7 +869,7 @@ export class BluetoothPage extends Page {
                                                               startNotifications: () => {
                                                                   console.log('startNotifications');
                                                               }
-                                                          }];
+                                                          }]
 
                                                   }
                                               ]
