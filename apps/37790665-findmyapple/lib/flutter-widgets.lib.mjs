@@ -745,16 +745,16 @@ export const Icons = {
     "alarm": "alarm"
 };
 
-const blueListView=new ListView({
-                        "borderRadius": "20px",
-                    marginTop: "15px",
-                    marginBottom: "15px",
-  					overflowY:"auto",
-  					paddingBottom: "30px",
-                        "id": "myListView",
-                        "color": "#232323",
-                        "backgroundColor": "#ffffff",
-                    });
+const blueListView = new ListView({
+    "borderRadius": "20px",
+    marginTop: "15px",
+    marginBottom: "15px",
+    overflowY: "auto",
+    paddingBottom: "30px",
+    "id": "myListView",
+    "color": "#232323",
+    "backgroundColor": "#ffffff",
+});
 
 export class BluetoothPage extends Page {
     constructor() {
@@ -765,14 +765,19 @@ export class BluetoothPage extends Page {
             "hideFooter": "true",
             "backgroundColor": "#323232",
             "children": [
-              new Div({
+                new Div({
                     "borderRadius": "40px",
                     margin: "20px",
                     bottom: "40px",
                     child: blueListView
                 }),
-              new Center({height:"30px",bottom: "85px",color:"#323232",innerText:"scanning"}),
-              new Center({
+                new Center({
+                    height: "30px",
+                    bottom: "85px",
+                    color: "#323232",
+                    innerText: "scanning"
+                }),
+                new Center({
                     id: "recButton",
                     left: "40px",
                     bottom: "10px",
@@ -782,8 +787,59 @@ export class BluetoothPage extends Page {
                     color: "white",
                     child: new Icon("close"),
                     onclick: () => {
-						PWA.getPWA().showHeader();
+                        PWA.getPWA().showHeader();
                         PWA.getPWA().setPage("HomePage");
+                      /*
+                        if (window.webkit.messageResponse == null) window.webkit.messageResponse = {};
+                        window.webkit.messageResponse["bluetooth-request-device-" + id] = {
+                            id: 'id',
+                            name: 'name',
+                            addEventListener: (type, f) => {},
+                            gatt: {
+                                connect: async () => {
+                                    return {
+                                        id: 'server',
+                                        getPrimaryServices: async () => {
+                                            return [{
+                                                    uuid: 'service1',
+                                                    getCharacteristics: async () => {
+                                                        return [{
+                                                            value: 'value1',
+                                                            properties: {
+                                                                notify: true
+                                                            },
+                                                            addEventListener: (type, f) => {
+                                                                console.log('addEventListener');
+                                                            },
+                                                            startNotifications: () => {
+                                                                console.log('startNotifications');
+                                                            }
+                                                        }];
+                                                    }
+                                                },
+                                                {
+                                                    uuid: 'service2',
+                                                    getCharacteristics: async () => {
+                                                        return [{
+                                                            value: 'value1',
+                                                            properties: {
+                                                                notify: true
+                                                            },
+                                                            addEventListener: (type, f) => {
+                                                                console.log('addEventListener');
+                                                            },
+                                                            startNotifications: () => {
+                                                                console.log('startNotifications');
+                                                            }
+                                                        }];
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    };
+                                }
+                            }
+                        }*/
                     }
                 })
             ],
@@ -793,26 +849,22 @@ export class BluetoothPage extends Page {
         });
 
     }
-  	appendPeripheral(e)
-  {
-    	if(!this.identifiers)this.identifiers={};
-    	if(!this.identifiers[e.identifier])
-        {
-          	this.identifiers[e.identifier]=e.name;
-            blueListView.appendChild(    new ListTile({
-              id:"id"+e.identifier,
-            "color": "black",
-            "title": new Text((e.name && e.name!="")?e.name:"N/A"),
-            "subtitle": new Text(e.identifier),
-            "leading": new Icon(Icons.battery_full),
-            "trailing": new Icon(e.status?"bluetooth":"close"),
-            "onclick": () => PWA.getPWA().setPage("HomePage")
-       	 }));
-        }
-    	else if(e.name !=this.identifiers[e.identifier])
-        {
-			//document.querySelector("#id"+e.identifier)
+    appendPeripheral(e) {
+        if (!this.identifiers) this.identifiers = {};
+        if (!this.identifiers[e.identifier]) {
+            this.identifiers[e.identifier] = e.name;
+            blueListView.appendChild(new ListTile({
+                id: "id" + e.identifier,
+                "color": "black",
+                "title": new Text((e.name && e.name != "") ? e.name : "N/A"),
+                "subtitle": new Text(e.identifier),
+                "leading": new Icon(Icons.battery_full),
+                "trailing": new Icon(e.status ? "bluetooth" : "close"),
+                "onclick": () => PWA.getPWA().setPage("HomePage")
+            }));
+        } else if (e.name != this.identifiers[e.identifier]) {
+            //document.querySelector("#id"+e.identifier)
         }
 
-  }
+    }
 }

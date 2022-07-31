@@ -127,11 +127,12 @@ class HomePage extends Page {
                     onclick: () => {
                         if (window.webkit.messageResponse) {
                             PWA.getPWA().setPage("BluetoothPage")
+                        }
                       
                             console.log("click");
                             if ('bluetooth' in navigator) {
                                 let bleService = 'battery_service',
-                                    bleCharacteristic = 'battery_level';
+                                bleCharacteristic = 'battery_level';
                                 console.log("got bluetooth");
                                 navigator.bluetooth.requestDevice({
                                     //filters: [0x2A29, 0x1800, 0x1801, 0x180a, 0x2902]
