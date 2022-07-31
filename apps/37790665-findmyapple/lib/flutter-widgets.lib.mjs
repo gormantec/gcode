@@ -820,85 +820,82 @@ export class BluetoothPage extends Page {
                         timeout = 60000,
                         id = Math.floor(Math.random() * 16777215).toString(16) + '-' + Math.floor(Math.random() * 16777215).toString(16) + '-' + Date.now().toString(16),
                         messagetype = 'bluetooth-request-device';
-                    window.webkit.messageHandlers[messagetype].postMessage({ id: id,data: d});
-                    let responseType="bluetooth-request-device-"+id;
-                    return new Promise((resolve, reject) => {
-						window.addEventListener(responseType, (e) => {
-                          resolve({
-                              id: e.detail.selectedPeripheralId,
-                              name: e.detail.selectedPeripheralName,
-                              addEventListener: (type, f) => {
-                                  if (type == 'gattserverdisconnected') {
-                                      window.webkit.messageHandlers[messagetype].postMessage({
-                                          id: id,
-                                          data: d
-                                      });
-                                  }
-                              },
-                              gatt: {
-                                  connect: async () => {
-                                      return {
-                                          id: 'server',
-                                          getPrimaryServices: async () => {
-                                              return [{
-                                                      uuid: 'service1',
-                                                      getCharacteristics: async () =>[{
-                                                              value: 'value1',
-                                                              properties: {
-                                                                  notify: true
-                                                              },
-                                                              addEventListener: (type, f) => {
-                                                                  console.log('addEventListener');
-                                                              },
-                                                              startNotifications: () => {
-                                                                  console.log('startNotifications');
-                                                              }
-                                                          }]
-
-                                                  },
-                                                  {
-                                                      uuid: 'service2',
-                                                      getCharacteristics: async () => [{
-                                                              value: 'value1',
-                                                              properties: {
-                                                                  notify: true
-                                                              },
-                                                              addEventListener: (type, f) => {
-                                                                  console.log('addEventListener');
-                                                              },
-                                                              startNotifications: () => {
-                                                                  console.log('startNotifications');
-                                                              }
-                                                          }]
-
-                                                  }
-                                              ]
-                                          }
-                                      };
-                                  }
-                              }
-                          });
-                        }
+                    window.webkit.messageHandlers[messagetype].postMessage({
+                        id: id,
+                        data: d
                     });
-                    /*
-                                        function waitForResponse(resolve, reject) {
-                                            window.webkit.messageResponse = window.webkit.messageResponse || {};
-                                            if (window.webkit.messageResponse[messagetype + '-' + id]) {
-                                                resolve(window.webkit.messageResponse[messagetype + '-' + id]);
-                                                delete window.webkit.messageResponse[messagetype + '-' + id];
-                                            } else if (timeout && (Date.now() - start) >= timeout) {
-                                                reject('timeout');
-                                            } else {
-                                                setTimeout(waitForResponse.bind(this, resolve, reject), 30);
-                                            }
-                                        }
-                                        */
+                    let responseType = "bluetooth-request-device-" + id;
+                    return new Promise((resolve, reject) => {
+                        window.addEventListener(responseType, (e) => {
+                            resolve({
+                                id: e.detail.selectedPeripheralId,
+                                name: e.detail.selectedPeripheralName,
+                                addEventListener: (type, f) => {
+                                    if (type == 'gattserverdisconnected') {
+                                        window.webkit.messageHandlers[messagetype].postMessage({
+                                            id: id,
+                                            data: d
+                                        });
+                                    }
+                                },
+                                gatt: {
+                                    connect: () => new Promise((res1, rej1) => {
+                                        res1({
+                                            id: 'server',
+                                            getPrimaryServices: () => new Promise((res2, rej2) => {
+                                                res2([{
+                                                        uuid: 'service1',
+                                                        getCharacteristics: () => new Promise((res3, rej3) => {
+                                                            res3([{
+                                                                value: 'value1',
+                                                                properties: {
+                                                                    notify: true
+                                                                },
+                                                                addEventListener: (type, f) => {
+                                                                    console.log('addEventListener');
+                                                                },
+                                                                startNotifications: () => {
+                                                                    console.log('startNotifications');
+                                                                }
+                                                            }]);
+                                                        })
+
+                                                    },
+                                                    {
+                                                        uuid: 'service2',
+                                                        getCharacteristics: () => new Promise((res4, rej4) => {
+                                                            res4([{
+                                                                value: 'value1',
+                                                                properties: {
+                                                                    notify: true
+                                                                },
+                                                                addEventListener: (type, f) => {
+                                                                    console.log('addEventListener');
+                                                                },
+                                                                startNotifications: () => {
+                                                                    console.log('startNotifications');
+                                                                }
+                                                            }]);
+                                                        })
+
+                                                    }
+                                                ])
+                                            })
+                                        })
+
+                                    })
+                                }
+                            });
+                        });
+
+                    });
                 }
             }
+
+
         }
-
-
     }
+
     notifySelectedPerefial({
         selectedPeripheralId,
         selectedPeripheralName
