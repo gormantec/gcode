@@ -816,6 +816,10 @@ export class BluetoothPage extends Page {
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
+      console.log({
+            id: id,
+            data: d
+        });
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
