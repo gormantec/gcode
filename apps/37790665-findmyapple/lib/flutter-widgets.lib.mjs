@@ -801,7 +801,7 @@ export class BluetoothPage extends Page {
         });
         window.addEventListener("bluetooth-peripheral-scanning", (e) => {
             PWA.getPWA().setPage(this);
-            this.scanningDetails = e;
+            this.scanningDetails = e.detail;
         });
         window.addEventListener("bluetooth-peripheral-found", (e) => {
             this.appendPeripheral(e.detail);
