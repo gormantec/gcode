@@ -813,30 +813,86 @@ export class BluetoothPage extends Page {
                 this.appendPeripheral(e.detail);
             });
             window.webkit.messageResponse = window.webkit.messageResponse || {};
-          
+
             navigator.bluetooth = {
                 requestDevice: (d) => {
                     let start = Date.now(),
                         timeout = 60000,
                         id = Math.floor(Math.random() * 16777215).toString(16) + '-' + Math.floor(Math.random() * 16777215).toString(16) + '-' + Date.now().toString(16),
                         messagetype = 'bluetooth-request-device';
-                    window.webkit.messageHandlers[messagetype].postMessage({
-                        id: id,
-                        data: d
-                    });
-                    return new Promise(waitForResponse);
+                    window.webkit.messageHandlers[messagetype].postMessage({ id: id,data: d});
+                    let responseType="bluetooth-request-device-"+id;
+                    return new Promise((resolve, reject) => {
+						window.addEventListener(responseType, (e) => {
+                          resolve({
+                              id: e.detail.selectedPeripheralId,
+                              name: e.detail.selectedPeripheralName,
+                              addEventListener: (type, f) => {
+                                  if (type == 'gattserverdisconnected') {
+                                      window.webkit.messageHandlers[messagetype].postMessage({
+                                          id: id,
+                                          data: d
+                                      });
+                                  }
+                              },
+                              gatt: {
+                                  connect: async () => {
+                                      return {
+                                          id: 'server',
+                                          getPrimaryServices: async () => {
+                                              return [{
+                                                      uuid: 'service1',
+                                                      getCharacteristics: async () =>[{
+                                                              value: 'value1',
+                                                              properties: {
+                                                                  notify: true
+                                                              },
+                                                              addEventListener: (type, f) => {
+                                                                  console.log('addEventListener');
+                                                              },
+                                                              startNotifications: () => {
+                                                                  console.log('startNotifications');
+                                                              }
+                                                          }];
 
-                    function waitForResponse(resolve, reject) {
-                        window.webkit.messageResponse = window.webkit.messageResponse || {};
-                        if (window.webkit.messageResponse[messagetype + '-' + id]) {
-                            resolve(window.webkit.messageResponse[messagetype + '-' + id]);
-                            delete window.webkit.messageResponse[messagetype + '-' + id];
-                        } else if (timeout && (Date.now() - start) >= timeout) {
-                            reject('timeout');
-                        } else {
-                            setTimeout(waitForResponse.bind(this, resolve, reject), 30);
+                                                  },
+                                                  {
+                                                      uuid: 'service2',
+                                                      getCharacteristics: async () => [{
+                                                              value: 'value1',
+                                                              properties: {
+                                                                  notify: true
+                                                              },
+                                                              addEventListener: (type, f) => {
+                                                                  console.log('addEventListener');
+                                                              },
+                                                              startNotifications: () => {
+                                                                  console.log('startNotifications');
+                                                              }
+                                                          }];
+
+                                                  }
+                                              ]
+                                          }
+                                      };
+                                  }
+                              }
+                          });
                         }
-                    }
+                    });
+                    /*
+                                        function waitForResponse(resolve, reject) {
+                                            window.webkit.messageResponse = window.webkit.messageResponse || {};
+                                            if (window.webkit.messageResponse[messagetype + '-' + id]) {
+                                                resolve(window.webkit.messageResponse[messagetype + '-' + id]);
+                                                delete window.webkit.messageResponse[messagetype + '-' + id];
+                                            } else if (timeout && (Date.now() - start) >= timeout) {
+                                                reject('timeout');
+                                            } else {
+                                                setTimeout(waitForResponse.bind(this, resolve, reject), 30);
+                                            }
+                                        }
+                                        */
                 }
             }
         }
