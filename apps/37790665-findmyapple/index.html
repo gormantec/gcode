@@ -138,13 +138,13 @@ class HomePage extends Page {
                                 }).then((device) => {
                                     console.log(device.id);
                                     console.log(device.name);
-                                    console.log(device);
+                                    //console.log(device);
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
                                     });
                                     device.gatt.connect().then((server) => {
-                                        console.log("server");
-                                        console.log(server);
+                                        //console.log("server");
+                                        //console.log(server);
                                         server.getPrimaryServices().then(services => {
                                             services.forEach(service => {
                                                 //console.log("service "+service.uuid);
