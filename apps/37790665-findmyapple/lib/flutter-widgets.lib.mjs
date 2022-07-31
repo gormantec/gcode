@@ -767,6 +767,8 @@ export class BluetoothPage extends Page {
             "children": [
                 new Div({
                     "borderRadius": "40px",
+                  	"paddingTop":"20px",
+                  	"paddingBottom":"40px",
                     margin: "20px",
                     bottom: "40px",
                     child: blueListView
