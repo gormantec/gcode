@@ -767,8 +767,8 @@ export class BluetoothPage extends Page {
             "children": [
                 new Div({
                     "borderRadius": "40px",
-                  	"paddingTop":"20px",
-                  	"paddingBottom":"40px",
+                    "paddingTop": "20px",
+                    "paddingBottom": "40px",
                     margin: "20px",
                     bottom: "40px",
                     child: blueListView
@@ -791,7 +791,10 @@ export class BluetoothPage extends Page {
                     onclick: () => {
                         PWA.getPWA().showHeader();
                         PWA.getPWA().setPage("HomePage");
-                        this.notifySelectedPerefial({selectedPeripheralId:"",selectedPeripheralName:""});
+                        this.notifySelectedPerefial({
+                            selectedPeripheralId: "",
+                            selectedPeripheralName: ""
+                        });
                     }
                 })
             ],
@@ -799,31 +802,70 @@ export class BluetoothPage extends Page {
                 PWA.getPWA().hideHeader();
             }
         });
-        window.addEventListener("bluetooth-peripheral-scanning", (e) => {
-            PWA.getPWA().setPage(this);
-            this.scanningDetails = e.detail;
-        });
-        window.addEventListener("bluetooth-peripheral-found", (e) => {
-            this.appendPeripheral(e.detail);
-        });
+
+        let appPlatform = this.getCookie("app-platform");
+        if (appPlatform && !navigator.bluetooth) {
+            window.addEventListener("bluetooth-peripheral-scanning", (e) => {
+                PWA.getPWA().setPage(this);
+                this.scanningDetails = e.detail;
+            });
+            window.addEventListener("bluetooth-peripheral-found", (e) => {
+                this.appendPeripheral(e.detail);
+            });
+            window.webkit.messageResponse = window.webkit.messageResponse || {};
+          
+            navigator.bluetooth = {
+                requestDevice: (d) => {
+                    let start = Date.now(),
+                        timeout = 60000,
+                        id = Math.floor(Math.random() * 16777215).toString(16) + '-' + Math.floor(Math.random() * 16777215).toString(16) + '-' + Date.now().toString(16),
+                        messagetype = 'bluetooth-request-device';
+                    window.webkit.messageHandlers[messagetype].postMessage({
+                        id: id,
+                        data: d
+                    });
+                    return new Promise(waitForResponse);
+
+                    function waitForResponse(resolve, reject) {
+                        window.webkit.messageResponse = window.webkit.messageResponse || {};
+                        if (window.webkit.messageResponse[messagetype + '-' + id]) {
+                            resolve(window.webkit.messageResponse[messagetype + '-' + id]);
+                            delete window.webkit.messageResponse[messagetype + '-' + id];
+                        } else if (timeout && (Date.now() - start) >= timeout) {
+                            reject('timeout');
+                        } else {
+                            setTimeout(waitForResponse.bind(this, resolve, reject), 30);
+                        }
+                    }
+                }
+            }
+        }
 
 
     }
-    notifySelectedPerefial({selectedPeripheralId,selectedPeripheralName}) {
+    notifySelectedPerefial({
+        selectedPeripheralId,
+        selectedPeripheralName
+    }) {
         let start = Date.now();
-        let d = {acceptAllDevices:this.scanningDetails.acceptAllDevices?this.scanningDetails.acceptAllDevices==true:false };
+        let d = {
+            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false
+        };
         let id = this.scanningDetails.bluetoothRequestDeviceId;
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
-        window.webkit.messageHandlers[messagetype].postMessage({id: id,data: d})
+        window.webkit.messageHandlers[messagetype].postMessage({
+            id: id,
+            data: d
+        })
     }
     appendPeripheral(e) {
         if (!this.identifiers) this.identifiers = {};
         if (!this.identifiers[e.identifier]) {
             this.identifiers[e.identifier] = e.name;
-          	let _name=(e.name && e.name != "") ? e.name : "N/A";
-          	let _identifier=e.identifier;
+            let _name = (e.name && e.name != "") ? e.name : "N/A";
+            let _identifier = e.identifier;
             blueListView.appendChild(new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
@@ -832,9 +874,12 @@ export class BluetoothPage extends Page {
                 "leading": new Icon(Icons.battery_full),
                 "trailing": new Icon(e.status ? "bluetooth" : "close"),
                 "onclick": () => {
-                        PWA.getPWA().showHeader();
-                        PWA.getPWA().setPage("HomePage");
-                        this.notifySelectedPerefial({selectedPeripheralId:_identifier,selectedPeripheralName:_name});   
+                    PWA.getPWA().showHeader();
+                    PWA.getPWA().setPage("HomePage");
+                    this.notifySelectedPerefial({
+                        selectedPeripheralId: _identifier,
+                        selectedPeripheralName: _name
+                    });
                 }
             }));
         } else if (e.name != this.identifiers[e.identifier]) {
@@ -842,4 +887,21 @@ export class BluetoothPage extends Page {
         }
 
     }
+    getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+
 }
