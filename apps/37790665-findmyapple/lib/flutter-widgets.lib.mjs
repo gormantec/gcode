@@ -810,19 +810,16 @@ export class BluetoothPage extends Page {
 
     }
     notifySelectedPerefial({selectedPeripheralId,selectedPeripheralName}) {
+        console.log("notifySelectedPerefial");
         console.log(this.scanningDetails);
         let start = Date.now();
         let d = {acceptAllDevices:this.scanningDetails.acceptAllDevices?this.scanningDetails.acceptAllDevices==true:false };
-        let timeout = 10000;
         let id = this.scanningDetails.bluetoothRequestDeviceId;
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
-      console.log({id: id,data: d});
-        window.webkit.messageHandlers[messagetype].postMessage({
-            id: id,
-            data: d
-        })
+        console.log({id: id,data: d});
+        window.webkit.messageHandlers[messagetype].postMessage({id: id,data: d})
     }
     appendPeripheral(e) {
         if (!this.identifiers) this.identifiers = {};
