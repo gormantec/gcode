@@ -789,7 +789,7 @@ export class BluetoothPage extends Page {
                     onclick: () => {
                         PWA.getPWA().showHeader();
                         PWA.getPWA().setPage("HomePage");
-                        this.notifySelectedPerefial();
+                        this.notifySelectedPerefial({selectedPeripheralId:"",selectedPeripheralName:""});
                     }
                 })
             ],
@@ -835,12 +835,9 @@ export class BluetoothPage extends Page {
                 "leading": new Icon(Icons.battery_full),
                 "trailing": new Icon(e.status ? "bluetooth" : "close"),
                 "onclick": () => {
-              
-                    onclick: () => {
                         PWA.getPWA().showHeader();
                         PWA.getPWA().setPage("HomePage");
-                        this.notifySelectedPerefial({selectedPeripheralId:_identifier,selectedPeripheralName:_name});
-                    }
+                        this.notifySelectedPerefial({selectedPeripheralId:_identifier,selectedPeripheralName:_name});   
                 }
             }));
         } else if (e.name != this.identifiers[e.identifier]) {
