@@ -789,57 +789,8 @@ export class BluetoothPage extends Page {
                     onclick: () => {
                         PWA.getPWA().showHeader();
                         PWA.getPWA().setPage("HomePage");
-                      /*
-                        if (window.webkit.messageResponse == null) window.webkit.messageResponse = {};
-                        window.webkit.messageResponse["bluetooth-request-device-" + id] = {
-                            id: 'id',
-                            name: 'name',
-                            addEventListener: (type, f) => {},
-                            gatt: {
-                                connect: async () => {
-                                    return {
-                                        id: 'server',
-                                        getPrimaryServices: async () => {
-                                            return [{
-                                                    uuid: 'service1',
-                                                    getCharacteristics: async () => {
-                                                        return [{
-                                                            value: 'value1',
-                                                            properties: {
-                                                                notify: true
-                                                            },
-                                                            addEventListener: (type, f) => {
-                                                                console.log('addEventListener');
-                                                            },
-                                                            startNotifications: () => {
-                                                                console.log('startNotifications');
-                                                            }
-                                                        }];
-                                                    }
-                                                },
-                                                {
-                                                    uuid: 'service2',
-                                                    getCharacteristics: async () => {
-                                                        return [{
-                                                            value: 'value1',
-                                                            properties: {
-                                                                notify: true
-                                                            },
-                                                            addEventListener: (type, f) => {
-                                                                console.log('addEventListener');
-                                                            },
-                                                            startNotifications: () => {
-                                                                console.log('startNotifications');
-                                                            }
-                                                        }];
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    };
-                                }
-                            }
-                        }*/
+                        this.notifySelectedPerefial();
+
                     }
                 })
             ],
@@ -847,7 +798,29 @@ export class BluetoothPage extends Page {
                 PWA.getPWA().hideHeader();
             }
         });
+        window.addEventListener("bluetooth-peripheral-scanning", (e) => {
+            PWA.getPWA().setPage(this);
+            this.scanningDetails = e;
+        });
+        window.addEventListener("bluetooth-peripheral-found", (e) => {
+            this.appendPeripheral(e.detail);
+        });
 
+
+    }
+    notifySelectedPerefial() {
+        console.log(this.scanningDetails);
+        let start = Date.now();
+        let d = {acceptAllDevices:this.scanningDetails.acceptAllDevices?this.scanningDetails.acceptAllDevices==true:false };
+        timeout = 10000;
+        let id = this.scanningDetails.bluetoothRequestDeviceId;
+        let messagetype = 'bluetooth-request-device';
+        d.selectedPeripheralId = "An_ID";
+        d.selectedPeripheralName = "A_Name";
+        window.webkit.messageHandlers[messagetype].postMessage({
+            id: id,
+            data: d
+        })
     }
     appendPeripheral(e) {
         if (!this.identifiers) this.identifiers = {};

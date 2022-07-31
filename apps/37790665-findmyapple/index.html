@@ -125,9 +125,7 @@ class HomePage extends Page {
                     borderRadius: "10px",
                     innerText: "Scan BLE",
                     onclick: () => {
-                        if (window.webkit.messageResponse) {
-                            PWA.getPWA().setPage("BluetoothPage")
-                        }
+
                       
                             console.log("click");
                             if ('bluetooth' in navigator) {
@@ -184,9 +182,7 @@ class HomePage extends Page {
     }
 }
 
-window.addEventListener("bluetooth-peripheral-found", (e) => {
-    aBluetoothPage.appendPeripheral(e.detail);
-});
+
 
 /*---------------------------------------------------------------------------*/
 
