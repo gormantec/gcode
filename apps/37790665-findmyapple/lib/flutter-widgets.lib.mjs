@@ -759,7 +759,7 @@ const blueListView = new ListView({
 });
 
 export class BluetoothPage extends Page {
-    constructor() {
+    constructor({homePage}) {
         super({
 
             "hideFloatingActionButton": "true",
@@ -792,7 +792,8 @@ export class BluetoothPage extends Page {
                     child: new Icon("close"),
                     onclick: () => {
                         PWA.getPWA().showHeader();
-                        PWA.getPWA().setPage("HomePage");
+                      	console.log(this.homePage);
+                        PWA.getPWA().setPage(this.homePage);
                         this.notifySelectedPerefial({
                             selectedPeripheralId: "",
                             selectedPeripheralName: ""
@@ -804,6 +805,7 @@ export class BluetoothPage extends Page {
                 PWA.getPWA().hideHeader();
             }
         });
+      	this.homePage=homePage;
       
       	
 
@@ -854,13 +856,14 @@ export class BluetoothPage extends Page {
                 "trailing": new Icon(e.status ? "bluetooth" : "close"),
                 "onclick": () => {
                     PWA.getPWA().showHeader();
-                    PWA.getPWA().setPage("HomePage");
+                    console.log(this.homePage);
+                    PWA.getPWA().setPage(this.homePage);
                   	setTimeout(()=>{
                       _this.notifySelectedPerefial({
                           selectedPeripheralId: _identifier,
                           selectedPeripheralName: _name
                       });
-                    },30);
+                    },500);
                 }
             }));
         } else if (e.name != this.identifiers[e.identifier]) {
