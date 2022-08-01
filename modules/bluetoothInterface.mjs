@@ -25,7 +25,7 @@ export class BluetoothInterface {
     }
 
     deviceRequestResult(e){
-        console.log(e);
+        console.log("found: "+e);
         resolve({
             id: e.detail.selectedPeripheralId,
             name: e.detail.selectedPeripheralName,
