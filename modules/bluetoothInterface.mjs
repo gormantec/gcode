@@ -2,7 +2,7 @@ export class BluetoothDevice {
     constructor({peripheralId,peripheralName}) {
         this.id= peripheralId;
         this.name= peripheralName;
-        this.gatt= new GattServerConnector({peripheralName:this.id, peripheralName:this.name})
+        this.gatt= new GattServerConnector({peripheralId:this.id, peripheralName:this.name})
     }
 
     addEventListener(type, f) {
