@@ -51,7 +51,7 @@ export class GattServer {
         console.log(messagetype);
         console.log(message);
         window.webkit.messageHandlers[messagetype].postMessage(message);
-        let responseType = messagetype+"-" + id;
+        let responseType = messagetype+"-" + this.peripheralId;
         return new Promise((resolve,reject) => {
             console.log("listen for:" + responseType);
             if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
