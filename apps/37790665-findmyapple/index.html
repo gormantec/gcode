@@ -101,6 +101,7 @@ try {
 class HomePage extends Page {
     constructor() {
         super({
+          	"id":"HomePage",
             "color": "black",
             "backgroundColor": "black",
             "hideFloatingActionButton": "true",
@@ -188,7 +189,7 @@ class HomePage extends Page {
 /*---------------------------------------------------------------------------*/
 
 var aHomePage = new HomePage();
-var aBluetoothPage = new BluetoothPage();
+var aBluetoothPage = new BluetoothPage({homePage:"HomePage"});
 var aPWA = new PWA({
     title: "Find my Apple",
     footer: "https://www.gormantec.com",
