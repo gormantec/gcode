@@ -150,7 +150,7 @@ class HomePage extends Page {
                                         server.getPrimaryServices().then(services => {
                                             services.forEach(service => {
                                                 //console.log("service "+service.uuid);
-                                                console.log(service.uuid);
+                                                console.log("service: "+service.uuid);
                                                 service.getCharacteristics().then(characteristics => {
 
                                                     //console.log("characteristics");
