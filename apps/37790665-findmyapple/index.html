@@ -169,7 +169,7 @@ class HomePage extends Page {
                                                     })
 
                                                 }).catch(e => console.log("0:" + e));
-                                              servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>
+                                              servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>";
                                             });
                                            PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString);
                                     
