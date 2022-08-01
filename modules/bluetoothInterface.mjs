@@ -60,9 +60,18 @@ export class GattServer {
             }
             else{
                 let eventListener = (e) => {
-                    console.log("found: " + e);
+                    console.log("getPrimaryServices: " );
+                    console.log(e);
                     window.removeEventListener(responseType, eventListener);
-                    resolve([new PrimaryService({uuid:"service1"}), new PrimaryService({uuid:"service2"})]);
+                    let services=[];
+                    for(let i=0;e.detail && e.detail.services && i<e.detail.services.length;i++)
+                    {
+                        if(e.detail.services[i].uuid)
+                        {
+                            services.push(new PrimaryService({uuid:e.detail.services[i].uuid}));
+                        }
+                    }
+                    resolve(services);
                 };
                 window.addEventListener(responseType, eventListener);
             }
@@ -95,7 +104,8 @@ export class GattServerConnector {
             }
             else{
                 let eventListener = (e) => {
-                    console.log("found: " + e);
+                    console.log("connect: " );
+                    console.log(e);
                     window.removeEventListener(responseType, eventListener);
                     resolve(new GattServer({peripheralId:this.peripheralId}));
                 };
