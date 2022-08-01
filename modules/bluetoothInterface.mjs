@@ -57,8 +57,8 @@ export class GattServerConnector {
             '-' + Math.floor(Math.random() * 16777215).toString(16) +
             '-' + Date.now().toString(16),
         messagetype = 'bluetooth-connect-device';
-        window.webkit.messageHandlers['bluetooth-connect-device'].postMessage({id: id,data: {peripheralId:id} });
-        let responseType = "bluetooth-connect-device-" + id;
+        window.webkit.messageHandlers[messagetype].postMessage({id: id,data: {peripheralId:id} });
+        let responseType = messagetype+"-" + id;
         return new Promise((resolve) => {
             console.log("listen for:" + responseType);
             let eventListener = (e) => {
