@@ -41,9 +41,6 @@ export class GattServer {
         this.peripheralId=peripheralId;
     }
     getPrimaryServices() {
-        new Promise((res2, rej2) => );
-
-
 
         let start = Date.now(),
         id = Math.floor(Math.random() * 16777215).toString(16) +
