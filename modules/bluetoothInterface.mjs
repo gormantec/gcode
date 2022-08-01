@@ -20,13 +20,17 @@ export class BluetoothInterface {
         let responseType = "bluetooth-request-device-" + id;
         return new Promise((resolve, reject) => {
             console.log("listen for:" + responseType);
-            window.addEventListener(responseType,this.deviceRequestResult);
+            let eventListener=(e)=>{        
+                console.log("found: "+e);
+                window.removeEventListener(responseType,eventListener);
+                resolve(this.deviceRequestResult(e));
+            };
+            window.addEventListener(responseType,eventListener);
         });
     }
 
     deviceRequestResult(e){
-        console.log("found: "+e);
-        resolve({
+        return {
             id: e.detail.selectedPeripheralId,
             name: e.detail.selectedPeripheralName,
             addEventListener: (type, f) => {
@@ -84,7 +88,7 @@ export class BluetoothInterface {
 
                 })
             }
-        });
+        };
     }
 
 
