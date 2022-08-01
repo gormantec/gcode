@@ -1,8 +1,8 @@
 export class BluetoothDevice {
-    constructor({id,name}) {
-        this.id= id;
-        this.name= name;
-        this.gatt= new GattServerConnector({id:id, name:name})
+    constructor({peripheralId,peripheralName}) {
+        this.peripheralId= peripheralId;
+        this.peripheralName= peripheralName;
+        this.gatt= new GattServerConnector({peripheralName:peripheralId, peripheralName:peripheralName})
     }
 
     addEventListener(type, f) {
@@ -46,9 +46,9 @@ export class GattServer {
 }
 
 export class GattServerConnector {
-    constructor({id, name}) {
-        this.id = id;
-        this.name = name;
+    constructor({peripheralId, peripheralName}) {
+        this.peripheralId = peripheralId;
+        this.peripheralName = peripheralName;
     }
 
     connect() {        
@@ -57,7 +57,7 @@ export class GattServerConnector {
             '-' + Math.floor(Math.random() * 16777215).toString(16) +
             '-' + Date.now().toString(16),
         messagetype = 'bluetooth-connect-device';
-        window.webkit.messageHandlers[messagetype].postMessage({id: id,data: {peripheralId:id} });
+        window.webkit.messageHandlers[messagetype].postMessage({id: id,data: {peripheralId:this.id} });
         let responseType = messagetype+"-" + id;
         return new Promise((resolve) => {
             console.log("listen for:" + responseType);
@@ -84,13 +84,13 @@ export class BluetoothInterface {
                 '-' + Date.now().toString(16),
             messagetype = 'bluetooth-request-device';
         window.webkit.messageHandlers[messagetype].postMessage({id: id,data: {acceptAllDevices:acceptAllDevices} });
-        let responseType = "bluetooth-request-device-" + id;
+        let responseType = messagetype+"-" + id;
         return new Promise((resolve) => {
             console.log("listen for:" + responseType);
             let eventListener = (e) => {
                 console.log("found: " + e);
                 window.removeEventListener(responseType, eventListener);
-                resolve(new BluetoothDevice({id:e.detail.selectedPeripheralId,name:e.detail.selectedPeripheralName}));
+                resolve(new BluetoothDevice({peripheralId:e.detail.selectedPeripheralId,peripheralName:e.detail.selectedPeripheralName}));
             };
             window.addEventListener(responseType, eventListener);
         });
