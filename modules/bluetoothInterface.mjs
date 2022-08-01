@@ -2,12 +2,12 @@ export class BluetoothDevice {
     constructor({peripheralId,peripheralName}) {
         this.id= peripheralId;
         this.name= peripheralName;
-        this.gatt= new GattServerConnector({peripheralName:id, peripheralName:name})
+        this.gatt= new GattServerConnector({peripheralName:this.id, peripheralName:this.name})
     }
 
     addEventListener(type, f) {
         if (type == 'gattserverdisconnected') {
-            window.addEventListener("bluetooth-peripheral-disconnect-" + id, f);
+            window.addEventListener("bluetooth-peripheral-disconnect-" + this.id, f);
         }
     }
 
