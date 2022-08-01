@@ -60,7 +60,7 @@ export class GattServer {
             }
             else{
                 let eventListener = (e) => {
-                    console.log("getPrimaryServices: " );
+                    console.log("getPrimaryServices: " );  
                     console.log(e);
                     window.removeEventListener(responseType, eventListener);
                     let services=[];
