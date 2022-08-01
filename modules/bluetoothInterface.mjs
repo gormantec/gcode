@@ -30,14 +30,15 @@ export class BluetoothInterface {
     }
 
     deviceRequestResult(e){
+        let id=e.detail.selectedPeripheralId;
+        let name=e.detail.selectedPeripheralName;
         return {
-            id: e.detail.selectedPeripheralId,
-            name: e.detail.selectedPeripheralName,
+            id: id,
+            name: name,
             addEventListener: (type, f) => {
                 if (type == 'gattserverdisconnected') {
-                    window.webkit.messageHandlers[messagetype].postMessage({
-                        id: id,
-                        data: d
+                    window.webkit.messageHandlers["bluetooth-request-gattserverdisconnected"].postMessage({
+                        id: e.detail.selectedPeripheralId
                     });
                 }
             },
