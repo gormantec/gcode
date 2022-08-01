@@ -51,9 +51,23 @@ export class GattServerConnector {
         this.name = name;
     }
 
-    connect() {
-        return new Promise((res1, rej1) => {
-            res1(new GattServer());
+    connect() {        
+        let start = Date.now(),
+        id = Math.floor(Math.random() * 16777215).toString(16) +
+            '-' + Math.floor(Math.random() * 16777215).toString(16) +
+            '-' + Date.now().toString(16),
+        messagetype = 'bluetooth-connect-device';
+        window.webkit.messageHandlers['bluetooth-connect-device'].postMessage({id: id,data: {peripheralId:id} });
+        let responseType = "bluetooth-connect-device-" + id;
+        return new Promise((resolve) => {
+            console.log("listen for:" + responseType);
+            let eventListener = (e) => {
+                console.log("found: " + e);
+                window.removeEventListener(responseType, eventListener);
+                resolve(new GattServer());
+            };
+            window.addEventListener(responseType, eventListener);
+            
         })
     }
 }
@@ -71,7 +85,7 @@ export class BluetoothInterface {
             messagetype = 'bluetooth-request-device';
         window.webkit.messageHandlers[messagetype].postMessage({id: id,data: {acceptAllDevices:acceptAllDevices} });
         let responseType = "bluetooth-request-device-" + id;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             console.log("listen for:" + responseType);
             let eventListener = (e) => {
                 console.log("found: " + e);
