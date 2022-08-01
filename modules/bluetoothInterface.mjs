@@ -1,15 +1,23 @@
 export class BluetoothDevice {
-    constructor() {
-
+    constructor(id,name) {
+        this.id= id;
+        this.name= name;
+        this.gatt= new GattServerConnector(id, name)
     }
+
+    addEventListener(type, f) {
+        if (type == 'gattserverdisconnected') {
+            window.addEventListener("bluetooth-peripheral-disconnect-" + id, f);
+        }
+    }
+
+    
 }
 
 export class PrimaryService {
     constructor(uuid) {
         this.uuid = uuid;
     }
-
-
     getCharacteristics() {
         return new Promise((res3, rej3) => {
             res3([{
@@ -26,9 +34,6 @@ export class PrimaryService {
             }]);
         });
     }
-
-
-
 }
 
 export class GattServer {
@@ -71,26 +76,10 @@ export class BluetoothInterface {
             let eventListener = (e) => {
                 console.log("found: " + e);
                 window.removeEventListener(responseType, eventListener);
-                resolve(this.deviceRequestResult(e));
+                resolve(new BluetoothDevice(e.detail.selectedPeripheralId,e.detail.selectedPeripheralName));
             };
             window.addEventListener(responseType, eventListener);
         });
     }
-
-    deviceRequestResult(e) {
-        let id = e.detail.selectedPeripheralId;
-        let name = e.detail.selectedPeripheralName;
-        return {
-            id: id,
-            name: name,
-            addEventListener: (type, f) => {
-                if (type == 'gattserverdisconnected') {
-                    window.addEventListener("bluetooth-peripheral-disconnect-" + id, f);
-                }
-            },
-            gatt: new GattServerConnector(id, name)
-        };
-    }
-
 
 }
