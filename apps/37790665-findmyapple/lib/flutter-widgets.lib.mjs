@@ -868,7 +868,7 @@ export class BluetoothPage extends Page {
                 }
             }));
         } else if (e.name != this.identifiers[e.identifier]) {
-            //document.querySelector("#id"+e.identifier)
+            console.log(e.identifier+" already exists");
         }
 
     }
