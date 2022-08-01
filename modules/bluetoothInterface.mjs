@@ -54,9 +54,9 @@ export class GattServer {
         let responseType = messagetype+"-" + id;
         return new Promise((resolve,reject) => {
             console.log("listen for:" + responseType);
-            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId!="")
+            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
             {
-                reject("peripheral ID is blank");
+                reject("getPrimaryServices: peripheral ID is blank");
             }
             else{
                 let eventListener = (e) => {
@@ -89,9 +89,9 @@ export class GattServerConnector {
         let responseType = messagetype+"-" + id;
         return new Promise((resolve,reject) => {
             console.log("listen for:" + responseType);
-            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId!="")
+            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
             {
-                reject("peripheral ID is blank")
+                reject("connect: peripheral ID is blank")
             }
             else{
                 let eventListener = (e) => {
