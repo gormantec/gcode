@@ -37,11 +37,39 @@ export class PrimaryService {
 }
 
 export class GattServer {
-    constructor() {
-        this.id = 'server';
+    constructor({peripheralId}) {
+        this.peripheralId=peripheralId;
     }
     getPrimaryServices() {
-        new Promise((res2, rej2) => { res2([new PrimaryService({uuid:"service1"}), new PrimaryService({uuid:"service2"})]) });
+        new Promise((res2, rej2) => );
+
+
+
+        let start = Date.now(),
+        id = Math.floor(Math.random() * 16777215).toString(16) +
+            '-' + Math.floor(Math.random() * 16777215).toString(16) +
+            '-' + Date.now().toString(16),
+        messagetype = 'bluetooth-gatt-discover-services';
+        let message={id: id,data: {peripheralId:this.peripheralId}};
+        console.log(messagetype);
+        console.log(message);
+        window.webkit.messageHandlers[messagetype].postMessage(message);
+        let responseType = messagetype+"-" + id;
+        return new Promise((resolve,reject) => {
+            console.log("listen for:" + responseType);
+            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId!="")
+            {
+                reject("peripheral ID is blank");
+            }
+            else{
+                let eventListener = (e) => {
+                    console.log("found: " + e);
+                    window.removeEventListener(responseType, eventListener);
+                    resolve([new PrimaryService({uuid:"service1"}), new PrimaryService({uuid:"service2"})]);
+                };
+                window.addEventListener(responseType, eventListener);
+            }
+        })
     }
 }
 
@@ -72,12 +100,10 @@ export class GattServerConnector {
                 let eventListener = (e) => {
                     console.log("found: " + e);
                     window.removeEventListener(responseType, eventListener);
-                    resolve(new GattServer());
+                    resolve(new GattServer({peripheralId:this.peripheralId}));
                 };
                 window.addEventListener(responseType, eventListener);
             }
-
-            
         })
     }
 }
