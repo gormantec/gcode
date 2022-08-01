@@ -58,6 +58,7 @@ export class GattServerConnector {
             '-' + Date.now().toString(16),
         messagetype = 'bluetooth-connect-device';
         let message={id: id,data: {peripheralId:this.peripheralId}};
+        console.log(messagetype);
         console.log(message);
         window.webkit.messageHandlers[messagetype].postMessage(message);
         let responseType = messagetype+"-" + id;
