@@ -139,8 +139,7 @@ class HomePage extends Page {
                                 }).then((device) => {
                                     console.log(device.id);
                                     console.log(device.name);
-                                  	PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>");
-                                    //console.log(device);
+                                  	//console.log(device);
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
                                     });
@@ -148,6 +147,7 @@ class HomePage extends Page {
                                         //console.log("server");
                                         //console.log(server);
                                         server.getPrimaryServices().then(services => {
+                                          let servicesString="";
                                             services.forEach(service => {
                                                 //console.log("service "+service.uuid);
                                                 console.log("service: "+service.uuid);
@@ -169,7 +169,10 @@ class HomePage extends Page {
                                                     })
 
                                                 }).catch(e => console.log("0:" + e));
+                                              servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>
                                             });
+                                           PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString);
+                                    
                                         }).catch(e => console.log("1:" + e));
                                     }).catch(e => console.log("2:" + e));
                                 }).catch(e => console.log("3:" + e));
