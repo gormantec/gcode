@@ -921,6 +921,7 @@ export class BluetoothPage extends Page {
             this.identifiers[e.identifier] = e.name;
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
+            let _this=this;
             blueListView.appendChild(new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
@@ -931,10 +932,12 @@ export class BluetoothPage extends Page {
                 "onclick": () => {
                     PWA.getPWA().showHeader();
                     PWA.getPWA().setPage("HomePage");
-                    this.notifySelectedPerefial({
-                        selectedPeripheralId: _identifier,
-                        selectedPeripheralName: _name
-                    });
+                  	setTimeout(()=>{
+                      _this.notifySelectedPerefial({
+                          selectedPeripheralId: _identifier,
+                          selectedPeripheralName: _name
+                      });
+                    },30);
                 }
             }));
         } else if (e.name != this.identifiers[e.identifier]) {
