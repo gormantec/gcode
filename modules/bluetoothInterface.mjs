@@ -21,9 +21,9 @@ export class BluetoothInterface {
         return new Promise((resolve, reject) => {
             console.log("listen for:" + responseType);
             window.addEventListener(responseType,this.deviceRequestResult);
-
         });
     }
+
     deviceRequestResult(e){
         console.log(e);
         resolve({
