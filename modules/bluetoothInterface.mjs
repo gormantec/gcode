@@ -62,14 +62,21 @@ export class GattServerConnector {
         console.log(message);
         window.webkit.messageHandlers[messagetype].postMessage(message);
         let responseType = messagetype+"-" + id;
-        return new Promise((resolve) => {
+        return new Promise((resolve,reject) => {
             console.log("listen for:" + responseType);
-            let eventListener = (e) => {
-                console.log("found: " + e);
-                window.removeEventListener(responseType, eventListener);
-                resolve(new GattServer());
-            };
-            window.addEventListener(responseType, eventListener);
+            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId!="")
+            {
+                reject("peripheral ID is blank")
+            }
+            else{
+                let eventListener = (e) => {
+                    console.log("found: " + e);
+                    window.removeEventListener(responseType, eventListener);
+                    resolve(new GattServer());
+                };
+                window.addEventListener(responseType, eventListener);
+            }
+
             
         })
     }
