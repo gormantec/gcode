@@ -37,9 +37,7 @@ export class BluetoothInterface {
             name: name,
             addEventListener: (type, f) => {
                 if (type == 'gattserverdisconnected') {
-                    window.webkit.messageHandlers["bluetooth-request-gattserverdisconnected"].postMessage({
-                        id: e.detail.selectedPeripheralId
-                    });
+                    window.addEventListener("bluetooth-peripheral-disconnect-"+id,f);
                 }
             },
             gatt: {
