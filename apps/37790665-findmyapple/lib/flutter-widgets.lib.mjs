@@ -773,7 +773,7 @@ export class BluetoothPage extends Page {
                     "paddingBottom": "40px",
                     margin: "20px",
                     bottom: "60px",
-                    child: new Div({"borderRadius": "20px","backgroundColor": "#ffffff",paddingTop:"20px",paddingBottom:"20px",child:blueListView})
+                    child: new Div({"borderRadius": "20px","backgroundColor": "#ffffff",paddingTop:"30px",paddingBottom:"30px","overflow":"none",child:blueListView})
                 }),
                 new Center({
                     height: "30px",
