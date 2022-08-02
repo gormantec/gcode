@@ -1,4 +1,10 @@
-import { PWA,Div,Page } from 'https://gcode.com.au/modules/pwa.mjs';
+import {
+    PWA,
+    Div,
+    Page
+} from 'https://gcode.com.au/modules/pwa.mjs';
+
+import {BluetoothInterface} from 'https://gcode.com.au/modules/bluetoothInterface.mjs';
 
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
@@ -69,25 +75,23 @@ export class ListView extends Div {
             }));
         }
     }
-  
-  	removeChildren()
-    {
-        var child = this.element.lastElementChild; 
+
+    removeChildren() {
+        var child = this.element.lastElementChild;
         while (child) {
             this.element.removeChild(child);
             child = this.element.lastElementChild;
         }
     }
-  	
-  	appendChild(child)
-    {
-      	//this.divChildren.push(child);
-      	super.appendChild(new Div({
-                "position": "relative",
-                "padding": "8px",
-                height: child.style.height,
-                child: child
-            }));
+
+    appendChild(child) {
+        //this.divChildren.push(child);
+        super.appendChild(new Div({
+            "position": "relative",
+            "padding": "8px",
+            height: child.style.height,
+            child: child
+        }));
     }
 }
 export class Container extends Div {
@@ -106,85 +110,91 @@ export class Form extends Div {
 
 export class DateFormField extends Div {
     constructor(params) {
-        super({position:"relative",overflowY: "none",overflowX: "none"});
-      
-      	if(!params.fontSize)this.style.height="44px";
-      	else this.style.height=(parseInt(params.fontSize)+30)+"px";
-      	let inputField=document.createElement("input");
-      	inputField.setAttribute("type","datetime-local");
-      	inputField.style.marginBottom="7px";
-      	if(!params.fontSize)inputField.style.height="44px";
-      	else inputField.style.height=(parseInt(params.fontSize)+10)+"px";
-      	if(!params.fontSize)inputField.style.fontSize="24px";
-      	inputField.style.padding="3px";
-      	inputField.style.backgroundColor="white";
-      	this.appendChild(inputField);
-      if(params.decoration)
-      {
-          inputField.style.marginLeft="60px";
-          if(params.decoration.style.width)inputField.style.marginLeft=(parseInt(params.decoration.style.width)+3)+"px";
-          params.decoration.style.left="3px";
-          if(!params.decoration.style.width)params.decoration.style.width="57px";
-          params.decoration.style.paddingTop="5px";
-          this.appendChild(params.decoration);
-      }
-      
-      const now = new Date();
-      inputField.value = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().substring(0, 19);
+        super({
+            position: "relative",
+            overflowY: "none",
+            overflowX: "none"
+        });
+
+        if (!params.fontSize) this.style.height = "44px";
+        else this.style.height = (parseInt(params.fontSize) + 30) + "px";
+        let inputField = document.createElement("input");
+        inputField.setAttribute("type", "datetime-local");
+        inputField.style.marginBottom = "7px";
+        if (!params.fontSize) inputField.style.height = "44px";
+        else inputField.style.height = (parseInt(params.fontSize) + 10) + "px";
+        if (!params.fontSize) inputField.style.fontSize = "24px";
+        inputField.style.padding = "3px";
+        inputField.style.backgroundColor = "white";
+        this.appendChild(inputField);
+        if (params.decoration) {
+            inputField.style.marginLeft = "60px";
+            if (params.decoration.style.width) inputField.style.marginLeft = (parseInt(params.decoration.style.width) + 3) + "px";
+            params.decoration.style.left = "3px";
+            if (!params.decoration.style.width) params.decoration.style.width = "57px";
+            params.decoration.style.paddingTop = "5px";
+            this.appendChild(params.decoration);
+        }
+
+        const now = new Date();
+        inputField.value = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().substring(0, 19);
     }
-  
+
 }
 
 export class TextFormField extends Div {
     constructor(params) {
-        super({position:"relative",overflowY: "none",overflowX: "none"});
-      
-      	if(!params.fontSize)this.style.height="44px";
-      	else this.style.height=(parseInt(params.fontSize)+4+14)+"px";
-      
-      
-      	let inputScrollDiv=new Div({overflowY: "auto",overflowX: "none"});
-      	let inputDiv=new Div(params);
-      	if(params.value){
-          console.log("TextFormField Value: "+params.value);
-          inputDiv.element.innerText=params.value;
+        super({
+            position: "relative",
+            overflowY: "none",
+            overflowX: "none"
+        });
+
+        if (!params.fontSize) this.style.height = "44px";
+        else this.style.height = (parseInt(params.fontSize) + 4 + 14) + "px";
+
+
+        let inputScrollDiv = new Div({
+            overflowY: "auto",
+            overflowX: "none"
+        });
+        let inputDiv = new Div(params);
+        if (params.value) {
+            console.log("TextFormField Value: " + params.value);
+            inputDiv.element.innerText = params.value;
         }
-      	inputDiv.style.position="relative";
-      	if(params.contenteditable!=false && params.contenteditable!="false")
-        {
-          	inputDiv.element.setAttribute("contenteditable","true");
-      		inputDiv.style.borderBottom="2px solid #BBBBBB";
-      		inputDiv.style.marginBottom="5px";
+        inputDiv.style.position = "relative";
+        if (params.contenteditable != false && params.contenteditable != "false") {
+            inputDiv.element.setAttribute("contenteditable", "true");
+            inputDiv.style.borderBottom = "2px solid #BBBBBB";
+            inputDiv.style.marginBottom = "5px";
+        } else {
+            inputDiv.style.marginBottom = "7px";
         }
-      	else
-        {
-      		inputDiv.style.marginBottom="7px";
+        if (!params.fontSize) inputDiv.style.height = "30px";
+        else inputDiv.style.height = (parseInt(params.fontSize) + 4) + "px";
+        if (!params.fontSize) inputDiv.style.fontSize = "24px";
+        if (params.height || params.minHeight) {
+            inputDiv.style.height = "";
+            inputDiv.style.minHeight = params.height || params.minHeight;
+            this.style.height = (parseInt(params.height) + 14) + "px";
+            inputDiv.style.borderBottom = "unset";
+            inputDiv.style.border = "1px solid #BBBBBB";
         }
-      	if(!params.fontSize)inputDiv.style.height="30px";
-      	else inputDiv.style.height=(parseInt(params.fontSize)+4)+"px";
-      	if(!params.fontSize)inputDiv.style.fontSize="24px";
-      	if(params.height || params.minHeight){
-          inputDiv.style.height="";
-          inputDiv.style.minHeight=params.height || params.minHeight;
-          this.style.height=(parseInt(params.height)+14)+"px";
-          inputDiv.style.borderBottom="unset";
-		  inputDiv.style.border="1px solid #BBBBBB";
+        inputDiv.style.padding = "3px";
+        inputDiv.style.marginBottom = "5px";
+        inputDiv.style.backgroundColor = "white";
+        inputScrollDiv.style.height = (parseInt(this.style.height)) + "px";
+        inputScrollDiv.appendChild(inputDiv);
+        this.appendChild(inputScrollDiv);
+        if (params.decoration) {
+            inputDiv.style.marginLeft = "60px";
+            if (params.decoration.style.width) inputDiv.style.marginLeft = (parseInt(params.decoration.style.width) + 3) + "px";
+            params.decoration.style.left = "3px";
+            if (!params.decoration.style.width) params.decoration.style.width = "57px";
+            params.decoration.style.paddingTop = "5px";
+            this.appendChild(params.decoration);
         }
-      	inputDiv.style.padding="3px";
-      	inputDiv.style.marginBottom="5px";
-      	inputDiv.style.backgroundColor="white";
-      	inputScrollDiv.style.height=(parseInt(this.style.height))+"px";
-      	inputScrollDiv.appendChild(inputDiv);
-      	this.appendChild(inputScrollDiv);
-      if(params.decoration)
-      {
-          inputDiv.style.marginLeft="60px";
-          if(params.decoration.style.width)inputDiv.style.marginLeft=(parseInt(params.decoration.style.width)+3)+"px";
-          params.decoration.style.left="3px";
-          if(!params.decoration.style.width)params.decoration.style.width="57px";
-          params.decoration.style.paddingTop="5px";
-          this.appendChild(params.decoration);
-      }
     }
 }
 export class Padding extends Div {
@@ -196,22 +206,20 @@ export class Padding extends Div {
 export class VideoImage extends Div {
     constructor(params) {
         super({
-          			width: params.width?params.width:"100%",
-                    height: params.height?params.height:"unset",
-                    id: params.id?params.id:"image-"+Date.now(),
-                    tagName: "img",
-              		backgroundColor:"black",
-                    classNameOverride: true,
-          			onclick:params.onclick
-              });
-      
-      	if(params.src)
-        {
-          	this.element.src=params.src;
+            width: params.width ? params.width : "100%",
+            height: params.height ? params.height : "unset",
+            id: params.id ? params.id : "image-" + Date.now(),
+            tagName: "img",
+            backgroundColor: "black",
+            classNameOverride: true,
+            onclick: params.onclick
+        });
+
+        if (params.src) {
+            this.element.src = params.src;
         }
-      	if(params.display)
-        {
-          	this.element.style.display=params.display;
+        if (params.display) {
+            this.element.style.display = params.display;
         }
     }
 }
@@ -219,89 +227,87 @@ export class VideoImage extends Div {
 export class Video extends Div {
     constructor(params) {
         super({
-          			width: params.width?params.width:"320px",
-                    height: params.height?params.height:"180px",
-                    id: params.id?params.id:"video-"+Date.now(),
-                    tagName: "video",
-              		backgroundColor:"black",
-                    classNameOverride: true
-              });
-      	if(params.src)
-        {
-          	this.element.src=params.src;
-          	this.element.setAttribute("controls", "controls");
-        }
-      	if(params.muted && params.muted!="false" && params.muted!=false)
-        {
-          	this.element.setAttribute("muted","muted");
-        }
-      	if(params.controls && params.controls!="false" && params.controls!=false)
-        {
-          	this.element.setAttribute("controls","controls");
-        }
-      
-      	if(params.playsinline && params.playsinline!="false" && params.playsinline!=false)
-        {
-          	this.element.setAttribute("playsinline","playsinline");
-        }
-      	if(params.autoplay && params.autoplay!="false" && params.autoplay!=false)
-        {
-          	this.element.setAttribute("autoplay","autoplay");
-        }
-      
-      	if(params.display)
-        {
-          	this.element.style.display=params.display;
-        }
-      
-      	
-    }
-  
-  static getVideoCover(file, seekTo = 0.0) {
-    console.log("getting video cover for file: ", file);
-    return new Promise((resolve, reject) => {
-        // load the file to a video player
-        const videoPlayer = document.createElement('video');
-        videoPlayer.setAttribute('src', URL.createObjectURL(file));
-        videoPlayer.load();
-        videoPlayer.addEventListener('error', (ex) => {
-            reject("error when loading video file", ex);
+            width: params.width ? params.width : "320px",
+            height: params.height ? params.height : "180px",
+            id: params.id ? params.id : "video-" + Date.now(),
+            tagName: "video",
+            backgroundColor: "black",
+            classNameOverride: true
         });
-        // load metadata of the video to get video duration and dimensions
-        videoPlayer.addEventListener('loadedmetadata', () => {
-            // seek to user defined timestamp (in seconds) if possible
-            if (videoPlayer.duration < seekTo) {
-                reject("video is too short.");
-                return;
-            }
-            // delay seeking or else 'seeked' event won't fire on Safari
-            setTimeout(() => {
-              videoPlayer.currentTime = seekTo;
-            }, 200);
-            // extract video thumbnail once seeking is complete
-            videoPlayer.addEventListener('seeked', () => {
-                console.log('video is now paused at %ss.', seekTo);
-                // define a canvas to have the same dimension as the video
-                const canvas = document.createElement("canvas");
-                canvas.width = videoPlayer.videoWidth;
-                canvas.height = videoPlayer.videoHeight;
-                // draw the video frame to canvas
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
-                // return the canvas image as a blob
-                ctx.canvas.toBlob(
-                    blob => {
-                      	let r={width:canvas.width,height:canvas.height,blob:blob};
-                      	console.log(r);
-                        resolve(r);
-                    },
-                    "image/jpeg",
-                    0.75 /* quality */
-                );
+        if (params.src) {
+            this.element.src = params.src;
+            this.element.setAttribute("controls", "controls");
+        }
+        if (params.muted && params.muted != "false" && params.muted != false) {
+            this.element.setAttribute("muted", "muted");
+        }
+        if (params.controls && params.controls != "false" && params.controls != false) {
+            this.element.setAttribute("controls", "controls");
+        }
+
+        if (params.playsinline && params.playsinline != "false" && params.playsinline != false) {
+            this.element.setAttribute("playsinline", "playsinline");
+        }
+        if (params.autoplay && params.autoplay != "false" && params.autoplay != false) {
+            this.element.setAttribute("autoplay", "autoplay");
+        }
+
+        if (params.display) {
+            this.element.style.display = params.display;
+        }
+
+
+    }
+
+    static getVideoCover(file, seekTo = 0.0) {
+        console.log("getting video cover for file: ", file);
+        return new Promise((resolve, reject) => {
+            // load the file to a video player
+            const videoPlayer = document.createElement('video');
+            videoPlayer.setAttribute('src', URL.createObjectURL(file));
+            videoPlayer.load();
+            videoPlayer.addEventListener('error', (ex) => {
+                reject("error when loading video file", ex);
+            });
+            // load metadata of the video to get video duration and dimensions
+            videoPlayer.addEventListener('loadedmetadata', () => {
+                // seek to user defined timestamp (in seconds) if possible
+                if (videoPlayer.duration < seekTo) {
+                    reject("video is too short.");
+                    return;
+                }
+                // delay seeking or else 'seeked' event won't fire on Safari
+                setTimeout(() => {
+                    videoPlayer.currentTime = seekTo;
+                }, 200);
+                // extract video thumbnail once seeking is complete
+                videoPlayer.addEventListener('seeked', () => {
+                    console.log('video is now paused at %ss.', seekTo);
+                    // define a canvas to have the same dimension as the video
+                    const canvas = document.createElement("canvas");
+                    canvas.width = videoPlayer.videoWidth;
+                    canvas.height = videoPlayer.videoHeight;
+                    // draw the video frame to canvas
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
+                    // return the canvas image as a blob
+                    ctx.canvas.toBlob(
+                        blob => {
+                            let r = {
+                                width: canvas.width,
+                                height: canvas.height,
+                                blob: blob
+                            };
+                            console.log(r);
+                            resolve(r);
+                        },
+                        "image/jpeg",
+                        0.75 /* quality */
+                    );
+                });
             });
         });
-    });
-}
+    }
 }
 export class Center extends Div {
     constructor(params) {
@@ -315,16 +321,16 @@ export class Center extends Div {
 export class InputDecoration extends Div {
     constructor(params) {
         super(params);
-      if(params.labelText)this.element.innerText=params.labelText;
-      this.style.overflow="hidden";
+        if (params.labelText) this.element.innerText = params.labelText;
+        this.style.overflow = "hidden";
     }
 }
 
-let mediaStream=null;
-let _blob=null;
-let _iblob=null;
+let mediaStream = null;
+let _blob = null;
+let _iblob = null;
 let mediaRecorder = null;
-let facingMode="environment";
+let facingMode = "environment";
 
 export class AddVideo extends Page {
     constructor(params) {
@@ -335,9 +341,9 @@ export class AddVideo extends Page {
             "hideFooter": "true",
             "navigateBackPage": "VideoBlog",
             "padding": "15px",
-          	"onback":()=>{
-              console.log("stop stream");
-				if (mediaStream) {
+            "onback": () => {
+                console.log("stop stream");
+                if (mediaStream) {
                     mediaStream.getTracks().forEach(function(track) {
                         track.stop();
                     });
@@ -345,7 +351,7 @@ export class AddVideo extends Page {
                 }
             },
             "onopen": () => {
-              	console.log("load page");
+                console.log("load page");
                 document.querySelector('#video').style.display = "";
                 document.querySelector('#videoCover').style.display = "none";
                 document.querySelector('#saveButton').style.display = "none";
@@ -358,7 +364,7 @@ export class AddVideo extends Page {
                     });
                     mediaStream = null;
                 }
-              	let getOrientation= ()=>window.innerWidth > window.innerHeight ? "landscape-primary" : "portrait-primary";
+                let getOrientation = () => window.innerWidth > window.innerHeight ? "landscape-primary" : "portrait-primary";
                 var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation || getOrientation();
                 let videoSpecs = {
                     facingMode: "environment",
@@ -373,7 +379,7 @@ export class AddVideo extends Page {
                         aspectRatio: 9 / 16
                     }
                 }
-              	console.log(videoSpecs);
+                console.log(videoSpecs);
                 navigator.mediaDevices.getUserMedia({
                     audio: true,
                     video: videoSpecs
@@ -398,7 +404,7 @@ export class AddVideo extends Page {
                                 done = true;
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#flipButton').style.color = "black";
-                              	
+
                             }
                         }
                     }
@@ -425,27 +431,27 @@ export class AddVideo extends Page {
                             height: "202px",
                             id: "videoCover",
                             display: "none",
-                          onclick: () => {
-                            let video = document.querySelector("#video");
-                            video.style.display = "";
-                            document.querySelector("#videoCover").style.display = "none";
-                            video.currentTime = 0;
-                            video.controls = true;
-                            video.playsinline = true;
-                            try {
-                              video.play();
-                            } catch (e) {
-                              console.log(e);
+                            onclick: () => {
+                                let video = document.querySelector("#video");
+                                video.style.display = "";
+                                document.querySelector("#videoCover").style.display = "none";
+                                video.currentTime = 0;
+                                video.controls = true;
+                                video.playsinline = true;
+                                try {
+                                    video.play();
+                                } catch (e) {
+                                    console.log(e);
+                                }
+                                const ev2 = () => {
+                                    let video2 = document.querySelector("#video");
+                                    video2.style.display = "none";
+                                    document.querySelector("#videoCover").style.display = "";
+                                    video2.currentTime = 0;
+                                    video2.removeEventListener('ended', ev2);
+                                };
+                                video.addEventListener('ended', ev2, false);
                             }
-                            const ev2 = () => {
-                              let video2 = document.querySelector("#video");
-                              video2.style.display = "none";
-                              document.querySelector("#videoCover").style.display = "";
-                              video2.currentTime = 0;
-                              video2.removeEventListener('ended',ev2);
-                            };
-                            video.addEventListener('ended', ev2, false);
-                          }
                         })]
                     })
                 }),
@@ -454,23 +460,29 @@ export class AddVideo extends Page {
                     left: "20px",
                     right: "20px",
                     fontSize: "12px",
-                  
+
                     children: [
                         new TextFormField({
-                          	decoration: new InputDecoration({labelText:'Date'}),
+                            decoration: new InputDecoration({
+                                labelText: 'Date'
+                            }),
                             fontSize: "12px",
                             id: "dateTextFormField",
-                          	contenteditable:false
+                            contenteditable: false
                         }),
                         new TextFormField({
-                          	decoration: new InputDecoration({labelText:'Title'}),
+                            decoration: new InputDecoration({
+                                labelText: 'Title'
+                            }),
                             fontSize: "12px",
                             id: "titleTextFormField"
                         }),
                         new TextFormField({
-                          	decoration: new InputDecoration({labelText:'Comment'}),
+                            decoration: new InputDecoration({
+                                labelText: 'Comment'
+                            }),
                             fontSize: "12px",
-                          	height: "45px",
+                            height: "45px",
                             id: "commentTextFormField"
                         }),
                     ]
@@ -487,20 +499,21 @@ export class AddVideo extends Page {
                         height: "30px",
                         fontSize: "30px",
                         color: "grey",
-                        child: new Icon("flip_camera_ios")}),
-                        onclick: () => {
-                          if(facingMode=="environment")facingMode="user";
-                          else facingMode="environment";
-                          console.log("click");
-                          PWA.getPWA().currentPage.onOpen();
-                        }
+                        child: new Icon("flip_camera_ios")
+                    }),
+                    onclick: () => {
+                        if (facingMode == "environment") facingMode = "user";
+                        else facingMode = "environment";
+                        console.log("click");
+                        PWA.getPWA().currentPage.onOpen();
+                    }
                 }),
 
                 new Center({
                     height: "50px",
                     bottom: "25px",
-                  	left:"80px",
-                  	right:"80px",
+                    left: "80px",
+                    right: "80px",
                     child: new Div({
                         id: "recButton",
                         width: "50px",
@@ -567,27 +580,27 @@ export class AddVideo extends Page {
                                     video.pause();
                                     video.setAttribute("controls", "controls");
                                     video.removeAttribute("muted");
-                                  	mediaRecorder=null;
+                                    mediaRecorder = null;
                                 }
                                 aTimeout = setTimeout(() => {
                                     aTimeout = null;
                                     console.log("stop");
                                     let dt = Date.now();
                                     let d = new Date(dt);
-                                    if(mediaRecorder)mediaRecorder.stop();
-                                    if(document.querySelector('#recButton'))document.querySelector('#recButton').style.color = "black";
-                                    if(document.querySelector('#saveButton'))document.querySelector('#saveButton').style.display = "";
-                                    if(document.querySelector('#dateTextFormField'))document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
-                                    if(document.querySelector('#dateTextFormField'))document.querySelector('#dateTextFormField').dataset.timestamp = dt;
+                                    if (mediaRecorder) mediaRecorder.stop();
+                                    if (document.querySelector('#recButton')) document.querySelector('#recButton').style.color = "black";
+                                    if (document.querySelector('#saveButton')) document.querySelector('#saveButton').style.display = "";
+                                    if (document.querySelector('#dateTextFormField')) document.querySelector('#dateTextFormField').innerText = d.toLocaleString();
+                                    if (document.querySelector('#dateTextFormField')) document.querySelector('#dateTextFormField').dataset.timestamp = dt;
                                 }, 10000);
                             } else if (document.querySelector('#recButton').style.color == "red") {
                                 if (aTimeout) clearTimeout(aTimeout);
                                 console.log("stop");
                                 let dt = Date.now();
                                 let d = new Date(dt);
-                                if(mediaRecorder){
-                                  console.log("stopping");
-                                  mediaRecorder.stop();
+                                if (mediaRecorder) {
+                                    console.log("stopping");
+                                    mediaRecorder.stop();
                                 }
                                 document.querySelector('#recButton').style.color = "black";
                                 document.querySelector('#saveButton').style.display = "";
@@ -734,4 +747,152 @@ export const Icons = {
     "alarm": "alarm"
 };
 
+const blueListView = new ListView({
+    "borderRadius": "20px",
+    marginTop: "15px",
+    marginBottom: "15px",
+    overflowY: "auto",
+    paddingBottom: "30px",
+    "id": "myListView",
+    "color": "#232323",
+    "backgroundColor": "#ffffff",
+});
 
+export class BluetoothPage extends Page {
+    constructor({homePage}) {
+        super({
+
+            "hideFloatingActionButton": "true",
+            "hideHeader": "true",
+            "hideFooter": "true",
+            "backgroundColor": "#323232",
+            "children": [
+                new Div({
+                    "borderRadius": "40px",
+                    "paddingTop": "20px",
+                    "paddingBottom": "40px",
+                    margin: "20px",
+                    bottom: "40px",
+                    child: blueListView
+                }),
+                new Center({
+                    height: "30px",
+                    bottom: "85px",
+                    color: "#323232",
+                    innerText: "scanning"
+                }),
+                new Center({
+                    id: "recButton",
+                    left: "40px",
+                    bottom: "10px",
+                    right: "40px",
+                    height: "50px",
+                    fontSize: "50px",
+                    color: "white",
+                    child: new Icon("close"),
+                    onclick: () => {
+                        PWA.getPWA().showHeader();
+                      	console.log(this.homePage);
+                        PWA.getPWA().setPage(this.homePage);
+                        this.notifySelectedPerefial({
+                            selectedPeripheralId: "",
+                            selectedPeripheralName: ""
+                        });
+                    }
+                })
+            ],
+            onopen: () => {
+                PWA.getPWA().hideHeader();
+            }
+        });
+      	this.homePage=homePage;
+      
+      	
+
+        let appPlatform = this.getCookie("app-platform");
+        if (appPlatform && !navigator.bluetooth) {
+            window.addEventListener("bluetooth-peripheral-scanning", (e) => {
+              	console.log("bluetooth-peripheral-scanning");
+                PWA.getPWA().setPage(this);
+                this.scanningDetails = e.detail;
+            });
+            window.addEventListener("bluetooth-peripheral-found", (e) => {
+                this.appendPeripheral(e.detail);
+            });
+            window.webkit.messageResponse = window.webkit.messageResponse || {};
+            navigator.bluetooth = new BluetoothInterface();
+        }
+    }
+
+    notifySelectedPerefial({
+        selectedPeripheralId,
+        selectedPeripheralName
+    }) {
+        let start = Date.now();
+        let d = {
+            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false
+        };
+        let id = this.scanningDetails.bluetoothRequestDeviceId;
+        let messagetype = 'bluetooth-request-device';
+        d.selectedPeripheralId = selectedPeripheralId;
+        d.selectedPeripheralName = selectedPeripheralName;
+        window.webkit.messageHandlers[messagetype].postMessage({
+            id: id,
+            data: d
+        })
+    }
+    appendPeripheral(e) {
+      	let elm=nill;
+        if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
+        if (elm==null) {
+            this.identifiers[e.identifier] = e.name;
+            let _name = (e.name && e.name != "") ? e.name : "N/A";
+            let _identifier = e.identifier;
+            let _this=this;
+          	let name=new Text(_name);
+          	name.element.id="name"+e.identifier;
+          	let subtitle=new Text(_identifier)
+          	subtitle.element.id="subtitle"+e.identifier;
+            blueListView.appendChild(new ListTile({
+                id: "id" + e.identifier,
+                "color": "black",
+                "title": name,
+                "subtitle": subtitle,
+                "leading": new Icon(Icons.battery_full),
+                "trailing": new Icon(e.status ? "bluetooth" : "close"),
+                "onclick": () => {
+                    PWA.getPWA().showHeader();
+                    console.log(this.homePage);
+                    PWA.getPWA().setPage(this.homePage);
+                  	setTimeout(()=>{
+                      _this.notifySelectedPerefial({
+                          selectedPeripheralId: _identifier,
+                          selectedPeripheralName: _name
+                      });
+                    },500);
+                }
+            }));
+        } else if (e.name != this.identifiers[e.identifier]) {
+            elm.querySelector("#name"+e.identifier)
+            elm.querySelector("#name"+e.identifier)
+        }
+
+    }
+    getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+
+}
