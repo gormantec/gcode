@@ -845,6 +845,7 @@ export class BluetoothPage extends Page {
       	let elm=null;
         if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
         if (elm==null) {
+            
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
             let _this=this;
@@ -852,13 +853,26 @@ export class BluetoothPage extends Page {
           	name.element.id="name"+e.identifier;
           	let subtitle=new Text(_identifier)
           	subtitle.element.id="subtitle"+e.identifier;
+          	let trailing=new Icon(e.status ? "bluetooth" : "close");
+          	window.addEventListener("bluetooth-peripheral-disconnect-" + e.identifier, ()=>{
+              trailing.firstChild.innerText="close";
+            });
+            window.addEventListener("bluetooth-connect-device-" + e.identifier, (ev)=>{
+              if(ev.details.didConnect)
+              {
+              	trailing.firstChild.innerText="bluetooth";
+              }
+              else {
+              	trailing.firstChild.innerText="close";
+              }
+            });
             blueListView.appendChild(new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
                 "title": name,
                 "subtitle": subtitle,
                 "leading": new Icon(Icons.battery_full),
-                "trailing": new Icon(e.status ? "bluetooth" : "close"),
+                "trailing": trailing,
                 "onclick": () => {
                     PWA.getPWA().showHeader();
                     console.log(this.homePage);
