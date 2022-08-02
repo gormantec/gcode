@@ -157,12 +157,14 @@ class HomePage extends Page {
                                                     //console.log(characteristics);
 
                                                     characteristics.forEach(characteristic => {
-                                                        //console.log("characteristic");
-                                                        //console.log(characteristic);
-                                                        //console.log(characteristic.value);
-                                                        //console.log(characteristic.properties);
+                                                        console.log("characteristic");
+                                                        console.log(characteristic);
+                                                        console.log(characteristic.value);
+                                                        console.log(characteristic.properties);
 
                                                         if (characteristic.properties.notify) {
+                                                          
+                                                        	console.log("addEventListener characteristicvaluechanged");
                                                             characteristic.addEventListener('characteristicvaluechanged', event => console.log(event));
                                                             characteristic.startNotifications();
                                                         }
