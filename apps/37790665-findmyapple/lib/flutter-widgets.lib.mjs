@@ -875,7 +875,7 @@ export class BluetoothPage extends Page {
           	let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
             elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
-            elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
+            elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
         }
 
     }
