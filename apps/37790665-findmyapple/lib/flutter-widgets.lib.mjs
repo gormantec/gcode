@@ -861,9 +861,11 @@ export class BluetoothPage extends Page {
               console.log(ev);
               if(ev && ev.detail && ev.detail.didConnect)
               {
+                trailing.firstChild.style.color="blue";
               	trailing.firstChild.innerText="bluetooth";
               }
               else {
+                trailing.firstChild.style.color="unset";
               	trailing.firstChild.innerText="close";
               }
             });
