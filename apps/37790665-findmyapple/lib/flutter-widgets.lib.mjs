@@ -842,17 +842,22 @@ export class BluetoothPage extends Page {
         })
     }
     appendPeripheral(e) {
-        if (!this.identifiers) this.identifiers = {};
-        if (!this.identifiers[e.identifier]) {
+      	let elm=nill;
+        if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
+        if (elm==null) {
             this.identifiers[e.identifier] = e.name;
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
             let _this=this;
+          	let name=new Text(_name);
+          	name.element.id="name"+e.identifier;
+          	let subtitle=new Text(_identifier)
+          	subtitle.element.id="subtitle"+e.identifier;
             blueListView.appendChild(new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
-                "title": new Text(_name),
-                "subtitle": new Text(_identifier),
+                "title": name,
+                "subtitle": subtitle,
                 "leading": new Icon(Icons.battery_full),
                 "trailing": new Icon(e.status ? "bluetooth" : "close"),
                 "onclick": () => {
@@ -867,8 +872,11 @@ export class BluetoothPage extends Page {
                     },500);
                 }
             }));
-        } else if (e.name != this.identifiers[e.identifier]) {
-            console.log(e.identifier+" already exists");
+        } else {
+          	let _name = (e.name && e.name != "") ? e.name : "N/A";
+            let _identifier = e.identifier;
+            elm.querySelector("#name"+e.identifier).innerText="<span>"+_name+"</span>";
+            elm.querySelector("#name"+e.identifier).innerText="<span>"+_identifier+"</span>";
         }
 
     }
