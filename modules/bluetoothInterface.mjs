@@ -32,6 +32,40 @@ export class Characteristic {
 
     startNotifications(){
         console.log('startNotifications');
+    }
+    readValue()
+    {
+        if(this.properties.read)
+        {
+            let start = Date.now(),
+            id = Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Date.now().toString(16),
+            messagetype = 'bluetooth-characteristic-read';
+            let message={id: id,data: {peripheralId:this.peripheralId,uuid:this.uuid}};
+            window.webkit.messageHandlers[messagetype].postMessage(message);
+            let responseType = messagetype+"-" + this.peripheralId+"-" + this.uuid;
+            return new Promise((resolve,reject) => {
+                console.log("listen for:" + responseType);
+                if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
+                {
+                    reject("readValue/Characteristics: peripheral ID is blank");
+                }
+                else{
+                    let eventListener = (e) => {
+                        window.removeEventListener(responseType, eventListener);
+                        let returnValue=null;
+                        if(e.detail && e.detail.value)
+                        {
+                            returnValue=e.detail.value
+                        }
+                        
+                        resolve(returnValue);
+                    };
+                    window.addEventListener(responseType, eventListener);
+                }
+            });
+        }
     }    
 }
 
