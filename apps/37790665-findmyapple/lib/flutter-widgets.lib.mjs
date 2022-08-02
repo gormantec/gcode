@@ -865,7 +865,7 @@ export class BluetoothPage extends Page {
               	trailing.firstChild.innerText="bluetooth";
               }
               else {
-                trailing.firstChild.style.color="unset";
+                trailing.firstChild.style.color="#232323";
               	trailing.firstChild.innerText="close";
               }
             });
