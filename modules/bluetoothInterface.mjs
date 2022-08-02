@@ -47,8 +47,6 @@ export class PrimaryService {
             '-' + Date.now().toString(16),
         messagetype = 'bluetooth-service-characteristic';
         let message={id: id,data: {peripheralId:this.peripheralId,uuid:this.uuid}};
-        console.log(messagetype);
-        console.log(message);
         window.webkit.messageHandlers[messagetype].postMessage(message);
         let responseType = messagetype+"-" + this.peripheralId+"-" + this.uuid;
         return new Promise((resolve,reject) => {
@@ -59,8 +57,6 @@ export class PrimaryService {
             }
             else{
                 let eventListener = (e) => {
-                    console.log("getCharacteristics: " );  
-                    console.log(e);
                     window.removeEventListener(responseType, eventListener);
                     let characteristics=[];
                     for(let i=0;e.detail && e.detail.service.characteristics && i<e.detail.service.characteristics.length;i++)
@@ -98,8 +94,6 @@ export class GattServer {
             '-' + Date.now().toString(16),
         messagetype = 'bluetooth-gatt-discover-services';
         let message={id: id,data: {peripheralId:this.peripheralId}};
-        console.log(messagetype);
-        console.log(message);
         window.webkit.messageHandlers[messagetype].postMessage(message);
         let responseType = messagetype+"-" + this.peripheralId;
         return new Promise((resolve,reject) => {
@@ -110,8 +104,6 @@ export class GattServer {
             }
             else{
                 let eventListener = (e) => {
-                    console.log("getPrimaryServices: " );  
-                    console.log(e);
                     window.removeEventListener(responseType, eventListener);
                     let services=[];
                     for(let i=0;e.detail && e.detail.services && i<e.detail.services.length;i++)
@@ -147,15 +139,12 @@ export class GattServerConnector {
         window.webkit.messageHandlers[messagetype].postMessage(message);
         let responseType = messagetype+"-" + this.peripheralId;
         return new Promise((resolve,reject) => {
-            console.log("listen for:" + responseType);
             if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
             {
                 reject("connect: peripheral ID is blank")
             }
             else{
                 let eventListener = (e) => {
-                    console.log("connect: " );
-                    console.log(e);
                     window.removeEventListener(responseType, eventListener);
                     resolve(new GattServer({peripheralId:this.peripheralId}));
                 };
@@ -181,7 +170,6 @@ export class BluetoothInterface {
         return new Promise((resolve) => {
             console.log("listen for:" + responseType);
             let eventListener = (e) => {
-                console.log("found: " + e);
                 window.removeEventListener(responseType, eventListener);
                 resolve(new BluetoothDevice({peripheralId:e.detail.selectedPeripheralId,peripheralName:e.detail.selectedPeripheralName}));
             };
