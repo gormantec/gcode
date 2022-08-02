@@ -773,7 +773,7 @@ export class BluetoothPage extends Page {
                     "paddingBottom": "40px",
                     margin: "20px",
                     bottom: "40px",
-                    child: blueListView
+                    child: new Div({paddingTop:"20px",paddingBottom:"20px",child:blueListView})
                 }),
                 new Center({
                     height: "30px",
@@ -874,8 +874,8 @@ export class BluetoothPage extends Page {
         } else {
           	let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
-            elm.querySelector("#name"+e.identifier).innerText="<span>"+_name+"</span>";
-            elm.querySelector("#name"+e.identifier).innerText="<span>"+_identifier+"</span>";
+            elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
+            elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
         }
 
     }
