@@ -845,7 +845,6 @@ export class BluetoothPage extends Page {
       	let elm=null;
         if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
         if (elm==null) {
-            this.identifiers[e.identifier] = e.name;
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
             let _this=this;
