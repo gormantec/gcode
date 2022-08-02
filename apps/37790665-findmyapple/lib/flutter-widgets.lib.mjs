@@ -859,7 +859,7 @@ export class BluetoothPage extends Page {
             });
             window.addEventListener("bluetooth-connect-device-" + e.identifier, (ev)=>{
               console.log(ev);
-              if(ev.details.didConnect)
+              if(ev && ev.detail && ev.detail.didConnect)
               {
               	trailing.firstChild.innerText="bluetooth";
               }
