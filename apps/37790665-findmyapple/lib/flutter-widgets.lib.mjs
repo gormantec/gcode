@@ -748,7 +748,7 @@ export const Icons = {
 };
 
 const blueListView = new ListView({
-    "borderRadius": "20px",
+    
     marginTop: "15px",
     marginBottom: "15px",
     overflowY: "auto",
@@ -772,8 +772,8 @@ export class BluetoothPage extends Page {
                     "paddingTop": "20px",
                     "paddingBottom": "40px",
                     margin: "20px",
-                    bottom: "40px",
-                    child: blueListView
+                    bottom: "60px",
+                    child: new Div({"borderRadius": "20px","backgroundColor": "#ffffff",paddingTop:"30px",paddingBottom:"30px","overflow":"none",child:blueListView})
                 }),
                 new Center({
                     height: "30px",
@@ -842,19 +842,40 @@ export class BluetoothPage extends Page {
         })
     }
     appendPeripheral(e) {
-        if (!this.identifiers) this.identifiers = {};
-        if (!this.identifiers[e.identifier]) {
-            this.identifiers[e.identifier] = e.name;
+      	let elm=null;
+        if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
+        if (elm==null) {
+            
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
             let _this=this;
+          	let name=new Text(_name);
+          	name.element.id="name"+e.identifier;
+          	let subtitle=new Text(_identifier)
+          	subtitle.element.id="subtitle"+e.identifier;
+          	let trailing=new Icon(e.status ? "bluetooth" : "close");
+          	window.addEventListener("bluetooth-peripheral-disconnect-" + e.identifier, ()=>{
+              trailing.firstChild.innerText="close";
+            });
+            window.addEventListener("bluetooth-connect-device-" + e.identifier, (ev)=>{
+              console.log(ev);
+              if(ev && ev.detail && ev.detail.didConnect)
+              {
+                trailing.firstChild.style.color="blue";
+              	trailing.firstChild.innerText="bluetooth";
+              }
+              else {
+                trailing.firstChild.style.color="#232323";
+              	trailing.firstChild.innerText="close";
+              }
+            });
             blueListView.appendChild(new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
-                "title": new Text(_name),
-                "subtitle": new Text(_identifier),
+                "title": name,
+                "subtitle": subtitle,
                 "leading": new Icon(Icons.battery_full),
-                "trailing": new Icon(e.status ? "bluetooth" : "close"),
+                "trailing": trailing,
                 "onclick": () => {
                     PWA.getPWA().showHeader();
                     console.log(this.homePage);
@@ -867,8 +888,11 @@ export class BluetoothPage extends Page {
                     },500);
                 }
             }));
-        } else if (e.name != this.identifiers[e.identifier]) {
-            //document.querySelector("#id"+e.identifier)
+        } else {
+          	let _name = (e.name && e.name != "") ? e.name : "N/A";
+            let _identifier = e.identifier;
+            elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
+            elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
         }
 
     }
