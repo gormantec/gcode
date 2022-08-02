@@ -15,15 +15,15 @@ export class BluetoothDevice {
 }
 
 export class Characteristic {
-    constructor({uuid,peripheralId,value,propertiesCount}) {
+    constructor({uuid,peripheralId,value,propertiesCount,read,write,notify}) {
         this.uuid= uuid;
         this.peripheralId= peripheralId;
         this.value= value;
         this.propertiesCount=propertiesCount;
-        this.properties={
-            notify: true
-        }
-
+        this.properties={}
+        if(read)this.properties.read=read;
+        if(write)this.properties.write=write;
+        if(notify)this.properties.notify=notify;
     }
 
     addEventListener(type, f){
@@ -67,7 +67,15 @@ export class PrimaryService {
                     {
                         if(e.detail.service.characteristics[i].uuid)
                         {
-                            characteristics.push(new Characteristic({uuid:e.detail.service.characteristics[i].uuid,peripheralId:e.detail.identifier,value:e.detail.service.characteristics[i].value,propertiesCount:e.detail.service.characteristics[i].propertiesCount}));
+                            characteristics.push(new Characteristic({
+                                uuid:e.detail.service.characteristics[i].uuid,
+                                peripheralId:e.detail.identifier,
+                                value:e.detail.service.characteristics[i].value,
+                                read:e.detail.service.characteristics[i].read,
+                                write:e.detail.service.characteristics[i].write,
+                                notify:e.detail.service.characteristics[i].notify,
+                                propertiesCount:e.detail.service.characteristics[i].propertiesCount
+                            }));
                         }
                     }
                     resolve(characteristics);
