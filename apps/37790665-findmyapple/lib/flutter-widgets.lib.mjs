@@ -842,7 +842,7 @@ export class BluetoothPage extends Page {
         })
     }
     appendPeripheral(e) {
-      	let elm=nill;
+      	let elm=null;
         if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
         if (elm==null) {
             this.identifiers[e.identifier] = e.name;
