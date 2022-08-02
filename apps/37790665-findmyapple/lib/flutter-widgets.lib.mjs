@@ -748,7 +748,7 @@ export const Icons = {
 };
 
 const blueListView = new ListView({
-    "borderRadius": "20px",
+    
     marginTop: "15px",
     marginBottom: "15px",
     overflowY: "auto",
@@ -772,8 +772,8 @@ export class BluetoothPage extends Page {
                     "paddingTop": "20px",
                     "paddingBottom": "40px",
                     margin: "20px",
-                    bottom: "40px",
-                    child: new Div({paddingTop:"20px",paddingBottom:"20px",child:blueListView})
+                    bottom: "60px",
+                    child: new Div({"borderRadius": "20px","backgroundColor": "#ffffff",paddingTop:"20px",paddingBottom:"20px",child:blueListView})
                 }),
                 new Center({
                     height: "30px",
