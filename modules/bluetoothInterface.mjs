@@ -15,23 +15,47 @@ export class BluetoothDevice {
 }
 
 export class PrimaryService {
-    constructor({uuid}) {
+    constructor({uuid,peripheralId}) {
         this.uuid = uuid;
+        this.peripheralId=peripheralId;
     }
     getCharacteristics() {
-        return new Promise((res3, rej3) => {
-            res3([{
-                value: 'value1',
-                properties: {
-                    notify: true
-                },
-                addEventListener: (type, f) => {
-                    console.log('addEventListener');
-                },
-                startNotifications: () => {
-                    console.log('startNotifications');
-                }
-            }]);
+        let start = Date.now(),
+        id = Math.floor(Math.random() * 16777215).toString(16) +
+            '-' + Math.floor(Math.random() * 16777215).toString(16) +
+            '-' + Date.now().toString(16),
+        messagetype = 'bluetooth-service-characteristic';
+        let message={id: id,data: {peripheralId:this.peripheralId,uuid:this.uuid}};
+        console.log(messagetype);
+        console.log(message);
+        window.webkit.messageHandlers[messagetype].postMessage(message);
+        let responseType = messagetype+"-" + this.peripheralId+"-" + this.uuid;
+        return new Promise((resolve,reject) => {
+            console.log("listen for:" + responseType);
+            if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
+            {
+                reject("getCharacteristics: peripheral ID is blank");
+            }
+            else{
+                let eventListener = (e) => {
+                    console.log("getCharacteristics: " );  
+                    console.log(e);
+                    window.removeEventListener(responseType, eventListener);
+                    resolve([{
+                        value: 'value1',
+                        properties: {
+                            notify: true
+                        },
+                        addEventListener: (type, f) => {
+                            console.log('addEventListener');
+                        },
+                        startNotifications: () => {
+                            console.log('startNotifications');
+                        }
+                    }]);
+                };
+                window.addEventListener(responseType, eventListener);
+            }
         });
     }
 }
@@ -68,7 +92,7 @@ export class GattServer {
                     {
                         if(e.detail.services[i].uuid)
                         {
-                            services.push(new PrimaryService({uuid:e.detail.services[i].uuid}));
+                            services.push(new PrimaryService({uuid:e.detail.services[i].uuid,peripheralId:this.peripheralId}));
                         }
                     }
                     resolve(services);
