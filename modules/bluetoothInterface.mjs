@@ -14,6 +14,27 @@ export class BluetoothDevice {
     
 }
 
+export class Characteristic {
+    constructor({uuid,peripheralId,value,propertiesCount}) {
+        this.uuid= uuid;
+        this.peripheralId= peripheralId;
+        this.value= value;
+        this.propertiesCount=propertiesCount;
+        this.properties={
+            notify: true
+        }
+
+    }
+
+    addEventListener(type, f){
+        console.log('addEventListener');
+    }
+
+    startNotifications(){
+        console.log('startNotifications');
+    }    
+}
+
 export class PrimaryService {
     constructor({uuid,peripheralId}) {
         this.uuid = uuid;
@@ -41,18 +62,15 @@ export class PrimaryService {
                     console.log("getCharacteristics: " );  
                     console.log(e);
                     window.removeEventListener(responseType, eventListener);
-                    resolve([{
-                        value: 'value1',
-                        properties: {
-                            notify: true
-                        },
-                        addEventListener: (type, f) => {
-                            console.log('addEventListener');
-                        },
-                        startNotifications: () => {
-                            console.log('startNotifications');
+                    let characteristics=[];
+                    for(let i=0;e.detail && e.detail.service.characteristics && i<e.detail.service.characteristics.length;i++)
+                    {
+                        if(e.detail.service.characteristics[i].uuid)
+                        {
+                            characteristics.push(new Characteristic({uuid:e.detail.service.characteristics[i].uuid,peripheralId:e.detail.identifier,value:e.detail.service.characteristics[i].value,propertiesCount:e.detail.service.characteristics[i].propertiesCount}));
                         }
-                    }]);
+                    }
+                    resolve(characteristics);
                 };
                 window.addEventListener(responseType, eventListener);
             }
