@@ -71,9 +71,9 @@ export class PrimaryService {
                                 uuid:e.detail.service.characteristics[i].uuid,
                                 peripheralId:e.detail.identifier,
                                 value:e.detail.service.characteristics[i].value,
-                                read:e.detail.service.characteristics[i].read,
-                                write:e.detail.service.characteristics[i].write,
-                                notify:e.detail.service.characteristics[i].notify,
+                                read:e.detail.service.characteristics[i].properties.read,
+                                write:e.detail.service.characteristics[i].properties.write,
+                                notify:e.detail.service.characteristics[i].properties.notify,
                                 propertiesCount:e.detail.service.characteristics[i].propertiesCount
                             }));
                         }
