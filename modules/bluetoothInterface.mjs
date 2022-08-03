@@ -193,8 +193,16 @@ export class GattServer {
                     {
                         reject(e.detail.error);
                     }
-                    else{
-                        resolve([]);
+                    else if(e.detail.services){
+                        let services=[];
+                        for(let i=0;e.detail && e.detail.services && i<e.detail.services.length;i++)
+                        {
+                            if(e.detail.services[i].uuid)
+                            {
+                                services.push(new PrimaryService({uuid:e.detail.services[i].uuid,peripheralId:this.peripheralId}));
+                            }
+                        }
+                        resolve(services);
                     }
                     
                 };
