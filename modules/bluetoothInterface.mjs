@@ -165,6 +165,7 @@ export class GattServer {
             console.log("listen for:" + responseType);
             if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
             {
+                console.log("getPrimaryServices: peripheral ID is blank");
                 reject("getPrimaryServices: peripheral ID is blank");
             }
             else{
