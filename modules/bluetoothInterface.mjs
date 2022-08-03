@@ -184,7 +184,7 @@ export class GattServer {
                     }
                     resolve(services);
                 };
-                window.addEventListener(responseType2, eventListener);
+                window.addEventListener(responseType, eventListener);
                 let eventListener2 = (e) => {
                     console.log("found :" + responseType2+" --> "+JSON.stringify(e));
                     window.removeEventListener(responseType, eventListener);
@@ -198,7 +198,7 @@ export class GattServer {
                     }
                     
                 };
-                window.addEventListener(responseType, eventListener2);
+                window.addEventListener(responseType2, eventListener2);
             }
         })
     }
