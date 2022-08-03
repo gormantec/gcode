@@ -165,7 +165,7 @@ class HomePage extends Page {
                                                         if (characteristic.properties.notify) {
                                                           
                                                         	console.log("addEventListener characteristicvaluechanged");
-                                                            characteristic.addEventListener('characteristicvaluechanged', event => console.log("N---->"+event));
+                                                            characteristic.addEventListener('characteristicvaluechanged', n => console.log("N---->"+n));
                                                             characteristic.startNotifications();
                                                         }
                                                       	if (characteristic.properties.read) {
