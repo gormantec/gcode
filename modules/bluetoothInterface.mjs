@@ -29,6 +29,7 @@ export class Characteristic {
 
     addEventListener(type, f){
         console.log('addEventListener');
+        window.addEventListener("bluetooth-characteristic-notify-"+"-" + this.peripheralId+"-" + this.serviceUuid+"-" + this.uuid, f);
     }
 
     startNotifications(){
