@@ -151,6 +151,8 @@ class HomePage extends Page {
                                           let servicesString="";
                                             services.forEach(service => {
                                                 //console.log("service "+service.uuid);
+                                               servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>";
+                                              PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString);
                                                 console.log("service: "+service.uuid);
                                                 service.getCharacteristics().then(characteristics => {
 
@@ -172,14 +174,17 @@ class HomePage extends Page {
                                                       	if (characteristic.properties.read) {
                                                           
                                                         	console.log("readValue");
-                                                            characteristic.readValue().then((v)=>console.log("V---->"+v));
-                                                          values.push({uuid:characteristic.uuid,value:c});
-                                                          	PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p>"+JSON.stringify(values)+"</p>");
+                                                            characteristic.readValue().then((v)=>{
+                                                              
+                                                              values.push({uuid:characteristic.uuid,value:c});
+                                                              PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p>"+JSON.stringify(values)+"</p>");
+                                                              console.log("V---->"+v);
+                                                            });
                                                         }
                                                     })
 
                                                 }).catch(e => console.log("0:" + e));
-                                              servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>";
+                                              
                                             });
                                            
                                     
