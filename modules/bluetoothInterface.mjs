@@ -186,15 +186,15 @@ export class GattServer {
                 };
                 window.addEventListener(responseType2, eventListener);
                 let eventListener2 = (e) => {
-                    console.log("found for:" + responseType2);
+                    console.log("found for:" + responseType2+" --> "+JSON.stringify(e));
                     window.removeEventListener(responseType, eventListener);
                     window.removeEventListener(responseType2, eventListener2);
                     if(e.detail.error)
                     {
-                        reject(e.detail);
+                        reject(e.detail.error);
                     }
                     else{
-                        resolve(e.detail);
+                        resolve([]);
                     }
                     
                 };
