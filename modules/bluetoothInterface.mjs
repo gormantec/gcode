@@ -49,6 +49,7 @@ export class Characteristic {
                 console.log("listen for:" + responseType);
 
                     let eventListener = (e) => {
+                        console.log("found:" + responseType);
                         window.removeEventListener(responseType, eventListener);
                         resolve(e.detail);
                     };
