@@ -32,7 +32,27 @@ export class Characteristic {
     }
 
     startNotifications(){
-        console.log('startNotifications');
+        if(this.properties.notify)
+        {
+            let start = Date.now(),
+            id = Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Date.now().toString(16),
+            messagetype = 'bluetooth-characteristic-notify';
+            let message={id: id,data: {peripheralId:this.peripheralId,serviceUuid:this.serviceUuid,uuid:this.uuid}};
+            window.webkit.messageHandlers[messagetype].postMessage(message);
+            let responseType = messagetype+"-" + id;
+            return new Promise((resolve,reject) => {
+                console.log("listen for:" + responseType);
+
+                    let eventListener = (e) => {
+                        window.removeEventListener(responseType, eventListener);
+                        resolve(e.detail);
+                    };
+                    window.addEventListener(responseType, eventListener);
+                
+            });
+        }
     }
     readValue()
     {
@@ -45,14 +65,10 @@ export class Characteristic {
             messagetype = 'bluetooth-characteristic-read';
             let message={id: id,data: {peripheralId:this.peripheralId,serviceUuid:this.serviceUuid,uuid:this.uuid}};
             window.webkit.messageHandlers[messagetype].postMessage(message);
-            let responseType = messagetype+"-" + this.peripheralId+"-" + this.uuid;
+            let responseType = messagetype+"-" + id;
             return new Promise((resolve,reject) => {
                 console.log("listen for:" + responseType);
-                if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
-                {
-                    reject("readValue/Characteristics: peripheral ID is blank");
-                }
-                else{
+
                     let eventListener = (e) => {
                         window.removeEventListener(responseType, eventListener);
                         let returnValue=null;
@@ -64,7 +80,7 @@ export class Characteristic {
                         resolve(returnValue);
                     };
                     window.addEventListener(responseType, eventListener);
-                }
+                
             });
         }
     }    
