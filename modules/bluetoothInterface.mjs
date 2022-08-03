@@ -32,10 +32,10 @@ export class Characteristic {
     }
 
     startNotifications(){
-        console.log("startNotifications")
+        console.log("startNotifications1")
         if(this.properties.notify)
         {
-            console.log("startNotifications")
+            console.log("startNotifications2")
             let start = Date.now(),
             id = Math.floor(Math.random() * 16777215).toString(16) +
                 '-' + Math.floor(Math.random() * 16777215).toString(16) +
@@ -59,8 +59,10 @@ export class Characteristic {
 
     readValue()
     {
+        console.log("readValue1");
         if(this.properties.read)
         {
+            console.log("readValue2");
             let start = Date.now(),
             id = Math.floor(Math.random() * 16777215).toString(16) +
                 '-' + Math.floor(Math.random() * 16777215).toString(16) +
