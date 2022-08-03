@@ -30,13 +30,13 @@ export class Characteristic {
     addEventListener(type, f) {
         console.log('addEventListener');
         let _func=f;
-        window.addEventListener("bluetooth-characteristic-notify-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, (e)=>{
-            let returnValue = null;
+        let _target=this;
+        window.addEventListener("bluetooth-characteristic-read-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, (e)=>{
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
                         console.log("NN2-------->"+JSON.stringify(e.detail));
-                        returnValue = e.detail.value
+                        _target.value = e.detail.value
                     }
-                    _func(returnValue);
+                    _func({target:_target});
         });
     }
 
@@ -81,18 +81,17 @@ export class Characteristic {
                 messagetype = 'bluetooth-characteristic-read';
             let message = { id: id, data: { peripheralId: this.peripheralId, serviceUuid: this.serviceUuid, uuid: this.uuid } };
             let responseType = messagetype +"-"+ this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid;
+            let _this=this;
             return new Promise((resolve, reject) => {
                 console.log("listen for:" + responseType);
                 let eventListener = (e) => {
                     console.log("found:" + responseType);
                     window.removeEventListener(responseType, eventListener);
-                    let returnValue = null;
                     console.log(e.detail);
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
-                        returnValue = e.detail.value
+                        _this.value = e.detail.value
                     }
-
-                    resolve(returnValue);
+                    resolve(_this.value);
                 };
                 window.addEventListener(responseType, eventListener);
                 window.webkit.messageHandlers[messagetype].postMessage(message);
