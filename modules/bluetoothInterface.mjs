@@ -15,8 +15,9 @@ export class BluetoothDevice {
 }
 
 export class Characteristic {
-    constructor({uuid,peripheralId,value,propertiesCount,read,write,notify}) {
+    constructor({uuid,serviceUuid,peripheralId,value,propertiesCount,read,write,notify}) {
         this.uuid= uuid;
+        this.serviceUuid= serviceUuid;
         this.peripheralId= peripheralId;
         this.value= value;
         this.propertiesCount=propertiesCount;
@@ -42,7 +43,7 @@ export class Characteristic {
                 '-' + Math.floor(Math.random() * 16777215).toString(16) +
                 '-' + Date.now().toString(16),
             messagetype = 'bluetooth-characteristic-read';
-            let message={id: id,data: {peripheralId:this.peripheralId,uuid:this.uuid}};
+            let message={id: id,data: {peripheralId:this.peripheralId,serviceUuid:this.serviceUuid,uuid:this.uuid}};
             window.webkit.messageHandlers[messagetype].postMessage(message);
             let responseType = messagetype+"-" + this.peripheralId+"-" + this.uuid;
             return new Promise((resolve,reject) => {
@@ -99,6 +100,7 @@ export class PrimaryService {
                         {
                             characteristics.push(new Characteristic({
                                 uuid:e.detail.service.characteristics[i].uuid,
+                                serviceUuid:e.detail.service.uuid,
                                 peripheralId:e.detail.identifier,
                                 value:e.detail.service.characteristics[i].value,
                                 read:e.detail.service.characteristics[i].properties.read,
