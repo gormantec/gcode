@@ -29,7 +29,7 @@ export class Characteristic {
 
     addEventListener(type, f) {
         console.log('addEventListener');
-        window.addEventListener("bluetooth-characteristic-notify-" + "-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, f);
+        window.addEventListener("bluetooth-characteristic-notify-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, f);
     }
 
     startNotifications() {
@@ -69,7 +69,7 @@ export class Characteristic {
                     '-' + Date.now().toString(16),
                 messagetype = 'bluetooth-characteristic-read';
             let message = { id: id, data: { peripheralId: this.peripheralId, serviceUuid: this.serviceUuid, uuid: this.uuid } };
-            let responseType = messagetype + "-" + id;
+            let responseType = messagetype +"-"+ this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid;
             return new Promise((resolve, reject) => {
                 console.log("listen for:" + responseType);
                 let eventListener = (e) => {
