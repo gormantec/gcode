@@ -30,7 +30,7 @@ function _b64toBuffer(b64Data, sliceSize=512) {
       byteArrays.push(byteArray);
     }
   
-    return byteArray;
+    return byteArrays;
   }
 
 export class Characteristic {
