@@ -812,7 +812,6 @@ export class BluetoothPage extends Page {
         let appPlatform = this.getCookie("app-platform");
         if (appPlatform && !navigator.bluetooth) {
             window.addEventListener("bluetooth-peripheral-scanning", (e) => {
-              	console.log("bluetooth-peripheral-scanning");
                 PWA.getPWA().setPage(this);
                 this.scanningDetails = e.detail;
             });
