@@ -50,8 +50,12 @@ export class Characteristic {
 
                     let eventListener = (e) => {
                         console.log("found:" + responseType);
-                        window.removeEventListener(responseType, eventListener);
-                        resolve(e.detail);
+                        let returnValue=null;
+                        if(e.detail && (e.detail.value || e.detail.value==""))
+                        {
+                            returnValue=e.detail.value
+                        }
+                        resolve(returnValue);
                     };
                     window.addEventListener(responseType, eventListener);
                 
@@ -81,7 +85,7 @@ export class Characteristic {
                         window.removeEventListener(responseType, eventListener);
                         let returnValue=null;
                         console.log(e.detail);
-                        if(e.detail && e.detail.value)
+                        if(e.detail && (e.detail.value || e.detail.value==""))
                         {
                             returnValue=e.detail.value
                         }
