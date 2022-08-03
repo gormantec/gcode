@@ -33,7 +33,7 @@ export class Characteristic {
         window.addEventListener("bluetooth-characteristic-notify-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, (e)=>{
             let returnValue = null;
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
-                        console.log("RR-------->"+e.detail.value);
+                        console.log("NN2-------->"+JSON.stringify(e.detail));
                         returnValue = e.detail.value
                     }
                     _func(returnValue);
