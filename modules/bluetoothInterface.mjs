@@ -29,7 +29,15 @@ export class Characteristic {
 
     addEventListener(type, f) {
         console.log('addEventListener');
-        window.addEventListener("bluetooth-characteristic-notify-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, f);
+        let _func=f;
+        window.addEventListener("bluetooth-characteristic-notify-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, (e)=>{
+            let returnValue = null;
+                    if (e.detail && (e.detail.value || e.detail.value == "")) {
+                        console.log("RR-------->"+e.detail.value);
+                        returnValue = e.detail.value
+                    }
+                    _func(returnValue);
+        });
     }
 
     startNotifications() {
