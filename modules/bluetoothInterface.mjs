@@ -161,6 +161,7 @@ export class GattServer {
         let message={id: id,data: {peripheralId:this.peripheralId}};
         window.webkit.messageHandlers[messagetype].postMessage(message);
         let responseType = messagetype+"-" + this.peripheralId;
+        let responseType2 = messagetype+"-" + id;
         return new Promise((resolve,reject) => {
             console.log("listen for:" + responseType);
             if(message==null || message.data==null || message.data.peripheralId==null || message.data.peripheralId=="")
@@ -172,6 +173,7 @@ export class GattServer {
                 let eventListener = (e) => {
                     console.log("found for:" + responseType);
                     window.removeEventListener(responseType, eventListener);
+                    window.removeEventListener(responseType2, eventListener2);
                     let services=[];
                     for(let i=0;e.detail && e.detail.services && i<e.detail.services.length;i++)
                     {
@@ -182,7 +184,21 @@ export class GattServer {
                     }
                     resolve(services);
                 };
-                window.addEventListener(responseType, eventListener);
+                window.addEventListener(responseType2, eventListener);
+                let eventListener2 = (e) => {
+                    console.log("found for:" + responseType2);
+                    window.removeEventListener(responseType, eventListener);
+                    window.removeEventListener(responseType2, eventListener2);
+                    if(e.detail.error)
+                    {
+                        reject(e.detail);
+                    }
+                    else{
+                        resolve(e.detail);
+                    }
+                    
+                };
+                window.addEventListener(responseType, eventListener2);
             }
         })
     }
