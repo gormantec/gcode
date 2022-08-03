@@ -49,6 +49,7 @@ export class Characteristic {
                     console.log("found:" + responseType);
                     let returnValue = null;
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
+                        console.log("RR-------->"+e.detail.value);
                         returnValue = e.detail.value
                     }
                     resolve(returnValue);
