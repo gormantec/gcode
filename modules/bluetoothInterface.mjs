@@ -77,8 +77,10 @@ export class Characteristic {
                 console.log("listen for:" + responseType);
 
                     let eventListener = (e) => {
+                        console.log("found:" + responseType);
                         window.removeEventListener(responseType, eventListener);
                         let returnValue=null;
+                        console.log(e.detail);
                         if(e.detail && e.detail.value)
                         {
                             returnValue=e.detail.value
