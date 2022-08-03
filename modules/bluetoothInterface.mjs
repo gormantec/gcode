@@ -32,8 +32,10 @@ export class Characteristic {
     }
 
     startNotifications(){
+        console.log("startNotifications")
         if(this.properties.notify)
         {
+            console.log("startNotifications")
             let start = Date.now(),
             id = Math.floor(Math.random() * 16777215).toString(16) +
                 '-' + Math.floor(Math.random() * 16777215).toString(16) +
@@ -54,6 +56,7 @@ export class Characteristic {
             });
         }
     }
+
     readValue()
     {
         if(this.properties.read)
