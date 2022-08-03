@@ -143,6 +143,7 @@ class HomePage extends Page {
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
                                     });
+                                  	let values=[];
                                     device.gatt.connect().then((server) => {
                                         //console.log("server");
                                         //console.log(server);
@@ -171,15 +172,16 @@ class HomePage extends Page {
                                                       	if (characteristic.properties.read) {
                                                           
                                                         	console.log("readValue");
-                                                           
                                                             characteristic.readValue().then((v)=>console.log("V---->"+v));
+                                                          values.push({uuid:characteristic.uuid,value:c});
+                                                          	PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p>"+JSON.stringify(values)+"</p>");
                                                         }
                                                     })
 
                                                 }).catch(e => console.log("0:" + e));
                                               servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>";
                                             });
-                                           PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString);
+                                           
                                     
                                         }).catch(e => console.log("1:" + e));
                                     }).catch(e => console.log("2:" + e));
