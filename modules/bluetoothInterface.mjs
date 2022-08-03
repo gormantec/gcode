@@ -118,7 +118,7 @@ export class Characteristic {
                     window.removeEventListener(responseType, eventListener);
                     console.log(e.detail);
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
-                        _this.value = e.detail.value
+                        _this.value = _b64toBuffer(e.detail.value);
                     }
                     resolve(_this.value);
                 };
