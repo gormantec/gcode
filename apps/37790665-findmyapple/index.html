@@ -165,14 +165,14 @@ class HomePage extends Page {
                                                         if (characteristic.properties.notify) {
                                                           
                                                         	console.log("addEventListener characteristicvaluechanged");
-                                                            characteristic.addEventListener('characteristicvaluechanged', event => console.log(event));
+                                                            characteristic.addEventListener('characteristicvaluechanged', event => console.log("N---->"+event));
                                                             characteristic.startNotifications();
                                                         }
                                                       	if (characteristic.properties.read) {
                                                           
                                                         	console.log("readValue");
                                                            
-                                                            characteristic.readValue().then((v)=>console.log("---->"+v));
+                                                            characteristic.readValue().then((v)=>console.log("V---->"+v));
                                                         }
                                                     })
 
