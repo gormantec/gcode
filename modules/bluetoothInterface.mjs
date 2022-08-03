@@ -27,6 +27,25 @@ export class Characteristic {
         if (notify) this.properties.notify = notify;
     }
 
+    b64toBuffer(b64Data, sliceSize=512) {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+      
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          const slice = byteCharacters.slice(offset, offset + sliceSize);
+      
+          const byteNumbers = new Array(slice.length);
+          for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+          }
+      
+          const byteArray = new Uint8Array(byteNumbers);
+          byteArrays.push(byteArray);
+        }
+      
+        return byteArray;
+      }
+
     addEventListener(type, f) {
         console.log('addEventListener');
         let _func=f;
@@ -34,7 +53,15 @@ export class Characteristic {
         window.addEventListener("bluetooth-characteristic-read-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, (e)=>{
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
                         console.log("NN2-------->"+JSON.stringify(e.detail));
-                        _target.value = e.detail.value
+                        if(e.detail.value==null || e.detail.value=="")
+                        {
+                            _target.value = null;
+                        }
+                        else
+                        {
+                            _target.value = b64toBuffer(e.detail.value);
+                        }
+                        
                     }
                     _func({target:_target});
         });
