@@ -55,12 +55,14 @@ export class Characteristic {
                 console.log("listen for:" + responseType);
                 let eventListener = (e) => {
                     console.log("found:" + responseType);
-                    let returnValue = null;
-                    if (e.detail && (e.detail.value || e.detail.value == "")) {
-                        console.log("RR-------->"+e.detail.value);
-                        returnValue = e.detail.value
+                    if(e.detail.notify==true)
+                    {
+                        resolve();
                     }
-                    resolve(returnValue);
+                    else{
+                        reject(e.detail)
+                    }
+                    
                 };
                 window.addEventListener(responseType, eventListener);
                 window.webkit.messageHandlers[messagetype].postMessage(message);
