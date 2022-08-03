@@ -14,6 +14,25 @@ export class BluetoothDevice {
 
 }
 
+function _b64toBuffer(b64Data, sliceSize=512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    return byteArray;
+  }
+
 export class Characteristic {
     constructor({ uuid, serviceUuid, peripheralId, value, propertiesCount, read, write, notify }) {
         this.uuid = uuid;
@@ -27,24 +46,7 @@ export class Characteristic {
         if (notify) this.properties.notify = notify;
     }
 
-    b64toBuffer(b64Data, sliceSize=512) {
-        const byteCharacters = atob(b64Data);
-        const byteArrays = [];
-      
-        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-          const slice = byteCharacters.slice(offset, offset + sliceSize);
-      
-          const byteNumbers = new Array(slice.length);
-          for (let i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-          }
-      
-          const byteArray = new Uint8Array(byteNumbers);
-          byteArrays.push(byteArray);
-        }
-      
-        return byteArray;
-      }
+
 
     addEventListener(type, f) {
         console.log('addEventListener');
@@ -59,7 +61,7 @@ export class Characteristic {
                         }
                         else
                         {
-                            _target.value = b64toBuffer(e.detail.value);
+                            _target.value = _b64toBuffer(e.detail.value);
                         }
                         
                     }
