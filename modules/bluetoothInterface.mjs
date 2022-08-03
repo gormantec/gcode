@@ -162,6 +162,7 @@ export class GattServer {
             }
             else{
                 let eventListener = (e) => {
+                    console.log("found for:" + responseType);
                     window.removeEventListener(responseType, eventListener);
                     let services=[];
                     for(let i=0;e.detail && e.detail.services && i<e.detail.services.length;i++)
