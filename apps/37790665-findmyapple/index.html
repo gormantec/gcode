@@ -175,7 +175,7 @@ class HomePage extends Page {
                                                           
                                                         	console.log("readValue");
                                                             characteristic.readValue().then((v)=>{
-                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => b.toString()).join ("");
+                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => String.fromCharCode(b)).join ("");
                                                               aValue=bufferToHex(v);
                                                               if(characteristic.uuid.endsWith("String"))aValue=bufferToString(v);
                                                               values.push({uuid:characteristic.uuid,value:aValue});
