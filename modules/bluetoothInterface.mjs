@@ -54,7 +54,6 @@ export class Characteristic {
         let _target=this;
         window.addEventListener("bluetooth-characteristic-read-" + this.peripheralId + "-" + this.serviceUuid + "-" + this.uuid, (e)=>{
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
-                        console.log("NN2-------->"+JSON.stringify(e.detail));
                         if(e.detail.value==null || e.detail.value=="")
                         {
                             _target.value = null;
