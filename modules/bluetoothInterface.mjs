@@ -56,11 +56,11 @@ export class Characteristic {
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
                         if(e.detail.value==null || e.detail.value=="")
                         {
-                            _target.value = null;
+                            _target.value = new Uint8Array([]);
                         }
                         else
                         {
-                            _target.value = e.detail.value;
+                            _target.value = new Uint8Array(_this.value);
                         }
                         
                     }
@@ -117,7 +117,7 @@ export class Characteristic {
                     window.removeEventListener(responseType, eventListener);
                     console.log(e.detail);
                     if (e.detail && (e.detail.value || e.detail.value == "")) {
-                        _this.value = e.detail.value;
+                        _this.value = new Uint8Array(e.detail.value);
                     }
                     resolve(_this.value);
                 };
