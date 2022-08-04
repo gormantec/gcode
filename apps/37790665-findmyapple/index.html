@@ -175,8 +175,10 @@ class HomePage extends Page {
                                                           
                                                         	console.log("readValue");
                                                             characteristic.readValue().then((v)=>{
-                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => b.toString (16).padStart (2, "0")).join ("");
-                                                              values.push({uuid:characteristic.uuid,value:bufferToHex(v)});
+                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => b.toString()).join ("");
+                                                              aValue=bufferToHex(v);
+                                                              if(characteristic.uuid.endsWith("String"))aValue=bufferToString(v);
+                                                              values.push({uuid:characteristic.uuid,value:aValue});
                                                               PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p>"+JSON.stringify(values)+"</p>");
                                                               console.log("V---->"+v);
                                                               console.log("V---->"+bufferToHex(v));
