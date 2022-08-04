@@ -143,6 +143,7 @@ class HomePage extends Page {
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
                                     });
+                                  	let values=[];
                                     device.gatt.connect().then((server) => {
                                         //console.log("server");
                                         //console.log(server);
@@ -150,6 +151,8 @@ class HomePage extends Page {
                                           let servicesString="";
                                             services.forEach(service => {
                                                 //console.log("service "+service.uuid);
+                                               servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>";
+                                              PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString);
                                                 console.log("service: "+service.uuid);
                                                 service.getCharacteristics().then(characteristics => {
 
@@ -171,15 +174,20 @@ class HomePage extends Page {
                                                       	if (characteristic.properties.read) {
                                                           
                                                         	console.log("readValue");
-                                                           
-                                                            characteristic.readValue().then((v)=>console.log("V---->"+v));
+                                                            characteristic.readValue().then((v)=>{
+                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => b.toString (16).padStart (2, "0")).join ("");
+                                                              values.push({uuid:characteristic.uuid,value:bufferToHex(v)});
+                                                              PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p>"+JSON.stringify(values)+"</p>");
+                                                              console.log("V---->"+v);
+                                                              console.log("V---->"+bufferToHex(v));
+                                                            });
                                                         }
                                                     })
 
                                                 }).catch(e => console.log("0:" + e));
-                                              servicesString=servicesString+"<p style='font-size:10px'>Service: "+service.uuid+"</p>";
+                                              
                                             });
-                                           PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString);
+                                           
                                     
                                         }).catch(e => console.log("1:" + e));
                                     }).catch(e => console.log("2:" + e));
@@ -207,6 +215,8 @@ var aPWA = new PWA({
     primaryColor: "#212121",
     "pwaAuth": "true"
 });
+
+
 
 aPWA.setPage(aHomePage);
 aPWA.show();

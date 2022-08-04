@@ -911,6 +911,4 @@ export class BluetoothPage extends Page {
         }
         return "";
     }
-
-
 }
