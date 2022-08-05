@@ -796,10 +796,7 @@ export class BluetoothPage extends Page {
                         PWA.getPWA().showHeader();
                       	console.log(this.homePage);
                         PWA.getPWA().setPage(this.homePage);
-                        this.notifySelectedPerefial({
-                            selectedPeripheralId: "",
-                            selectedPeripheralName: ""
-                        });
+                        this.stopScanning();
                     }
                 })
             ],
@@ -831,12 +828,25 @@ export class BluetoothPage extends Page {
     }) {
         let start = Date.now();
         let d = {
-            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false
+            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false, stopScanning:true
         };
         let id = this.scanningDetails.bluetoothRequestDeviceId;
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
+        window.webkit.messageHandlers[messagetype].postMessage({
+            id: id,
+            data: d
+        })
+    }
+  	stopScanning() {
+        let d = {
+            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false, stopScanning:true
+        };
+        let id = Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Date.now().toString(16);
+        let messagetype = 'bluetooth-request-device';
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
