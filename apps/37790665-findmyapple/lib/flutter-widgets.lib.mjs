@@ -6,6 +6,8 @@ import {
 
 import {BluetoothInterface} from 'https://gcode.com.au/modules/bluetoothInterface.mjs';
 
+const deviceTimeout={};
+
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
     constructor(params) {
@@ -869,7 +871,7 @@ export class BluetoothPage extends Page {
               	trailing.firstChild.innerText="close";
               }
             });
-            blueListView.appendChild(new ListTile({
+          var nt=new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
                 "title": name,
@@ -887,12 +889,18 @@ export class BluetoothPage extends Page {
                       });
                     },500);
                 }
-            }));
+            })
+            blueListView.appendChild(nt);
+          
+          	deviceTimeout[_identifier]=setTimeout(()=>{nt.element.remove();},30000);
         } else {
           	let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
+          	clearTimeout(deviceTimeout[_identifier]);
             elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
             elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
+          	let _elm=elm;
+          	deviceTimeout[_identifier]=setTimeout(()=>{_elm.remove();},30000);
         }
 
     }
