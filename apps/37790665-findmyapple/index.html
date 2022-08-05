@@ -175,9 +175,18 @@ class HomePage extends Page {
                                                           
                                                         	console.log("readValue");
                                                             characteristic.readValue().then((v)=>{
-                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => b.toString (16).padStart (2, "0")).join ("");
-                                                              values.push({uuid:characteristic.uuid,value:bufferToHex(v)});
-                                                              PWA.getPWA().alert(device.name+"<p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p>"+JSON.stringify(values)+"</p>");
+                                                              let bufferToHex =(buffer)=> [...new Uint8Array (buffer)].map (b => b.toString(16).padStart(2, "0")).join ("");
+                                                              let bufferToString=(buffer)=> [...new Uint8Array (buffer)].map (b => String.fromCharCode(b)).join ("");
+                                                              let aValue="";
+                                                              if(characteristic.uuid.endsWith("String")){
+                                                                aValue=bufferToString(v);
+                                                              }
+                                                              else
+                                                              {
+                                                                aValue=bufferToHex(v);
+                                                              }
+                                                              values.push({uuid:characteristic.uuid,value:aValue});
+                                                              PWA.getPWA().alert(device.name+"<div style='position:relative;top:0px;bottom:0px;left:0px;right:0px;overflow-y:auto'><p style='font-size:10px'>"+device.id+"</p>"+servicesString+"<p style='font-size:10px'>"+JSON.stringify(values)+"</p></div>");
                                                               console.log("V---->"+v);
                                                               console.log("V---->"+bufferToHex(v));
                                                             });

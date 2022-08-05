@@ -6,6 +6,8 @@ import {
 
 import {BluetoothInterface} from 'https://gcode.com.au/modules/bluetoothInterface.mjs';
 
+const deviceTimeout={};
+
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
     constructor(params) {
@@ -794,10 +796,7 @@ export class BluetoothPage extends Page {
                         PWA.getPWA().showHeader();
                       	console.log(this.homePage);
                         PWA.getPWA().setPage(this.homePage);
-                        this.notifySelectedPerefial({
-                            selectedPeripheralId: "",
-                            selectedPeripheralName: ""
-                        });
+                        this.stopScanning();
                     }
                 })
             ],
@@ -829,12 +828,25 @@ export class BluetoothPage extends Page {
     }) {
         let start = Date.now();
         let d = {
-            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false
+            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false, stopScanning:true
         };
         let id = this.scanningDetails.bluetoothRequestDeviceId;
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
+        window.webkit.messageHandlers[messagetype].postMessage({
+            id: id,
+            data: d
+        })
+    }
+  	stopScanning() {
+        let d = {
+            acceptAllDevices: this.scanningDetails.acceptAllDevices ? this.scanningDetails.acceptAllDevices == true : false, stopScanning:true
+        };
+        let id = Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Date.now().toString(16);
+        let messagetype = 'bluetooth-request-device';
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
@@ -869,7 +881,7 @@ export class BluetoothPage extends Page {
               	trailing.firstChild.innerText="close";
               }
             });
-            blueListView.appendChild(new ListTile({
+          var nt=new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
                 "title": name,
@@ -887,12 +899,19 @@ export class BluetoothPage extends Page {
                       });
                     },500);
                 }
-            }));
+            })
+            blueListView.appendChild(nt);
+          
+          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove");nt.element.parentElement.remove();},60000);
         } else {
           	let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
+            console.log("clear "+_identifier);
+          	clearTimeout(deviceTimeout[_identifier]);
             elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
             elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
+          	let _elm=elm;
+          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove");_elm.parentElement.remove();},60000);
         }
 
     }
