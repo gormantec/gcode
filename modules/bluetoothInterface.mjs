@@ -289,14 +289,17 @@ export class BluetoothInterface {
         let message = { id: id, data: { acceptAllDevices: acceptAllDevices } };
 
         let responseType = messagetype + "-" + id;
+        let _this=this;
         return new Promise((resolve) => {
             console.log("listen for:" + responseType);
             let eventListener = (e) => {
+                clearInterval(_this.keepScanningInterval);
                 window.removeEventListener(responseType, eventListener);
                 resolve(new BluetoothDevice({ peripheralId: e.detail.selectedPeripheralId, peripheralName: e.detail.selectedPeripheralName }));
             };
             window.addEventListener(responseType, eventListener);
             window.webkit.messageHandlers[messagetype].postMessage(message);
+            _this.keepScanningInterval=setInterval(()=>window.webkit.messageHandlers[messagetype].postMessage({id:0,data:{keepScanning:true}}),10000);
         });
     }
 
