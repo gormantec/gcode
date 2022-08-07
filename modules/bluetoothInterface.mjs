@@ -1,14 +1,32 @@
 export class BluetoothDevice {
-    constructor({ peripheralId, peripheralName }) {
+    constructor({ peripheralId, peripheralName, state, rssi }) {
         this.id = peripheralId;
         this.name = peripheralName;
+        this.state = state || false;
+        this.rssi =rssi;
         this.gatt = new GattServerConnector({ peripheralId: this.id, peripheralName: this.name })
     }
 
-    addEventListener(type, f) {
+    addEventListener(type, _func) {
         if (type == 'gattserverdisconnected') {
             window.addEventListener("bluetooth-peripheral-disconnect-" + this.id, f);
         }
+        else if (type == 'advertisementreceived') {
+            let _this=this;
+            window.addEventListener("bluetooth-peripheral-found", (e)=>{
+                if(e.detail.identifier==this.id)
+                {
+                    _this.name = (e.name && e.name != "") ? e.name : (_this.name && _this.name != "N/A") ? _this.name:"N/A";
+                    _this.rssi =e.detail.rssi;
+                    _this.state =e.detail.state;
+                    _func({device:{name:_this.name,id:_this.id,rssi:_this.rssi,txPower:"",uuids:""},manufacturerData:[],serviceData:[]});
+                }
+            });
+        }
+    }
+    watchAdvertisements()
+    {
+
     }
 
 
@@ -295,7 +313,7 @@ export class BluetoothInterface {
             let eventListener = (e) => {
                 clearInterval(_this.keepScanningInterval);
                 window.removeEventListener(responseType, eventListener);
-                resolve(new BluetoothDevice({ peripheralId: e.detail.selectedPeripheralId, peripheralName: e.detail.selectedPeripheralName }));
+                resolve(new BluetoothDevice({ peripheralId: e.detail.selectedPeripheralId, peripheralName: e.detail.selectedPeripheralName,state:e.detail.state,rssi:e.detail.rssi }));
             };
             window.addEventListener(responseType, eventListener);
             window.webkit.messageHandlers[messagetype].postMessage(message);
