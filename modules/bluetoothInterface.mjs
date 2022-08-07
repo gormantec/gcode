@@ -9,7 +9,7 @@ export class BluetoothDevice {
 
     addEventListener(type, _func) {
         if (type == 'gattserverdisconnected') {
-            window.addEventListener("bluetooth-peripheral-disconnect-" + this.id, f);
+            window.addEventListener("bluetooth-peripheral-disconnect-" + this.id, _func);
         }
         else if (type == 'advertisementreceived') {
             let _this=this;
