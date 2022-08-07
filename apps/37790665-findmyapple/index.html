@@ -147,6 +147,8 @@ class HomePage extends Page {
                                     device.addEventListener('advertisementreceived', (e) => {
                                         console.log("advertisementreceived");
                                         console.log(e);
+                                      	PWA.getPWA().alert(device.name+"<div style='position:relative;top:0px;bottom:0px;left:0px;right:0px;overflow-y:auto'><p style='font-size:10px'>"+e.device.name+"</p>"+e.device.id+"<p style='font-size:10px'>"+event.rssi+"</p></div>");
+                                                              
                                     });
                                   	device.watchAdvertisements();
                                   	let values=[];
