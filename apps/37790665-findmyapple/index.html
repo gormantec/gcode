@@ -83,11 +83,11 @@ if (window.opener && window.opener !== window) {
   splashDuration: 2000
   permittedUrls: ["https://www.icloud.com/find/"]
 
-*/
+*/ 
 
 /*---------------------------------------------------------------------------*/
 import {
-    PWA,
+    PWA, 
     Page,
     Div, 
     AuthButtons
@@ -139,10 +139,16 @@ class HomePage extends Page {
                                 }).then((device) => {
                                     console.log(device.id);
                                     console.log(device.name);
+                                  	device.watchAdvertisements();
                                   	//console.log(device);
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
                                     });
+                                    device.addEventListener('advertisementreceived', (e) => {
+                                        console.log("advertisementreceived");
+                                        console.log(e);
+                                    });
+                                  	device.watchAdvertisements();
                                   	let values=[];
                                     device.gatt.connect().then((server) => {
                                         //console.log("server");

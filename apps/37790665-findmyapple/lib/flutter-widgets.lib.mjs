@@ -798,7 +798,7 @@ export class BluetoothPage extends Page {
                         PWA.getPWA().setPage(this.homePage);
                         this.notifySelectedPerefial({
                             selectedPeripheralId: "",
-                            selectedPeripheralName: ""
+                            selectedPeripheralName: "",rssi:0
                         });
                     }
                 })
@@ -827,7 +827,7 @@ export class BluetoothPage extends Page {
 
     notifySelectedPerefial({
         selectedPeripheralId,
-        selectedPeripheralName
+        selectedPeripheralName,rssi,state
     }) {
         let start = Date.now();
         let d = {
@@ -837,6 +837,8 @@ export class BluetoothPage extends Page {
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
+        d.rssi = rssi;
+        d.state = state;
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
@@ -849,6 +851,8 @@ export class BluetoothPage extends Page {
             
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
+            let _rssi = e.rssi || 0;
+            let _state = e.state || false;
             let _this=this;
           	let name=new Text(_name);
           	name.element.id="name"+e.identifier;
@@ -885,14 +889,19 @@ export class BluetoothPage extends Page {
                   	setTimeout(()=>{
                       _this.notifySelectedPerefial({
                           selectedPeripheralId: _identifier,
-                          selectedPeripheralName: _name
+                          selectedPeripheralName: _name,
+                          rssi:_rssi,
+                          state:_state
                       });
                     },500);
                 }
             })
             blueListView.appendChild(nt);
           
-          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove "+_identifier));nt.element.parentElement.remove();},60000);
+          	deviceTimeout[_identifier]=setTimeout(()=>{
+              console.log("remove "+_identifier);
+              nt.element.parentElement.remove();
+            },60000);
         } else {
           	let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
@@ -901,7 +910,10 @@ export class BluetoothPage extends Page {
             elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
             elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
           	let _elm=elm;
-          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove "+_identifier);_elm.parentElement.remove();},60000);
+          	deviceTimeout[_identifier]=setTimeout(()=>{
+              console.log("remove "+_identifier);
+              _elm.parentElement.remove();
+            },60000);
         }
 
     }
