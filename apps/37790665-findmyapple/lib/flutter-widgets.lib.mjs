@@ -892,16 +892,16 @@ export class BluetoothPage extends Page {
             })
             blueListView.appendChild(nt);
           
-          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove");nt.element.parentElement.remove();},60000);
+          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove "+_identifier));nt.element.parentElement.remove();},60000);
         } else {
           	let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
-            console.log("clear "+_identifier);
+            console.log("clear timeout for "+_identifier);
           	clearTimeout(deviceTimeout[_identifier]);
             elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
             elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
           	let _elm=elm;
-          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove");_elm.parentElement.remove();},60000);
+          	deviceTimeout[_identifier]=setTimeout(()=>{console.log("remove "+_identifier);_elm.parentElement.remove();},60000);
         }
 
     }
