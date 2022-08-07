@@ -838,7 +838,7 @@ export class BluetoothPage extends Page {
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
         d.rssi = rssi;
-        d.state = rsstatesi;
+        d.state = state;
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
