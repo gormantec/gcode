@@ -827,7 +827,7 @@ export class BluetoothPage extends Page {
 
     notifySelectedPerefial({
         selectedPeripheralId,
-        selectedPeripheralName,rssi
+        selectedPeripheralName,rssi,state
     }) {
         let start = Date.now();
         let d = {
@@ -838,6 +838,7 @@ export class BluetoothPage extends Page {
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
         d.rssi = rssi;
+        d.state = rsstatesi;
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
@@ -851,6 +852,7 @@ export class BluetoothPage extends Page {
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
             let _rssi = e.rssi || 0;
+            let _state = e.state || false;
             let _this=this;
           	let name=new Text(_name);
           	name.element.id="name"+e.identifier;
@@ -888,7 +890,8 @@ export class BluetoothPage extends Page {
                       _this.notifySelectedPerefial({
                           selectedPeripheralId: _identifier,
                           selectedPeripheralName: _name,
-                          rssi:_rssi
+                          rssi:_rssi,
+                          state:_state
                       });
                     },500);
                 }
