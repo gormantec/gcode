@@ -13,7 +13,7 @@ export class BluetoothDevice {
         }
         else if (type == 'advertisementreceived') {
             let _this=this;
-            window.addEventListener("bluetooth-peripheral-found", (e)=>{
+            window.addEventListener("bluetooth-watch-advertisements-"+this.id, (e)=>{
                 if(e.detail.identifier==this.id)
                 {
                     _this.name = (e.name && e.name != "") ? e.name : (_this.name && _this.name != "N/A") ? _this.name:"N/A";
@@ -26,7 +26,29 @@ export class BluetoothDevice {
     }
     watchAdvertisements()
     {
-
+        console.log("watchAdvertisements");
+        let start = Date.now(),
+            id = Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Math.floor(Math.random() * 16777215).toString(16) +
+                '-' + Date.now().toString(16),
+            messagetype = 'bluetooth-watch-advertisements';
+        let message = { id: id, data: { peripheralId: this.id } };
+        let responseType = messagetype +"-"+ this.id;
+        let _this=this;
+        return new Promise((resolve, reject) => {
+            console.log("listen for:" + responseType);
+            let eventListener = (e) => {
+                console.log("found:" + responseType);
+                window.removeEventListener(responseType, eventListener);
+                console.log(e.detail);
+                if (e.detail && (e.detail.value || e.detail.value == "")) {
+                    _this.value = new Uint8Array(e.detail.value);
+                }
+                resolve(_this.value);
+            };
+            window.addEventListener(responseType, eventListener);
+            window.webkit.messageHandlers[messagetype].postMessage(message);
+        });
     }
 
 
