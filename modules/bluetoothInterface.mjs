@@ -313,6 +313,7 @@ export class BluetoothInterface {
             let eventListener = (e) => {
                 clearInterval(_this.keepScanningInterval);
                 window.removeEventListener(responseType, eventListener);
+                console.log(e.detail);
                 resolve(new BluetoothDevice({ peripheralId: e.detail.selectedPeripheralId, peripheralName: e.detail.selectedPeripheralName,state:e.detail.state,rssi:e.detail.rssi }));
             };
             window.addEventListener(responseType, eventListener);
