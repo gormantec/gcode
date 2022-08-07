@@ -19,7 +19,8 @@ export class BluetoothDevice {
                     _this.name = (e.name && e.name != "") ? e.name : (_this.name && _this.name != "N/A") ? _this.name:"N/A";
                     _this.rssi =e.detail.rssi;
                     _this.state =e.detail.state;
-                    _func({device:{name:_this.name,id:_this.id,rssi:_this.rssi,txPower:"",uuids:""},manufacturerData:[],serviceData:[]});
+                    _this.advertisementData =e.detail.advertisementData;
+                    _func({device:{name:_this.name,id:_this.id,rssi:_this.rssi,txPower:"",uuids:"",state:_this.state,advertisementData:_this.advertisementData},manufacturerData:[],serviceData:[]});
                 }
             });
         }
@@ -49,6 +50,10 @@ export class BluetoothDevice {
             window.addEventListener(responseType, eventListener);
             window.webkit.messageHandlers[messagetype].postMessage(message);
         });
+    }
+    unwatchAdvertisements()
+    {
+        
     }
 
 
