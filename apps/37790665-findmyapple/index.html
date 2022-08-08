@@ -147,7 +147,7 @@ class HomePage extends Page {
                                     device.addEventListener('advertisementreceived', (e) => {
                                         console.log("advertisementreceived");
                                         console.log(e);
-                                      	PWA.getPWA().alert(device.name+"<div style='position:relative;top:0px;bottom:0px;left:0px;right:0px;overflow-y:auto'><p style='font-size:10px'>"+e.device.name+"</p>"+e.device.id+"<p style='font-size:10px'>"+e.rssi+"</p></div>");
+                                      	PWA.getPWA().alert(e.device.name+"<div style='position:relative;top:0px;bottom:0px;left:0px;right:0px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+e.device.id+"</p><p style='font-size:10px'>RSSI:"+e.device.rssi+"<br>State:"+e.device.state+"</p></div>");
                                                               
                                     });
                                   	device.watchAdvertisements();
