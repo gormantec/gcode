@@ -139,6 +139,8 @@ class HomePage extends Page {
                                 }).then((device) => {
                                     console.log(device.id);
                                     console.log(device.name);
+                                  	PWA.getPWA().alert(e.device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+device.id+"</p></div>");
+
                                   	//console.log(device);
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
