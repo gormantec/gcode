@@ -854,7 +854,7 @@ export class BluetoothPage extends Page {
             let _rssi = e.rssi || 0;
             let _state = e.state || false;
             let _this=this;
-          	let nameText=new Text(_name+" S="+_state+" R="+_rssi);
+          	let nameText=new Text(_name);
           	nameText.element.id="name"+e.identifier;
           	let subtitleText=new Text(_identifier)
           	subtitleText.element.id="subtitle"+e.identifier;
