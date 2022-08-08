@@ -854,10 +854,10 @@ export class BluetoothPage extends Page {
             let _rssi = e.rssi || 0;
             let _state = e.state || false;
             let _this=this;
-          	let name=new Text(_name);
-          	name.element.id="name"+e.identifier;
-          	let subtitle=new Text(_identifier)
-          	subtitle.element.id="subtitle"+e.identifier;
+          	let nameText=new Text(_name+" S="+_state+" R="+_rssi);
+          	nameText.element.id="name"+e.identifier;
+          	let subtitleText=new Text(_identifier)
+          	subtitleText.element.id="subtitle"+e.identifier;
           	let trailing=new Icon(e.status ? "bluetooth" : "close");
           	window.addEventListener("bluetooth-peripheral-disconnect-" + e.identifier, ()=>{
               trailing.firstChild.innerText="close";
@@ -878,8 +878,8 @@ export class BluetoothPage extends Page {
           var nt=new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
-                "title": name,
-                "subtitle": "S="+_state+" R="+_rssi,
+                "title": nameText,
+                "subtitle": subtitleText,
                 "leading": new Icon(Icons.battery_full),
                 "trailing": trailing,
                 "onclick": () => {
