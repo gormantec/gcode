@@ -139,18 +139,20 @@ class HomePage extends Page {
                                 }).then((device) => {
                                     console.log(device.id);
                                     console.log(device.name);
-                                  	device.watchAdvertisements();
                                   	//console.log(device);
                                     device.addEventListener('gattserverdisconnected', () => {
                                         console.log("gattserverdisconnected");
                                     });
-                                    device.addEventListener('advertisementreceived', (e) => {
-                                        console.log("advertisementreceived");
-                                        console.log(e);
-                                      	PWA.getPWA().alert(e.device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+e.device.id+"</p><p style='font-size:10px'>RSSI:"+e.device.rssi+"<br>State:"+e.device.state+"<br>AdvData:"+e.device.advertisementData+"</p></div>");
-                                                              
-                                    });
-                                  	device.watchAdvertisements();
+                                  	if(typeof device.watchAdvertisements === 'function' )
+                                    {
+                                      device.watchAdvertisements();
+                                      device.addEventListener('advertisementreceived', (e) => {
+                                          console.log("advertisementreceived");
+                                          console.log(e);
+                                          PWA.getPWA().alert(e.device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+e.device.id+"</p><p style='font-size:10px'>RSSI:"+e.device.rssi+"<br>State:"+e.device.state+"<br>AdvData:"+e.device.advertisementData+"</p></div>");
+
+                                      });
+                                    }
                                   	let values=[];
                                   /*
                                     device.gatt.connect().then((server) => {
