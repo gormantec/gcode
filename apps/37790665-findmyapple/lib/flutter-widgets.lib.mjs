@@ -878,8 +878,8 @@ export class BluetoothPage extends Page {
           var nt=new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
-                "title": name+" "+_state+" "+_rssi,
-                "subtitle": subtitle,
+                "title": name,
+                "subtitle": "S="+_state+" R="+_rssi,
                 "leading": new Icon(Icons.battery_full),
                 "trailing": trailing,
                 "onclick": () => {
