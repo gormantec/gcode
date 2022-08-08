@@ -1,10 +1,11 @@
 export class BluetoothDevice {
-    constructor({ peripheralId, peripheralName, state, rssi }) {
+    constructor({ peripheralId, peripheralName, state, rssi,advertisementData }) {
         this.id = peripheralId;
         this.name = peripheralName;
         this.state = state || false;
         this.rssi =rssi;
         this.gatt = new GattServerConnector({ peripheralId: this.id, peripheralName: this.name })
+        this.advertisementData=advertisementData;
     }
 
     addEventListener(type, _func) {
@@ -341,7 +342,7 @@ export class BluetoothInterface {
                 clearInterval(_this.keepScanningInterval);
                 window.removeEventListener(responseType, eventListener);
                 console.log(e.detail);
-                resolve(new BluetoothDevice({ peripheralId: e.detail.selectedPeripheralId, peripheralName: e.detail.selectedPeripheralName,state:e.detail.state,rssi:e.detail.rssi }));
+                resolve(new BluetoothDevice({ peripheralId: e.detail.selectedPeripheralId, peripheralName: e.detail.selectedPeripheralName,state:e.detail.state,rssi:e.detail.rssi,advertisementData:e.detail.advertisementData }));
             };
             window.addEventListener(responseType, eventListener);
             window.webkit.messageHandlers[messagetype].postMessage(message);
