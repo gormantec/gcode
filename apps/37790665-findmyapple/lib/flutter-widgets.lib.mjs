@@ -896,6 +896,7 @@ export class BluetoothPage extends Page {
                     },500);
                 }
             })
+          	nt.appendChild(new Div({id:"rssi"+_identifier,innerText:_rssi,top:"2px",right:"20px",width:"30px",height:"20px",fontSize:"18px"}));
             blueListView.appendChild(nt);
           
           	deviceTimeout[_identifier]=setTimeout(()=>{
