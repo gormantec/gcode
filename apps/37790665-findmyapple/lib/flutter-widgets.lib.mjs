@@ -798,7 +798,7 @@ export class BluetoothPage extends Page {
                         PWA.getPWA().setPage(this.homePage);
                         this.notifySelectedPerefial({
                             selectedPeripheralId: "",
-                            selectedPeripheralName: "",rssi:0
+                            selectedPeripheralName: "",rssi:0,state:false
                         });
                     }
                 })
