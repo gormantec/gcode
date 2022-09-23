@@ -125,7 +125,7 @@ class HomePage extends Page {
                     height: "50px",
                     borderRadius: "10px",
                     innerText: "Scan BLE",
-                    onclick: () => {
+                    onclick: () => {  
 
                       
                             console.log("click");
@@ -139,7 +139,7 @@ class HomePage extends Page {
                                 }).then((device) => {
                                     console.log(device.id);
                                     console.log(device.name);
-                                  	PWA.getPWA().alert(device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+device.id+"</p><p style='font-size:10px'>RSSI:"+e.device.rssi+"<br>State:"+e.device.state+"<br>AdvData:</p></div>");
+                                  	PWA.getPWA().alert(device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+device.id+"</p><p style='font-size:10px'>RSSI:"+device.rssi+"<br>Distance:"+Math.floor((device.rssi/-5)-8)+"m<br>State:"+device.state+"<br>AdvData:"+JSON.stringify(device.advertisementData,null,4)+"</p></div>");
 
                                   	//console.log(device);
                                     device.addEventListener('gattserverdisconnected', () => {
@@ -151,7 +151,7 @@ class HomePage extends Page {
                                       device.addEventListener('advertisementreceived', (e) => {
                                           console.log("advertisementreceived");
                                           console.log(e);
-                                          PWA.getPWA().alert(e.device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+e.device.id+"</p><p style='font-size:10px'>RSSI:"+e.device.rssi+"<br>State:"+e.device.state+"<br>AdvData:"+JSON.stringify(e.device.advertisementData,null,4)+"</p></div>");
+                                          PWA.getPWA().alert(e.device.name+"<div style='position:relative;top:0px;bottom:0px;left:15px;right:15px;overflow-y:auto;text-align:left'><p style='font-size:10px'>"+e.device.id+"</p><p style='font-size:10px'>RSSI:"+e.device.rssi+"<br>Distance:"+Math.floor((e.device.rssi/-5)-8)+"m<br>State:"+e.device.state+"<br>AdvData:"+JSON.stringify(e.device.advertisementData,null,4)+"</p></div>");
 
                                       });
                                     }
