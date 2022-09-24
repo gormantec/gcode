@@ -237,7 +237,7 @@ class HomePage extends Page {
                       let min=allmin-Math.floor(allmin/60)*60;
                       let hours=Math.floor(allmin/60);
                       
-                      counter.element.innerHTML = hours+("00"+min).slice(-2)+":"+("00"+sec).slice(-2);
+                      counter.element.innerHTML = hours+":"+("00"+min).slice(-2)+":"+("00"+sec).slice(-2);
                     }
                     DATE.element.innerHTML = data.games[0].date;
                     ATEAM.element.innerHTML = data.games[0].ateam;
