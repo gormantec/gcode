@@ -227,60 +227,68 @@ class HomePage extends Page {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    if (data.games[0].date) {
-                        let b = Date.parse(data.games[0].date.replaceAll(" ", "T"));
-                        console.log(b);
-                        let n = Date.now();
-                        if (b > n) {
-                            let allsec = Math.floor((b - n) / 1000);
-                            let sec = allsec - Math.floor(allsec / 60) * 60;
-                            let allmin = Math.floor(allsec / 60);
-                            let min = allmin - Math.floor(allmin / 60) * 60;
-                            let hours = Math.floor(allmin / 60);
+                    if (data && data.games[0]) {
+                        if (data.games[0].hteamid==16) {
+                          
+                          HTEAM.backgroundColor= "#ed171f"
+                          HG.backgroundColor= "#ed171f";
+                          HP.backgroundColor= "#ed171f";
+                          HS.backgroundColor= "#ed171f";
+                          ATEAM.backgroundColor= "black";
+                          AG.backgroundColor= "black";
+                          AP.backgroundColor= "black";
+                          AS.backgroundColor= "black";
+                        }
+                        if (data.games[0].date) {
+                            let b = Date.parse(data.games[0].date.replaceAll(" ", "T"));
+                            console.log(b);
+                            let n = Date.now();
+                            if (b > n) {
+                                let allsec = Math.floor((b - n) / 1000);
+                                let sec = allsec - Math.floor(allsec / 60) * 60;
+                                let allmin = Math.floor(allsec / 60);
+                                let min = allmin - Math.floor(allmin / 60) * 60;
+                                let hours = Math.floor(allmin / 60);
+                                counter.element.innerHTML = hours + ":" + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                            } else if (data.games[0].complete == 100) {
 
-                            counter.element.innerHTML = hours + ":" + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
-                        } else if(data.games[0].complete==100) {
-   
-                            counter.element.innerHTML = "COMPLETE";
+                                counter.element.innerHTML = "COMPLETE";
+                            } else if (data.games[0].complete < 25) {
+                                let allsec = Math.floor(60 * 20 * (25 - data.games[0].complete) / 25);
+                                let sec = allsec - Math.floor(allsec / 60) * 60;
+                                let allmin = Math.floor(allsec / 60);
+                                let min = allmin - Math.floor(allmin / 60) * 60;
+                                counter.element.innerHTML = "Q1 " + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                            } else if (data.games[0].complete < 50) {
+                                let allsec = Math.floor(60 * 20 * (25 - (data.games[0].complete - 25)) / 25);
+                                let sec = allsec - Math.floor(allsec / 60) * 60;
+                                let allmin = Math.floor(allsec / 60);
+                                let min = allmin - Math.floor(allmin / 60) * 60;
+                                counter.element.innerHTML = "Q2 " + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                            } else if (data.games[0].complete < 75) {
+                                let allsec = Math.floor(60 * 20 * (25 - (data.games[0].complete - 50)) / 25);
+                                let sec = allsec - Math.floor(allsec / 60) * 60;
+                                let allmin = Math.floor(allsec / 60);
+                                let min = allmin - Math.floor(allmin / 60) * 60;
+                                counter.element.innerHTML = "Q3 " + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                            } else if (data.games[0].complete < 100) {
+                                let allsec = Math.floor(60 * 20 * (25 - (data.games[0].complete - 75)) / 25);
+                                let sec = allsec - Math.floor(allsec / 60) * 60;
+                                let allmin = Math.floor(allsec / 60);
+                                let min = allmin - Math.floor(allmin / 60) * 60;
+                                counter.element.innerHTML = "Q4 " + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                            }
                         }
-                        else if(data.games[0].complete<25){
-                            let allsec=Math.floor(60*20*(25-data.games[0].complete)/25);
-                            let sec = allsec - Math.floor(allsec / 60) * 60;
-                            let allmin = Math.floor(allsec / 60);
-                            let min = allmin - Math.floor(allmin / 60) * 60;
-                            counter.element.innerHTML = "Q1 "+("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
-                        }
-                        else if(data.games[0].complete<50){
-                            let allsec=Math.floor(60*20*(25-(data.games[0].complete-25))/25);
-                            let sec = allsec - Math.floor(allsec / 60) * 60;
-                            let allmin = Math.floor(allsec / 60);
-                            let min = allmin - Math.floor(allmin / 60) * 60;
-                            counter.element.innerHTML = "Q2 "+("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
-                        }
-                        else if(data.games[0].complete<75){
-                            let allsec=Math.floor(60*20*(25-(data.games[0].complete-50))/25);
-                            let sec = allsec - Math.floor(allsec / 60) * 60;
-                            let allmin = Math.floor(allsec / 60);
-                            let min = allmin - Math.floor(allmin / 60) * 60;
-                            counter.element.innerHTML = "Q3 "+("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
-                        }
-                        else if(data.games[0].complete<100){
-                            let allsec=Math.floor(60*20*(25-(data.games[0].complete-75))/25);
-                            let sec = allsec - Math.floor(allsec / 60) * 60;
-                            let allmin = Math.floor(allsec / 60);
-                            let min = allmin - Math.floor(allmin / 60) * 60;
-                            counter.element.innerHTML = "Q4 "+("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
-                        }
+                        DATE.element.innerHTML = data.games[0].date;
+                        ATEAM.element.innerHTML = data.games[0].ateam;
+                        HTEAM.element.innerHTML = data.games[0].hteam;
+                        HG.element.innerHTML = data.games[0].hgoals || 0;
+                        HP.element.innerHTML = data.games[0].hbehinds || 0;
+                        HS.element.innerHTML = data.games[0].hscore || 0;
+                        AG.element.innerHTML = data.games[0].agoals || 0;
+                        AP.element.innerHTML = data.games[0].abehinds || 0;
+                        AS.element.innerHTML = data.games[0].ascore || 0;
                     }
-                    DATE.element.innerHTML = data.games[0].date;
-                    ATEAM.element.innerHTML = data.games[0].ateam;
-                    HTEAM.element.innerHTML = data.games[0].hteam;
-                    HG.element.innerHTML = data.games[0].hgoals || 0;
-                    HP.element.innerHTML = data.games[0].hbehinds || 0;
-                    HS.element.innerHTML = data.games[0].hscore || 0;
-                    AG.element.innerHTML = data.games[0].agoals || 0;
-                    AP.element.innerHTML = data.games[0].abehinds || 0;
-                    AS.element.innerHTML = data.games[0].ascore || 0;
                 });
         }, 5000);
     }
