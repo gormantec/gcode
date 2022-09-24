@@ -98,6 +98,12 @@ class HomePage extends Page {
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(https://sportsfancovers.com/wp-content/uploads/2020/04/Sydney_Swans_Logo-249x300.png)"
       });
+    
+    setInterval(()=>{
+      fetch("https://api.squiggle.com.au/?q=games;team=7;complete=!100").then((d)=>{
+        console.log(d);
+      });
+    },5000);
   }
 
 }
