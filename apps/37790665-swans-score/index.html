@@ -227,6 +227,12 @@ class HomePage extends Page {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
+              		let b=Date.parse(data.games[0].date).getTime();
+              		let n=Date.now();
+              		if(b>n){
+                      
+                      counter.element.innerHTML = Math.floor((b-n)/1000);
+                    }
                     DATE.element.innerHTML = data.games[0].date;
                     ATEAM.element.innerHTML = data.games[0].ateam;
                     HTEAM.element.innerHTML = data.games[0].hteam;
