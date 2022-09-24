@@ -219,7 +219,7 @@ class HomePage extends Page {
         super({
             "color": "black",
             "backgroundColor": "white",
-            "children": [LOGO, DATELable, DATE, ATEAM, HTEAM, HG, HP, HS, AG, AP, AS,counter]
+            "children": [LOGO, DATELable, DATE, ATEAM, HTEAM, HG, HP, HS, AG, AP, AS, counter]
         });
 
         setInterval(() => {
@@ -227,17 +227,19 @@ class HomePage extends Page {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-              		let b=Date.parse(data.games[0].date);
-              		console.log(b);
-              		let n=Date.now();
-              		if(b>n){
-                      let allsec=Math.floor((b-n)/1000);
-                      let sec=allsec-Math.floor(allsec/60)*60;
-                      let allmin=Math.floor(allsec/60);
-                      let min=allmin-Math.floor(allmin/60)*60;
-                      let hours=Math.floor(allmin/60);
-                      
-                      counter.element.innerHTML = hours+":"+("00"+min).slice(-2)+":"+("00"+sec).slice(-2);
+                    if (data.games[0].date) {
+                        let b = Date.parse(data.games[0].date.replaceAll(" ", "T"));
+                        console.log(b);
+                        let n = Date.now();
+                        if (b > n) {
+                            let allsec = Math.floor((b - n) / 1000);
+                            let sec = allsec - Math.floor(allsec / 60) * 60;
+                            let allmin = Math.floor(allsec / 60);
+                            let min = allmin - Math.floor(allmin / 60) * 60;
+                            let hours = Math.floor(allmin / 60);
+
+                            counter.element.innerHTML = hours + ":" + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                        }
                     }
                     DATE.element.innerHTML = data.games[0].date;
                     ATEAM.element.innerHTML = data.games[0].ateam;
