@@ -100,9 +100,18 @@ class HomePage extends Page {
       });
     
     setInterval(()=>{
-      fetch("https://api.squiggle.com.au/?q=games;team=7;complete=!100")
+      fetch("https://api.squiggle.com.au/?q=games;team=16;complete=!100")
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) =>{
+        	console.log(data.games[0].aTeam);
+        	console.log(data.games[0].agoals);
+        	console.log(data.games[0].abehinds);
+        	console.log(data.games[0].ascore);
+        	console.log(data.games[0].hTeam);
+        	console.log(data.games[0].hgoals);
+        	console.log(data.games[0].hbehinds);
+        	console.log(data.games[0].hscore);
+         });
     },5000);
   }
 
