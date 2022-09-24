@@ -104,11 +104,11 @@ class HomePage extends Page {
         .then((response) => response.json())
         .then((data) =>{
         	console.log(data);
-        	console.log(data.games[0].aTeam);
+        	console.log(data.games[0].ateam);
         	console.log(data.games[0].agoals || 0);
         	console.log(data.games[0].abehinds || 0);
         	console.log(data.games[0].ascore);
-        	console.log(data.games[0].hTeam);
+        	console.log(data.games[0].hteam);
         	console.log(data.games[0].hgoals || 0);
         	console.log(data.games[0].hbehinds || 0);
         	console.log(data.games[0].hscore);
