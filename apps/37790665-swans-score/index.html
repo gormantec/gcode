@@ -88,7 +88,9 @@ if (window.opener && window.opener !== window) {
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
-let DATE=new Div({"innerText":"TEST"});
+let DATE=new Div({"top":"20px","innerText":"TEST"});
+let ATEAM=new Div({"top":"60px","innerText":"Away"});
+let HTEAM=new Div({"top":"100px","innerText":"Home"});
 class HomePage extends Page {
   
   constructor() {
@@ -108,6 +110,8 @@ class HomePage extends Page {
         .then((data) =>{
         	console.log(data);
         	DATE.element.innerHTML=data.games[0].date;
+        	ATEAM.element.innerHTML=data.games[0].ateam;
+        	HTEAM.element.innerHTML=data.games[0].hteam;
         	console.log(data.games[0].date);
         	console.log(data.games[0].ateam);
         	console.log(data.games[0].agoals || 0);
