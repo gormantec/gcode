@@ -95,6 +95,9 @@ let ATEAM=new Div({"top":"60px","left":"220px","innerText":"Away"});
 let HG=new Div({"top":"80px","left":"60px","innerText":"0"});
 let HP=new Div({"top":"100px","left":"60px","innerText":"0"});
 let HS=new Div({"top":"120px","left":"60px","innerText":"0"});
+let AG=new Div({"top":"80px","left":"220px","innerText":"0"});
+let AP=new Div({"top":"100px","left":"220px","innerText":"0"});
+let AS=new Div({"top":"120px","left":"220px","innerText":"0"});
 class HomePage extends Page {
   
   constructor() {
@@ -105,7 +108,7 @@ class HomePage extends Page {
           "backgroundSize": "60%",
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(https://sportsfancovers.com/wp-content/uploads/2020/04/Sydney_Swans_Logo-249x300.png)",
-          "children":[DATELable,DATE,ATEAM,HTEAM,]
+          "children":[DATELable,DATE,ATEAM,HTEAM,HG,HP,HS,AG,AP,AS]
       });
     
     setInterval(()=>{
