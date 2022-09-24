@@ -119,15 +119,12 @@ class HomePage extends Page {
         	DATE.element.innerHTML=data.games[0].date;
         	ATEAM.element.innerHTML=data.games[0].ateam;
         	HTEAM.element.innerHTML=data.games[0].hteam;
-        	console.log(data.games[0].date);
-        	console.log(data.games[0].ateam);
-        	console.log(data.games[0].agoals || 0);
-        	console.log(data.games[0].abehinds || 0);
-        	console.log(data.games[0].ascore);
-        	console.log(data.games[0].hteam);
-        	console.log(data.games[0].hgoals || 0);
-        	console.log(data.games[0].hbehinds || 0);
-        	console.log(data.games[0].hscore);
+        	HG.element.innerHTML=data.games[0].hgoals || 0;
+        	HP.element.innerHTML=data.games[0].hbehinds || 0;
+        	HS.element.innerHTML=data.games[0].hscore || 0;
+        	AG.element.innerHTML=data.games[0].agoals || 0;
+        	AP.element.innerHTML=data.games[0].abehinds || 0;
+        	AS.element.innerHTML=data.games[0].ascore || 0;
          });
     },5000);
   }
