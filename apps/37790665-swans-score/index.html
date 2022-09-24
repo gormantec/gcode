@@ -107,7 +107,7 @@ class HomePage extends Page {
         .then((response) => response.json())
         .then((data) =>{
         	console.log(data);
-        	DATE.element.innerText=data.games[0].date;
+        	DATE.element.innerHTML=data.games[0].date;
         	console.log(data.games[0].date);
         	console.log(data.games[0].ateam);
         	console.log(data.games[0].agoals || 0);
