@@ -106,8 +106,8 @@ class HomePage extends Page {
       fetch("https://api.squiggle.com.au/?q=games;team=16;complete=!100")
         .then((response) => response.json())
         .then((data) =>{
-        	console.log(data.games[0].date);
-        	DATE.innerText=
+        	console.log(data);
+        	DATE.innerText=data.games[0].date;
         	console.log(data.games[0].date);
         	console.log(data.games[0].ateam);
         	console.log(data.games[0].agoals || 0);
