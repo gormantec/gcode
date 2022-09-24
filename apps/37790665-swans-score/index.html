@@ -230,14 +230,14 @@ class HomePage extends Page {
                     if (data && data.games[0]) {
                         if (data.games[0].hteamid==16) {
                           
-                          HTEAM.backgroundColor= "#ed171f"
-                          HG.backgroundColor= "#ed171f";
-                          HP.backgroundColor= "#ed171f";
-                          HS.backgroundColor= "#ed171f";
-                          ATEAM.backgroundColor= "black";
-                          AG.backgroundColor= "black";
-                          AP.backgroundColor= "black";
-                          AS.backgroundColor= "black";
+                          HTEAM.style.backgroundColor= "#ed171f"
+                          HG.style.backgroundColor= "#ed171f";
+                          HP.style.backgroundColor= "#ed171f";
+                          HS.style.backgroundColor= "#ed171f";
+                          ATEAM.style.backgroundColor= "black";
+                          AG.style.backgroundColor= "black";
+                          AP.style.backgroundColor= "black";
+                          AS.style.backgroundColor= "black";
                         }
                         if (data.games[0].date) {
                             let b = Date.parse(data.games[0].date.replaceAll(" ", "T"));
