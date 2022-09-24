@@ -231,7 +231,7 @@ class HomePage extends Page {
                         let b = Date.parse(data.games[0].date.replaceAll(" ", "T"));
                         console.log(b);
                         let n = Date.now();
-                      	data.games[0].complete=99;
+                      	data.games[0].complete=99.5;
                         if (b > n) {
                             let allsec = Math.floor((b - n) / 1000);
                             let sec = allsec - Math.floor(allsec / 60) * 60;
