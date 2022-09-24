@@ -85,63 +85,162 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-try { Page.clearPages(); } catch (e) {}
+import {
+    PWA,
+    Page,
+    Div
+} from 'https://gcode.com.au/modules/pwa.mjs';
+try {
+    Page.clearPages();
+} catch (e) {}
 /*---------------------------------------------------------------------------*/
-let DATELable=new Div({"top":"20px","left":"60px","innerText":"Bounce:"});
-let DATE=new Div({"top":"20px","left":"130px","innerText":"TEST"});
-let HTEAM=new Div({"top":"60px","fontSize":"26px","left":"40px","innerText":"Home","width":"140px","height":"30px","color":"white","backgroundColor":"#002b5c","textAlign":"center"});
-let ATEAM=new Div({"top":"60px","fontSize":"26px","left":"200px","innerText":"Away","width":"140px","height":"30px","color":"white","backgroundColor":"#ed171f","textAlign":"center"});
-let HG=new Div({"top":"90px","fontSize":"26px","left":"40px","innerText":"0","width":"140px","height":"30px","color":"white","backgroundColor":"#002b5c","textAlign":"center"});
-let HP=new Div({"top":"120px","fontSize":"26px","left":"40px","innerText":"0","width":"140px","height":"30px","color":"white","backgroundColor":"#002b5c","textAlign":"center"});
-let HS=new Div({"top":"150px","fontSize":"26px","left":"40px","innerText":"0","width":"140px","height":"30px","color":"white","backgroundColor":"#002b5c","textAlign":"center"});
-let AG=new Div({"top":"90px","fontSize":"26px","left":"200px","innerText":"0","width":"140px","height":"30px","color":"white","backgroundColor":"#ed171f","textAlign":"center"});
-let AP=new Div({"top":"120px","fontSize":"26px","left":"200px","innerText":"0","width":"140px","height":"30px","color":"white","backgroundColor":"#ed171f","textAlign":"center"});
-let AS=new Div({"top":"150px","fontSize":"26px","left":"200px","innerText":"0","width":"140px","height":"30px","color":"white","backgroundColor":"#ed171f","textAlign":"center"});
+let DATELable = new Div({
+    "top": "20px",
+    "left": "60px",
+    "innerText": "Bounce:"
+});
+let DATE = new Div({
+    "top": "20px",
+    "left": "130px",
+    "innerText": "TEST"
+});
+let HTEAM = new Div({
+    "top": "60px",
+    "fontSize": "26px",
+    "left": "40px",
+    "innerText": "Home",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#002b5c",
+    "textAlign": "center"
+});
+let ATEAM = new Div({
+    "top": "60px",
+    "fontSize": "26px",
+    "left": "200px",
+    "innerText": "Away",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#ed171f",
+    "textAlign": "center"
+});
+let HG = new Div({
+    "top": "90px",
+    "fontSize": "26px",
+    "left": "40px",
+    "innerText": "0",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#002b5c",
+    "textAlign": "center"
+});
+let HP = new Div({
+    "top": "120px",
+    "fontSize": "26px",
+    "left": "40px",
+    "innerText": "0",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#002b5c",
+    "textAlign": "center"
+});
+let HS = new Div({
+    "top": "150px",
+    "fontSize": "26px",
+    "left": "40px",
+    "innerText": "0",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#002b5c",
+    "textAlign": "center"
+});
+let AG = new Div({
+    "top": "90px",
+    "fontSize": "26px",
+    "left": "200px",
+    "innerText": "0",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#ed171f",
+    "textAlign": "center"
+});
+let AP = new Div({
+    "top": "120px",
+    "fontSize": "26px",
+    "left": "200px",
+    "innerText": "0",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#ed171f",
+    "textAlign": "center"
+});
+let AS = new Div({
+    "top": "150px",
+    "fontSize": "26px",
+    "left": "200px",
+    "innerText": "0",
+    "width": "140px",
+    "height": "30px",
+    "color": "white",
+    "backgroundColor": "#ed171f",
+    "textAlign": "center"
+});
+let LOGO = new Div({
+    "marginTop": "100px",
+    "backgroundColor": "white",
+    "backgroundPosition": "bottom",
+    "backgroundSize": "40%",
+    "backgroundRepeat": "no-repeat",
+    "backgroundImage": "url(https://sportsfancovers.com/wp-content/uploads/2020/04/Sydney_Swans_Logo-249x300.png)",
+});
 class HomePage extends Page {
-  
-  constructor() {
-      super({
-          "color": "black",
-          "backgroundColor": "white",
-          "backgroundPosition": "bottom",
-          "backgroundSize": "40%",
-          "backgroundRepeat": "no-repeat",
-          "backgroundImage": "url(https://sportsfancovers.com/wp-content/uploads/2020/04/Sydney_Swans_Logo-249x300.png)",
-          "children":[DATELable,DATE,ATEAM,HTEAM,HG,HP,HS,AG,AP,AS]
-      });
-    
-    setInterval(()=>{
-      fetch("https://api.squiggle.com.au/?q=games;team=16;complete=!100")
-        .then((response) => response.json())
-        .then((data) =>{
-        	console.log(data);
-        	DATE.element.innerHTML=data.games[0].date;
-        	ATEAM.element.innerHTML=data.games[0].ateam;
-        	HTEAM.element.innerHTML=data.games[0].hteam;
-        	HG.element.innerHTML=data.games[0].hgoals || 0;
-        	HP.element.innerHTML=data.games[0].hbehinds || 0;
-        	HS.element.innerHTML=data.games[0].hscore || 0;
-        	AG.element.innerHTML=data.games[0].agoals || 0;
-        	AP.element.innerHTML=data.games[0].abehinds || 0;
-        	AS.element.innerHTML=data.games[0].ascore || 0;
-         });
-    },5000);
-  }
+
+    constructor() {
+        super({
+            "color": "black",
+            "backgroundColor": "white",
+            "children": [LOGO, DATELable, DATE, ATEAM, HTEAM, HG, HP, HS, AG, AP, AS]
+        });
+
+        setInterval(() => {
+            fetch("https://api.squiggle.com.au/?q=games;team=16;complete=!100")
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    DATE.element.innerHTML = data.games[0].date;
+                    ATEAM.element.innerHTML = data.games[0].ateam;
+                    HTEAM.element.innerHTML = data.games[0].hteam;
+                    HG.element.innerHTML = data.games[0].hgoals || 0;
+                    HP.element.innerHTML = data.games[0].hbehinds || 0;
+                    HS.element.innerHTML = data.games[0].hscore || 0;
+                    AG.element.innerHTML = data.games[0].agoals || 0;
+                    AP.element.innerHTML = data.games[0].abehinds || 0;
+                    AS.element.innerHTML = data.games[0].ascore || 0;
+                });
+        }, 5000);
+    }
 
 }
 
 /*---------------------------------------------------------------------------*/
-var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+var myDiv = new Div({
+    innerHTML: "url(https://gcode.com.au/html/test.html)"
+});
 var aHomePage = new HomePage();
 var aPWA = new PWA({
-  title: "Sydney Swans Score Card",
-  footer: "https://www.gormantec.com",
-  primaryColor: "#ed171f",
+    title: "Sydney Swans Score Card",
+    footer: "https://www.gormantec.com",
+    primaryColor: "#ed171f",
 });
 
 aPWA.setPage(aHomePage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
