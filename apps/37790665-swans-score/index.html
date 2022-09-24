@@ -90,7 +90,7 @@ try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 let DATE=new Div({"top":"20px","innerText":"TEST"});
 let ATEAM=new Div({"top":"60px","innerText":"Away"});
-let HTEAM=new Div({"top":"100px","innerText":"Home"});
+let HTEAM=new Div({"top":"60px","left":"150px","innerText":"Home"});
 class HomePage extends Page {
   
   constructor() {
@@ -101,7 +101,7 @@ class HomePage extends Page {
           "backgroundSize": "60%",
           "backgroundRepeat": "no-repeat",
           "backgroundImage": "url(https://sportsfancovers.com/wp-content/uploads/2020/04/Sydney_Swans_Logo-249x300.png)",
-          "children":[DATE]
+          "children":[DATE,ATEAM,HTEAM]
       });
     
     setInterval(()=>{
