@@ -239,7 +239,11 @@ class HomePage extends Page {
                             let hours = Math.floor(allmin / 60);
 
                             counter.element.innerHTML = hours + ":" + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
-                        } else {
+                        } else if(data.games[0].complete==100) {
+   
+                            counter.element.innerHTML = "COMPLETE";
+                        }
+                        else {
    
                             counter.element.innerHTML = "LIVE";
                         }
