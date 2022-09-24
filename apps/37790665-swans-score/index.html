@@ -200,13 +200,25 @@ let LOGO = new Div({
     "backgroundRepeat": "no-repeat",
     "backgroundImage": "url(https://sportsfancovers.com/wp-content/uploads/2020/04/Sydney_Swans_Logo-249x300.png)",
 });
+
+let counter = new Div({
+    "botom": "20px",
+    "fontSize": "32px",
+    "left": "200px",
+    "innerText": "0:00",
+    "width": "140px",
+    "height": "36px",
+    "color": "black",
+    "textAlign": "center"
+});
+
 class HomePage extends Page {
 
     constructor() {
         super({
             "color": "black",
             "backgroundColor": "white",
-            "children": [LOGO, DATELable, DATE, ATEAM, HTEAM, HG, HP, HS, AG, AP, AS]
+            "children": [LOGO, DATELable, DATE, ATEAM, HTEAM, HG, HP, HS, AG, AP, AS,counter]
         });
 
         setInterval(() => {
