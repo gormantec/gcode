@@ -223,7 +223,7 @@ class HomePage extends Page {
         });
 
         setInterval(() => {
-            fetch("https://api.squiggle.com.au/?q=games;team=16;complete=!100")
+            fetch("https://api.squiggle.com.au/?q=games;round=27;year=2022")
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
