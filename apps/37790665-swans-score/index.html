@@ -94,7 +94,7 @@ try {
     Page.clearPages();
 } catch (e) {}
 /*---------------------------------------------------------------------------*/
-let teamColor=["black","black","black","black","black","black","black","#002b5c","black","black","black","black","black","black","black","black","#ed171f","black","black","black","black","black"];
+let teamColor=["black","black","black","black","black","black","black","#002b5c","black","black","black","black","#1a3b8e","black","black","black","#ed171f","black","black","black","black","black"];
 let DATELable = new Div({
     "top": "20px",
     "left": "60px",
@@ -229,17 +229,16 @@ class HomePage extends Page {
                 .then((data) => {
                     console.log(data);
                     if (data && data.games[0]) {
-                        if (data.games[0].hteamid==16) {
-                          
-                          HTEAM.style.backgroundColor= "#ed171f"
-                          HG.style.backgroundColor= "#ed171f";
-                          HP.style.backgroundColor= "#ed171f";
-                          HS.style.backgroundColor= "#ed171f";
-                          ATEAM.style.backgroundColor= "black";
-                          AG.style.backgroundColor= "black";
-                          AP.style.backgroundColor= "black";
-                          AS.style.backgroundColor= "black";
-                        }
+
+                          HTEAM.style.backgroundColor= teamColor[data.games[0].hteamid]
+                          HG.style.backgroundColor= teamColor[data.games[0].hteamid]
+                          HP.style.backgroundColor= teamColor[data.games[0].hteamid]
+                          HS.style.backgroundColor= teamColor[data.games[0].hteamid]
+                          ATEAM.style.backgroundColor= teamColor[data.games[0].ateamid]
+                          AG.style.backgroundColor= teamColor[data.games[0].ateamid]
+                          AP.style.backgroundColor= teamColor[data.games[0].ateamid]
+                          AS.style.backgroundColor= teamColor[data.games[0].ateamid]
+                        
                         if (data.games[0].date) {
                             let b = Date.parse(data.games[0].date.replaceAll(" ", "T"));
                             console.log(b);
