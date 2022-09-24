@@ -8,7 +8,7 @@
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-swans-score/",
   "permitted_urls": [],
-  "version": "1.0.0.2299058",
+  "version": "1.0.0.2299068",
   "icons": [
     {
       "src": "/apps/37790665-swans-score/180x180.icon.png",

@@ -239,6 +239,9 @@ class HomePage extends Page {
                             let hours = Math.floor(allmin / 60);
 
                             counter.element.innerHTML = hours + ":" + ("00" + min).slice(-2) + ":" + ("00" + sec).slice(-2);
+                        } else {
+   
+                            counter.element.innerHTML = "LIVE";
                         }
                     }
                     DATE.element.innerHTML = data.games[0].date;
