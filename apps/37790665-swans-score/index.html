@@ -231,8 +231,9 @@ class HomePage extends Page {
               		console.log(b);
               		let n=Date.now();
               		if(b>n){
-                      
-                      counter.element.innerHTML = Math.floor((b-n)/1000);
+                      let allsec=Math.floor((b-n)/1000);
+                      let sec=allsec-Math.floor(allsec/60)*60;
+                      counter.element.innerHTML = sec;
                     }
                     DATE.element.innerHTML = data.games[0].date;
                     ATEAM.element.innerHTML = data.games[0].ateam;
