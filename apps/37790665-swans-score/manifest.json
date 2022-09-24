@@ -1,0 +1,33 @@
+{
+  "name": "score",
+  "short_name": "score",
+  "theme_color": "#ed171f",
+  "background_color": "#ed171f",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "A gcode developed PWA app",
+  "scope": "/apps/37790665-swans-score/",
+  "permitted_urls": [],
+  "version": "1.0.0.2298280",
+  "icons": [
+    {
+      "src": "/apps/37790665-swans-score/180x180.icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-swans-score/192x192.icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apps/37790665-swans-score/512x512.icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/apps/37790665-swans-score/index.html"
+}
