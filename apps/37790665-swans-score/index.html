@@ -227,7 +227,8 @@ class HomePage extends Page {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-              		let b=Date.parse(data.games[0].date).getTime();
+              		let b=Date.parse(data.games[0].date);
+              		console.log(b);
               		let n=Date.now();
               		if(b>n){
                       
