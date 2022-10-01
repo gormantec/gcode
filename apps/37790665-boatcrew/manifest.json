@@ -1,8 +1,8 @@
 {
   "name": "boatcrew",
   "short_name": "boatcrew",
-  "theme_color": "#0010AA",
-  "background_color": "#0010AA",
+  "theme_color": "#3f3ff3",
+  "background_color": "#3f3ff3",
   "display": "standalone",
   "orientation": "any",
   "description": "An app to colaborate with freinds on trips to the river.",
@@ -20,7 +20,7 @@
     "fonts.googleapis.com",
     "maps.gstatic.com"
   ],
-  "version": "1.0.0.2361496",
+  "version": "1.0.0.2361504",
   "icons": [
     {
       "src": "/apps/37790665-boatcrew/180x180.icon.png",
