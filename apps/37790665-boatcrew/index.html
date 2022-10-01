@@ -110,12 +110,10 @@ class LoginPage extends Page {
             "child": new AuthButtons({
                     "id": "getEmailButton",
                     applekey: "au.com.gcode.appleauth",
+                    facebookkey: "1240916769304778",
                     appearance: "list",
                     bottom: "45px",
-                    onsignin: (s) => {
-                        //location.href="https://www.icloud.com/find/";
-
-                    }
+                    nextPage: "ChatPage"
                 }),
             "bottom": ""
         });
