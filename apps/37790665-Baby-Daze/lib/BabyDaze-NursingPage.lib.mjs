@@ -135,6 +135,7 @@ export class Nursing extends Page {
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="none";
                                                 document.querySelector("#timerFields").style.height="56px";
                                                 this.startTimerL(document.querySelector("#timerFieldL"));
+                                                this.stopTimerR();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
@@ -161,6 +162,7 @@ export class Nursing extends Page {
                                                 document.querySelector("#timerFields").style.height="56px";
                                                 document.querySelector("#timerFieldR").innerText=this.getTimerValueR();
                                                 this.startTimerR(document.querySelector("#timerFieldR"));
+                                                this.stopTimerL();
                                               }
                                               else{
                                                 icon.innerText="play_circle";
@@ -181,7 +183,6 @@ export class Nursing extends Page {
                                             onclick: () => {
                                               var icon=document.querySelector("#startNursingButtonL > div > i");
                                               icon.innerText="play_circle";
-                                              
                                               icon=document.querySelector("#startNursingButtonR > div > i");
                                               icon.innerText="play_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
