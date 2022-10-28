@@ -136,6 +136,7 @@ export class Nursing extends Page {
                                                 document.querySelector("#timerFields").style.height="56px";
                                                 this.startTimerL(document.querySelector("#timerFieldL"));
                                                 this.stopTimerR();
+                                              	document.querySelector("#startNursingButtonR > div > i").innerText="play_circle";
                                               }
                                               else{
                                                 icon.innerText="play_circle";
@@ -163,6 +164,7 @@ export class Nursing extends Page {
                                                 document.querySelector("#timerFieldR").innerText=this.getTimerValueR();
                                                 this.startTimerR(document.querySelector("#timerFieldR"));
                                                 this.stopTimerL();
+                                              	document.querySelector("#startNursingButtonL > div > i").innerText="play_circle";
                                               }
                                               else{
                                                 icon.innerText="play_circle";
@@ -181,10 +183,10 @@ export class Nursing extends Page {
                                             color: "red",
                                             child: new Icon("stop_circle"),
                                             onclick: () => {
-                                              var icon=document.querySelector("#startNursingButtonL > div > i");
-                                              icon.innerText="play_circle";
-                                              icon=document.querySelector("#startNursingButtonR > div > i");
-                                              icon.innerText="play_circle";
+                                              var iconL=document.querySelector("#startNursingButtonL > div > i");
+                                              iconL.innerText="play_circle";
+                                              var iconR=document.querySelector("#startNursingButtonR > div > i");
+                                              iconR.innerText="play_circle";
                                                 document.querySelector("#titleTextFormField").parentElement.parentElement.style.display="";
                                                 document.querySelector("#timerFields").style.height="20px";
                                                 document.querySelector("#timerFieldL").innerText="";
