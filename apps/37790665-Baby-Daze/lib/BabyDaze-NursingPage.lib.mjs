@@ -126,7 +126,7 @@ export class Nursing extends Page {
                                             width: "50px",
                                             height: "50px",
                                             fontSize: "50px",
-                                            color: "#f67904",
+                                            color: "red",
                                             child: new Icon("play_circle"),
                                             onclick: () => {
                                               var icon=document.querySelector("#startNursingButtonL > div > i");
@@ -151,7 +151,7 @@ export class Nursing extends Page {
                                             width: "50px",
                                             height: "50px",
                                             fontSize: "50px",
-                                            color: "#f67904",
+                                            color: "red",
                                             child: new Icon("play_circle"),
                                             onclick: () => {
                                               var icon=document.querySelector("#startNursingButtonR > div > i");
@@ -176,7 +176,7 @@ export class Nursing extends Page {
                                             width: "50px",
                                             height: "50px",
                                             fontSize: "50px",
-                                            color: "#f67904",
+                                            color: "red",
                                             child: new Icon("stop_circle"),
                                             onclick: () => {
                                               var icon=document.querySelector("#startNursingButtonL > div > i");
