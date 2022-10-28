@@ -6,6 +6,8 @@ import {
 
 import {BluetoothInterface} from 'https://gcode.com.au/modules/bluetoothInterface.mjs';
 
+const deviceTimeout={};
+
 /*---------------------------------------------------------------------------*/
 export class Row extends Div {
     constructor(params) {
@@ -748,7 +750,7 @@ export const Icons = {
 };
 
 const blueListView = new ListView({
-    "borderRadius": "20px",
+    
     marginTop: "15px",
     marginBottom: "15px",
     overflowY: "auto",
@@ -772,8 +774,8 @@ export class BluetoothPage extends Page {
                     "paddingTop": "20px",
                     "paddingBottom": "40px",
                     margin: "20px",
-                    bottom: "40px",
-                    child: blueListView
+                    bottom: "60px",
+                    child: new Div({"borderRadius": "20px","backgroundColor": "#ffffff",paddingTop:"30px",paddingBottom:"30px","overflow":"none",child:blueListView})
                 }),
                 new Center({
                     height: "30px",
@@ -796,7 +798,7 @@ export class BluetoothPage extends Page {
                         PWA.getPWA().setPage(this.homePage);
                         this.notifySelectedPerefial({
                             selectedPeripheralId: "",
-                            selectedPeripheralName: ""
+                            selectedPeripheralName: "",rssi:0,state:false
                         });
                     }
                 })
@@ -812,7 +814,6 @@ export class BluetoothPage extends Page {
         let appPlatform = this.getCookie("app-platform");
         if (appPlatform && !navigator.bluetooth) {
             window.addEventListener("bluetooth-peripheral-scanning", (e) => {
-              	console.log("bluetooth-peripheral-scanning");
                 PWA.getPWA().setPage(this);
                 this.scanningDetails = e.detail;
             });
@@ -826,7 +827,7 @@ export class BluetoothPage extends Page {
 
     notifySelectedPerefial({
         selectedPeripheralId,
-        selectedPeripheralName
+        selectedPeripheralName,rssi,state
     }) {
         let start = Date.now();
         let d = {
@@ -836,30 +837,51 @@ export class BluetoothPage extends Page {
         let messagetype = 'bluetooth-request-device';
         d.selectedPeripheralId = selectedPeripheralId;
         d.selectedPeripheralName = selectedPeripheralName;
+        d.rssi = rssi;
+        d.state = state;
         window.webkit.messageHandlers[messagetype].postMessage({
             id: id,
             data: d
         })
     }
     appendPeripheral(e) {
-      	let elm=nill;
+      	let elm=null;
         if(e && e.identifier)elm=blueListView.querySelector("#id"+e.identifier);
         if (elm==null) {
-            this.identifiers[e.identifier] = e.name;
+            
             let _name = (e.name && e.name != "") ? e.name : "N/A";
             let _identifier = e.identifier;
+            let _rssi = e.rssi || 0;
+            let _state = e.state || false;
             let _this=this;
-          	let name=new Text(_name);
-          	name.element.id="name"+e.identifier;
-          	let subtitle=new Text(_identifier)
-          	subtitle.element.id="subtitle"+e.identifier;
-            blueListView.appendChild(new ListTile({
+          	let nameText=new Text(_name);
+          	nameText.element.id="name"+e.identifier;
+          	let subtitleText=new Text(_identifier)
+          	subtitleText.element.id="subtitle"+e.identifier;
+          	let trailing=new Icon(e.status ? "bluetooth" : "close");
+          	window.addEventListener("bluetooth-peripheral-disconnect-" + e.identifier, ()=>{
+              trailing.firstChild.innerText="close";
+            });
+            window.addEventListener("bluetooth-connect-device-" + e.identifier, (ev)=>{
+              console.log(ev);
+              if(ev && ev.detail && ev.detail.didConnect)
+              {
+                trailing.firstChild.style.color="blue";
+              	trailing.firstChild.innerText="bluetooth";
+              }
+              else {
+                console.log("*** Set color #232323");
+                trailing.firstChild.style.color="#232323";
+              	trailing.firstChild.innerText="close";
+              }
+            });
+          var nt=new ListTile({
                 id: "id" + e.identifier,
                 "color": "black",
-                "title": name,
-                "subtitle": subtitle,
+                "title": nameText,
+                "subtitle": subtitleText,
                 "leading": new Icon(Icons.battery_full),
-                "trailing": new Icon(e.status ? "bluetooth" : "close"),
+                "trailing": trailing,
                 "onclick": () => {
                     PWA.getPWA().showHeader();
                     console.log(this.homePage);
@@ -867,14 +889,32 @@ export class BluetoothPage extends Page {
                   	setTimeout(()=>{
                       _this.notifySelectedPerefial({
                           selectedPeripheralId: _identifier,
-                          selectedPeripheralName: _name
+                          selectedPeripheralName: _name,
+                          rssi:_rssi,
+                          state:_state
                       });
                     },500);
                 }
-            }));
-        } else if (e.name != this.identifiers[e.identifier]) {
-            elm.querySelector("#name"+e.identifier)
-            elm.querySelector("#name"+e.identifier)
+            })
+          	nt.appendChild(new Div({id:"rssi"+_identifier,innerText:_rssi,top:"2px",right:"30px",width:"30px",height:"12px",fontSize:"10px"}));
+            blueListView.appendChild(nt);
+          
+          	deviceTimeout[_identifier]=setTimeout(()=>{
+              console.log("remove "+_identifier);
+              nt.element.parentElement.remove();
+            },60000);
+        } else {
+          	let _name = (e.name && e.name != "") ? e.name : "N/A";
+            let _identifier = e.identifier;
+            console.log("clear timeout for "+_identifier);
+          	clearTimeout(deviceTimeout[_identifier]);
+            elm.querySelector("#name"+e.identifier).innerHTML="<span>"+_name+"</span>";
+            elm.querySelector("#subtitle"+e.identifier).innerHTML="<span>"+_identifier+"</span>";
+          	let _elm=elm;
+          	deviceTimeout[_identifier]=setTimeout(()=>{
+              console.log("remove "+_identifier);
+              _elm.parentElement.remove();
+            },60000);
         }
 
     }
@@ -893,6 +933,4 @@ export class BluetoothPage extends Page {
         }
         return "";
     }
-
-
 }
