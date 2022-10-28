@@ -472,22 +472,22 @@ window.setEditorMode = function () {
     var filename = document.getElementById("filename").innerText;
     if (filename.endsWith(".js")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 9 } });
+        window.editor.setOption('lint', { options: { esversion: 11 } });
         setFeature("javascript");
     }
     else if (filename.endsWith(".lib.mjs")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 9 } });
+        window.editor.setOption('lint', { options: { esversion: 11 } });
         setFeature("javascript/lib");
     }
     else if (filename.endsWith(".mjs")) {
         window.editor.setOption("mode", "javascript");
-        window.editor.setOption('lint', { options: { esversion: 9 } });
+        window.editor.setOption('lint', { options: { esversion: 11 } });
         setFeature("javascript/module");
     }
     else if (filename.endsWith(".ts")) {
         window.editor.setOption("mode", "text/typescript");
-        window.editor.setOption('lint', { options: { esversion: 9 } });
+        window.editor.setOption('lint', { options: { esversion: 11 } });
         setFeature("typescript");
     }
     else if (filename.endsWith(".py")) {
@@ -569,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             foldGutter: true,
             gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            lint: { esversion: 9 }
+            lint: { esversion: 11 }
         });
 
         Array.from(document.getElementsByClassName("cm-s-theme")).forEach(function (e) { e.classList.add('cm-s-' + theme); });
