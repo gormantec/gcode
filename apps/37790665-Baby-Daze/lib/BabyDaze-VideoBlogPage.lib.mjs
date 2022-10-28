@@ -5,6 +5,8 @@ import {
 } from 'https://gcode.com.au/modules/pwa.mjs';
 import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column,VideoImage,AddVideo} from './lib/flutter-widgets.lib.mjs';
 
+let listView=null;
+
 export class VideoBlog extends Page {
     constructor(params) {
         super({
