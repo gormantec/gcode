@@ -1,5 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function() {
   var mode = CodeMirror.getMode({indentUnit: 4},
@@ -45,4 +45,30 @@
   MT("dontIndentTypeDecl",
      "[variable i]: [builtin int] [operator =] [number 32]",
      "[builtin print]([variable i])")
+
+  MT("dedentElse",
+     "[keyword if] [variable x]:",
+     "    [variable foo]()",
+     "[keyword elif] [variable y]:",
+     "    [variable bar]()",
+     "[keyword else]:",
+     "    [variable baz]()")
+
+  MT("dedentElsePass",
+     "[keyword if] [variable x]:",
+     "    [keyword pass]",
+     "[keyword elif] [variable y]:",
+     "    [keyword pass]",
+     "[keyword else]:",
+     "    [keyword pass]")
+
+  MT("dedentElseInFunction",
+     "[keyword def] [def foo]():",
+     "    [keyword if] [variable x]:",
+     "        [variable foo]()",
+     "    [keyword elif] [variable y]:",
+     "        [variable bar]()",
+     "        [keyword pass]",
+     "    [keyword else]:",
+     "        [variable baz]()")
 })();
