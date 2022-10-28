@@ -10,7 +10,7 @@ export class Nursing extends Page {
     constructor(params) {
         super({
             "color": "#545454",
-            "backgroundColor": "#f67904",
+            "backgroundColor": "red",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
             "hideHeader": "true",
