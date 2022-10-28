@@ -5,7 +5,7 @@ import {
 } from 'https://gcode.com.au/modules/pwa.mjs';
 import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column} from './flutter-widgets.lib.mjs';
 
-class HomePage extends Page {
+export class HomePage extends Page {
     constructor() {
         super({
             "id": "HomePage",
