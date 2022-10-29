@@ -242,6 +242,8 @@ export async function getImageAsync(url,x,y) {
 
 export function createHtml(code, options) {
 
+    console.log("HtmlUtils::createHtml:START");
+
     if (!options) options = {};
     var splashBackgroundColor = null;
     var splash = null;
@@ -289,6 +291,7 @@ export function createHtml(code, options) {
     if (!permittedUrls || permittedUrls == code) permittedUrls = "[]";
     permittedUrls=permittedUrls.trim();
     permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
+    console.log("HtmlUtils::permittedUrls="+permittedUrls);
     var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
     description=description.trim();
@@ -436,8 +439,9 @@ export function createHtml(code, options) {
         _module.text = "\n" + jApp + "\n";
         rootHead.appendChild(_module);
     }
-
+    console.log("HtmlUtils::createHtml:START");
     return { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, description:description,permittedUrls:permittedUrls,icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
+
 }
 
 export function sleep(delay) {
