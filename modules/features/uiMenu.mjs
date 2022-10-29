@@ -143,6 +143,7 @@ async function refreshScreen() {
                     }
                 }
             }
+            console.log("-->replace('./lib/"+importFiles[i].name+"')");
             sCode = sCode.replace("./lib/"+importFiles[i].name,"data:text/javascript;base64,"+window.btoa(slib));
         }
     }
