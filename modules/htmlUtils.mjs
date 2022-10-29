@@ -114,24 +114,33 @@ export function addSubImportLibFile(importFiles) {
 export function getImportLibFileList(code,isInLibdir) {
     console.log("getImportLibFileList::START");
     var filename = document.getElementById("filename").innerText;
-    var importsList = [];
+    var importFiles = [];
     if(isInLibdir==true)
     {
-        importsList = code.match(/import.*?\sfrom\s['"]\.\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
-    }
-    else{
-        importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
-    }
-    
-    var importFiles = [];
-    if (importsList && importsList.length > 0) {
-        for (var i = 0; i < importsList.length; i++) {
-            var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.(\/lib)?\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
-            let dir = "";
-            if (filename.lastIndexOf("/") > 0) dir = filename.substring(0, filename.lastIndexOf("/") + 1);
-            importFiles.push({ name: fileNameLib, dir: dir });
+        var importsList = code.match(/import.*?\sfrom\s['"]\.\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+        if (importsList && importsList.length > 0) {
+            for (var i = 0; i < importsList.length; i++) {
+                var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
+                let dir = "";
+                if (filename.lastIndexOf("/") > 0) dir = filename.substring(0, filename.lastIndexOf("/") + 1);
+                importFiles.push({ name: fileNameLib, dir: dir });
+            }
         }
     }
+    else{
+        var importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+        if (importsList && importsList.length > 0) {
+            for (var i = 0; i < importsList.length; i++) {
+                var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
+                let dir = "";
+                if (filename.lastIndexOf("/") > 0) dir = filename.substring(0, filename.lastIndexOf("/") + 1);
+                importFiles.push({ name: fileNameLib, dir: dir });
+            }
+        }
+    }
+    
+    
+
     console.log(importFiles);
     console.log("getImportLibFileList::END");
     return importFiles;
