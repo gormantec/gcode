@@ -112,7 +112,6 @@ export function addSubImportLibFile(importFiles) {
 }
 
 export function getImportLibFileList(code,isInLibdir) {
-    console.log("getImportLibFileList::START");
     var filename = document.getElementById("filename").innerText;
     var importFiles = [];
     if(isInLibdir==true)
@@ -139,10 +138,7 @@ export function getImportLibFileList(code,isInLibdir) {
         }
     }
     
-    
 
-    console.log(importFiles);
-    console.log("getImportLibFileList::END");
     return importFiles;
 }
 
@@ -263,7 +259,6 @@ export function createHtml(code, options) {
 
     splash = code.replace(/\/\*.*?splash:((?!\n).)*?(((http)|(git)|(\.\/))((?!\n).)*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$2');
     if (splash == code || !(splash.startsWith("http") || splash.startsWith("git") || splash.startsWith("./"))) splash = null;
-    console.log("splash =================>"+splash);
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
 
     if (splashSize == code) splashSize = "contain";
@@ -292,16 +287,12 @@ export function createHtml(code, options) {
     if (!appName || appName == code) appName = "gcode App";
     var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!permittedUrls || permittedUrls == code) permittedUrls = "[]";
-    console.log("permittedUrls="+permittedUrls);
     permittedUrls=permittedUrls.trim();
     permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
-    console.log("permittedUrls="+permittedUrls);
     var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
-    console.log("description="+description);
     description=description.trim();
     description=description.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
-    console.log("description="+description);
     appName = appName.trim();
     var manifest = code.replace(/\/\*.*?manifest:.*?(.*\.json)[\n].*?\*\/.*/s, '$1');
     if (!manifest || manifest == "" || manifest == code) manifest = "xxxxx_manifest.json";
@@ -350,7 +341,6 @@ export function createHtml(code, options) {
     _link.setAttribute("href", "###ICONURI###");
     rootHead.appendChild(_link);
     if (splash  && (splash.substring(splash.length - 3) == "png" || splash.substring(splash.length - 3) == "svg")) {
-        console.log("********************************* YES");
         var _style = window.document.createElement("style");
         var spinnerCss = ".loader{font-size:" + spinnerSize + ";text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}";
         _style.textContent = "\n.splash{position:absolute;background-size:" + splashSize.trim() + ";background-image:url('splash.icon.png');background-position:center;background-repeat:no-repeat;top:0px;bottom:0px;left:0px;right:0px;" + (splashColor ? "color:" + splashColor : "") + ";" + (splashBackgroundColor ? "background-color:" + splashBackgroundColor : "") + ";}\n" + spinnerCss + "\n";
