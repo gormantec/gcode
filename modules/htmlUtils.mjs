@@ -111,9 +111,17 @@ export function addSubImportLibFile(importFiles) {
     return newimportFiles;
 }
 
-export function getImportLibFileList(code) {
+export function getImportLibFileList(code,isInLibdir) {
     var filename = document.getElementById("filename").innerText;
-    var importsList = code.match(/import.*?\sfrom\s['"]\.(\/lib)?\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+    var importsList = [];
+    if(isInLibdir)
+    {
+        importsList = code.match(/import.*?\sfrom\s['"]\.\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+    }
+    else{
+        importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+    }
+    
     var importFiles = [];
     if (importsList && importsList.length > 0) {
         for (var i = 0; i < importsList.length; i++) {

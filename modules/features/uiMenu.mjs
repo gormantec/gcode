@@ -131,7 +131,7 @@ async function refreshScreen() {
         let slib=load(importFiles[i].dir+importFiles[i].name);
         if(slib && typeof slib=="string" && slib.length>0)
         {
-            let importFilesSLib= getImportLibFileList(slib);
+            let importFilesSLib= getImportLibFileList(slib,true);
             console.log(importFilesSLib);
             for(let j=0;j<importFilesSLib.length;j++)
             {
