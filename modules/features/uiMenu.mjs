@@ -132,18 +132,16 @@ async function refreshScreen() {
         if(slib && typeof slib=="string" && slib.length>0)
         {
             let importFilesSLib= getImportLibFileList(slib,true);
-            console.log(importFilesSLib);
             for(let j=0;j<importFilesSLib.length;j++)
             {
                 for(let k=0;k<importFiles.length;k++)
                 {
                     if(importFiles[k].name==importFilesSLib[j].name)
                     {
-                        console.log("*** "+importFilesSLib[j].name+" already loaded");
+                        slib=slib.replace(new RegExp("import.*?\\sfrom\\s['\\\"]\\.\\/"+importFilesSLib[j].name+"['\\\"]","gi"),"/* "+importFilesSLib[j].name+" already loaded*/");
                     }
                 }
             }
-            console.log("-->replace('./lib/"+importFiles[i].name+"')");
             sCode = sCode.replace("./lib/"+importFiles[i].name,"data:text/javascript;base64,"+window.btoa(slib));
         }
     }
