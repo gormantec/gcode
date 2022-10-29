@@ -113,11 +113,11 @@ export function addSubImportLibFile(importFiles) {
 
 export function getImportLibFileList(code) {
     var filename = document.getElementById("filename").innerText;
-    var importsList = code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+    var importsList = code.match(/import.*?\sfrom\s['"]\.(\/lib)?\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
     var importFiles = [];
     if (importsList && importsList.length > 0) {
         for (var i = 0; i < importsList.length; i++) {
-            var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
+            var fileNameLib = importsList[i].replace(/(import.*?\sfrom\s['"]\.(\/lib)?\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g, "$2");
             let dir = "";
             if (filename.lastIndexOf("/") > 0) dir = filename.substring(0, filename.lastIndexOf("/") + 1);
             importFiles.push({ name: fileNameLib, dir: dir });
