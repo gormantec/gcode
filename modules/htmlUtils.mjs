@@ -242,8 +242,8 @@ export async function getImageAsync(url,x,y) {
 function getHeaderValue(code,header,defaultValue)
 {
     var permittedUrls = defaultValue;
-    findStart=code.indexOf("/*");
-    findEnd=code.indexOf("*/");
+    var findStart=code.indexOf("/*");
+    var findEnd=code.indexOf("*/");
     if(findStart>=0 && findEnd>=0 && code.substring(findStart,findEnd).toLowerCase().indexOf(header.toLowerCase())>=0)
     {
         var regexPURLS=new RegExp(".*?\\/\\*(\\n|\\r|.)*?"+header+"\\s*:\\s*(?<permittedUrls>(\\n|\\r|.)*?)\\s*?([a-zA-Z0-9]*?:|\\*\\/)","i");
@@ -304,16 +304,12 @@ export function createHtml(code, options) {
     if (!orientation || orientation == code) orientation = "any";
     console.log("HtmlUtils::appName::START");
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
-    var findStart=0;
-    var findEnd=0;
     if (!appName || appName == code) appName = "gcode App";
     appName = appName.trim();
     console.log("HtmlUtils::appName="+appName);
     console.log("HtmlUtils::permittedUrls::START");
     //var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     var permittedUrls = "[]";
-    findStart=code.indexOf("/*");
-    findEnd=code.indexOf("*/");
     var permittedUrls=getHeaderValue(code,"permittedUrls","[]");
     console.log("HtmlUtils::permittedUrls="+permittedUrls);
     console.log("HtmlUtils::description::START");
