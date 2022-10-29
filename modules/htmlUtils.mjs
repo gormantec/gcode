@@ -297,6 +297,9 @@ export function createHtml(code, options) {
     permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
     console.log("HtmlUtils::permittedUrls="+permittedUrls);
     console.log("HtmlUtils::description::START");
+    var regExDec=/.*?\/\*(\n|\r|.)*?description:\s*?(?<description>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/gm;
+    var found=code.match(regExDec);
+    console.log(found.groups.description);
     var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
     description=description.trim();
