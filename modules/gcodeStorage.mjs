@@ -52,12 +52,12 @@ export function parent(filename) {
 
 export async function preload(files) {
     return new Promise((resolve, reject) => {
-        console.log("preloading");
+        
         try {
 
             if(files==null)resolve();
             else if(Array.isArray(files) && files.length==0)resolve();
-            console.log(files);
+            
             if (typeof files == "string") files = [files];
             let count = 0;
             for (let i = 0; i < files.length; i++) {

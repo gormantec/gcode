@@ -294,6 +294,7 @@ export function createHtml(code, options) {
     //var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     
     var regexPURLS=/.*?\/\*(\n|\r|.)*?permitted[uU]rls\s*:\s*(?<permittedUrls>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/;
+    regexPURLS=/permitted[uU]rls\s*:\s*(?<permittedUrls>(\n|\r|.)*?)\s*?\*\//;
     var foundPURLS=code.match(regexPURLS);
     var permittedUrls = "[]";
     if(foundPURLS && foundPURLS.groups && foundPURLS.groups.permittedUrls) permittedUrls=foundPURLS.groups.permittedUrls;

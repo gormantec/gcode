@@ -6,7 +6,6 @@ import { getScript } from '/modules/getScript.mjs';
 const getAcorn = getScript('https://cdnjs.cloudflare.com/ajax/libs/acorn/8.7.1/acorn.min.js', ["acorn"]);
 let acornParser=null;
 getAcorn.then(({acorn})=>{
-    console.log(acorn);
     acornParser=acorn;
 });
 
