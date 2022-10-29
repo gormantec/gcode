@@ -134,13 +134,16 @@ async function refreshScreen() {
             let importFilesSLib= getImportLibFileList(slib,true);
             for(let j=0;j<importFilesSLib.length;j++)
             {
-                for(let k=0;k<importFiles.length;k++)
-                {
-                    if(importFiles[k].name==importFilesSLib[j].name)
-                    {
-                        slib=slib.replace(new RegExp("import.*?\\sfrom\\s['\\\"]\\.\\/"+importFilesSLib[j].name+"['\\\"]","gi"),"/* "+importFilesSLib[j].name+" already loaded*/");
-                    }
-                }
+                //for(let k=0;k<importFiles.length;k++)
+                //{
+                //    if(importFiles[k].name==importFilesSLib[j].name)
+                //    {
+                //        slib=slib.replace(new RegExp("import.*?\\sfrom\\s['\\\"]\\.\\/"+importFilesSLib[j].name+"['\\\"]","gi"),"/* "+importFilesSLib[j].name+" already loaded*/");
+                //    }
+                //}
+                let slib2=load(importFilesSLib[j].dir+importFilesSLib[j].name);
+                slib = slib.replace("./"+importFilesSLib[j].name,"data:text/javascript;base64,"+window.btoa(slib2));
+
             }
             sCode = sCode.replace("./lib/"+importFiles[i].name,"data:text/javascript;base64,"+window.btoa(slib));
         }
