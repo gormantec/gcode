@@ -6,7 +6,6 @@ import { getScript } from '/modules/getScript.mjs';
 const getAcorn = getScript('https://cdnjs.cloudflare.com/ajax/libs/acorn/8.7.1/acorn.min.js', ["acorn"]);
 let acornParser=null;
 getAcorn.then(({acorn})=>{
-    console.log("acorn");
     console.log(acorn);
     acornParser=acorn;
 });
@@ -110,7 +109,6 @@ async function refreshScreen() {
     //document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "";
     //pageDiv.remove();
     let sCode=window.editor.getValue();
-    console.log(structure);
     sCode=updateCodeFromStructure(sCode);
     //let sCode = structureToCode();
     window.editor.setValue(sCode);
@@ -358,7 +356,6 @@ function pushCode(data) {
  
             structure.push(aClass);
             if (data.code.trim().length > classCode.trim().length) {
-                console.log("push class: "+classname);
                 pushCode({ code: data.code.substring(classCode.length).trim() });
             }
         }
@@ -382,7 +379,6 @@ function pushCode(data) {
 
                     let someParams = arr[6];
                     someParams=someParams.replaceAll("##CLBK##",")");
-                    console.log(someParams);
                     someParams = cleanParams(someParams);
                     try{someParams = JSON.parse(someParams);}catch(e){someParams="{}";}
                     line = line + ((i + 1) == codeLines.length ? "" : ";");
@@ -531,7 +527,6 @@ function getSuperClassProperties(block)
             props2[props[i].key.value]="widget(new "+props[i].value.callee.name+"(...))";
         }
     }
-    console.log(props2);
     return props2;
 }
 function setSuperClassPropertieValue(_blockIndex,name,value)
@@ -540,7 +535,6 @@ function setSuperClassPropertieValue(_blockIndex,name,value)
     {
         if(structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties[i].value.type=="Literal" && structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties[i].key.value==name)
         {
-            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             structure[_blockIndex].body.body[0].value.body.body[0].expression.arguments[0].properties[i].value.rawReplacement=value;
         }
     }
@@ -553,7 +547,6 @@ function showUiEditor() {
     //  try {
     //splitComments(source);
     structure=acornParser.parse(window.editor.getValue(), {ecmaVersion: 2022,sourceType: "module"}).body;
-    console.log(structure);
     document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "none";
     let rootMiddlePage = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (rootMiddlePage) rootMiddlePage.remove();
@@ -578,7 +571,6 @@ function showUiEditor() {
     }*/
     for (let ii = 0; ii < structure.length; ii++) {
         let block = structure[ii];
-        console.log(block);
         if (block.type=="ClassDeclaration" && block.superClass.name == "Page") {
             let blockIndex=ii;
             let pagePropsDiv = createPagePropsDiv(block,blockIndex);
@@ -792,8 +784,6 @@ function createPagePropsDiv(block,blockIndex) {
 }
 function appendClassParams(pagePropsDiv, params,block,blockIndex) {
     for (let param in params) {
-        console.log("param key="+param);
-        console.log("param value="+params[param]);
         let pageDivRow = document.createElement("div");
         pageDivRow.style.width = "420px";
         let pageDivC1 = document.createElement("div");
