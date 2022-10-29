@@ -112,9 +112,10 @@ export function addSubImportLibFile(importFiles) {
 }
 
 export function getImportLibFileList(code,isInLibdir) {
+    console.log("getImportLibFileList::START");
     var filename = document.getElementById("filename").innerText;
     var importsList = [];
-    if(isInLibdir)
+    if(isInLibdir==true)
     {
         importsList = code.match(/import.*?\sfrom\s['"]\.\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
     }
@@ -131,6 +132,8 @@ export function getImportLibFileList(code,isInLibdir) {
             importFiles.push({ name: fileNameLib, dir: dir });
         }
     }
+    console.log(importFiles);
+    console.log("getImportLibFileList::END");
     return importFiles;
 }
 
