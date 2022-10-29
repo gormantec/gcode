@@ -293,7 +293,7 @@ export function createHtml(code, options) {
     console.log("HtmlUtils::permittedUrls::START");
     //var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     
-    var regexPURLS=/.*?\/\*(\n|\r|.)*?permitted[uU]rls:\s*(?<permittedUrls>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/;
+    var regexPURLS=/.*?\/\*(\n|\r|.)*?permitted[uU]rls\s*:\s*(?<permittedUrls>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/;
     var foundPURLS=code.match(regexPURLS);
     var permittedUrls = "[]";
     if(foundPURLS && foundPURLS.groups && foundPURLS.groups.permittedUrls) permittedUrls=foundPURLS.groups.permittedUrls;
@@ -301,7 +301,7 @@ export function createHtml(code, options) {
     permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
     console.log("HtmlUtils::permittedUrls="+permittedUrls);
     console.log("HtmlUtils::description::START");
-    var regExDec=/.*?\/\*(\n|\r|.)*?description:\s*(?<description>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/;
+    var regExDec=/.*?\/\*(\n|\r|.)*?description\s*:\s*(?<description>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/;
     var found=code.match(regExDec);
     var description = "A gcode developed PWA app";
     if(found && found.groups && found.groups.description) description=found.groups.description;
