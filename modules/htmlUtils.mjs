@@ -291,8 +291,12 @@ export function createHtml(code, options) {
     appName = appName.trim();
     console.log("HtmlUtils::appName="+appName);
     console.log("HtmlUtils::permittedUrls::START");
-    var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
-    if (!permittedUrls || permittedUrls == code) permittedUrls = "[]";
+    //var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
+    
+    var regexPURLS=/.*?\/\*(\n|\r|.)*?permitted[uU]rls:\s*(?<permittedUrls>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/;
+    var foundPURLS=code.match(regexPURLS);
+    var permittedUrls = "[]";
+    if(foundPURLS && foundPURLS.groups && foundPURLS.groups.permittedUrls) permittedUrls=foundPURLS.groups.permittedUrls;
     permittedUrls=permittedUrls.trim();
     permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
     console.log("HtmlUtils::permittedUrls="+permittedUrls);
