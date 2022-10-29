@@ -299,7 +299,7 @@ export function createHtml(code, options) {
     console.log("HtmlUtils::description::START");
     var regExDec=/.*?\/\*(\n|\r|.)*?description:\s*?(?<description>(\n|\r|.)*?)\s*?([a-zA-Z0-9]*?:|\*\/)/gm;
     var found=code.match(regExDec);
-    console.log(found.groups.description);
+    console.log(found.groups);
     var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
     description=description.trim();
