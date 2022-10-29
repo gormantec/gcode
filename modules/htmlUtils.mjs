@@ -287,11 +287,13 @@ export function createHtml(code, options) {
     if (!orientation || orientation == code) orientation = "any";
     var appName = code.replace(/\/\*.*?appName:.*?([A-Za-z0-9 ]*)[\n].*?\*\/.*/s, '$1');
     if (!appName || appName == code) appName = "gcode App";
+    console.log("HtmlUtils::permittedUrls::START");
     var permittedUrls = code.replace(/[\s\S]*?permittedUrls:([\s\S]*?)((\n.*?[a-zA-Z0-9\[\]\:\/\"\.\-,_]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
+    console.log("HtmlUtils::permittedUrls="+permittedUrls);
     if (!permittedUrls || permittedUrls == code) permittedUrls = "[]";
     permittedUrls=permittedUrls.trim();
     permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
-    console.log("HtmlUtils::permittedUrls="+permittedUrls);
+    
     var description = code.replace(/[\s\S]*?description:([\s\S]*?)((\n.*?[a-zA-Z0-9]*?\s*?:)|(\*\/))[\s\S]*/gm, '$1');
     if (!description || description == code) description = "A gcode developed PWA app";
     description=description.trim();
