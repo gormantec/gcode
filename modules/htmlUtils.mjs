@@ -241,7 +241,7 @@ export async function getImageAsync(url,x,y) {
 
 function getHeaderValue(code,header,defaultValue)
 {
-    var permittedUrls = defaultValue;
+    var returnValue = defaultValue;
     var findStart=code.indexOf("/*");
     var findEnd=code.indexOf("*/");
     if(findStart>=0 && findEnd>=0 && code.substring(findStart,findEnd).toLowerCase().indexOf(header.toLowerCase())>=0)
@@ -249,13 +249,13 @@ function getHeaderValue(code,header,defaultValue)
         var regexPURLS=new RegExp(".*?\\/\\*(\\n|\\r|.)*?"+header+"\\s*:\\s*(?<headerValue>(\\n|\\r|.)*?)\\s*?([a-zA-Z0-9]*?\\s*:|\\*\\/)","i");
         console.log(regexPURLS);
         var foundPURLS=code.substring(findStart,findEnd).match(regexPURLS);
-        console.log(foundPURLS.groups);
-        if(foundPURLS && foundPURLS.groups && foundPURLS.groups.headerValue) permittedUrls=foundPURLS.groups.headerValue;
-        permittedUrls=permittedUrls.trim();
-        permittedUrls=permittedUrls.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
+        if(foundPURLS)console.log(foundPURLS.groups);
+        if(foundPURLS && foundPURLS.groups && foundPURLS.groups.headerValue) returnValue=foundPURLS.groups.headerValue;
+        returnValue=returnValue.trim();
+        returnValue=returnValue.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
         
     }
-    return permittedUrls;
+    return returnValue;
 }
 
 
