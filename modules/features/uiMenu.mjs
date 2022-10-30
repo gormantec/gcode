@@ -87,16 +87,13 @@ const paramOptions = ["navigateBackPage", "innerHTML",
         structure.forEach((sObject) => {
             if(sObject.type=="ImportDeclaration" && sObject.source && sObject.source.value.startsWith("./lib/") && sObject.source.value.endsWith(".lib.mjs"))
             {
-                console.log("Add pages from "+sObject.source.value);
                 let subcode=load(sObject.source.value.substring(6));
                 let substructure=acornParser.parse(subcode, {ecmaVersion: 2022,sourceType: "module"}).body;
                 for (let ii = 0; ii < substructure.length; ii++) {
                     let subblock = substructure[ii];
                     if(subblock.declaration)
                     {
-                        console.log(subblock.declaration);
                         if (subblock.type=="ExportNamedDeclaration" && subblock.declaration.type=="ClassDeclaration" && subblock.declaration.superClass.name == "Page") {
-                            console.log("append:"+JSON.stringify(subblock.declaration));
                             subblock.declaration.sourceFile=sObject.source.value;
                             structure.push(JSON.parse(JSON.stringify(subblock.declaration)));
                         }
@@ -138,14 +135,13 @@ async function refreshScreen() {
     //let sCode = structureToCode();
     window.editor.setValue(sCode);
     parseStructure(sCode);
-    console.log(structure);
     
     let thisURL = window.location.href;
     sCode = sCode.replaceAll("https:\/\/gcode\.com\.au\/", thisURL);
 
     let regex3 = new RegExp("\.setPage\(.*?a.*?\).*?;\naPWA.show...", "g");
 
-    sCode = sCode.replaceAll(regex3, ".setPage(\"" + block.id.name + "\");\naPWA.show();//changed");
+    sCode = sCode.replaceAll(regex3, ".setPage(a" + block.id.name + ");\naPWA.show();//changed");
 
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
