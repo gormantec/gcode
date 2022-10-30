@@ -246,7 +246,7 @@ function getHeaderValue(code,header,defaultValue)
     var findEnd=code.indexOf("*/");
     if(findStart>=0 && findEnd>=0 && code.substring(findStart,findEnd).toLowerCase().indexOf(header.toLowerCase())>=0)
     {
-        var regexPURLS=new RegExp(".*?\\/\\*(\\n|\\r|.)*?"+header+"\\s*:\\s*(?<headerValue>(\\n|\\r|.)*?)\\s*?([a-zA-Z0-9]*?\\s*:|\\*\\/)","i");
+        var regexPURLS=new RegExp(".*?\\/\\*(\\n|\\r|.)*?"+header+"\\s*:\\s*(?<headerValue>(\\n|\\r|.)*?)\\s*?([a-zA-Z0-9]*?\\s*:|(\\n|\\r|.)*?\\*\\/)","i");
         console.log(regexPURLS);
         var foundPURLS=code.substring(findStart,findEnd).match(regexPURLS);
         if(foundPURLS)console.log(foundPURLS.groups);
