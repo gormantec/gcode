@@ -5,10 +5,10 @@
   "background_color": "#FA00AB",
   "display": "standalone",
   "orientation": "any",
-  "description": "A gcode developed PWA app",
+  "description": "Baby Daze is an app for young mothers.",
   "scope": "/apps/37790665-Baby-Daze/",
   "permitted_urls": [],
-  "version": "1.0.0.2600382",
+  "version": "1.0.0.2611765",
   "icons": [
     {
       "src": "/apps/37790665-Baby-Daze/180x180.icon.png",
