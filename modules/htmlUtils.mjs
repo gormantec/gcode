@@ -250,6 +250,7 @@ function getHeaderValue(code,header,defaultValue)
         console.log(regexPURLS);
         var foundPURLS=code.substring(findStart,findEnd).match(regexPURLS);
         if(foundPURLS)console.log(foundPURLS.groups);
+        else console.log(header+" not found?");
         if(foundPURLS && foundPURLS.groups && foundPURLS.groups.headerValue) returnValue=foundPURLS.groups.headerValue;
         returnValue=returnValue.trim();
         returnValue=returnValue.replaceAll("\n"," ").replaceAll("\t"," ").replace(/\t/g," ").replaceAll("  "," ").replaceAll("  "," ").replaceAll("  "," ");    
