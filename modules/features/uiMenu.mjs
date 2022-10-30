@@ -140,8 +140,12 @@ async function refreshScreen() {
     sCode = sCode.replaceAll("https:\/\/gcode\.com\.au\/", thisURL);
 
     let regex3 = new RegExp("\.setPage\(.*?a.*?\).*?;\naPWA.show...", "g");
-
-    sCode = sCode.replaceAll(regex3, ".setPage(a" + block.id.name + ");\naPWA.show();//changed");
+    var aNewPage="a" + block.id.name ;
+    if(sCode.indexOf("a" + block.id.name)<0)
+    {
+        aNewPage="new "+block.id.name+"()";
+    }
+    sCode = sCode.replaceAll(regex3, ".setPage(" + aNewPage + ");\naPWA.show();//changed");
 
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
