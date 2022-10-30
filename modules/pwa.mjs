@@ -175,9 +175,10 @@ class PWA {
             console.log(aPage);
             console.log("----");
         }
-        if (!aPage || !(aPage instanceof Page)) {
+        if (!aPage || (!(aPage instanceof Page) && Object.getPrototypeOf(aPage.constructor).name!="Page")) {
             console.log(aPage);
             console.log(aPage instanceof Page);
+            console.log(typeof aPage);
             return;
         }
         if (aPage.navigateBackPage) {
