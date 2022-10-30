@@ -81,6 +81,32 @@ const paramOptions = ["navigateBackPage", "innerHTML",
         return sCode2;
     }
 
+    function parseStructure(sCode)
+    {
+        structure=acornParser.parse(sCode, {ecmaVersion: 2022,sourceType: "module"}).body;
+        structure.forEach((sObject) => {
+            if(sObject.type=="ImportDeclaration" && sObject.source && sObject.source.value.startsWith("./lib/") && sObject.source.value.endsWith(".lib.mjs"))
+            {
+                console.log("Add pages from "+sObject.source.value);
+                let subcode=load(sObject.source.value.substring(6));
+                let substructure=acornParser.parse(subcode, {ecmaVersion: 2022,sourceType: "module"}).body;
+                for (let ii = 0; ii < substructure.length; ii++) {
+                    let subblock = substructure[ii];
+                    if(subblock.declaration)
+                    {
+                        console.log(subblock.declaration);
+                        if (subblock.type=="ExportNamedDeclaration" && subblock.declaration.type=="ClassDeclaration" && subblock.declaration.superClass.name == "Page") {
+                            console.log("append:"+JSON.stringify(subblock.declaration));
+                            subblock.declaration.sourceFile=sObject.source.value;
+                            structure.push(JSON.parse(JSON.stringify(subblock.declaration)));
+                        }
+                    }
+                }
+                
+            }
+        });
+    }
+
 async function refreshScreen() {
 
     let mockFrameIframe = document.getElementById("pageMiddle").querySelector("#pageMiddle-" + menuMetadata.id + "iframe");
@@ -111,28 +137,7 @@ async function refreshScreen() {
     sCode=updateCodeFromStructure(sCode);
     //let sCode = structureToCode();
     window.editor.setValue(sCode);
-    structure=acornParser.parse(sCode, {ecmaVersion: 2022,sourceType: "module"}).body;
-    structure.forEach((sObject) => {
-        if(sObject.type=="ImportDeclaration" && sObject.source && sObject.source.value.startsWith("./lib/") && sObject.source.value.endsWith(".lib.mjs"))
-        {
-            console.log("Add pages from "+sObject.source.value);
-            let subcode=load(sObject.source.value.substring(6));
-            let substructure=acornParser.parse(subcode, {ecmaVersion: 2022,sourceType: "module"}).body;
-            for (let ii = 0; ii < substructure.length; ii++) {
-                let subblock = substructure[ii];
-                if(subblock.declaration)
-                {
-                    console.log(subblock.declaration);
-                    if (subblock.type=="ExportNamedDeclaration" && subblock.declaration.type=="ClassDeclaration" && subblock.declaration.superClass.name == "Page") {
-                        console.log("append:"+JSON.stringify(subblock.declaration));
-                        subblock.declaration.sourceFile=sObject.source.value;
-                        structure.push(JSON.parse(JSON.stringify(subblock.declaration)));
-                    }
-                }
-            }
-            
-        }
-    });
+    parseStructure(sCode);
     console.log(structure);
     
     let thisURL = window.location.href;
@@ -140,7 +145,7 @@ async function refreshScreen() {
 
     let regex3 = new RegExp("\.setPage\(.*?a.*?\).*?;\naPWA.show...", "g");
 
-    sCode = sCode.replaceAll(regex3, ".setPage(a" + block.id.name + ");\naPWA.show();//changed");
+    sCode = sCode.replaceAll(regex3, ".setPage(\"" + block.id.name + "\");\naPWA.show();//changed");
 
     let importFiles= getImportLibFileList(sCode);
     await preload(importFiles);
@@ -568,7 +573,8 @@ function showUiEditor() {
     //while(structure.length>0)structure.pop();
     //  try {
     //splitComments(source);
-    structure=acornParser.parse(window.editor.getValue(), {ecmaVersion: 2022,sourceType: "module"}).body;
+    //structure=acornParser.parse(window.editor.getValue(), {ecmaVersion: 2022,sourceType: "module"}).body;
+    parseStructure(source);
     document.getElementById("pageMiddle").querySelector(".CodeMirror").style.display = "none";
     let rootMiddlePage = document.getElementById("pageMiddle-" + menuMetadata.id);
     if (rootMiddlePage) rootMiddlePage.remove();
