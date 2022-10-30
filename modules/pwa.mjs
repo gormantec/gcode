@@ -181,6 +181,10 @@ class PWA {
             console.log(typeof aPage);
             return;
         }
+        if(!(aPage instanceof Page))
+        {
+            console.log("Not good......");
+        }
         if (aPage.navigateBackPage) {
             debug.log("setNavigateBackPage:" + aPage.navigateBackPage);
             this.setNavigateBackPage(aPage.navigateBackPage);
