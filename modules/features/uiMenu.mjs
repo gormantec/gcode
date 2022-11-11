@@ -50,6 +50,9 @@ const paramOptions = ["navigateBackPage", "innerHTML",
         for (let ii = 0; ii < structure.length; ii++) {
             let block = structure[ii];
             if (block.type=="ClassDeclaration" && block.superClass.name == "Page") {
+                console.log("-----------");
+                console.log(block);
+                console.log("-----------");
                 let props=block.body.body[0].value.body.body[0].expression.arguments[0].properties; 
                 let newClassName=block.id.newName;  
                 let className=block.id.name;  
