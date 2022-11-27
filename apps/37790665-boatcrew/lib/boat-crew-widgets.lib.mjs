@@ -156,16 +156,18 @@ export function aPageChangheListener(id) {
         (async () => {
             try {
                 await nearConnect();
-                if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
-                    myList.insertBefore(newSpinnerRow(), myList.firstChild);
-                }
-                let accounts = [];
-                accounts.push(accountId);
-                let messageList = JSON.parse(await messages.listMessages({
-                    accountIds: JSON.stringify(accounts),
-                    max: 30
-                }, 300000000000000));
-                console.log(messageList);
+                //if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
+                //    myList.insertBefore(newSpinnerRow(), myList.firstChild);
+                //}
+                //let accounts = [];
+                //accounts.push(accountId);
+                //let messageList = JSON.parse(await messages.listMessages({
+                 //   accountIds: JSON.stringify(accounts),
+                //    max: 30
+                //}, 300000000000000));
+                //console.log(messageList);
+              	let messageList={data:[{message:"xxx",accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()}]};
+              console.log(JSON.pase(messageList));
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
                     let _message = messageList.data[i].message;
