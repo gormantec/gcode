@@ -937,11 +937,12 @@ class AuthButtons extends Div {
                     marginLeft: "-100px",
                     marginBottom: "-15px",
                     right: "unset",
-                    fontSize: "14px",
+                    fontSize: "13.3333333px",
                     width: "194px",
                     borderRadius: "2px",
                     padding: "2px",
                     backgroundColor: "#555555",
+                    fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
                     innerText: "Skip Login",
                     onclick: () => {
                         myglobals.PWA.setPage(_nextPage);
