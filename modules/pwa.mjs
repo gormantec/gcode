@@ -941,7 +941,7 @@ class AuthButtons extends Div {
                     width: "194px",
                     borderRadius: "2px",
                     padding: "2px",
-                    backgroundColor: "#999999",
+                    backgroundColor: "#555555",
                     innerText: "Skip Login",
                     onclick: () => {
                         myglobals.PWA.setPage(_nextPage);
