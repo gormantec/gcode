@@ -941,6 +941,7 @@ class AuthButtons extends Div {
                     width: "194px",
                     borderRadius: "2px",
                     padding: "2px",
+                    paddingLeft: "12px",
                     backgroundColor: "#555555",
                     fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
                     innerText: "Skip Login",
@@ -979,7 +980,6 @@ class ActionButton extends Div {
         this.setChild(new Div({
             tagName: "span", float: "left", position: "relative", child: new Div({
                 tagName: "i",
-                marginLeft: "10px",
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "add"
