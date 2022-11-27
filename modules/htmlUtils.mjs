@@ -276,6 +276,8 @@ export function createHtml(code, options) {
     rootHTML.appendChild(rootHead);
     rootHTML.appendChild(rootBody);
 
+    console.log("HtmlUtils::createHtml:STAR 2");
+
 
 
 
@@ -283,6 +285,8 @@ export function createHtml(code, options) {
     splash = code.replace(/\/\*.*?splash:((?!\n).)*?(((http)|(git)|(\.\/))((?!\n).)*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$2');
     if (splash == code || !(splash.startsWith("http") || splash.startsWith("git") || splash.startsWith("./"))) splash = null;
     splashSize = code.replace(/\/\*.*?splashSize:.*?([A-Za-z0-9#]*)[\n].*?\*\/.*/s, '$1');
+
+    console.log("HtmlUtils::createHtml:STAR 3");
 
     if (splashSize == code) splashSize = "contain";
     var icon = code.replace(/\/\*.*?icon:.*?(((http)|(git)).*?((png)|(gif)|(svg)))[\n].*?\*\/.*/s, '$1');
@@ -454,7 +458,7 @@ export function createHtml(code, options) {
         _module.text = "\n" + jApp + "\n";
         rootHead.appendChild(_module);
     }
-    console.log("HtmlUtils::createHtml:START");
+    console.log("HtmlUtils::createHtml:END");
     return { "rootHTML": rootHTML, "splashBackgroundColor": splashBackgroundColor, "splash": splash, "mockFrame": mockFrame, description:description,permittedUrls:permittedUrls,icon180x180: icon180x180, icon192x192: icon192x192, icon512x512: icon512x512 };
 
 }

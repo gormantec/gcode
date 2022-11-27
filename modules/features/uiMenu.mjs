@@ -53,29 +53,53 @@ const paramOptions = ["navigateBackPage", "innerHTML",
                 console.log("-----------");
                 console.log(block);
                 console.log("-----------");
+
                 let props=block.body.body[0].value.body.body[0].expression.arguments[0].properties; 
                 let newClassName=block.id.newName;  
                 let className=block.id.name;  
                 let nameStart=block.id.start;  
                 let nameEnd=block.id.end;
                 
-                if(newClassName && className)
+                if(block.sourceFile=="XXXXX")
                 {
-                    sCode2=sCode2.substring(0,nameStart+offset)+newClassName+sCode2.substring(nameEnd+offset);
-                    offset=offset+(newClassName.length-className.length);
-                }               
-                for(let i=0;i<props.length;i++)
-                {
-                    if(props[i].value.type=="Literal")
+                    //var sCode3=load(block.sourceFile)
+                    console.log("---sCode3");
+                    /*console.log(sCode3);
+                    for(let i=0;sCode3!=null && i<props.length;i++)
                     {
-                        let start=props[i].value.start;
-                        let end=props[i].value.end;
-                        let replacement=props[i].value.rawReplacement;
-                        let rawValue=props[i].value.raw;
-                        if(replacement && rawValue)
+                        if(props[i].value.type=="Literal")
                         {
-                            sCode2=sCode2.substring(0,start+offset)+replacement+sCode2.substring(end+offset);
-                            offset=offset+(replacement.length-rawValue.length);
+                            let start=props[i].value.start;
+                            let end=props[i].value.end;
+                            let replacement=props[i].value.rawReplacement;
+                            let rawValue=props[i].value.raw;
+                            if(replacement && rawValue)
+                            {
+                                sCode3=sCode3.substring(0,start+offset)+replacement+sCode3.substring(end+offset);
+                                offset=offset+(replacement.length-rawValue.length);
+                            }
+                        }
+                    }*/
+                }
+                else{           
+                    if(newClassName && className)
+                    {
+                        sCode2=sCode2.substring(0,nameStart+offset)+newClassName+sCode2.substring(nameEnd+offset);
+                        offset=offset+(newClassName.length-className.length);
+                    }               
+                    for(let i=0;i<props.length;i++)
+                    {
+                        if(props[i].value.type=="Literal")
+                        {
+                            let start=props[i].value.start;
+                            let end=props[i].value.end;
+                            let replacement=props[i].value.rawReplacement;
+                            let rawValue=props[i].value.raw;
+                            if(replacement && rawValue)
+                            {
+                                sCode2=sCode2.substring(0,start+offset)+replacement+sCode2.substring(end+offset);
+                                offset=offset+(replacement.length-rawValue.length);
+                            }
                         }
                     }
                 }
