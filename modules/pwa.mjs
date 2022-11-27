@@ -952,7 +952,7 @@ class AuthButtons extends Div {
                         if (params && (params.rememberSkip == "true" || params.rememberSkip == true)) {
                             window.localStorage.setItem("authSkip", "true");
                             console.log("SET TEST EMAIL");
-                            myglobals.PWA.setCredentials({provider:"testemail",email:"test@testemail.com",imageUrl:null,providerData:{user:{id:"test@testemail.com"}}});
+                            myglobals.PWA.setCredentials({provider:"testemail",email:"test@testemail.com",imageUrl:"https://www.gcode.com.au/images/icons8-test-account-48.png",providerData:{user:{id:"test@testemail.com"}}});
                         }
                     }
                 })
@@ -965,7 +965,7 @@ class AuthButtons extends Div {
                                 console.log('The ' + mutation.attributeName + ' attribute was modified.'+JSON.stringify(mutation));
                                 if (window.localStorage.getItem("authSkip") == "true") {
                                     console.log("SET TEST EMAIL");
-                                    myglobals.PWA.setCredentials({provider:"testemail",email:"test@testemail.com",imageUrl:null,providerData:{user:{id:"test@testemail.com"}}});
+                                    myglobals.PWA.setCredentials({provider:"testemail",email:"test@testemail.com",imageUrl:"https://www.gcode.com.au/images/icons8-test-account-48.png",providerData:{user:{id:"test@testemail.com"}}});
                                     myglobals.PWA.setPage(_nextPage);
                                 }
                             }
