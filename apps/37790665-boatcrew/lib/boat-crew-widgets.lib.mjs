@@ -167,7 +167,7 @@ export function aPageChangheListener(id) {
                 //}, 300000000000000));
                 //console.log(messageList);
               	let messageList={data:[{message:"xxx",accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()}]};
-              	console.log(JSON.pase(messageList));
+              	console.log(JSON.parse(messageList));
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
                     let _message = messageList.data[i].message;
