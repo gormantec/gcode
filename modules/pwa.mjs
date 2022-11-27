@@ -935,7 +935,7 @@ class AuthButtons extends Div {
                 child: new ActionButton({
                     margin: "0px",
                     marginLeft: "-100px",
-                    marginBottom: "-150px",
+                    marginBottom: "-15px",
                     right: "unset",
                     fontSize: "14px",
                     width: "194px",
