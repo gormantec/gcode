@@ -166,7 +166,7 @@ export function aPageChangheListener(id) {
                 //    max: 30
                 //}, 300000000000000));
                 //console.log(messageList);
-              	let messageList={data:[{message:"xxx",accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()}]};
+              	let messageList={data:[{message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()}]};
               	console.log(JSON.stringify(messageList));
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
