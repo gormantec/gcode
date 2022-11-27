@@ -131,7 +131,7 @@ class ChatPage extends Page {
             "backgroundSize": "cover",
             "backgroundRepeat": "no-repeat",
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
-          	"onOpen":()=>{console.log(myglobals.PWA.credentials);},
+          	"onOpen":()=>{console.log(PWA.getPWA().credentials);},
             "child": myList
         });
     }
