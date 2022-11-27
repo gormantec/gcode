@@ -133,13 +133,13 @@ class ChatPage extends Page {
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
             "onOpen": () => {
                 console.log(PWA.getPWA().credentials);
-                if (PWA.getPWA()) {
+                if (PWA.getPWA().credentials && PWA.getPWA().credentials.imageUrl) {
                     PWA.getPWA().pwaHeader.appendChild(new Div({
                       	"title": "email@email.com",
                         "width": "40px",
                         "height": "40px",
                       	"right": "0px",
-                        "backgroundImage": "url(https://www.gcode.com.au/images/icons8-test-account-48.png)"
+                        "backgroundImage": "url("+PWA.getPWA().credentials.imageUrl+")"
                     }));
                 }
             },
