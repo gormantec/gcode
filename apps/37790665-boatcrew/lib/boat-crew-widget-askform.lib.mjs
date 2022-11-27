@@ -1,3 +1,4 @@
+/*jshint esversion: 9 */
 import {
     Page,
     PWA,
