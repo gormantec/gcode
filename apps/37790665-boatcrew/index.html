@@ -111,8 +111,10 @@ class LoginPage extends Page {
                     "id": "getEmailButton",
                     applekey: "au.com.gcode.appleauth",
                     facebookkey: "1240916769304778",
+              		googlekey:"xxxxxx",
                     appearance: "list",
                     bottom: "45px",
+              		skip:"true",
                     nextPage: "ChatPage"
                 }),
             "bottom": ""
@@ -129,6 +131,7 @@ class ChatPage extends Page {
             "backgroundSize": "cover",
             "backgroundRepeat": "no-repeat",
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
+          	"onOpen":()=>{console.log(PWA.getPWA().credentials);},
             "child": myList
         });
     }
