@@ -89,7 +89,7 @@ if (window.opener && window.opener !== window) {
 */
 /*---------------------------------------------------------------------------*/
 //#1818ca   
-import { PWA,  Page, AuthButtons } from 'https://gcode.com.au/modules/pwa.mjs';
+import { PWA,  Div, Page, AuthButtons } from 'https://gcode.com.au/modules/pwa.mjs';
 import { myList,CrewDivForm,aPageChangheListener,Spinner,LoginButton } from './lib/boat-crew-widgets.lib.mjs';
 import { AskDivForm } from './lib/boat-crew-widget-askform.lib.mjs';
 try {
@@ -108,15 +108,15 @@ class LoginPage extends Page {
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
             "child": new AuthButtons({
-                    "id": "getEmailButton",
-                    applekey: "au.com.gcode.appleauth",
-                    facebookkey: "1240916769304778",
-              		googlekey:"xxxxxx",
-                    appearance: "list",
-                    bottom: "55px",
-              		skip:"true",
-                    nextPage: "ChatPage"
-                }),
+                "id": "getEmailButton",
+                applekey: "au.com.gcode.appleauth",
+                facebookkey: "1240916769304778",
+                googlekey: "xxxxxx",
+                appearance: "list",
+                bottom: "55px",
+                skip: "true",
+                nextPage: "ChatPage"
+            }),
             "bottom": ""
         });
     }
@@ -131,7 +131,21 @@ class ChatPage extends Page {
             "backgroundSize": "cover",
             "backgroundRepeat": "no-repeat",
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
-          	"onOpen":()=>{console.log(PWA.getPWA().credentials);},
+            "onOpen": () => {
+                console.log(PWA.getPWA().credentials);
+                if (PWA.getPWA()) {
+                    PWA.getPWA().pwaHeader.appendChild(new Div({
+                        "backgroundPosition": "center",
+                        "backgroundSize": "cover",
+                        "backgroundRepeat": "no-repeat",
+                        "width": "38px",
+                        "height": "38px",
+                      	"top": "4px",
+                      	"right": "4px",
+                        "backgroundImage": "url(https://gcode.com.au/images/icons8-test-account-48.png)"
+                    }));
+                }
+            },
             "child": myList
         });
     }
@@ -190,14 +204,14 @@ class FormPage extends Page {
 }
 /*---------------------------------------------------------------------------*/
 var aChatPage = new ChatPage();
-var aSpinner=new Spinner();
+var aSpinner = new Spinner();
 var aSubmitPage = new SubmitPage();
-var aCrewDivForm=new CrewDivForm();
+var aCrewDivForm = new CrewDivForm();
 var aCrewPage = new CrewPage();
-var aLoginButton=new LoginButton();
+var aLoginButton = new LoginButton();
 var aLoginPage = new LoginPage();
 var aFormPage = new FormPage();
-var aAskDivForm=new AskDivForm();
+var aAskDivForm = new AskDivForm();
 var aAsktoJoin = new AsktoJoin();
 var aPWA = new PWA({
     "title": "Boat Crew",
@@ -212,5 +226,4 @@ aPWA.addPageChangeListener(aPageChangheListener);
 aPWA.setPage(aLoginPage);
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
