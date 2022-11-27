@@ -951,6 +951,8 @@ class AuthButtons extends Div {
                         window.localStorage.setItem("authSkip", "true");
                         if (params && (params.rememberSkip == "true" || params.rememberSkip == true)) {
                             window.localStorage.setItem("authSkip", "true");
+                            console.log("SET TEST EMAIL");
+                            myglobals.PWA.setCredentials({provider:"testemail",email:"test@testemail.com",imageUrl:null,providerData:{user:{id:"test@testemail.com"}}});
                         }
                     }
                 })
