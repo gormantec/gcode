@@ -155,7 +155,7 @@ export function aPageChangheListener(id) {
         //lost contract = gcode-eea3047988c.testnet
         (async () => {
             try {
-                await nearConnect();
+                //await nearConnect();
                 //if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
                 //    myList.insertBefore(newSpinnerRow(), myList.firstChild);
                 //}
@@ -167,7 +167,7 @@ export function aPageChangheListener(id) {
                 //}, 300000000000000));
                 //console.log(messageList);
               	let messageList={data:[{message:"xxx",accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()}]};
-              console.log(JSON.pase(messageList));
+              	console.log(JSON.pase(messageList));
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
                     let _message = messageList.data[i].message;
