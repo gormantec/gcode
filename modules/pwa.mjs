@@ -918,7 +918,7 @@ class AuthButtons extends Div {
                 console.log("Provider (MS, Google, FB): ", signIn.provider);
                 console.log("Raw data from provider: ", signIn.providerData);
                 console.log("----------------");
-                if(signIn.email && signIn.imageUrl==null) signIn.imageUrl="https://gcode.com.au/images/icons8-test-account-48.png"
+                if(signIn.email && signIn.imageUrl==null) signIn.imageUrl="https://gcode.com.au/images/icons8-test-account-48.png";
                 if(signIn.providerData && signIn.providerData.user)console.log(signIn.providerData.user.id);
                 else if(signIn.providerData)console.log(signIn.providerData);
                 myglobals.PWA.setCredentials(signIn);
