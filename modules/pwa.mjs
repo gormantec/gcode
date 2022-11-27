@@ -962,6 +962,7 @@ class AuthButtons extends Div {
                             if (mutation.type === 'attributes') {
                                 console.log('The ' + mutation.attributeName + ' attribute was modified.'+JSON.stringify(mutation));
                                 if (window.localStorage.getItem("authSkip") == "true") {
+                                    console.log("SET TEST EMAIL");
                                     myglobals.PWA.setCredentials({provider:"testemail",email:"test@testemail.com",imageUrl:null,providerData:{user:{id:"test@testemail.com"}}});
                                     myglobals.PWA.setPage(_nextPage);
                                 }
