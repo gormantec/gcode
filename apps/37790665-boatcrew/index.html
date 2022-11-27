@@ -135,6 +135,9 @@ class ChatPage extends Page {
                 console.log(PWA.getPWA().credentials);
                 if (PWA.getPWA().credentials && PWA.getPWA().credentials.imageUrl) {
                     PWA.getPWA().pwaHeader.appendChild(new Div({
+                        "backgroundPosition": "center",
+                        "backgroundSize": "cover",
+                        "backgroundRepeat": "no-repeat",
                       	"title": "email@email.com",
                         "width": "38px",
                         "height": "38px",
