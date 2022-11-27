@@ -504,6 +504,7 @@ class Div {
         else if (params instanceof String) this.element.innerHTML = params;
 
         if (params && params.id) this.element.id = params.id;
+        if (params && params.title) this.element.title = params.title;
         if (params && params.class) this.element.className = (this.element.className + " " + params.class).trim();
         if (params && params.color) this.element.style.color = params.color;
         if (params && params.verticalAlign) this.element.style.verticalAlign = params.verticalAlign;
