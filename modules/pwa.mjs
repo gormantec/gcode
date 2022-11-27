@@ -943,6 +943,8 @@ class AuthButtons extends Div {
                     padding: "2px",
                     paddingLeft: "8px",
                     backgroundColor: "#555555",
+                    textAlign:"left",
+                    paddingLeft:"48px",
                     fontFamily:"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
                     innerText: "Skip Login",
                     onclick: () => {
