@@ -979,6 +979,7 @@ class ActionButton extends Div {
         this.setChild(new Div({
             tagName: "span", float: "left", position: "relative", child: new Div({
                 tagName: "i",
+                marginLeft: "10px",
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "add"
