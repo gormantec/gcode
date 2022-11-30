@@ -90,7 +90,7 @@ if (window.opener && window.opener !== window) {
 /*---------------------------------------------------------------------------*/
 //#1818ca   
 import { PWA,  Div, Page, AuthButtons } from 'https://gcode.com.au/modules/pwa.mjs';
-import { myList,CrewDivForm,aPageChangheListener,Spinner,LoginButton } from './lib/boat-crew-widgets.lib.mjs';
+import { myList,listView,CrewDivForm,aPageChangheListener,Spinner,LoginButton } from './lib/boat-crew-widgets.lib.mjs';
 import { AskDivForm } from './lib/boat-crew-widget-askform.lib.mjs';
 try {
     Page.clearPages();
@@ -147,7 +147,7 @@ class ChatPage extends Page {
                     }));
                 }
             },
-            "child": myList
+            "child": listView
         });
     }
 }

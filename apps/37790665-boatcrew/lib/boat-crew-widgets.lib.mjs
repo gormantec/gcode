@@ -13,10 +13,16 @@ import {
 } from 'https://gcode.com.au/modules/near/index.mjs';
 import {listCrewRequest} from "./boat-crew-widget-askform.lib.mjs";
 
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column} from './lib/flutter-widgets.lib.mjs'
+
 
 let messages = null;
 let accountId = "";
 export var myList = new Div();
+export var listView = new ListView({
+            "padding": "8px"
+        });
+
 
 async function nearConnect() { 
     if (!messages) {
@@ -190,8 +196,20 @@ export function aPageChangheListener(id) {
               	console.log(JSON.stringify(messageList));
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
+                    let _date = messageList.data[i].date;
                     let _message = messageList.data[i].message;
                     myList.appendChild(newRow(messageList.data[i]));
+                    listView.appendChild(new Container({
+                                      height: "240px",
+                                      children: [
+                                          new ListTile({
+                                              color: "#545454",
+                                              title: new Text(_date),
+                                              subtitle: new Text((_message.subject || "")),
+                                              leading: new Icon(Icons.battery_full),
+                                              trailing: new Icon(Icons.star_outline)
+                                          }), new Center({})]
+                    }));
                 }
             } catch (e) {
                 console.log(e);
