@@ -50,6 +50,23 @@ export function parent(filename) {
     return null;
 }
 
+
+
+export function syncPreload(files) {
+
+    var done=false;
+
+    preload(files).then(()=>{
+        done=true;
+    });
+    count++;
+    while(done==false && count<100000)
+    {
+        var rnd=Math.sqrt(Math.random*Math.random*Math.random*Math.random*Math.random*100000);
+        count++;
+    }
+}
+
 export async function preload(files) {
     return new Promise((resolve, reject) => {
         

@@ -128,6 +128,30 @@ function publishToGit(code, user,token)
                     {
                         filesArray.push({ name: "/lib/"+importFiles[i].name, data: window.btoa(slib), type: "base64" });
                         console.log("/lib/"+importFiles[i].name);
+
+                        var importsList2=slib.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+  
+                        var importFiles2=[];
+                        if(importsList2 && importsList2.length>0)
+                        {
+                            for(var i=0;i<importsList2.length;i++)
+                            {
+                                var fileNameLib=importsList2[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
+                                let dir="";
+                                if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
+                                importFiles2.push({name:fileNameLib,dir:dir});
+                            }
+                            syncPreload(importFiles2);
+                            let slib2=load(importFiles2[i].dir+importFiles2[i].name);
+                            if(slib2 && typeof slib2=="string" && slib2.length>0)
+                            {
+                                filesArray.push({ name: "/lib/"+importFiles2[i].name, data: window.btoa(slib2), type: "base64" });
+                                console.log("/lib/"+importFiles2[i].name);
+                            }
+                        }
+
+
+
                     }       
                 }
                 var result = createHtml(code);
