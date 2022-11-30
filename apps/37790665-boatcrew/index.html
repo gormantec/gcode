@@ -90,7 +90,7 @@ if (window.opener && window.opener !== window) {
 /*---------------------------------------------------------------------------*/
 //#1818ca   
 import { PWA,  Div, Page, AuthButtons } from 'https://gcode.com.au/modules/pwa.mjs';
-import { myList,CrewDivForm,aPageChangheListener,Spinner,LoginButton } from './lib/boat-crew-widgets.lib.mjs';
+import { myList,listView,CrewDivForm,aPageChangheListener,Spinner,LoginButton } from './lib/boat-crew-widgets.lib.mjs';
 import { AskDivForm } from './lib/boat-crew-widget-askform.lib.mjs';
 try {
     Page.clearPages();
@@ -133,20 +133,21 @@ class ChatPage extends Page {
             "backgroundImage": "url(https://gcode.com.au/images/boatcrew/bg2664x.png)",
             "onOpen": () => {
                 console.log(PWA.getPWA().credentials);
-                if (PWA.getPWA()) {
+                if (PWA.getPWA().credentials && PWA.getPWA().credentials.imageUrl) {
                     PWA.getPWA().pwaHeader.appendChild(new Div({
                         "backgroundPosition": "center",
                         "backgroundSize": "cover",
                         "backgroundRepeat": "no-repeat",
+                      	"title": "email@email.com",
                         "width": "38px",
                         "height": "38px",
-                      	"top": "4px",
                       	"right": "4px",
-                        "backgroundImage": "url(https://gcode.com.au/images/icons8-test-account-48.png)"
+                      	"top": "4px",
+                        "backgroundImage": "url("+PWA.getPWA().credentials.imageUrl+")"
                     }));
                 }
             },
-            "child": myList
+            "child": listView
         });
     }
 }

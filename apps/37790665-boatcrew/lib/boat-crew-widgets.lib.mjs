@@ -13,12 +13,18 @@ import {
 } from 'https://gcode.com.au/modules/near/index.mjs';
 import {listCrewRequest} from "./boat-crew-widget-askform.lib.mjs";
 
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column} from './flutter-widgets.lib.mjs'
+
 
 let messages = null;
 let accountId = "";
 export var myList = new Div();
+export var listView = new ListView({
+            "padding": "8px"
+        });
 
-async function nearConnect() {
+
+async function nearConnect() { 
     if (!messages) {
         var config = await login({
             accountId: accountId,
@@ -155,21 +161,55 @@ export function aPageChangheListener(id) {
         //lost contract = gcode-eea3047988c.testnet
         (async () => {
             try {
-                await nearConnect();
-                if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
-                    myList.insertBefore(newSpinnerRow(), myList.firstChild);
-                }
-                let accounts = [];
-                accounts.push(accountId);
-                let messageList = JSON.parse(await messages.listMessages({
-                    accountIds: JSON.stringify(accounts),
-                    max: 30
-                }, 300000000000000));
-                console.log(messageList);
+                //await nearConnect();
+                //if (!myList.firstChild || !myList.firstChild.id || myList.firstChild.id != "spinnerRow") {
+                //    myList.insertBefore(newSpinnerRow(), myList.firstChild);
+                //}
+                //let accounts = [];
+                //accounts.push(accountId);
+                //let messageList = JSON.parse(await messages.listMessages({
+                 //   accountIds: JSON.stringify(accounts),
+                //    max: 30
+                //}, 300000000000000));
+                //console.log(messageList);
+              	let messageList={data:[
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                  {message:{subject:"xxxx","body":"xxxxx"},accountId:"xxxx",timestamp:"xxxx",date:(new Date()).toISOString()},
+                ]};
+              	console.log(JSON.stringify(messageList));
                 myList.removeChildren();
                 for (var i = 0; i < messageList.data.length; i++) {
+                    let _date = messageList.data[i].date;
                     let _message = messageList.data[i].message;
                     myList.appendChild(newRow(messageList.data[i]));
+                    listView.appendChild(new Container({
+                                      height: "240px",
+                                      children: [
+                                          new ListTile({
+                                              color: "#545454",
+                                              title: new Text(_date),
+                                              subtitle: new Text((_message.subject || "")),
+                                              leading: new Icon(Icons.battery_full),
+                                              trailing: new Icon(Icons.star_outline)
+                                          }), new Center({})]
+                    }));
                 }
             } catch (e) {
                 console.log(e);
