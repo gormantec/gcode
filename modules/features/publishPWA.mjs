@@ -141,13 +141,14 @@ function publishToGit(code, user,token)
                                 if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
                                 importFiles2.push({name:fileNameLib,dir:dir});
                             }
-                            syncPreload(importFiles2);
-                            let slib2=load(importFiles2[i].dir+importFiles2[i].name);
-                            if(slib2 && typeof slib2=="string" && slib2.length>0)
-                            {
-                                filesArray.push({ name: "/lib/"+importFiles2[i].name, data: window.btoa(slib2), type: "base64" });
-                                console.log("/lib/"+importFiles2[i].name);
-                            }
+                            preload(importFiles2).then(()=>{
+                                let slib2=load(importFiles2[i].dir+importFiles2[i].name);
+                                if(slib2 && typeof slib2=="string" && slib2.length>0)
+                                {
+                                    filesArray.push({ name: "/lib/"+importFiles2[i].name, data: window.btoa(slib2), type: "base64" });
+                                    console.log("/lib/"+importFiles2[i].name);
+                                }
+                            });
                         }
 
 
