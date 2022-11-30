@@ -13,7 +13,7 @@ import {
 } from 'https://gcode.com.au/modules/near/index.mjs';
 import {listCrewRequest} from "./boat-crew-widget-askform.lib.mjs";
 
-import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column} from './lib/flutter-widgets.lib.mjs'
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column} from './flutter-widgets.lib.mjs'
 
 
 let messages = null;
