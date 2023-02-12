@@ -87,7 +87,7 @@ export function dialogAction(event) {
                         let current = event.getInputValue("uploadFileDialogData");
                         if (!current || current.tim() == "") current = "{\"files\":[]}";
                         let currentJson = JSON.parse(current);
-                        currentJson.files.push({ name: file.name, lastModified: file.lastModified, size: file.lastModified, type: file.type, svgdata:"<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><image width=\""+i.width+"\" height=\""+i.height+"\" xlink:href=\""+e.target.result+"\" /></svg>", base64: e.target.result });
+                        currentJson.files.push({ name: file.name, lastModified: file.lastModified, size: file.lastModified, type: file.type, svgdata:"<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" enable-background=\"new 0 0 "+i.width+" "+i.height+"\" height=\""+i.height+"\" viewBox=\"0 0 "+i.width+" "+i.height+"\" width=\""+i.width+"\"><image width=\""+i.width+"\" height=\""+i.height+"\" xlink:href=\""+e.target.result+"\" /></svg>", base64: e.target.result });
                         event.setInputValue("uploadFileDialogData", JSON.stringify(currentJson));
                     };
                     i.src = e.target.result; 
