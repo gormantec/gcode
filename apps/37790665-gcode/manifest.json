@@ -1,14 +1,14 @@
 {
   "name": "gcode",
   "short_name": "gcode",
-  "theme_color": "#ed171f",
-  "background_color": "#ed171f",
+  "theme_color": "#005040",
+  "background_color": "#005040",
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-gcode/",
   "permitted_urls": [],
-  "version": "1.0.0.2298255",
+  "version": "1.0.0.3518772",
   "icons": [
     {
       "src": "/apps/37790665-gcode/180x180.icon.png",
