@@ -85,7 +85,8 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+import { PWA,  Div, Page, AuthButtons } from 'https://gcode.com.au/modules/pwa.mjs';
+import { myList,listView,CrewDivForm,aPageChangheListener,Spinner,LoginButton } from './lib/boat-crew-widgets.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
