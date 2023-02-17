@@ -1,14 +1,14 @@
 {
   "name": "ezmc",
   "short_name": "ezmc",
-  "theme_color": "#e5b1b1",
-  "background_color": "#e5b1b1",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
   "scope": "/apps/37790665-ezmc/",
   "permitted_urls": [],
-  "version": "1.0.0.3559332",
+  "version": "1.0.0.3562548",
   "icons": [
     {
       "src": "/apps/37790665-ezmc/180x180.icon.png",
