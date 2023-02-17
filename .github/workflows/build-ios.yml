@@ -99,7 +99,7 @@ jobs:
           cd src
           project_file="`ls -A | grep -i \\.xcodeproj\$`"
           IOS_VERSION=`cat "$project_file/project.pbxproj" | grep IPHONEOS_DEPLOYMENT_TARGET -m 1 | sed -e 's/\t//g'| sed -e 's/IPHONEOS_DEPLOYMENT_TARGET = //g' | sed -e 's/;//g'`
-          BUILD_VERSION="$IOS_VERSION.$APP_SUB_VERSION"
+          BUILD_VERSION="${IOS_VERSION}.{$APP_SUB_VERSION}"
           echo "BUILD_VERSION=$(echo $BUILD_VERSION)" >> $GITHUB_ENV
           echo "IOS_VERSION = $IOS_VERSION"
           echo "BUILD_VERSION = $BUILD_VERSION"
