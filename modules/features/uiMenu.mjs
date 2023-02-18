@@ -649,16 +649,26 @@ function createPagesMenu() {
     let moreDiv = new Div({
         children: [
             new Div({
+                id:"expandMorePages",
                 tagName: "i",
                 class: "material-icons",
                 classNameOverride: true,
-                innerText: "expand_more"
+                innerText: "expand_more",
+                onclick: ()=>{
+                    document.getElementById("expandMorePages").style.display="none";
+                    document.getElementById("expandLessPages").style.display="block";
+                }
             }),Div({
                 tagName: "i",
+                id:"expandLessPages",
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "expand_less",
-                display:"none"
+                display:"none",
+                onclick: ()=>{
+                    document.getElementById("expandLessPages").style.display="none";
+                    document.getElementById("expandMorePages").style.display="block";
+                }
             }),
             new Div({
                 innerText: "Pages"
