@@ -659,7 +659,7 @@ function createPagesMenu() {
                     document.getElementById("expandMorePages").style.display="none";
                     document.getElementById("expandLessPages").style.display="block";
                 }
-            }),Div({
+            }),new Div({
                 tagName: "i",
                 id:"expandLessPages",
                 class: "material-icons",
