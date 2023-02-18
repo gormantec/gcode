@@ -292,7 +292,7 @@ aPWA.floatingActionButton.onclick(function() {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 let aUDID_Param = urlParams.get('UDID');
-aHomePage.setUUID("0000-0000000000000000");
+aHomePage.setUUID("00000000-0000000000000000");
 if (aUDID_Param) {
     aHomePage.setUUID(aUDID_Param);
     localStorage.setItem('UDID', aUDID_Param);
