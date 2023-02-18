@@ -13,6 +13,7 @@ class PWA {
         console.log("new PWA");
         if (!params) params = [];
         this.pwaAuth = params.pwaAuth || "false";
+        this.promptToInstall = params.promptToInstall || "true";
         this.title = params.title || "Code";
         this.primaryColor = params.primaryColor || "#005040";
         this.headerHeight = parseInt(params.headerHeight) || 45;
@@ -397,9 +398,11 @@ class PWA {
         });
         if (mockFrame && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
             rootWindow = addFrame(win, aPWA, mockFrame);
-
-            win.document.body.appendChild(ad2hsPrompt.element);
-            win.document.body.appendChild(iosPrompt.element);
+            if(this.promptToInstall!="false")
+            {
+                win.document.body.appendChild(ad2hsPrompt.element);
+                win.document.body.appendChild(iosPrompt.element);
+            }
             aPWA.buildScreen(msec, win, rootWindow);
         }
         else {
@@ -408,8 +411,11 @@ class PWA {
             var frame = new Div({});
             frame.appendChild(splashdiv);
             win.document.body.appendChild(frame.element);
-            win.document.body.appendChild(ad2hsPrompt.element);
-            win.document.body.appendChild(iosPrompt.element);
+            if(this.promptToInstall!="false")
+            {
+                win.document.body.appendChild(ad2hsPrompt.element);
+                win.document.body.appendChild(iosPrompt.element);
+            }
             rootWindow = frame.element;
             this.buildScreen(msec, win, rootWindow);
         }
