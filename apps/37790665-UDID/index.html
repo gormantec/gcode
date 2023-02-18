@@ -93,7 +93,7 @@ import {
     Page,
     Div,
     AuthButtons
-} from 'https://gcode.com.au/modules/pwa.mjs'; 
+} from 'https://gcode.com.au/modules/pwa.mjs';
 
 /*
 import {
@@ -277,52 +277,50 @@ aPWA.floatingActionButton.onclick(function() {
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-let aUDID = urlParams.get('UDID')
+let aUDID_Param = urlParams.get('UDID');
 aHomePage.setUUID("0000-0000000000000000");
-if (aUDID) {
-    aHomePage.setUUID(aUDID);
-    localStorage.setItem('UDID', aUDID);
+if (aUDID_Param) {
+    aHomePage.setUUID(aUDID_Param);
+    localStorage.setItem('UDID', aUDID_Param);
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
     window.addEventListener('pwaLoaded', function() {
-        aUDID = localStorage.getItem('UDID');
+        let aUDID = localStorage.getItem('UDID');
         let aEmail = localStorage.getItem('Email');
-        if (aUDID && aEmail) {
-          	console.log("Email and UDID exist");
+        if (aUDID && aEmail && aUDID.trim().length>0 && aEmail.trim().length>0) {
+            console.log("Email and UDID exist");
             aHomePage.setUUID(aUDID);
             aHomePage.setEmail(aEmail);
-          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "none";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "block";//sendToGcodeButton
-           // document.getElementById("getUDIDButton").style.display = "none";
+            aHomePage.children[3].firstChild.style.display = "none"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "none"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "block"; //sendToGcodeButton
+            // document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "none";
             //document.getElementById("sendToGcodeButton").style.display = "block";
-        } else if (aUDID) {
-          
-          	console.log("Only UDID exist");
+        } else if (aUDID && aUDID.trim().length>0) {
+
+            console.log("Only UDID exist");
             aHomePage.setUUID(aUDID);
-          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "block";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            aHomePage.children[3].firstChild.style.display = "none"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "block"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "none"; //sendToGcodeButton
             //document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "block";
             //document.getElementById("sendToGcodeButton").style.display = "none";
-        }
-        else if (aEmail) {
-          	console.log("Only aEmail exist");
+        } else if (aEmail && aEmail.trim().length>0) {
+            console.log("Only aEmail exist");
             aHomePage.setEmail(aEmail);
-          	aHomePage.children[3].firstChild.style.display = "block";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "none";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            aHomePage.children[3].firstChild.style.display = "block"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "none"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "none"; //sendToGcodeButton
             //document.getElementById("getUDIDButton").style.display = "block";
             //document.getElementById("getEmailButton").style.display = "none";
             //document.getElementById("sendToGcodeButton").style.display = "none";
-        }
-        else  {
-          	console.log("Neither UDID or aEmail exist");
-          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "block";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+        } else {
+            console.log("Neither UDID or aEmail exist");
+            aHomePage.children[3].firstChild.style.display = "none"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "block"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "none"; //sendToGcodeButton
             //document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "block";
             //document.getElementById("sendToGcodeButton").style.display = "none";
