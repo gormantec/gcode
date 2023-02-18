@@ -647,6 +647,7 @@ function createPagesMenu() {
     let pagesBody = document.createElement("div");
 
     let moreDiv = new Div({
+        width:"200px",
         children: [
             new Div({
                 id:"expandMorePages",
@@ -671,7 +672,8 @@ function createPagesMenu() {
                 }
             }),
             new Div({
-                innerText: "Pages"
+                innerText: "Pages",
+                float: "right"
             })
         ]
     });
