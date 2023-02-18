@@ -1087,7 +1087,7 @@ class DivForm extends Div {
                         response => response.json()
                     ).then(
                         json => {
-                        var googleAPI = getScript('https://maps.googleapis.com/maps/api/js?key='+json.googleapiskey+'&libraries=places&v=weekly', ["google"]);
+                        var googleAPI = getScript('https://maps.googleapis.com/maps/api/js?key='+json.googleapiskey+'&callback=Function.prototype&libraries=places&v=weekly', ["google"]);
                         googleAPI.then(({ google }) => {
                             let autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
                                 componentRestrictions: { country: country },
