@@ -244,6 +244,7 @@ class HomePage extends Page {
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
             bottom: "20px",
+          	borderColor: "white", borderWidth: "1px", borderStyle: "groove", borderRadius: "6px",
             onsignin: (s) => {
                 if (s.email) localStorage.setItem('Email', s.email);
                 if (s.name) localStorage.setItem('Name', s.name);
