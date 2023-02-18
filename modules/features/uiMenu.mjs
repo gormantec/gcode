@@ -3,7 +3,7 @@ import { getImage, createHtml,getImportLibFileList } from '/modules/htmlUtils.mj
 import { cyrb53 } from '/modules/cyrb53.mjs';
 import { load, preload} from '/modules/gcodeStorage.mjs';
 import { getScript } from '/modules/getScript.mjs';
-import { Div } from '/modules/pwa.mjs'
+import { Div } from '/modiules/pwa.mjs'
 const getAcorn = getScript('https://cdnjs.cloudflare.com/ajax/libs/acorn/8.7.1/acorn.min.js', ["acorn"]);
 let acornParser=null;
 getAcorn.then(({acorn})=>{
