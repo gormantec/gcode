@@ -15,7 +15,7 @@ concurrency:
   group: iOS ${{ github.ref }}
   cancel-in-progress: true
   
-jobs:
+jobs: 
   build:
     name: Build Achive and Export IPA
     runs-on: [macos]
