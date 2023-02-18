@@ -10,7 +10,11 @@ on:
       - '!**/apk/**'
       - '!**.xcarchive/Info.plist'
       - '!apps/gcode_manifests.json'
-
+      
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   build:
     name: Build Achive and Export IPA
