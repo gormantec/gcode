@@ -84,7 +84,7 @@ if (window.opener && window.opener !== window) {
   description: An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.
   permittedUrls: ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"]
 
-
+  
   
 */
 /*---------------------------------------------------------------------------*/
@@ -93,7 +93,7 @@ import {
     Page,
     Div,
     AuthButtons
-} from 'https://gcode.com.au/modules/pwa.mjs';
+} from 'https://gcode.com.au/modules/pwa.mjs'; 
 
 /*
 import {
@@ -179,17 +179,18 @@ class HomePage extends Page {
             child: new Div({
                 "id": "getUDIDButton",
                 "position": "absolute",
-                "bottom": "55px",
+                "bottom": "35px",
                 "height": "42px",
                 "width": "200px",
                 borderRadius: "8px",
+                paddingTop: "10px",
                 backgroundColor: "#555555",
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "zIndex": "10001",
                 "textAlign": "center",
-                "child": new Center({child:new Text("Get UDID")}),
+                "innerText": "Get UDID",
                 "display": "none",
                 onclick: () => {
                     window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
@@ -202,17 +203,18 @@ class HomePage extends Page {
             child: new Div({
                 "id": "sendToGcodeButton",
                 "position": "absolute",
-                "bottom": "55px",
+                "bottom": "35px",
                 "height": "32px",
                 "width": "200px",
                 borderRadius: "8px",
+                paddingTop: "10px",
                 backgroundColor: "#555555",
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "zIndex": "10001",
                 "textAlign": "center",
-                "innerText": new Center({child:new Text("Send info to gcode")}),
+                "innerText": "Send info to gcode",
                 "display": "none",
                 onclick: () => {
                     console.log("click");
@@ -229,7 +231,7 @@ class HomePage extends Page {
             "id": "getEmailButton",
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-            bottom: "45px",
+            bottom: "20px",
             onsignin: (s) => {
                 if (s.email) localStorage.setItem('Email', s.email);
                 if (s.name) localStorage.setItem('Name', s.name);
