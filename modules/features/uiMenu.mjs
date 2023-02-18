@@ -658,6 +658,7 @@ function createPagesMenu() {
                 onclick: ()=>{
                     document.getElementById("expandMorePages").style.display="none";
                     document.getElementById("expandLessPages").style.display="block";
+                    pagesBody.style.display="none";
                 }
             }),new Div({
                 tagName: "i",
@@ -669,6 +670,7 @@ function createPagesMenu() {
                 onclick: ()=>{
                     document.getElementById("expandLessPages").style.display="none";
                     document.getElementById("expandMorePages").style.display="block";
+                    pagesBody.style.display="block";
                 }
             }),
             new Div({
