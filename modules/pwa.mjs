@@ -411,7 +411,7 @@ class PWA {
             var frame = new Div({});
             frame.appendChild(splashdiv);
             win.document.body.appendChild(frame.element);
-            if(this.promptToInstall!="false")
+            if(this.promptToInstall!="false")  
             {
                 win.document.body.appendChild(ad2hsPrompt.element);
                 win.document.body.appendChild(iosPrompt.element);
