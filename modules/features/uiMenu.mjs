@@ -3,6 +3,7 @@ import { getImage, createHtml,getImportLibFileList } from '/modules/htmlUtils.mj
 import { cyrb53 } from '/modules/cyrb53.mjs';
 import { load, preload} from '/modules/gcodeStorage.mjs';
 import { getScript } from '/modules/getScript.mjs';
+import { Div } from '/modiules/pwa.mjs'
 const getAcorn = getScript('https://cdnjs.cloudflare.com/ajax/libs/acorn/8.7.1/acorn.min.js', ["acorn"]);
 let acornParser=null;
 getAcorn.then(({acorn})=>{
@@ -668,7 +669,14 @@ function createPagesMenu() {
     let pagesPanel = document.createElement("div");
     let pagesHeader = document.createElement("div");
     let pagesBody = document.createElement("div");
-    pagesHeader.innerHTML = "[+] pages";
+    
+    let moreDiv=new Div({
+        tagName: "i",
+        class: "material-icons",
+        classNameOverride: true,
+        innerText: "expand_more"
+    });
+    pagesHeader.appendChild(moreDiv.element);
     pagesHeader.style.borderColor = "#AAAAAA";
     pagesHeader.style.borderWidth = "1px";
     pagesHeader.style.borderStyle = "solid";
