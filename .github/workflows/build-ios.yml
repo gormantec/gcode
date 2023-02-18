@@ -12,7 +12,7 @@ on:
       - '!apps/gcode_manifests.json'
       
 concurrency:
-  group: ${{ github.ref }}
+  group: iOS ${{ github.ref }}
   cancel-in-progress: true
   
 jobs:
