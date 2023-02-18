@@ -21,7 +21,7 @@ jobs:
     runs-on: [macos]
     steps:
       - name: Sleep for 180 seconds
-        run: sleep 180
+        run: sleep 270
         shell: bash
       - name: Checkout
         uses: actions/checkout@v3
