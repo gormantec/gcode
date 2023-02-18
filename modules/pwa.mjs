@@ -1080,12 +1080,20 @@ class DivForm extends Div {
                     inputDivDiv.element.setAttribute("required", "true");
                     inputDivDiv.element.setAttribute("autocomplete", "off");
                     inputDivDiv.element.setAttribute("size", size);
-                    var googleAPI = getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM&libraries=places&v=weekly', ["google"]);
-                    googleAPI.then(({ google }) => {
-                        let autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
-                            componentRestrictions: { country: country },
-                            fields: ["address_components", "geometry"],
-                            types: ["geocode"],
+                    let googleapiskey="AIzaSyBHUbW3FmHsI0H7denep4FFCZ5NP5QC8xM";
+                    
+                    fetch('https://xcgnmv1u3g.execute-api.ap-southeast-2.amazonaws.com/default/googleapiskey')
+                    .then(
+                        response => response.json()
+                    ).then(
+                        json => {
+                        var googleAPI = getScript('https://maps.googleapis.com/maps/api/js?key='+json.googleapiskey+'&libraries=places&v=weekly', ["google"]);
+                        googleAPI.then(({ google }) => {
+                            let autocomplete = new google.maps.places.Autocomplete(inputDivDiv.element, {
+                                componentRestrictions: { country: country },
+                                fields: ["address_components", "geometry"],
+                                types: ["geocode"],
+                            });
                         });
                     });
                 }
