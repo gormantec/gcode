@@ -236,7 +236,8 @@ class HomePage extends Page {
                 if (s.email) localStorage.setItem('Email', s.email);
                 if (s.name) localStorage.setItem('Name', s.name);
                 _this.setEmail(s.email);
-                document.getElementById("getUDIDButton").style.display = "block";
+                document.getElementById("sendToGcodeButton").style.display = "block";
+                document.getElementById("getUDIDButton").style.display = "none";
                 document.getElementById("getEmailButton").style.display = "none";
 
             }
