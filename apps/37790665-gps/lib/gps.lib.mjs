@@ -65,7 +65,7 @@ class GpsClass {
     updateLocation(lat, lng) {
         let _this = this;
 
-        if (_this.coordDiv) {
+        if (_this.coordDiv && mykey!='') {
             if (navigator.geolocation) {
                 if (!lat && _this._position && _this._position.coords.latitude) lat = _this._position.coords.latitude;
                 if (!lng && _this._position && _this._position.coords.longitude) lng = _this._position.coords.longitude;

@@ -8,7 +8,7 @@
   "description": "A simple GPS viewer, allowing you to measure between two points.  This is an example of a new line.  This is another new line",
   "scope": "/apps/37790665-gps/",
   "permitted_urls": [],
-  "version": "1.0.0.3571439",
+  "version": "1.0.0.3571453",
   "icons": [
     {
       "src": "/apps/37790665-gps/180x180.icon.png",
