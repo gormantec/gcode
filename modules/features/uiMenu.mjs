@@ -699,6 +699,42 @@ function createPWAMenu(pwaWidget) {
     let pwaHeader = document.createElement("div");
     let pwaBody = document.createElement("div");
     pwaHeader.innerHTML = "[+] pwa";
+
+    let moreDiv = new Div({
+        width:"200px",
+        children: [
+            new Div({
+                id:"expandMorePWA",
+                tagName: "i",
+                class: "material-icons",
+                classNameOverride: true,
+                innerText: "expand_more",
+                onclick: ()=>{
+                    document.getElementById("expandMorePWA").style.display="none";
+                    document.getElementById("expandLessPWA").style.display="block";
+                    pwaBody.style.display="none";
+                }
+            }),new Div({
+                tagName: "i",
+                id:"expandLessPWA",
+                class: "material-icons",
+                classNameOverride: true,
+                innerText: "expand_less",
+                display:"none",
+                onclick: ()=>{
+                    document.getElementById("expandLessPWA").style.display="none";
+                    document.getElementById("expandMorePWA").style.display="block";
+                    pwaBody.style.display="block";
+                }
+            }),
+            new Div({
+                innerText: "PWA",
+                float: "right"
+            })
+        ]
+    });
+
+
     pwaHeader.style.borderColor = "#AAAAAA";
     pwaHeader.style.borderWidth = "1px";
     pwaHeader.style.borderStyle = "solid";
