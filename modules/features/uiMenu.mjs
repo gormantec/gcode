@@ -653,6 +653,12 @@ function createPagesMenu() {
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "expand_more"
+            }),Div({
+                tagName: "i",
+                class: "material-icons",
+                classNameOverride: true,
+                innerText: "expand_less",
+                display:"none"
             }),
             new Div({
                 innerText: "Pages"
