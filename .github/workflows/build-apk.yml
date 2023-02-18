@@ -11,6 +11,9 @@ on:
       - '!**/ios/**'
       - '!**/apk/**'
       - '!apps/gcode_manifests.json'
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build-apk-job:
     timeout-minutes: 10
