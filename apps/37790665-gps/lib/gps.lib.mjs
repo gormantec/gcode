@@ -4,7 +4,7 @@ import {
 
 let platlmg = "";
 let mykey = '';
-fetch('http://example.com/movies.json')
+fetch('https://xcgnmv1u3g.execute-api.ap-southeast-2.amazonaws.com/default/googleapiskey?gps=true')
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
