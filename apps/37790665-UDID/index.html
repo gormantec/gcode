@@ -193,7 +193,9 @@ class HomePage extends Page {
                 "innerText": "Get UDID",
                 "display": "none",
                 onclick: () => {
+                    document.getElementById("getUDIDButton").style.display = "none";
                     window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+
                 }
             })
         }));
@@ -288,7 +290,7 @@ if (aUDID_Param) {
     window.addEventListener('pwaLoaded', function() {
         let aUDID = localStorage.getItem('UDID');
         let aEmail = localStorage.getItem('Email');
-        if (aUDID && aEmail && aUDID.trim().length>0 && aEmail.trim().length>0) {
+        if (aUDID && aEmail && aUDID.trim().length > 0 && aEmail.trim().length > 0) {
             console.log("Email and UDID exist");
             aHomePage.setUUID(aUDID);
             aHomePage.setEmail(aEmail);
@@ -298,7 +300,7 @@ if (aUDID_Param) {
             // document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "none";
             //document.getElementById("sendToGcodeButton").style.display = "block";
-        } else if (aUDID && aUDID.trim().length>0) {
+        } else if (aUDID && aUDID.trim().length > 0) {
 
             console.log("Only UDID exist");
             aHomePage.setUUID(aUDID);
@@ -308,7 +310,7 @@ if (aUDID_Param) {
             //document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "block";
             //document.getElementById("sendToGcodeButton").style.display = "none";
-        } else if (aEmail && aEmail.trim().length>0) {
+        } else if (aEmail && aEmail.trim().length > 0) {
             console.log("Only aEmail exist");
             aHomePage.setEmail(aEmail);
             aHomePage.children[3].firstChild.style.display = "block"; //getUDIDButton
