@@ -16,6 +16,9 @@ jobs:
     name: Build Achive and Export IPA
     runs-on: [macos]
     steps:
+      - name: Sleep for 30 seconds
+        run: sleep 120s
+        shell: bash
       - name: Checkout
         uses: actions/checkout@v3
       - name: Get changed files
