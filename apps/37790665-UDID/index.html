@@ -84,7 +84,7 @@ if (window.opener && window.opener !== window) {
   description: An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.
   permittedUrls: ["https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"]
 
-
+  
   
 */
 /*---------------------------------------------------------------------------*/
@@ -117,7 +117,7 @@ class HomePage extends Page {
             "backgroundColor": "#000000",
             "hideFloatingActionButton": "true",
             "children": [new Div({
-                    "marginTop": "80px",
+                    "marginTop": "60px",
                     "display": "flex",
                     "justifyContent": "center",
                     "classNameOverride": "true",
@@ -168,8 +168,8 @@ class HomePage extends Page {
                     "display": "block",
                     "marginLeft": "40px",
                     "fontSize": "11px",
-                    "marginTop": "50px",
-                    "innerHTML": "1) Login to your Apple ID below.<br><br>2) Download the profile with \"Get UDID\" below.<br><br>3) Go to Settings -> General -> Profile --or-- <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings -> General ->VPN & Device Management.<br><br>4) Then Install profile: \"Gorman Technology Pty Ltd\"<br><br>5) This will email your ID and UDID to gormantec."
+                    "marginTop": "40px",
+                    "innerHTML": "1) Download the profile with \"Get UDID\" below.<br><br>2) Go to Settings -> General -> Profile --or-- <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings -> General ->VPN & Device Management.<br><br>3) Then Install profile: \"Gorman Technology Pty Ltd\"<br><br>4) Login to your Apple ID below to get email.<br><br>5) This will email your ID and UDID to gormantec.<br><br><br>* The profile is unsigned, you can ignore the warning."
                 })
             ]
         });
@@ -179,20 +179,23 @@ class HomePage extends Page {
             child: new Div({
                 "id": "getUDIDButton",
                 "position": "absolute",
-                "bottom": "55px",
+                "bottom": "35px",
                 "height": "42px",
                 "width": "200px",
                 borderRadius: "8px",
+                paddingTop: "10px",
                 backgroundColor: "#555555",
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "zIndex": "10001",
                 "textAlign": "center",
-                "child": new Center({child:new Text("Get UDID")}),
+                "innerText": "Get UDID",
                 "display": "none",
                 onclick: () => {
+                    document.getElementById("getUDIDButton").style.display = "none";
                     window.location.href = "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid";
+
                 }
             })
         }));
@@ -202,17 +205,18 @@ class HomePage extends Page {
             child: new Div({
                 "id": "sendToGcodeButton",
                 "position": "absolute",
-                "bottom": "55px",
+                "bottom": "35px",
                 "height": "32px",
                 "width": "200px",
                 borderRadius: "8px",
+                paddingTop: "10px",
                 backgroundColor: "#555555",
                 fontSize: "20px",
                 "cursor": "pointer",
                 "pointerEvents": "auto",
                 "zIndex": "10001",
                 "textAlign": "center",
-                "innerText": new Center({child:new Text("Send info to gcode")}),
+                "innerText": "Send info to gcode",
                 "display": "none",
                 onclick: () => {
                     console.log("click");
@@ -229,12 +233,13 @@ class HomePage extends Page {
             "id": "getEmailButton",
             applekey: "au.com.gcode.appleauth",
             appearance: "list",
-            bottom: "45px",
+            bottom: "20px",
             onsignin: (s) => {
                 if (s.email) localStorage.setItem('Email', s.email);
                 if (s.name) localStorage.setItem('Name', s.name);
                 _this.setEmail(s.email);
-                document.getElementById("getUDIDButton").style.display = "block";
+                document.getElementById("sendToGcodeButton").style.display = "block";
+                document.getElementById("getUDIDButton").style.display = "none";
                 document.getElementById("getEmailButton").style.display = "none";
 
             }
@@ -266,7 +271,8 @@ var aPWA = new PWA({
     "title": "Gorman Technology Pty Ltd",
     "footer": "https://www.gormantec.com",
     "primaryColor": "#323232",
-    "pwaAuth": "true"
+    "pwaAuth": "true",
+    "promptToInstall": "false" 
 });
 aPWA.setPage(aHomePage);
 aPWA.floatingActionButton.onclick(function() {
@@ -275,52 +281,50 @@ aPWA.floatingActionButton.onclick(function() {
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-let aUDID = urlParams.get('UDID')
+let aUDID_Param = urlParams.get('UDID');
 aHomePage.setUUID("0000-0000000000000000");
-if (aUDID) {
-    aHomePage.setUUID(aUDID);
-    localStorage.setItem('UDID', aUDID);
+if (aUDID_Param) {
+    aHomePage.setUUID(aUDID_Param);
+    localStorage.setItem('UDID', aUDID_Param);
     window.location.replace("https://gcode.com.au/apps/37790665-UDID/index.html");
 } else {
     window.addEventListener('pwaLoaded', function() {
-        aUDID = localStorage.getItem('UDID');
+        let aUDID = localStorage.getItem('UDID');
         let aEmail = localStorage.getItem('Email');
-        if (aUDID && aEmail) {
-          	console.log("Email and UDID exist");
+        if (aUDID && aEmail && aUDID.trim().length > 0 && aEmail.trim().length > 0) {
+            console.log("Email and UDID exist");
             aHomePage.setUUID(aUDID);
             aHomePage.setEmail(aEmail);
-          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "none";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "block";//sendToGcodeButton
-           // document.getElementById("getUDIDButton").style.display = "none";
+            aHomePage.children[3].firstChild.style.display = "none"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "none"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "block"; //sendToGcodeButton
+            // document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "none";
             //document.getElementById("sendToGcodeButton").style.display = "block";
-        } else if (aUDID) {
-          
-          	console.log("Only UDID exist");
+        } else if (aUDID && aUDID.trim().length > 0) {
+
+            console.log("Only UDID exist");
             aHomePage.setUUID(aUDID);
-          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "block";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            aHomePage.children[3].firstChild.style.display = "none"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "block"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "none"; //sendToGcodeButton
             //document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "block";
             //document.getElementById("sendToGcodeButton").style.display = "none";
-        }
-        else if (aEmail) {
-          	console.log("Only aEmail exist");
+        } else if (aEmail && aEmail.trim().length > 0) {
+            console.log("Only aEmail exist");
             aHomePage.setEmail(aEmail);
-          	aHomePage.children[3].firstChild.style.display = "block";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "none";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+            aHomePage.children[3].firstChild.style.display = "block"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "none"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "none"; //sendToGcodeButton
             //document.getElementById("getUDIDButton").style.display = "block";
             //document.getElementById("getEmailButton").style.display = "none";
             //document.getElementById("sendToGcodeButton").style.display = "none";
-        }
-        else  {
-          	console.log("Neither UDID or aEmail exist");
-          	aHomePage.children[3].firstChild.style.display = "none";//getUDIDButton
-          	aHomePage.children[5].firstChild.style.display = "block";//getEmailButton
-          	aHomePage.children[4].firstChild.style.display = "none";//sendToGcodeButton
+        } else {
+            console.log("Neither UDID or aEmail exist");
+            aHomePage.children[3].firstChild.style.display = "block"; //getUDIDButton
+            aHomePage.children[5].firstChild.style.display = "none"; //getEmailButton
+            aHomePage.children[4].firstChild.style.display = "none"; //sendToGcodeButton
             //document.getElementById("getUDIDButton").style.display = "none";
             //document.getElementById("getEmailButton").style.display = "block";
             //document.getElementById("sendToGcodeButton").style.display = "none";
