@@ -739,7 +739,7 @@ function createPWAMenu(pwaWidget) {
         ]
     });
 
-    pagesHeader.appendChild(moreDiv.element);
+    pwaHeader.appendChild(moreDiv.element);
 
 
     pwaHeader.style.borderColor = "#AAAAAA";
