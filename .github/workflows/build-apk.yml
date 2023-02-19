@@ -19,9 +19,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - name: Sleep for 90 seconds
-        run: sleep 90s
-        shell: bash
+      - name: Checkout
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
@@ -82,10 +80,5 @@ jobs:
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/apk
           git commit -m "Add changes"
-
-      - name: Push changes # push the output folder to your repo
-        uses: ad-m/github-push-action@master
-        with:
-          branch: master #ignore if your branch is master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+          git pull --rebase
+          git push

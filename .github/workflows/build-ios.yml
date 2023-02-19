@@ -65,11 +65,6 @@ jobs:
           echo "APP_VERSION=$(echo $APP_VERSION)" >> $GITHUB_ENV
           echo "APP_MAIN_VERSION=$(echo $APP_MAIN_VERSION)" >> $GITHUB_ENV
           echo "APP_SUB_VERSION=$(echo $APP_SUB_VERSION)" >> $GITHUB_ENV
-      - name: Sleep for 180 seconds
-        run: sleep 90
-        shell: bash
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: setup node
         uses: actions/setup-node@v3.3.0
         with:
