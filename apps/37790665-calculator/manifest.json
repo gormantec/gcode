@@ -6,9 +6,10 @@
   "display": "standalone",
   "orientation": "any",
   "description": "A simple calculator pWA app.",
+  "id": "37790665-calculator",
   "scope": "/apps/37790665-calculator/",
   "permitted_urls": [],
-  "version": "1.0.0.3518875",
+  "version": "1.0.0.3585342",
   "icons": [
     {
       "src": "/apps/37790665-calculator/180x180.icon.png",
