@@ -705,29 +705,32 @@ function createPWAMenu(pwaWidget) {
         children: [
             new Div({
                 id:"expandMorePWA",
+                width:"20px",
                 tagName: "i",
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "expand_more",
                 onclick: ()=>{
                     document.getElementById("expandMorePWA").style.display="none";
-                    document.getElementById("expandLessPWA").style.display="block";
+                    document.getElementById("expandLessPWA").style.display="inline-block";
                     pwaBody.style.display="none";
                 }
             }),new Div({
                 tagName: "i",
                 id:"expandLessPWA",
+                width:"20px",
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "expand_less",
                 display:"none",
                 onclick: ()=>{
                     document.getElementById("expandLessPWA").style.display="none";
-                    document.getElementById("expandMorePWA").style.display="block";
-                    pwaBody.style.display="block";
+                    document.getElementById("expandMorePWA").style.display="inline-block";
+                    pwaBody.style.display="inline-block";
                 }
             }),
             new Div({
+                display: "inline-block",
                 innerText: "PWA",
                 float: "right"
             })
