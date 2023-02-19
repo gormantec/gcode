@@ -6,9 +6,10 @@
   "display": "standalone",
   "orientation": "any",
   "description": "Baby Daze is an app for young mothers.",
+  "id": "37790665-Baby-Daze",
   "scope": "/apps/37790665-Baby-Daze/",
   "permitted_urls": [],
-  "version": "1.0.0.3585077",
+  "version": "1.0.0.3585207",
   "icons": [
     {
       "src": "/apps/37790665-Baby-Daze/180x180.icon.png",
