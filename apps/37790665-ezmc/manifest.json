@@ -1,14 +1,15 @@
 {
   "name": "ezmc",
   "short_name": "ezmc",
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
+  "theme_color": "#005040",
+  "background_color": "#005040",
   "display": "standalone",
   "orientation": "any",
-  "description": "EZMC is an application that save time and money by doing stuff to make your life easier. It will calculate the average thing required to do some other thing and keep you deplvering outcomes all day long.",
+  "description": "A gcode developed PWA app",
+  "id": "37790665-ezmc",
   "scope": "/apps/37790665-ezmc/",
   "permitted_urls": [],
-  "version": "1.0.0.3580055",
+  "version": "1.0.0.3585331",
   "icons": [
     {
       "src": "/apps/37790665-ezmc/180x180.icon.png",

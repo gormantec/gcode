@@ -6,6 +6,7 @@
   "display": "standalone",
   "orientation": "any",
   "description": "An app to colaborate with freinds on trips to the river.",
+  "id": "37790665-boatcrew",
   "scope": "/apps/37790665-boatcrew/",
   "permitted_urls": [
     "connect.facebook.net",
@@ -20,7 +21,7 @@
     "fonts.googleapis.com",
     "maps.gstatic.com"
   ],
-  "version": "1.0.0.3570952",
+  "version": "1.0.0.3585338",
   "icons": [
     {
       "src": "/apps/37790665-boatcrew/180x180.icon.png",

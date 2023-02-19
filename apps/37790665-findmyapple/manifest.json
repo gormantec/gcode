@@ -6,11 +6,12 @@
   "display": "standalone",
   "orientation": "any",
   "description": "A gcode developed PWA app",
+  "id": "37790665-findmyapple",
   "scope": "/apps/37790665-findmyapple/",
   "permitted_urls": [
     "https://www.icloud.com/find/"
   ],
-  "version": "1.0.0.1895026",
+  "version": "1.0.0.3585355",
   "icons": [
     {
       "src": "/apps/37790665-findmyapple/180x180.icon.png",
