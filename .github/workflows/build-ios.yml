@@ -27,6 +27,7 @@ jobs:
           echo ${{ github.event.head_commit.message }}
           APP_NAME=${{ github.event.head_commit.message }}
           APP_NAME=${APP_NAME:7}
+          echo "[$APP_NAME]"
           SHORT_NAME=`grep '"short_name"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           THEME_COLOR=`grep '"theme_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
           BACKGROUND_COLOR=`grep '"background_color"' ./apps/$APP_NAME/manifest.json | sed -r 's/^[^:]*:.*"(.*)".*$/\1/'`
