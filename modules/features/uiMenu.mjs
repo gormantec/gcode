@@ -671,7 +671,7 @@ function createPagesMenu() {
                 onclick: ()=>{
                     document.getElementById("expandLessPages").style.display="none";
                     document.getElementById("expandMorePages").style.display="inline-block";
-                    pagesBody.style.display="inline-block";
+                    pagesBody.style.display="block";
                 }
             }),
             new Div({
@@ -728,7 +728,7 @@ function createPWAMenu(pwaWidget) {
                 onclick: ()=>{
                     document.getElementById("expandLessPWA").style.display="none";
                     document.getElementById("expandMorePWA").style.display="inline-block";
-                    pwaBody.style.display="inline-block";
+                    pwaBody.style.display="block";
                 }
             }),
             new Div({
