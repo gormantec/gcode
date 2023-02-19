@@ -176,5 +176,5 @@ jobs:
           git config --local user.name "gormantec"
           git add ./apps/$APP_NAME/ios
           git commit -m "Add changes" -a
-          git pull
+          git pull --rebase
           git push
