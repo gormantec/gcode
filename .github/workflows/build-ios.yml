@@ -12,7 +12,7 @@ on:
       - '!apps/gcode_manifests.json'
       
 concurrency:
-  group: iOS ${{ github.ref }}
+  group: iOS ${{ github.event.head_commit.message }}
   cancel-in-progress: true
   
 jobs: 
@@ -27,6 +27,7 @@ jobs:
         uses: tj-actions/changed-files@v19
       - name: List all changed files
         run: |
+          echo ${{ github.event.head_commit.message }}
           oldIFS="$IFS"
           IFS=$'\n'
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
