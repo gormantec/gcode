@@ -655,9 +655,10 @@ function createPagesMenu() {
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "expand_more",
+                display:"inline-block",
                 onclick: ()=>{
                     document.getElementById("expandMorePages").style.display="none";
-                    document.getElementById("expandLessPages").style.display="block";
+                    document.getElementById("expandLessPages").style.display="inline-block";
                     pagesBody.style.display="none";
                 }
             }),new Div({
@@ -669,11 +670,12 @@ function createPagesMenu() {
                 display:"none",
                 onclick: ()=>{
                     document.getElementById("expandLessPages").style.display="none";
-                    document.getElementById("expandMorePages").style.display="block";
-                    pagesBody.style.display="block";
+                    document.getElementById("expandMorePages").style.display="inline-block";
+                    pagesBody.style.display="inline-block";
                 }
             }),
             new Div({
+                display: "inline-block",
                 innerText: "Pages",
                 float: "right"
             })
@@ -698,7 +700,6 @@ function createPWAMenu(pwaWidget) {
     let pwaPanel = document.createElement("div");
     let pwaHeader = document.createElement("div");
     let pwaBody = document.createElement("div");
-    pwaHeader.innerHTML = "[+] pwa";
 
     let moreDiv = new Div({
         width:"200px",
@@ -710,6 +711,7 @@ function createPWAMenu(pwaWidget) {
                 class: "material-icons",
                 classNameOverride: true,
                 innerText: "expand_more",
+                display:"inline-block",
                 onclick: ()=>{
                     document.getElementById("expandMorePWA").style.display="none";
                     document.getElementById("expandLessPWA").style.display="inline-block";
@@ -736,6 +738,8 @@ function createPWAMenu(pwaWidget) {
             })
         ]
     });
+
+    pagesHeader.appendChild(moreDiv.element);
 
 
     pwaHeader.style.borderColor = "#AAAAAA";
