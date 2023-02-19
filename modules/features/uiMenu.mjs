@@ -641,7 +641,7 @@ function getWidgetByClass(name) {
     return widget;
 }
 
-function createPagesMenu() {
+function createPagesMenu() {  
     let pagesPanel = document.createElement("div");
     let pagesHeader = document.createElement("div");
     let pagesBody = document.createElement("div");
