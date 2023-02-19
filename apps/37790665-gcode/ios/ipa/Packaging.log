@@ -1,0 +1,585 @@
+2023-02-19 04:07:38 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fceb317c610; archive(resolved)="<IDEArchive: 0x600002385980>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team(resolved)="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	Chain (13, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fceb317c610; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionProcessingPipelineContext: 0x7fcec277f3e0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fcec2780120; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fcec2779bd0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fce927399f0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fcec2779590; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fce927395d0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fce927307b0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fceb30bfa50; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="<IDEProvisioningBasicTeam: 0x6000006624a0; teamID='9R8LPM6UR2', teamName='(null)'>">
+	<IDEDistributionContext: 0x7fceb315c5f0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="(null)">
+	<IDEDistributionContext: 0x7fceb30ff360; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="(null)">
+	<IDEDistributionContext: 0x7fceb3148910; archive = "<IDEArchive: 0x600002385980>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x600000552f50>", team="(null)">
+	<IDEDistributionContext: 0x7fcec27544a0; archive = "<IDEArchive: 0x600002385980>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7fceb317c610>
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionCopyItemStep
+2023-02-19 04:07:38 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app'
+2023-02-19 04:07:38 +0000  >>> Copying /Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app 
+2023-02-19 04:07:38 +0000  copying file ./_CodeSignature/CodeResources ... 
+14045 bytes for ./_CodeSignature/CodeResources
+copying file ./AppIcon60x60@2x.png ... 
+41176 bytes for ./AppIcon60x60@2x.png
+copying file ./GoogleService-Info.plist ... 
+2023-02-19 04:07:38 +0000  664 bytes for ./GoogleService-Info.plist
+2023-02-19 04:07:38 +0000  copying file ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/runtime.nib ... 
+2023-02-19 04:07:38 +0000  967 bytes for ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/runtime.nib
+2023-02-19 04:07:38 +0000  copying file ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/objects-14.0+.nib ... 
+2023-02-19 04:07:38 +0000  967 bytes for ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/objects-14.0+.nib
+2023-02-19 04:07:38 +0000  copying file ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/runtime.nib ... 
+2023-02-19 04:07:38 +0000  4298 bytes for ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/runtime.nib
+copying file ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/objects-14.0+.nib ... 
+2023-02-19 04:07:38 +0000  3149 bytes for ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/objects-14.0+.nib
+2023-02-19 04:07:38 +0000  copying file ./Base.lproj/Main.storyboardc/Info.plist ... 
+2023-02-19 04:07:38 +0000  258 bytes for ./Base.lproj/Main.storyboardc/Info.plist
+copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-4mO-e4-REQ.nib ... 
+2023-02-19 04:07:38 +0000  2225 bytes for ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-4mO-e4-REQ.nib
+2023-02-19 04:07:38 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2023-02-19 04:07:38 +0000  896 bytes for ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2023-02-19 04:07:38 +0000  258 bytes for ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2023-02-19 04:07:38 +0000  copying file ./Entitlements/Entitlements.plist ... 
+2023-02-19 04:07:38 +0000  837 bytes for ./Entitlements/Entitlements.plist
+2023-02-19 04:07:38 +0000  copying file ./Entitlements/.gitignore ... 
+2023-02-19 04:07:38 +0000  27 bytes for ./Entitlements/.gitignore
+copying file ./Assets.car ... 
+2023-02-19 04:07:38 +0000  2348255 bytes for ./Assets.car
+copying file ./AppIcon76x76@2x~ipad.png ... 
+65134 bytes for ./AppIcon76x76@2x~ipad.png
+copying file ./gcode ... 
+196736 bytes for ./gcode
+copying file ./Frameworks/GoogleDataTransport.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/GoogleDataTransport.framework/_CodeSignature/CodeResources
+2023-02-19 04:07:38 +0000  copying file ./Frameworks/GoogleDataTransport.framework/GoogleDataTransport ... 
+361360 bytes for ./Frameworks/GoogleDataTransport.framework/GoogleDataTransport
+copying file ./Frameworks/GoogleDataTransport.framework/Info.plist ... 
+807 bytes for ./Frameworks/GoogleDataTransport.framework/Info.plist
+copying file ./Frameworks/FBLPromises.framework/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:38 +0000  1798 bytes for ./Frameworks/FBLPromises.framework/_CodeSignature/CodeResources
+2023-02-19 04:07:38 +0000  copying file ./Frameworks/FBLPromises.framework/FBLPromises ... 
+2023-02-19 04:07:38 +0000  191920 bytes for ./Frameworks/FBLPromises.framework/FBLPromises
+copying file ./Frameworks/FBLPromises.framework/Info.plist ... 
+2023-02-19 04:07:38 +0000  789 bytes for ./Frameworks/FBLPromises.framework/Info.plist
+2023-02-19 04:07:38 +0000  copying file ./Frameworks/FirebaseCoreInternal.framework/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:38 +0000  1798 bytes for ./Frameworks/FirebaseCoreInternal.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal ... 
+2023-02-19 04:07:38 +0000  404128 bytes for ./Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal
+copying file ./Frameworks/FirebaseCoreInternal.framework/Info.plist ... 
+2023-02-19 04:07:38 +0000  809 bytes for ./Frameworks/FirebaseCoreInternal.framework/Info.plist
+copying file ./Frameworks/FirebaseCore.framework/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:38 +0000  1798 bytes for ./Frameworks/FirebaseCore.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/FirebaseCore.framework/FirebaseCore ... 
+223648 bytes for ./Frameworks/FirebaseCore.framework/FirebaseCore
+copying file ./Frameworks/FirebaseCore.framework/Info.plist ... 
+791 bytes for ./Frameworks/FirebaseCore.framework/Info.plist
+copying file ./Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/GoogleUtilities.framework/GoogleUtilities ... 
+308704 bytes for ./Frameworks/GoogleUtilities.framework/GoogleUtilities
+copying file ./Frameworks/GoogleUtilities.framework/Info.plist ... 
+799 bytes for ./Frameworks/GoogleUtilities.framework/Info.plist
+copying file ./Frameworks/FirebaseMessaging.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/FirebaseMessaging.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/FirebaseMessaging.framework/FirebaseMessaging ... 
+2023-02-19 04:07:38 +0000  566528 bytes for ./Frameworks/FirebaseMessaging.framework/FirebaseMessaging
+copying file ./Frameworks/FirebaseMessaging.framework/Info.plist ... 
+804 bytes for ./Frameworks/FirebaseMessaging.framework/Info.plist
+2023-02-19 04:07:38 +0000  copying file ./Frameworks/nanopb.framework/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:38 +0000  1798 bytes for ./Frameworks/nanopb.framework/_CodeSignature/CodeResources
+2023-02-19 04:07:38 +0000  copying file ./Frameworks/nanopb.framework/nanopb ... 
+2023-02-19 04:07:38 +0000 [MT] /usr/bin/ditto exited with 0
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x600002395260; bundleID='org.cocoapods.FBLPromises', path='<DVTFilePath:0x600002c9e300:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da5d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FBLPromises', executablePath='<DVTFilePath:0x600002cad960:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework/FBLPromises'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x60000238f240; bundleID='org.cocoapods.FirebaseCore', path='<DVTFilePath:0x600002c9f3a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dce60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003007e90; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCore', executablePath='<DVTFilePath:0x600002cac150:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x60000239a6a0; bundleID='org.cocoapods.FirebaseCoreDiagnostics', path='<DVTFilePath:0x600002828f80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c2df0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreDiagnostics', executablePath='<DVTFilePath:0x600002c77410:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x600002385740; bundleID='org.cocoapods.FirebaseCoreInternal', path='<DVTFilePath:0x600002809600:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024d9e50; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003038160; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreInternal', executablePath='<DVTFilePath:0x600002cae220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x600002395080; bundleID='org.cocoapods.FirebaseInstallations', path='<DVTFilePath:0x600002839700:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbb60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseInstallations', executablePath='<DVTFilePath:0x600002c77170:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x60000238b420; bundleID='org.cocoapods.FirebaseMessaging', path='<DVTFilePath:0x60000280ba80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da260; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035ad0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseMessaging', executablePath='<DVTFilePath:0x600002c76bc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x60000239a5e0; bundleID='org.cocoapods.GoogleDataTransport', path='<DVTFilePath:0x600002828880:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024db1b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003007e90; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleDataTransport', executablePath='<DVTFilePath:0x600002caddc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x60000239a640; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x60000280bb00:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024e0410; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x600002c76220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping profile for item: <IDEDistributionItem: 0x60000238bc60; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x600002c9e370:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbcf0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035ad0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x60000238dda0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionCompileBitcodeStep
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionCodeSlimmingStep
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionCopyBCSymbolMapsStep
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionSymbolsStep
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionAppThinningStep
+2023-02-19 04:07:38 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionArchThinningStep
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FBLPromises.framework/FBLPromises' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "FBLPromises" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "FirebaseCore" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "FirebaseCoreDiagnostics" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "FirebaseCoreInternal" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "FirebaseInstallations" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "FirebaseMessaging" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "GoogleDataTransport" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "GoogleUtilities" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/nanopb.framework/nanopb' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "nanopb" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/gcode' '-verify_arch' 'arm64e'
+2023-02-19 04:07:38 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-02-19 04:07:38 +0000 [MT] Skipping architecture thinning for item "gcode" because arch "arm64e" wasn't found
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionODRStep
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x600002395260; bundleID='org.cocoapods.FBLPromises', path='<DVTFilePath:0x600002c9e300:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da5d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FBLPromises', executablePath='<DVTFilePath:0x600002cad960:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework/FBLPromises'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000238f240; bundleID='org.cocoapods.FirebaseCore', path='<DVTFilePath:0x600002c9f3a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dce60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCore', executablePath='<DVTFilePath:0x600002cac150:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000239a6a0; bundleID='org.cocoapods.FirebaseCoreDiagnostics', path='<DVTFilePath:0x600002828f80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c2df0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003007e90; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreDiagnostics', executablePath='<DVTFilePath:0x600002c77410:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x600002385740; bundleID='org.cocoapods.FirebaseCoreInternal', path='<DVTFilePath:0x600002809600:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024d9e50; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003038420; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreInternal', executablePath='<DVTFilePath:0x600002cae220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x600002395080; bundleID='org.cocoapods.FirebaseInstallations', path='<DVTFilePath:0x600002839700:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbb60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseInstallations', executablePath='<DVTFilePath:0x600002c77170:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000238b420; bundleID='org.cocoapods.FirebaseMessaging', path='<DVTFilePath:0x60000280ba80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da260; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseMessaging', executablePath='<DVTFilePath:0x600002c76bc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000239a5e0; bundleID='org.cocoapods.GoogleDataTransport', path='<DVTFilePath:0x600002828880:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024db1b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleDataTransport', executablePath='<DVTFilePath:0x600002caddc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000239a640; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x60000280bb00:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024e0410; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x600002c76220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Skipping stripping extended attributes of item: <IDEDistributionItem: 0x60000238bc60; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x600002c9e370:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbcf0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x60000238dda0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'>
+2023-02-19 04:07:38 +0000 [MT] Running /usr/bin/xattr '-crs' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app'
+2023-02-19 04:07:38 +0000 [MT] /usr/bin/xattr exited with 0
+2023-02-19 04:07:38 +0000 [MT] Processing step: IDEDistributionCodesignStep
+2023-02-19 04:07:38 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002395260; bundleID='org.cocoapods.FBLPromises', path='<DVTFilePath:0x600002c9e300:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da5d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FBLPromises', executablePath='<DVTFilePath:0x600002cad960:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework/FBLPromises'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:38 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002395260; bundleID='org.cocoapods.FBLPromises', path='<DVTFilePath:0x600002c9e300:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da5d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003007e90; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FBLPromises', executablePath='<DVTFilePath:0x600002cad960:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework/FBLPromises'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:38 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x600002395260; bundleID='org.cocoapods.FBLPromises', path='<DVTFilePath:0x600002c9e300:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da5d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003038420; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FBLPromises', executablePath='<DVTFilePath:0x600002cad960:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FBLPromises.framework/FBLPromises'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~Oxu3fu
+2023-02-19 04:07:38 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~Oxu3fu' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FBLPromises.framework'
+2023-02-19 04:07:38 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FBLPromises.framework: replacing existing signature
+2023-02-19 04:07:38 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FBLPromises.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.FBLPromises]
+2023-02-19 04:07:38 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:38 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000238f240; bundleID='org.cocoapods.FirebaseCore', path='<DVTFilePath:0x600002c9f3a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dce60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCore', executablePath='<DVTFilePath:0x600002cac150:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:38 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000238f240; bundleID='org.cocoapods.FirebaseCore', path='<DVTFilePath:0x600002c9f3a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dce60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033180; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCore', executablePath='<DVTFilePath:0x600002cac150:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:38 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000238f240; bundleID='org.cocoapods.FirebaseCore', path='<DVTFilePath:0x600002c9f3a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dce60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCore', executablePath='<DVTFilePath:0x600002cac150:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~3peKtX
+2023-02-19 04:07:38 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~3peKtX' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCore.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCore.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCore.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.FirebaseCore]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000239a6a0; bundleID='org.cocoapods.FirebaseCoreDiagnostics', path='<DVTFilePath:0x600002828f80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c2df0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreDiagnostics', executablePath='<DVTFilePath:0x600002c77410:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000239a6a0; bundleID='org.cocoapods.FirebaseCoreDiagnostics', path='<DVTFilePath:0x600002828f80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c2df0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003038630; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreDiagnostics', executablePath='<DVTFilePath:0x600002c77410:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000239a6a0; bundleID='org.cocoapods.FirebaseCoreDiagnostics', path='<DVTFilePath:0x600002828f80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c2df0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035fa0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreDiagnostics', executablePath='<DVTFilePath:0x600002c77410:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~krcZwf
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~krcZwf' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.FirebaseCoreDiagnostics]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002385740; bundleID='org.cocoapods.FirebaseCoreInternal', path='<DVTFilePath:0x600002809600:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024d9e50; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreInternal', executablePath='<DVTFilePath:0x600002cae220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002385740; bundleID='org.cocoapods.FirebaseCoreInternal', path='<DVTFilePath:0x600002809600:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024d9e50; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033230; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreInternal', executablePath='<DVTFilePath:0x600002cae220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x600002385740; bundleID='org.cocoapods.FirebaseCoreInternal', path='<DVTFilePath:0x600002809600:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024d9e50; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035fa0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseCoreInternal', executablePath='<DVTFilePath:0x600002cae220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~VOnPak
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~VOnPak' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.FirebaseCoreInternal]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002395080; bundleID='org.cocoapods.FirebaseInstallations', path='<DVTFilePath:0x600002839700:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbb60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003038420; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseInstallations', executablePath='<DVTFilePath:0x600002c77170:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002395080; bundleID='org.cocoapods.FirebaseInstallations', path='<DVTFilePath:0x600002839700:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbb60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003007d30; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseInstallations', executablePath='<DVTFilePath:0x600002c77170:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x600002395080; bundleID='org.cocoapods.FirebaseInstallations', path='<DVTFilePath:0x600002839700:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbb60; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseInstallations', executablePath='<DVTFilePath:0x600002c77170:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~RyHsjH
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~RyHsjH' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseInstallations.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseInstallations.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseInstallations.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.FirebaseInstallations]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000238b420; bundleID='org.cocoapods.FirebaseMessaging', path='<DVTFilePath:0x60000280ba80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da260; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseMessaging', executablePath='<DVTFilePath:0x600002c76bc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000238b420; bundleID='org.cocoapods.FirebaseMessaging', path='<DVTFilePath:0x60000280ba80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da260; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035ef0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseMessaging', executablePath='<DVTFilePath:0x600002c76bc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000238b420; bundleID='org.cocoapods.FirebaseMessaging', path='<DVTFilePath:0x60000280ba80:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024da260; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035a20; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.FirebaseMessaging', executablePath='<DVTFilePath:0x600002c76bc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~YsUIQX
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~YsUIQX' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseMessaging.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseMessaging.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseMessaging.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.FirebaseMessaging]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000239a5e0; bundleID='org.cocoapods.GoogleDataTransport', path='<DVTFilePath:0x600002828880:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024db1b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000030380b0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleDataTransport', executablePath='<DVTFilePath:0x600002caddc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000239a5e0; bundleID='org.cocoapods.GoogleDataTransport', path='<DVTFilePath:0x600002828880:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024db1b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033230; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleDataTransport', executablePath='<DVTFilePath:0x600002caddc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000239a5e0; bundleID='org.cocoapods.GoogleDataTransport', path='<DVTFilePath:0x600002828880:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024db1b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035760; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleDataTransport', executablePath='<DVTFilePath:0x600002caddc0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~VUckTk
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~VUckTk' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleDataTransport.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleDataTransport.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleDataTransport.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.GoogleDataTransport]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000239a640; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x60000280bb00:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024e0410; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003033440; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x600002c76220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000239a640; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x60000280bb00:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024e0410; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035760; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x600002c76220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000239a640; bundleID='org.cocoapods.GoogleUtilities', path='<DVTFilePath:0x60000280bb00:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024e0410; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.GoogleUtilities', executablePath='<DVTFilePath:0x600002c76220:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~06ejDu
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~06ejDu' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleUtilities.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleUtilities.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleUtilities.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.GoogleUtilities]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000238bc60; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x600002c9e370:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbcf0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035970; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x60000238dda0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'>: {
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000238bc60; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x600002c9e370:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbcf0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035e40; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x60000238dda0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'> are: {
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000238bc60; bundleID='org.cocoapods.nanopb', path='<DVTFilePath:0x600002c9e370:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024dbcf0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003035fa0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='(null)', teamID='9R8LPM6UR2', identifier='org.cocoapods.nanopb', executablePath='<DVTFilePath:0x60000238dda0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/Frameworks/nanopb.framework/nanopb'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~kcAO61
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~kcAO61' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/nanopb.framework'
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/nanopb.framework: replacing existing signature
+2023-02-19 04:07:39 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/nanopb.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.nanopb]
+2023-02-19 04:07:39 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002395c20; bundleID='au.com.gcode.37790665-gcode', path='<DVTFilePath:0x600002c97090:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c31b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600003038370; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='{
+    "application-identifier" = "9R8LPM6UR2.au.com.gcode.37790665-gcode";
+    "aps-environment" = development;
+    "com.apple.developer.associated-domains" =     (
+        "applinks:gcode.com.au",
+        "webcredentials:gcode.com.au"
+    );
+    "com.apple.developer.team-identifier" = 9R8LPM6UR2;
+    "get-task-allow" = 1;
+}', teamID='9R8LPM6UR2', identifier='au.com.gcode.37790665-gcode', executablePath='<DVTFilePath:0x6000023957a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/gcode'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "9R8LPM6UR2.au.com.gcode.37790665-gcode";
+    "aps-environment" = production;
+    "com.apple.developer.associated-domains" =     (
+        "applinks:gcode.com.au",
+        "webcredentials:gcode.com.au"
+    );
+    "com.apple.developer.team-identifier" = 9R8LPM6UR2;
+    "get-task-allow" = 0;
+}
+2023-02-19 04:07:39 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002395c20; bundleID='au.com.gcode.37790665-gcode', path='<DVTFilePath:0x600002c97090:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c31b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000030389a0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='{
+    "application-identifier" = "9R8LPM6UR2.au.com.gcode.37790665-gcode";
+    "aps-environment" = development;
+    "com.apple.developer.associated-domains" =     (
+        "applinks:gcode.com.au",
+        "webcredentials:gcode.com.au"
+    );
+    "com.apple.developer.team-identifier" = 9R8LPM6UR2;
+    "get-task-allow" = 1;
+}', teamID='9R8LPM6UR2', identifier='au.com.gcode.37790665-gcode', executablePath='<DVTFilePath:0x6000023957a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/gcode'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "9R8LPM6UR2.au.com.gcode.37790665-gcode";
+    "aps-environment" = production;
+    "com.apple.developer.associated-domains" =     (
+        "applinks:gcode.com.au",
+        "webcredentials:gcode.com.au"
+    );
+    "com.apple.developer.team-identifier" = 9R8LPM6UR2;
+    "get-task-allow" = 0;
+}
+2023-02-19 04:07:39 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x600002395c20; bundleID='au.com.gcode.37790665-gcode', path='<DVTFilePath:0x600002c97090:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x6000024c31b0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000030334f0; name='Apple Development: Craig Gorman (5JC3XWB44V)', hash='4306BBB633743D94CFC7565694FEA4757730DEB5', serialNumber='494AE56079AD754BE508213DD1272D64', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-06-27 06:12:40 +0000''>', entitlements='{
+    "application-identifier" = "9R8LPM6UR2.au.com.gcode.37790665-gcode";
+    "aps-environment" = development;
+    "com.apple.developer.associated-domains" =     (
+        "applinks:gcode.com.au",
+        "webcredentials:gcode.com.au"
+    );
+    "com.apple.developer.team-identifier" = 9R8LPM6UR2;
+    "get-task-allow" = 1;
+}', teamID='9R8LPM6UR2', identifier='au.com.gcode.37790665-gcode', executablePath='<DVTFilePath:0x6000023957a0:'/Users/craig/actions-runner/_work/gcode/gcode/build/out/37790665-gcode.xcarchive/Products/Applications/gcode.app/gcode'>', hardenedRuntime='0'>'> to: /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~OGdBXj
+2023-02-19 04:07:39 +0000 [MT] Running /usr/bin/codesign '-vvv' '--force' '--sign' '9A1D235C02F17F93093236EB8D084528E5FB034C' '--entitlements' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/entitlements~~~OGdBXj' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app'
+2023-02-19 04:07:40 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app: replacing existing signature
+2023-02-19 04:07:40 +0000  /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app: signed app bundle with Mach-O thin (arm64) [au.com.gcode.37790665-gcode]
+2023-02-19 04:07:40 +0000 [MT] /usr/bin/codesign exited with 0
+2023-02-19 04:07:40 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Processing step: IDEDistributionCreateIPAStep
+2023-02-19 04:07:40 +0000 [MT] Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root' '/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Packages/gcode.ipa'
+2023-02-19 04:07:40 +0000  >>> Copying /var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root 
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:40 +0000  14045 bytes for ./Payload/gcode.app/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/AppIcon60x60@2x.png ... 
+2023-02-19 04:07:40 +0000  41176 bytes for ./Payload/gcode.app/AppIcon60x60@2x.png
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/GoogleService-Info.plist ... 
+664 bytes for ./Payload/gcode.app/GoogleService-Info.plist
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/runtime.nib ... 
+2023-02-19 04:07:40 +0000  967 bytes for ./Payload/gcode.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/runtime.nib
+copying file ./Payload/gcode.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/objects-14.0+.nib ... 
+967 bytes for ./Payload/gcode.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib/objects-14.0+.nib
+copying file ./Payload/gcode.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/runtime.nib ... 
+2023-02-19 04:07:40 +0000  4298 bytes for ./Payload/gcode.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/runtime.nib
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/objects-14.0+.nib ... 
+3149 bytes for ./Payload/gcode.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/objects-14.0+.nib
+copying file ./Payload/gcode.app/Base.lproj/Main.storyboardc/Info.plist ... 
+2023-02-19 04:07:40 +0000  258 bytes for ./Payload/gcode.app/Base.lproj/Main.storyboardc/Info.plist
+copying file ./Payload/gcode.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-4mO-e4-REQ.nib ... 
+2023-02-19 04:07:40 +0000  2225 bytes for ./Payload/gcode.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-4mO-e4-REQ.nib
+copying file ./Payload/gcode.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2023-02-19 04:07:40 +0000  896 bytes for ./Payload/gcode.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Payload/gcode.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+258 bytes for ./Payload/gcode.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/Entitlements/Entitlements.plist ... 
+837 bytes for ./Payload/gcode.app/Entitlements/Entitlements.plist
+copying file ./Payload/gcode.app/Entitlements/.gitignore ... 
+2023-02-19 04:07:40 +0000  27 bytes for ./Payload/gcode.app/Entitlements/.gitignore
+copying file ./Payload/gcode.app/Assets.car ... 
+2023-02-19 04:07:40 +0000  2348255 bytes for ./Payload/gcode.app/Assets.car
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/AppIcon76x76@2x~ipad.png ... 
+2023-02-19 04:07:40 +0000  65134 bytes for ./Payload/gcode.app/AppIcon76x76@2x~ipad.png
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/gcode ... 
+2023-02-19 04:07:40 +0000  196736 bytes for ./Payload/gcode.app/gcode
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/Frameworks/GoogleDataTransport.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/GoogleDataTransport.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport ... 
+2023-02-19 04:07:40 +0000  361664 bytes for ./Payload/gcode.app/Frameworks/GoogleDataTransport.framework/GoogleDataTransport
+copying file ./Payload/gcode.app/Frameworks/GoogleDataTransport.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  807 bytes for ./Payload/gcode.app/Frameworks/GoogleDataTransport.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/FBLPromises.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/FBLPromises.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/FBLPromises.framework/FBLPromises ... 
+2023-02-19 04:07:40 +0000  192224 bytes for ./Payload/gcode.app/Frameworks/FBLPromises.framework/FBLPromises
+copying file ./Payload/gcode.app/Frameworks/FBLPromises.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  789 bytes for ./Payload/gcode.app/Frameworks/FBLPromises.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:40 +0000  1798 bytes for ./Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal ... 
+2023-02-19 04:07:40 +0000  404432 bytes for ./Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/FirebaseCoreInternal
+copying file ./Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  809 bytes for ./Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/FirebaseCore.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/FirebaseCore.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore ... 
+2023-02-19 04:07:40 +0000  223952 bytes for ./Payload/gcode.app/Frameworks/FirebaseCore.framework/FirebaseCore
+copying file ./Payload/gcode.app/Frameworks/FirebaseCore.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  791 bytes for ./Payload/gcode.app/Frameworks/FirebaseCore.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities ... 
+2023-02-19 04:07:40 +0000  309008 bytes for ./Payload/gcode.app/Frameworks/GoogleUtilities.framework/GoogleUtilities
+copying file ./Payload/gcode.app/Frameworks/GoogleUtilities.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  799 bytes for ./Payload/gcode.app/Frameworks/GoogleUtilities.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/FirebaseMessaging.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/FirebaseMessaging.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging ... 
+2023-02-19 04:07:40 +0000  566832 bytes for ./Payload/gcode.app/Frameworks/FirebaseMessaging.framework/FirebaseMessaging
+copying file ./Payload/gcode.app/Frameworks/FirebaseMessaging.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  804 bytes for ./Payload/gcode.app/Frameworks/FirebaseMessaging.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/nanopb.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/nanopb.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/nanopb.framework/nanopb ... 
+2023-02-19 04:07:40 +0000  81056 bytes for ./Payload/gcode.app/Frameworks/nanopb.framework/nanopb
+copying file ./Payload/gcode.app/Frameworks/nanopb.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  783 bytes for ./Payload/gcode.app/Frameworks/nanopb.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/FirebaseInstallations.framework/_CodeSignature/CodeResources ... 
+2023-02-19 04:07:40 +0000  1798 bytes for ./Payload/gcode.app/Frameworks/FirebaseInstallations.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations ... 
+2023-02-19 04:07:40 +0000  294256 bytes for ./Payload/gcode.app/Frameworks/FirebaseInstallations.framework/FirebaseInstallations
+copying file ./Payload/gcode.app/Frameworks/FirebaseInstallations.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  811 bytes for ./Payload/gcode.app/Frameworks/FirebaseInstallations.framework/Info.plist
+copying file ./Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/_CodeSignature/CodeResources
+copying file ./Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics ... 
+2023-02-19 04:07:40 +0000  86560 bytes for ./Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics
+copying file ./Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/Info.plist ... 
+2023-02-19 04:07:40 +0000  815 bytes for ./Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework/Info.plist
+copying file ./Payload/gcode.app/embedded.mobileprovision ... 
+2023-02-19 04:07:40 +0000  17475 bytes for ./Payload/gcode.app/embedded.mobileprovision
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/Info.plist ... 
+2366 bytes for ./Payload/gcode.app/Info.plist
+2023-02-19 04:07:40 +0000  copying file ./Payload/gcode.app/PkgInfo ... 
+8 bytes for ./Payload/gcode.app/PkgInfo
+2023-02-19 04:07:40 +0000 [MT] /usr/bin/ditto exited with 0
+2023-02-19 04:07:40 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
+2023-02-19 04:07:40 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2023-02-19 04:07:40 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x60000283ad80:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseInstallations.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x60000282fa80:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleUtilities.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x60000282d000:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreInternal.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002833480:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseMessaging.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x60000283a600:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCoreDiagnostics.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002cb32c0:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FirebaseCore.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002caa450:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/FBLPromises.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x60000282cb00:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/GoogleDataTransport.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002cc40e0:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app/Frameworks/nanopb.framework'>
+2023-02-19 04:07:40 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002cbeed0:'/var/folders/sv/h0fz1p090h97prcxzlhf99740000gr/T/XcodeDistPipeline.~~~Ff1Ivi/Root/Payload/gcode.app'>
+2023-02-19 04:07:40 +0000 [MT] Processing step: IDEDistributionCreateManifestStep
