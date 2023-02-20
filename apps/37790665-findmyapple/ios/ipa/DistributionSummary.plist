@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UDID.ipa</key>
+	<key>findmyapple.ipa</key>
 	<array>
 		<dict>
 			<key>architectures</key>
@@ -10,7 +10,7 @@
 				<string>arm64</string>
 			</array>
 			<key>buildNumber</key>
-			<string>13.0.3585937</string>
+			<string>13.0.3585934</string>
 			<key>certificate</key>
 			<dict>
 				<key>SHA1</key>
@@ -278,7 +278,7 @@
 			<key>entitlements</key>
 			<dict>
 				<key>application-identifier</key>
-				<string>9R8LPM6UR2.au.com.gcode.37790665-UDID</string>
+				<string>9R8LPM6UR2.au.com.gcode.37790665-findmyapple</string>
 				<key>aps-environment</key>
 				<string>production</string>
 				<key>com.apple.developer.associated-domains</key>
@@ -292,15 +292,15 @@
 				<false/>
 			</dict>
 			<key>name</key>
-			<string>UDID.app</string>
+			<string>findmyapple.app</string>
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>f83e81c8-10dd-4320-8a69-51a397f331d1</string>
+				<string>d1081f31-dad0-4bd2-b341-1ffda8ddd1e4</string>
 				<key>dateExpires</key>
 				<string>29/6/2023</string>
 				<key>name</key>
-				<string>iOS Team Ad Hoc Provisioning Profile: au.com.gcode.37790665-UDID</string>
+				<string>iOS Team Ad Hoc Provisioning Profile: au.com.gcode.37790665-findmyapple</string>
 			</dict>
 			<key>team</key>
 			<dict>
