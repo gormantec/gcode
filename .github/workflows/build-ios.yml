@@ -25,7 +25,7 @@ jobs:
       - name: Get details from manifest
         run: |
           echo ${{ github.event.head_commit.message }}
-          APP_NAME=${{ github.event.head_commit.message }}
+          APP_NAME="${{ github.event.head_commit.message }}"
           APP_NAME=${APP_NAME:7}
           echo "[$APP_NAME]"
           echo "[$APP_NAME]"
