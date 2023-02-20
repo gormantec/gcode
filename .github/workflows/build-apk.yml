@@ -12,7 +12,7 @@ on:
       - '!**/apk/**'
       - '!apps/gcode_manifests.json'
 concurrency:
-  group: ${{ github.ref }}
+  group: Android ${{ github.event.head_commit.message }}
   cancel-in-progress: true
 jobs:
   build-apk-job:
