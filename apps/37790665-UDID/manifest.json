@@ -6,11 +6,12 @@
   "display": "standalone",
   "orientation": "any",
   "description": "An app to retrive the UDID from your iPhone. It will require you download and install a profile, allowing access to your UDID. You can delete the profile after that.",
+  "id": "37790665-UDID",
   "scope": "/apps/37790665-UDID/",
   "permitted_urls": [
     "https://isjqwevc8e.execute-api.ap-southeast-2.amazonaws.com/default/udid"
   ],
-  "version": "1.0.0.3570699",
+  "version": "1.0.0.3585937",
   "icons": [
     {
       "src": "/apps/37790665-UDID/180x180.icon.png",
