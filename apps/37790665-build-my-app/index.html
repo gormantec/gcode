@@ -32,36 +32,14 @@ function addToHomeScreen() {
  });}
 function showAddToHomeScreen() {
    let a2hsBtn = document.querySelector(".ad2hs-prompt");
-   a2hsBtn.style.display ="block";
-   a2hsBtn.addEventListener("click", addToHomeScreen);
+   if(a2hsBtn)a2hsBtn.style.display ="block";
+   if(a2hsBtn)a2hsBtn.addEventListener("click", addToHomeScreen);
  }
  window.addEventListener('beforeinstallprompt', function (e) {
    e.preventDefault();
    deferredPrompt = e;
    showAddToHomeScreen();
-   setTimeout(()=>{document.querySelector(".ad2hs-prompt").style.display ="none";},10000);
- });
-function showIosInstall() {
-  let iosPrompt = document.querySelector(".ios-prompt");
-  if(iosPrompt)iosPrompt.style.display = "block";
-  if(iosPrompt)iosPrompt.addEventListener("click", () => {
-  if(iosPrompt)iosPrompt.style.display = "none";
-  });
-}
-
-const isIos = () => {
-  const userAgent = window.navigator.userAgent.toLowerCase();
-  return /iphone|ipad|ipod/.test( userAgent );
-}
-const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-document.addEventListener("DOMContentLoaded", ()=>{
-   console.log("DOMContentLoaded");
-   if (isIos() && !isInStandaloneMode()) {
-  showIosInstall();
-   console.log("showIosInstall");
-  }
-});
-
+   setTimeout(()=>{
 </script><script type="module">
 import { addkey } from "https://gcode.com.au/modules/near/index.mjs";
 
