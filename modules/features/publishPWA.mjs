@@ -117,6 +117,19 @@ function publishToGit(code, user,token)
                     importFiles.push({name:fileNameLib,dir:dir});
                 }
             }
+
+            var gitsvgList=code.match(/url\(\/images\/.*?\.svg\)/g);
+            if(gitsvgList && gitsvgList.length>0)
+            {
+                for(var i=0;i<gitsvgList.length;i++)
+                {
+                    var fileNameSvg=gitsvgList[i].replace(/(url\(\/images\/)(.*?\.svg)(\))/g,"$2");
+                    let dir="";
+                    console.log({name:fileNameSvg,dir:dir});
+                    importFiles.push({name:fileNameSvg,dir:dir});
+                }
+            }
+
             preload(importFiles).then(()=>{
 
                 console.log("publish");
