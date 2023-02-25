@@ -422,10 +422,10 @@ export function createHtml(code, options) {
             " window.addEventListener('beforeinstallprompt', function (e) {\n" +
             "   e.preventDefault();\n" +
             "   deferredPrompt = e;\n" +   
-            "   showAddToHomeScreen();\n" +
-            "   setTimeout(()=>{\n"
-            "    let ad2hs=document.querySelector(\".ad2hs-prompt\");\n"
-            "    if(ad2hs) ad2hs.style.display =\"none\";\n"
+            "   showAddToHomeScreen();\n" +   
+            "   setTimeout(()=>{\n" +
+            "    let ad2hs=document.querySelector(\".ad2hs-prompt\");\n" +
+            "    if(ad2hs) ad2hs.style.display =\"none\";\n" +
             "},10000);\n" +
             " });\n" +
             "function showIosInstall() {\n" +
