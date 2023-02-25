@@ -104,6 +104,11 @@ class HomePage extends Page {
         super({
             "color": "black",
             "backgroundColor": "white",
+            "backgroundPosition": "center",
+            "backgroundSize": "60%",
+            "opacity": "0.4",
+            "backgroundRepeat": "no-repeat",
+            "backgroundImage": "url(180x180.icon.png)",
             "hideFooter": "true",
             "hideFloatingActionButton": "true",
           	"child":aMainForm
@@ -114,8 +119,8 @@ class HomePage extends Page {
 
 /*---------------------------------------------------------------------------*/
 
-var aHomePage = new HomePage();
 var aMainForm=new MainForm();
+var aHomePage = new HomePage();
 var aPWA = new PWA({
     title: "build my app",
     footer: "https://www.gormantec.com",
