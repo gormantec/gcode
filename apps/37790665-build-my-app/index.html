@@ -93,6 +93,8 @@ import {
 try {
     Page.clearPages();
 } catch (e) {}
+import {Text} from './lib/flutter-widgets.lib.mjs';
+import { MainForm } from './lib/build-my-app-mainform.lib.mjs';
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -105,7 +107,8 @@ class HomePage extends Page {
             "backgroundRepeat": "no-repeat",
             "backgroundImage": "url(180x180.icon.png)",
             "hideFooter": "true",
-            "hideFloatingActionButton": "true"
+            "hideFloatingActionButton": "true",
+          	"child":aMainForm
         });
     }
 
@@ -126,6 +129,7 @@ var myDiv = new Div({
 });
 var aHomePage = new HomePage();
 var aSecondPage = new SecondPage();
+var aMainForm=new MainForm();
 var aPWA = new PWA({
     title: "build my app",
     footer: "https://www.gormantec.com",
