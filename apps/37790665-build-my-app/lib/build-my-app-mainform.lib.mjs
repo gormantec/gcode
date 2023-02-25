@@ -32,12 +32,12 @@ export class MainForm extends DivForm {
                     type: "hidden"
                 },
                 {
-                    name: "crewTimestamp",
+                    name: "crewTimestamp",  
                     type: "hidden"
                 }
             ],
             sendButton: {
-                onclick: sendAskButtonAction
+                onclick: ()=>{console.log("!");}
             }
         });
     }
