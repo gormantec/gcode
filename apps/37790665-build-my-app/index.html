@@ -40,6 +40,31 @@ function showAddToHomeScreen() {
    deferredPrompt = e;
    showAddToHomeScreen();
    setTimeout(()=>{
+    let ad2hs=document.querySelector(".ad2hs-prompt");
+    if(ad2hs) ad2hs.style.display ="none";
+},10000);
+ });
+function showIosInstall() {
+  let iosPrompt = document.querySelector(".ios-prompt");
+  if(iosPrompt)iosPrompt.style.display = "block";
+  if(iosPrompt)iosPrompt.addEventListener("click", () => {
+  if(iosPrompt)iosPrompt.style.display = "none";
+  });
+}
+
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+document.addEventListener("DOMContentLoaded", ()=>{
+   console.log("DOMContentLoaded");
+   if (isIos() && !isInStandaloneMode()) {
+  showIosInstall();
+   console.log("showIosInstall");
+  }
+});
+
 </script><script type="module">
 import { addkey } from "https://gcode.com.au/modules/near/index.mjs";
 
