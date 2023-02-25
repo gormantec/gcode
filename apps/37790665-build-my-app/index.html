@@ -96,7 +96,9 @@ class HomePage extends Page {
           "backgroundPosition": "center",
           "backgroundSize": "60%",
           "backgroundRepeat": "no-repeat",
-          "backgroundImage": "url(/images/build-my-app.svg)"
+          "backgroundImage": "url(/images/build-my-app.svg)",
+        "hideFooterFlag":"true",
+        "hideFloatingActionButtonFlag":"true"
       });
   }
 
@@ -121,7 +123,8 @@ var aPWA = new PWA({
   color: "#ffffff",
   primaryColor: "#f27602",
   primaryColorText: "#ffffff",
-  showFooter: "false"
+  showFooter: "false",
+  promptToInstall: "false"
 });
 aPWA.floatingActionButton.onclick(function() {
   aPWA.setPage(aSecondPage);
