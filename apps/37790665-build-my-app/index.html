@@ -88,7 +88,7 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import {  
+import {
     PWA,
     Page,
     Div
@@ -96,22 +96,31 @@ import {
 try {
     Page.clearPages();
 } catch (e) {}
-import {Text} from './lib/flutter-widgets.lib.mjs';
-import { MainForm } from './lib/build-my-app-mainform.lib.mjs';
+import {
+    Text
+} from './lib/flutter-widgets.lib.mjs';
+import {
+    MainForm
+} from './lib/build-my-app-mainform.lib.mjs';
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
         super({
             "color": "black",
             "backgroundColor": "white",
-            "backgroundPosition": "center",
-            "backgroundSize": "60%",
-            "opacity": "0.4",
-            "backgroundRepeat": "no-repeat",
-            "backgroundImage": "url(180x180.icon.png)",
             "hideFooter": "true",
             "hideFloatingActionButton": "true",
-          	"child":aMainForm
+            "children": [
+                new Div({
+                    "backgroundColor": "white",
+                    "backgroundPosition": "center",
+                    "backgroundSize": "60%",
+                    "opacity": "0.4",
+                    "backgroundRepeat": "no-repeat",
+                    "backgroundImage": "url(180x180.icon.png)"
+                }),
+                aMainForm
+            ]
         });
     }
 
@@ -119,7 +128,7 @@ class HomePage extends Page {
 
 /*---------------------------------------------------------------------------*/
 
-var aMainForm=new MainForm();
+var aMainForm = new MainForm();
 var aHomePage = new HomePage();
 var aPWA = new PWA({
     title: "build my app",
