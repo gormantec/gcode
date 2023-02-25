@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html><head><link rel="manifest" href="/apps/37790665-build-my-app/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="A gcode developed PWA app"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta property="fpwa:template" content="pwa=true,name=build my app,short_name=build my app,theme_color=#f27602,background_color=#f27602,display=standalone,orientation=any"><link rel="apple-touch-icon" href="/apps/37790665-build-my-app/icon.png"><link rel="apple-touch-icon-precomposed" href="/apps/37790665-build-my-app/icon.png"><link rel="icon" href="/apps/37790665-build-my-app/icon.png"><style>
+.splash{position:absolute;background-size:300px;background-image:url('splash.icon.png');background-position:center;background-repeat:no-repeat;top:0px;bottom:0px;left:0px;right:0px;color:#0F0F0F;background-color:#f27602;}
+.loader{font-size:50px;text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:72px auto;position:absolute;bottom:20px;left:20px;right:20px;bottom:0;-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0);-webkit-animation:load6 1.7s infinite ease,round 1.7s infinite ease;animation:load6 1.7s infinite ease,round 1.7s infinite ease}@-webkit-keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@keyframes load6{0%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}5%,95%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}10%,59%{box-shadow:0 -.83em 0 -.4em,-.087em -.825em 0 -.42em,-.173em -.812em 0 -.44em,-.256em -.789em 0 -.46em,-.297em -.775em 0 -.477em}20%{box-shadow:0 -.83em 0 -.4em,-.338em -.758em 0 -.42em,-.555em -.617em 0 -.44em,-.671em -.488em 0 -.46em,-.749em -.34em 0 -.477em}38%{box-shadow:0 -.83em 0 -.4em,-.377em -.74em 0 -.42em,-.645em -.522em 0 -.44em,-.775em -.297em 0 -.46em,-.82em -.09em 0 -.477em}100%{box-shadow:0 -.83em 0 -.4em,0 -.83em 0 -.42em,0 -.83em 0 -.44em,0 -.83em 0 -.46em,0 -.83em 0 -.477em}}@-webkit-keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes round{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
+</style><script>
+  window.PWA={globals:{}};
+  window.PWA.globals.appName="build my app";
+  window.PWA.globals.orientation="any";
+  window.PWA.globals.icon="icon.png";
+  window.PWA.globals.icon180x180="180x180.icon.png";
+  window.PWA.globals.icon192x192="192x192.icon.png";
+  window.PWA.globals.icon512x512="512x512.icon.png";
+  window.PWA.globals.splash="splash.png";
+  window.PWA.globals.splashColor="#0F0F0F";
+  window.PWA.globals.mockFrame="iphoneX";
+  window.PWA.globals.splashBackgroundColor="#f27602";
+  window.PWA.globals.splashDuration=2000;
+
+let deferredPrompt;
+if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/apps/37790665-build-my-app/sw.js');
+};
+
+function addToHomeScreen() {
+   let a2hsBtn = document.querySelector(".ad2hs-prompt");
+   a2hsBtn.style.display = 'none'; 
+   deferredPrompt.prompt();
+   deferredPrompt.userChoice.then(function(choiceResult){
+   if (choiceResult.outcome === 'accepted') console.log('User accepted the A2HS prompt');
+   else console.log('User dismissed the A2HS prompt');
+   deferredPrompt = null;
+ });}
+function showAddToHomeScreen() {
+   let a2hsBtn = document.querySelector(".ad2hs-prompt");
+   a2hsBtn.style.display ="block";
+   a2hsBtn.addEventListener("click", addToHomeScreen);
+ }
+ window.addEventListener('beforeinstallprompt', function (e) {
+   e.preventDefault();
+   deferredPrompt = e;
+   showAddToHomeScreen();
+   setTimeout(()=>{document.querySelector(".ad2hs-prompt").style.display ="none";},10000);
+ });
+function showIosInstall() {
+  let iosPrompt = document.querySelector(".ios-prompt");
+  if(iosPrompt)iosPrompt.style.display = "block";
+  if(iosPrompt)iosPrompt.addEventListener("click", () => {
+  if(iosPrompt)iosPrompt.style.display = "none";
+  });
+}
+
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+document.addEventListener("DOMContentLoaded", ()=>{
+   console.log("DOMContentLoaded");
+   if (isIos() && !isInStandaloneMode()) {
+  showIosInstall();
+   console.log("showIosInstall");
+  }
+});
+
+</script><script type="module">
+import { addkey } from "https://gcode.com.au/modules/near/index.mjs";
+
+if (window.opener && window.opener !== window) {
+    window.addEventListener("message",function(e){if(e.origin=="https://gcode.com.au")addkey(e.data);},false);
+    window.addEventListener("load", (event) => {window.opener.postMessage("loaded","https://gcode.com.au");});
+}
+
+</script><script type="module">
+/*
+
+  filename:git://gormantec:gcode_repo/build-my-app.mjs
+  created: 2023-1-0T08:15:42
+  appName: build my app
+  splashSize: 300px
+  splash: git://gormantec:gcode_repo/build-my-app.svg
+  mockFrame: iphoneX
+  splashBackgroundColor: #f27602
+  splashDuration: 2000
+
+*/
+
+/*---------------------------------------------------------------------------*/
+import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+try { Page.clearPages(); } catch (e) {}
+/*---------------------------------------------------------------------------*/
+class HomePage extends Page {
+  constructor() {
+      super({
+          "color": "black",
+          "backgroundColor": "white",
+          "backgroundPosition": "center",
+          "backgroundSize": "60%",
+          "backgroundRepeat": "no-repeat",
+          "backgroundImage": "url(git://gormantec:gcode_repo/build-my-app.svg)"
+      });
+  }
+
+}
+class SecondPage extends Page {
+  constructor() {
+      super({
+          "color": "black",
+          "backgroundColor": "white",
+          "navigateBackPage": aHomePage,
+          "child": myDiv
+      });
+  }
+}
+/*---------------------------------------------------------------------------*/
+var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+var aHomePage = new HomePage();
+var aSecondPage = new SecondPage();
+var aPWA = new PWA({
+  title: "Gorman Technology Pty Ltd",
+  footer: "https://www.gormantec.com",
+  color: "#ffffff",
+  primaryColor: "#f27602",
+  showFooter: "false"
+});
+aPWA.floatingActionButton.onclick(function() {
+  aPWA.setPage(aSecondPage);
+});
+aPWA.setPage(aHomePage);
+aPWA.show();
+/*---------------------------------------------------------------------------*/
+
+</script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
