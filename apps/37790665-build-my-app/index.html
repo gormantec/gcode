@@ -85,7 +85,7 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import {
+import {  
     PWA,
     Page,
     Div
@@ -93,6 +93,8 @@ import {
 try {
     Page.clearPages();
 } catch (e) {}
+import {Text} from './lib/flutter-widgets.lib.mjs';
+import { MainForm } from './lib/build-my-app-mainform.lib.mjs';
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
@@ -105,27 +107,17 @@ class HomePage extends Page {
             "backgroundRepeat": "no-repeat",
             "backgroundImage": "url(180x180.icon.png)",
             "hideFooter": "true",
-            "hideFloatingActionButton": "true"
+            "hideFloatingActionButton": "true",
+          	"child":aMainForm
         });
     }
 
 }
-class SecondPage extends Page {
-    constructor() {
-        super({
-            "color": "black",
-            "backgroundColor": "white",
-            "navigateBackPage": aHomePage,
-            "child": myDiv
-        });
-    }
-}
+
 /*---------------------------------------------------------------------------*/
-var myDiv = new Div({
-    innerHTML: "url(https://gcode.com.au/html/test.html)"
-});
+
 var aHomePage = new HomePage();
-var aSecondPage = new SecondPage();
+var aMainForm=new MainForm();
 var aPWA = new PWA({
     title: "build my app",
     footer: "https://www.gormantec.com",
@@ -134,9 +126,6 @@ var aPWA = new PWA({
     primaryColorText: "#ffffff",
     showFooter: "false",
     promptToInstall: "false"
-});
-aPWA.floatingActionButton.onclick(function() {
-    aPWA.setPage(aSecondPage);
 });
 aPWA.setPage(aHomePage);
 aPWA.show();
