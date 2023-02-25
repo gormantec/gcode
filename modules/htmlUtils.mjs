@@ -421,7 +421,7 @@ export function createHtml(code, options) {
             " }\n" +
             " window.addEventListener('beforeinstallprompt', function (e) {\n" +
             "   e.preventDefault();\n" +
-            "   deferredPrompt = e;\n" +
+            "   deferredPrompt = e;\n" +   
             "   showAddToHomeScreen();\n" +
             "   setTimeout(()=>{\n"
             "    let ad2hs=document.querySelector(\".ad2hs-prompt\");\n"
