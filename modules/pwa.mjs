@@ -519,6 +519,7 @@ class Div {
         if (params && params.bottom) this.element.style.bottom = params.bottom;
         if (params && params.left) this.element.style.left = params.left;
         if (params && params.right) this.element.style.right = params.right;
+        if (params && params.opacity) this.element.style.opacity = params.opacity;
         if (params && params.float) this.element.style.float = params.float;
         if (params && params.alignItems) this.element.style.alignItems = params.alignItems;
         if (params && params.justifyContent) this.element.style.justifyContent = params.justifyContent;
