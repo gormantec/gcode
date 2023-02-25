@@ -124,11 +124,8 @@ class SecondPage extends Page {
     }
 }
 /*---------------------------------------------------------------------------*/
-var myDiv = new Div({
-    innerHTML: "url(https://gcode.com.au/html/test.html)"
-});
+
 var aHomePage = new HomePage();
-var aSecondPage = new SecondPage();
 var aMainForm=new MainForm();
 var aPWA = new PWA({
     title: "build my app",
@@ -138,9 +135,6 @@ var aPWA = new PWA({
     primaryColorText: "#ffffff",
     showFooter: "false",
     promptToInstall: "false"
-});
-aPWA.floatingActionButton.onclick(function() {
-    aPWA.setPage(aSecondPage);
 });
 aPWA.setPage(aHomePage);
 aPWA.show();
