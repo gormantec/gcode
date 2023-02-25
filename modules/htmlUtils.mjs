@@ -416,14 +416,17 @@ export function createHtml(code, options) {
             " });}\n" +
             "function showAddToHomeScreen() {\n" +
             "   let a2hsBtn = document.querySelector(\".ad2hs-prompt\");\n" +
-            "   a2hsBtn.style.display =\"block\";\n" +
-            "   a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
+            "   if(a2hsBtn)a2hsBtn.style.display =\"block\";\n" +
+            "   if(a2hsBtn)a2hsBtn.addEventListener(\"click\", addToHomeScreen);\n" +
             " }\n" +
             " window.addEventListener('beforeinstallprompt', function (e) {\n" +
             "   e.preventDefault();\n" +
             "   deferredPrompt = e;\n" +
             "   showAddToHomeScreen();\n" +
-            "   setTimeout(()=>{document.querySelector(\".ad2hs-prompt\").style.display =\"none\";},10000);\n" +
+            "   setTimeout(()=>{\n"
+            "    let ad2hs=document.querySelector(\".ad2hs-prompt\");\n"
+            "    if(ad2hs) ad2hs.style.display =\"none\";\n"
+            "},10000);\n" +
             " });\n" +
             "function showIosInstall() {\n" +
             "  let iosPrompt = document.querySelector(\".ios-prompt\");\n" +
