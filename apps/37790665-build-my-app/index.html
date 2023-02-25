@@ -77,9 +77,7 @@ if (window.opener && window.opener !== window) {
   created: 2023-1-0T08:15:42
   appName: build my app
   splashSize: 300px
-  splash: https://gcode.com.au/images/ios/ios-appicon-180-180.png
-  icon: https://gcode.com.au/images/ios/ios-appicon-180-180op.png
-  icon180x180: https://gcode.com.au/images/ios/ios-appicon-180-180op.png
+  splash: git://gormantec:gcode_repo/build-my-app.svg
   mockFrame: iphoneX
   splashBackgroundColor: #f27602
   splashDuration: 2000
@@ -120,7 +118,7 @@ var aSecondPage = new SecondPage();
 var aPWA = new PWA({
   title: "Gorman Technology Pty Ltd",
   footer: "https://www.gormantec.com",
-  primaryColor: "#005040",
+  primaryColor: "#f27602",
 });
 aPWA.floatingActionButton.onclick(function() {
   aPWA.setPage(aSecondPage);
