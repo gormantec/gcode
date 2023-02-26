@@ -1125,7 +1125,7 @@ class DivForm extends Div {
                 left: "unset",
                 right: "unset",
                 width: "60%",
-                innerText: "send",
+                innerText: params.sendButton.innerText || "send",
                 position: "relative",
                 margin: "auto",
                 marginBottom: "50px",
