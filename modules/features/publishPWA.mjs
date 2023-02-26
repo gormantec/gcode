@@ -111,7 +111,7 @@ function publishToGit(code, user,token)
             {
                 for(var i=0;i<importsList.length;i++)
                 {
-                    var fileNameLib=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
+                    var fileNameLib=importsList[i].replace(/(import[\s|\S\.]*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
                     let dir="";
                     if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
                     console.log("!!l-------------------------------------!!!");
