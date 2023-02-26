@@ -114,6 +114,10 @@ function publishToGit(code, user,token)
                     var fileNameLib=importsList[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
                     let dir="";
                     if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
+                    console.log("!!l-------------------------------------!!!");
+                    console.log(fileNameLib);
+                    console.log(dir);
+                    console.log("!!l-------------------------------------!!!");
                     importFiles.push({name:fileNameLib,dir:dir});
                 }
             }
