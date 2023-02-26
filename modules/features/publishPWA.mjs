@@ -119,6 +119,9 @@ function publishToGit(code, user,token)
             }
 
             var gitsvgList=code.match(/url\(\/images\/.*?\.svg\)/g);
+            console.log("!!a-------------------------------------!!!");
+            console.log(gitsvgList);
+            console.log("!!a-------------------------------------!!!");
             if(gitsvgList && gitsvgList.length>0)
             {
                 for(var i=0;i<gitsvgList.length;i++)
