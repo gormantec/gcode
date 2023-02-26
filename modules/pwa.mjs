@@ -1046,7 +1046,7 @@ class DivForm extends Div {
                     padding: "10px"
                 };
                 if (params.formInputs[i].height) inputDiv.height = params.formInputs[i].height;
-                if (params.formInputs[i].type && params.formInputs[i].type != "text" && params.formInputs[i].type != "location" && params.formInputs[i].type != "select") {
+                if (params.formInputs[i].type && params.formInputs[i].type != "text" && params.formInputs[i].type != "location" && params.formInputs[i].type != "color" && params.formInputs[i].type != "select") {
                     inputDiv.tagName = "input";
                     inputDiv.inputType = params.formInputs[i].type;
                     if (params.formInputs[i].min) inputDiv.inputMin = params.formInputs[i].min;
@@ -1055,6 +1055,12 @@ class DivForm extends Div {
                 }
                 else if (params.formInputs[i].type == "location") {
                     inputDiv.tagName = "input";
+                }
+                else if (params.formInputs[i].type == "color") {
+                    inputDiv.tagName = "input";
+                    inputDiv.inputType = params.formInputs[i].type;
+                    inputDiv.padding="0px";
+                    inputDiv.width="30px";
                 }
                 else if (params.formInputs[i].type == "select") {
                     inputDiv.tagName = "select";
