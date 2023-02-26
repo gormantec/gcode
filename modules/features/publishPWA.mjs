@@ -118,15 +118,16 @@ function publishToGit(code, user,token)
                 }
             }
 
-            var gitsvgList=code.match(/url\(\/images\/.*?\.svg\)/g);
+            var gitsvgList=code.match(/\"url.*?\(.*?.svg\)\"/g);
             console.log("!!a-------------------------------------!!!");
             console.log(gitsvgList);
+            console.log(gitsvgList.length);
             console.log("!!a-------------------------------------!!!");
             if(gitsvgList && gitsvgList.length>0)
             {
                 for(var i=0;i<gitsvgList.length;i++)
                 {
-                    var fileNameSvg=gitsvgList[i].replace(/(url\(\/images\/)(.*?\.svg)(\))/g,"$2");
+                    var fileNameSvg=gitsvgList[i].replace(/(\"url.*?\()(.*?.svg)(\)\")/g,"$2");
                     let dir="";
                     console.log("!!-------------------------------------!!!");
                     console.log({name:fileNameSvg,dir:dir});
