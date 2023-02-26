@@ -40,6 +40,31 @@ function showAddToHomeScreen() {
    deferredPrompt = e;
    showAddToHomeScreen();
    setTimeout(()=>{
+    let ad2hs=document.querySelector(".ad2hs-prompt");
+    if(ad2hs) ad2hs.style.display ="none";
+},10000);
+ });
+function showIosInstall() {
+  let iosPrompt = document.querySelector(".ios-prompt");
+  if(iosPrompt)iosPrompt.style.display = "block";
+  if(iosPrompt)iosPrompt.addEventListener("click", () => {
+  if(iosPrompt)iosPrompt.style.display = "none";
+  });
+}
+
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+document.addEventListener("DOMContentLoaded", ()=>{
+   console.log("DOMContentLoaded");
+   if (isIos() && !isInStandaloneMode()) {
+  showIosInstall();
+   console.log("showIosInstall");
+  }
+});
+
 </script><script type="module">
 import { addkey } from "https://gcode.com.au/modules/near/index.mjs";
 
@@ -63,7 +88,7 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import {  
+import {
     PWA,
     Page,
     Div
@@ -71,22 +96,31 @@ import {
 try {
     Page.clearPages();
 } catch (e) {}
-import {Text} from './lib/flutter-widgets.lib.mjs';
-import { MainForm } from './lib/build-my-app-mainform.lib.mjs';
+import {
+    Text
+} from './lib/flutter-widgets.lib.mjs';
+import {
+    MainForm
+} from './lib/build-my-app-mainform.lib.mjs';
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
     constructor() {
         super({
             "color": "black",
             "backgroundColor": "white",
-            "backgroundPosition": "center",
-            "backgroundSize": "60%",
-            "opacity": "0.4",
-            "backgroundRepeat": "no-repeat",
-            "backgroundImage": "url(180x180.icon.png)",
             "hideFooter": "true",
             "hideFloatingActionButton": "true",
-          	"child":aMainForm
+            "children": [
+                new Div({
+                    "backgroundColor": "white",
+                    "backgroundPosition": "center",
+                    "backgroundSize": "60%",
+                    "opacity": "0.1",
+                    "backgroundRepeat": "no-repeat",
+                    "backgroundImage": "url(180x180.icon.png)"
+                }),
+                aMainForm
+            ]
         });
     }
 
@@ -94,8 +128,8 @@ class HomePage extends Page {
 
 /*---------------------------------------------------------------------------*/
 
+var aMainForm = new MainForm();
 var aHomePage = new HomePage();
-var aMainForm=new MainForm();
 var aPWA = new PWA({
     title: "build my app",
     footer: "https://www.gormantec.com",
