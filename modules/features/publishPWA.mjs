@@ -125,7 +125,9 @@ function publishToGit(code, user,token)
                 {
                     var fileNameSvg=gitsvgList[i].replace(/(url\(\/images\/)(.*?\.svg)(\))/g,"$2");
                     let dir="";
+                    console.log("!!-------------------------------------!!!");
                     console.log({name:fileNameSvg,dir:dir});
+                    console.log("!!-------------------------------------!!!");
                     importFiles.push({name:fileNameSvg,dir:dir});
                 }
             }
