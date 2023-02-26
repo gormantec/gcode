@@ -31,7 +31,8 @@ export class MainForm extends DivForm {
                 },
                	{
                     name: "primary color",
-                    type: "color" 
+                    type: "color", 
+                  	padding: "0px"
                 },
                	{
                     name: "icon",
