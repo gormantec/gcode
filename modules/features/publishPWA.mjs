@@ -114,28 +114,17 @@ function publishToGit(code, user,token)
                     var fileNameLib=importsList[i].replace(/(import[\s|\S\.]*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
                     let dir="";
                     if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
-                    console.log("!!l-------------------------------------!!!");
-                    console.log(fileNameLib);
-                    console.log(dir);
-                    console.log("!!l-------------------------------------!!!");
                     importFiles.push({name:fileNameLib,dir:dir});
                 }
             }
 
             var gitsvgList=code.match(/\"url.*?\(.*?.svg\)\"/g);
-            console.log("!!a-------------------------------------!!!");
-            console.log(gitsvgList);
-            console.log(gitsvgList.length);
-            console.log("!!a-------------------------------------!!!");
             if(gitsvgList && gitsvgList.length>0)
             {
                 for(var i=0;i<gitsvgList.length;i++)
                 {
                     var fileNameSvg=gitsvgList[i].replace(/(\"url.*?\()(.*?.svg)(\)\")/g,"$2");
                     let dir="";
-                    console.log("!!-------------------------------------!!!");
-                    console.log({name:fileNameSvg,dir:dir});
-                    console.log("!!-------------------------------------!!!");
                     importFiles.push({name:fileNameSvg,dir:dir});
                 }
             }
@@ -152,14 +141,14 @@ function publishToGit(code, user,token)
                         filesArray.push({ name: "/lib/"+importFiles[i].name, data: window.btoa(slib), type: "base64" });
                         console.log("/lib/"+importFiles[i].name);
 
-                        var importsList2=slib.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+                        var importsList2=slib.match(/import[\s|\S\.]*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
   
                         var importFiles2=[];
                         if(importsList2 && importsList2.length>0)
                         {
                             for(var i=0;i<importsList2.length;i++)
                             {
-                                var fileNameLib=importsList2[i].replace(/(import.*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
+                                var fileNameLib=importsList2[i].replace(/(import[\s|\S\.]*?\sfrom\s['"]\.\/lib\/)([a-zA-Z0-9_-]*\.lib\.mjs)(['"])/g,"$2");
                                 let dir="";
                                 if(filename.lastIndexOf("/")>0)dir=filename.substring(0,filename.lastIndexOf("/")+1);
                                 importFiles2.push({name:fileNameLib,dir:dir});
