@@ -1121,7 +1121,7 @@ class DivForm extends Div {
         }
 
         if (params.sendButton) {
-            let sendButton = new ActionButton({
+            let sendButton = new ActionButton({   
                 left: "unset",
                 right: "unset",
                 width: "60%",
