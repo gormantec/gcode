@@ -104,7 +104,7 @@ function publishToGit(code, user,token)
             var code = window.editor.getValue(); errorline=328;
 
 
-            var importsList=code.match(/import.*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/g);
+            var importsList=code.match(/import[\s|\S\.]*?\sfrom\s['"]\.\/lib\/[a-zA-Z0-9_-]*\.lib\.mjs['"]/gm);
   
             var importFiles=[];
             if(importsList && importsList.length>0)
