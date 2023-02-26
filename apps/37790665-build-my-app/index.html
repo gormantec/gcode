@@ -98,7 +98,7 @@ try {
 } catch (e) {}
 import {
     Text
-} from './lib/flutter-widgets.lib.mjs';     
+} from './lib/flutter-widgets.lib.mjs';      
 import {
     MainForm
 } from './lib/build-my-app-mainform.lib.mjs';  
@@ -107,17 +107,17 @@ class HomePage extends Page {
     constructor() {  
         super({
             "color": "black",
-            "backgroundColor": "white",
+            "backgroundColor": "white", 
             "hideFooter": "true", 
             "hideFloatingActionButton": "true",    
             "children": [ 
                 new Div({
                     "backgroundColor": "white",
-                    "backgroundPosition": "center",
+                    "backgroundPosition": "center",  
                     "backgroundSize": "60%",
                     "opacity": "0.1",
                     "backgroundRepeat": "no-repeat", 
-                    "backgroundImage": "url(build-my-app.svg)"
+                    "backgroundImage": "url(./images/build-my-app.svg)"
                 }),
                 aMainForm
             ]
