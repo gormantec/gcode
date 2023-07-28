@@ -32,14 +32,17 @@ function addToHomeScreen() {
  });}
 function showAddToHomeScreen() {
    let a2hsBtn = document.querySelector(".ad2hs-prompt");
-   a2hsBtn.style.display ="block";
-   a2hsBtn.addEventListener("click", addToHomeScreen);
+   if(a2hsBtn)a2hsBtn.style.display ="block";
+   if(a2hsBtn)a2hsBtn.addEventListener("click", addToHomeScreen);
  }
  window.addEventListener('beforeinstallprompt', function (e) {
    e.preventDefault();
    deferredPrompt = e;
    showAddToHomeScreen();
-   setTimeout(()=>{document.querySelector(".ad2hs-prompt").style.display ="none";},10000);
+   setTimeout(()=>{
+    let ad2hs=document.querySelector(".ad2hs-prompt");
+    if(ad2hs) ad2hs.style.display ="none";
+},10000);
  });
 function showIosInstall() {
   let iosPrompt = document.querySelector(".ios-prompt");
@@ -95,7 +98,7 @@ import {
     Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
 
-import {Row,Column, OutlinedButton,Text} from './lib/flutter-widgets.lib.mjs';       
+import {Row,Column, OutlinedButton,Text,Center} from './lib/flutter-widgets.lib.mjs';       
 import {gps} from './lib/gps.lib.mjs';
 
 try {
@@ -145,7 +148,7 @@ class HomePage extends Page {
                                     "marginRight": "auto",
                                     "marginTop": "30px",
                 					"fontWeight":"900",
-                                    "child": new Center({new Text("LOCKED")}),
+                                    "child": new Center({child:new Text("LOCKED")}),
                                     "onclick": (e) => {
                                       let lockB1=document.getElementById("lockB1");
                                       let lockB2=document.getElementById("lockB2");
