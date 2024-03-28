@@ -96,123 +96,147 @@ try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 
 var aPWA = new PWA({
-  "title": "find my air pods",
-  "primaryColor": "#aaaaaa",
-  "hideHeader": "true",
+    "title": "find my air pods",
+    "primaryColor": "#aaaaaa",
+    "hideHeader": "true",
 });
-aPWA.alertDialogContent.element.style.backgroundColor="#eeeeee";
-aPWA.alertDialogBody.element.style.height="100px";
-aPWA.alertDialogBody.element.style.marginTop="200px";
+aPWA.alertDialogContent.element.style.backgroundColor = "#eeeeee";
+aPWA.alertDialogBody.element.style.height = "100px";
+aPWA.alertDialogBody.element.style.marginTop = "200px";
 
 const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 8000,
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 8000,
 };
-const errorLog=function(err){console.warn("ERROR("+err.code+": "+err.message+")")}
-let _position={coords:{latitude:0,longitude:0}};
-let leftLight=new Div({"backgroundColor": "#FFA500", id:"leftButton", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
-let flashFunction=function(){
-  let count=0;
-setInterval(function(){
-  if(leftLight.element.style.backgroundColor=="rgb(255, 165, 0)")
-  { 
-  	leftLight.element.style.backgroundColor="#aaaaaa";
-  }
-  else if(count==Math.round(count/8,0)*8)
-  {
-  	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position)=>{
-        _position=position;
-        console.log("position:"+position.coords.latitude+"x"+position.coords.longitude);
-        console.log("heading:"+position.coords.heading);
-        console.log("speed:"+position.coords.speed);
-      },errorLog,options);
+const errorLog = function(err) {
+    console.warn("ERROR(" + err.code + ": " + err.message + ")")
+}
+let _position = {
+    coords: {
+        latitude: 0,
+        longitude: 0
     }
-  }
-  count++;
- 
-},200);
+};
+let leftLight = new Div({
+    "backgroundColor": "#FFA500",
+    id: "leftButton",
+    height: "40px",
+    width: "40px",
+    left: "100px",
+    top: "120px",
+    borderRadius: "40px"
+});
+let hook=null;
+let flashFunction = function() {
+    let count = 0;
+    hook=setInterval(function() {
+        if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
+            leftLight.element.style.backgroundColor = "#aaaaaa";
+        } else if (count == Math.round(count / 8, 0) * 8) {
+            leftLight.element.style.backgroundColor = "rgb(255, 165, 0)";
+        }
+        count++;
+
+    }, 200);
 }
 
 
 
-
-
-
-if('bluetooth' in navigator) {
-  const scan = leftLight.element;
-  //const batteryIndicator = document.querySelector('#battery-indicator');
-
-  scan.addEventListener('click',()=>{
-  
-  if (!navigator.mediaDevices?.enumerateDevices) {
-  console.log("enumerateDevices() not supported.");
+if (!navigator.mediaDevices?.enumerateDevices) {
+    console.log("enumerateDevices() not supported.");
 } else {
-  // List cameras and microphones.
-  navigator.mediaDevices
-    .enumerateDevices()
-    .then((devices) => {
-      devices.forEach((device) => {
-        if(device.label=="AirPods" && device.kind=="audioinput")
-        {
-			console.log(`${device.kind}: ${device.label} id = ${JSON.stringify(device.getCapabilities())}`);
-            aPWA.alert("AirPods connected at "+_position.coords.latitude+"x"+_position.coords.longitude);
-        }
-        else if(device.label=="AirPods" && device.kind=="audiooutput")
-        {
-			console.log(`${device.kind}: ${device.label} id = ${JSON.stringify(device)}`);
-        }
-      });
-    })
-    .catch((err) => {
-      console.error(`${err.name}: ${err.message}`);
-    });
+    // List cameras and microphones.
+    navigator.mediaDevices
+        .enumerateDevices()
+        .then((devices) => {
+            devices.forEach((device) => {
+                if (device.label == "AirPods" && device.kind == "audioinput") {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition((position) => {
+                            _position = position;
+                            console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
+                            console.log("heading:" + position.coords.heading);
+                            console.log("speed:" + position.coords.speed);
+                            aPWA.alert("AirPods connected at " + _position.coords.latitude + "x" + _position.coords.longitude);
+                            if(hook!=null)clearInterval(hook);
+                            leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                        }, errorLog, options);
+                    }
+
+                }
+            });
+        })
+        .catch((err) => {
+            console.error(`${err.name}: ${err.message}`);
+        });
 }
-  
-  })
-  
-}   
+
+
 
 class HomePage extends Page {
-  constructor() {
-      super({
-          "color": "#ffffff",
-          "backgroundColor": "#ffffff",
-          "backgroundPosition": "center",
-          "backgroundSize": "60%",
-          "backgroundRepeat": "no-repeat",
-          "backgroundImage": "url(https://logo.com/image-cdn/images/kts928pd/production/9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png?w=1080&q=72)",
-          "hideHeader": "true",
-          "hideFooter": "true",
-          "hideFloatingActionButton": "true",
-          "onOpen":flashFunction,
-          "children": [
-            leftLight,
-            new Div({"backgroundColor": "#00ff00", height:"40px", width:"40px",right:"100px",top:"120px", borderRadius:"40px"}),
-            new Div({innerText:"L", textAlign:"center", "color": "#aaaaaa", height:"40px", width:"40px",left:"100px",top:"180px"}),
-            new Div({innerText:"R", textAlign:"center", "color": "#aaaaaa", height:"40px", width:"40px",right:"100px",top:"180px"}),
-                      ]
-      });
-  }
+    constructor() {
+        super({
+            "color": "#ffffff",
+            "backgroundColor": "#ffffff",
+            "backgroundPosition": "center",
+            "backgroundSize": "60%",
+            "backgroundRepeat": "no-repeat",
+            "backgroundImage": "url(https://logo.com/image-cdn/images/kts928pd/production/9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png?w=1080&q=72)",
+            "hideHeader": "true",
+            "hideFooter": "true",
+            "hideFloatingActionButton": "true",
+            "onOpen": flashFunction,
+            "children": [
+                leftLight,
+                new Div({
+                    "backgroundColor": "#00ff00",
+                    height: "40px",
+                    width: "40px",
+                    right: "100px",
+                    top: "120px",
+                    borderRadius: "40px"
+                }),
+                new Div({
+                    innerText: "L",
+                    textAlign: "center",
+                    "color": "#aaaaaa",
+                    height: "40px",
+                    width: "40px",
+                    left: "100px",
+                    top: "180px"
+                }),
+                new Div({
+                    innerText: "R",
+                    textAlign: "center",
+                    "color": "#aaaaaa",
+                    height: "40px",
+                    width: "40px",
+                    right: "100px",
+                    top: "180px"
+                }),
+            ]
+        });
+    }
 
 }
 
 class SecondPage extends Page {
-  constructor() {
-      super({
-          "color": "black",
-          "backgroundColor": "white",
-          "navigateBackPage": aHomePage,
-          "hideHeader": "true",
-          "hideFooter": "true",
-          "hideFloatingActionButton": "true",
-      });
-  }
+    constructor() {
+        super({
+            "color": "black",
+            "backgroundColor": "white",
+            "navigateBackPage": aHomePage,
+            "hideHeader": "true",
+            "hideFooter": "true",
+            "hideFloatingActionButton": "true",
+        });
+    }
 }
 /*---------------------------------------------------------------------------*/
-var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
+var myDiv = new Div({
+    innerHTML: "url(https://gcode.com.au/html/test.html)"
+});
 var aHomePage = new HomePage();
 var aSecondPage = new SecondPage();
 
@@ -222,5 +246,4 @@ aPWA.show();
 
 
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
