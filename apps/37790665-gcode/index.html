@@ -166,7 +166,7 @@ if('bluetooth' in navigator) {
       }
     };
 
-    await connectToDevice({bleService: 'battery_service', bleCharacteristic: 'battery_level'});
+    await connectToDevice({bleService: 'device_information'});
   });
 }   
 
