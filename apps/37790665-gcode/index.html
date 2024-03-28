@@ -160,7 +160,12 @@ if (!navigator.mediaDevices?.enumerateDevices) {
                             console.log("speed:" + position.coords.speed);
                             aPWA.alert("AirPods connected at " + _position.coords.latitude + "x" + _position.coords.longitude);
                             if(hook!=null)clearInterval(hook);
-                            leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                            aPWA.alertDialogOK.element.addEventListener("visibilitychange", () => {
+                              if (document.visibilityState === "hidden") {
+                                leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                              }
+                            });
+                            
                         }, errorLog, options);
                     }
 
