@@ -91,6 +91,7 @@ if (window.opener && window.opener !== window) {
 
 /*---------------------------------------------------------------------------*/
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+import {gps} from './lib/gps.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
@@ -106,6 +107,8 @@ setInterval(function(){
   	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
   }
   count++;
+  
+  console.log(gps.position.coords);
  
 },200);
 }
