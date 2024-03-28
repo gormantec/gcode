@@ -127,8 +127,9 @@ var myDiv=new Div({innerHTML: "url(https://gcode.com.au/html/test.html)"});
 var aHomePage = new HomePage();
 var aSecondPage = new SecondPage();
 var aPWA = new PWA({
-  title: "find my air pods",
-  primaryColor: "#aaaaaa",
+  "title": "find my air pods",
+  "primaryColor": "#aaaaaa",
+  "hideHeader": "true",
 });
 aPWA.setPage(aHomePage);
 aPWA.show();
