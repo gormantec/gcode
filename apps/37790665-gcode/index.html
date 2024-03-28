@@ -127,10 +127,10 @@ let leftLight = new Div({
     top: "120px",
     borderRadius: "40px"
 });
-let hook=null;
+let hook = null;
 let flashFunction = function() {
     let count = 0;
-    hook=setInterval(function() {
+    hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
             leftLight.element.style.backgroundColor = "#aaaaaa";
         } else if (count == Math.round(count / 8, 0) * 8) {
@@ -141,41 +141,52 @@ let flashFunction = function() {
     }, 200);
 }
 
+let searchAirPods = function() {
 
+    if (!navigator.mediaDevices?.enumerateDevices) {
+        console.log("enumerateDevices() not supported.");
+    } else {
+        // List cameras and microphones.
+        let founsAirPod = false;
+        navigator.mediaDevices
+            .enumerateDevices()
+            .then((devices) => {
+                devices.forEach((device) => {
+                    if (device.label == "AirPods" && device.kind == "audioinput") {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition((position) => {
+                                _position = position;
+                                console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
+                                console.log("heading:" + position.coords.heading);
+                                console.log("speed:" + position.coords.speed);
+                                setTimeout(() => {
+                                    if (hook != null) clearInterval(hook);
+                                    setTimeout(() => {
+                                        leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                                    }, 1000)
+                                }, 1000);
+                                aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
 
-if (!navigator.mediaDevices?.enumerateDevices) {
-    console.log("enumerateDevices() not supported.");
-} else {
-    // List cameras and microphones.
-    navigator.mediaDevices
-        .enumerateDevices()
-        .then((devices) => {
-            devices.forEach((device) => {
-                if (device.label == "AirPods" && device.kind == "audioinput") {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition((position) => {
-                            _position = position;
-                            console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
-                            console.log("heading:" + position.coords.heading);
-                            console.log("speed:" + position.coords.speed);
-                           setTimeout(()=>{
-                                if(hook!=null)clearInterval(hook);
-                                setTimeout(()=>{
-                                  leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
-                                },1000)
-                           },1000);
-                            aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude*1000)/1000 + "x" + Math.round(_position.coords.longitude*1000)/1000);
-                            
-                        }, errorLog, options);
+                            }, errorLog, options);
+                        }
+
                     }
-
-                }
+                });
+            })
+            .catch((err) => {
+                console.error(`${err.name}: ${err.message}`);
             });
-        })
-        .catch((err) => {
-            console.error(`${err.name}: ${err.message}`);
-        });
-}
+        setTimeout(() => {
+            if (!searchAirPods) searchAirPods();
+        }, 10000)
+    }
+
+
+};
+
+setTimeout(searchAirPods, 5000);
+
+
 
 
 
