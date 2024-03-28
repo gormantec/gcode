@@ -111,6 +111,7 @@ class HomePage extends Page {
   }
 
 }
+let div=new Div({height: "240px",width: "240px"});
 class SecondPage extends Page {
   constructor() {
       super({
@@ -120,7 +121,7 @@ class SecondPage extends Page {
           "hideHeader": "true",
           "hideFooter": "true",
           "hideFloatingActionButton": "true",
-          "child": new Div({height: "240px",width: "240px"})
+          "child": div
       });
   }
 }
