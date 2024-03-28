@@ -107,11 +107,17 @@ setInterval(function(){
   	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
   }
   count++;
-  
   console.log(gps.position);
  
 },200);
 }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log("position:"+position);
+        });
+    }
+
 class HomePage extends Page {
   constructor() {
       super({
