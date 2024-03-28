@@ -112,7 +112,7 @@ setInterval(function(){
   {
   	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position)=>{console.log("position:"+JSON.stringify(position.coords));},errorLog,options);
+      navigator.geolocation.getCurrentPosition((position)=>{console.log("position:"+position.coords.latitude);},errorLog,options);
     }
   }
   count++;
