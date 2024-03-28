@@ -135,6 +135,7 @@ if('bluetooth' in navigator) {
     const connectToDevice = async ({bleService, bleCharacteristic}) => {
       try {
         const device = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
           filters: [{
             services: [bleService]
           }]
