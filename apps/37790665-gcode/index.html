@@ -130,7 +130,7 @@ if('bluetooth' in navigator) {
   const scan = document.querySelector('#scan');
   const batteryIndicator = document.querySelector('#battery-indicator');
 
-  scan.addEventListener('click', async () => {
+
 
     const connectToDevice = async ({bleService, bleCharacteristic}) => {
       try {
@@ -166,8 +166,9 @@ if('bluetooth' in navigator) {
       }
     };
 
-    await connectToDevice({bleService: 'battery_service', bleCharacteristic: 'battery_level'});
-  });
+    connectToDevice({bleService: 'battery_service', bleCharacteristic: 'battery_level'});
+
+  
 }   
 
 class HomePage extends Page {
