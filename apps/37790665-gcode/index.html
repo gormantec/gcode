@@ -136,9 +136,9 @@ if('bluetooth' in navigator) {
       try {
         const device = await navigator.bluetooth.requestDevice({
           acceptAllDevices: true,
-          filters: [{
-            services: [bleService]
-          }]
+         // filters: [{
+         //   services: [bleService]
+         // }]
         });
 
         device.addEventListener('gattserverdisconnected', () => {
