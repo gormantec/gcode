@@ -93,6 +93,7 @@ if (window.opener && window.opener !== window) {
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
+let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
 class HomePage extends Page {
   constructor() {
       super({
@@ -106,7 +107,7 @@ class HomePage extends Page {
           "hideFooter": "true",
           "hideFloatingActionButton": "true",
           "children": [
-            new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"}),
+            leftLight,
             new Div({"backgroundColor": "#00ff00", height:"40px", width:"40px",right:"100px",top:"120px", borderRadius:"40px"}),
             new Div({innerText:"L", textAlign:"center", "color": "#aaaaaa", height:"40px", width:"40px",left:"100px",top:"180px"}),
             new Div({innerText:"R", textAlign:"center", "color": "#aaaaaa", height:"40px", width:"40px",right:"100px",top:"180px"}),
@@ -140,6 +141,8 @@ var aPWA = new PWA({
 aPWA.setPage(aHomePage);
 aPWA.hideHeader();
 aPWA.show();
+
+setInterval(function(){leftLight.element.style.backgroundColor="#ff0000";},1000);
 /*---------------------------------------------------------------------------*/
 
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
