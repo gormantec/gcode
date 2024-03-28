@@ -110,6 +110,7 @@ const options = {
   maximumAge: 8000,
 };
 const errorLog=function(err){console.warn("ERROR("+err.code+": "+err.message+")")}
+let _position={coords:{latitude:0,longitude:0}};
 let leftLight=new Div({"backgroundColor": "#FFA500", id:"leftButton", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
 let flashFunction=function(){
   let count=0;
@@ -123,6 +124,7 @@ setInterval(function(){
   	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position)=>{
+        _position=position;
         console.log("position:"+position.coords.latitude+"x"+position.coords.longitude);
         console.log("heading:"+position.coords.heading);
         console.log("speed:"+position.coords.speed);
@@ -156,7 +158,7 @@ if('bluetooth' in navigator) {
         if(device.label=="AirPods" && device.kind=="audioinput")
         {
 			console.log(`${device.kind}: ${device.label} id = ${JSON.stringify(device.getCapabilities())}`);
-            aPWA.alert("AirPods");
+            aPWA.alert("AirPods connected at "+_position.coords.latitude+"x"+_position.coords.longitude);
         }
         else if(device.label=="AirPods" && device.kind=="audiooutput")
         {
