@@ -145,7 +145,7 @@ if('bluetooth' in navigator) {
       devices.forEach((device) => {
         if(device.label=="AirPods")
         {
-			console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+			console.log(`${device.kind}: ${device.label} id = ${device.getCapabilities()}`);
         }
       });
     })
