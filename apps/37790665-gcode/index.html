@@ -158,16 +158,12 @@ if (!navigator.mediaDevices?.enumerateDevices) {
                             console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
                             console.log("heading:" + position.coords.heading);
                             console.log("speed:" + position.coords.speed);
-                            aPWA.alertDialogOK.element.addEventListener("click", (e) => {
-                               console.log(e);
-                              if (aPWA.alertDialogOK.element.visibilityState === "hidden") {
+                           setTimeout(()=>{
                                 if(hook!=null)clearInterval(hook);
                                 setTimeout(()=>{
                                   leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
                                 },1000)
-                                
-                              }
-                            });
+                           },1000);
                             aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude*1000)/1000 + "x" + Math.round(_position.coords.longitude*1000)/1000);
                             
                         }, errorLog, options);
