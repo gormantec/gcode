@@ -99,7 +99,7 @@ let flashFunction=function(){
 setInterval(function(){
   if(leftLight.element.style.backgroundColor=="rgb(255, 0, 0)")
   { 
-  	leftLight.element.style.backgroundColor="#FFA500";
+  	leftLight.element.style.backgroundColor="#aaaaaa";
   }
   else if(count==Math.round(count/4,0)*4)
   {
@@ -108,7 +108,7 @@ setInterval(function(){
   console.log("count="+count+" "+Math.round(count/2,0)*2);
   count++;
  
-},500);
+},200);
 }
 class HomePage extends Page {
   constructor() {
