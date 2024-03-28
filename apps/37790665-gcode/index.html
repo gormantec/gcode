@@ -94,6 +94,18 @@ import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
+let flashFunction=function(){
+setInterval(function(){
+  if(leftLight.element.style.backgroundColor=="#ff0000")
+  { 
+  	leftLight.element.style.backgroundColor="#FFA500";
+  }
+  else
+  {
+  	leftLight.element.style.backgroundColor="#ff0000";
+  }
+},1000);
+}
 class HomePage extends Page {
   constructor() {
       super({
@@ -106,6 +118,7 @@ class HomePage extends Page {
           "hideHeader": "true",
           "hideFooter": "true",
           "hideFloatingActionButton": "true",
+          "onOpen":flashFunction,
           "children": [
             leftLight,
             new Div({"backgroundColor": "#00ff00", height:"40px", width:"40px",right:"100px",top:"120px", borderRadius:"40px"}),
@@ -142,16 +155,7 @@ aPWA.setPage(aHomePage);
 aPWA.hideHeader();
 aPWA.show();
 
-setInterval(function(){
-  if(leftLight.element.style.backgroundColor=="#ff0000")
-  { 
-  	leftLight.element.style.backgroundColor="#FFA500";
-  }
-  else
-  {
-  	leftLight.element.style.backgroundColor="#ff0000";
-  }
-},1000);
+
 /*---------------------------------------------------------------------------*/
 
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
