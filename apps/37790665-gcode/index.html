@@ -147,6 +147,10 @@ if('bluetooth' in navigator) {
         {
 			console.log(`${device.kind}: ${device.label} id = ${JSON.stringify(device.getCapabilities())}`);
         }
+        else if(device.label=="AirPods" && device.kind=="audiooutput")
+        {
+			console.log(`${device.kind}: ${device.label} id = ${JSON.stringify(device)}`);
+        }
       });
     })
     .catch((err) => {
