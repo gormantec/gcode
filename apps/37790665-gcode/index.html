@@ -164,7 +164,7 @@ if (!navigator.mediaDevices?.enumerateDevices) {
                                 leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
                               }
                             });
-                            aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude,4) + "x" + Math.round(_position.coords.longitude,4));
+                            aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude*1000)/1000 + "x" + Math.round(_position.coords.longitude*1000)/1000);
                             
                         }, errorLog, options);
                     }
