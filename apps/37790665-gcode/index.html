@@ -94,6 +94,12 @@ import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 import {gps} from './lib/gps.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 8000,
+};
+const errorLog=function(err){console.warn("ERROR("+err.code+": "+err.message+")")}
 let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
 let flashFunction=function(){
   let count=0;
@@ -105,17 +111,16 @@ setInterval(function(){
   else if(count==Math.round(count/8,0)*8)
   {
   	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position)=>{console.log("position:"+position);},errorLog,options);
+    }
   }
   count++;
  
 },200);
 }
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          console.log("position:"+position);
-        });
-    }
+
 
 class HomePage extends Page {
   constructor() {
