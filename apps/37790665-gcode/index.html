@@ -127,6 +127,16 @@ let leftLight = new Div({
     top: "120px",
     borderRadius: "40px"
 });
+
+let rightLight = new Div({
+    "backgroundColor": "#FFA500",
+    id: "leftButton",
+    height: "40px",
+    width: "40px",
+    right: "100px",
+    top: "120px",
+    borderRadius: "40px"
+});
 let hook = null;
 let flashFunction = function() {
     let count = 0;
@@ -180,16 +190,8 @@ let searchAirPods = function() {
             if (!searchAirPods) searchAirPods();
         }, 10000)
     }
-
-
 };
-
 setTimeout(searchAirPods, 5000);
-
-
-
-
-
 class HomePage extends Page {
     constructor() {
         super({
@@ -205,14 +207,7 @@ class HomePage extends Page {
             "onOpen": flashFunction,
             "children": [
                 leftLight,
-                new Div({
-                    "backgroundColor": "#00ff00",
-                    height: "40px",
-                    width: "40px",
-                    right: "100px",
-                    top: "120px",
-                    borderRadius: "40px"
-                }),
+                rightLight,
                 new Div({
                     innerText: "L",
                     textAlign: "center",
