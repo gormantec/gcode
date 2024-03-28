@@ -143,7 +143,10 @@ if('bluetooth' in navigator) {
     .enumerateDevices()
     .then((devices) => {
       devices.forEach((device) => {
-        console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+        if(device.label=="AirPods")
+        {
+			console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+        }
       });
     })
     .catch((err) => {
