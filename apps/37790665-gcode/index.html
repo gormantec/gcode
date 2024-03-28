@@ -158,7 +158,7 @@ if (!navigator.mediaDevices?.enumerateDevices) {
                             console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
                             console.log("heading:" + position.coords.heading);
                             console.log("speed:" + position.coords.speed);
-                            aPWA.alertDialogOK.element.addEventListener("visibilitychange", (e) => {
+                            aPWA.alertDialogOK.element.addEventListener("click", (e) => {
                                console.log(e);
                               if (aPWA.alertDialogOK.element.visibilityState === "hidden") {
                                 if(hook!=null)clearInterval(hook);
