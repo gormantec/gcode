@@ -142,7 +142,16 @@ aPWA.setPage(aHomePage);
 aPWA.hideHeader();
 aPWA.show();
 
-setInterval(function(){leftLight.element.style.backgroundColor="#ff0000";},1000);
+setInterval(function(){
+  if(leftLight.element.style.backgroundColor=="#FFA500")
+  { 
+  	leftLight.element.style.backgroundColor="#ff0000";
+  }
+  else
+  {
+  	leftLight.element.style.backgroundColor="#FFA500";
+  }
+},1000);
 /*---------------------------------------------------------------------------*/
 
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
