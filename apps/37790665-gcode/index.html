@@ -100,7 +100,7 @@ const options = {
   maximumAge: 8000,
 };
 const errorLog=function(err){console.warn("ERROR("+err.code+": "+err.message+")")}
-let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
+let leftLight=new Div({"backgroundColor": "#FFA500", id:"leftButton", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
 let flashFunction=function(){
   let count=0;
 setInterval(function(){
@@ -127,10 +127,10 @@ setInterval(function(){
 
 
 if('bluetooth' in navigator) {
-  const scan = document.querySelector('#scan');
-  const batteryIndicator = document.querySelector('#battery-indicator');
+  const scan = leftLight.element;
+  //const batteryIndicator = document.querySelector('#battery-indicator');
 
-
+  scan.addEventListener('click', async () => {
 
     const connectToDevice = async ({bleService, bleCharacteristic}) => {
       try {
@@ -141,7 +141,7 @@ if('bluetooth' in navigator) {
         });
 
         device.addEventListener('gattserverdisconnected', () => {
-          batteryIndicator.value = 0;
+          //batteryIndicator.value = 0;
         });
 
         const server = await device.gatt.connect();
@@ -154,7 +154,7 @@ if('bluetooth' in navigator) {
 
           console.log(bleCharacteristic+" changed value="+value);
 
-          batteryIndicator.value = value;
+          //batteryIndicator.value = value;
         });
 
         characteristic.readValue();
@@ -166,9 +166,8 @@ if('bluetooth' in navigator) {
       }
     };
 
-    connectToDevice({bleService: 'battery_service', bleCharacteristic: 'battery_level'});
-
-  
+    await connectToDevice({bleService: 'battery_service', bleCharacteristic: 'battery_level'});
+  });
 }   
 
 class HomePage extends Page {
