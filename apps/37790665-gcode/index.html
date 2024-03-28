@@ -153,7 +153,7 @@ if('bluetooth' in navigator) {
         if(device.label=="AirPods" && device.kind=="audioinput")
         {
 			console.log(`${device.kind}: ${device.label} id = ${JSON.stringify(device.getCapabilities())}`);
-            aPWA.setAlert("AirPods");
+            aPWA.alert("AirPods");
         }
         else if(device.label=="AirPods" && device.kind=="audiooutput")
         {
