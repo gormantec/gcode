@@ -113,7 +113,7 @@ setInterval(function(){
   	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position)=>{
-        console.log("position:"+position.coords.latitude+"x"+position.coords.latitude);
+        console.log("position:"+position.coords.latitude+"x"+position.coords.longitude);
         console.log("heading:"+position.coords.heading);
         console.log("speed:"+position.coords.speed);
       },errorLog,options);
