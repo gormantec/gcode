@@ -91,7 +91,6 @@ if (window.opener && window.opener !== window) {
 
 /*---------------------------------------------------------------------------*/
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column,VideoImage,AddVideo} from './flutter-widgets.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
@@ -106,7 +105,7 @@ class HomePage extends Page {
           "hideHeader": "true",
           "hideFooter": "true",
           "hideFloatingActionButton": "true",
-          "children": [new Div({height: "240px",width: "240px"})]
+          "children": [ new Div() ]
       });
   }
 
