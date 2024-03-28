@@ -112,6 +112,8 @@ class SecondPage extends Page {
           "color": "black",
           "backgroundColor": "white",
           "navigateBackPage": aHomePage,
+          "hideFooterFlag": "true",
+          "hideFloatingActionButton": "true",
           "child": myDiv
       });
   }
@@ -122,11 +124,7 @@ var aHomePage = new HomePage();
 var aSecondPage = new SecondPage();
 var aPWA = new PWA({
   title: "Gorman Technology Pty Ltd",
-  hideFooterFlag: "true",
   primaryColor: "#aaaaaa",
-});
-aPWA.floatingActionButton.onclick(function() {
-  aPWA.setPage(aSecondPage);
 });
 aPWA.setPage(aHomePage);
 aPWA.show();
