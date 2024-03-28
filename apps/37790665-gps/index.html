@@ -32,14 +32,17 @@ function addToHomeScreen() {
  });}
 function showAddToHomeScreen() {
    let a2hsBtn = document.querySelector(".ad2hs-prompt");
-   a2hsBtn.style.display ="block";
-   a2hsBtn.addEventListener("click", addToHomeScreen);
+   if(a2hsBtn)a2hsBtn.style.display ="block";
+   if(a2hsBtn)a2hsBtn.addEventListener("click", addToHomeScreen);
  }
  window.addEventListener('beforeinstallprompt', function (e) {
    e.preventDefault();
    deferredPrompt = e;
    showAddToHomeScreen();
-   setTimeout(()=>{document.querySelector(".ad2hs-prompt").style.display ="none";},10000);
+   setTimeout(()=>{
+    let ad2hs=document.querySelector(".ad2hs-prompt");
+    if(ad2hs) ad2hs.style.display ="none";
+},10000);
  });
 function showIosInstall() {
   let iosPrompt = document.querySelector(".ios-prompt");
@@ -93,7 +96,7 @@ if (window.opener && window.opener !== window) {
 */
 
 /*---------------------------------------------------------------------------*/
-import {  
+import {
     PWA,
     Page,
     Div
