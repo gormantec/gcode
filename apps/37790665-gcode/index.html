@@ -95,8 +95,9 @@ try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px",left:"100px",top:"120px", borderRadius:"40px"});
 let flashFunction=function(){
+  let count=0;
 setInterval(function(){
-  if(leftLight.element.style.backgroundColor=="rgb(255, 0, 0)")
+  if(leftLight.element.style.backgroundColor=="rgb(255, 0, 0)" && count/2==Math.round(count/2,0))
   { 
   	leftLight.element.style.backgroundColor="#FFA500";
   }
@@ -104,7 +105,7 @@ setInterval(function(){
   {
   	leftLight.element.style.backgroundColor="#ff0000";
   }
-  console.log("flashFunction:"+leftLight.element.style.backgroundColor);
+  count++;
 },1000);
 }
 class HomePage extends Page {
