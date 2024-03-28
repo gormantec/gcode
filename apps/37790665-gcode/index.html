@@ -143,8 +143,10 @@ let flashFunction = function() {
     hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
             leftLight.element.style.backgroundColor = "#aaaaaa";
+            rightLight.element.style.backgroundColor = "#aaaaaa";
         } else if (count == Math.round(count / 8, 0) * 8) {
             leftLight.element.style.backgroundColor = "rgb(255, 165, 0)";
+            rightLight.element.style.backgroundColor = "rgb(255, 165, 0)";
         }
         count++;
 
@@ -173,6 +175,7 @@ let searchAirPods = function() {
                                     if (hook != null) clearInterval(hook);
                                     setTimeout(() => {
                                         leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                                        rightLight.element.style.backgroundColor = "rgb(0, 255, 0)";
                                     }, 1000)
                                 }, 1000);
                                 aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
