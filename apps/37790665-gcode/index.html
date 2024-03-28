@@ -97,13 +97,13 @@ let leftLight=new Div({"backgroundColor": "#FFA500", height:"40px", width:"40px"
 let flashFunction=function(){
   let count=0;
 setInterval(function(){
-  if(leftLight.element.style.backgroundColor=="rgb(255, 0, 0)")
+  if(leftLight.element.style.backgroundColor=="rgb(255, 165, 0)")
   { 
   	leftLight.element.style.backgroundColor="#aaaaaa";
   }
   else if(count==Math.round(count/4,0)*4)
   {
-  	leftLight.element.style.backgroundColor="#ff0000";
+  	leftLight.element.style.backgroundColor="rgb(255, 165, 0)";
   }
   console.log("count="+count+" "+Math.round(count/2,0)*2);
   count++;
