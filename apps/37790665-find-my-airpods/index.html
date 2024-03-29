@@ -141,7 +141,7 @@ let flashFunction = async function() {
         return (resolve, reject) => {
             let timeOut = setTimeout(() => {
                 console.log("timeout");
-                reject("timeout");
+                resolve();
             }, 5000);
             navigator.permissions.query({
                 name: "" + name
@@ -156,7 +156,7 @@ let flashFunction = async function() {
                 });
             }).catch((e) => {
                 clearTimeout(timeOut);
-                reject(e);
+                resolve();
             });
         }
     }
