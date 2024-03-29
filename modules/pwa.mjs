@@ -44,6 +44,16 @@ class PWA {
         return myglobals.PWA;
     }
 
+    dispatchEvent(event)
+    {
+        this.pwaRoot.dispatchEvent(event);
+    }
+    
+    addEventListener(eventName,funcObject)
+    {
+        this.pwaRoot.addEventListener(eventName,funcObject);
+    }
+
     setAlert(message) {
         this.alertDialog = new Div({ id: "alertDialog", display: "none" });
         this.alertDialogBody = new Div({ id: "alertDialogBody", backgroundColor: this.primaryColorText, borderColor: this.primaryColor, borderWidth: "2px" });
