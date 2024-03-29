@@ -141,17 +141,43 @@ let hook = null;
 let flashFunction = function() {
     let count = 0;
   
-  
-  (async ()=>{
-     navigator.permissions.query({ name: "geolocation" }).then((result) => {
-   		aPWA.alert("geolocation:"+result.state);
-       console.log("record");
-       aPWA.addEventListener("alertDialogClosed",()=>{
-         console.log("alertDialogClosed");
-         return;
-       }, { once: true });
-    });
-  })();
+  (async ()=>{  
+    
+    await (async ()=>{
+       navigator.permissions.query({ name: "geolocation" }).then((result) => {
+          aPWA.alert("geolocation:"+result.state);
+         console.log("record");
+         aPWA.addEventListener("alertDialogClosed",()=>{
+           console.log("alertDialogClosed");
+           return;
+         }, { once: true });
+      });
+    })();
+    
+        await (async ()=>{
+       navigator.permissions.query({ name: "geolocation" }).then((result) => {
+          aPWA.alert("geolocation:"+result.state);
+         console.log("record");
+         aPWA.addEventListener("alertDialogClosed",()=>{
+           console.log("alertDialogClosed");
+           return;
+         }, { once: true });
+      });
+    })();
+    
+    
+        await (async ()=>{
+       navigator.permissions.query({ name: "geolocation" }).then((result) => {
+          aPWA.alert("geolocation:"+result.state);
+         console.log("record");
+         aPWA.addEventListener("alertDialogClosed",()=>{
+           console.log("alertDialogClosed");
+           return;
+         }, { once: true });
+      });
+    })();
+    
+    })();
 
   
   
