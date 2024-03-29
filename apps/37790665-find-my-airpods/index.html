@@ -146,7 +146,8 @@ let flashFunction = function() {
      navigator.permissions.query({ name: "geolocation" }).then((result) => {
    		aPWA.alert("geolocation:"+result.state);
        console.log("record");
-       window.querySelector("#mousemove").addEventListener("click",()=>{
+       document.querySelector("#mousemove").style.backgroundColor="#ff0000";
+       document.querySelector("#mousemove").addEventListener("click",()=>{
          console.log("click");
          return;
        });
