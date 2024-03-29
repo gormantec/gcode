@@ -140,6 +140,7 @@ let rightLight = new Div({
 let hook = null;
 let flashFunction = function() {
     let count = 0;
+  MediaDevices.selectAudioOutput();
     hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
             leftLight.element.style.backgroundColor = "#aaaaaa";
