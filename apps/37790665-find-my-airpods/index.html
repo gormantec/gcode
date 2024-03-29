@@ -145,7 +145,10 @@ let flashFunction = function() {
   (async ()=>{
      navigator.permissions.query({ name: "geolocation" }).then((result) => {
    		aPWA.alert("geolocation:"+result.state);
-       document.querySelector("#alertDialogOK").addEventListener("click",()=>console.log("click"));
+       document.querySelector("#alertDialogOK").addEventListener("click",()=>{
+         console.log("click");
+         return;
+       });
     });
   })();
 
