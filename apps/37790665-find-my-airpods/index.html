@@ -90,6 +90,7 @@ import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 import {gps} from './lib/gps.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*----------------------------------------------*/
+// This works on all devices/browsers, and uses IndexedDBShim as a final fallback 
 
 var aPWA = new PWA({
     "title": "find my air pods",
@@ -133,6 +134,16 @@ let rightLight = new Div({
     top: "120px",
     borderRadius: "40px"
 });
+
+let locationTextDiv=new Div({
+                    id: "locationText",
+                    textAlign: "center",
+                    "color": "#aaaaaa",
+                    height: "40px",
+                    left: "100px",
+                    right: "100px",
+                    top: "210px"
+                })
 let hook = null;
 let flashFunction = async function() {
     let count = 0;
@@ -164,21 +175,14 @@ let flashFunction = async function() {
     //await new Promise(action("geolocation"));
     //console.log("get gyroscope");
     //await new Promise(action("gyroscope"));
-    console.log("get microphone");
-    await new Promise(action("microphone"));
+    //console.log("get microphone");
+    //await new Promise(action("microphone"));
    // await new Promise(action("notifications"));
     //await new Promise(action("background-sync"));
     //await new Promise(action("accelerometer"));
 
     console.log("!!!!!!!!!!!!");
-    
-
-
-
-
-
-
-
+   
     hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
             leftLight.element.style.backgroundColor = "#aaaaaa";
@@ -225,7 +229,10 @@ let searchAirPods = async function() {
                                         rightLight.element.style.backgroundColor = "rgb(0, 255, 0)";
                                     }, 1000)
                                 }, 1000);
-                                aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
+                                //aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
+                              let locationText=""+Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000;
+                              window.localStorage.setItem("lastLocation", locationText);
+                              window.localStorage.setItem("lastCoords", JSON.stringify({timestamp:coords.timestamp,coords:_position.coords}));
 
                             }, errorLog, options);
                         } else {
@@ -238,6 +245,8 @@ let searchAirPods = async function() {
                 console.error(`${err.name}: ${err.message}`);
             });
         setTimeout(() => {
+          	let locationText=window.localStorage.getItem("lastLocation");
+            locationTextDiv.element.innerText=locationText;
             if (!searchAirPods) searchAirPods();
         }, 10000)
     }
@@ -277,6 +286,7 @@ class HomePage extends Page {
                     right: "100px",
                     top: "180px"
                 }),
+                locationTextDiv,
             ]
         });
     }
