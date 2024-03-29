@@ -160,15 +160,15 @@ let flashFunction = async function() {
             });
         }
     }
-    console.log("get geolocation");
-    await new Promise(action("geolocation"));
-    console.log("get gyroscope");
-    await new Promise(action("gyroscope"));
+    //console.log("get geolocation");
+    //await new Promise(action("geolocation"));
+    //console.log("get gyroscope");
+    //await new Promise(action("gyroscope"));
     console.log("get microphone");
     await new Promise(action("microphone"));
-    await new Promise(action("notifications"));
-    await new Promise(action("background-sync"));
-    await new Promise(action("accelerometer"));
+   // await new Promise(action("notifications"));
+    //await new Promise(action("background-sync"));
+    //await new Promise(action("accelerometer"));
 
     console.log("!!!!!!!!!!!!");
     
