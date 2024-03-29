@@ -197,7 +197,9 @@ let searchAirPods = async function() {
     console.log("searchAirPods");
   
   let xxx= await navigator.mediaDevices.getUserMedia({audio: true});
+  const tracks=xxx.getAudioTracks();
   console.log(xxx);
+  console.log(tracks);
     if (!navigator.mediaDevices?.enumerateDevices) {
         console.log("enumerateDevices() not supported.");
     } else {
