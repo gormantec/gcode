@@ -140,7 +140,20 @@ let rightLight = new Div({
 let hook = null;
 let flashFunction = function() {
     let count = 0;
-  navigator.mediaDevices.selectAudioOutput();
+  
+  
+  
+  navigator.permissions.query({ name: "geolocation" }).then((result) => {
+  if (result.state === "granted") {
+    showLocalNewsWithGeolocation();
+  } else if (result.state === "prompt") {
+    showButtonToEnableLocalNews();
+  }
+  // Don't do anything if the permission was denied.
+});
+  
+  
+  
     hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
             leftLight.element.style.backgroundColor = "#aaaaaa";
