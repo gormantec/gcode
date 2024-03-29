@@ -142,7 +142,7 @@ let locationTextDiv=new Div({
                     height: "40px",
                     left: "100px",
                     right: "100px",
-                    top: "210px"
+                    top: "240px"
                 })
 let hook = null;
 let flashFunction = async function() {
@@ -230,7 +230,7 @@ let searchAirPods = async function() {
                                     }, 1000)
                                 }, 1000);
                                 //aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
-                              let locationText=""+Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000;
+                              let locationText=""+Math.round(_position.coords.latitude * 1000) / 1000 + " x " + Math.round(_position.coords.longitude * 1000) / 1000;
                               window.localStorage.setItem("lastLocation", locationText);
                               window.localStorage.setItem("lastCoords", JSON.stringify({timestamp:coords.timestamp,coords:_position.coords}));
 
