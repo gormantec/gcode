@@ -93,7 +93,7 @@ if (window.opener && window.opener !== window) {
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 import {gps} from './lib/gps.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
-/*---------------------------------------------------------------------------*/
+/*----------------------------------------------*/
 
 var aPWA = new PWA({
     "title": "find my air pods",
@@ -140,27 +140,36 @@ let rightLight = new Div({
 let hook = null;
 let flashFunction = function() {
     let count = 0;
-  
-  (async ()=>{  
-    
-     let func1=async ()=>{
-       navigator.permissions.query({ name: "geolocation" }).then((result) => {
-         aPWA.alert("geolocation:"+result.state);
-         aPWA.addEventListener("alertDialogClosed",()=>{
-           console.log("alertDialogClosed");
-           return;
-         }, { once: true });
-      });
-    };
-    let restltFunc1=await func1();
-	console.log("!!!!!!!!!!!!");
-    
+
+    (async () => {
+
+        const func1 = new Promise((resolve, reject) => {
+
+
+            let timeOut = setTimeout(reject, 5000);
+
+            navigator.permissions.query({
+                name: "geolocation"
+            }).then((result) => {
+                clearTimeout(timeOut);
+                aPWA.alert("geolocation:" + result.state);
+                aPWA.addEventListener("alertDialogClosed", () => {
+                    console.log("alertDialogClosed");
+                    resolve();
+                }, {
+                    once: true
+                });
+            });
+        });
+        let restltFunc1 = await func1();
+        console.log("!!!!!!!!!!!!");
+
     })();
 
-  
-  
-  
-  
+
+
+
+
     hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
             leftLight.element.style.backgroundColor = "#aaaaaa";
@@ -175,8 +184,8 @@ let flashFunction = function() {
 }
 
 let searchAirPods = function() {
-  
-  console.log("searchAirPods");
+
+    console.log("searchAirPods");
 
     if (!navigator.mediaDevices?.enumerateDevices) {
         console.log("enumerateDevices() not supported.");
@@ -186,9 +195,9 @@ let searchAirPods = function() {
         navigator.mediaDevices
             .enumerateDevices()
             .then((devices) => {
-                
+
                 devices.forEach((device) => {
-                  //console.log("device:"+JSON.stringify(device));
+                    //console.log("device:"+JSON.stringify(device));
                     if (device.label == "AirPods" && device.kind == "audioinput") {
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition((position) => {
@@ -206,11 +215,9 @@ let searchAirPods = function() {
                                 aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
 
                             }, errorLog, options);
+                        } else {
+                            console.log("no navigator.geolocation");
                         }
-                      else
-                      {
-                        console.log("no navigator.geolocation");
-                      }
                     }
                 });
             })
