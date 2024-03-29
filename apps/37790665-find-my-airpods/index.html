@@ -144,12 +144,12 @@ let flashFunction = function() {
   
   
  navigator.permissions.query({ name: "geolocation" }).then((result) => {
-   alert("geolocation:"+result.state);
+   aPWA.alert("geolocation:"+result.state);
   // Don't do anything if the permission was denied.
 });
   
    navigator.permissions.query({ name: "bluetooth" }).then((result) => {
-   alert("geolocation:"+result.state);
+   aPWA.alert("geolocation:"+result.state);
   // Don't do anything if the permission was denied.
 });
   
