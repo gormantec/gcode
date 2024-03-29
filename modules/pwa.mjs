@@ -51,7 +51,7 @@ class PWA {
     
     addEventListener(eventName,funcObject,options)
     {
-        this.pwaRoot.addEventListener(eventName,funcObject,options);
+        return this.pwaRoot.addEventListener(eventName,funcObject,options);
     }
 
     setAlert(message) {
@@ -655,7 +655,7 @@ class Div {
 
     dispatchEvent(event)
     {
-        return this.element.dispatchEvent(event);
+        this.element.dispatchEvent(event);
     }
     
     addEventListener(eventName, eventHandler,options) {
