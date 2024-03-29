@@ -137,35 +137,41 @@ let hook = null;
 let flashFunction = async function() {
     let count = 0;
 
-	let action=function(name){
-      return (resolve, reject) => {
-            let timeOut = setTimeout(reject, 5000);
+    let action = function(name) {
+        return (resolve, reject) => {
+            let timeOut = setTimeout(() => {
+                console.log("timeout");
+                reject("timeout");
+            }, 5000);
             navigator.permissions.query({
-                name: ""+name
+                name: "" + name
             }).then((result) => {
                 clearTimeout(timeOut);
-                aPWA.alert(""+name+":" + result.state);
+                aPWA.alert("" + name + ":" + result.state);
                 aPWA.addEventListener("alertDialogClosed", () => {
                     console.log("alertDialogClosed");
                     resolve();
                 }, {
                     once: true
                 });
-            }).catch((e)=>{
+            }).catch((e) => {
                 clearTimeout(timeOut);
-              	reject(e);
+                reject(e);
             });
         }
     }
+    console.log("get geolocation");
+    await new Promise(action("geolocation"));
+    console.log("get gyroscope");
+    await new Promise(action("gyroscope"));
+    console.log("get microphone");
+    await new Promise(action("microphone"));
+    await new Promise(action("notifications"));
+    await new Promise(action("background-sync"));
+    await new Promise(action("accelerometer"));
 
-  await new Promise(action("geolocation"));
-  await new Promise(action("gyroscope"));
-  await new Promise(action("microphone"));
-  await new Promise(action("notifications"));
-  await new Promise(action("background-sync"));
-  await new Promise(action("accelerometer"));
-  
-  console.log("!!!!!!!!!!!!");gyroscope
+    console.log("!!!!!!!!!!!!");
+    gyroscope
 
 
 
