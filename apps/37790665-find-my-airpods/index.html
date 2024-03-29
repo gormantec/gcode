@@ -147,7 +147,7 @@ let flashFunction = function() {
    		aPWA.alert("geolocation:"+result.state);
        console.log("record");
        aPWA.alertDialog.element.style.backgroundColor="#ff0000";
-       aPWA.alertDialog.element.addEventListener("visibilitychange",()=>{
+       aPWA.alertDialog.addEventListener("visibilitychange",()=>{
          console.log("visibilitychange");
          return;
        });
