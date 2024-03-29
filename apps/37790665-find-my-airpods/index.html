@@ -146,10 +146,10 @@ let flashFunction = function() {
      navigator.permissions.query({ name: "geolocation" }).then((result) => {
    		aPWA.alert("geolocation:"+result.state);
        console.log("record");
-       aPWA.alertDialog.element.onmouseover=()=>{
-         console.log("onmouseover");
+       aPWA.addEventListener("alertDialogClosed",()=>{
+         console.log("alertDialogClosed");
          return;
-       };
+       }, { once: true });
     });
   })();
 
