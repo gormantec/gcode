@@ -155,6 +155,9 @@ let flashFunction = async function() {
                 }, {
                     once: true
                 });
+            }).catch((e)=>{
+                clearTimeout(timeOut);
+              	reject(e);
             });
         }
     }
