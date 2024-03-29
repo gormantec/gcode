@@ -146,9 +146,8 @@ let flashFunction = function() {
      navigator.permissions.query({ name: "geolocation" }).then((result) => {
    		aPWA.alert("geolocation:"+result.state);
        console.log("record");
-       aPWA.alertDialog.element.style.backgroundColor="#ff0000";
-       aPWA.alertDialog.addEventListener("visibilitychange",()=>{
-         console.log("visibilitychange");
+       aPWA.alertDialog.element.onmouseover(()=>{
+         console.log("onmouseover");
          return;
        });
     });
@@ -185,14 +184,14 @@ let searchAirPods = function() {
             .then((devices) => {
                 
                 devices.forEach((device) => {
-                  console.log("device:"+JSON.stringify(device));
+                  //console.log("device:"+JSON.stringify(device));
                     if (device.label == "AirPods" && device.kind == "audioinput") {
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition((position) => {
                                 _position = position;
-                                console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
-                                console.log("heading:" + position.coords.heading);
-                                console.log("speed:" + position.coords.speed);
+                                //console.log("position:" + position.coords.latitude + "x" + position.coords.longitude);
+                                //console.log("heading:" + position.coords.heading);
+                                //console.log("speed:" + position.coords.speed);
                                 setTimeout(() => {
                                     if (hook != null) clearInterval(hook);
                                     setTimeout(() => {
