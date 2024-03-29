@@ -141,15 +141,14 @@ let hook = null;
 let flashFunction = async function() {
     let count = 0;
 
- 
-
-        const func1 = await new Promise((resolve, reject) => {
+	let action=function(name){
+      return (resolve, reject) => {
             let timeOut = setTimeout(reject, 5000);
             navigator.permissions.query({
-                name: "geolocation"
+                name: ""+name
             }).then((result) => {
                 clearTimeout(timeOut);
-                aPWA.alert("geolocation:" + result.state);
+                aPWA.alert(""+name+":" + result.state);
                 aPWA.addEventListener("alertDialogClosed", () => {
                     console.log("alertDialogClosed");
                     resolve();
@@ -157,8 +156,17 @@ let flashFunction = async function() {
                     once: true
                 });
             });
-        });
-        console.log("!!!!!!!!!!!!");
+        }
+    }
+
+  await new Promise(action("geolocation"));
+  await new Promise(action("gyroscope"));
+  await new Promise(action("microphone"));
+  await new Promise(action("notifications"));
+  await new Promise(action("background-sync"));
+  await new Promise(action("accelerometer"));
+  
+  console.log("!!!!!!!!!!!!");gyroscope
 
 
 
