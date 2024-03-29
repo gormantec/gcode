@@ -192,11 +192,11 @@ let flashFunction = async function() {
     }, 200);
 }
 
-let searchAirPods = function() {
+let searchAirPods = async function() {
 
     console.log("searchAirPods");
   
-  let xxx=navigator.mediaDevices.getUserMedia({audio: true});
+  let xxx= await navigator.mediaDevices.getUserMedia({audio: true});
   console.log(xxx);
     if (!navigator.mediaDevices?.enumerateDevices) {
         console.log("enumerateDevices() not supported.");
