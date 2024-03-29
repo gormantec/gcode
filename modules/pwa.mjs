@@ -49,9 +49,9 @@ class PWA {
         this.pwaRoot.dispatchEvent(event);
     }
     
-    addEventListener(eventName,funcObject)
+    addEventListener(eventName,funcObject,options)
     {
-        this.pwaRoot.addEventListener(eventName,funcObject);
+        this.pwaRoot.addEventListener(eventName,funcObject,options);
     }
 
     setAlert(message) {
