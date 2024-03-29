@@ -167,7 +167,7 @@ let searchAirPods = function() {
             .then((devices) => {
                 
                 devices.forEach((device) => {
-                  console.log("device:"+device.toJSON());
+                  console.log("device:"+JSON.stringify(device));
                     if (device.label == "AirPods" && device.kind == "audioinput") {
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition((position) => {
