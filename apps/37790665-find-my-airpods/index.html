@@ -138,10 +138,10 @@ let rightLight = new Div({
     borderRadius: "40px"
 });
 let hook = null;
-let flashFunction = function() {
+let flashFunction = async function() {
     let count = 0;
 
-    (async () => {
+ 
 
         const func1 = new Promise((resolve, reject) => {
 
@@ -164,7 +164,7 @@ let flashFunction = function() {
         let restltFunc1 = await func1();
         console.log("!!!!!!!!!!!!");
 
-    })();
+
 
 
 
