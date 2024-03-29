@@ -142,15 +142,16 @@ let flashFunction = function() {
     let count = 0;
   
   
-  
- navigator.permissions.query({ name: "geolocation" }).then((result) => {
-   aPWA.alert("geolocation:"+result.state);
-  // Don't do anything if the permission was denied.
-});
+  async ()=>{
+     navigator.permissions.query({ name: "geolocation" }).then((result) => {
+   		aPWA.alert("geolocation:"+result.state);
+       aPWA.alertDialogOK.element.addEventListener("click",()=>console.log("click"));
+    });
+  }
+
   
    navigator.permissions.query({ name: "bluetooth" }).then((result) => {
    aPWA.alert("geolocation:"+result.state);
-  // Don't do anything if the permission was denied.
 });
   
   
