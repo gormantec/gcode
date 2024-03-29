@@ -54,11 +54,14 @@ class PWA {
         this.alertDialog.appendChild(this.alertDialogBody);
         this.pwaOverlay.appendChild(this.alertDialog);
         const _thisAlertDialog = this.alertDialog;
+        const _this = this;
 
         this.alertDialogOK.onclick(function (event) {
+             _this.dispatchEvent(new Event('alertDialogClosed'));
             _thisAlertDialog.close();
         });
         this.alertDialogOK.onPointerUp(function (event) {
+             _this.dispatchEvent(new Event('alertDialogClosed'));
             _thisAlertDialog.close();
         });
     }
