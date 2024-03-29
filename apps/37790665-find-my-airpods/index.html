@@ -143,17 +143,16 @@ let flashFunction = function() {
   
   (async ()=>{  
     
-    await (async ()=>{
+     let func1=async ()=>{
        navigator.permissions.query({ name: "geolocation" }).then((result) => {
-          aPWA.alert("geolocation:"+result.state);
-         console.log("record");
+         aPWA.alert("geolocation:"+result.state);
          aPWA.addEventListener("alertDialogClosed",()=>{
            console.log("alertDialogClosed");
            return;
          }, { once: true });
       });
-    })();
-    
+    };
+    let restltFunc1=await func1();
 	console.log("!!!!!!!!!!!!");
     
     })();
