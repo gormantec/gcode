@@ -653,9 +653,14 @@ class Div {
         this.element.addEventListener("pointerout", (e) => { if (_this.isPointerDown == true) { _this.isPointerDown = false; e.stopImmediatePropagation(); e.preventDefault(); e.stopPropagation(); e._this = _this; handleLeave(e); } });
     }
 
-    addEventListener(eventName, eventHandler) {
+    dispatchEvent(event)
+    {
+        return this.element.dispatchEvent(event);
+    }
+    
+    addEventListener(eventName, eventHandler,options) {
         console.log("addEventListener(" + eventName + ")");
-        return this.element.addEventListener(eventName, eventHandler);
+        return this.element.addEventListener(eventName, eventHandler,options);
     }
 
     showModal() {
@@ -675,15 +680,6 @@ class Div {
         }
     }
 
-    dispatchEvent(event)
-    {
-        this.element.dispatchEvent(event);
-    }
-    
-    addEventListener(eventName,funcObject,options)
-    {
-        this.element.addEventListener(eventName,funcObject,options);
-    }
 
     htmlToElement(html) {
         var template = document.createElement('template');
