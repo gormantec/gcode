@@ -93,8 +93,8 @@ try { Page.clearPages(); } catch (e) {}
 // This works on all devices/browsers, and uses IndexedDBShim as a final fallback 
 
 var aPWA = new PWA({
-    "title": "find my air pods",   
-    "primaryColor": "#aaaaaa", 
+    "title": "find my air pods",
+    "primaryColor": "#aaaaaa",
     "hideHeader": "true",
 });
 aPWA.alertDialogContent.element.style.backgroundColor = "#eeeeee";
@@ -143,13 +143,15 @@ let locationTextDiv = new Div({
     left: "100px",
     right: "100px",
     top: "240px",
-    onclick:function(){aPWA.setPage("SecondPage");}
+    onclick: function() {
+        aPWA.setPage("SecondPage");
+    }
 });
 let hook = null;
 let flashFunction = async function() {
     let count = 0;
-  
-  console.log("!********************************************");
+
+    console.log("!********************************************");
 
 
     let action = function(name) {
@@ -228,7 +230,7 @@ let searchAirPods = async function() {
                                 foundAirPods = true;
                                 setTimeout(() => {
                                     if (hook != null) clearInterval(hook);
-                                  hook=null;
+                                    hook = null;
                                     setTimeout(() => {
                                         leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
                                         rightLight.element.style.backgroundColor = "rgb(0, 255, 0)";
@@ -236,7 +238,7 @@ let searchAirPods = async function() {
                                 }, 100);
                                 //aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
                                 let locationText = "" + Math.round(_position.coords.latitude * 1000) / 1000 + ", " + Math.round(_position.coords.longitude * 1000) / 1000;
-                              
+
                                 window.localStorage.setItem("lastLocation", locationText);
                                 window.localStorage.setItem("lastCoords", JSON.stringify({
                                     timestamp: _position.timestamp,
@@ -249,9 +251,8 @@ let searchAirPods = async function() {
                         }
                     }
                 });
-          		if(founsAirPod==false && hook==null)
-                {
-                  flashFunction();
+                if (founsAirPod == false && hook == null) {
+                    flashFunction();
                 }
             })
             .catch((err) => {
@@ -260,17 +261,31 @@ let searchAirPods = async function() {
 
         let locationText = window.localStorage.getItem("lastLocation");
         locationTextDiv.element.innerText = locationText;
-      
+
         setTimeout(() => {
-          if (!foundAirPods) searchAirPods();
-          else
-          {
-            setTimeout(() => {
-                searchAirPods();
-            }, 10000);
-          }
+            if (!foundAirPods) searchAirPods();
+            else {
+                setTimeout(() => {
+                    searchAirPods();
+                }, 10000);
+            }
         }, 2000);
     }
+
+    if (lastCoords) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                _position = position;
+                if (lastCoords && Math.round(lastCoords.coords.latitude * 1000) == Math.round(_position.coords.latitude * 1000) && Math.round(lastCoords.coords.longitude * 1000) == Math.round(_position.coords.longitude * 1000)) {
+                    locationTextDiv.element.style.color = "rgb(0,255,0)";
+                } else {
+                    locationTextDiv.element.style.color = "rgb(255,0,0)";
+                }
+                console.log("lastCoords:" + JSON.stringify(lastCoords));
+            });
+        }
+    }
+    console.log("lastCoords:" + JSON.stringify(lastCoords));
 };
 setTimeout(searchAirPods, 5000);
 let locationText = window.localStorage.getItem("lastLocation");
@@ -280,23 +295,7 @@ if (locationText) locationTextDiv.element.innerText = locationText;
 
 
 
-if (lastCoords) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            _position = position;
-          if(lastCoords && Math.round(lastCoords.coords.latitude*1000)==Math.round(_position.coords.latitude*1000) && Math.round(lastCoords.coords.longitude*1000)==Math.round(_position.coords.longitude*1000))
-          {
-            locationTextDiv.element.style.color="rgb(0,255,0)";
-          }
-          else
-          {
-            locationTextDiv.element.style.color="rgb(255,0,0)";
-          }
-          console.log("lastCoords:"+lastCoords);
-        });
-    }
-}
-console.log("lastCoords:"+JSON.stringify(lastCoords));
+
 
 class HomePage extends Page {
     constructor() {
@@ -334,7 +333,7 @@ class HomePage extends Page {
                     borderStyle: "solid",
                     borderThickness: "1px"
                 }),
-              new Div({
+                new Div({
                     "color": "#ffffff",
                     height: "29px",
                     width: "10px",
@@ -345,7 +344,7 @@ class HomePage extends Page {
                     borderRightStyle: "solid",
                     borderThickness: "1px"
                 }),
-              new Div({
+                new Div({
                     "color": "#ffffff",
                     height: "29px",
                     width: "10px",
@@ -356,8 +355,8 @@ class HomePage extends Page {
                     borderLeftStyle: "solid",
                     borderThickness: "1px"
                 }),
-              
-              new Div({
+
+                new Div({
                     "color": "#ffffff",
                     height: "100px",
                     width: "15px",
@@ -369,8 +368,8 @@ class HomePage extends Page {
                     borderThickness: "1px",
                     borderRadius: "8px",
                 }),
-              
-              new Div({
+
+                new Div({
                     "color": "#ffffff",
                     height: "100px",
                     width: "15px",
@@ -435,16 +434,16 @@ class SecondPage extends Page {
             "hideFooter": "true",
             "hideFloatingActionButton": "true",
             "children": [
-                
+
                 gps.newImageDiv({
                     fontSize: "30px",
                     "top": "0px",
                     "left": "0px",
                     "width": "100%",
-                    "height": window.innerHeight+"px",
+                    "height": window.innerHeight + "px",
                     backgroundColor: "#555555",
                 }),
-              gps.newCoordDiv({
+                gps.newCoordDiv({
                     textAlign: "center",
                     padding: "4px",
                     fontSize: "20px",
@@ -454,27 +453,33 @@ class SecondPage extends Page {
                     "marginLeft": "auto",
                     "marginRight": "auto",
                     backgroundColor: "#ffffff",
-                	borderRadius:"15px",
+                    borderRadius: "15px",
                     color: "#aaaaaa",
                     innerText: "0"
                 }),
-              new Div({innerText:"BACK",                    
-                       textAlign: "center",
+                new Div({
+                    innerText: "BACK",
+                    textAlign: "center",
                     padding: "5px",
                     fontSize: "20px",
-                       bottom: "20px",
-                       left: "0px",
-                       right: "0px",
+                    bottom: "20px",
+                    left: "0px",
+                    right: "0px",
                     "width": "100px",
                     "height": "20px",
-                       "borderRadius":"10px",
+                    "borderRadius": "10px",
                     "marginLeft": "auto",
                     "marginRight": "auto",
                     backgroundColor: "#ffffff",
                     color: "#aaaaaa",
-                       onclick:function(){aPWA.setPage("HomePage");}})
+                    onclick: function() {
+                        aPWA.setPage("HomePage");
+                    }
+                })
             ],
-          onOpen:function(){gps.updateLocation();}
+            onOpen: function() {
+                gps.updateLocation();
+            }
         });
     }
 }
@@ -489,5 +494,4 @@ aPWA.setPage(aHomePage);
 aPWA.hideHeader();
 aPWA.show();
 /*---------------------------------------------------------------------------*/
-
 </script></head><body><div class="splash"></div><div class="loader">Loading...</div></body></html>
