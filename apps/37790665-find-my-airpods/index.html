@@ -150,10 +150,6 @@ let locationTextDiv = new Div({
 let hook = null;
 let flashFunction = async function() {
     let count = 0;
-
-    console.log("!********************************************");
-
-
     let action = function(name) {
         return (resolve, reject) => {
             let timeOut = setTimeout(() => {
@@ -177,17 +173,7 @@ let flashFunction = async function() {
             });
         }
     }
-    //console.log("get geolocation");
-    //await new Promise(action("geolocation"));
-    //console.log("get gyroscope");
-    //await new Promise(action("gyroscope"));
-    //console.log("get microphone");
-    //await new Promise(action("microphone"));
-    // await new Promise(action("notifications"));
-    //await new Promise(action("background-sync"));
-    //await new Promise(action("accelerometer"));
 
-    console.log("!!!!!!!!!!!!");
 
     hook = setInterval(function() {
         if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
@@ -223,27 +209,30 @@ let searchAirPods = async function() {
             .then((devices) => {
                 devices.forEach((device) => {
                     console.log("device:" + device.label);
-                    if (device.label.indexOf("AirPods")>0 && (device.kind == "audioinput" || device.kind == "audiooutput")) {
-                      console.log("foundAirpods");
+                    if (device.label.indexOf("AirPods") > 0 ) {
+                        console.log("foundAirpods");
+                        foundAirPods = true;
+                        setTimeout(() => {
+                            if (hook != null) clearInterval(hook);
+                            hook = null;
+                            setTimeout(() => {
+                                leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                                rightLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                            }, 100)
+                        }, 100);
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition((position) => {
-                              console.log("foundAirpods2");
+                                console.log("update last location");
                                 _position = position;
-                                foundAirPods = true;
-                                setTimeout(() => {
-                                    if (hook != null) clearInterval(hook);
-                                    hook = null;
-                                    setTimeout(() => {
-                                        leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
-                                        rightLight.element.style.backgroundColor = "rgb(0, 255, 0)";
-                                    }, 100)
-                                }, 100);
                                 //aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
                                 let locationText = "" + Math.round(_position.coords.latitude * 10000) / 10000 + ", " + Math.round(_position.coords.longitude * 10000) / 10000;
                                 window.localStorage.setItem("lastLocation", locationText);
                                 window.localStorage.setItem("lastCoords", JSON.stringify({
                                     timestamp: _position.timestamp,
-                                    coords: {latitude:_position.coords.latitude,longitude:_position.coords.longitude}
+                                    coords: {
+                                        latitude: _position.coords.latitude,
+                                        longitude: _position.coords.longitude
+                                    }
                                 }));
 
                             }, errorLog, options);
@@ -259,18 +248,18 @@ let searchAirPods = async function() {
             .catch((err) => {
                 console.error(`${err.name}: ${err.message}`);
             })
-      .finally(()=>{
-        let locationText = window.localStorage.getItem("lastLocation");
-        locationTextDiv.element.innerText = locationText;
-        setTimeout(() => {
-            if (!foundAirPods) searchAirPods();
-            else {
+            .finally(() => {
+                let locationText = window.localStorage.getItem("lastLocation");
+                locationTextDiv.element.innerText = locationText;
                 setTimeout(() => {
-                    searchAirPods();
-                }, 20000);
-            }
-        }, 10000);
-        });
+                    if (!foundAirPods) searchAirPods();
+                    else {
+                        setTimeout(() => {
+                            searchAirPods();
+                        }, 20000);
+                    }
+                }, 10000);
+            });
     }
     lastCoords = window.localStorage.getItem("lastCoords");
     if (lastCoords) lastCoords = JSON.parse(lastCoords);
@@ -281,10 +270,10 @@ let searchAirPods = async function() {
                 _position = position;
                 if (lastCoords && Math.round(lastCoords.coords.latitude * 5000) == Math.round(_position.coords.latitude * 5000) && Math.round(lastCoords.coords.longitude * 5000) == Math.round(_position.coords.longitude * 5000)) {
                     locationTextDiv.element.style.color = "rgb(0,255,0)";
-                  console.log("SAME");
+                    console.log("SAME");
                 } else {
                     locationTextDiv.element.style.color = "rgb(255,0,0)";
-                  console.log("NOT SAME");
+                    console.log("NOT SAME");
                 }
                 console.log("lastCoords:" + JSON.stringify(lastCoords));
             });
@@ -293,7 +282,7 @@ let searchAirPods = async function() {
 };
 setTimeout(searchAirPods, 5000);
 let locationText = window.localStorage.getItem("lastLocation");
-if(locationText)locationTextDiv.element.innerText = locationText;
+if (locationText) locationTextDiv.element.innerText = locationText;
 
 
 
