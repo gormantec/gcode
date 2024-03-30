@@ -426,19 +426,7 @@ class SecondPage extends Page {
             "hideFooter": "true",
             "hideFloatingActionButton": "true",
             "children": [
-                gps.newCoordDiv({
-                    textAlign: "center",
-                    paddingRight: "2px",
-                    fontSize: "30px",
-                    "marginTop": "100px",
-                    "position": "relative",
-                    "width": "370px",
-                    "marginLeft": "auto",
-                    "marginRight": "auto",
-                    backgroundColor: "#ffffff",
-                    color: "#aaaaaa",
-                    innerText: "0"
-                }),
+                
                 gps.newImageDiv({
                     fontSize: "30px",
                     "top": "0px",
@@ -446,6 +434,20 @@ class SecondPage extends Page {
                     "width": "100%",
                     "height": window.innerHeight+"px",
                     backgroundColor: "#555555",
+                }),
+              gps.newCoordDiv({
+                    textAlign: "center",
+                    paddingRight: "2px",
+                    fontSize: "30px",
+                    "marginTop": "100px",
+                    "position": "relative",
+                    "width": "200px",
+                    "marginLeft": "auto",
+                    "marginRight": "auto",
+                    backgroundColor: "#ffffff",
+                	borderRadius:"15px",
+                    color: "#aaaaaa",
+                    innerText: "0"
                 }),
                 gps.newDistDiv({
                     textAlign: "center",
