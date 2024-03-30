@@ -4,7 +4,7 @@ import { getScript } from '/modules/getScript.mjs';
 window.PWA = window.PWA || {};
 window.PWA.globals = window.PWA.globals || {};
 
-var debug = debug || { log: function (v) { /*console.log(v);*/ } };
+var debug = debug || { log: function (v) { /*console.log(v);*/ } }; 
 
 const myglobals = { PWA: null };
 
