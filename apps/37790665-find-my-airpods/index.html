@@ -272,7 +272,6 @@ let searchAirPods = async function() {
         }, 2000);
     }
     lastCoords = window.localStorage.getItem("lastCoords");
-  console.log(lastCoords);
     if (lastCoords) lastCoords = JSON.parse(lastCoords);
     if (locationText) locationTextDiv.element.innerText = locationText;
     if (lastCoords) {
@@ -281,14 +280,15 @@ let searchAirPods = async function() {
                 _position = position;
                 if (lastCoords && Math.round(lastCoords.coords.latitude * 5000) == Math.round(_position.coords.latitude * 5000) && Math.round(lastCoords.coords.longitude * 5000) == Math.round(_position.coords.longitude * 5000)) {
                     locationTextDiv.element.style.color = "rgb(0,255,0)";
+                  console.log("SAME");
                 } else {
                     locationTextDiv.element.style.color = "rgb(255,0,0)";
+                  console.log("NOT SAME");
                 }
                 console.log("lastCoords:" + JSON.stringify(lastCoords));
             });
         }
     }
-    console.log("lastCoords:" + JSON.stringify(lastCoords));
 };
 setTimeout(searchAirPods, 5000);
 let locationText = window.localStorage.getItem("lastLocation");
