@@ -256,24 +256,14 @@ let searchAirPods = async function() {
       
         setTimeout(() => {
             if (!searchAirPods) searchAirPods();
-        }, 10000)
+        }, 1000);
     }
 };
 let locationText = window.localStorage.getItem("lastLocation");
 lastCoords = window.localStorage.getItem("lastLocation");
 if (lastCoords) lastCoords = JSON.parse(lastCoords);
 if (locationText) locationTextDiv.element.innerText = locationText;
-if (lastCoords) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            _position = position;
-          if(lastCoords && Math.round(lastCoords.coords.latitude*1000)==Math.round(_position.coords.latitude*1000))
-          {
-            locationTextDiv.element.style.backgroundColor="rgb(255,0,0)";
-          }
-        });
-    }
-}
+
 setTimeout(searchAirPods, 5000);
 class HomePage extends Page {
     constructor() {
