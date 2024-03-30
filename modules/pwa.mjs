@@ -537,6 +537,10 @@ class Div {
         if (params && params.alignItems) this.element.style.alignItems = params.alignItems;
         if (params && params.justifyContent) this.element.style.justifyContent = params.justifyContent;
         if (params && params.borderRadius) this.element.style.borderRadius = params.borderRadius;
+        if (params && params.borderTopRightRadius) this.element.style.borderTopRightRadius = params.borderTopRightRadius;
+        if (params && params.borderBottomRightRadius) this.element.style.borderBottomRightRadius = params.borderBottomRightRadius;
+        if (params && params.borderTopLeftRadius) this.element.style.borderTopLeftRadius = params.borderTopLeftRadius;
+        if (params && params.borderBottomLeftRadius) this.element.style.borderBottomLeftRadius = params.borderBottomLeftRadius;
         if (params && params.borderColor) this.element.style.borderColor = params.borderColor;
         if (params && params.fontSize) this.element.style.fontSize = params.fontSize;
         if (params && params.fontStyle) this.element.style.fontStyle = params.fontStyle;
