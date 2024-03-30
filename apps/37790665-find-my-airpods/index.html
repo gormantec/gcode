@@ -286,11 +286,11 @@ if (lastCoords) {
             _position = position;
           if(lastCoords && Math.round(lastCoords.coords.latitude*1000)==Math.round(_position.coords.latitude*1000) && Math.round(lastCoords.coords.longitude*1000)==Math.round(_position.coords.longitude*1000))
           {
-            locationTextDiv.element.style.backgroundColor="rgb(0,255,0)";
+            locationTextDiv.element.style.color="rgb(0,255,0)";
           }
           else
           {
-            locationTextDiv.element.style.backgroundColor="rgb(255,0,0)";
+            locationTextDiv.element.style.color="rgb(255,0,0)";
           }
         });
     }
