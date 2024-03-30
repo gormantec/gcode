@@ -79,9 +79,9 @@ class GpsClass {
                 if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
                     _this.pzoom = _this.zoom;
                     var width = _this.imageDiv.element.offsetWidth;
-                    if(width<10)width=window.innerWidth*2;
+                    //if(width<10)width=window.innerWidth*2;
                     var height = _this.imageDiv.element.offsetHeight;
-                    if(height<10)height=window.innerHeight*2;
+                    //if(height<10)height=window.innerHeight*2;
                     let othermarkers = "";
                     if (_this.marks) {
                         othermarkers = "&markers=color:blue%7Clabel:X%7C" + _this.marks[0];
@@ -92,27 +92,29 @@ class GpsClass {
                             _this.distDiv.innerHTML = dist + " m";
                         }
                     }
+					if(width!=0 && height!=0)
+                    {
+                      let imageLoaded = () => {
+                          console.log("imageLoaded");
+                          _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
+                              roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=' + mykey + '")';
+                          platlmg = latlmg;
+                      };
 
-                    let imageLoaded = () => {
-                        console.log("imageLoaded");
-                        _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                            roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=' + mykey + '")';
-                        platlmg = latlmg;
-                    };
+                      var img = new Image();
+                      img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
+                          roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=' + mykey + '';
+                      if (img.complete) {
 
-                    var img = new Image();
-                    img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
-                        roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=' + mykey + '';
-                    if (img.complete) {
-
-                        console.log("complete");
-                        imageLoaded();
-                    } else {
-                        console.log("complete");
-                        img.addEventListener('load', imageLoaded)
-                        img.addEventListener('error', function(e) {
-                            console.log("error:" + e);
-                        })
+                          console.log("complete");
+                          imageLoaded();
+                      } else {
+                          console.log("complete");
+                          img.addEventListener('load', imageLoaded)
+                          img.addEventListener('error', function(e) {
+                              console.log("error:" + e);
+                          })
+                      }
                     }
                 }
             } else {
