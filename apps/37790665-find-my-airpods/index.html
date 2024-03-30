@@ -242,7 +242,7 @@ let searchAirPods = async function() {
                                 window.localStorage.setItem("lastLocation", locationText);
                                 window.localStorage.setItem("lastCoords", JSON.stringify({
                                     timestamp: _position.timestamp,
-                                    coords: _position.coords
+                                    coords: {latitude:_position.coords.latitude,longitude:_position.coords.longitude}
                                 }));
 
                             }, errorLog, options);
