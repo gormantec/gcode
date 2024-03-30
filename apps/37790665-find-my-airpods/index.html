@@ -208,7 +208,7 @@ let searchAirPods = async function() {
             .enumerateDevices()
             .then((devices) => {
                 devices.forEach((device) => {
-                    console.log("device:" + device.label);
+                    console.log("device:" + JSON.stringify(device));
                     if (device.label.indexOf("AirPods") > 0 ) {
                         console.log("foundAirpods");
                         foundAirPods = true;
