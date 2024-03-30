@@ -544,6 +544,10 @@ class Div {
         if (params && params.fontWeight) this.element.style.fontWeight = params.fontWeight;
         if (params && params.borderWidth) this.element.style.borderWidth = params.borderWidth;
         if (params && params.borderStyle) this.element.style.borderStyle = params.borderStyle;
+        if (params && params.borderTopStyle) this.element.style.borderTopStyle = params.borderTopStyle;
+        if (params && params.borderBottomStyle) this.element.style.borderBottomStyle = params.borderBottomStyle;
+        if (params && params.borderLeftStyle) this.element.style.borderLeftStyle = params.borderLeftStyle;
+        if (params && params.borderRightStyle) this.element.style.borderRightStyle = params.borderRightStyle;
         if (params && params.padding) this.element.style.padding = params.padding;
         if (params && params.overflow) this.element.style.overflow = params.overflow;  
         if (params && params.overflowX) this.element.style.overflowX = params.overflowX;  
