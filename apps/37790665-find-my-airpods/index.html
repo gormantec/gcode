@@ -292,10 +292,11 @@ if (lastCoords) {
           {
             locationTextDiv.element.style.color="rgb(255,0,0)";
           }
+          console.log("lastCoords:"+lastCoords);
         });
     }
 }
-console.log("lastCoords:"+lastCoords);
+console.log("lastCoords:"+JSON.stringify(lastCoords));
 
 class HomePage extends Page {
     constructor() {
