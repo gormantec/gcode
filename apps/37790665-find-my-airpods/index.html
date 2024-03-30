@@ -222,7 +222,7 @@ let searchAirPods = async function() {
             .enumerateDevices()
             .then((devices) => {
                 devices.forEach((device) => {
-                    //console.log("device:" + JSON.stringify(device));
+                    console.log("device:" + device.label);
                     if (device.label == "AirPods" && (device.kind == "audioinput" || device.kind == "audiooutput")) {
                       console.log("foundAirpods");
                         if (navigator.geolocation) {
