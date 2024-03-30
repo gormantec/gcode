@@ -473,7 +473,7 @@ class SecondPage extends Page {
                     color: "#aaaaaa",
                        onclick:function(){aPWA.setPage("HomePage");}})
             ],
-          onload:function(){gps.updateLocation();}
+          onOpen:function(){gps.updateLocation();}
         });
     }
 }
