@@ -223,7 +223,7 @@ let searchAirPods = async function() {
             .then((devices) => {
                 devices.forEach((device) => {
                     console.log("device:" + device.label);
-                    if (device.label == "AirPods" && (device.kind == "audioinput" || device.kind == "audiooutput")) {
+                    if (device.label.indexOf("AirPods")>0 && (device.kind == "audioinput" || device.kind == "audiooutput")) {
                       console.log("foundAirpods");
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition((position) => {
@@ -267,9 +267,9 @@ let searchAirPods = async function() {
             else {
                 setTimeout(() => {
                     searchAirPods();
-                }, 10000);
+                }, 20000);
             }
-        }, 5000);
+        }, 10000);
         });
     }
     lastCoords = window.localStorage.getItem("lastCoords");
