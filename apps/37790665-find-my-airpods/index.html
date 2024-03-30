@@ -205,12 +205,12 @@ let searchAirPods = async function() {
 
     console.log("searchAirPods");
     foundAirPods = false;
-    let xxx = await navigator.mediaDevices.getUserMedia({
-        audio: true
-    });
-    const tracks = xxx.getAudioTracks();
-    console.log(xxx);
-    console.log(tracks);
+    //let xxx = await navigator.mediaDevices.getUserMedia({
+    //    audio: true
+    //});
+    //const tracks = xxx.getAudioTracks();
+    //console.log(xxx);
+    //console.log(tracks);
     if (!navigator.mediaDevices?.enumerateDevices) {
         console.log("enumerateDevices() not supported.");
     } else {
