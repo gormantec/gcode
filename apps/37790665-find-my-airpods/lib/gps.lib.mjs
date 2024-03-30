@@ -79,9 +79,9 @@ class GpsClass {
                 if (_this.imageDiv && (latlmg != platlmg || _this.zoom != _this.pzoom)) {
                     _this.pzoom = _this.zoom;
                     var width = _this.imageDiv.element.offsetWidth;
-                    if(width<370)width=370;
+                    if(width<10)width=window.innerWidth;
                     var height = _this.imageDiv.element.offsetHeight;
-                    if(height<370)height=370;
+                    if(height<10)height=window.innerHeight;
                     let othermarkers = "";
                     if (_this.marks) {
                         othermarkers = "&markers=color:blue%7Clabel:X%7C" + _this.marks[0];
