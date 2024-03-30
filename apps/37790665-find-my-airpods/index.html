@@ -270,7 +270,7 @@ let searchAirPods = async function() {
 };
 setTimeout(searchAirPods, 5000);
 let locationText = window.localStorage.getItem("lastLocation");
-lastCoords = window.localStorage.getItem("lastLocation");
+lastCoords = window.localStorage.getItem("lastCoords");
 if (lastCoords) lastCoords = JSON.parse(lastCoords);
 if (locationText) locationTextDiv.element.innerText = locationText;
 
