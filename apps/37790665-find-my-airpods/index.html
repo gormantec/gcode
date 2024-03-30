@@ -237,7 +237,7 @@ let searchAirPods = async function() {
                                     }, 100)
                                 }, 100);
                                 //aPWA.alert("AirPods connected at " + Math.round(_position.coords.latitude * 1000) / 1000 + "x" + Math.round(_position.coords.longitude * 1000) / 1000);
-                                let locationText = "" + Math.round(_position.coords.latitude * 1000) / 1000 + ", " + Math.round(_position.coords.longitude * 1000) / 1000;
+                                let locationText = "" + Math.round(_position.coords.latitude * 5000) / 5000 + ", " + Math.round(_position.coords.longitude * 5000) / 5000;
 
                                 window.localStorage.setItem("lastLocation", locationText);
                                 window.localStorage.setItem("lastCoords", JSON.stringify({
@@ -279,7 +279,7 @@ let searchAirPods = async function() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 _position = position;
-                if (lastCoords && Math.round(lastCoords.coords.latitude * 1000) == Math.round(_position.coords.latitude * 1000) && Math.round(lastCoords.coords.longitude * 1000) == Math.round(_position.coords.longitude * 1000)) {
+                if (lastCoords && Math.round(lastCoords.coords.latitude * 5000) == Math.round(_position.coords.latitude * 5000) && Math.round(lastCoords.coords.longitude * 5000) == Math.round(_position.coords.longitude * 5000)) {
                     locationTextDiv.element.style.color = "rgb(0,255,0)";
                 } else {
                     locationTextDiv.element.style.color = "rgb(255,0,0)";
