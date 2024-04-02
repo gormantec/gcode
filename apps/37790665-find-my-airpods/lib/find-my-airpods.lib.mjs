@@ -14,6 +14,9 @@
 */
 
 /*---------------------------------------------------------------------------*/
+import {
+    Div
+} from 'https://gcode.com.au/modules/pwa.mjs';
 
 export class LeftLight extends Div {
     constructor(params) {
