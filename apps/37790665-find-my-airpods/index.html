@@ -102,35 +102,13 @@ aPWA.alertDialogContent.element.style.backgroundColor = "#eeeeee";
 aPWA.alertDialogBody.element.style.height = "100px";
 aPWA.alertDialogBody.element.style.marginTop = "200px";
 
-const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 8000,
-};
-const errorLog = function(err) {
-    console.warn("ERROR(" + err.code + ": " + err.message + ")")
-}
-let _position = {
-    coords: {
-        latitude: 0,
-        longitude: 0
-    }
-};
 let leftLight = new LeftLight();
-
 let rightLight = new RightLight();
-
 let locationTextDiv = new LocationTextDiv();
 locationTextDiv.onclick = function() {aPWA.setPage("SecondPage");};
-
 setTimeout(searchAirPods, 5000);
 let locationText = window.localStorage.getItem("lastLocation");
 if (locationText) locationTextDiv.element.innerText = locationText;
-
-
-
-
-
 
 class HomePage extends Page {
     constructor() {
@@ -146,94 +124,7 @@ class HomePage extends Page {
             "hideFloatingActionButton": "true",
             "onOpen": flashFunction,
             "children": [
-                new Div({
-                    "color": "#ffffff",
-                    height: "50px",
-                    width: "50px",
-                    left: "100px",
-                    top: "100px",
-                    borderRadius: "40px",
-                    borderColor: "#aaaaaa",
-                    borderStyle: "solid",
-                    borderThickness: "1px"
-                }),
-                new Div({
-                    "color": "#ffffff",
-                    height: "50px",
-                    width: "50px",
-                    right: "100px",
-                    top: "100px",
-                    borderRadius: "40px",
-                    borderColor: "#aaaaaa",
-                    borderStyle: "solid",
-                    borderThickness: "1px"
-                }),
-                new Div({
-                    "color": "#ffffff",
-                    height: "29px",
-                    width: "10px",
-                    left: "94px",
-                    top: "112px",
-                    backgroundColor: "#ffffff",
-                    borderColor: "#aaaaaa",
-                    borderRightStyle: "solid",
-                    borderThickness: "1px"
-                }),
-                new Div({
-                    "color": "#ffffff",
-                    height: "29px",
-                    width: "10px",
-                    right: "94px",
-                    top: "112px",
-                    backgroundColor: "#ffffff",
-                    borderColor: "#aaaaaa",
-                    borderLeftStyle: "solid",
-                    borderThickness: "1px"
-                }),
-
-                new Div({
-                    "color": "#ffffff",
-                    height: "100px",
-                    width: "15px",
-                    left: "135px",
-                    top: "116px",
-                    backgroundColor: "#ffffff",
-                    borderColor: "#aaaaaa",
-                    borderStyle: "solid",
-                    borderThickness: "1px",
-                    borderRadius: "7px",
-                }),
-
-                new Div({
-                    "color": "#ffffff",
-                    height: "100px",
-                    width: "15px",
-                    right: "135px",
-                    top: "116px",
-                    backgroundColor: "#ffffff",
-                    borderColor: "#aaaaaa",
-                    borderStyle: "solid",
-                    borderThickness: "1px",
-                    borderRadius: "7px",
-                }),
-                new Div({
-                    "color": "#ffffff",
-                    height: "30px",
-                    width: "24px",
-                    left: "127px",
-                    top: "114px",
-                    backgroundColor: "#ffffff",
-                    borderRadius: "6px",
-                }),
-                new Div({
-                    "color": "#ffffff",
-                    height: "30px",
-                    width: "24px",
-                    right: "127px",
-                    top: "114px",
-                    backgroundColor: "#ffffff",
-                    borderRadius: "6px",
-                }),
+                airPods,
                 leftLight,
                 rightLight,
                 new Div({

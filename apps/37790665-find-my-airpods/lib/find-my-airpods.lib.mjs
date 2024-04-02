@@ -45,6 +45,108 @@ export class RightLight extends Div {
     }
 }
 
+export class AirPods extends Div {
+    constructor(params) {
+        super({
+            top: "0px",
+            bottom: "0px",
+            left: "0px",
+            right: "0px",
+            children: [
+                new Div({
+                    "color": "#ffffff",
+                    height: "50px",
+                    width: "50px",
+                    left: "100px",
+                    top: "100px",
+                    borderRadius: "40px",
+                    borderColor: "#aaaaaa",
+                    borderStyle: "solid",
+                    borderThickness: "1px"
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "50px",
+                    width: "50px",
+                    right: "100px",
+                    top: "100px",
+                    borderRadius: "40px",
+                    borderColor: "#aaaaaa",
+                    borderStyle: "solid",
+                    borderThickness: "1px"
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "29px",
+                    width: "10px",
+                    left: "94px",
+                    top: "112px",
+                    backgroundColor: "#ffffff",
+                    borderColor: "#aaaaaa",
+                    borderRightStyle: "solid",
+                    borderThickness: "1px"
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "29px",
+                    width: "10px",
+                    right: "94px",
+                    top: "112px",
+                    backgroundColor: "#ffffff",
+                    borderColor: "#aaaaaa",
+                    borderLeftStyle: "solid",
+                    borderThickness: "1px"
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "100px",
+                    width: "15px",
+                    left: "135px",
+                    top: "116px",
+                    backgroundColor: "#ffffff",
+                    borderColor: "#aaaaaa",
+                    borderStyle: "solid",
+                    borderThickness: "1px",
+                    borderRadius: "7px",
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "100px",
+                    width: "15px",
+                    right: "135px",
+                    top: "116px",
+                    backgroundColor: "#ffffff",
+                    borderColor: "#aaaaaa",
+                    borderStyle: "solid",
+                    borderThickness: "1px",
+                    borderRadius: "7px",
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "30px",
+                    width: "24px",
+                    left: "127px",
+                    top: "114px",
+                    backgroundColor: "#ffffff",
+                    borderRadius: "6px",
+                }),
+                new Div({
+                    "color": "#ffffff",
+                    height: "30px",
+                    width: "24px",
+                    right: "127px",
+                    top: "114px",
+                    backgroundColor: "#ffffff",
+                    borderRadius: "6px",
+                }),
+            ]
+        });
+    }
+}
+
+
+
+
 
 export class LocationTextDiv extends Div {
     constructor(params) {
@@ -62,6 +164,20 @@ export class LocationTextDiv extends Div {
 
 let hook = null;
 let lastCoords = null;
+let _position = {
+    coords: {
+        latitude: 0,
+        longitude: 0
+    }
+};
+const errorLog = function(err) {
+    console.warn("ERROR(" + err.code + ": " + err.message + ")")
+}
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 8000
+};
 
 export async function flashFunction() {
     let count = 0;
