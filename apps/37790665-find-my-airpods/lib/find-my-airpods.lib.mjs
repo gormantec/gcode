@@ -226,10 +226,10 @@ export async function flashFunction() {
 
 
     hook = setInterval(function() {
-        if (document.querySelector("#leftLight").style.backgroundColor == "rgb(255, 165, 0)") {
+        if (document.querySelector("#leftLight") && document.querySelector("#leftLight").style.backgroundColor == "rgb(255, 165, 0)") {
             document.querySelector("#leftLight").style.backgroundColor = "#aaaaaa";
             document.querySelector("#rightLight").style.backgroundColor = "#aaaaaa";
-        } else if (count == Math.round(count / 12, 0) * 12) {
+        } else if (document.querySelector("#leftLight") && count == Math.round(count / 12, 0) * 12) {
             document.querySelector("#leftLight").style.backgroundColor = "rgb(255, 165, 0)";
             document.querySelector("#rightLight").style.backgroundColor = "rgb(255, 165, 0)";
         }
