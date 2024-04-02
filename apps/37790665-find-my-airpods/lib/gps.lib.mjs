@@ -32,13 +32,14 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
 }
 
 export class GpsClass {
-    constructor() {
+    constructor(params) {
         let _this = this;
         //window.setInterval(() => {
         //    _this.updateLocation();
         //}, 10000);
         //_this.updateLocation();
         _this.zoom = 17;
+        _this.maptype=params.maptype || "hybrid";
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 _this._position = position;
@@ -97,13 +98,13 @@ export class GpsClass {
                       let imageLoaded = () => {
                           console.log("imageLoaded");
                           _this.imageDiv.style.backgroundImage = 'url("https://maps.googleapis.com/maps/api/staticmap?center=' +
-                              roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=' + mykey + '")';
+                              roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype='+_this.maptype+'&key=' + mykey + '")';
                           platlmg = latlmg;
                       };
 
                       var img = new Image();
                       img.src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
-                          roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype=hybrid&key=' + mykey + '';
+                          roughtlatlmg + '&zoom=' + _this.zoom + othermarkers + '&markers=icon:https://gcode.com.au/images/blueDot.png%7C' + latlmg + '&size=' + width + 'x' + height + '&maptype='+_this.maptype+'&key=' + mykey + '';
                       if (img.complete) {
 
                           console.log("complete");
