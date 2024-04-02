@@ -139,6 +139,24 @@ export class AirPods extends Div {
                     backgroundColor: "#ffffff",
                     borderRadius: "6px",
                 }),
+                new Div({
+                    innerText: "L",
+                    textAlign: "center",
+                    "color": "#aaaaaa",
+                    height: "40px",
+                    width: "40px",
+                    left: "100px",
+                    top: "180px"
+                }),
+                new Div({
+                    innerText: "R",
+                    textAlign: "center",
+                    "color": "#aaaaaa",
+                    height: "40px",
+                    width: "40px",
+                    right: "100px",
+                    top: "180px"
+                }),
             ]
         });
     }

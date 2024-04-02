@@ -104,9 +104,11 @@ aPWA.alertDialogBody.element.style.marginTop = "200px";
 
 let leftLight = new LeftLight();
 let rightLight = new RightLight();
-let airPods= new AirPods();
+let airPods = new AirPods();
 let locationTextDiv = new LocationTextDiv();
-locationTextDiv.onclick = function() {aPWA.setPage("SecondPage");};
+locationTextDiv.onclick = function() {
+    aPWA.setPage("SecondPage");
+};
 setTimeout(searchAirPods, 5000);
 let locationText = window.localStorage.getItem("lastLocation");
 if (locationText) locationTextDiv.element.innerText = locationText;
@@ -128,24 +130,6 @@ class HomePage extends Page {
                 airPods,
                 leftLight,
                 rightLight,
-                new Div({
-                    innerText: "L",
-                    textAlign: "center",
-                    "color": "#aaaaaa",
-                    height: "40px",
-                    width: "40px",
-                    left: "100px",
-                    top: "180px"
-                }),
-                new Div({
-                    innerText: "R",
-                    textAlign: "center",
-                    "color": "#aaaaaa",
-                    height: "40px",
-                    width: "40px",
-                    right: "100px",
-                    top: "180px"
-                }),
                 locationTextDiv,
             ]
         });
