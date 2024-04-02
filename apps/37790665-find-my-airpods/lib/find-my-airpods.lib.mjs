@@ -300,7 +300,10 @@ export async function searchAirPods() {
             })
             .finally(() => {
                 let locationText = window.localStorage.getItem("lastLocation");
-                document.querySelector("#locationText").innerText = locationText;
+                if(document.querySelector("#locationText")){
+                  document.querySelector("#locationText").innerText = locationText;
+                }
+                
                 setTimeout(() => {
                     if (!foundAirPods) searchAirPods();
                     else {
@@ -313,15 +316,15 @@ export async function searchAirPods() {
     }
     lastCoords = window.localStorage.getItem("lastCoords");
     if (lastCoords) lastCoords = JSON.parse(lastCoords);
-    if (locationText) document.querySelector("#locationText").innerText = locationText;
+    if (locationText && document.querySelector("#locationText")) document.querySelector("#locationText").innerText = locationText;
     if (lastCoords) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 _position = position;
-                if (lastCoords && Math.round(lastCoords.coords.latitude * 5000) == Math.round(_position.coords.latitude * 5000) && Math.round(lastCoords.coords.longitude * 5000) == Math.round(_position.coords.longitude * 5000)) {
+                if (document.querySelector("#locationText") && lastCoords && Math.round(lastCoords.coords.latitude * 5000) == Math.round(_position.coords.latitude * 5000) && Math.round(lastCoords.coords.longitude * 5000) == Math.round(_position.coords.longitude * 5000)) {
                     document.querySelector("#locationText").style.color = "rgb(0,255,0)";
                     console.log("SAME");
-                } else {
+                } else if(document.querySelector("#locationText")){
                     document.querySelector("#locationText").style.color = "rgb(255,0,0)";
                     console.log("NOT SAME");
                 }
