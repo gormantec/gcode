@@ -22,7 +22,7 @@ export class LeftLight extends Div {
     constructor(params) {
         super({
             "backgroundColor": "#FFA500",
-            id: "leftButton",
+            id: "leftLight",
             height: "10px",
             width: "10px",
             left: "110px",
@@ -35,7 +35,7 @@ export class RightLight extends Div {
     constructor(params) {
         super({
             "backgroundColor": "#FFA500",
-            id: "leftButton",
+            id: "rightLight",
             height: "10px",
             width: "10px",
             right: "110px",
@@ -90,12 +90,12 @@ export async function flashFunction() {
 
 
     hook = setInterval(function() {
-        if (leftLight.element.style.backgroundColor == "rgb(255, 165, 0)") {
-            leftLight.element.style.backgroundColor = "#aaaaaa";
-            rightLight.element.style.backgroundColor = "#aaaaaa";
+        if (document.querySelector("#leftLight").style.backgroundColor == "rgb(255, 165, 0)") {
+            document.querySelector("#leftLight").style.backgroundColor = "#aaaaaa";
+            document.querySelector("#rightLight").style.backgroundColor = "#aaaaaa";
         } else if (count == Math.round(count / 12, 0) * 12) {
-            leftLight.element.style.backgroundColor = "rgb(255, 165, 0)";
-            rightLight.element.style.backgroundColor = "rgb(255, 165, 0)";
+            document.querySelector("#leftLight").style.backgroundColor = "rgb(255, 165, 0)";
+            document.querySelector("#rightLight").style.backgroundColor = "rgb(255, 165, 0)";
         }
         count++;
 
@@ -130,8 +130,8 @@ export async function searchAirPods() {
                             if (hook != null) clearInterval(hook);
                             hook = null;
                             setTimeout(() => {
-                                leftLight.element.style.backgroundColor = "rgb(0, 255, 0)";
-                                rightLight.element.style.backgroundColor = "rgb(0, 255, 0)";
+                                document.querySelector("#leftLight").style.backgroundColor = "rgb(0, 255, 0)";
+                                document.querySelector("#rightLight").style.backgroundColor = "rgb(0, 255, 0)";
                             }, 100)
                         }, 100);
                         if (navigator.geolocation) {
