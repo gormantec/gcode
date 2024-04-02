@@ -175,7 +175,8 @@ export class LocationTextDiv extends Div {
             height: "40px",
             left: "100px",
             right: "100px",
-            top: "240px"
+            top: "240px",
+            onclick:params.onclick
         });
     }
 }
