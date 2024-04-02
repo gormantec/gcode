@@ -61,6 +61,7 @@ export class LocationTextDiv extends Div {
 }
 
 let hook = null;
+let lastCoords = null;
 
 export async function flashFunction() {
     let count = 0;
