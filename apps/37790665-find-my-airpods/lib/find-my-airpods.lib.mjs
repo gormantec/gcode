@@ -316,7 +316,7 @@ export async function searchAirPods() {
     }
     lastCoords = window.localStorage.getItem("lastCoords");
     if (lastCoords) lastCoords = JSON.parse(lastCoords);
-    if (window.localStorage.setItem("lastLocation") && document.querySelector("#locationText")) document.querySelector("#locationText").innerText = window.localStorage.setItem("lastLocation");
+    if (window.localStorage.getItem("lastLocation") && document.querySelector("#locationText")) document.querySelector("#locationText").innerText = window.localStorage.getItem("lastLocation");
     if (lastCoords) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
