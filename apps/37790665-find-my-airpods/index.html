@@ -88,7 +88,7 @@ if (window.opener && window.opener !== window) {
 /*---------------------------------------------------------------------------*/
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
 import {gps} from './lib/gps.lib.mjs';
-import {LeftLight,RightLight,LocationTextDiv,flashFunction,searchAirPods} from './lib/find-my-airpods.lib.mjs';
+import {LeftLight,RightLight,LocationTextDiv,AirPods,flashFunction,searchAirPods} from './lib/find-my-airpods.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*----------------------------------------------*/
 // This works on all devices/browsers, and uses IndexedDBShim as a final fallback 
@@ -104,6 +104,7 @@ aPWA.alertDialogBody.element.style.marginTop = "200px";
 
 let leftLight = new LeftLight();
 let rightLight = new RightLight();
+let airPods= new AirPods();
 let locationTextDiv = new LocationTextDiv();
 locationTextDiv.onclick = function() {aPWA.setPage("SecondPage");};
 setTimeout(searchAirPods, 5000);
