@@ -39,6 +39,7 @@ export class GpsClass {
         //}, 10000);
         //_this.updateLocation();
         _this.zoom = 17;
+        if(params.zoom) _this.zoom = Number.parseInt(params.zoom);
         _this.mapType=params.mapType || "hybrid";
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {

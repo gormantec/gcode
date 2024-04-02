@@ -92,7 +92,7 @@ import {LeftLight,RightLight,LocationTextDiv,AirPods,flashFunction,searchAirPods
 try { Page.clearPages(); } catch (e) {}
 /*----------------------------------------------*/
 // This works on all devices/browsers, and uses IndexedDBShim as a final fallback 
-let gps=new GpsClass({mapType:"roadmap"});
+let gps=new GpsClass({mapType:"roadmap",zoom:22});
 var aPWA = new PWA({
     "title": "find my air pods",
     "primaryColor": "#aaaaaa",
