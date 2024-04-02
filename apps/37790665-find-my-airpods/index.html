@@ -87,12 +87,12 @@ if (window.opener && window.opener !== window) {
 
 /*---------------------------------------------------------------------------*/
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
-import {gps} from './lib/gps.lib.mjs';
+import {GpsClass} from './lib/gps.lib.mjs';
 import {LeftLight,RightLight,LocationTextDiv,AirPods,flashFunction,searchAirPods} from './lib/find-my-airpods.lib.mjs';
 try { Page.clearPages(); } catch (e) {}
 /*----------------------------------------------*/
 // This works on all devices/browsers, and uses IndexedDBShim as a final fallback 
-
+let gps=new GpsClass({mapType:"roadmap"});
 var aPWA = new PWA({
     "title": "find my air pods",
     "primaryColor": "#aaaaaa",

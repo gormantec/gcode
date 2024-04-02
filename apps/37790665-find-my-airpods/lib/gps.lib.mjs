@@ -31,7 +31,7 @@ function distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
     return earthRadiusKm * c;
 }
 
-class GpsClass {
+export class GpsClass {
     constructor() {
         let _this = this;
         //window.setInterval(() => {
@@ -165,4 +165,4 @@ class GpsClass {
     }
 }
 
-export var gps = new GpsClass();
+export var gps = new GpsClass({mapType:"hybrid"});
