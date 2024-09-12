@@ -99,7 +99,7 @@ jobs:
           
           sed -i '' "s/CURRENT_PROJECT_VERSION = 1\;/CURRENT_PROJECT_VERSION = $BUILD_VERSION;/g" "$project_file/project.pbxproj"
           sed -i '' "s/MARKETING_VERSION = 1\;/MARKETING_VERSION = $APP_MAIN_VERSION;/g" "$project_file/project.pbxproj"
-          sed -i '' "s/DEVELOPMENT_TEAM = \"\"/DEVELOPMENT_TEAM = 9R8LPM6UR2/g" "$project_file/project.pbxproj"
+          sed -i '' "s/DEVELOPMENT_TEAM = \"\"/DEVELOPMENT_TEAM = ${{ env.TEAM_ID }}/g" "$project_file/project.pbxproj"
           cat "$project_file/project.pbxproj" | grep MARKETING_VERSION
           cat "$project_file/project.pbxproj" | grep CURRENT_PROJECT_VERSION
           cat "$project_file/project.pbxproj" | grep DEVELOPMENT_TEAM
@@ -107,16 +107,16 @@ jobs:
           pod install  > /dev/null 2>&1
           if [[ $platform == "iOS" ]]; then
             echo "Archive"
-            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -destination generic/platform=iOS -allowProvisioningUpdates -allowProvisioningDeviceRegistration -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild archive -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -sdk iphoneos -destination generic/platform=iOS -allowProvisioningUpdates -allowProvisioningDeviceRegistration -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -quiet DEVELOPMENT_TEAM=${{ env.TEAM_ID }}
             echo "Export"
-            xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -exportOptionsPlist ../../modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/ipa" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild -exportArchive -archivePath "$OUT_DIR_VAR/$APP_NAME.xcarchive" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -exportOptionsPlist ../../modules/pwabuilder/iosExpot.plist -exportPath "$OUT_DIR_VAR/ipa" -quiet DEVELOPMENT_TEAM=${{ env.TEAM_ID }}
           fi
           if [[ $platform == "iOS Simulator" ]]; then
             echo"Simulate"
             BUILD_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILD_DIR" | grep -oEi "\/.*"`
             echo "BUILD_DIR = $BUILD_DIR"
             BUILT_PRODUCTS_DIR=`xcodebuild -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -showBuildSettings | grep -m 1 "BUILT_PRODUCTS_DIR" | grep -oEi "\/.*"`
-            xcodebuild -allowProvisioningUpdates  -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=9R8LPM6UR2
+            xcodebuild -allowProvisioningUpdates  -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -quiet DEVELOPMENT_TEAM=${{ env.TEAM_ID }}
           fi
           cd $OUT_DIR_VAR
           ls -latr
