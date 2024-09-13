@@ -55,6 +55,7 @@ jobs:
           node -v
           npm install node-fetch
           pwd
+          rm -f build
           mkdir -p build 
           cd build
           pwd
