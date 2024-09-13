@@ -103,8 +103,10 @@ jobs:
           cat "$project_file/project.pbxproj" | grep MARKETING_VERSION
           cat "$project_file/project.pbxproj" | grep CURRENT_PROJECT_VERSION
           cat "$project_file/project.pbxproj" | grep DEVELOPMENT_TEAM
+          echo "DO CLEAN"
           xcodebuild clean
-          pod install  > /dev/null 2>&1
+          echo "DONE CLEAN"
+          pod install
           if [[ $platform == "iOS" ]]; then
             echo "Archive: xcodebuild archive -scheme $scheme - $filetype_parameter $file_to_build -sdk iphoneos -destination generic/platform=iOS -allowProvisioningUpdates -allowProvisioningDeviceRegistration -archivePath $OUT_DIR_VAR/$APP_NAME.xcarchive -quiet DEVELOPMENT_TEAM=${{ env.TEAM_ID }}"
             echo "Export"
