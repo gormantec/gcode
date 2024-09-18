@@ -10,15 +10,15 @@
 				<string>arm64</string>
 			</array>
 			<key>buildNumber</key>
-			<string>13.0.3585934</string>
+			<string>15.0.8564130</string>
 			<key>certificate</key>
 			<dict>
 				<key>SHA1</key>
-				<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+				<string>F982365B2950261C48C9046913FD648946761517</string>
 				<key>dateExpires</key>
-				<string>27/6/2023</string>
+				<string>12/9/2025</string>
 				<key>type</key>
-				<string>Apple Distribution</string>
+				<string>Cloud Managed Apple Distribution</string>
 			</dict>
 			<key>embeddedBinaries</key>
 			<array>
@@ -32,23 +32,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>FBLPromises.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>2.1.1</string>
+					<string>2.4.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -60,23 +60,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>FirebaseCore.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>9.2.0</string>
+					<string>11.2.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -88,51 +88,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
-					</dict>
-					<key>name</key>
-					<string>FirebaseCoreDiagnostics.framework</string>
-					<key>team</key>
-					<dict>
-						<key>id</key>
-						<string>9R8LPM6UR2</string>
-						<key>name</key>
-						<string></string>
-					</dict>
-					<key>versionNumber</key>
-					<string>9.2.0</string>
-				</dict>
-				<dict>
-					<key>architectures</key>
-					<array>
-						<string>arm64</string>
-					</array>
-					<key>buildNumber</key>
-					<string>1</string>
-					<key>certificate</key>
-					<dict>
-						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
-						<key>dateExpires</key>
-						<string>27/6/2023</string>
-						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>FirebaseCoreInternal.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>9.2.0</string>
+					<string>11.2.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -144,23 +116,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>FirebaseInstallations.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>9.2.0</string>
+					<string>11.2.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -172,23 +144,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>FirebaseMessaging.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>9.2.0</string>
+					<string>11.2.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -200,23 +172,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>GoogleDataTransport.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>9.1.4</string>
+					<string>10.1.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -228,23 +200,23 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>GoogleUtilities.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>7.7.0</string>
+					<string>8.0.2</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -256,29 +228,29 @@
 					<key>certificate</key>
 					<dict>
 						<key>SHA1</key>
-						<string>9A1D235C02F17F93093236EB8D084528E5FB034C</string>
+						<string>F982365B2950261C48C9046913FD648946761517</string>
 						<key>dateExpires</key>
-						<string>27/6/2023</string>
+						<string>12/9/2025</string>
 						<key>type</key>
-						<string>Apple Distribution</string>
+						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
 					<string>nanopb.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
-						<string>9R8LPM6UR2</string>
+						<string>BMP74LSH25</string>
 						<key>name</key>
 						<string></string>
 					</dict>
 					<key>versionNumber</key>
-					<string>2.30909.0</string>
+					<string>3.30910.0</string>
 				</dict>
 			</array>
 			<key>entitlements</key>
 			<dict>
 				<key>application-identifier</key>
-				<string>9R8LPM6UR2.au.com.gcode.37790665-findmyapple</string>
+				<string>BMP74LSH25.com.gormantec.37790665-findmyapple</string>
 				<key>aps-environment</key>
 				<string>production</string>
 				<key>com.apple.developer.associated-domains</key>
@@ -287,7 +259,7 @@
 					<string>webcredentials:gcode.com.au</string>
 				</array>
 				<key>com.apple.developer.team-identifier</key>
-				<string>9R8LPM6UR2</string>
+				<string>BMP74LSH25</string>
 				<key>get-task-allow</key>
 				<false/>
 			</dict>
@@ -296,16 +268,16 @@
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>d1081f31-dad0-4bd2-b341-1ffda8ddd1e4</string>
+				<string>c57e2cd7-4b9b-4f0b-a4d8-082c10411807</string>
 				<key>dateExpires</key>
-				<string>29/6/2023</string>
+				<string>12/9/2025</string>
 				<key>name</key>
-				<string>iOS Team Ad Hoc Provisioning Profile: au.com.gcode.37790665-findmyapple</string>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.gormantec.37790665-findmyapple</string>
 			</dict>
 			<key>team</key>
 			<dict>
 				<key>id</key>
-				<string>9R8LPM6UR2</string>
+				<string>BMP74LSH25</string>
 				<key>name</key>
 				<string></string>
 			</dict>
