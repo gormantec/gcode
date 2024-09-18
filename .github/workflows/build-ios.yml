@@ -14,7 +14,8 @@ on:
 concurrency:
   group: iOS ${{ github.event.head_commit.message }}
   cancel-in-progress: true
-  
+env:
+  TEAM_ID: ${{ env.TEAM_ID }}
 jobs: 
   build:
     name: Build Achive and Export IPA
