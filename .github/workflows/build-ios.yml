@@ -143,12 +143,14 @@ jobs:
           VINDEX=${APP_NAME/$SPLIT*/$SPLIT}
           VINDEX=${#VINDEX}
           SHORT_APP_NAME=$SHORT_NAME
+          APP_SCREENSHOT="https://is1-ssl.mzstatic.com/image/thumb/Purple118/v4/35/11/72/35117250-1cda-8128-bf7c-2c83b2a4f2cf/pr_source.png/600x0w.webp"
           echo "SHORT_APP_NAME = $SHORT_APP_NAME"
           SHORT_APP_NAME_NOS=$SHORT_NAME_NOSP
           echo "SHORT_APP_NAME_NOS = $SHORT_APP_NAME_NOS"
           sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_manifest.plist 
           sed -i '' "s/##APP_NAME##/$APP_NAME/g" ./apps/$APP_NAME/ios/ipa_link.html  
           sed -i '' "s/##APP_DESCRIPTION##/$APP_DESCRIPTION/g" ./apps/$APP_NAME/ios/ipa_link.html  
+          sed -i '' "s/##APP_SCREENSHOT##/$APP_SCREENSHOT/g" ./apps/$APP_NAME/ios/ipa_link.html  
           sed -i '' "s/##SHORT_APP_NAME##/$SHORT_APP_NAME/g" ./apps/$APP_NAME/ios/ipa_manifest.plist  
           sed -i '' "s/##SHORT_APP_NAME_NOS##/$SHORT_APP_NAME_NOS/g" ./apps/$APP_NAME/ios/ipa_manifest.plist  
           cp -rf build/out/* ./apps/$APP_NAME/ios/  
