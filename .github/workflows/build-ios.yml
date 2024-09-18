@@ -18,6 +18,8 @@ jobs:
   build:
     name: Build Achive and Export IPA
     runs-on: [macos]
+    env:
+      TEAM_ID: ${{ secrets.TEAM_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,8 +52,6 @@ jobs:
       - name: Environment
         run: env
       - name: pwaBuilder build IOS
-        env:
-          TEAM_ID: ${{ secrets.TEAM_ID }}
         run: | 
           echo "APP_NAME = $APP_NAME"
           echo "APP_VERSION = $APP_VERSION"
