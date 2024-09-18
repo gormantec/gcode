@@ -12,8 +12,6 @@
 	<string>automatic</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
-	<key>teamID</key>
-	<string>BMP74LSH25</string>
 	<key>thinning</key>
 	<string>&lt;none&gt;</string>
 </dict>
