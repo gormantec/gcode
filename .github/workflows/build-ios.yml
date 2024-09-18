@@ -56,12 +56,6 @@ jobs:
           echo "APP_NAME = $APP_NAME"
           echo "APP_VERSION = $APP_VERSION"
           echo "TEAM_ID = ${{ env.TEAM_ID }}"
-          echo "TEAM_ID = $TEAM_ID"
-          echo "TEAM_ID-----------"
-          echo $env.TEAM_ID
-          echo "TEAM_ID-----------"
-          echo ${{ env.TEAM_ID }}
-          echo "TEAM_ID-----------"
           node -v
           npm install node-fetch
           pwd
