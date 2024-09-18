@@ -51,7 +51,7 @@ jobs:
         run: env
       - name: pwaBuilder build IOS
         env:
-          TEAM_ID: ${{ env.TEAM_ID }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
         run: | 
           echo "APP_NAME = $APP_NAME"
           echo "APP_VERSION = $APP_VERSION"
