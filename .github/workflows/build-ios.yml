@@ -143,7 +143,7 @@ jobs:
           VINDEX=${APP_NAME/$SPLIT*/$SPLIT}
           VINDEX=${#VINDEX}
           SHORT_APP_NAME=$SHORT_NAME
-          APP_SCREENSHOT="https://is1-ssl.mzstatic.com/image/thumb/Purple118/v4/35/11/72/35117250-1cda-8128-bf7c-2c83b2a4f2cf/pr_source.png/600x0w.webp"
+          APP_SCREENSHOT="https:\\/\\/is1-ssl.mzstatic.com\\/image\\/thumb\\/Purple118\\/v4\\/35\\/11\\/72\\/35117250-1cda-8128-bf7c-2c83b2a4f2cf\\/pr_source.png\\/600x0w.webp"
           echo "SHORT_APP_NAME = $SHORT_APP_NAME"
           SHORT_APP_NAME_NOS=$SHORT_NAME_NOSP
           echo "SHORT_APP_NAME_NOS = $SHORT_APP_NAME_NOS"
