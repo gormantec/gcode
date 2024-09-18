@@ -34,7 +34,7 @@ const theBody={
         "navigationDividerColor":_manifestJSON.background_color,
         "navigationDividerColorDark":_manifestJSON.background_color,
         "orientation":_manifestJSON.orientation,
-        "packageId":"au.com.gcode.x"+process.env.APP_NAME.replace(/\-/g,""),
+        "packageId":"com.gormantec.x"+process.env.APP_NAME.replace(/\-/g,""),
         "shortcuts":[],"signing":{
             "file":null,
             "alias":"my-key-alias",
