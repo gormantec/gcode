@@ -14,8 +14,6 @@ on:
 concurrency:
   group: iOS ${{ github.event.head_commit.message }}
   cancel-in-progress: true
-env:
-  TEAM_ID: ${{ env.TEAM_ID }}
 jobs: 
   build:
     name: Build Achive and Export IPA
@@ -49,7 +47,11 @@ jobs:
         uses: actions/setup-node@v3.3.0
         with:
           node-version: '>=16.0.0'
+      - name: Environment
+        run: env
       - name: pwaBuilder build IOS
+        env:
+          TEAM_ID: ${{ env.TEAM_ID }}
         run: | 
           echo "APP_NAME = $APP_NAME"
           echo "APP_VERSION = $APP_VERSION"
