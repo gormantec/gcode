@@ -84,25 +84,25 @@ if (window.opener && window.opener !== window) {
   mockFrame: iphoneX
   splashBackgroundColor: #FA00AB
   splashDuration: 2000
-  includedImages: ["git://gormantec:gcode_repo/BabyDazeTitle400.png.svg"] 
+  includedImages: ["git://gormantec:gcode_repo/BabyDazeTitle400.png.svg"]
   permittedUrls: []
   description: Baby Daze is an app for young mothers.
 
 */
-// FA00AB    
-  
+// FA00AB  
+ 
 /*---------------------------------------------------------------------------*/
-import {         
-    PWA, 
-    Page,  
-    Div 
+import {     
+    PWA,
+    Page,
+    Div
 } from 'https://gcode.com.au/modules/pwa.mjs';
 import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column,VideoImage,AddVideo} from './lib/flutter-widgets.lib.mjs';
 import { HomePage } from './lib/BabyDaze-HomePage.lib.mjs';
 import { Nursing } from './lib/BabyDaze-NursingPage.lib.mjs';
 import { VideoBlog } from './lib/BabyDaze-VideoBlogPage.lib.mjs';
 try {
-    Page.clearPages(); 
+    Page.clearPages();
 } catch (e) {}
 
 
