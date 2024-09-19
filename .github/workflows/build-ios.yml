@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Get details from manifest
         run: |
-          echo '{"name":"John", "age":30, "city":"New York"}' | jq '.name'
+          cat ./apps/$APP_NAME/manifest.json | jq '.icons[0].src'
           echo ${{ github.event.head_commit.message }}
           APP_NAME="${{ github.event.head_commit.message }}"
           APP_NAME=${APP_NAME:7}
