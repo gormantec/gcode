@@ -1,0 +1,49 @@
+/* these format the color and shap of each of your html building blocks */
+#mainarea{
+ /* this sets an image as the background of main area */
+ background-image: url("https://gormanlearncode.github.io/learncode/images/24716919.jpg");
+ background-size: cover;
+ background-color: white;
+ width:1000px;
+ height:852px;
+}
+/* this sets circle object to round, with an orange background */
+#circle{
+  border: 5px solid black;
+  border-radius:35px;
+  /* radius needs to be 35 because total width is 70px, when you addd the 5px boarder */
+  background-color: orange;
+  margin: 0px;
+  padding: 0px;
+  top:320px;
+  left:20px;
+  width:60px;
+  height:60px;
+  position: relative;
+}
+/* this sets square object to a position 120 pixels down from the top and 20 pixels in from the left */
+#square{
+  border: 5px solid black;
+  top:120px;
+  left:20px;
+  width:60px;
+  height:60px;
+  position: relative;
+}
+/* this sets the text initially to hidden, code will display it after 10 seconds */
+#sometext1{
+  top:120px;
+  left:220px;
+  width:320px;
+  border: 5px solid black;
+  background-color: white;
+  font-size: 40px;
+  text-align: center;
+  position: relative;
+  display: none;
+}
+#startbutton{
+  margin-left:20%;
+  margin-top:20px;
+  font-size: 40px;
+}
