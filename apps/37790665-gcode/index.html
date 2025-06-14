@@ -104,9 +104,12 @@ class HomePage extends Page {
             "hideFooter": "true",
         	"children":[
               new Container({
+                "top":"0px",
+                "bottom":"50px",
                 "child": new Text("Test")
             }),
               new Container({
+                "top":"50px",
                "child": new ListView({
                 "id": "myListView",
                 "padding": "8px",
