@@ -102,9 +102,11 @@ class HomePage extends Page {
           "backgroundColor": "white",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
-            "child": new ListView({
+        	"children":[new Container(),new Container({
+               "child": new ListView({
                 "id": "myListView",
                 "padding": "8px",
+        
                 "children": [
                     new ListTile({
                         "color": "#005040",
@@ -187,6 +189,8 @@ class HomePage extends Page {
                         "onclick": () => PWA.getPWA().setPage("SomeOtherPage1")
                     }) ]
             })
+            })],
+           
       });
   }
 
