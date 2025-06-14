@@ -102,7 +102,11 @@ class HomePage extends Page {
           "backgroundColor": "white",
             "hideFloatingActionButton": "true",
             "hideFooter": "true",
-        	"children":[new Container(),new Container({
+        	"children":[
+              new Container({
+                "child": new Text("Test")
+            }),
+              new Container({
                "child": new ListView({
                 "id": "myListView",
                 "padding": "8px",
