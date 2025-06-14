@@ -91,13 +91,38 @@ if (window.opener && window.opener !== window) {
 
 /*---------------------------------------------------------------------------*/
 import { PWA, Page, Div } from 'https://gcode.com.au/modules/pwa.mjs';
+import {Text,Center,Container,ListView,ListTile,Icon,Icons,Video,Form,TextFormField,DateFormField,InputDecoration,Padding,Column,VideoImage,AddVideo} from './lib/flutter-widgets.lib.mjs';
+
 try { Page.clearPages(); } catch (e) {}
 /*---------------------------------------------------------------------------*/
 class HomePage extends Page {
   constructor() {
       super({
           "color": "white",
-          "backgroundColor": "white"
+          "backgroundColor": "white",
+            "hideFloatingActionButton": "true",
+            "hideFooter": "true",
+            "child": new ListView({
+                "id": "myListView",
+                "padding": "8px",
+                "children": [
+                    new ListTile({
+                        "color": "red",
+                        "title": new Text("34 min ago"),
+                        "subtitle": new Text("Nursing paused."),
+                        "leading": new Icon(Icons.battery_full),
+                        "trailing": new Icon(Icons.alarm),
+                        "onclick": () => PWA.getPWA().setPage("Nursing")
+                    }),
+                    new ListTile({
+                        "color": "blue",
+                        "title": new Text("17 hours 34 min ago"),
+                        "subtitle": new Text("Subtitle: The battery is full."),
+                        "leading": new Icon(Icons.flag),
+                        "trailing": new Icon(Icons.alarm),
+                        "onclick": () => PWA.getPWA().setPage("SomeOtherPage1")
+                    }) ]
+            })
       });
   }
 
